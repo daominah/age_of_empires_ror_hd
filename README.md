@@ -1,8 +1,6 @@
 # Age of Empires: The Rise of Rome
 
-## 
-
-## Run
+## Run the game
 
 * Init setup: run file `SETUP.EXE`
 
@@ -10,8 +8,8 @@
 
 * For multi player, run file `EMPIRESX.EXE`, if someone uses cheat code in the game, theirs units will be deleted then kicked from the game.
 
-## 
+* Run detail: [HuongDan.htm](HuongDan.htm)
 
-## Detail
+## Edit AI (computer player)
 
-[HuongDan.htm](HuongDan.htm)
+Guides how to edit are in directory [data2_daominah/doc](data2_daominah/doc/readme_about_ai.md). 

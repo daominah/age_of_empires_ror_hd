@@ -1,0 +1,94 @@
+B109      Town_Center1         1      -1         
+U83       Man                  12     109        
+B12       Barracks1            1      -1         
+T83       Man                  2      109        2
+
+C101    Tool_Age               1      109        
+B84       Market1              1      -1         
+U83       Man                  2      109        
+B50       Farm                 1      -1     
+T347      Slinger              2      12         2
+R16     Watch_Tower            1      68         
+U83       Man                  2      109        
+B79       Watch_Tower          2      -1         
+U83       Man                  2      109        
+T347      Slinger              2      12         2
+B50       Farm                 2      -1     
+R46     Tool_Working           1      103        
+B79       Watch_Tower          2      -1         
+R109    Stone_Mining           1      84     
+R107    Wood_Working           1      84         
+U83       Man                  2      109        
+B50       Farm                 2      -1     
+B87       Range1               1      -1         
+B12       Barracks1            1      -1         
+
+C102    Bronze_Age             1      109        
+R40     Leather_Armor_-_Soldie 1      103        
+T83       Man                  2      109        1
+B104      Temple1              1      -1         
+U125      Priest               2      104        
+U75       Soldier-Inf3         3      12         
+R28     Wheel                  1      84         
+U125      Priest               2      104        
+R32	Artisanship	       1      84
+U125      Priest               2      104        
+R108    Gold_Mining            1      84         
+U125      Priest               2      104        
+R24     Polytheism             1      104        
+B79       Watch_Tower          2      -1         
+R51     Metal_Working          1      103        
+B12       Barracks1            1      -1         
+U75       Soldier-Inf3         3      12         
+R81     Domestication          1      84     
+B79       Watch_Tower          2      -1         
+R22     Astrology              1      104        
+R47     Bronze_Shield          1      103        
+U75       Soldier-Inf3         3      12         
+R21     Mysticism              1      104        
+B79       Watch_Tower          2      -1         
+B50       Farm                 2      -1     
+R12     Sentry_Tower           2      68         
+R43     Scale_Armor_-_Soldiers 1      103        
+B82       Government_Center    1      -1     
+R121    Logistics              1      82
+R65     Broad_Sword            1      12         
+       
+C103    Iron_Age               1      109
+R106    Ballistics             1      82     
+B104      Temple1              1      -1         
+U125      Priest               2      104        
+R30	  Coinage                1      84
+U125      Priest               2      104        
+B79       Watch_Tower          2      -1         
+R15     Guard_Tower            1      68         
+U125      Priest               2      104        
+R66     Long_Sword             1      12         
+R18     Afterlife              1      104        
+U75       Soldier-Inf3         3       12      
+R20     Fanaticism             1      104        
+B79       Watch_Tower          2      -1         
+R110    Craftsmanship          1      84
+U125      Priest               2      104        
+R19     Monotheism             1      104        
+U75       Soldier-Inf3         3       12      
+B79       Watch_Tower          2      -1         
+R52     Metallurgy             1      103    
+R2      Catapult_Tower         1      68     
+B79       Watch_Tower          6      -1         
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B12       Barracks1            1      -1       
+U75       Soldier-Inf3         12     12         
+B104      Temple1              1      -1         
+U125      Priest               6      104
+B49       Siege_Workshop       1      -1     
+U11       Soldier-Ballista     4      49   
+U125      Priest               12     104
+U11       Soldier-Ballista     8      49   
+B12       Barracks1            1      -1       
+U125      Priest               24     104
+U75       Soldier-Inf3         175    12         
+B109      Town_Center1         1      -1     

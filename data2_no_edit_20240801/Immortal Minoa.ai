@@ -1,0 +1,76 @@
+B109      Town_Center1         1      -1           
+U83       Man                  10      109          
+B12       Barracks1            1      -1           
+T83       Man                  4      109       2
+
+C101    Tool_Age               1      109       
+B87       Range1               1      -1   
+U83       Man                  2      109          
+T4        Soldier-Archer1      2      87        2
+U83       Man                  2      109        
+B84       Market1              1      -1           
+R81     Domestication          1      84     
+B50       Farm                 1      -1           
+T83       Man                  2      109       1   
+R16     Watch_Tower            1      68           
+B50       Farm                 2      -1           
+U83       Man                  2      109        
+B79       Watch_Tower          1      -1
+B87       Range1               1      -1   
+
+C102    Bronze_Age             1      109          
+R28     Wheel                  1      84           
+B49       Siege_Workshop       1      -1     
+R41     Leather_Armor_-_Archer 1      103     
+U35       Soldier-Catapult1    1      49     
+B50       Farm                 1      -1
+U83       Man                  2      109        
+R56     Improved_bow           1      87     
+U35       Soldier-Catapult1    1      49     
+T5        Soldier-Archer2      2      87        3
+R12     Sentry_Tower           1      68
+R31     Plow                   1      84
+U83       Man                  2      109        
+R107    Wood_Working           1      84     
+T5        Soldier-Archer2      2      87        2
+R57     Composit_bow           1      87     
+B79       Watch_Tower          1      -1
+B82       Government_Center    1      -1
+T5        Soldier-Archer2      2      87        3
+R32     Artisanship            1      84    
+B104      Temple1              1      -1     
+U125      Priest               1      104    
+R44     Scale_Armor_-_Archers  1      103  
+T5        Soldier-Archer2      2      87        3  
+
+C103    Iron_Age               1      109
+R106    Ballistics             1      82     
+R109    Stone_Mining           1      84     
+R37     Alchemy                1      82     
+U35       Soldier-Catapult1    2      49     
+R54     Heavy_Catapult         1      49     
+R110    Craftmanship           1      84
+U35       Soldier-Catapult1    2      49    
+R111    Siege_Craft            1      84      
+U35       Soldier-Catapult1    1      49     
+R24     Polytheism             1      104    
+R35     Engineering            1      82     
+R49     Chain_Mail_-_Archers   1      103    
+U35       Soldier-Catapult1    1      49     
+U125      Priest               2      104    
+R36     Massive-Catapults      1      49     
+U35       Soldier-Catapult1    5      49     
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B87       Range1               1      -1 
+U5        Soldier-Archer2      8      87
+B49       Siege_Workshop       1      -1      
+U35       Soldier-Catapult1    25     49             
+U125      Priest               2      104         
+U5        Soldier-Archer2      16     87
+U35       Soldier-Catapult1    85     49          
+B87       Range1               1      -1 
+U5        Soldier-Archer2      125    87            
+B109      Town_Center1         1      -1     

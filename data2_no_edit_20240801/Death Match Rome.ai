@@ -1,0 +1,98 @@
+//Quick, Threaded Research to the Iron Age
+
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1  
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1           
+B87       Range1               1      -1     
+
+C102    Bronze_Age             1      109
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B82       Government_Center    1      -1
+B49       Siege_Workshop       1      -1     
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+R40     Leather_Armor_-_Soldie 1      103    
+B12       Barracks1            1      -1  
+R46     Tool_Working           1      103    
+R16     Watch_Tower            1      68
+R107    Wood_Working           1      84     
+B12       Barracks1            1      -1  
+U83       Man                  2      109        
+R109    Stone_Mining           1      84     
+B12       Barracks1            1      -1  
+R28     Wheel                  1      84
+B12       Barracks1            1      -1  
+U83       Man                  2      109        
+B49       Siege_Workshop       1      -1     
+R32     Artisanship            1      84     
+R106    Ballistics             1      82 
+B12       Barracks1            1      -1  
+U83       Man                  2      109        
+R121    Logistics              1      82
+B49       Siege_Workshop       1      -1     
+B104      Temple1              1      -1     
+R20     Fanaticism             1      104    
+U83       Man                  2      109        
+U75       Soldier-Inf3         16     12     
+R65     Broad_Sword            1      12     
+B12       Barracks1            1      -1  
+U75       Soldier-Inf3         16     12     
+R54     Heavy_Catapult         1      49     
+U35       Soldier-Catapult1    8      49     
+R66     Long_Sword             1      12     
+R35     Engineering            1      82     
+B49       Siege_Workshop       1      -1     
+R111    Siegecraft             1      84     
+R43     Scale_Armor_-_Soldiers 1      103    
+U35       Soldier-Catapult1    8      49     
+R48     Chain_Mail_-_Soldiers  1      103    
+U75       Soldier-Inf3         16     12     
+U11       Soldier-Ballista     8      49     
+R51     Metal_Working          1      103    
+B49       Siege_Workshop       1      -1     
+R52     Metallurgy             1      103    
+U11       Soldier-Ballista     8      49     
+R36     Massive_Catapult       1      49     
+R110    Craftmanship           1      84
+R27     Helepolis              1      49     
+R77     Legion                 1      12     
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+R47     Bronze-Shield          1      103
+B50       Farm                 2      -1     
+R117    Iron-Shield            1      103
+B12       Barracks1            1      -1  
+R122    Tower_Shield           1      103
+U75       Soldier-Inf3         48     12     
+R12     Sentry_Tower           1      68
+U75       Soldier-Inf3         48     12     
+U35       Soldier-Catapult1    20     49     
+B79       Watch_Tower          1      -1
+U11       Soldier-Ballista     20     49     
+B109      Town_Center1         1      -1           
+U75       Soldier-Inf3         40     12     
+U35       Soldier-Catapult1    20     49     
+U11       Soldier-Ballista     20     49     
+B79       Watch_Tower          2      -1
+U75       Soldier-Inf3         40     12     
+B79       Watch_Tower          2      -1  
+U11       Soldier-Ballista     20     49     
+B79       Watch_Tower          2      -1
+U35       Soldier-Catapult1    20     49     
+U75       Soldier-Inf3         40     12     
+B79       Watch_Tower          30      -1 
+U75       Soldier-Inf3         40     12     
+U11       Soldier-Ballista     40     49     
+U35       Soldier-Catapult1    40     49     
+B50       Farm                 2      -1     

@@ -1,0 +1,96 @@
+B109      Town_Center1         1      -1           
+U83       Man                  10     109          
+B12       Barracks1            1      -1 
+T83       Man                  3      109       2          
+
+C101    Tool_Age               1      109       
+B101      Stable1              1      -1     
+T299      Soldier-Scout        2      101       1 
+U83       Man                  2      109          
+R42     Leather-Cavalry        1      103
+B84       Market1              1      -1      
+T299      Soldier-Scout        2      101       1
+B50       Farm                 2      -1     
+T83       Man                  2      109       2   
+B101      Stable1              1      -1     
+T299      Soldier-Scout        2      101       1
+U83       Man                  2      109        
+B87       Range1               1      -1  
+T299      Soldier-Scout        2      101       1
+R46     Toolworking            1      103
+T299      Soldier-Scout        2      101       1
+B50       Farm                 2      -1     
+R16     Watch_Tower            1      68           
+U83       Man                  2      109          
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+ 
+C102    Bronze_Age             1      109          
+B50       Farm                 2      -1     
+B49       Siege_Workshop       1      -1     
+U83       Man                  2      109          
+R16     Watch_Tower            2      68           
+R28     Wheel                  1      84           
+U35       Soldier-Catapult1    1      49 
+R41     Leather_Armor_-_Archer 1      103
+U35       Soldier-Catapult1    1      49 
+R44     Scale_Armor_-_Archers  1      103        
+U35       Soldier-Catapult1    1      49     
+R31     Plow                   1      84
+B50       Farm                 2      -1     
+U83       Man                  2      109          
+U35       Soldier-Catapult1    1      49     
+R16     Watch_Tower            2      68           
+T83       Man                  2      109       1   
+U35       Soldier-Catapult1    1      49     
+R12     Sentry_Tower           1      68
+U35       Soldier-Catapult1    1      49     
+B49       Siege_Workshop       1      -1     
+R107    Wood_Working           1      84     
+B79       Watch_Tower          2      -1
+B82       Government_Center    1      -1
+R32     Artisanship            1      84    
+B104      Temple1              1      -1     
+U125      Priest               1      104    
+R109    Stone_Mining           1      84     
+B87       Range1               1      -1   
+
+C103    Iron_Age               1      109
+R108    Gold_Mining            1      84          
+R106    Ballistics             1      82     
+U39       Soldier-Cavalry3_Arc 2      87
+R49     Chain_Mail_-_Archers   1      103    
+U39       Soldier-Cavalry3_Arc 2      87     
+R24     Polytheism             1      104    
+R35     Engineering            1      82     
+U39       Soldier-Cavalry3_Arc 2      87     
+R111    Siegecraft             1      84     
+U35       Soldier-Catapult1    2      49     
+R21     Mysticism              1      104    
+U39       Soldier-Cavalry3_Arc 2      87     
+R54     Heavy_Catapult         1      49     
+U125      Priest               2      104    
+R15     Guard_Tower            1      68     
+U39       Soldier-Cavalry3_Arc 2      87     
+R37     Alchemy                1      82     
+U35       Soldier-Catapult1    2      49     
+R34     Nobility               1      82     
+U39       Soldier-Cavalry3_Arc 5      87
+R30	Coinage                1      84
+U35       Soldier-Catapult1    3      49     
+R16     Watch_Tower            6      68           
+R38     Heavy_Horse_Archer     1      87
+R36     Massive_Catapult       1      49     
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B87       Range1               1      -1
+U39       Soldier-Cavalry3_Arc 12     87     
+B49       Siege_Workshop       1      -1      
+U35       Soldier-Catapult1    4      49
+U39       Soldier-Cavalry3_Arc 24     87     
+U35       Soldier-Catapult1    8      49
+B87       Range1               1      -1
+U39       Soldier-Cavalry3_Arc 175     87     
+B109      Town_Center1         1      -1     

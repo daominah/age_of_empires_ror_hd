@@ -1,0 +1,66 @@
+B109      Town_Center1         1      -1       
+U83       Man                  10      109      
+B12       Barracks1            1      -1       
+T83       Man                  4      109      2
+
+C101    Tool_Age               1      109      
+B84       Market1              1      -1       
+U83       Man                  2      109      
+B101      Stable1              1      -1       
+U83       Man                  2      109      
+T299      Soldier-Scout        1      101      1
+B50       Farm                 2      -1     
+U83       Man                  2      109      
+B50       Farm                 2      -1     
+T83       Man                  2      109      1
+
+C102    Bronze_Age             1      109      
+U83       Man                  2      109      
+B0        Academy              1      -1       
+U93       Soldier-Phal1        2      0             
+R16     Watch_Tower            1      68       
+U83       Man                  2      109      
+B79       Watch_Tower          2      -1       
+R28     Wheel                  1      84  
+U93       Soldier-Phal1        2      0             
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+R40     Leather_Armor-Soldier  1      103      
+B87       Range1               1      -1  
+U93       Soldier-Phal1        2      0        
+R31     Plow                   1      84
+B50       Farm                 2      -1     
+U93       Soldier-Phal1        2      0        
+R108    Gold_Mining            1      84       
+B79       Watch_Tower          2      -1       
+B82       Government_Center    1      -1       
+B0        Academy              1      -1       
+U93       Soldier-Phal1        2      0        
+B49       Siege_Workshop       1      -1       
+R109    Stone_Mining           1      84     
+U93       Soldier-Phal1        2      0        
+R43     Scale_Armor_-_Soldiers 1      103
+U35       Soldier-Catapult1    2      49       
+R46     Tool_Working           1      103      
+
+C103    Iron_Age               1      109      
+B49       Siege_Workshop       1      -1       
+R51     Metal_Working          1      103      
+B79       Watch_Tower          2      -1       
+U35       Soldier-Catapult1    2      49       
+R12     Sentry_Tower           2      68       
+U93       Soldier-Phal1        6      0        
+B79       Watch_Tower          6      -1       
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1        
+
+B0        Academy              1      -1     
+U93       Soldier-Phal1        12     0      
+B49       Siege_Workshop       1      -1     
+U35       Soldier-Catapult1    4      49   
+U125      Priest               2      104
+U35       Soldier-Catapult1    8      49   
+B0        Academy              1      -1     
+U93       Soldier-Phal1        175    0      
+B109      Town_Center1         1      -1     

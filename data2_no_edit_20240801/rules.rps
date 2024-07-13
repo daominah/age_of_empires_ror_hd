@@ -1,0 +1,162 @@
+// RULES.RPS
+//
+// This file contains the rock, paper, scissors rules for Tribe units.
+// The first number in each line is the ReferenceUnit#.  The numbers
+// on each line are paired in the form:  ReferenceUnit#   CombatantUnit#   CombatRating
+// The CombatRating is the desirability (on a 0 to 100) scale for having
+// the ReferenceUnit# fight with the CombatantUnit#
+//
+// Combinations that are left out are assumed to be desirability 50.
+//
+// For example:
+// 0     3 25
+// Suggests that Archers (Type 0) have a 25 desirability against buildings (Type 3)
+//
+//The unit numbers are as follows:
+//  TribeAIGroupArcher             0
+//   TribeAIGroupBuilding           3
+//   TribeAIGroupCivilian           4
+//  TribeAIGroupElephantRider      24
+//   TribeAIGroupFishingBoat        21
+//  TribeAIGroupFootSoldier        6
+//  TribeAIGroupHeavyFootSoldier   25
+//  TribeAIGroupElephantArcher     26
+//  TribeAIGroupMountedSoldier     12
+//  TribeAIGroupHeavyMountedSoldier 23
+//  TribeAIGroupPhalanx            28
+//  TribeAIGroupPriest             18
+//  TribeAIGroupSiegeWeapon        13
+//   TribeAIGroupTradeBoat          2
+//   TribeAIGroupTransportBoat      20
+//   TribeAIGroupWall               27
+//   TribeAIGroupWarBoat            22
+//Archers
+0     3  25
+0     4  75
+0     24 25
+0     6  25
+0     25 25
+0     26 25
+0     12 25
+0     23 25 
+0     28 10
+0     18 100
+0     13 10
+0     27 25
+//War Elephants
+24    0  75    
+24    3  75    
+24    4  75    
+24    6  80    
+24    25 80    
+24    26 75    
+24    12 60    
+24    23 40    
+24    28 30    
+24    18 10    
+24    13 10    
+24    27 100
+//Light Infantry
+6     0  60    
+6     3  60    
+6     4  90    
+6     24 25    
+6     25 25    
+6     26 25    
+6     12 25    
+6     23 25    
+6     28 30    
+6     18 100   
+6     13 100   
+6     27 75
+//Heavy Infantry
+25    0  90    
+25    3  90    
+25    4  90   
+25    24 75    
+25    6  75    
+25    26 70    
+25    12 80    
+25    23 70    
+25    28 60    
+25    18 75    
+25    13 50    
+25    27 50
+//Elephant Archer
+26    0  75    
+26    3  25    
+26    4  75    
+26    24 25    
+26    6  40    
+26    25 25    
+26    12 60    
+26    23 25    
+26    28 10    
+26    18 80    
+26    13 10    
+26    27 25
+//Mounted Soldier
+12    0  75    
+12    3  60    
+12    4  75    
+12    24 25    
+12    6  60    
+12    25 40    
+12    26 45    
+12    23 25    
+12    28 30    
+12    18 80    
+12    13 90    
+12    27 60
+//Heavy Mounted Soldier
+23    0  90    
+23    3  70    
+23    4  95    
+23    24 45    
+23    6  80    
+23    25 60    
+23    26 35    
+23    12 60    
+23    28 50    
+23    18 90    
+23    13 90    
+23    27 70
+//Phalanx
+28    0  50    
+28    3  100   
+28    4  20    
+28    24 70    
+28    6  60    
+28    25 40    
+28    26 55    
+28    12 40    
+28    23 25    
+28    18 10    
+28    13 10    
+28    27 90
+//Priest
+18    0  40    
+18    3  5     
+18    4  100   
+18    24 25    
+18    6  50    
+18    25 25    
+18    26 10    
+18    12 25    
+18    23 25    
+18    28 10    
+18    13 100   
+18    27 0
+//Siege Weapons
+13    0  60    
+13    3  60    
+13    4  30    
+13    24 55    
+13    6  40    
+13    25 25    
+13    26 75    
+13    12 25    
+13    23 25    
+13    28 70    
+13    18 100   
+13    27 100

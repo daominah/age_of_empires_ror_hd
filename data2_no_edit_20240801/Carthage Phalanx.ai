@@ -1,0 +1,81 @@
+B109      Town_Center1         1      -1     
+U83       Man                  10      109    
+B12       Barracks1            1      -1
+U83       Man                  4      109    
+
+C101    Tool_Age               1      109   
+B84       Market1              1      -1  
+U83       Man                  2      109    
+B101      Stable1              1      -1     
+U83       Man                  2      109    
+T299      Soldier-Scout        1      101       1
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+T83       Man                  2      109       2
+T347      Soldier-Slinger      2      12        2
+T83       Man                  2      109       2
+B50       Farm                 2      -1     
+T347      Soldier-Slinger      2      12        2
+T83       Man                  2      109       2
+B50       Farm                 2      -1     
+R40     Leather_Armor_-_Soldie 1      103 
+
+C102    Bronze_Age             1      109    
+B87       Range1               1      -1     
+T83       Man                  2      109       1
+B0        Academy              1      -1     
+B82       Government_Center    1      -1     
+U93       Soldier-Phal1        2      0      
+R28     Wheel                  1      84     
+U93       Soldier-Phal1        2      0      
+T338      Soldier-Camel        2      101       2
+R31     Plow                   1      84     
+R47     Bronze_Shield          1      103    
+B50       Farm                 2      -1     
+U83       Man                  2      109    
+R46     Tool_Working           1      103
+U93       Soldier-Phal1        2      0         
+R51     Metal_Working          1      103 
+U93       Soldier-Phal1        2      0         
+B0        Academy              1      -1     
+U93       Soldier-Phal1        2      0         
+B50       Farm                 2      -1     
+R43     Scale_Armor_-_Soldiers 1      103
+T338      Soldier-Camel        2      101       2
+
+C103    Iron_Age               1      109    
+B49       Siege_Workshop       1      -1     
+U93       Soldier-Phal1        1      0      
+U11       Soldier-Balista      2      49     
+R113    Aristocracy            1      82     
+U93       Soldier-Phal1        2      0      
+R108    Gold_Mining            1      84     
+U93       Soldier-Phal1        1      0      
+R117    Iron_Shield            1      103    
+B49       Siege_Workshop       1      -1     
+R80     Irrigation             1      84
+U11       Soldier-Ballista     2      49     
+R73     Phalanx                1      0      
+U11       Soldier-Ballista     2      49     
+U93       Soldier-Phal1        1      0      
+R35     Engineering            1      82  
+U11       Soldier-Ballista     2      49     
+R106    Ballistics             1      82     
+U11       Soldier-Ballista     2      49     
+R79     Centurion              1      0      
+R122    Tower_Shield           1      103
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B0        Academy              1      -1     
+U93       Soldier-Phal1        12      0      
+U125      Priest               1      104    
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      4      49
+U93       Soldier-Phal1        24      0      
+U125      Priest               1      104    
+U11       Soldier-Balista      8      49
+B0        Academy              1      -1     
+U93       Soldier-Phal1        175     0      
+B109      Town_Center1         1      -1     

@@ -1,0 +1,79 @@
+//Quick, Threaded Research to the Iron Age 
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1 
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1           
+B87       Range1               1      -1   
+
+C102    Bronze_Age             1      109          
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B49       Siege_Workshop       1      -1
+B82       Government_Center    1      -1
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+R16     Watch_Tower            1      68           
+R28     Wheel                  1      84
+R41     Leather_Armor_-_Archer 1      103
+R107    Wood_Working           1      84     
+B87       Range1               1      -1   
+U83       Man                  2      109        
+R109    Stone_Mining           1      84     
+R44     Scale_Armor_-_Archers  1      103
+R32     Artisanship            1      84    
+U83       Man                  2      109        
+R106    Ballistics             1      82     
+U39       Soldier-Cavalry3_Arc 2      87
+B87       Range1               1      -1   
+R37     Alchemy                1      82     
+B49       Siege_Workshop       1      -1
+R49     Chain_Mail_-_Archers   1      103    
+R54     Heavy_Catapult         1      49
+U83       Man                  2      109        
+R111    Siege_Craft            1      84     
+B49       Siege_Workshop       1      -1
+B87       Range1               1      -1   
+R36     Massive_Catapult       1      49
+B49       Siege_Workshop       1      -1
+R38     Heavy_Horse_Archer     1      87     
+B49       Siege_Workshop       1      -1     
+U83       Man                  2      109        
+R108    Gold_Mining            1      84          
+U39       Soldier-Cavalry3_Arc 4      87
+U35       Soldier-Catapult1    8      49     
+B87       Range1               1      -1   
+R35     Engineering            1      82    
+B87       Range1               1      -1    
+U39       Soldier-Cavalry3_Arc 12     87
+B87       Range1               1      -1    
+U35       Soldier-Catapult1    4      49     
+R30	Coinage                1      84
+U39       Soldier-Cavalry3_Arc 12     87
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+R12     Sentry_Tower           1      68
+B79       Watch_Tower          2      -1
+U35       Soldier-Catapult1    4      49     
+R34     Nobility               1      82     
+R15     Guard_Tower            1      68     
+B109      Town_Center1         1      -1              
+U39       Soldier-Cavalry3_Arc 32     87
+R2      Ballista-Tower         1      68
+U35       Soldier-Catapult1    24     49     
+U39       Soldier-Cavalry3_Arc 32     87     
+U35       Soldier-Catapult1    24     49     
+B79     Watch_Tower            19     -1
+U35       Soldier-Catapult1    24     49     
+U39       Soldier-Cavalry3_Arc 64     87
+U35       Soldier-Catapult1    64     49     
+B50       Farm                 2      -1     

@@ -1,0 +1,91 @@
+B109      Town_Center1         1      -1     
+U83       Man                  12      109    
+B12       Barracks1            1      -1
+U83       Man                  2      109    
+
+C101    Tool_Age               1      109   
+B84       Market1              1      -1  
+T83       Man                  2      109       2
+B101      Stable1              1      -1     
+T83       Man                  2      109       2
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+U83       Man                  2      109
+T347      Soldier-Slinger      2      12        2
+R16     Watch_Tower            1      68     
+B79       Watch_Tower          2      -1     
+B50       Farm                 2      -1     
+U83       Man                  2      109
+B50       Farm                 2      -1     
+T347      Soldier-Slinger      2      12        2
+B87       Range1               1      -1     
+
+C102    Bronze_Age             1      109    
+B0        Academy              1      -1     
+R109    Stone_Mining           1      84     
+U83       Man                  2      109
+B82       Government_Center    1      -1     
+T83       Man                  2      109       1
+T347      Soldier-Slinger      2      12        2
+U93       Soldier-Phal1        1      0      
+T347      Soldier-Slinger      2      12        2
+R31     Plow                   1      84     
+B50       Farm                 2      -1     
+U93       Soldier-Phal1        1      0          
+R47     Bronze_Shield          1      103    
+B79       Watch_Tower          2      -1     
+R40     Leather_Armor_-_Soldie 1      103 
+U93       Soldier-Phal1        1      0         
+R43     Scale_Armor_-_Soldiers 1      103
+U93       Soldier-Phal1        1      0         
+R46     Tool_Working           1      103
+U93       Soldier-Phal1        1      0         
+R51     Metal_Working          1      103 
+//T347      Soldier-Slinger      2      12        2
+B50       Farm                 2      -1     
+R28     Wheel                  1      84       
+U93       Soldier-Phal1        2      0      
+
+C103    Iron_Age               1      109    
+B0        Academy              1      -1     
+U93       Soldier-Phal1        1      0      
+B49       Siege_Workshop       1      -1     
+B79       Watch_Tower          2      -1     
+U11       Soldier-Balista      2      49     
+R113    Aristocracy            1      82     
+U93       Soldier-Phal1        1      0      
+R108    Gold_Mining            1      84     
+U93       Soldier-Phal1        1      0      
+R117    Iron_Shield            1      103    
+U11       Soldier-Balista      2      49     
+R80     Irrigation             1      84
+B49       Siege_Workshop       1      -1     
+U35       Soldier-Catapult1    2      49 
+R12     Sentry_Tower           1      68     
+U93       Soldier-Phal1        1      0      
+R73     Phalanx                1      0      
+U11       Soldier-Balista      2      49     
+B79       Watch_Tower          2      -1     
+U93       Soldier-Phal1        2      0      
+R15     Guard_Tower            1      68     
+U11       Soldier-Balista      2      49     
+R106    Balistics              1      82     
+U11       Soldier-Balista      2      49     
+R48     Chain_Mail_-_Soldiers  1      103    
+R52     Metallurgy             1      103    
+R79     Centurion              1      0      
+R122    Tower_Shield           1      103
+B79       Watch_Tower          4      -1     
+B276      Wonder               1      -1     
+B109      Town_Center1         1      -1     
+
+B0        Academy              1      -1     
+U93       Soldier-Phal1        12      0      
+B49       Siege_Workshop       1      -1     
+U11       Soldier-Ballista     4      49   
+U125      Priest               2      104
+B0        Academy              1      -1     
+R54     Heavy_Catapult         1      49          
+U35       Soldier-Catapult1    8      49 
+U93       Soldier-Phal1        175     0      
+B109      Town_Center1         1      -1     

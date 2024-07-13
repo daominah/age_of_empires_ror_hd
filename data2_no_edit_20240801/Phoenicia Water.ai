@@ -1,0 +1,96 @@
+B109      Town_Center1         1      -1     
+U83       Man                  10      109    
+B12       Barracks1            1      -1     
+T83       Man                  4      109    2
+B45       Dock_1               1      -1     
+
+C101    Tool_Age               1      109    
+B84       Market1              1      -1     
+U83       Man                  2      109    
+B50       Farm                 2      -1     
+U19       Boat-War1            2      45     
+U83       Man                  2      109    
+B87       Range1               1      -1     
+R107    Wood_Working           1      84     
+R16     Watch_Tower            1      68     
+B50       Farm                 2      -1     
+B79       Watch_Tower          1      -1     
+T83       Man                  2      109    2
+U19       Boat-War1            2      45         
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+U83       Man                  2      109    
+B45       Dock_1               1      -1 
+B79       Watch_Tower          2      -1 
+
+C102    Bronze_Age             1      109    
+B82       Government_Center    1      -1     
+R28     Wheel                  1      84     
+U83       Man                  2      109    
+R31     Plow                   1      84     
+B50       Farm                 2      -1     
+U83       Man                  2      109    
+B87       Range1               1      -1     
+R5      Medium_War_Ship        1      45     
+T41       Soldier-Chariot2     2      87     2
+R4      Fishing_Ship           1      45     
+R12     Sentry_Tower           1      68 
+T41       Soldier-Chariot2     2      87     2
+B87       Range1               1      -1     
+B104      Temple1              1      -1     
+U125      Priest               1      104    
+U19       Boat-War1            2      45  
+B45       Dock_1               1      -1     
+R21     Mysticism              1      104    
+T41       Soldier-Chariot2     2      87     2
+R41     Leather_Armor_-_Archer 1      103    
+T83       Man                  2      109    2
+B87       Range1               1      -1     
+B79       Watch_Tower          2      -1     
+U17       Boat-Transport1      2      45     
+
+C103    Iron_Age               1      109         
+R7      Trireme                1      45  
+U125      Priest               1      104    
+R9      Trireme_with_Catapult  1      45          
+U250      Boat-War4            2      45          
+R37     Alchemy                1      82          
+U125      Priest               1      104    
+R22     Astrology              1      104    
+U25       Soldier-El_Archer    2      87     
+R35     Engineering            1      82
+U250      Boat-War4            2      45          
+R8      Heavy_Transport        1      45          
+U25       Soldier-El_Archer    2      87     
+R106    Ballistics             1      82
+U25       Soldier-El_Archer    2      87     
+R80     Irrigation             1      84     
+U125      Priest               1      104    
+R24     Polytheism             1      104    
+U250      Boat-War4            2      45          
+R32     Artisanship            1      84             
+U25       Soldier-El_Archer    2      87     
+U250      Boat-War4            2      45          
+R44     Scale_Armor_-_Archers  1      103    
+U25       Soldier-El_Archer    2      87     
+U250      Boat-War4            2      45          
+R110    Craftmanship           1      84
+U25       Soldier-El_Archer    2      87     
+R25     Juggernaught           1      45     
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B45       Dock_1               1      -1 
+U250      Boat-War4            2      45          
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      2      49
+B87       Range1               1      -1
+U25       Soldier-El_Archer    24     87     
+U19       Boat-War1            24     45
+B45       Dock_1               1      -1 
+U19       Boat-War1            175    45
+U11       Soldier-Balista      8      49
+B87       Range1               1      -1
+U25       Soldier-El_Archer    175    87     
+B109      Town_Center1         1      -1     

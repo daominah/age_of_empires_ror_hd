@@ -1,0 +1,75 @@
+B109      Town_Center1         1      -1       
+U83       Man                  10      109      
+B12       Barracks1            1      -1       
+T83       Man                  5      109      2
+
+C101    Tool_Age               1      109    
+B84       Market1              1      -1
+T347      Soldier-Slinger      2      12       2   
+B50       Farm                 2      -1     
+U83       Man                  2      109      
+B101      Stable1              1      -1     
+B50       Farm                 2      -1     
+T299      Soldier-Scout        1      101    2
+U83       Man                  2      109  
+R16     Watch_Tower            1      68  
+B79       Watch_Tower          2      -1     
+B12       Barracks1            1      -1       
+T347      Soldier-Slinger      2      12       2   
+R40     Leather_Armor_-_Soldie 1      103    
+U83       Man                  2      109      
+R81     Domestication          1      84       
+B50       Farm                 2      -1     
+
+C102    Bronze_Age             1      109      
+B87       Range1               1      -1       
+U83       Man                  2      109        
+R63     Axe                    1      12     
+B12       Barracks1            1      -1       
+R64     Short_Sword            1      12       
+U75       Soldier-Inf3         2      12     
+U83       Man                  2      109        
+B82       Government_Center    1      -1     
+R109    Stone_Mining           1      84     
+R121      Logistics            1      82
+B79       Watch_Tower          2      -1     
+U75       Soldier-Inf3         3      12       
+R108    Gold_Mining            1      84     
+U75       Soldier-Inf3         3      12       
+R107    Wood_Working           1      84       
+R31     Plow                   1      84     
+B50       Farm                 2      -1     
+U75       Soldier-Inf3         3      12                  
+R28     Wheel                  1      84     
+B49       Siege_Workshop       1      -1     
+R46     Tool_Working           1      103      
+U75       Soldier-Inf3         3      12                   
+R43     Scale_Armor_-_Soldiers 1      103    
+U35       Soldier-Catapult1    1      49   
+U75       Soldier-Inf3         3      12         
+R12     Sentry_Tower           1      68     
+U35       Soldier-Catapult1    1      49   
+U75       Soldier-Inf3         3      12         
+
+C103    Iron_Age               1      109    
+U75       Soldier-Inf3         3      12         
+R51     Metal_Working          1      103    
+R47     Bronze_Shield          1      103    
+B79       Watch_Tower          2      -1
+U35       Soldier-Catapult1    2      49   
+R32     Artisanship            1      84         
+U75       Soldier-Inf3         3      12         
+B79       Watch_Tower          2      -1
+U75       Soldier-Inf3         6      12          
+B109      Town_Center1         1      -1     
+
+B12       Barracks1            1      -1       
+U75       Soldier-Inf3         12     12         
+U125      Priest               1      104
+B49       Siege_Workshop       1      -1     
+U35       Soldier-Catapult1    4      49   
+U125      Priest               1      104
+U35       Soldier-Catapult1    8      49   
+B12       Barracks1            1      -1       
+U75       Soldier-Inf3         175    12         
+B109      Town_Center1         1      -1     

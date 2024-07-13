@@ -1,0 +1,98 @@
+B109      Town_Center1         1      -1           
+U83       Man                  8      109          
+B45       Dock_1               1      -1     
+T83       Man                  4      109       2
+B12       Barracks1            1      -1           
+
+C101    Tool_Age               1      109    
+B87       Range1               1      -1   
+U83       Man                  2      109          
+B84       Market1              1      -1     
+U83       Man                  2      109          
+B50       Farm                 1      -1     
+T4        Soldier-Archer1      2      87       2
+B50       Farm                 1      -1     
+T4        Soldier-Archer1      2      87       2
+U19       Boat-War1            2      45     
+U83       Man                  2      109          
+B50       Farm                 1      -1     
+R16     Watch_Tower            1      68     
+B50       Farm                 1      -1     
+B79       Watch_Tower          1      -1 
+T4        Soldier-Archer1      2      87       2
+B50       Farm                 1      -1     
+B79       Watch_Tower          1      -1       
+T83       Man                  2      109      1
+B50       Farm                 1      -1     
+B79       Watch_Tower          1      -1 
+T4        Soldier-Archer1      2      87       2
+B45       Dock_1               1      -1 
+
+C102    Bronze_Age             1      109
+R107    Wood_Working           1      84
+U83       Man                  2      109          
+B87       Range1               1      -1   
+R28     Wheel                  1      84
+U83       Man                  2      109      
+B82       Government_Center    1      -1
+T41       Soldier-Chariot2     4      87       3
+R41     Leather_Armor_-_Archer 1      103
+B101      Stable1              1      -1     
+T338      Soldier-Camel        2      101      2
+B49       Siege_Workshop       1      -1
+U19       Boat-War1            2      45
+B45       Dock_1               1      -1
+U19       Boat-War1            2      45     
+T35       Soldier-Catapult1    1      49       1
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+T338      Soldier-Camel        2      101      2
+R4      Fishing_Ship           1      45     
+T41       Soldier-Chariot2     2      87       3
+T35       Soldier-Catapult1    1      49       1
+R5      Medium_War_Ship        1      45
+B79       Watch_Tower          2      -1
+U19       Boat-War1            2      45
+R12     Sentry_Tower           1      68
+R31     Plow                   1      84
+B50       Farm                 2      -1     
+R32     Artisanship            1      84
+B79       Watch_Tower          2      -1
+U19       Boat-War1            2      45         
+
+C103    Iron_Age               1      109         
+R7      Trireme                1      45  
+R106    Ballistics             1      82
+B87       Range1               1      -1
+U11       Soldier-Balista      2      49
+U39       Soldier-Cavalry3_Arc 2      87     
+R44     Scale_Armor_-_Archers  1      103
+U360      Fire-Galley          2      45             
+U11       Soldier-Balista      2      49                
+U39       Soldier-Cavalry3_Arc 2      87     
+U360      Fire-Galley          2      45             
+R110    Craftmanship           1      84
+R80     Irrigation             1      84     
+U39       Soldier-Cavalry3_Arc 2      87     
+R15     Guard_Tower            1      68     
+U19       Boat-War1            4      45
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B45       Dock_1               1      -1 
+U360      Fire-Galley          6      45             
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      4      49
+B87       Range1               1      -1
+U39       Soldier-Cavalry3_Arc 24     87     
+U19       Boat-War1            24     45
+U360      Fire-Galley          12     45             
+U11       Soldier-Balista      2      49
+R35     Engineering            1      82  
+B45       Dock_1               1      -1 
+U19       Boat-War1            120    45
+U11       Soldier-Balista      8      49
+B87       Range1               1      -1
+U39       Soldier-Cavalry3_Arc 120    87     
+B109      Town_Center1         1      -1     
