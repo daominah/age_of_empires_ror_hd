@@ -2,6 +2,12 @@
 
 ## 
 
+## Download
+
+From [github.com/daominah/age_of_empires_ror_hd](https://github.com/daominah/age_of_empires_ror_hd) click on green button `Code` then `Download ZIP` (size about 80 MB)
+
+
+
 ## Run
 
 * Init setup: run file `SETUP.EXE`
