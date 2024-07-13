@@ -1,0 +1,81 @@
+B109      Town_Center1         1      -1     
+U83       Man                  12      109    
+B12       Barracks1            1      -1     
+T83       Man                  4      109    2
+
+C101    Tool_Age               1      109    
+B84       Market1              1      -1     
+U83       Man                  2      109    
+T347      Slinger              2      12     2
+B50       Farm                 2      -1     
+U83       Man                  2      109    
+B101      Stable1              1      -1     
+R16     Watch_Tower            1      68     
+B50       Farm                 2      -1     
+T299      Soldier-Scout        1      101    3
+U83       Man                  2      109    
+B79       Watch_Tower          2      -1     
+T83       Man                  2      109    2
+T347      Slinger              2      12     2
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+
+C102    Bronze_Age             1      109 
+R107    Wood_Working           1      84        
+T37       Soldier-Cavalry1     2      101    2
+B50       Farm                 2      -1     
+U83       Man                  2      109    
+R108    Gold_Mining            1      84     
+B104      Temple1              1      -1     
+T83       Man                  1      109    1
+U125      Priest               1      104    
+R28     Wheel                  1      84     
+B87       Range1               1      -1     
+R42     Leather_Armor_Mounted  1      103    
+B82       Government_Center    1      -1
+R45     Scale_Armor_-_Cavalry  1      103    
+T338      Soldier-Camel        2      101    2
+R12     Sentry_Tower           1      68 
+B101      Stable1              1      -1
+R31     Plow                   1      84     
+B50       Farm                 2      -1     
+T338      Soldier-Camel        2      101    2
+
+C103    Iron_Age               1      109    
+B101      Stable1              1      -1     
+U46       Soldier-Elephant     2      101    
+U25       Soldier-El_Archer    2      87     
+R30     Coinage                1      84     
+U46       Soldier-Elephant     2      101        
+U25       Soldier-El_Archer    2      87     
+B87       Range1               1      -1     
+R41     Leather_Armor_-_Archer 1      103    
+R80     Irrigation             1      84     
+U46       Soldier-Elephant     2      101 
+U25       Soldier-El_Archer    2      87     
+R32     Artisanship            1      84     
+U46       Soldier-Elephant     2      101    
+U25       Soldier-El_Archer    2      87     
+R106    Ballistics             1      82     
+R37     Alchemy                1      82     
+U46       Soldier-Elephant     2      101    
+R110    Craftmanship           1      84     
+R47     Bronze_Shield          1      103    
+R117    Iron_Shield            1      103    
+R125    Armored-Elephant       1      101
+U46       Soldier-Elephant     2      101    
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      2      49
+B101      Stable1              1      -1     
+U46       Soldier-Elephant     12     101   
+U125      Priest               1      104    
+U11       Soldier-Balista      4      49
+U46       Soldier-Elephant     24     101   
+U11       Soldier-Balista      8      49
+B101      Stable1              1      -1     
+U46       Soldier-Elephant     175    101   
+B109      Town_Center1         1      -1     

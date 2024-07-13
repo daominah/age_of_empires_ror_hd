@@ -1,0 +1,107 @@
+//Quick Threaded, Research to the Iron Age
+
+B109      Town_Center1         1      -1            
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1  
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1           
+B101      Stable1              1      -1 
+B87       Range1               1      -1
+
+C102    Bronze_Age             1      109
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B104      Temple1              1      -1  
+B82       Government_Center    1      -1
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+B101      Stable1              1      -1 
+R41     Leather-armor-archer   1      103
+R16     Watch_Tower            1      68
+R42     Leather_Armor_Mounted  1      103
+B101      Stable1              1      -1 
+R46     Toolworking            1      103
+R107    Wood_Working           1      84     
+U83       Man                  2      109        
+R28     Wheel                  1      84
+B101      Stable1              1      -1 
+U40       Soldier-Chariot1     8      101 
+R21     Mysticism              1      104    
+U83       Man                  2      109        
+U40       Soldier-Chariot1     8      101
+R44     Scale-Armor-Archer     1      103          
+R22     Astrology              1      104
+R45     Scale-Armor-Cavalry    1      103          
+B101      Stable1              1      -1 
+U83       Man                  2      109        
+R51     Metalworking           1      103
+R32     Artisanship            1      84     
+R34     Nobility               1      82     
+B104      Temple1              1      -1
+R106    Ballistics             1      82     
+B104      Temple1              1      -1     
+R37	  Alchemy              1      82
+U83       Man                  2      109        
+U40       Soldier-Chariot1     8      101
+B87       Range1               1      -1
+U125      Priest               2      104    
+R126    Scythe-Chariot         1      101
+B104      Temple1              1      -1     
+U40       Soldier-Chariot1     8      101
+R24     Polytheism             1      104
+B87       Range1               1      -1
+R19     Monotheism             1      104    
+R52     Metallurgy             1      103
+R20     Fanaticism             1      104
+U41       Soldier-Chariot2     8      87         
+R18     Afterlife              1      104         
+R49     Chain-Mail-Archer      1      103    
+U41       Soldier-Chariot2     8      87         
+R23     Jihad                  1      104
+R50     Chain-Mail-Cavalry     1      103    
+U25       Soldier-Ele-Archer   16     87
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+R110    Craftmanship           1      84
+B101      Stable1              1      -1 
+U125      Priest               2      104
+U40       Soldier-Chariot1     16     101
+R12     Sentry_Tower           1      68
+U125      Priest               4      104
+B79       Watch_Tower          1      -1       
+B109      Town_Center1         1      -1           
+U125      Priest               4      104
+R15     Guard_Tower            1      68
+B79       Watch_Tower          2      -1
+R108	Gold_Mining            1      84          
+U125      Priest               4      104                 
+R2      Catapult_Tower         1      68     
+B79       Watch_Tower          2      -1       
+R30	Coinage                1      84          
+U125      Priest               4      104                  
+B87       Range1               1      -1
+U25       Soldier-Ele-Archer   8      87
+B79       Watch_Tower          2      -1
+U25       Soldier-Ele-Archer   8      87
+U125      Priest               4      104                     
+U25       Soldier-Ele-Archer   8      87
+B79       Watch_Tower          2      -1 
+B87       Range1               1      -1
+U25       Soldier-Ele-Archer   16     87
+U125      Priest               4      104
+U25       Soldier-Ele-Archer   16     87
+R112    Architecture           1      82     
+U125      Priest               4      104
+U40       Soldier-Chariot1     16     101
+B79       Watch_Tower          16      -1 
+U25       Soldier-Ele-Archer   120    87
+B50       Farm                 2      -1     

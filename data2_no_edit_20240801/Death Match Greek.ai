@@ -1,0 +1,92 @@
+//Quick, Threaded, Research to the Iron Age
+B109      Town_Center1         1      -1     
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1
+
+C101    Tool_Age               1      109   
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1  
+B87       Range1               1      -1
+B101      Stable1              1      -1
+
+C102    Bronze_Age             1      109    
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B82       Government_Center    1      -1
+B0        Academy              1      -1     
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+R109    Stone_Mining           1      84
+R40     Leather_Armor_-_Soldie 1      103
+U83       Man                  2      109        
+R46     Tool_Working           1      103
+R28     Wheel                  1      84     
+R51     Metal_Working          1      103 
+B0        Academy              1      -1     
+R43     Scale_Armor_-_Soldiers 1      103
+U83       Man                  2      109        
+R47     Bronze-Shield          1      103
+B0        Academy              1      -1     
+R113    Aristocracy            1      82
+R73     Phalanx                1      0
+R117    Iron-Shield            1      103
+U83       Man                  2      109        
+R48     Chain_Mail_-_Soldiers  1      103    
+B49       Siege_Workshop       1      -1
+R79     Centurion              1      0      
+R54     Heavy_Catapult         1      49
+B49       Siege_Workshop       1      -1
+R111    Siege_Craft            1      84     
+B0        Academy              1      -1
+R36     Massive_Catapult       1      49
+R35     Engineering            1      82  
+B0        Academy              1      -1
+U83       Man                  2      109        
+B49       Siege_Workshop       1      -1
+U93       Soldier-Phal1        16     0
+B49       Siege_Workshop       1      -1
+U35       Soldier-Catapult1    8      49
+U93       Soldier-Phal1        24     0
+U35       Soldier-Catapult1    12     49
+U93       Soldier-Phal1        16     0      
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+U35       Soldier-Catapult1    8      49     
+U93       Soldier-Phal1        24     0      
+U35       Soldier-Catapult1    12     49
+R122    Tower-Shield           1      103
+U93       Soldier-Phal1        12     0      
+U35       Soldier-Catapult1    12     49             
+B109      Town_Center1         1      -1
+U93       Soldier-Phal1        24     0         
+U35       Soldier-Catapult1    12     49             
+R37     Alchemy                1      82     
+U93       Soldier-Phal1        24     0         
+U35       Soldier-Catapult1    12     49             
+B104      Temple1              1      -1     
+U125      Priest               5      104 
+R106    Ballistics             1      82     
+R21     Mysticism              1      104    
+U125      Priest               3      104 
+R22     Astrology              1      104    
+R24     Polytheism             1      104
+R20     Fanaticism             1      104    
+R18     Afterlife              1      104
+U35       Soldier-Catapult1    12     49             
+R16     Watch_Tower            1      68     
+U125      Priest               2      104 
+R12     Sentry_Tower           1      68     
+R15     Guard_Tower            1      68     
+U93       Soldier-Phal1        64     0         
+U35       Soldier-Catapult1    24     49             
+R2      Ballista-Tower         1      68
+B79       Watch_Tower          19      -1
+U93       Soldier-Phal1        48     0
+B50       Farm                 2      -1     

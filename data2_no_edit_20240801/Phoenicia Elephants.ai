@@ -1,0 +1,83 @@
+B109      Town_Center1         1      -1           
+U83       Man                  10     109          
+B12       Barracks1            1      -1  
+T83       Man                  4      109      2             
+
+C101    Tool_Age               1      109       
+B84       Market1              1      -1           
+T347      Soldier_Slinger      2      12       2
+B50       Farm                 2      -1     
+U83       Man                  2      109          
+B101      Stable1              1      -1       
+U83       Man                  2      109
+R107    Wood_Working           1      84          
+B50       Farm                 2      -1     
+U83       Man                  2      109          
+ 
+C102    Bronze_Age             1      109          
+B87       Range1               1      -1     
+T338      Camel                2      101      2
+U83       Man                  2      109          
+R28     Wheel                  1      84           
+R42     Leather_Armor_Mounted  1      103             
+R32     Artisanship            1      84         
+B104      Temple1              1      -1  
+R16     Watch_Tower            1      68           
+U83       Man                  2      109          
+B79       Watch_Tower          1      -1       
+B82       Government_Center    1      -1     
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+B79       Watch_Tower          2      -1
+T338      Camel                2      101      2
+B50       Farm                 2      -1     
+T83       Man                  2      109      1   
+R31     Plow                   1      84
+B50       Farm                 2      -1     
+U125      Priest               1      104                 
+B79       Watch_Tower          1      -1                      
+
+C103    Iron_Age               1      109
+B87       Range1               1      -1
+U25       Soldier-El_Archer    2      87          
+B101      Stable1              1      -1 
+B104      Temple1              1      -1
+U25       Soldier-El_Archer    2      87     
+R106    Ballistics             1      82
+U125      Priest               2      104
+R41     Leather_Armor_-_Archer 1      103        
+U25       Soldier-El_Archer    2      87
+R37     Alchemy                1      82               
+U46       Soldier-Elephant     2      101
+U46       Soldier-Elephant     2      101             
+R80     Irrigation             1      84     
+R21     Mysticism              1      104    
+U25       Soldier-El_Archer    2      87          
+R45     Scale_Armor_-_Cavalry  1      103     
+U46       Soldier-Elephant     2      101          
+R22     Astrology              1      104
+U25       Soldier-El_Archer    2      87      
+U46       Soldier-Elephant     2      101         
+R110    Craftmanship           1      84     
+U125      Priest               2      104
+U25       Soldier-El_Archer    2      87          
+R24     Polytheism             1      104
+U46       Soldier-Elephant     2      101     
+R44     Scale_Armor_-_Archers  1      103        
+R18     Afterlife              1      104 
+R19     Monotheism             1      104    
+R47     Bronze_Shield          1      103    
+R117    Iron_Shield            1      103    
+R125    Armored_Elephants      1      101
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B87       Range1               1      -1
+U25       Soldier-El_Archer    8      87   
+U125      Priest               1      104    
+B101      Stable1              1      -1     
+U46       Soldier-Elephant     32     101   
+B87       Range1               1      -1
+U25       Soldier-El_Archer    175    87   
+B109      Town_Center1         1      -1     
