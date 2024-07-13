@@ -1,0 +1,102 @@
+//Quick, Threaded Research to the Iron Age
+
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1  
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1           
+B101      Stable1              1      -1 
+B87       Range1               1      -1     
+
+C102    Bronze_Age             1      109
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B82       Government_Center    1      -1
+B104      Temple1              1      -1  
+B101      Stable1              1      -1 
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+B45       Dock1                1      -1	
+R42     Leather_Armor_Mounted  1      103
+R16     Watch_Tower            1      68
+B101      Stable1              1      -1 	
+U83       Man                  2      109        
+R28     Wheel                  1      84
+R21     Mysticism              1      104    
+B104      Temple1              1      -1     
+U83       Man                  2      109        
+B45       Dock1                1      -1	
+R22     Astrology              1      104
+R106    Ballistics             1      82 
+B45       Dock_1               1      -1     
+R37     Alchemy                1      82
+B104      Temple1              1      -1     
+U83       Man                  2      109        
+U125      Priest               6      104    
+B45       Dock1                1      -1	
+R24     Polytheism             1      104
+B101      Stable1              1      -1 
+R19     Monotheism             1      104    
+R45     Scale_Armor-Cavalry    1      103          
+U83       Man                  2      109        
+U46       Soldier-Elephant     8      101
+B45       Dock_1               1      -1     
+R20     Fanaticism             1      104
+U17       Boat-Transport1      8      45
+B101      Stable1              1      -1 
+R18     Afterlife              1      104
+U46       Soldier-Elephant     16     101
+R23     Jihad                  1      104
+R47     Bronze-Shield          1      103
+B45       Dock1                1      -1	
+R117    Iron-Shield            1      103
+R125    Armored-Elephant       1      101
+U250      Boat-War4            12     45                 
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+R5      Medium_War_Ship        1      45
+B104      Temple1              1      -1
+U125      Priest               2      104
+R7      Trireme                1      45 
+U17       Boat-Transport1      4      45     
+R12     Sentry_Tower           1      68
+U125      Priest               6      104
+R9      Trireme_with_Catapult  1      45 
+B45       Dock_1               1      -1     
+U250      Boat-War4            24     45                 
+B101      Stable1              1      -1 
+U46       Soldier-Elephant     20     101
+B79       Watch_Tower          1      -1
+U17       Boat-Transport1      1      45
+R8      Heavy_Transport        1      45       
+U250      Boat-War4            24     45   
+B109      Town_Center1         1      -1           
+U125      Priest               8      104
+R35     Engineering            1      82           
+R25     Juggernaught           1      45     
+R15     Guard_Tower            1      68 
+U250      Boat-War4            16     45             
+B79       Watch_Tower          2      -1
+U125      Priest               6      104                 
+R2      Catapult_Tower         1      68     
+B79       Watch_Tower          2      -1  
+U46       Soldier-Elephant     20     101
+U250      Boat-War4            16     45                  
+B79       Watch_Tower          2      -1
+U250      Boat-War4            16     45             
+U125      Priest               6      104                     
+B79       Watch_Tower          2      -1 
+U250      Boat-War4            32     45             
+U46       Soldier-Elephant     12     101
+B79       Watch_Tower          16      -1 
+U46       Soldier-Elephant     75     101
+B50       Farm                 2      -1     

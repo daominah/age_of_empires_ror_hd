@@ -1,0 +1,26 @@
+
+     === AGE OF EMPIRES HD ===
+      AoE-HD_0.5 Up2018-08-24
+
+Trang chu: http://aoehd.net
+Ho tro: http://facebook.com/aoehd
+
+- Chay file SETUP.EXE o lan dau choi game, khi chuyen game
+qua thu muc khac de cai dat va sua mot so loi thuong gap,
+cai do phan giai, tuy chon tieng Viet va che do cua so cho game.
+- Doc HuongDan.htm de biet them chi tiet.
+- Anh chup man hinh (Crtl + F12) duoc luu trong thu muc Screenshot.
+
+* Do phan giai game mac dinh (man hinh 16:9):
+    1920x1080   1600x900   1366x768
+
+* Set 2K: Ho tro 16:9 2K va cac man kich thuoc lon:
+    2560x1440   1920x1080  1600x900
+
+* Set 16:10: Ho tro man hinh ti le 16:10:
+    1680x1050   1440x900   1280x800
+
+* Set ho tro do phan giai khac:
+    2560x1080   1360x768   1280x1024
+
+==========================================

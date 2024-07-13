@@ -1,0 +1,95 @@
+//Quick, Threaded Research to the Iron Age
+
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1  
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1           
+B101      Stable1              1      -1 
+B87       Range1               1      -1     
+
+C102    Bronze_Age             1      109
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B82       Government_Center    1      -1
+B104      Temple1              1      -1  
+B87       Range1               1      -1
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+B87       Range1               1      -1
+R42     Leather_Armor_Mounted  1      103
+U83       Man                  2      109        
+R41     Leather-armor-archer   1      103
+R16     Watch_Tower            1      68
+B87       Range1               1      -1
+R107    Wood_Working           1      84     
+U83       Man                  2      109        
+B104      Temple1              1      -1     
+R28     Wheel                  1      84
+B101      Stable1              1      -1 
+R21     Mysticism              1      104    
+B87       Range1               1      -1
+B104      Temple1              1      -1     
+R22     Astrology              1      104
+R32     Artisanship            1      84     
+R106    Ballistics             1      82 
+U83       Man                  2      109        
+R37     Alchemy                1      82
+U125      Priest               6      104    
+U83       Man                  2      109        
+U25       Soldier-Ele-Archer   8      87
+R24     Polytheism             1      104
+R44     Scale_Armor-Archer     1      103         
+B104      Temple1              1      -1
+R19     Monotheism             1      104    
+U25       Soldier-Ele-Archer   20     87
+B101      Stable1              1      -1  
+R45     Scale_Armor-Cavalry    1      103          
+U46       Soldier-Elephant     20     101
+R20     Fanaticism             1      104
+B101      Stable1              1      -1 
+R18     Afterlife              1      104
+B101      Stable1              1      -1 
+U46       Soldier-Elephant     20     101
+R23     Jihad                  1      104
+R110    Craftmanship           1      84
+R47     Bronze-Shield          1      103
+R125    Armored-Elephant       1      101
+R117    Iron-Shield            1      103
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+B87       Range1               1      -1
+U125      Priest               8      104
+R12     Sentry_Tower           1      68
+U125      Priest               8      104
+U25       Soldier-Ele-Archer   20     87
+U46       Soldier-Elephant     20     101
+B79       Watch_Tower          1      -1
+B109      Town_Center1         1      -1           
+U125      Priest               4      104
+U25       Soldier-Ele-Archer   20     87
+U46       Soldier-Elephant     20     101
+R15     Guard_Tower            1      68 
+B79       Watch_Tower          2      -1
+U125      Priest               6      104                 
+R2      Catapult_Tower         1      68     
+B79       Watch_Tower          2      -1  
+U46       Soldier-Elephant     20     101
+B79       Watch_Tower          2      -1
+U25       Soldier-Ele-Archer   20     87
+U125      Priest               10     104                     
+B79       Watch_Tower          2      -1 
+U46       Soldier-Elephant     50     101
+U25       Soldier-Ele-Archer   50     87
+B79       Watch_Tower          16      -1 
+U25       Soldier-Ele-Archer   10     87
+B50       Farm                 2      -1     
