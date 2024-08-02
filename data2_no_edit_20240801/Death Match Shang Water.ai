@@ -1,0 +1,103 @@
+//Quick Threaded, Research to the Iron Age
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1           
+B45       Dock1                1      -1
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B84       Market1              1      -1
+B101      Stable               1      -1
+B87       Range1               1      -1
+
+C102    Bronze_Age             1      109          
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B82       Government_Center    1      -1
+B104      Temple1              1      -1     
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+B101      Stable               1      -1
+R42     Leather_Armor-Cav      1      103
+R16     Watch_Tower            1      68
+B45       Dock1                1      -1	
+R46     Toolworking            1      103
+B101      Stable               1      -1
+U83       Man                  2      109        
+U37       Soldier-Cavalry1     8      101
+U125      Priest               8      104    
+U83       Man                  2      109        
+U37       Soldier-Cavalry1     16     101
+B45       Dock1                1      -1
+R45     Scale_Armor-Cav        1      103
+U83       Man                  2      109       
+R108    Gold_Mining            1      84           
+U37       Soldier-Cavalry1     16     101
+B45       Dock1                1      -1	
+U83       Man                  2      109        
+U17       Boat-Transport1      4      45
+R51     Metalworking           1      103
+R5      War_Galley             1      45
+R34     Nobility               1      82     
+B101      Stable               1      -1
+R71     Heavy-Cavalry          1      101
+B45       Dock1                1      -1	
+R30	Coinage                1      84
+U360      Fire-Galley          20     45             
+R107    Wood_Working           1      84     
+B49       Siege_Workshop       1      -1
+R50     Chain_Mail-Cav         1      103    
+U11       Soldier-Balista      20     49
+B49       Siege_Workshop       1      -1    
+R32     Artisanship            1      84      
+B101      Stable               1      -1
+B45       Dock1                1      -1
+U360      Fire-Galley          20     45             
+R110    Craftmanship           1      84    
+B49       Siege_Workshop       1      -1     
+B79       Watch_Tower          2      -1
+U11       Soldier-Balista      20     49
+R52     Metallurgy             1      103
+R27     Helepolis              1      49
+U17       Boat-Transport1      4      45
+U37       Soldier-Cavalry1     20     101
+R78     Cataphract             1      101
+U17       Boat-Transport1      4      45
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+B101      Stable               1      -1
+R12     Sentry_Tower           1      68
+R21     Mysticism              1      104   
+U11       Soldier-Balista      20     49
+R28     Wheel                  1      84
+U125      Priest               8      104    
+U37       Soldier-Cavalry1     20     101
+R22     Astrology              1      104  
+R15     Guard_Tower            1      68     
+U360      Fire-Galley          20     45             
+B109      Town_Center1         1      -1           
+U125      Priest               8      104    
+R24     Polytheism             1      104
+B79       Watch_Tower          2      -1
+R19     Monotheism             1      104 
+U11       Soldier-Balista      20     49   
+R20     Fanaticism             1      104 
+B45       Dock1                1      -1
+U360      Fire-Galley          2      45             
+R18     Afterlife              1      104
+U11       Soldier-Balista      20     49
+R23     Jihad                  1      104
+U125      Priest               9      104    
+R112    Architecture           1      82
+U11       Soldier-Balista      80     49
+U360      Fire-Galley          80     45             
+B79       Watch_Tower          19      -1
+U37       Soldier-Cavalry1     10     101
+B50       Farm                 2      -1     

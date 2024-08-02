@@ -1,0 +1,78 @@
+B109      Town_Center1         1      -1           
+U83       Man                  14     109          
+B12       Barracks1            1      -1           
+
+C101    Tool_Age               1      109       
+B84       Market1              1      -1           
+T83       Man                  2      109       2  
+B50       Farm                 1      -1           
+T83       Man                  2      109       2   
+R16     Watch_Tower            1      68           
+T73       Soldier-Inf1         2      12        1
+B50       Farm                 1      -1           
+B79       Watch_Tower          1      -1       
+B101      Stable1              1      -1       
+U83       Man                  2      109          
+B50       Farm                 2      -1           
+B87       Range1               1      -1     
+ 
+C102    Bronze_Age             1      109          
+R28     Wheel                  1      84           
+B79       Watch_Tower          1      -1       
+B50       Farm                 2      -1           
+R81     Domestication          1      84     
+U83       Man                  2      109          
+B79       Watch_Tower          2      -1       
+B50       Farm                 1      -1           
+T83       Man                  2      109         1
+R12     Sentry_Tower           1      68       
+R31     Plow                   1      84       
+U83       Man                  2      109          
+B101      Stable1              1      -1           
+B79       Watch_Tower          2      -1       
+R46     Tool_Working           1      103           
+R51     Metal_Working          1      103          
+U37       Soldier-Cavalry1     2      101        
+B104      Temple1              1      -1
+U37       Soldier-Cavalry1     2      101
+R42     Leather_Armor_Mounted  1      103 
+U37       Soldier-Cavalry1     2      101                     
+U125      Priest               1      104
+U37       Soldier-Cavalry1     2      101         
+R45     Scale_Armor_-_Cavalry  1      103          
+B82       Government_Center    1      -1           
+U37       Soldier-Cavalry1     4      101        
+
+C103    Iron_Age               1      109    
+R34     Nobility               1      82     
+B0        Academy              1      -1     
+R24     Polytheism             1      104    
+U93       Soldier-Phal1        1      0      
+R71     Heavy_Cavalry          1      101
+R18     Afterlife              1      104    
+U125      Priest               1      104
+U93       Soldier-Phal1        1      0      
+U93       Soldier-Phal1        1      0      
+U37       Soldier-Cavalry1     4      101         
+R52     Metallurgy             1      103    
+R78     Cataphracts            1      101    
+R50     Chain_Mail_-_Cavalry   1      103    
+U93       Soldier-Phal1        1      0      
+R73     Phalanx                1      0      
+R40     Leather_Armor_-_Soldie 1      103    
+R43     Scale_Armor_-_Soldiers 1      103    
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B0        Academy              1      -1     
+U93       Soldier-Phal1        12      0      
+U125      Priest               1      104    
+B101      Stable1              1      -1       
+U37       Soldier-Cavalry1     4      101         
+U93       Soldier-Phal1        24      0      
+U125      Priest               1      104    
+U37       Soldier-Cavalry1     8      101         
+B0        Academy              1      -1     
+U93       Soldier-Phal1        175     0      
+B109      Town_Center1         1      -1     

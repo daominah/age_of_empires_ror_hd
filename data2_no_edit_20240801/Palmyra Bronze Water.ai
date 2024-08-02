@@ -1,0 +1,87 @@
+B109      Town_Center1         1      -1     
+U83       Man                  12      109    
+B45       Dock_1               1      -1     
+T83       Man                  2      109    2
+B12       Barracks1            1      -1     
+
+C101    Tool_Age               1      109    
+B84       Market1              1      -1     
+T73       Soldier-Inf1         2      12     1
+B50       Farm                 2      -1     
+U83       Man                  2      109    
+B45       Dock_1               1      -1 
+U19       Boat-War1            2      45     
+B87       Range1               1      -1     
+R46     Tool_Working           1      103    
+U83       Man                  2      109    
+B50       Farm                 2      -1     
+U19       Boat-War1            2      45     
+R16     Watch_Tower            1      68     
+B79       Watch_Tower          2      -1 
+U19       Boat-War1            2      45         
+U83       Man                  2      109    
+R42	Leather_Armor_Mounted  1      103     
+B101      Stable1              1      -1           
+B79       Watch_Tower          1      -1     
+R107    Wood_Working           1      84     
+
+C102    Bronze_Age             1      109    
+U83       Man                  2      109    
+B82       Government_Center    1      -1     
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+U338      Soldier-Camel        2      101
+R4      Fishing_Ship           1      45     
+R12     Sentry_Tower           1      68     
+B101      Stable1              1      -1       
+B49       Siege_Workshop       1      -1     
+U19       Boat-War1            2      45  
+B45       Dock_1               1      -1     
+T83       Man                  2      109    1
+R5      Medium_War_Ship        1      45     
+B79       Watch_Tower          2      -1     
+R28     Wheel                  1      84     
+U19       Boat-War1            2      45 
+U338      Soldier-Camel        2      101
+
+C103    Iron_Age               1      109         
+R7      Trireme                1      45  
+R108    Gold_Mining            1      84          
+R37     Alchemy                1      82          
+U35       Soldier-Catapult1    2      49     
+R34	Nobility	       1      82
+R32     Artisanship            1      84             
+R106    Ballistics             1      82
+U338      Soldier-Camel        2      101
+R45	Scale_Armor_Cavalry    1      103
+U338      Soldier-Camel        2      101
+U17       Boat-Transport1      1      45     
+U35       Soldier-Catapult1    2      49     
+U338      Soldier-Camel        2      101
+U360      Fire-Galley          2      45             
+U35       Soldier-Catapult1    2      49     
+U360      Fire-Galley          2      45             
+R54     Heavy_Catapult         1      49     
+R30	Coinage                1      84          
+U35       Soldier-Catapult1    2      49     
+R50     Chain_Mail_-_Cavalry   1      103
+R51     Metal_Working          1      103    
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B45       Dock_1               1      -1 
+U360      Fire-Galley          6      45             
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      4      49
+B101      Stable1              1      -1     
+U338      Soldier-Camel        24     101      
+U19       Boat-War1            12     45
+U360      Fire-Galley          24     45             
+U11       Soldier-Balista      2      49
+B45       Dock_1               1      -1 
+U19       Boat-War1            175    45
+U11       Soldier-Balista      8      49
+B101      Stable1              1      -1     
+U338      Soldier-Camel        175    101      
+B109      Town_Center1         1      -1     

@@ -1,0 +1,95 @@
+//Quick Threaded, Research to the Iron Age
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1           
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B87       Range1               1      -1
+B84       Market1              1      -1
+
+C102    Bronze_Age             1      109          
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B49       Siege_Workshop       1      -1
+B82       Government_Center    1      -1
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority Build Items
+R107    Wood_Working           1      84
+R41     Leather-Armor-Archer   1      103
+R16     Watch_Tower            1      68
+R28     Wheel                  1      84
+U83       Man                  2      109       
+R32     Artisanship            1      84    
+R44     Scale-Armor-Archer     1      103
+R106    Ballistics             1      82     
+U83       Man                  2      109       
+B49       Siege_Workshop       1      -1     
+R110    Craftmanship           1      84    
+B49       Siege_Workshop       1      -1     
+U11       Soldier-Balista      2      49
+U83       Man                  2      109       
+R27     Helepolis              1      49
+B87       Range1               1      -1        
+U11       Soldier-Balista      3      49        
+B49       Siege_Workshop       1      -1     
+R54     Heavy_Catapult         1      49
+R111    Siege_Craft            1      84     
+B79       Watch_Tower          2      -1
+U11       Soldier-Balista      3      49                
+B87       Range1               1      -1
+U39       Soldier-Cavalry3_Arc 2      87
+R35     Engineering            1      82  
+B87       Range1               1      -1
+U83       Man                  2      109       
+R36     Massive_Catapult       1      49
+U35       Soldier-Catapult1    2      49     
+U39       Soldier-Cavalry3_Arc 12     87
+U11       Soldier-Balista      6      49
+U39       Soldier-Cavalry3_Arc 16     87
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+B104      Temple1              1      -1     
+R12     Sentry_Tower           1      68
+U35       Soldier-Catapult1    2      49     
+U125      Priest               2      104    
+U11       Soldier-Balista      4      49                       
+R21     Mysticism              1      104   
+U11       Soldier-Balista      3      49
+U125      Priest               2      104    
+U35       Soldier-Catapult1    3      49     
+U39       Soldier-Cavalry3_Arc 12     87	
+R22     Astrology              1      104  
+R15     Guard_Tower            1      68     
+B109      Town_Center1         1      -1           
+U39       Soldier-Cavalry3_Arc 64     87	
+U125      Priest               4      104    
+R24     Polytheism             1      104
+B79       Watch_Tower          2      -1
+R19     Monotheism             1      104 
+U11       Soldier-Balista      12     49   
+R20     Fanaticism             1      104 
+U39       Soldier-Cavalry3_Arc 24     87     
+U125      Priest               4      104    
+U11       Soldier-Balista      8      49                   
+R18     Afterlife              1      104
+U11       Soldier-Balista      8      49
+R23     Jihad                  1      104
+U39       Soldier-Cavalry3_Arc 12      87 
+U125      Priest               2      104    
+U39       Soldier-Cavalry3_Arc 32     87
+U125      Priest               1      104    
+U11       Soldier-Balista      32     49
+U39       Soldier-Cavalry3_Arc 80     87
+R2      Ballista-Tower         1      68
+B79       Watch_Tower          19     -1
+U11       Soldier-Balista      32     49                
+B50       Farm                 2      -1     
+U41       Soldier-Chariot2     8      87

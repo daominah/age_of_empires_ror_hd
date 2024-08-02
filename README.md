@@ -1,14 +1,6 @@
 # Age of Empires: The Rise of Rome
 
-## 
-
-## Download
-
-From [github.com/daominah/age_of_empires_ror_hd](https://github.com/daominah/age_of_empires_ror_hd) click on green button `Code` then `Download ZIP` (size about 80 MB)
-
-
-
-## Run
+## Run the game
 
 * Init setup: run file `SETUP.EXE`
 
@@ -16,8 +8,8 @@ From [github.com/daominah/age_of_empires_ror_hd](https://github.com/daominah/age
 
 * For multi player, run file `EMPIRESX.EXE`, if someone uses cheat code in the game, theirs units will be deleted then kicked from the game.
 
-## 
+* Run detail: [HuongDan.htm](HuongDan.htm)
 
-## Detail
+## Edit AI (computer player)
 
-[HuongDan.htm](HuongDan.htm)
+Guides are PDF files in directory [data2/doc](data2_backup/doc). 

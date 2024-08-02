@@ -1,0 +1,96 @@
+B109      Town_Center1         1      -1           
+U83       Man                  10     109          
+B12       Barracks1            1      -1  
+T83       Man                  4      109      2             
+
+C101    Tool_Age               1      109       
+B84       Market1              1      -1           
+U83       Man                  2      109          
+B101      Stable1              1      -1     
+B12       Barracks1            1      -1  
+U83       Man                  2      109
+T347      Soldier-Slinger      3      12       2
+U83       Man                  2      109          
+B50       Farm                 2      -1     
+U83       Man                  2      109          
+
+C102    Bronze_Age             1      109          
+T83       Man                  2      109      1          
+B12       Barracks1            1      -1  
+U75       Soldier-Inf3         2      12
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+R40     Leather_Armor_Inf      1      103             
+B104      Temple1              1      -1  
+U83       Man                  2      109          
+U125      Priest               2      104
+B87       Range1               1      -1     
+B50       Farm                 2      -1     
+R65     Broadsword             1      12
+R46     Toolworking            1      103
+B82       Gov_Center           1      -1
+R21     Mysticism              1      104    
+B50       Farm                 2      -1     
+R16     Watch_Tower            1      68           
+T338      Camel                3      101      2     
+B12       Barracks1            1      -1  
+B79       Watch_Tower          1      -1       
+T83       Man                  2      109      1     
+B79       Watch_Tower          2      -1
+U75       Soldier-Inf3         2      12
+B50       Farm                 2      -1     
+R22     Astrology              1      104
+T83       Man                  2      109      1   
+U125      Priest               2      104                 
+R47       Bronze_Shield        1      103
+B79       Watch_Tower          1      -1          
+R51     Metalworking           1      103            
+R28     Wheel                  1      84       
+
+C103    Iron_Age               1      109
+R32     Artisanship            1      84          
+R37     Alchemy                1      82
+R43     Scale_Armor_-_Infantry 1      103          
+R121    Logistics              1      82
+B87       Range1               1      -1
+U75       Soldier-Inf3         2      12
+R108    Gold_Mining            1      84     
+R66     Longsword              1      12
+U25       Soldier-El_Archer    2      87          
+R107    Wood_Working           1      84          
+B104      Temple1              1      -1 
+U25       Soldier-El_Archer    2      87     
+U125      Priest               2      104                     
+U75       Soldier-Inf3         2      12
+U25       Soldier-El_Archer    2      87          
+U75       Soldier-Inf3         2      12
+R48     Chain_Armor-Infantry   1      103          
+B12       Barracks1            1      -1  
+U25       Soldier-El_Archer    2      87          
+U125      Priest               2      104
+U25       Soldier-El_Archer    2      87          
+B79       Watch_Tower          1      -1          
+U75       Soldier-Inf3         2      12
+R24     Polytheism             1      104
+R52     Metallurgy             1      103
+U75       Soldier-Inf3         2      12
+R12     Sentry_Tower           1      68 
+B79       Watch_Tower          1      -1          
+R18     Afterlife              1      104 
+R15     Guard_Tower            1      68                    
+B79       Watch_Tower          1      -1          
+R19     Monotheism             1      104    
+U25       Soldier-El_Archer    5      87          
+B79       Watch_Tower          4      -1          
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1
+
+B101      Stable1              1      -1     
+R30	Coinage                1      84          
+U25       Soldier-El_Archer    8      87  
+U125      Priest               1      104    
+U75       Soldier-Inf3         32     12   
+B101      Stable1              1      -1     
+U25       Soldier-El_Archer    175    87  
+B109      Town_Center1         1      -1     

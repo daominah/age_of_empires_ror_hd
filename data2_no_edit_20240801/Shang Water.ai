@@ -1,0 +1,87 @@
+B109      Town_Center1         1      -1     
+U83       Man                  12      109    
+B12       Barracks1            1      -1     
+U83       Man                  2      109
+B45       Dock_1               1      -1     
+
+C101    Tool_Age               1      109    
+B84       Market1              1      -1     
+U83       Man                  2      109
+U19       Boat-War1            2      45     
+B87       Range1               1      -1     
+T83       Man                  2      109    2
+B50       Farm                 2      -1     
+U19       Boat-War1            2      45     
+R16     Watch_Tower            1      68     
+B79       Watch_Tower          2      -1 
+U19       Boat-War1            2      45         
+T83       Man                  2      109    2
+R42     Leather_Armor_Archer   1      103     
+B79       Watch_Tower          1      -1     
+R107    Wood_Working           1      84     
+U83       Man                  2      109
+R81     Domestication          1      84     
+B50       Farm                 2      -1     
+B45       Dock_1               1      -1 
+
+C102    Bronze_Age             1      109    
+R108    Gold_Mining            1      84          
+B82       Government_Center    1      -1     
+U83       Man                  2      109
+R56     Improved_bow           1      87     
+R32     Artisanship            1      84             
+T5        Soldier-Archer2      2      87     3
+R4      Fishing_Ship           1      45     
+R12     Sentry_Tower           1      68     
+B101      Stable1              1      -1       
+R42     Leather_Armor_Mounted  1      103    
+B49       Siege_Workshop       1      -1     
+U35       Soldier-Catapult1    1      49     
+T5        Soldier-Archer2      2      87     3
+B45       Dock_1               1      -1     
+U338      Soldier-Camel        2      101
+T83       Man                  2      109    2
+R5      Medium_War_Ship        1      45     
+B79       Watch_Tower          2      -1     
+R46     Tool_Working           1      103    
+U338      Soldier-Camel        2      101
+R28     Wheel                  1      84     
+T5        Soldier-Archer2      2      87     3
+U35       Soldier-Catapult1    1      49     
+
+C103    Iron_Age               1      109         
+R30	Coinage                1      84
+U360      Fire-Galley          2      45             
+U11       Soldier-Balista      2      49 
+R34	Nobility	       1      82
+U360      Fire-Galley          2      45       
+B49       Siege_Workshop       1      -1     
+U360      Fire-Galley          2      45             
+B50       Farm                 2      -1     
+U11       Soldier-Balista      2      49                   
+U360      Fire-Galley          2      45             
+U11       Soldier-Balista      2      49          
+R110    Craftmanship           1      84
+B49       Siege_Workshop       1      -1     
+U360      Fire-Galley          2      45             
+R51     Metal_Working          1      103    
+R27     Helepolis              1      49     
+B109      Town_Center1         1      -1     
+
+B276      Wonder               1      -1     
+
+B45       Dock_1               1      -1 
+U360      Fire-Galley          6      45             
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      4      49
+B101      Stable1              1      -1     
+U338      Soldier-Camel        16     101      
+U19       Boat-War1            8      45
+U360      Fire-Galley          32     45             
+U11       Soldier-Balista      2      49
+B45       Dock_1               1      -1 
+U19       Boat-War1            175    45
+U11       Soldier-Balista      50     49
+B101      Stable1              1      -1     
+U338      Soldier-Camel        125    101      
+B109      Town_Center1         1      -1     

@@ -1,0 +1,76 @@
+//Quick Threaded, Research to the Iron Age
+B109      Town_Center1         1      -1           
+U83       Man                  8      109       
+T83       Man                  1      109       2
+B12       Barracks1            1      -1           
+
+C101    Tool_Age               1      109       
+T73       Soldier-Inf1         1      12        1   
+T83       Man                  1      109       2
+B87       Range1               1      -1   
+B84       Market1              1      -1
+
+C102    Bronze_Age             1      109
+B50       Farm                 2      -1     
+T83       Man                  1      109       2
+B82       Government_Center    1      -1
+B49       Siege_Workshop       1      -1
+
+C103    Iron_Age               1      109
+B109      Town_Center1         1      -1           
+
+//High Priority build Items
+B101      Stable1              1      -1     
+R106    Ballistics             1      82     
+B101      Stable1              1      -1     
+U83       Man                  2      109        
+U46       Soldier-Elephant     8      101    
+R37     Alchemy                1      82
+R42     Leather_Armor_Mounted  1      103    
+B101      Stable1              1      -1     
+U83       Man                  2      109        
+U46       Soldier-Elephant     8      101    
+B49       Siege_Workshop       1      -1
+R35     Engineering            1      82     
+R45     Scale_Armor_-_Cavalry  1      103    
+R107    Wood_Working           1      84     
+U83       Man                  2      109        
+R32     Artisanship            1      84     
+R110    Craftmanship           1      84
+U83       Man                  2      109        
+U11       Soldier-Balista      8      49
+B101      Stable1              1      -1     
+U46       Soldier-Elephant     8      101    
+B49       Siege_Workshop       1      -1
+U11       Soldier-Balista      8      49
+R27     Helepolis              1      49
+R47     Bronze_Shield          1      103    
+R117    Iron_Shield            1      103    
+R125    Armored_Elephants      1      101
+U46       Soldier-Elephant     8      101    
+
+//Low Priority Build Items
+B109      Town_Center1         1      -1           
+B50       Farm                 2      -1     
+R16     Watch_Tower            1      68   
+U11       Soldier-Balista      16     49
+U46       Soldier-Elephant     8      101    
+R12     Sentry_Tower           1      68
+U11       Soldier-Balista      16     49
+U46       Soldier-Elephant     20     101    
+R28     Wheel                  1      84           
+B87       Range1               1      -1   
+U11       Soldier-Balista      32     49
+U46       Soldier-Elephant     32     101    
+R15     Guard_Tower            1      68     
+B109      Town_Center1         1      -1           
+U11       Soldier-Balista      40     49
+U46       Soldier-Elephant     24     101    
+B79       Watch_Tower          2      -1
+U11       Soldier-Balista      40     49     
+U46       Soldier-Elephant     24     101    
+R2      Catapult_Tower         1      68     
+B79       Watch_Tower          19      -1
+U11       Soldier-Balista      16     49
+U46       Soldier-Elephant     24     101    
+B50       Farm                 2      -1     

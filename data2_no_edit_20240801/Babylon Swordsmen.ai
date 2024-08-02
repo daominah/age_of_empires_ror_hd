@@ -1,0 +1,93 @@
+B109      Town_Center1         1      -1       
+U83       Man                  12      109      
+B12       Barracks1            1      -1       
+T83       Man                  2      109      2
+
+C101    Tool_Age               1      109      
+B84       Market1              1      -1       
+T347      Soldier-Slinger      2      12       2     
+B101      Stable1              1      -1     
+B50       Farm                 2      -1     
+T83       Man                  2      109      2
+R16     Watch_Tower            1      68       
+U83       Man                  2      109      
+B50       Farm                 2      -1     
+B79       Watch_Tower          1      -1     
+T347      Soldier-Slinger      2      12       2     
+T83       Man                  2      109      1
+B50       Farm                 2      -1     
+B79       Watch_Tower          1      -1     
+U83       Man                  2      109      
+
+C102    Bronze_Age             1      109      
+B49       Siege_Workshop       1      -1     
+U83       Man                  2      109      
+B87       Range1               1      -1       
+R28     Wheel                  1      84       
+B82       Government_Center    1      -1     
+U83       Man                  2      109      
+R121      Logistics            1      82
+B12       Barracks1            1      -1       
+U75       Soldier-Inf3         3      12       
+R81     Domestication          1      84       
+B50       Farm                 2      -1     
+B104      Temple1              1      -1
+U75       Soldier-Inf3         3      12       
+R46     Tool_Working           1      103      
+U125      Priest               1      104
+B79       Watch_Tower          1      -1     
+U75       Soldier-Inf3         3      12                  
+R65     Broad_Sword            1      12
+U75       Soldier-Inf3         3      12                   
+U35       Soldier-Catapult1    1      49   
+R40     Leather_Armor_-_Soldie 1      103    
+B79       Watch_Tower          1      -1     
+U75       Soldier-Inf3         3      12         
+R12     Sentry_Tower           1      68     
+U35       Soldier-Catapult1    1      49   
+U75       Soldier-Inf3         3      12         
+
+C103    Iron_Age               1      109    
+R106    Ballistics             1      82     
+U75       Soldier-Inf3         3      12         
+R21     Mysticism              1      104    
+R66     Long_Sword             1      12     
+R107    Wood_Working           1      84       
+R54     Heavy_Catapult         1      49
+U125      Priest               1      104         
+B79       Watch_Tower          2      -1
+R22     Astrology              1      104    
+U35       Soldier-Catapult1    1      49   
+U75       Soldier-Inf3         3      12         
+R51     Metal_Working          1      103
+U125      Priest               1      104             
+U35       Soldier-Catapult1    1      49   
+R43     Scale_Armor_-_Soldiers 1      103
+U125      Priest               1      104
+R32     Artisanship            1      84         
+R24     Polytheism             1      104    
+U125      Priest               1      104
+B79       Watch_Tower          2      -1
+R20     Fanaticism             1      104
+R47     Bronze_Shield          1      103
+R110    Craftmanship           1      84     
+U125      Priest               1      104
+R18     Afterlife              1      104
+U35       Soldier-Catapult1    1      49   
+R15     Guard_Tower            1      68     
+R77     Legion                 1      12     
+B109      Town_Center1         1      -1     
+
+B12       Barracks1            1      -1       
+U75       Soldier-Inf3         12     12         
+B49       Siege_Workshop       1      -1     
+U35       Soldier-Catapult1    4      49   
+U125      Priest               1      104
+R52     Metallurgy             1      103    
+U75       Soldier-Inf3         12     12         
+U125      Priest               1      104
+U35       Soldier-Catapult1    4      49   
+B12       Barracks1            1      -1       
+U75       Soldier-Inf3         175    12         
+B87       Range1               1      -1      
+B109      Town_Center1         1      -1     
