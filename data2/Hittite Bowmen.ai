@@ -1,5 +1,5 @@
 // Hittite Horse Archers
-// Bronze Age: 40 villager, 1 bowman, 24 chariot archer, 3 stone thrower
+// Bronze Age: 36 villager, 1 bowman, 24 chariot archer, 3 stone thrower
 // Iron Age: 48 chariot archer, 48 heavy horse archer, 24 heavy catapult (120 army)
 
 
@@ -71,9 +71,10 @@ R41     Leather_Armor_-_Archer 1      103
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 U41       Soldier-Chariot2     2      87
-// 28 villager, 10 farm, 4 archery range
-
 U41       Soldier-Chariot2     4      87
+B109      Town_Center1         1      -1
+// 28 villager, 10 farm, 8 chariot archer, 4 archery range
+
 B70       House                5      -1
 U41       Soldier-Chariot2     4      87
 T41       Soldier-Chariot2     4      87        0
@@ -141,7 +142,7 @@ U35       Soldier-Catapult1    1      49
 // 24 horse archer, 10 catapult
 
 A70       House                5      -1        2
-R38     Heavy_Horse_Archer     1      87
+C38     Heavy_Horse_Archer     1      87
 A49       Siege_Workshop       1      -1        2
 T39       Soldier-Cavalry3_Arc 3      87        2
 T35       Soldier-Catapult1    1      49        2

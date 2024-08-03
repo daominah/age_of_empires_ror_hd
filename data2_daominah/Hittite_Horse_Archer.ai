@@ -142,7 +142,7 @@ U35       Soldier-Catapult1    1      49
 // 24 horse archer, 10 catapult
 
 A70       House                5      -1        2
-R38     Heavy_Horse_Archer     1      87
+C38     Heavy_Horse_Archer     1      87
 A49       Siege_Workshop       1      -1        2
 T39       Soldier-Cavalry3_Arc 3      87        2
 T35       Soldier-Catapult1    1      49        2
