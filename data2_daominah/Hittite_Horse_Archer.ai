@@ -65,7 +65,7 @@ B79       Watch_Tower          4      -1
 
 U41       Soldier-Chariot2     2      87
 B87       Range1               3      -1
-R41     Leather_Armor_-_Archer 1      103
+C41     Leather_Armor_-_Archer 1      103
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 U41       Soldier-Chariot2     2      87
@@ -77,7 +77,7 @@ B70       House                5      -1
 U41       Soldier-Chariot2     4      87
 T41       Soldier-Chariot2     4      87        0
 R32     Artisanship            1      84
-R44     Scale_Armor_-_Archers  1      103
+C44     Scale_Armor_-_Archers  1      103
 T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 B50       Farm                 2      -1
@@ -114,8 +114,8 @@ R37     Alchemy                1      82
 U39       Soldier-Cavalry3_Arc 1      87
 R110    Craftmanship           1      84
 U39       Soldier-Cavalry3_Arc 1      87
-R49     Chain_Mail_-_Archers   1      103
-R54     Heavy_Catapult         1      49
+C49     Chain_Mail_-_Archers   1      103
+C54     Heavy_Catapult         1      49
 U39       Soldier-Cavalry3_Arc 1      87
 U39       Soldier-Cavalry3_Arc 1      87
 R106    Ballistics             1      82

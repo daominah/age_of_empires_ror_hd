@@ -33,7 +33,7 @@ B87       Range1               1      -1
 
 C102    Bronze_Age             1      109
 
-R107    Wood_Working           1      84
+C107    Wood_Working           1      84
 T4        Soldier-Archer1      1      87        2
 // T299      Soldier-Scout        1      101       2
 B50       Farm                 4      -1
@@ -76,7 +76,7 @@ B109      Town_Center1         1      -1
 B70       House                5      -1
 U41       Soldier-Chariot2     4      87
 T41       Soldier-Chariot2     4      87        0
-R32     Artisanship            1      84
+C32     Artisanship            1      84
 R44     Scale_Armor_-_Archers  1      103
 T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
@@ -111,7 +111,7 @@ R30     Coinage                1      84
 U39       Soldier-Cavalry3_Arc 1      87
 // R37     Alchemy                1      82
 U39       Soldier-Cavalry3_Arc 1      87
-R110    Craftmanship           1      84
+C110    Craftmanship           1      84
 U39       Soldier-Cavalry3_Arc 1      87
 // R49     Chain_Mail_-_Archers   1      103
 R54     Heavy_Catapult         1      49

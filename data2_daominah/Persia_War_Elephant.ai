@@ -102,7 +102,7 @@ B101      Stable1              1      -1
 U46       Soldier-Elephant     2      101
 B101      Stable1              1      -1
 B109      Town_Center1         1      -1
-R47     Bronze_Shield          1      103
+C47     Bronze_Shield          1      103
 U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
@@ -114,14 +114,14 @@ B70       House                1      -1
 U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
-R117    Iron_Shield            1      103
+C117    Iron_Shield            1      103
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                1      -1
 // 18 war elephant
 B79       Watch_Tower          4      -1
 C125    Armored Elephants      1      101
-B87       Range1               1      -1
+B87       Range1               2      -1
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                2      -1
@@ -129,6 +129,7 @@ B70       House                2      -1
 
 
 R41     Leather_Armor_-_Archer 1      103
+B87       Range1               2      -1
 R15     Guard_Tower            1      68
 R37     Alchemy                1      82
 U46       Soldier-Elephant     6      101

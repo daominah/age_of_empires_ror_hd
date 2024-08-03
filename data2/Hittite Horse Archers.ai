@@ -1,6 +1,6 @@
 // Hittite Horse Archers
 // Bronze Age: 36 villager, 1 bowman, 24 chariot archer, 3 stone thrower
-// Iron Age: 48 chariot archer, 48 heavy horse archer, 24 heavy catapult (120 army)
+// Iron Age: 48 chariot archer, 48 heavy horse archer, 24 heavy catapult (121 army)
 
 
 B109      Town_Center1         1      -1
@@ -63,23 +63,21 @@ B79       Watch_Tower          4      -1
 // start civilization specific build from here:
 
 
-// chariot archer in Bronze Age, horse archer and catapult in Iron Age
-
 U41       Soldier-Chariot2     2      87
 B87       Range1               3      -1
-R41     Leather_Armor_-_Archer 1      103
+C41     Leather_Armor_-_Archer 1      103
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 U41       Soldier-Chariot2     2      87
 U41       Soldier-Chariot2     4      87
 B109      Town_Center1         1      -1
-// 28 villager, 10 farm, 8 chariot archer, 4 archery range
+// 8 chariot archer, 4 archery range
 
 B70       House                5      -1
 U41       Soldier-Chariot2     4      87
 T41       Soldier-Chariot2     4      87        0
 R32     Artisanship            1      84
-R44     Scale_Armor_-_Archers  1      103
+C44     Scale_Armor_-_Archers  1      103
 T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 B50       Farm                 2      -1
@@ -88,7 +86,7 @@ T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 R31     Plow                   1      84
-// 32 villager, 24 chariot archer, 14 farm
+// 32 villager, 14 farm, 24 chariot archer
 
 B109      Town_Center1         1      -1
 R108    Gold_Mining            1      84
@@ -101,7 +99,7 @@ U35       Soldier-Catapult1    1      49
 T83       Man                  1      109       0
 U35       Soldier-Catapult1    1      49
 U35       Soldier-Catapult1    1      49
-// 36 villager, 3 stone thrower, 16 farm
+// 36 villager, 16 farm, 3 stone thrower,
 
 
 C103    Iron_Age               1      109
@@ -116,8 +114,8 @@ R37     Alchemy                1      82
 U39       Soldier-Cavalry3_Arc 1      87
 R110    Craftmanship           1      84
 U39       Soldier-Cavalry3_Arc 1      87
-R49     Chain_Mail_-_Archers   1      103
-R54     Heavy_Catapult         1      49
+C49     Chain_Mail_-_Archers   1      103
+C54     Heavy_Catapult         1      49
 U39       Soldier-Cavalry3_Arc 1      87
 U39       Soldier-Cavalry3_Arc 1      87
 R106    Ballistics             1      82
