@@ -76,6 +76,7 @@ B109      Town_Center1         1      -1
 R108    Gold_Mining            1      84
 T83       Man                  4      109       0
 B50       Farm                 4      -1
+B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 B70       House                2      -1
 T83       Man                  8      109       0
@@ -115,7 +116,8 @@ U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                1      -1
 // 18 war elephant
-R125    Armored Elephants      1      101
+B79       Watch_Tower          4      -1
+C125    Armored Elephants      1      101
 B87       Range1               1      -1
 R50     Chain_Mail_-_Cavalry   1      103
 U46       Soldier-Elephant     3      101
@@ -124,7 +126,9 @@ B70       House                2      -1
 // 24 armored elephant
 
 R15     Guard_Tower            1      68
+B79       Watch_Tower          4      -1
 R37     Alchemy                1      82
+B79       Watch_Tower          4      -1
 U46       Soldier-Elephant     6      101
 U25       Soldier-El_Archer    2      87
 B50       Farm                 1      -1

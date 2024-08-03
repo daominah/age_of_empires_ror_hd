@@ -1,4 +1,12 @@
-Hittite_Horse_Archers:
+Assyria_Archer:
+	- Assyria Archer Bronze.ai
+	- Assyria Archer Iron.ai
+	- Assyria Ballista.ai
+	- Assyria Bowmen.ai
+	- Assyria Infantry Bronze.ai
+	- Immortal Assyria.ai
+
+Hittite_Horse_Archer:
 	- Hittite Bowmen.ai
 	- Hittite Elephant.ai
 	- Hittite Horse Archers.ai

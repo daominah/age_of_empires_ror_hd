@@ -47,7 +47,7 @@ Should edit in dir data2_daominah then copy to files in data2 with the
 corresponding civilization. Example: 3 files for Hittite were copied from
   [data2_daominah](../../data2_daominah).
 
-Example 1 file `data2_daominah/Hittite_Horse_Archers.ai` is copied to 3 following files in dir `data2`:  
+Example 1 file `data2_daominah/Hittite_Horse_Archer.ai` is copied to 3 following files in dir `data2`:  
 
 All the Hittite computers play the same way, we can add more build later.
 
