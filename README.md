@@ -12,4 +12,4 @@
 
 ## Edit AI (computer player)
 
-Guides are PDF files in directory [data2/doc](data2_backup/doc). 
+Guides how to edit are in directory [data2_daominah/doc](data2_daominah/doc/readme_about_ai.md). 
