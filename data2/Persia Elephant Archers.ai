@@ -1,6 +1,6 @@
 // Persian War Elephant
 // Bronze Age: 50 villager, 32 farm, 1 scout, 2 camel rider
-// Iron Age: 48 armored elephant, 4 elephant archer (total 52 army)
+// Iron Age: 48 armored elephant, 10 elephant archer (total 58 army)
 
 
 B109      Town_Center1         1      -1
@@ -123,16 +123,18 @@ U46       Soldier-Elephant     3      101
 B70       House                2      -1
 // 24 armored elephant
 
+R15     Guard_Tower            1      68
+R37     Alchemy                1      82
 U46       Soldier-Elephant     6      101
-U25       Soldier-El_Archer    1      87
+U25       Soldier-El_Archer    2      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
-U25       Soldier-El_Archer    1      87
+U25       Soldier-El_Archer    2      87
 B70       House                2      -1
 U46       Soldier-Elephant     6      101
-U25       Soldier-El_Archer    1      87
+U25       Soldier-El_Archer    3      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
-U25       Soldier-El_Archer    1      87
+U25       Soldier-El_Archer    3      87
 B70       House                2      -1
-// 48 armored elephant, 4 elephant archer
+// 48 armored elephant, 10 elephant archer
