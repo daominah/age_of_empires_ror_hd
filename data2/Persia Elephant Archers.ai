@@ -1,8 +1,6 @@
 // Persian War Elephant
-// Stone Age: 24 villager
-// Tool Age: 26 villager
 // Bronze Age: 50 villager, 32 farm, 1 scout, 2 camel rider
-// Iron Age: 48 armored elephant
+// Iron Age: 48 armored elephant, 4 elephant archer (total 52 army)
 
 
 B109      Town_Center1         1      -1
@@ -12,9 +10,7 @@ B70       House                1      -1
 U83       Man                  1      109
 B70       House                1      -1
 U83       Man                  6      109
-// 10 villager
-B70       House                1      -1
-T83       Man                  4      109       2
+// pop 10/12
 B70       House                1      -1
 T83       Man                  4      109       2
 B70       House                1      -1
@@ -22,60 +18,79 @@ T83       Man                  4      109       2
 B70       House                1      -1
 T83       Man                  2      109       2
 B12       Barracks1            1      -1
-// 24 villager, pop 24/28
+// pop 20/24
 
 
 C101    Tool_Age               1      109
+
 T83       Man                  1      109       0
 B84       Market1              1      -1
 T83       Man                  1      109       0
+// pop 22/24, pick Stable or Archery Range:
 B101      Stable1              1      -1
+// B87       Range1               1      -1
 
 
 C102    Bronze_Age             1      109
+
 R107    Wood_Working           1      84
+// T4        Soldier-Archer1      1      87        2
+T299      Soldier-Scout        1      101       2
+B50       Farm                 4      -1
+// R28     Wheel                  1      84
 B70       House                2      -1
-T299      Soldier-Scout        1      101    3
-B50       Farm                 2      -1
 T83       Man                  2      109       0
 B50       Farm                 2      -1
+R81     Domestication          1      84
 T83       Man                  2      109       0
+B50       Farm                 2      -1
 B70       House                2      -1
-B50       Farm                 2      -1
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-T83       Man                  2      109       0
-// 34 villager, pop 35/44, 8 farm
+// 26 villager, 8 farm, pop 27/40
+
+B82       Government_Center    1      -1
+R16     Watch_Tower            1      68
+R109    Stone_Mining           1      84
+B70       House                2      -1
+R112    Architecture           1      82
+B79       Watch_Tower          2      -1
+B70       House                2      -1
+R12     Sentry_Tower           1      68
+B79       Watch_Tower          4      -1
+// 6 tower, pop 27/56
+
+
+// ended of shared build section for almost all civilization,
+// start civilization specific build from here:
+
+
+// a lot of farms, fast Iron Age to buy war elephant
 
 T338      Soldier-Camel        2      101       2
-B82       Government_Center    1      -1
-R108    Gold_Mining            1      84
-B109      Town_Center1         1      -1
-B70       House                2      -1
-B50       Farm                 2      -1
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-T83       Man                  2      109       0
+T338      Soldier-Camel        2      101       0
 R42     Leather_Armor_Mounted  1      103
-B50       Farm                 2      -1
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-T83       Man                  2      109       0
-R81     Domestication          1      84
+T83       Man                  4      109       0
+B50       Farm                 4      -1
+B79       Watch_Tower          4      -1
+
+B109      Town_Center1         1      -1
+R108    Gold_Mining            1      84
+T83       Man                  4      109       0
+B50       Farm                 4      -1
 B109      Town_Center1         1      -1
 B70       House                2      -1
-B50       Farm                 2      -1
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-T83       Man                  2      109       0
+T83       Man                  8      109       0
+B50       Farm                 8      -1
+// 42 villager, 24 farm
+
+B109      Town_Center1         1      -1
 R45     Scale_Armor_-_Cavalry  1      103
-B50       Farm                 2      -1
 T83       Man                  2      109       0
 B50       Farm                 2      -1
-T83       Man                  2      109       0
+B70       House                2      -1
 B104      Temple1              1      -1
+T83       Man                  6      109       0
 B50       Farm                 6      -1
-// 50 villager, 30 farm, pop 51/68
+// 50 villager, 32 farm
 
 
 C103    Iron_Age               1      109
@@ -91,14 +106,15 @@ U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
 B101      Stable1              2      -1
+// 6 stable
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
-// 12 war elephant
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                1      -1
+// 18 war elephant
 R125    Armored Elephants      1      101
 B87       Range1               1      -1
 R50     Chain_Mail_-_Cavalry   1      103
@@ -106,11 +122,17 @@ U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                2      -1
 // 24 armored elephant
+
 U46       Soldier-Elephant     6      101
+U25       Soldier-El_Archer    1      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
+U25       Soldier-El_Archer    1      87
 B70       House                2      -1
 U46       Soldier-Elephant     6      101
+U25       Soldier-El_Archer    1      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
+U25       Soldier-El_Archer    1      87
 B70       House                2      -1
+// 48 armored elephant, 4 elephant archer
