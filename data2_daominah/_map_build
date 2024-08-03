@@ -6,6 +6,11 @@ Assyria_Archer:
 	- Assyria Infantry Bronze.ai
 	- Immortal Assyria.ai
 
+Choson_Swordmen
+	- Choson Axemen.ai
+	- Choson Priests.ai
+	- Choson Swordsmen.ai
+
 Hittite_Horse_Archer:
 	- Hittite Bowmen.ai
 	- Hittite Elephant.ai

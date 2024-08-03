@@ -1,94 +1,166 @@
-B109      Town_Center1         1      -1       
-U83       Man                  12      109      
-B12       Barracks1            1      -1       
-T83       Man                  2      109      2
+// Choson Swordsmen
+// Bronze Age: 32 villager, 1 scout, 24 broad swordsmen, 9 priest, 16 tower
+// Iron Age: 168 legion, 24 priest, 24 ballista tower (193 army)
 
-C101    Tool_Age               1      109    
+
+B109      Town_Center1         1      -1
+U83       Man                  3      109
+
+B70       House                1      -1
+U83       Man                  1      109
+B70       House                1      -1
+U83       Man                  6      109
+// pop 10/12
+B70       House                1      -1
+T83       Man                  4      109       2
+B70       House                1      -1
+T83       Man                  4      109       2
+B70       House                1      -1
+T83       Man                  2      109       2
+B12       Barracks1            1      -1
+// pop 20/24
+
+
+C101    Tool_Age               1      109
+
+T83       Man                  1      109       0
 B84       Market1              1      -1
-T83       Man                  2      109      2
-B50       Farm                 2      -1       
-U83       Man                  2      109      
-R46     Tool_Working           1      103      
-U83       Man                  2      109      
-R16     Watch_Tower            1      68       
-B50       Farm                 2      -1     
-U83       Man                  2      109      
-B79       Watch_Tower          3      -1     
-R107    Wood_Working           1      84       
-T83       Man                  2      109      2
-R81     Domestication          1      84       
-B50       Farm                 2      -1     
-B87       Range1               1      -1        
- 
-C102    Bronze_Age             1      109      
-B12       Barracks1            1      -1       
-T83       Man                  2      109      1
-R40     Leather_Armor-Soldie   1      103    
-R28     Wheel                  1      84       
-U75       Soldier-Inf3         3      12       
+T83       Man                  1      109       0
+// pop 22/24, pick Stable or Archery Range:
+B101      Stable1              1      -1
+// B87       Range1               1      -1
+C63     Axe                    1      12
+
+
+C102    Bronze_Age             1      109
+
+R107    Wood_Working           1      84
+// T4        Soldier-Archer1      1      87        2
+T299      Soldier-Scout        1      101       2
+B50       Farm                 4      -1
+R28     Wheel                  1      84
+C64     Short_Sword            1      12
+B12       Barracks1            1      -1
+B70       House                2      -1
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+R81     Domestication          1      84
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+B70       House                2      -1
+C65     Broad_Sword            1      12
+R46     Toolworking            1      103
+R108    Gold_Mining            1      84
+// 26 villager, 8 farm, pop 27/40
+
+B82       Government_Center    1      -1
+R16     Watch_Tower            1      68
+R109    Stone_Mining           1      84
+B70       House                2      -1
+R112    Architecture           1      82
+B79       Watch_Tower          2      -1
+B70       House                2      -1
+R12     Sentry_Tower           1      68
+B79       Watch_Tower          4      -1
+R40     Leather_Armor_-_Soldie 1      103
+// 6 tower, pop 27/56
+
+
+// ended of shared build section for almost all civilization,
+// start civilization specific build from here:
+
+
 B104      Temple1              1      -1
-B50       Farm                 2      -1     
-U75       Soldier-Inf3         3      12       
-U83       Man                  2      109    
-B12       Barracks1            1      -1       
-B79       Watch_Tower          3      -1     
-U125      Priest               1      104
-U75       Soldier-Inf3         3      12             
-B82       Government_Center    1      -1          
-R65     Broad_Sword            1      12
-B49       Siege_Workshop       1      -1     
-U75       Soldier-Inf3         3      12                   
-T35       Soldier-Catapult1    1      49       1
-R121    Logistics              1      82
-U75       Soldier-Inf3         3      12         
-R12     Sentry_Tower           1      68     
-T35       Soldier-Catapult1    1      49       1
-R108    Gold_Mining            1      84     
-R109    Stone_Mining           1      84     
-U75       Soldier-Inf3         3      12         
-
-C103    Iron_Age               1      109    
-U75       Soldier-Inf3         3      12         
-R32     Artisanship            1      84         
-R21     Mysticism              1      104    
-R66     Long_Sword             1      12     
-U125      Priest               1      104         
-B79       Watch_Tower          3      -1
-R110    Craftmanship           1      84     
-R22     Astrology              1      104    
-U11       Soldier-Ballista     2      49     
+B79       Watch_Tower          2      -1
+U75       Soldier-Inf3         2      12
+B12       Barracks1            2      -1
+B104      Temple1              1      -1
+T83       Man                  2      109       0
+B50       Farm                 2      -1
 R51     Metal_Working          1      103
-U75       Soldier-Inf3         3      12         
-U125      Priest               1      104             
-R52     Metallurgy             1      103    
-U75       Soldier-Inf3         3      12         
-R43     Scale_Armor-Soldiers   1      103
+B79       Watch_Tower          2      -1
+B70       House                5      -1
+U75       Soldier-Inf3         2      12
 U125      Priest               1      104
-U11       Soldier-Balista      2      49     
-R24     Polytheism             1      104    
-B79       Watch_Tower          3      -1
-R20     Fanaticism             1      104
-R110    Craftmanship           1      84     
-U75       Soldier-Inf3         3      12             
-U125      Priest               1      104      
-R106    Ballistics             1      82     
+U75       Soldier-Inf3         2      12
+B104      Temple1              1      -1
+B109      Town_Center1         1      -1
+R43     Scale_Armor_-_Soldiers 1      103
+B79       Watch_Tower          2      -1
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+R21     Mysticism              1      104
+U75       Soldier-Inf3         2      12
+U125      Priest               1      104
+U75       Soldier-Inf3         2      12
+R24     Polytheism             1      104
 R47     Bronze_Shield          1      103
-R18     Afterlife              1      104
-R77     Legion                 1      12     
-R111    Siegecraft             1      84     
-R15     Guard_Tower            1      68     
-U11       Soldier-Ballista     2      49     
-B79       Watch_Tower          3      -1     
-U125      Priest               1      104
-R2      Catapult_Tower         1      68     
-B109      Town_Center1         1      -1     
+// 10 broad swordsmen, 4 barracks, 2 priest, 2 temple
 
-B12       Barracks1            1      -1       
-U75       Soldier-Inf3         12     12         
-B49       Siege_Workshop       1      -1     
-U11       Soldier-Ballista     4      49   
+B109      Town_Center1         1      -1
+U75       Soldier-Inf3         2      12
+B79       Watch_Tower          2      -1
 U125      Priest               2      104
-U11       Soldier-Ballista     8      49   
-B12       Barracks1            1      -1       
-U75       Soldier-Inf3         175    12         
-B109      Town_Center1         1      -1     
+R121    Logistics              1      82
+R32     Artisanship            1      84
+R22     Astrology              1      104
+T83       Man                  1      109       0
+B50       Farm                 1      -1
+B12       Barracks1            4      -1
+B70       House                5      -1
+U75       Soldier-Inf3         4      12
+U125      Priest               2      104
+B79       Watch_Tower          2      -1
+T83       Man                  1      109       0
+B50       Farm                 1      -1
+U125      Priest               3      104
+U75       Soldier-Inf3         4      12
+R31     Plow                   1      84
+U75       Soldier-Inf3         4      12
+// 32 villager, 14 farm, 24 broad swordsmen, 8 barrack, 9 priest, 16 tower
+
+
+C103    Iron_Age               1      109
+U125      Priest               3      104
+B109      Town_Center1         1      -1
+B70       House                5      -1
+R30     Coinage                1      84
+C66     Long_Sword             1      12
+R52     Metallurgy             1      103
+R15     Guard_Tower            1      68
+R106    Ballistics             1      82
+R110    Craftmanship           1      84
+C20     Fanaticism             1      104
+U75       Soldier-Inf3         4      12
+B79       Watch_Tower          4      -1
+R18     Afterlife              1      104
+C77     Legion                 1      12
+B70       House                5      -1
+U75       Soldier-Inf3         6      12
+U75       Soldier-Inf3         6      12
+U75       Soldier-Inf3         8      12
+R19     Monotheism             1      104
+B70       House                5      -1
+U75       Soldier-Inf3         12      12
+U125      Priest               3      104
+B70       House                5      -1
+U75       Soldier-Inf3         12      12
+U125      Priest               3      104
+
+B70       House                5      -1
+U75       Soldier-Inf3         12      12
+U125      Priest               3      104
+B70       House                5      -1
+U75       Soldier-Inf3         12      12
+U125      Priest               3      104
+
+C2      Ballista_Tower         1      68
+B79       Watch_Tower          4      -1
+// 24 ballista tower
+
+B70       House                5      -1
+U75       Soldier-Inf3         24      12
+U75       Soldier-Inf3         24      12
+U75       Soldier-Inf3         24      12
+
+// B276      Wonder               1      -1

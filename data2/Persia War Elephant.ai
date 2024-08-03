@@ -1,6 +1,6 @@
 // Persian War Elephant
-// Bronze Age: 40 villager, 20 farm, 1 scout, 2 camel rider
-// Iron Age: 48 armored elephant, 10 elephant archer (total 58 army)
+// Bronze Age: 40 villager, 20 farm, 1 scout, 10 camel rider, 14 tower
+// Iron Age: 48 armored elephant, 10 elephant archer, 48 bowman (total 117 army)
 
 
 B109      Town_Center1         1      -1
@@ -63,26 +63,27 @@ B79       Watch_Tower          4      -1
 // start civilization specific build from here:
 
 
-// a lot of farms, fast Iron Age to buy war elephant
-
-T338      Soldier-Camel        2      101       2
-T338      Soldier-Camel        2      101       0
+T338      Soldier-Camel        2      101       1
+B101      Stable1              1      -1
 R42     Leather_Armor_Mounted  1      103
+T338      Soldier-Camel        2      101       1
+R46     Toolworking            1      103
+T338      Soldier-Camel        2      101       1
 T83       Man                  2      109       0
 B50       Farm                 2      -1
+T338      Soldier-Camel        4      101       0
 B79       Watch_Tower          4      -1
-
 B109      Town_Center1         1      -1
+// 10 camel rider
+
 R108    Gold_Mining            1      84
 T83       Man                  2      109       0
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 B109      Town_Center1         1      -1
 B70       House                2      -1
 T83       Man                  4      109       0
 B50       Farm                 2      -1
-// 42 villager, 18 farm
-
 B109      Town_Center1         1      -1
 R45     Scale_Armor_-_Cavalry  1      103
 T83       Man                  2      109       0
@@ -91,14 +92,15 @@ B70       House                2      -1
 B104      Temple1              1      -1
 T83       Man                  4      109       0
 B50       Farm                 4      -1
-// 50 villager, 24 farm
+// 40 villager, 20 farm, 14 tower
 
 
 C103    Iron_Age               1      109
+B79       Watch_Tower          6      -1
 R50     Chain_Mail_-_Cavalry   1      103
 B101      Stable1              1      -1
 U46       Soldier-Elephant     2      101
-B101      Stable1              2      -1
+B101      Stable1              1      -1
 B109      Town_Center1         1      -1
 R47     Bronze_Shield          1      103
 U46       Soldier-Elephant     2      101
@@ -125,22 +127,27 @@ U46       Soldier-Elephant     3      101
 B70       House                2      -1
 // 24 armored elephant
 
+
+R41     Leather_Armor_-_Archer 1      103
 R15     Guard_Tower            1      68
-B79       Watch_Tower          4      -1
 R37     Alchemy                1      82
-B79       Watch_Tower          4      -1
 U46       Soldier-Elephant     6      101
+R44     Scale_Armor_-_Archers  1      103
 U25       Soldier-El_Archer    2      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
+R49     Chain_Mail_-_Archers   1      103
 U25       Soldier-El_Archer    2      87
 B50       Farm                 1      -1
-B70       House                2      -1
+B70       House                5      -1
 U46       Soldier-Elephant     6      101
 U25       Soldier-El_Archer    3      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
 U25       Soldier-El_Archer    3      87
 B50       Farm                 1      -1
-B70       House                2      -1
-// 48 armored elephant, 10 elephant archer
+B70       House                5      -1
+U4        Soldier-Archer1      24      87
+B70       House                5      -1
+U4        Soldier-Archer1      24      87
+// 48 armored elephant, 10 elephant archer, 48 bowman

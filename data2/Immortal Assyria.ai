@@ -63,8 +63,6 @@ B79       Watch_Tower          4      -1
 // start civilization specific build from here:
 
 
-// chariot archer in Bronze Age, horse archer, helepolis and catapult in Iron Age
-
 U41       Soldier-Chariot2     2      87
 B87       Range1               3      -1
 R41     Leather_Armor_-_Archer 1      103
@@ -73,7 +71,7 @@ B50       Farm                 2      -1
 U41       Soldier-Chariot2     2      87
 U41       Soldier-Chariot2     4      87
 B109      Town_Center1         1      -1
-// 28 villager, 10 farm, 8 chariot archer, 4 archery range
+// 8 chariot archer, 4 archery range
 
 B70       House                5      -1
 U41       Soldier-Chariot2     4      87
@@ -88,7 +86,7 @@ T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 R31     Plow                   1      84
-// 32 villager, 24 chariot archer, 14 farm
+// 32 villager, 14 farm, 24 chariot archer
 
 B103      Town_Center1         1      -1
 R108    Gold_Mining            1      84
