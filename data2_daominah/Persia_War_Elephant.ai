@@ -95,12 +95,12 @@ B50       Farm                 4      -1
 
 
 C103    Iron_Age               1      109
+R50     Chain_Mail_-_Cavalry   1      103
 B101      Stable1              1      -1
-R47     Bronze_Shield          1      103
 U46       Soldier-Elephant     2      101
 B101      Stable1              2      -1
 B109      Town_Center1         1      -1
-R117    Iron_Shield            1      103
+R47     Bronze_Shield          1      103
 U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
@@ -112,6 +112,7 @@ B70       House                1      -1
 U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
+R117    Iron_Shield            1      103
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                1      -1
@@ -119,7 +120,6 @@ B70       House                1      -1
 B79       Watch_Tower          4      -1
 C125    Armored Elephants      1      101
 B87       Range1               1      -1
-R50     Chain_Mail_-_Cavalry   1      103
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                2      -1
