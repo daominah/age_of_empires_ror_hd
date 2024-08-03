@@ -1,5 +1,5 @@
 // Persian War Elephant
-// Bronze Age: 50 villager, 24 farm, 1 scout, 2 camel rider
+// Bronze Age: 40 villager, 20 farm, 1 scout, 2 camel rider
 // Iron Age: 48 armored elephant, 10 elephant archer (total 58 army)
 
 
@@ -68,19 +68,19 @@ B79       Watch_Tower          4      -1
 T338      Soldier-Camel        2      101       2
 T338      Soldier-Camel        2      101       0
 R42     Leather_Armor_Mounted  1      103
-T83       Man                  4      109       0
-B50       Farm                 4      -1
+T83       Man                  2      109       0
+B50       Farm                 2      -1
 B79       Watch_Tower          4      -1
 
 B109      Town_Center1         1      -1
 R108    Gold_Mining            1      84
-T83       Man                  4      109       0
+T83       Man                  2      109       0
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 B70       House                2      -1
-T83       Man                  8      109       0
-B50       Farm                 4      -1
+T83       Man                  4      109       0
+B50       Farm                 2      -1
 // 42 villager, 18 farm
 
 B109      Town_Center1         1      -1
@@ -89,7 +89,7 @@ T83       Man                  2      109       0
 B50       Farm                 2      -1
 B70       House                2      -1
 B104      Temple1              1      -1
-T83       Man                  6      109       0
+T83       Man                  4      109       0
 B50       Farm                 4      -1
 // 50 villager, 24 farm
 
@@ -134,11 +134,13 @@ U25       Soldier-El_Archer    2      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
 U25       Soldier-El_Archer    2      87
+B50       Farm                 1      -1
 B70       House                2      -1
 U46       Soldier-Elephant     6      101
 U25       Soldier-El_Archer    3      87
 B50       Farm                 1      -1
 U46       Soldier-Elephant     6      101
 U25       Soldier-El_Archer    3      87
+B50       Farm                 1      -1
 B70       House                2      -1
 // 48 armored elephant, 10 elephant archer
