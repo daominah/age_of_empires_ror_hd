@@ -1,4 +1,4 @@
-// Hittite Horse Archers
+// Assyrian Helepolis
 // Bronze Age: 32 villager, 14 farm, 1 bowman, 48 chariot archer, 3 stone thrower
 // Iron Age: 24 horse archer, 30 Helepolis, 16 catapult (119 army)
 
@@ -14,9 +14,8 @@ B12       Barracks1            1      -1
 
 C101    Tool_Age               1      109
 
-T83       Man                  1      109       0
+T83       Man                  2      109       0
 B84       Market1              1      -1
-T83       Man                  1      109       0
 // pop 22/24, pick Stable or Archery Range:
 // B101      Stable1              1      -1
 B87       Range1               1      -1
@@ -27,27 +26,26 @@ C102    Bronze_Age             1      109
 C107    Wood_Working           1      84
 T4        Soldier-Archer1      1      87        2
 // T299      Soldier-Scout        1      101       2
-B50       Farm                 4      -1
 R28     Wheel                  1      84
-B70       House                2      -1
+B70       House                4      -1
 T83       Man                  2      109       0
-B50       Farm                 2      -1
 R81     Domestication          1      84
 T83       Man                  2      109       0
-B50       Farm                 2      -1
-B70       House                2      -1
-// 26 villager, 8 farm, pop 27/40
+// 26 villager, pop 27/40
 
 B82       Government_Center    1      -1
 R16     Watch_Tower            1      68
 R109    Stone_Mining           1      84
-B70       House                2      -1
+B70       House                1      -1
 // R112    Architecture           1      82
+B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
-B70       House                2      -1
+T83       Man                  2      109       0
 R12     Sentry_Tower           1      68
 B79       Watch_Tower          4      -1
-// 6 tower, pop 27/56
+B50       Farm                 4      -1
+B50       Farm                 4      -1
+// 28 villager, 8 farm, 6 tower, pop 29/48
 
 
 // ended of shared build section for almost all civilization,
@@ -57,29 +55,27 @@ B79       Watch_Tower          4      -1
 U41       Soldier-Chariot2     2      87
 B87       Range1               3      -1
 R41     Leather_Armor_-_Archer 1      103
-T83       Man                  2      109       0
-B50       Farm                 2      -1
 U41       Soldier-Chariot2     2      87
 U41       Soldier-Chariot2     4      87
 B109      Town_Center1         1      -1
 // 8 chariot archer, 4 archery range
 
+R31     Plow                   1      84
 B70       House                5      -1
 U41       Soldier-Chariot2     4      87
 T41       Soldier-Chariot2     4      87        0
+T83       Man                  2      109       0
+B50       Farm                 2      -1
 C32     Artisanship            1      84
 R44     Scale_Armor_-_Archers  1      103
 T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
-B50       Farm                 2      -1
+B50       Farm                 4      -1
 B70       House                5      -1
 T41       Soldier-Chariot2     4      87        0
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-R31     Plow                   1      84
 // 32 villager, 14 farm, 24 chariot archer
 
-B103      Town_Center1         1      -1
+B109      Town_Center1         1      -1
 R108    Gold_Mining            1      84
 // R34       Nobility  	       1      82
 B87       Range1               2      -1
@@ -94,7 +90,6 @@ U41       Soldier-Chariot2     8      87
 
 
 C103    Iron_Age               1      109
-B109      Town_Center1         1      -1
 B70       House                5      -1
 U35       Soldier-Catapult1    1      49
 U39       Soldier-Cavalry3_Arc 1      87
@@ -110,6 +105,7 @@ U39       Soldier-Cavalry3_Arc 1      87
 U39       Soldier-Cavalry3_Arc 1      87
 B49       Siege_Workshop       1      -1
 R106    Ballistics             1      82
+B70       House                5      -1
 U39       Soldier-Cavalry3_Arc 2      87
 U35       Soldier-Catapult1    2      49
 R35     Engineering            1      82
