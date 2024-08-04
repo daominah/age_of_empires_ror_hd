@@ -22,3 +22,5 @@ done;
 #Priest Bronze.ai
 #Priest Iron.ai
 #War Elephant Iron.ai
+
+# ls | grep -ivE "water|death match" | grep -i choson

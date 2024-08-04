@@ -1,5 +1,5 @@
 // Choson Swordsmen
-// Bronze Age: 32 villager, 1 scout, 24 broad swordsmen, 9 priest, 16 tower
+// Bronze Age: 32 villager, 14 farm, 1 scout, 24 broad swordsmen, 9 priest, 16 tower
 // Iron Age: 168 legion, 24 priest, 24 ballista tower (193 army)
 
 
@@ -109,11 +109,11 @@ B50       Farm                 1      -1
 B12       Barracks1            4      -1
 B70       House                5      -1
 U75       Soldier-Inf3         4      12
-U125      Priest               2      104
+T125      Priest               2      104       2
 B79       Watch_Tower          2      -1
 T83       Man                  1      109       0
 B50       Farm                 1      -1
-U125      Priest               3      104
+T125      Priest               3      104       2
 U75       Soldier-Inf3         4      12
 R31     Plow                   1      84
 U75       Soldier-Inf3         4      12
@@ -121,7 +121,7 @@ U75       Soldier-Inf3         4      12
 
 
 C103    Iron_Age               1      109
-U125      Priest               3      104
+T125      Priest               3      104       0
 B109      Town_Center1         1      -1
 B70       House                5      -1
 R30     Coinage                1      84
@@ -142,17 +142,18 @@ U75       Soldier-Inf3         8      12
 R19     Monotheism             1      104
 B70       House                5      -1
 U75       Soldier-Inf3         12      12
-U125      Priest               3      104
+T125      Priest               3      104       0
 B70       House                5      -1
 U75       Soldier-Inf3         12      12
-U125      Priest               3      104
-
+T125      Priest               3      104       0
+// 72 legion
+R80     Irrigation             1      84
 B70       House                5      -1
 U75       Soldier-Inf3         12      12
-U125      Priest               3      104
+T125      Priest               3      104       0
 B70       House                5      -1
 U75       Soldier-Inf3         12      12
-U125      Priest               3      104
+T125      Priest               3      104       0
 R119    Medicine               1      104
 
 C2      Ballista_Tower         1      68
@@ -165,3 +166,17 @@ U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
 
 // B276      Wonder               1      -1
+
+
+// full Priest upgrade line:
+// R21     Mysticism              1      104  // x2 HP (25 to 50)
+// R24     Polytheism             1      104  // +40% MS (0.8 to 1.12 tile/s)
+// R22     Astrology              1      104  // +30% convert (30% to 39% chance/chant) and heal (3 to 4 HP/s)
+//
+// R18     Afterlife              1      104  // +3 range (10 to 13 tile)
+// R20     Fanaticism             1      104  // +50% rejuvenate (so rest duration reduce from 50s to 33s)
+// R19     Monotheism             1      104  // convert enemy Priests and buildings
+// R119    Medicine               1      104  // x3 healing rate (3 to 9 HP/s, or 4 to 12 with Astrology)
+//
+// R120    Martyrdom              1      104  // sacrifice to instantly convert an enemy unit (computer don't use)
+// R23     Jihad                  1      104  // village + 0.3 MS (1.8 to 2.1 tile/s with Wheel), +7 ATK, +40 HP, -8 gather cap
