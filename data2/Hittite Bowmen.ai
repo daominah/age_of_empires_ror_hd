@@ -1,24 +1,15 @@
 // Hittite Horse Archers
-// Bronze Age: 36 villager, 1 bowman, 24 chariot archer, 3 stone thrower
+// Bronze Age: 36 villager, 16 farm, 1 bowman, 24 chariot archer, 3 stone thrower
 // Iron Age: 48 chariot archer, 48 heavy horse archer, 24 heavy catapult (121 army)
 
 
 B109      Town_Center1         1      -1
 U83       Man                  3      109
 
-B70       House                1      -1
-U83       Man                  1      109
-B70       House                1      -1
-U83       Man                  6      109
-// pop 10/12
-B70       House                1      -1
-T83       Man                  4      109       2
-B70       House                1      -1
-T83       Man                  4      109       2
-B70       House                1      -1
-T83       Man                  2      109       2
-B12       Barracks1            1      -1
+B70       House                5      -1
+U83       Man                  17      109
 // pop 20/24
+B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
@@ -184,7 +175,9 @@ B79       Watch_Tower          4      -1
 // 24 ballista tower
 
 
+B50       Farm                 10     -1
 // B276      Wonder               1      -1
+
 
 // A70       House                10     -1        2
 // T25       Soldier-El_Archer    3      87        1

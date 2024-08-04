@@ -1,24 +1,15 @@
 // Persian War Elephant
 // Bronze Age: 32 villager, 14 farm, 1 scout, 10 camel rider, 14 tower
-// Iron Age: 48 armored elephant, 12 catapult, 48 bowman (total 117 army)
+// Iron Age: 48 armored elephant, 18 catapult, 24 bowman (total 101 army)
 
 
 B109      Town_Center1         1      -1
 U83       Man                  3      109
 
-B70       House                1      -1
-U83       Man                  1      109
-B70       House                1      -1
-U83       Man                  6      109
-// pop 10/12
-B70       House                1      -1
-T83       Man                  4      109       2
-B70       House                1      -1
-T83       Man                  4      109       2
-B70       House                1      -1
-T83       Man                  2      109       2
-B12       Barracks1            1      -1
+B70       House                5      -1
+U83       Man                  17      109
 // pop 20/24
+B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
@@ -97,7 +88,7 @@ B50       Farm                 2      -1
 
 
 C103    Iron_Age               1      109
-B49       Siege_Workshop       1      -1
+B49       Siege_Workshop       2      -1
 B79       Watch_Tower          6      -1
 R50     Chain_Mail_-_Cavalry   1      103
 C54     Heavy_Catapult         1      49
@@ -106,6 +97,7 @@ U46       Soldier-Elephant     2      101
 B101      Stable1              1      -1
 U35       Soldier-Catapult1    2      49
 C47     Bronze_Shield          1      103
+U46       Soldier-Elephant     2      101
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
 B70       House                1      -1
@@ -115,47 +107,53 @@ B101      Stable1              2      -1
 // 6 stable
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
+U35       Soldier-Catapult1    2      49
 B70       House                1      -1
 U46       Soldier-Elephant     2      101
 C117    Iron_Shield            1      103
-U35       Soldier-Catapult1    2      49
+R35     Engineering            1      82
+U35       Soldier-Catapult1    3      49
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
 B70       House                1      -1
-U35       Soldier-Catapult1    2      49
+U35       Soldier-Catapult1    3      49
 // 18 war elephant
 B79       Watch_Tower          4      -1
 C125    Armored Elephants      1      101
-U35       Soldier-Catapult1    2      49
+U35       Soldier-Catapult1    3      49
 B87       Range1               1      -1
 U46       Soldier-Elephant     3      101
 U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
+U35       Soldier-Catapult1    3      49
 B70       House                2      -1
-// 24 armored elephant, 12 catapult
+// 24 armored elephant, 18 catapult
 
 
 R41     Leather_Armor_-_Archer 1      103
 B87       Range1               2      -1
 R15     Guard_Tower            1      68
 R37     Alchemy                1      82
-B50       Farm                 1      -1
-U4        Soldier-Archer1      12     87
+B50       Farm                 2      -1
 U46       Soldier-Elephant     6      101
+U4        Soldier-Archer1      6     87
 R44     Scale_Armor_-_Archers  1      103
-B50       Farm                 1      -1
-U4        Soldier-Archer1      12     87
+B50       Farm                 2      -1
 U46       Soldier-Elephant     6      101
+U4        Soldier-Archer1      6     87
 R49     Chain_Mail_-_Archers   1      103
 B70       House                10     -1
-B50       Farm                 1      -1
+B50       Farm                 2      -1
 B70       House                5      -1
-U4        Soldier-Archer1      12     87
 U46       Soldier-Elephant     6      101
-B50       Farm                 1      -1
-U4        Soldier-Archer1      12     87
+U4        Soldier-Archer1      6     87
+B50       Farm                 2      -1
 U46       Soldier-Elephant     6      101
-// 48 armored elephant, 48 bowman
-
+U4        Soldier-Archer1      6     87
+B50       Farm                 2      -1
+// 48 armored elephant, 24 bowman
 
 // U25       Soldier-El_Archer    24     87        1
+
+
+B50       Farm                 10     -1
+// B276      Wonder               1      -1

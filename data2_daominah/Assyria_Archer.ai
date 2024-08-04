@@ -6,19 +6,10 @@
 B109      Town_Center1         1      -1
 U83       Man                  3      109
 
-B70       House                1      -1
-U83       Man                  1      109
-B70       House                1      -1
-U83       Man                  6      109
-// pop 10/12
-B70       House                1      -1
-T83       Man                  4      109       2
-B70       House                1      -1
-T83       Man                  4      109       2
-B70       House                1      -1
-T83       Man                  2      109       2
-B12       Barracks1            1      -1
+B70       House                5      -1
+U83       Man                  17      109
 // pop 20/24
+B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
@@ -149,6 +140,7 @@ U11       Soldier-Balista      4      49
 U11       Soldier-Balista      4      49
 // 30 helepolis
 
+
 B79       Watch_Tower          4      -1
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          2      -1
@@ -162,4 +154,5 @@ U35       Soldier-Catapult1    4      49
 U35       Soldier-Catapult1    4      49
 
 
+B50       Farm                 10     -1
 // B276      Wonder               1      -1
