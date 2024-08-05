@@ -1,177 +1,144 @@
 // Hittite Horse Archer
-// Bronze Age: 36 villager, 16 farm, 1 bowman, 24 chariot archer, 3 stone thrower
-// Iron Age: 48 chariot archer, 48 heavy horse archer, 24 heavy catapult (121 army)
+// Bronze Age: 12 chariot archer, 2 stone thrower
+// Iron Age: 36 heavy horse archer, 24 heavy catapult
 
 
+B70       House                2      -1
+U83       Man                  10      109
 B109      Town_Center1         1      -1
-U83       Man                  3      109
-
-B70       House                5      -1
-U83       Man                  17      109
-// pop 20/24
+B70       House                3      -1
+U83       Man                  8      109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
-
-T83       Man                  2      109       0
 B84       Market1              1      -1
-// pop 22/24, pick Stable or Archery Range:
-// B101      Stable1              1      -1
+U83       Man                  2      109
+B101      Stable1              1      -1
 B87       Range1               1      -1
+R16     Watch_Tower            1      68
+// pop 20/24
 
 
 C102    Bronze_Age             1      109
-
 R107    Wood_Working           1      84
-T4        Soldier-Archer1      1      87        2
-// T299      Soldier-Scout        1      101       2
+T4        Soldier-Archer1      1      87        4
+B87       Range1               2      -1
+C41     Leather_Armor_-_Archer 1      103
+// T299      Soldier-Scout        1      101       1
+// B101      Stable1              2      -1
+// R42     Leather_Armor_Mounted  1      103
+
+B79       Watch_Tower          4      -1
 R28     Wheel                  1      84
-B70       House                4      -1
+R12     Sentry_Tower           1      68
+// R46     Toolworking            1      103
+B70       House                5      -1
+T83       Man                  2      109       0
+B82       Government_Center    1      -1
+B104      Temple1              1      -1
 T83       Man                  2      109       0
 R81     Domestication          1      84
-T83       Man                  2      109       0
-// 26 villager, pop 27/40
-
-B82       Government_Center    1      -1
-R16     Watch_Tower            1      68
-C109    Stone_Mining           1      84
-B70       House                1      -1
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
-B79       Watch_Tower          2      -1
-T83       Man                  2      109       0
-R12     Sentry_Tower           1      68
+// 24 villager, pop 25/48, 3 archery range (or 3 stable),
+// cost: 3600 food, 2150 wood, 650 stone
+
+// T338      Soldier-Camel        2      101       0
+// T37       Soldier-Cavalry1     2      101       0
+T41       Soldier-Chariot2     3      87        0
+T125      Priest               1      104       0
 B79       Watch_Tower          4      -1
-B50       Farm                 4      -1
-B50       Farm                 4      -1
-// 28 villager, 8 farm, 6 tower, pop 29/48
+// 4 sentry tower
 
-
-// ended of shared build section for almost all civilization,
-// start civilization specific build from here:
-
-
-U41       Soldier-Chariot2     2      87
-B87       Range1               3      -1
-C41     Leather_Armor_-_Archer 1      103
-U41       Soldier-Chariot2     2      87
-U41       Soldier-Chariot2     4      87
-B109      Town_Center1         1      -1
-// 8 chariot archer, 4 archery range
-
-R31     Plow                   1      84
-B70       House                5      -1
-U41       Soldier-Chariot2     4      87
-T41       Soldier-Chariot2     4      87        0
-T83       Man                  2      109       0
-B50       Farm                 2      -1
 R32     Artisanship            1      84
 C44     Scale_Armor_-_Archers  1      103
-T41       Soldier-Chariot2     4      87        0
-T83       Man                  2      109       0
-B50       Farm                 4      -1
+// R45     Scale_Armor_-_Cavalry  1      103
+T41       Soldier-Chariot2     3      87        0
+T125      Priest               2      104       0
+B49       Siege_Workshop       2      -1
 B70       House                5      -1
-T41       Soldier-Chariot2     4      87        0
-// 32 villager, 14 farm, 24 chariot archer
-
-B109      Town_Center1         1      -1
-R108    Gold_Mining            1      84
-R34       Nobility  	       1      82
 T83       Man                  2      109       0
-B50       Farm                 2      -1
-B49       Siege_Workshop       1      -1
-T83       Man                  1      109       0
-U35       Soldier-Catapult1    1      49
-T83       Man                  1      109       0
-U35       Soldier-Catapult1    1      49
-U35       Soldier-Catapult1    1      49
-// 36 villager, 16 farm, 3 stone thrower
+R108    Gold_Mining            1      84
+// R51     Metal_Working          1      103
+T41       Soldier-Chariot2     3      87        0
+T83       Man                  2      109       0
+R34       Nobility  	       1      82
+T41       Soldier-Chariot2     3      87        0
+U35       Soldier-Catapult1    2      49
+C109    Stone_Mining           1      84
+B70       House                5      -1
+// 28 villager, 12 chariot archer, 2 stone thrower
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
-B87       Range1               2      -1
-U35       Soldier-Catapult1    1      49
-U39       Soldier-Cavalry3_Arc 1      87
-R30     Coinage                1      84
-U39       Soldier-Cavalry3_Arc 1      87
-R37     Alchemy                1      82
-U39       Soldier-Cavalry3_Arc 1      87
+T83       Man                  4      109       0
+B109      Town_Center1         1      -1
+T41       Soldier-Chariot2     3      87        0
+B87       Range1               3      -1
+U35       Soldier-Catapult1    2      49
+B49       Siege_Workshop       2      -1
+T41       Soldier-Chariot2     3      87        0
+// 6 archery range, 4 siege workshop
+
 R110    Craftmanship           1      84
-U39       Soldier-Cavalry3_Arc 1      87
+R37     Alchemy                1      82
 C49     Chain_Mail_-_Archers   1      103
 C54     Heavy_Catapult         1      49
-U39       Soldier-Cavalry3_Arc 2      87
-R106    Ballistics             1      82
-U39       Soldier-Cavalry3_Arc 2      87
-U35       Soldier-Catapult1    1      49
-R35     Engineering            1      82
-U39       Soldier-Cavalry3_Arc 2      87
-U35       Soldier-Catapult1    1      49
-U39       Soldier-Cavalry3_Arc 2      87
-B49       Siege_Workshop       1      -1
-// 12 horse archer, 6 catapult, 6 archery range
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    4      49
 
 B70       House                5      -1
-U39       Soldier-Cavalry3_Arc 3      87
-U35       Soldier-Catapult1    1      49
-U39       Soldier-Cavalry3_Arc 3      87
-U35       Soldier-Catapult1    1      49
-U39       Soldier-Cavalry3_Arc 3      87
-U35       Soldier-Catapult1    1      49
-U39       Soldier-Cavalry3_Arc 3      87
-U35       Soldier-Catapult1    1      49
-// 24 horse archer, 10 catapult
+R30     Coinage                1      84
+R106    Ballistics             1      82
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    4      49
+U39       Soldier-Cavalry3_Arc 6      87
 
-A70       House                5      -1        2
-C38     Heavy_Horse_Archer     1      87
-A49       Siege_Workshop       2      -1        2
-T39       Soldier-Cavalry3_Arc 1      87        0
-T35       Soldier-Catapult1    1      49        2
-T39       Soldier-Cavalry3_Arc 1      87        0
-T35       Soldier-Catapult1    1      49        2
+B70       House                5      -1
 C111    Siegecraft             1      84
-T39       Soldier-Cavalry3_Arc 1      87        0
-T35       Soldier-Catapult1    2      49        2
-T39       Soldier-Cavalry3_Arc 1      87        0
-T35       Soldier-Catapult1    2      49        2
-// 28 heavy horse archer, 16 catapult, 4 siege workshop
+R35     Engineering            1      82
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    4      49
+// 24 horse archer, 16 catapult, 6 archery range
 
-A70       House                5      -1        2
+B70       House                5      -1
+C38     Heavy_Horse_Archer     1      87
+U35       Soldier-Catapult1    4      49
+B50       Farm                 8      -1
+B79       Watch_Tower          4      -1
 C36     Massive_Catapult       1      49
-T39       Soldier-Cavalry3_Arc 5      87        2
-T35       Soldier-Catapult1    2      49        2
-T39       Soldier-Cavalry3_Arc 5      87        2
-T35       Soldier-Catapult1    2      49        2
-T39       Soldier-Cavalry3_Arc 5      87        2
-T35       Soldier-Catapult1    2      49        2
-T39       Soldier-Cavalry3_Arc 5      87        2
-T35       Soldier-Catapult1    2      49        2
-// 48 heavy horse archer, 24 heavy catapult
 
-// switch back to chariot archer in case of no gold
-B70       House                5     -1
-U41       Soldier-Chariot2     6      87
-U41       Soldier-Chariot2     6      87
-U41       Soldier-Chariot2     6      87
-U41       Soldier-Chariot2     6      87
+B70       House                5      -1
+U39       Soldier-Cavalry3_Arc 6      87
+B50       Farm                 8      -1
+B79       Watch_Tower          4      -1
+U35       Soldier-Catapult1    4      49
+U39       Soldier-Cavalry3_Arc 6      87
+// 36 heavy horse archer, 24 heavy catapult
 
 
+B79       Watch_Tower          4      -1
 R15     Guard_Tower            1      68
-B79       Watch_Tower          4      -1
-R2      Ballista_Tower         1      68
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
 B79       Watch_Tower          6      -1
+B50       Farm                 8      -1
+R2      Ballista_Tower         1      68
 // 24 ballista tower
 
+B70       House                5      -1
+U39       Soldier-Cavalry3_Arc 6      87
+U39       Soldier-Cavalry3_Arc 6      87
+B70       House                5      -1
+U41       Soldier-Chariot2     6      87
+U41       Soldier-Chariot2     6      87
+U41       Soldier-Chariot2     6      87
+U41       Soldier-Chariot2     6      87
 
-B50       Farm                 10     -1
+
 B276      Wonder               1      -1
+B50       Farm                 16     -1
 
 
-// A70       House                10     -1        2
 // T25       Soldier-El_Archer    3      87        1
 // T25       Soldier-El_Archer    3      87        1
 // T25       Soldier-El_Archer    3      87        1
