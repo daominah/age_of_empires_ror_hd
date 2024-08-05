@@ -28,7 +28,7 @@ C41     Leather_Armor_-_Archer 1      103
 // T299      Soldier-Scout        1      101       1
 // B101      Stable1              2      -1
 // R42     Leather_Armor_Mounted  1      103
-R108    Gold_Mining            1      84
+
 B79       Watch_Tower          4      -1
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
@@ -38,7 +38,7 @@ T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              1      -1
 T83       Man                  2      109       0
-
+R108    Gold_Mining            1      84
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 // 24 villager, pop 25/48, 3 archery range (or 3 stable),
