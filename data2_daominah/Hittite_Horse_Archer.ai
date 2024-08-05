@@ -14,8 +14,8 @@ B12       Barracks1            1      -1
 C101    Tool_Age               1      109
 B84       Market1              1      -1
 U83       Man                  2      109
-B101      Stable1              1      -1
 B87       Range1               1      -1
+B101      Stable1              1      -1
 R16     Watch_Tower            1      68
 // pop 20/24
 
@@ -38,7 +38,7 @@ T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              1      -1
 T83       Man                  2      109       0
-R81     Domestication          1      84
+R32     Artisanship            1      84
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 // 24 villager, pop 25/48, 3 archery range (or 3 stable),
@@ -49,9 +49,9 @@ B109      Town_Center1         1      -1
 T41       Soldier-Chariot2     3      87        0
 T125      Priest               1      104       0
 B79       Watch_Tower          4      -1
-// 4 sentry tower
+// 8 sentry tower
 
-R32     Artisanship            1      84
+R108    Gold_Mining            1      84
 C44     Scale_Armor_-_Archers  1      103
 // R45     Scale_Armor_-_Cavalry  1      103
 T41       Soldier-Chariot2     3      87        0
@@ -59,14 +59,15 @@ T125      Priest               2      104       0
 B49       Siege_Workshop       2      -1
 B70       House                5      -1
 T83       Man                  2      109       0
-R108    Gold_Mining            1      84
+C109    Stone_Mining           1      84
 // R51     Metal_Working          1      103
 T41       Soldier-Chariot2     3      87        0
 T83       Man                  2      109       0
 R34       Nobility  	       1      82
 T41       Soldier-Chariot2     3      87        0
 U35       Soldier-Catapult1    2      49
-C109    Stone_Mining           1      84
+R81     Domestication          1      84
+R22     Astrology              1      104
 B70       House                5      -1
 // 28 villager, 12 chariot archer, 2 stone thrower
 
@@ -107,11 +108,12 @@ C38     Heavy_Horse_Archer     1      87
 U35       Soldier-Catapult1    4      49
 B50       Farm                 8      -1
 B79       Watch_Tower          4      -1
+T83       Man                  4      109       0
+B50       Farm                 8      -1
 C36     Massive_Catapult       1      49
 
 B70       House                5      -1
 U39       Soldier-Cavalry3_Arc 6      87
-B50       Farm                 8      -1
 B79       Watch_Tower          4      -1
 U35       Soldier-Catapult1    4      49
 U39       Soldier-Cavalry3_Arc 6      87
@@ -120,9 +122,10 @@ U39       Soldier-Cavalry3_Arc 6      87
 
 B79       Watch_Tower          4      -1
 R15     Guard_Tower            1      68
-B79       Watch_Tower          6      -1
-B50       Farm                 8      -1
-R2      Ballista_Tower         1      68
+B79       Watch_Tower          4      -1
+T83       Man                  4      109       0
+B50       Farm                 12     -1
+C2      Ballista_Tower         1      68
 // 24 ballista tower
 
 B70       House                5      -1
@@ -135,8 +138,9 @@ U41       Soldier-Chariot2     6      87
 U41       Soldier-Chariot2     6      87
 
 
-B276      Wonder               1      -1
 B50       Farm                 16     -1
+B276      Wonder               1      -1
+
 
 
 // T25       Soldier-El_Archer    3      87        1
