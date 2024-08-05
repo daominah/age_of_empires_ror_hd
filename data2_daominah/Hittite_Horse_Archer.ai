@@ -38,7 +38,7 @@ T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              1      -1
 T83       Man                  2      109       0
-R108    Gold_Mining            1      84
+R32     Artisanship            1      84
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 // 24 villager, pop 25/48, 3 archery range (or 3 stable),
@@ -51,7 +51,7 @@ T125      Priest               1      104       0
 B79       Watch_Tower          4      -1
 // 8 sentry tower
 
-R32     Artisanship            1      84
+R108    Gold_Mining            1      84
 C44     Scale_Armor_-_Archers  1      103
 // R45     Scale_Armor_-_Cavalry  1      103
 T41       Soldier-Chariot2     3      87        0
