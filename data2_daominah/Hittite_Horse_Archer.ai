@@ -103,12 +103,13 @@ C111    Siegecraft             1      84
 R35     Engineering            1      82
 U39       Soldier-Cavalry3_Arc 6      87
 U35       Soldier-Catapult1    4      49
-// 24 horse archer, 16 catapult, 6 archery range
-
 B70       House                5      -1
 B109      Town_Center1         1      -1
 C38     Heavy_Horse_Archer     1      87
 U35       Soldier-Catapult1    4      49
+// 24 heavy horse archer, 20 catapult
+// spent:  food,  wood, gold
+
 B50       Farm                 8      -1
 B79       Watch_Tower          4      -1
 T83       Man                  4      109       0
