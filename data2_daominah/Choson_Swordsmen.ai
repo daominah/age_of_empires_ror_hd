@@ -17,17 +17,17 @@ U83       Man                  2      109
 B101      Stable1              1      -1
 B87       Range1               1      -1
 R16     Watch_Tower            1      68
+T299      Soldier-Scout        1      101       1
+// T4        Soldier-Archer1      1      87        4
 // pop 20/24
 C63     Axe                    1      12
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-// T4        Soldier-Archer1      1      87        4
-// B87       Range1               2      -1
-// C41     Leather_Armor_-_Archer 1      103
 R46     Toolworking            1      103
-T299      Soldier-Scout        1      101       1
+// C41     Leather_Armor_-_Archer 1      103
+// B87       Range1               2      -1
 // B101      Stable1              2      -1
 B12       Barracks1            2      -1
 
@@ -165,6 +165,7 @@ U75       Soldier-Inf3         24      12
 B70       House                5      -1
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
+
 
 // full Priest upgrade line:
 // R21     Mysticism              1      104  // x2 HP (25 to 50)
