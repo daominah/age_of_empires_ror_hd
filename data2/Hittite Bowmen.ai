@@ -42,7 +42,7 @@ R81     Domestication          1      84
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 // 24 villager, pop 25/48, 3 archery range (or 3 stable),
-// cost: 3600 food, 2150 wood, 650 stone
+// spent: 3600 food, 2150 wood, 650 stone
 
 // T338      Soldier-Camel        2      101       0
 // T37       Soldier-Cavalry1     2      101       0
