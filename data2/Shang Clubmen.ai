@@ -74,7 +74,7 @@ R15     Guard_Tower            1      68
 R30	Coinage                1      84
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B49       Siege_Workshop       1      -1
 U11       Soldier-Balista      2      49

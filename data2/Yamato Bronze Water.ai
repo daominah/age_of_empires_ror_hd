@@ -75,7 +75,7 @@ R51     Metal_Working          1      103
 R49     Chain_Mail_-_Archers   1      103
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B45       Dock_1               1      -1
 U250      Boat-War4            2      45
