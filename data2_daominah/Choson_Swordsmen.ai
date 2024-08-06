@@ -1,6 +1,6 @@
 // Choson Swordsmen
 // Bronze Age: 2 cavalry, 12 swordsmen, 6 priest
-// Iron Age: 96 legion, 36 priest, 18 ballista, 40 tower
+// Iron Age: 72+ legion, 36 priest, 18 ballista, 40 tower
 
 
 B70       House                2      -1
@@ -19,7 +19,7 @@ B87       Range1               1      -1
 R16     Watch_Tower            1      68
 T299      Soldier-Scout        1      101       1
 // T4        Soldier-Archer1      1      87        4
-// pop 20/24
+// pop 21/24, 1 scout
 C63     Axe                    1      12
 
 
@@ -47,7 +47,7 @@ B109      Town_Center1         1      -1
 C65     Broad_Sword            1      12
 R47     Bronze_Shield          1      103
 // 24 villager, pop 25/48, 3 barrack, 3 temple, 4 tower
-// spent: 4000 food, 2800 wood, 400 gold
+// spent: 2800 wood, 4000 food, 400 gold
 
 
 T37       Soldier-Cavalry1     1      101    0
@@ -56,6 +56,7 @@ U125      Priest               2      104       0
 R21     Mysticism              1      104
 
 R108    Gold_Mining            1      84
+// R34       Nobility  	       1      82
 C121    Logistics              1      82
 T37       Soldier-Cavalry1     1      101    0
 T75       Soldier-Inf3         3      2
@@ -84,7 +85,7 @@ B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-// spent: 6700 food, 3300 wood, 2700 gold
+// spent: 3300 wood, 6700 food, 2700 gold
 
 U75       Soldier-Inf3         6      12
 B12       Barracks1            5      -1
@@ -103,6 +104,8 @@ U125      Priest               2      104
 T11       Soldier-Balista      2      49        2
 U75       Soldier-Inf3         6      12
 
+B109      Town_Center1         2      -1
+B50       Farm                 8      -1
 B70       House                5      -1
 B79       Watch_Tower          4      -1
 R30     Coinage                1      84
@@ -114,13 +117,12 @@ B79       Watch_Tower          4      -1
 // 24 legion, 12 priest, 20 tower
 // spent: 5000 wood, 10000 food, 5000 gold, 3100 stone
 
-B109      Town_Center1         2      -1
-B50       Farm                 8      -1
 U75       Soldier-Inf3         8      12
 T125      Priest               4      104       2
 T11       Soldier-Balista      2      49        2
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          4      -1
+
 R111    Siegecraft             1      84
 R19     Monotheism             1      104
 B50       Farm                 8      -1
@@ -154,17 +156,18 @@ R27     Helepolis              1      49
 
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
+B70       House                5      -1
+U75       Soldier-Inf3         24      12
+U75       Soldier-Inf3         24      12
+B70       House                5      -1
+U75       Soldier-Inf3         24      12
+U75       Soldier-Inf3         24      12
 
 
 // B276      Wonder               1      -1
 B50       Farm                 24     -1
 
-B70       House                5      -1
-U75       Soldier-Inf3         24      12
-U75       Soldier-Inf3         24      12
-B70       House                5      -1
-U75       Soldier-Inf3         24      12
-U75       Soldier-Inf3         24      12
+
 
 
 // full Priest upgrade line:
