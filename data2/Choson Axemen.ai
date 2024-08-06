@@ -1,6 +1,6 @@
 // Choson Swordsmen
 // Bronze Age: 2 cavalry, 12 swordsmen, 6 priest
-// Iron Age: 96+ legion, 36 priest, 18 ballista, 40 tower
+// Iron Age: 96 legion, 36 priest, 18 ballista, 40 tower
 
 
 B70       House                2      -1
@@ -56,7 +56,7 @@ U125      Priest               2      104       0
 R21     Mysticism              1      104
 
 R108    Gold_Mining            1      84
-R114    Writing                1      82
+C121    Logistics              1      82
 T37       Soldier-Cavalry1     1      101    0
 T75       Soldier-Inf3         3      2
 T83       Man                  2      109       0
@@ -74,7 +74,8 @@ R22     Astrology              1      104
 T83       Man                  2      109       0
 U125      Priest               2      104
 T75       Soldier-Inf3         3      2
-C121    Logistics              1      82
+R81     Domestication          1      84
+R114    Writing                1      82
 // 28 villager, 2 cavalry, 12 swordsmen, 6 priest
 
 
@@ -92,10 +93,10 @@ U125      Priest               4      104
 B79       Watch_Tower          4      -1
 
 C66     Long_Sword             1      12
+C20     Fanaticism             1      104
 C15     Guard_Tower            1      68
 R110    Craftmanship           1      84
 C106    Ballistics             1      82
-C20     Fanaticism             1      104
 R52     Metallurgy             1      103
 B70       House                5      -1
 U125      Priest               2      104
@@ -113,22 +114,23 @@ B79       Watch_Tower          4      -1
 // 24 legion, 12 priest, 20 tower
 // spent: 5000 wood, 10000 food, 5000 gold, 3100 stone
 
-
-U75       Soldier-Inf3         8      12
+B109      Town_Center1         2      -1
 B50       Farm                 8      -1
-R19     Monotheism             1      104
-R111    Siegecraft             1      84
 U75       Soldier-Inf3         8      12
 T125      Priest               4      104       2
 T11       Soldier-Balista      2      49        2
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          4      -1
+R111    Siegecraft             1      84
+R19     Monotheism             1      104
+B50       Farm                 8      -1
 U75       Soldier-Inf3         8      12
 B70       House                5      -1
 T125      Priest               4      104       2
-// 48 legion, 20 priest, 24 tower
+U75       Soldier-Inf3         8      12
+B79       Watch_Tower          4      -1
+// 48 legion, 20 priest, 28 tower
 
-B50       Farm                 8      -1
 R119    Medicine               1      104
 T11       Soldier-Balista      3      49        2
 U75       Soldier-Inf3         12     12
@@ -141,7 +143,7 @@ B79       Watch_Tower          4      -1
 T11       Soldier-Balista      3      49        0
 // 72 legion, 32 tower
 C2      Ballista_Tower         1      68
-B79       Watch_Tower          8      -1
+B79       Watch_Tower          4      -1
 
 U75       Soldier-Inf3         12     12
 T125      Priest               4      104       2
