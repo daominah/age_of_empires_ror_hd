@@ -17,16 +17,16 @@ U83       Man                  2      109
 B87       Range1               1      -1
 B101      Stable1              1      -1
 R16     Watch_Tower            1      68
+// T299      Soldier-Scout        1      101       1
+T4        Soldier-Archer1      1      87        4
 // pop 20/24
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-T4        Soldier-Archer1      1      87        4
-B87       Range1               2      -1
-C41     Leather_Armor_-_Archer 1      103
 // R46     Toolworking            1      103
-// T299      Soldier-Scout        1      101       1
+C41     Leather_Armor_-_Archer 1      103
+B87       Range1               2      -1
 // B101      Stable1              2      -1
 
 B79       Watch_Tower          4      -1
@@ -127,10 +127,20 @@ T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          4      -1
 R2      Ballista_Tower         1      68
+
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
+T39       Soldier-Cavalry3_Arc 12      87        1
+
+U35       Soldier-Catapult1    8      49
+T39       Soldier-Cavalry3_Arc 12      87        1
+U35       Soldier-Catapult1    8      49
+T39       Soldier-Cavalry3_Arc 12      87        1
+U35       Soldier-Catapult1    8      49
+T39       Soldier-Cavalry3_Arc 12      87        1
+U35       Soldier-Catapult1    8      49
 
 
 // B276      Wonder               1      -1
@@ -146,25 +156,3 @@ B50       Farm                 24     -1
 // T25       Soldier-El_Archer    3      87        1
 // T25       Soldier-El_Archer    3      87        1
 // 24 elephant archer
-
-
-// consider maintain 48 scythe chariot in another build, here is just comments
-// B101      Stable1              1      -1
-// R126    Scythe_Chariot         1      101
-// R46     Toolworking            1      103
-// B101      Stable1              1      -1
-// R42     Leather_Armor_Mounted  1      103
-// U40       Soldier-Chariot1     2      101
-// R51     Metal_Working          1      103
-// B101      Stable1              2      -1
-// R45     Scale_Armor_-_Cavalry  1      103
-// B101      Stable1              2      -1
-// R52     Metallurgy             1      103
-// U40       Soldier-Chariot1     6      101
-// B101      Stable1              2      -1
-// R50     Chain_Mail_-_Cavalry   1      103
-// U40       Soldier-Chariot1     8      101
-// U40       Soldier-Chariot1     8      101
-// U40       Soldier-Chariot1     8      101
-// U40       Soldier-Chariot1     8      101
-// U40       Soldier-Chariot1     8      101
