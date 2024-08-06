@@ -49,10 +49,6 @@ B50       Farm                 4      -1
 // 32 villager, 8 farm, 6 tower, pop 29/48
 
 
-// ended of shared build section for almost all civilization,
-// start civilization specific build from here:
-
-
 U41       Soldier-Chariot2     2      87
 B87       Range1               3      -1
 R41     Leather_Armor_-_Archer 1      103
@@ -151,4 +147,4 @@ B79       Watch_Tower          6      -1
 
 B50       Farm                 10     -1
 B50       Farm                 10     -1
-B276      Wonder               1      -1
+// B276      Wonder               1      -1

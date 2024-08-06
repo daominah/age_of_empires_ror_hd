@@ -74,7 +74,7 @@ R16     Watch_Tower            6      68
 R30	Coinage                1      84
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B87       Range1               1      -1
 U41       Soldier-Chariot2     2      87

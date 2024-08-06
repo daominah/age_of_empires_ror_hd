@@ -51,10 +51,6 @@ B50       Farm                 4      -1
 // 28 villager, 8 farm, 6 tower, pop 29/48
 
 
-// ended of shared build section for almost all civilization,
-// start civilization specific build from here:
-
-
 T338      Soldier-Camel        2      101       0
 B101      Stable1              1      -1
 R42     Leather_Armor_Mounted  1      103
@@ -154,4 +150,4 @@ B50       Farm                 2      -1
 
 
 B50       Farm                 10     -1
-B276      Wonder               1      -1
+// B276      Wonder               1      -1

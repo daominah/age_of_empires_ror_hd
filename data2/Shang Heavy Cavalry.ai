@@ -69,7 +69,7 @@ R15     Guard_Tower            1      68
 U37       Soldier-Cavalry1     1      101
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 U125      Priest               1      104
 U11       Soldier-Ballista     2      49

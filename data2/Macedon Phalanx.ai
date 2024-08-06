@@ -76,7 +76,7 @@ R52     Metallurgy             1      103
 R79     Centurion              1      0
 R122    Tower_Shield           1      103
 B79       Watch_Tower          4      -1
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 B109      Town_Center1         1      -1
 
 B0        Academy              1      -1

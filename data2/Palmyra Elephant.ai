@@ -65,7 +65,7 @@ R117    Iron_Shield            1      103
 R125    Armored-Elephant       1      101
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 R30	Coinage                1      84
 U338      Soldier-Camel        4      101

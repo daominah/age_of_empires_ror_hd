@@ -72,7 +72,7 @@ B79       Watch_Tower          6      -1
 R2      Catapult_Tower         1      68
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B0        Academy              1      -1
 U93       Soldier-Phal1        12     0
