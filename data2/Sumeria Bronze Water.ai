@@ -67,7 +67,7 @@ R30	Coinage                1      84
 R51     Metal_Working          1      103
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B45       Dock_1               1      -1
 U360      Fire-Galley          6      45

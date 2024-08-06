@@ -67,7 +67,7 @@ U360      Fire-Galley          4      45
 R2      Ballista_Tower         1      68
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B45       Dock_1               1      -1
 U360      Fire-Galley          6      45

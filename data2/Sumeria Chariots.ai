@@ -69,7 +69,7 @@ R49     Chain_Mail_-_Archers   1      103
 R126    Scythe_Chariot         1      101
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 U40       Soldier-Chariot1     2      101
 B87       Range1               1      -1

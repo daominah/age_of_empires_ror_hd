@@ -58,7 +58,7 @@ R15     Guard_Tower            1      68
 U39       Soldier-Cavalry3_Arc 8      87
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B87       Range1               1      -1
 U5        Soldier-Archer2      12     87

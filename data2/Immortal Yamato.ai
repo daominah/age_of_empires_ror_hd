@@ -63,7 +63,7 @@ R40     Leather_Armor_-_Soldie 1      103
 R43     Scale_Armor_-_Soldiers 1      103
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B0        Academy              1      -1
 U93       Soldier-Phal1        12      0

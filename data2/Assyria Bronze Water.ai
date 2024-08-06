@@ -78,7 +78,7 @@ R15     Guard_Tower            1      68
 U19       Boat-War1            4      45
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B45       Dock_1               1      -1
 U360      Fire-Galley          6      45

@@ -90,7 +90,7 @@ R77     Legion                 1      12
 B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 B45       Dock_1               1      -1
 U360      Fire-Galley          6      45

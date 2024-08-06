@@ -57,7 +57,7 @@ R78     Cataphracts            1      101
 R15     Guard_Tower            1      68
 B109      Town_Center1         1      -1
 
-B276      Wonder               1      -1
+// B276      Wonder               1      -1
 
 U125      Priest               1      104
 U35       Soldier-Catapult1    2      49
