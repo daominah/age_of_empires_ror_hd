@@ -104,8 +104,6 @@ U125      Priest               2      104
 T11       Soldier-Balista      2      49        2
 U75       Soldier-Inf3         6      12
 
-B109      Town_Center1         2      -1
-B50       Farm                 8      -1
 B70       House                5      -1
 B79       Watch_Tower          4      -1
 R30     Coinage                1      84
@@ -117,12 +115,15 @@ B79       Watch_Tower          4      -1
 // 24 legion, 12 priest, 20 tower
 // spent: 5000 wood, 10000 food, 5000 gold, 3100 stone
 
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
 U75       Soldier-Inf3         8      12
 T125      Priest               4      104       2
 T11       Soldier-Balista      2      49        2
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          4      -1
 
+B109      Town_Center1         1      -1
 R111    Siegecraft             1      84
 R19     Monotheism             1      104
 B50       Farm                 8      -1
