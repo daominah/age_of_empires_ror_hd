@@ -91,8 +91,6 @@ R110    Craftmanship           1      84
 U39       Soldier-Cavalry3_Arc 4      87
 U35       Soldier-Catapult1    3      49
 
-B109      Town_Center1         2      -1
-B50       Farm                 8      -1
 B70       House                5      -1
 B79       Watch_Tower          4      -1
 R30     Coinage                1      84
@@ -111,11 +109,14 @@ B79       Watch_Tower          4      -1
 // 24 heavy horse archer, 18 catapult, 20 tower, pop 91/132
 // spent: 10000 wood, 10600 food, 6200 gold, 3100 stone
 
-B79       Watch_Tower          4      -1
+B109      Town_Center1         1      -1
 C111    Siegecraft             1      84
 B50       Farm                 8      -1
-U35       Soldier-Catapult1    2      49
+B79       Watch_Tower          4      -1
 
+U35       Soldier-Catapult1    2      49
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
 C36     Massive_Catapult       1      49
 
 B70       House                5      -1

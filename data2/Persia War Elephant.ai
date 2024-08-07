@@ -94,8 +94,6 @@ U35       Soldier-Catapult1    3      49
 U46       Soldier-Elephant     3      101
 U125      Priest               2      104
 
-B109      Town_Center1         2      -1
-B50       Farm                 8      -1
 B70       House                5      -1
 B79       Watch_Tower          4      -1
 C117    Iron_Shield            1      103
@@ -109,7 +107,7 @@ B70       House                5      -1
 B79       Watch_Tower          4      -1
 U125      Priest               2      104
 C125    Armored Elephants      1      101
-R19     Monotheism             1      104
+R119    Medicine               1      104
 U46       Soldier-Elephant     3      101
 U35       Soldier-Catapult1    4      49
 U46       Soldier-Elephant     3      101
@@ -117,12 +115,15 @@ U125      Priest               3      104
 // 18 war elephant, 14 catapult, pop 82/132
 // spent: 8300 wood, 10700 food, 8800 gold, 3100 stone
 
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
 U46       Soldier-Elephant     3      101
 U35       Soldier-Catapult1    4      49
 U46       Soldier-Elephant     3      101
 B79       Watch_Tower          4      -1
 
-R119    Medicine               1      104
+B109      Town_Center1         1      -1
+R19     Monotheism             1      104
 // R15     Guard_Tower            1      68
 B50       Farm                 8      -1
 U46       Soldier-Elephant     3      101
