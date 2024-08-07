@@ -42,7 +42,7 @@ R32     Artisanship            1      84
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 // 24 villager, pop 25/48, 3 archery range
-// spent: 2500 wood, 3400 food, 50 gold
+// spent bronze: 2500 wood, 3400 food
 
 
 // T37       Soldier-Cavalry1     2      101       0
@@ -52,7 +52,7 @@ T125      Priest               1      104       0
 
 
 R108    Gold_Mining            1      84
-R34       Nobility  	       1      82
+R34     Nobility               1      82
 T41       Soldier-Chariot2     3      87        2
 T83       Man                  2      109       0
 C109    Stone_Mining           1      84
@@ -77,7 +77,7 @@ B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-// spent:  5400 wood, 6100 food, 1900 gold
+// spent iron:  5400 wood, 6100 food, 1900 gold
 
 B87       Range1               3      -1
 U35       Soldier-Catapult1    2      49
@@ -99,6 +99,8 @@ C38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    3      49
 U39       Soldier-Cavalry3_Arc 5      87
+
+B70       House                5      -1
 R35     Engineering            1      82
 U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    4      49
@@ -107,7 +109,7 @@ U35       Soldier-Catapult1    4      49
 U39       Soldier-Cavalry3_Arc 5      87
 B79       Watch_Tower          4      -1
 // 24 heavy horse archer, 18 catapult, 20 tower, pop 91/132
-// spent: 10000 wood, 10600 food, 6200 gold, 3100 stone
+// spent army: 10000 wood, 10600 food, 6200 gold, 3100 stone
 
 B109      Town_Center1         1      -1
 C111    Siegecraft             1      84
@@ -124,6 +126,8 @@ T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 R15     Guard_Tower            1      68
 B79       Watch_Tower          4      -1
+
+B70       House                5      -1
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          4      -1
