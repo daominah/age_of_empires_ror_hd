@@ -1,6 +1,6 @@
 // Phoenician Elephant
 // Bronze Age: 12 chariot archer, 6 priest
-// Iron Age:  elephant archer,  chariot archer, 18 priest
+// Iron Age: 24 elephant archer, 30 chariot archer, 18 priest
 
 
 B70       House                2      -1
@@ -39,10 +39,10 @@ B82       Government_Center    1      -1
 B104      Temple1              3      -1
 T83       Man                  2      109       0
 R32     Artisanship            1      84
-R112    Architecture           1      82
+// R112    Architecture           1      82
 B109      Town_Center1         1      -1
 // 24 villager, pop 25/48, 3 archery range, 3 temple
-// spent: 2900 wood, 3400 food, 50 gold
+// spent bronze: 2700 wood, 3300 food
 
 
 U125      Priest               2      104       0
@@ -65,7 +65,7 @@ T83       Man                  2      109       0
 U125      Priest               2      104
 R81     Domestication          1      84
 R114    Writing                1      82
-// 28 villager, 12 chariot archer, 6 stone thrower
+// 28 villager, 12 chariot archer, 6 priest, pop 44/68
 
 
 C103    Iron_Age               1      109
@@ -73,7 +73,7 @@ B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-// spent:  wood,  food,  gold
+// spent iron: 4600 wood, 5700 food, 2200 gold
 
 B87       Range1               3      -1
 U125      Priest               3      104
@@ -86,53 +86,54 @@ U25       Soldier-El_Archer    6      87
 U125      Priest               2      104
 
 B70       House                5      -1
-B79       Watch_Tower          4      -1
+B87       Range1               6      -1
 R30     Coinage                1      84
 R106    Ballistics             1      82
 C20     Fanaticism             1      104
 U25       Soldier-El_Archer    6      87
 U125      Priest               2      104
 
+R15     Guard_Tower            1      68
 B70       House                5      -1
+B79       Watch_Tower          4      -1
+U41       Soldier-Chariot2     6      87
 U125      Priest               2      104
 U25       Soldier-El_Archer    6      87
 U125      Priest               3      104
-B79       Watch_Tower          4      -1
-// x elephant archer, pop x/x
-// spent:  wood,  food,  gold,  stone
-
-T83       Man                  4      109       0
-B109      Town_Center1         1      -1
-B50       Farm                 8      -1
-B79       Watch_Tower          4      -1
-
-T83       Man                  4      109       0
-B109      Town_Center1         1      -1
-B87       Range1               3      -1
-B50       Farm                 8      -1
-B79       Watch_Tower          4      -1
-
-B109      Town_Center1         1      -1
-B87       Range1               3      -1
-B50       Farm                 8      -1
-B79       Watch_Tower          4      -1
-
-B109      Town_Center1         1      -1
-B50       Farm                 8      -1
-B79       Watch_Tower          4      -1
 
 B70       House                5      -1
-R15     Guard_Tower            1      68
+B79       Watch_Tower          4      -1
+U41       Soldier-Chariot2     12      87
+
+// 24 elephant archer, 30 chariot archer, pop 102/136
+// spent army: 8000 wood, 10900 food, 6000 gold, 3200 stone
+
+T83       Man                  4      109       0
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
+B79       Watch_Tower          4      -1
+
+T83       Man                  4      109       0
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
+
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
+
+B109      Town_Center1         1      -1
+B50       Farm                 8      -1
+
+B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
-B79       Watch_Tower          4      -1
 
 B70       House                5      -1
+U41       Soldier-Chariot2     6      87
+U25       Soldier-El_Archer    6      87
+U41       Soldier-Chariot2     6      87
+
 R2      Ballista_Tower         1      68
-U41       Soldier-Chariot2     6      87
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
 
 B70       House                5      -1
 U41       Soldier-Chariot2     6      87
