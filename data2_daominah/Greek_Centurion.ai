@@ -1,5 +1,5 @@
 // Greek Centurion
-// Bronze Age: 2 cavalry, 16 hoplite, 6 priest
+// Bronze Age: 2 cavalry, 12 hoplite, 6 priest
 // Iron Age: 24 centurion, 16 priest
 
 
@@ -66,10 +66,9 @@ R43     Scale_Armor_-_Soldiers 1      103
 R22     Astrology              1      104
 T83       Man                  2      109       0
 U125      Priest               2      104
-U93       Soldier-Phal1        4      0
 R81     Domestication          1      84
 R114    Writing                1      82
-// 28 villager, 2 cavalry, 16 hoplite, 6 priest
+// 28 villager, 2 cavalry, 12 hoplite, 6 priest
 
 
 C103    Iron_Age               1      109
@@ -105,20 +104,20 @@ R122    Tower_Shield           1      103
 T125      Priest               3      104       0
 U93       Soldier-Phal1        4      0
 B79       Watch_Tower          4      -1
-// 28 centurion, 14 priest
+// 24 centurion, 14 priest
 // spent army:  wood,  food,  gold,  stone
 
 B109      Town_Center1         1      -1
-B70       House                5      -1
 B50       Farm                 8      -1
-U93       Soldier-Phal1        4      0
 T125      Priest               2      104       2
+B50       Farm                 8      -1
+B70       House                5      -1
+U93       Soldier-Phal1        4      0
 U93       Soldier-Phal1        4      0
 B79       Watch_Tower          4      -1
 
 B109      Town_Center1         1      -1
 B70       House                5      -1
-B50       Farm                 8      -1
 U93       Soldier-Phal1        4      0
 R15     Guard_Tower            1      68
 R106    Ballistics             1      82
