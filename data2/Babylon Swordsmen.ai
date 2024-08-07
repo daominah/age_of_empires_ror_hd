@@ -11,10 +11,18 @@ U299      Soldier-Scout        10      101
 B101      Stable1              9      -1
 U299      Soldier-Scout        10      101
 
+C102    Bronze_Age             1      109
+B103      Storage_Pit1         4      -1
+
+
 B70       House                5      -1
+B103      Storage_Pit1         4      -1
 B101      Stable1              9      -1
+B103      Storage_Pit1         4      -1
 U299      Soldier-Scout        10      101
+B103      Storage_Pit1         4      -1
 B101      Stable1              9      -1
+B103      Storage_Pit1         4      -1
 U299      Soldier-Scout        10      101
 
 B70       House                5      -1
