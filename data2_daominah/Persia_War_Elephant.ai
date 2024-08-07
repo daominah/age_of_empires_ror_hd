@@ -104,7 +104,6 @@ U46       Soldier-Elephant     3      101
 U125      Priest               2      104
 
 B70       House                5      -1
-B79       Watch_Tower          4      -1
 U125      Priest               2      104
 C125    Armored Elephants      1      101
 R119    Medicine               1      104
@@ -112,6 +111,7 @@ U46       Soldier-Elephant     3      101
 U35       Soldier-Catapult1    4      49
 U46       Soldier-Elephant     3      101
 U125      Priest               3      104
+B79       Watch_Tower          4      -1
 // 18 war elephant, 14 catapult, pop 82/132
 // spent: 8300 wood, 10700 food, 8800 gold, 3100 stone
 

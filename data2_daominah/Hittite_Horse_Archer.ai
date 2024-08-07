@@ -52,7 +52,7 @@ T125      Priest               1      104       0
 
 
 R108    Gold_Mining            1      84
-R34       Nobility  	       1      82
+R34     Nobility               1      82
 T41       Soldier-Chariot2     3      87        2
 T83       Man                  2      109       0
 C109    Stone_Mining           1      84
@@ -99,6 +99,8 @@ C38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    3      49
 U39       Soldier-Cavalry3_Arc 5      87
+
+B70       House                5      -1
 R35     Engineering            1      82
 U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    4      49
@@ -124,6 +126,8 @@ T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 R15     Guard_Tower            1      68
 B79       Watch_Tower          4      -1
+
+B70       House                5      -1
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          4      -1
