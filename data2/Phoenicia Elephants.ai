@@ -80,6 +80,8 @@ B87       Range1               3      -1
 U125      Priest               3      104
 B79       Watch_Tower          4      -1
 
+// R54     Heavy_Catapult         1      49
+// R49     Chain_Mail_-_Archers   1      103
 R37     Alchemy                1      82
 R110    Craftmanship           1      84
 R18     Afterlife              1      104
@@ -95,19 +97,21 @@ U25       Soldier-El_Archer    6      87
 U125      Priest               2      104
 
 R15     Guard_Tower            1      68
+R119    Medicine               1      104
 B70       House                5      -1
 B79       Watch_Tower          4      -1
 U41       Soldier-Chariot2     6      87
 U125      Priest               2      104
 U25       Soldier-El_Archer    6      87
-U125      Priest               3      104
 
+R19     Monotheism             1      104
 B70       House                5      -1
 B79       Watch_Tower          4      -1
 U41       Soldier-Chariot2     12      87
+U125      Priest               3      104
 
 // 24 elephant archer, 30 chariot archer, pop 102/136
-// spent army: 8000 wood, 10900 food, 6000 gold, 3200 stone
+// spent army: 8000 wood, 10900 food, 6500 gold, 3200 stone
 
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1

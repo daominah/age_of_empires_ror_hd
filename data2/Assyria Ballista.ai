@@ -102,18 +102,20 @@ B79       Watch_Tower          4      -1
 
 C27     Helepolis              1      49
 R15     Guard_Tower            1      68
+R19     Monotheism             1      104
 B79       Watch_Tower          4      -1
 U39       Soldier-Cavalry3_Arc 4      87
 U11       Soldier-Balista      5      49
 U125      Priest               1      104
 
+R119    Medicine               1      104
 B79       Watch_Tower          4      -1
 U39       Soldier-Cavalry3_Arc 4      87
 U11       Soldier-Balista      5      49
 U125      Priest               2      104
 
 // 20 helepolis, 20 horse archer, 10 priest, pop 107/132
-// spent army: 11000 wood, 9700 food, 7400 gold, 2500 stone
+// spent army: 11000 wood, 9700 food, 7900 gold, 2500 stone
 
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
