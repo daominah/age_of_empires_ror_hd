@@ -11,10 +11,20 @@ Choson_Swordmen
 	- Choson Priests.ai
 	- Choson Swordsmen.ai
 
+Greek_Centurion:
+	- Greek Phalanx.ai
+	- Greek Priests.ai
+	- Greek Siege.ai
+
 Hittite_Horse_Archer:
 	- Hittite Bowmen.ai
 	- Hittite Elephant.ai
 	- Hittite Horse Archers.ai
+
+Macedon_Centurion:
+	- Macedon Cavalry.ai
+	- Macedon Elephant.ai
+	- Macedon Phalanx.ai
 
 Persia_War_Elephant:
 	- Persia Elephant Archers.ai
@@ -25,4 +35,5 @@ Phoenicia_Elephants.ai:
 	- Phoenicia Elephants.ai
 
 Yamato_Cavalry:
-	-
+	- Immortal Yamato.ai
+	- Yamato Heavy Cavalry.ai
