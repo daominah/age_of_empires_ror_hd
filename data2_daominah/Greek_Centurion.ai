@@ -40,10 +40,10 @@ R112    Architecture           1      82
 B109      Town_Center1         1      -1
 R47     Bronze_Shield          1      103
 // 24 villager, pop 25/48, 3 academy, 3 temple
-// spent bronze:  wood,  food
+// spent bronze: 3400 wood, 3700 food
 
 
-T37       Soldier-Cavalry1     1      101    0
+T37       Soldier-Cavalry1     1      101       0
 U93       Soldier-Phal1        4      0
 U125      Priest               2      104       0
 R21     Mysticism              1      104
@@ -51,24 +51,24 @@ B79       Watch_Tower          4      -1
 
 R108    Gold_Mining            1      84
 R40     Leather_Armor_-_Soldie 1      103
-T37       Soldier-Cavalry1     1      101    0
+T37       Soldier-Cavalry1     1      101       0
 U93       Soldier-Phal1        4      0
 T83       Man                  2      109       0
 // R109    Stone_Mining           1      84
 
+B70       House                5      -1
 R24     Polytheism             1      104
 U125      Priest               2      104
 B79       Watch_Tower          4      -1
 U93       Soldier-Phal1        4      0
 
-B70       House                5      -1
 R43     Scale_Armor_-_Soldiers 1      103
 R22     Astrology              1      104
 T83       Man                  2      109       0
 U125      Priest               2      104
 R81     Domestication          1      84
 R114    Writing                1      82
-// 28 villager, 2 cavalry, 12 hoplite, 6 priest
+// 28 villager, 2 cavalry, 12 hoplite, 6 priest, pop 49/68
 
 
 C103    Iron_Age               1      109
@@ -76,7 +76,7 @@ B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-// spent iron:  wood,  food,  gold
+// spent iron: 4700 wood, 6700 food, 3000 gold
 
 U93       Soldier-Phal1        4      0
 B0        Academy              4      -1
@@ -95,7 +95,6 @@ R20     Fanaticism             1      104
 T125      Priest               2      104       0
 U93       Soldier-Phal1        4      0
 
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 // R52     Metallurgy             1      103
 R30     Coinage                1      84
@@ -105,7 +104,7 @@ T125      Priest               3      104       0
 U93       Soldier-Phal1        4      0
 B79       Watch_Tower          4      -1
 // 24 centurion, 14 priest
-// spent army:  wood,  food,  gold,  stone
+// spent army: 5800 wood, 10700 food, 6800 gold, 3100 stone, pop 73/112
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -123,7 +122,6 @@ R15     Guard_Tower            1      68
 R106    Ballistics             1      82
 U93       Soldier-Phal1        4      0
 B79       Watch_Tower          4      -1
-// 48 centurion
 
 B70       House                5      -1
 B50       Farm                 8      -1
