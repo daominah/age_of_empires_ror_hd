@@ -43,7 +43,7 @@ B109      Town_Center1         1      -1
 
 
 U37       Soldier-Cavalry1     4      101
-T125      Priest               1      104       2
+T125      Priest               1      104       1
 
 R42     Leather_Armor_Mounted  1      103
 R34     Nobility               1      82
@@ -53,7 +53,7 @@ T83       Man                  2      109       0
 
 R45     Scale_Armor_-_Cavalry  1      103
 U37       Soldier-Cavalry1     4      101
-T125      Priest               1      104       2
+T125      Priest               1      104       1
 B101      Stable1              2      -1
 
 B70       House                5      -1
@@ -65,7 +65,7 @@ B101      Stable1              2      -1
 R81     Domestication          1      84
 R114    Writing                1      82
 U37       Soldier-Cavalry1     6      101
-T125      Priest               1      104       2
+T125      Priest               1      104       1
 // 28 villager, 24 cavalry, 3 priest
 
 
@@ -87,7 +87,7 @@ R50     Chain_Mail_-_Cavalry   1      103
 B70       House                5      -1
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 1      87
-T125      Priest               1      104       2
+T125      Priest               1      104       1
 
 C78     Cataphracts            1      101
 U37       Soldier-Cavalry1     6      101
@@ -101,7 +101,7 @@ B70       House                5      -1
 B50       Farm                 8      -1
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 1      87
-T125      Priest               1      104       2
+T125      Priest               2      104       0
 U37       Soldier-Cavalry1     8      101
 T83       Man                  4      109       0
 U39       Soldier-Cavalry3_Arc 1      87
@@ -111,6 +111,7 @@ B70       House                5      -1
 T83       Man                  4      109       0
 U37       Soldier-Cavalry1     8      101
 U39       Soldier-Cavalry3_Arc 1      87
+T125      Priest               2      104       0
 B50       Farm                 8      -1
 B70       House                5      -1
 U37       Soldier-Cavalry1     8      101

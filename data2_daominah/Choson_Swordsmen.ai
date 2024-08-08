@@ -50,7 +50,7 @@ R47     Bronze_Shield          1      103
 // spent bronze: 2800 wood, 4000 food (400 gold)
 
 
-T37       Soldier-Cavalry1     1      101    0
+T37       Soldier-Cavalry1     1      101       0
 T75       Soldier-Inf3         3      2
 U125      Priest               2      104       0
 R21     Mysticism              1      104
@@ -58,7 +58,7 @@ R21     Mysticism              1      104
 R108    Gold_Mining            1      84
 // R34     Nobility               1      82
 C121    Logistics              1      82
-T37       Soldier-Cavalry1     1      101    0
+T37       Soldier-Cavalry1     1      101       0
 T75       Soldier-Inf3         3      2
 T83       Man                  2      109       0
 R109    Stone_Mining           1      84
@@ -114,6 +114,7 @@ T11       Soldier-Balista      2      49        2
 B79       Watch_Tower          4      -1
 // 24 legion, 12 priest, 20 tower
 // spent army: 5000 wood, 10000 food, 5000 gold, 3100 stone
+// (easy to make more 24 legion, only cost 840 food + 360 gold)
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -155,12 +156,6 @@ U75       Soldier-Inf3         12     12
 B79       Watch_Tower          4      -1
 R27     Helepolis              1      49
 
-B70       House                5      -1
-U75       Soldier-Inf3         24      12
-U75       Soldier-Inf3         24      12
-B70       House                5      -1
-U75       Soldier-Inf3         24      12
-U75       Soldier-Inf3         24      12
 B70       House                5      -1
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
