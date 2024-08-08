@@ -119,34 +119,32 @@ U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 B50       Farm                 8      -1
 
-
-B70       House                8      -1
-U93       Soldier-Phal1        8      0
-U11       Soldier-Balista      8      49
-U93       Soldier-Phal1        8      0
-U93       Soldier-Phal1        8      0
-
-B70       House                8      -1
-U93       Soldier-Phal1        8      0
-U11       Soldier-Balista      8      49
-U93       Soldier-Phal1        8      0
-U93       Soldier-Phal1        8      0
-
-B70       House                8      -1
-U93       Soldier-Phal1        8      0
-U11       Soldier-Balista      8      49
-U93       Soldier-Phal1        8      0
-U93       Soldier-Phal1        8      0
-
-B70       House                8      -1
-U93       Soldier-Phal1        8      0
-U11       Soldier-Balista      8      49
-U93       Soldier-Phal1        8      0
-U93       Soldier-Phal1        8      0
-
-
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          4      -1
+
+B70       House                8      -1
+U93       Soldier-Phal1        8      0
+U11       Soldier-Balista      8      49
+U93       Soldier-Phal1        8      0
+U93       Soldier-Phal1        8      0
+
+B70       House                8      -1
+U93       Soldier-Phal1        8      0
+U11       Soldier-Balista      8      49
+U93       Soldier-Phal1        8      0
+U93       Soldier-Phal1        8      0
+
+B70       House                8      -1
+U93       Soldier-Phal1        8      0
+U11       Soldier-Balista      8      49
+U93       Soldier-Phal1        8      0
+U93       Soldier-Phal1        8      0
+
+B70       House                8      -1
+U93       Soldier-Phal1        8      0
+U11       Soldier-Balista      8      49
+U93       Soldier-Phal1        8      0
+U93       Soldier-Phal1        8      0
 
 
 // B276      Wonder               1      -1
