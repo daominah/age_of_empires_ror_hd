@@ -3,11 +3,8 @@
 // Iron Age: 24 elephant archer, 30 chariot archer, 18 priest
 
 
-B70       House                2      -1
-U83       Man                  10      109
 B109      Town_Center1         1      -1
-B70       House                3      -1
-U83       Man                  8      109
+U83       Man                  16      109
 B12       Barracks1            1      -1
 
 
@@ -33,7 +30,6 @@ B79       Watch_Tower          4      -1
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 C44     Scale_Armor_-_Archers  1      103
-B70       House                5      -1
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              3      -1
@@ -59,7 +55,6 @@ U125      Priest               2      104
 B79       Watch_Tower          4      -1
 T41       Soldier-Chariot2     3      87        2
 
-B70       House                5      -1
 R22     Astrology              1      104
 T83       Man                  2      109       0
 U125      Priest               2      104
@@ -70,7 +65,6 @@ R114    Writing                1      82
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -88,7 +82,6 @@ R18     Afterlife              1      104
 U25       Soldier-El_Archer    6      87
 U125      Priest               2      104
 
-B70       House                5      -1
 B87       Range1               6      -1
 R30     Coinage                1      84
 R106    Ballistics             1      82
@@ -98,14 +91,12 @@ U125      Priest               2      104
 
 R15     Guard_Tower            1      68
 R119    Medicine               1      104
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 U41       Soldier-Chariot2     6      87
 U125      Priest               2      104
 U25       Soldier-El_Archer    6      87
 
 R19     Monotheism             1      104
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 U41       Soldier-Chariot2     12      87
 U125      Priest               3      104
@@ -128,31 +119,25 @@ B50       Farm                 8      -1
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
 
-B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
 
-B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
 
 R2      Ballista_Tower         1      68
 
-B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
-B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
-B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
-B70       House                5      -1
 U41       Soldier-Chariot2     6      87
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87

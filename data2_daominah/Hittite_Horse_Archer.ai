@@ -3,11 +3,8 @@
 // Iron Age: 24 heavy horse archer, 18 catapult
 
 
-B70       House                2      -1
-U83       Man                  10      109
 B109      Town_Center1         1      -1
-B70       House                3      -1
-U83       Man                  8      109
+U83       Man                  16      109
 B12       Barracks1            1      -1
 
 
@@ -33,7 +30,6 @@ B79       Watch_Tower          4      -1
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 C44     Scale_Armor_-_Archers  1      103
-B70       House                5      -1
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              1      -1
@@ -61,7 +57,6 @@ B49       Siege_Workshop       2      -1
 B79       Watch_Tower          4      -1
 T41       Soldier-Chariot2     3      87        2
 
-B70       House                5      -1
 R22     Astrology              1      104
 T83       Man                  2      109       0
 T125      Priest               1      104       0
@@ -73,7 +68,6 @@ R114    Writing                1      82
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -91,7 +85,6 @@ R110    Craftmanship           1      84
 U39       Soldier-Cavalry3_Arc 4      87
 U35       Soldier-Catapult1    3      49
 
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 R30     Coinage                1      84
 R106    Ballistics             1      82
@@ -100,11 +93,9 @@ U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    3      49
 U39       Soldier-Cavalry3_Arc 5      87
 
-B70       House                5      -1
 R35     Engineering            1      82
 U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    4      49
-B70       House                5      -1
 U35       Soldier-Catapult1    4      49
 U39       Soldier-Cavalry3_Arc 5      87
 B79       Watch_Tower          4      -1
@@ -121,13 +112,11 @@ B109      Town_Center1         1      -1
 B50       Farm                 8      -1
 C36     Massive_Catapult       1      49
 
-B70       House                5      -1
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 R15     Guard_Tower            1      68
 B79       Watch_Tower          4      -1
 
-B70       House                5      -1
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          4      -1

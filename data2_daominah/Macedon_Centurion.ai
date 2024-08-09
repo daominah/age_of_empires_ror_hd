@@ -1,13 +1,10 @@
 // Macedonian Centurion
-// Bronze Age: 2 cavalry, 12 hoplite, 6 priest
-// Iron Age: 24 centurion, 16 priest
+// Bronze Age: 2 cavalry, 12 hoplite
+// Iron Age: 24 centurion
 
 
-B70       House                2      -1
-U83       Man                  10      109
 B109      Town_Center1         1      -1
-B70       House                3      -1
-U83       Man                  8      109
+U83       Man                  16      109
 B12       Barracks1            1      -1
 
 
@@ -30,7 +27,6 @@ B0        Academy              4      -1
 // R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 R51     Metal_Working          1      103
-B70       House                5      -1
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B79       Watch_Tower          4      -1
@@ -54,7 +50,6 @@ U93       Soldier-Phal1        4      0
 B49       Siege_Workshop       4      -1
 T83       Man                  2      109       0
 
-B70       House                5      -1
 U93       Soldier-Phal1        4      0
 T35       Soldier-Catapult1    4      49        2
 B79       Watch_Tower          4      -1
@@ -69,7 +64,6 @@ R114    Writing                1      82
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
 // T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -85,7 +79,6 @@ C73     Phalanx                1      0
 R117    Iron_Shield            1      103
 U11       Soldier-Balista      4      49
 
-B70       House                5      -1
 R106    Ballistics             1      82
 R122    Tower_Shield           1      103
 U93       Soldier-Phal1        6      0
@@ -105,16 +98,13 @@ R52     Metallurgy             1      103
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-T125      Priest               2      104       2
 B50       Farm                 8      -1
-B70       House                5      -1
 U93       Soldier-Phal1        4      0
 U11       Soldier-Balista      8      49
 R15     Guard_Tower            1      68
 U93       Soldier-Phal1        4      0
 
 B109      Town_Center1         1      -1
-B70       House                5      -1
 U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 B50       Farm                 8      -1
@@ -122,25 +112,21 @@ B50       Farm                 8      -1
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          4      -1
 
-B70       House                8      -1
 U93       Soldier-Phal1        8      0
 U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
-B70       House                8      -1
 U93       Soldier-Phal1        8      0
 U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
-B70       House                8      -1
 U93       Soldier-Phal1        8      0
 U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
-B70       House                8      -1
 U93       Soldier-Phal1        8      0
 U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
