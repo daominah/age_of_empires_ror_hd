@@ -3,11 +3,8 @@
 // Iron Age: 60 legion, 36 priest, 18 ballista, 40 tower
 
 
-B70       House                2      -1
-U83       Man                  10      109
 B109      Town_Center1         1      -1
-B70       House                3      -1
-U83       Man                  8      109
+U83       Man                  16      109
 B12       Barracks1            1      -1
 
 
@@ -36,7 +33,6 @@ R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 C64     Short_Sword            1      12
 R51     Metal_Working          1      103
-B70       House                5      -1
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              3      -1
@@ -69,7 +65,6 @@ U125      Priest               2      104
 B79       Watch_Tower          4      -1
 T75       Soldier-Inf3         3      2
 
-B70       House                5      -1
 R43     Scale_Armor_-_Soldiers 1      103
 R22     Astrology              1      104
 T83       Man                  2      109       0
@@ -81,7 +76,6 @@ R114    Writing                1      82
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -99,12 +93,10 @@ C15     Guard_Tower            1      68
 R110    Craftmanship           1      84
 C106    Ballistics             1      82
 R52     Metallurgy             1      103
-B70       House                5      -1
 U125      Priest               2      104
 T11       Soldier-Balista      2      49        2
 U75       Soldier-Inf3         6      12
 
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 R30     Coinage                1      84
 R18     Afterlife              1      104
@@ -129,7 +121,6 @@ R111    Siegecraft             1      84
 R19     Monotheism             1      104
 B50       Farm                 8      -1
 U75       Soldier-Inf3         8      12
-B70       House                5      -1
 T125      Priest               4      104       2
 U75       Soldier-Inf3         8      12
 B79       Watch_Tower          4      -1
@@ -142,7 +133,6 @@ T125      Priest               4      104       2
 T11       Soldier-Balista      3      49        2
 U75       Soldier-Inf3         12     12
 T125      Priest               4      104       2
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 T11       Soldier-Balista      3      49        0
 // 72 legion, 32 tower
@@ -156,16 +146,12 @@ U75       Soldier-Inf3         12     12
 B79       Watch_Tower          4      -1
 R27     Helepolis              1      49
 
-B70       House                5      -1
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
-B70       House                5      -1
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
-B70       House                5      -1
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
-B70       House                5      -1
 U75       Soldier-Inf3         24      12
 U75       Soldier-Inf3         24      12
 

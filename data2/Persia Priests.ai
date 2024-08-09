@@ -3,11 +3,8 @@
 // Iron Age: 18 armored elephant, 24 catapult, 18 priest
 
 
-B70       House                2      -1
-U83       Man                  10      109
 B109      Town_Center1         1      -1
-B70       House                3      -1
-U83       Man                  8      109
+U83       Man                  16      109
 B12       Barracks1            1      -1
 
 
@@ -34,7 +31,6 @@ B79       Watch_Tower          4      -1
 R12     Sentry_Tower           1      68
 R42     Leather_Armor_Mounted  1      103
 // R51     Metal_Working          1      103
-B70       House                5      -1
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              3      -1
@@ -61,7 +57,6 @@ U125      Priest               2      104
 B49       Siege_Workshop       2      -1
 B79       Watch_Tower          4      -1
 
-B70       House                5      -1
 R22     Astrology              1      104
 T83       Man                  2      109       0
 U125      Priest               2      104
@@ -73,7 +68,6 @@ R114    Writing                1      82
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -94,7 +88,6 @@ U35       Soldier-Catapult1    3      49
 U46       Soldier-Elephant     3      101
 U125      Priest               2      104
 
-B70       House                5      -1
 B79       Watch_Tower          4      -1
 C117    Iron_Shield            1      103
 C20     Fanaticism             1      104
@@ -103,7 +96,6 @@ U35       Soldier-Catapult1    3      49
 U46       Soldier-Elephant     3      101
 U125      Priest               2      104
 
-B70       House                5      -1
 U125      Priest               2      104
 C125    Armored Elephants      1      101
 R119    Medicine               1      104
@@ -112,44 +104,60 @@ U35       Soldier-Catapult1    4      49
 U46       Soldier-Elephant     3      101
 U125      Priest               3      104
 B79       Watch_Tower          4      -1
-// 18 war elephant, 14 catapult, pop 82/132
+// 18 war elephant, 14 catapult, pop 82
 // spent army: 8300 wood, 10700 food, 8800 gold, 3100 stone
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
 U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    4      49
+U35       Soldier-Catapult1    2      49
 U46       Soldier-Elephant     3      101
 B79       Watch_Tower          4      -1
 
-B109      Town_Center1         1      -1
+T83       Man                  4      109       0
 R19     Monotheism             1      104
 // R15     Guard_Tower            1      68
 B50       Farm                 8      -1
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    4      49
-U46       Soldier-Elephant     3      101
-B70       House                5      -1
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    4      49
-U46       Soldier-Elephant     3      101
 
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
 
-B70       House                5      -1
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    4      49
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    4      49
-B70       House                5      -1
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    4      49
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    4      49
-B70       House                5      -1
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    4      49
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    4      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U35       Soldier-Catapult1    2      49
 
 
 // B276      Wonder               1      -1
