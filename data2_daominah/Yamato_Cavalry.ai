@@ -120,7 +120,6 @@ U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 
 R49     Chain_Mail_-_Archers   1      103
-B109      Town_Center1         1      -1
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 
@@ -128,8 +127,11 @@ U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 R38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 4      87
-// 72 cataphract, 24 heavy horse archer, 6 priest (pop 143)
-// spent full: 7500 wood, 16400 food, 10500 gold
+// 72 cataphract, 24 heavy horse archer (pop 143)
+// spent extras: 7500 wood, 16400 food, 10500 gold
+
+
+B109      Town_Center1         1      -1
 
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
