@@ -139,14 +139,10 @@ U35       Soldier-Catapult1    2      49
 
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          4      -1
+// x helepolis, x catapult (pop )
+// spent extras:  wood,  food,  gold
 
-U11       Soldier-Balista      8      49
-U35       Soldier-Catapult1    4      49
-U11       Soldier-Balista      8      49
-U35       Soldier-Catapult1    4      49
-U41       Soldier-Chariot2     4      87
-U11       Soldier-Balista      8      49
-U35       Soldier-Catapult1    4      49
+B109      Town_Center1         1      -1
 
 U11       Soldier-Balista      8      49
 U35       Soldier-Catapult1    4      49
