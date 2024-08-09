@@ -69,7 +69,6 @@ Units: 107 total
     50 Villager
 Buildings: 90 total
     5 Town Center
-    28 House
     1 Granary (auto build)
     1 Storage Pit (auto build)
     1 Barracks
