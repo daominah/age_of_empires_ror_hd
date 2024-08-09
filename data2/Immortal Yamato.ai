@@ -35,26 +35,28 @@ R51     Metal_Working          1      103
 U37       Soldier-Cavalry1     4      101
 // T338      Soldier-Camel        3      101       0
 B104      Temple1              1      -1
-T83       Man                  2      109       0
 U37       Soldier-Cavalry1     4      101
+T83       Man                  2      109       0
 
 // T41       Soldier-Chariot2     3      87        2
 U37       Soldier-Cavalry1     4      101
 // R32     Artisanship            1      84
 // R21     Mysticism              1      104
 T125      Priest               1      104       1
+T83       Man                  2      109       0
 
 R45     Scale_Armor_-_Cavalry  1      103
 R108    Gold_Mining            1      84
 B82       Government_Center    1      -1
-T83       Man                  2      109       0
 U37       Soldier-Cavalry1     4      101
 T125      Priest               1      104       1
+T83       Man                  2      109       0
 
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 U37       Soldier-Cavalry1     4      101
 T125      Priest               1      104       1
+T83       Man                  2      109       0
 
 R34     Nobility               1      82
 R24     Polytheism             1      104
@@ -64,9 +66,9 @@ B101      Stable1              4      -1
 // R81     Domestication          1      84
 R114    Writing                1      82
 
-// 28 villager, 24 cavalry, 3 priest (pop )
+// 28 villager, 24 cavalry, 3 priest (pop 56)
 // 8 stable, 1 archery range, 1 temple
-// spent bronze:  wood,  food, gold
+// spent bronze: 3400 wood, 5400 food, 2300 gold
 
 
 C103    Iron_Age               1      109
@@ -91,8 +93,8 @@ C78     Cataphracts            1      101
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 T125      Priest               1      104       1
-// 42 cataphract, 5 priest, 4 horse archer (pop )
-// spent army: 4500 wood, 10900 food, 6600 gold, 0 stone
+// 42 cataphract, 5 priest, 4 horse archer (pop 84)
+// spent army: 4500 wood, 10700 food, 6300 gold, 0 stone
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -103,7 +105,6 @@ T125      Priest               1      104       0
 T83       Man                  4      109       0
 B50       Farm                 4      -1
 B87       Range1               2      -1
-R110    Craftmanship           1      84
 R41     Leather_Armor_-_Archer 1      103
 R32     Artisanship            1      84
 R106    Ballistics             1      82
@@ -112,8 +113,9 @@ U37       Soldier-Cavalry1     6      101
 
 T83       Man                  4      109       0
 B50       Farm                 8      -1
-R37     Alchemy                1      82
 R44     Scale_Armor_-_Archers  1      103
+R110    Craftmanship           1      84
+R37     Alchemy                1      82
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 
@@ -126,8 +128,8 @@ U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 R38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 4      87
-// 72 cataphract, 24 horse archer
-
+// 72 cataphract, 24 heavy horse archer, 6 priest (pop 143)
+// spent full: 7500 wood, 16400 food, 10500 gold
 
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101

@@ -1,6 +1,6 @@
 // Assyrian Helepolis (missing Engineering, bad Iron Age civilization)
 // Bronze Age: 20 chariot archer, 8 priest, 3 stone thrower
-// Iron Age:  helepolis,  catapult, horse archer, 18 priest
+// Iron Age: 20 helepolis, 20 horse archer, 18 priest
 
 
 B109      Town_Center1         1      -1
@@ -35,27 +35,29 @@ R44     Scale_Armor_-_Archers  1      103
 // T37       Soldier-Cavalry1     3      101       0
 // T338      Soldier-Camel        3      101       0
 B104      Temple1              3      -1
-T83       Man                  2      109       0
 // T37       Soldier-Cavalry1     3      101       0
+T83       Man                  2      109       0
 
 U41       Soldier-Chariot2     4      87
 // T37       Soldier-Cavalry1     3      101       0
 R32     Artisanship            1      84
 R21     Mysticism              1      104
 U125      Priest               2      104
+T83       Man                  2      109       0
 
 // R45     Scale_Armor_-_Cavalry  1      103
 R108    Gold_Mining            1      84
 R24     Polytheism             1      104
 B82       Government_Center    1      -1
-T83       Man                  2      109       0
 U41       Soldier-Chariot2     4      87
 U125      Priest               2      104
+T83       Man                  2      109       0
 
-R112    Architecture           1      82
+// R112    Architecture           1      82
 B109      Town_Center1         1      -1
 U41       Soldier-Chariot2     4      87
 U125      Priest               2      104
+T83       Man                  2      109       0
 
 // R34     Nobility               1      82
 R22     Astrology              1      104
@@ -70,9 +72,9 @@ U35       Soldier-Catapult1    3      49
 R81     Domestication          1      84
 R114    Writing                1      82
 
-// 28 villager, 20 chariot archer, 8 priest, 3 catapult (pop )
+// 28 villager, 20 chariot archer, 8 priest, 3 catapult (pop 60)
 // 4 archery range, 3 temple, 3 siege workshop
-// spent bronze:  wood,  food
+// spent bronze: 5700 wood, 4900 food, 1800 gold
 
 
 C103    Iron_Age               1      109
@@ -113,8 +115,8 @@ U39       Soldier-Cavalry3_Arc 4      87
 U11       Soldier-Balista      5      49
 U125      Priest               2      104
 
-// 20 helepolis, 20 horse archer, 18 priest (pop )
-// spent army: 11000 wood, 9700 food, 7900 gold, 2500 stone
+// 20 helepolis, 20 horse archer, 18 priest (pop 114)
+// spent army: 11000 wood, 9800 food, 7900 gold, 2600 stone
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
