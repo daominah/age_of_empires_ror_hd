@@ -14,13 +14,12 @@ B101      Stable1              1      -1
 R46     Toolworking            1      103
 B87       Range1               1      -1
 // R41     Leather_Armor_-_Archer 1      103
-// B101      Stable1              1      -1
-U83       Man                  4      109
-B84       Market1              1      -1
 T299      Soldier-Scout        1      101       1
 // T4        Soldier-Archer1      1      87        4
+U83       Man                  4      109
+B84       Market1              1      -1
 // B79       Watch_Tower          4      -1
-// pop 21/24, 1 scout
+// 20 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
@@ -65,8 +64,8 @@ B101      Stable1              4      -1
 // R81     Domestication          1      84
 R114    Writing                1      82
 
-// 28 villager, 24 cavalry, 3 priest, pop /
-// 8 stable, 1 temple
+// 28 villager, 24 cavalry, 3 priest (pop )
+// 8 stable, 1 archery range, 1 temple
 // spent bronze:  wood,  food, gold
 
 
@@ -74,7 +73,7 @@ C103    Iron_Age               1      109
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-// spent iron: 4300 wood, 6800 food, 3100 gold
+B87       Range1               1      -1
 
 R71     Heavy_Cavalry          1      101
 C52     Metallurgy             1      103
@@ -90,55 +89,81 @@ T125      Priest               1      104       1
 
 C78     Cataphracts            1      101
 U37       Soldier-Cavalry1     6      101
-U39       Soldier-Cavalry3_Arc 1      87
-T125      Priest               1      104       2
-// 42 cataphract, 5 priest, 3 horse archer
+U39       Soldier-Cavalry3_Arc 2      87
+T125      Priest               1      104       1
+// 42 cataphract, 5 priest, 4 horse archer (pop )
 // spent army: 4500 wood, 10900 food, 6600 gold, 0 stone
 
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
+U39       Soldier-Cavalry3_Arc 2      87
 U37       Soldier-Cavalry1     6      101
-U39       Soldier-Cavalry3_Arc 1      87
-T125      Priest               2      104       0
-U37       Soldier-Cavalry1     8      101
-T83       Man                  4      109       0
-U39       Soldier-Cavalry3_Arc 1      87
+T125      Priest               1      104       0
 
-B109      Town_Center1         1      -1
 T83       Man                  4      109       0
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-T125      Priest               2      104       0
+B50       Farm                 4      -1
+B87       Range1               2      -1
+R110    Craftmanship           1      84
+R41     Leather_Armor_-_Archer 1      103
+R32     Artisanship            1      84
+R106    Ballistics             1      82
+U39       Soldier-Cavalry3_Arc 2      87
+U37       Soldier-Cavalry1     6      101
+
+T83       Man                  4      109       0
 B50       Farm                 8      -1
-U37       Soldier-Cavalry1     8      101
+R37     Alchemy                1      82
+R44     Scale_Armor_-_Archers  1      103
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
 
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
+R49     Chain_Mail_-_Archers   1      103
+B109      Town_Center1         1      -1
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
 
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+R38     Heavy_Horse_Archer     1      87
+U39       Soldier-Cavalry3_Arc 4      87
+// 72 cataphract, 24 horse archer
 
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
 
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
-U37       Soldier-Cavalry1     8      101
-U39       Soldier-Cavalry3_Arc 1      87
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
+U37       Soldier-Cavalry1     6      101
 
 
 // B276      Wonder               1      -1

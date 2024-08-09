@@ -10,17 +10,16 @@ B12       Barracks1            1      -1
 
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
-// B101      Stable1              1      -1
-// R46     Toolworking            1      103
 B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
 B101      Stable1              1      -1
-U83       Man                  4      109
-B84       Market1              1      -1
+// R46     Toolworking            1      103
 // T299      Soldier-Scout        1      101       1
 T4        Soldier-Archer1      1      87        4
+U83       Man                  4      109
+B84       Market1              1      -1
 B79       Watch_Tower          4      -1
-// pop 21/24, 1 bowman
+// 20 villager, 1 bowman
 
 
 C102    Bronze_Age             1      109
@@ -71,7 +70,7 @@ U35       Soldier-Catapult1    3      49
 R81     Domestication          1      84
 R114    Writing                1      82
 
-// 28 villager, 20 chariot archer, 8 priest, 3 catapult pop /
+// 28 villager, 20 chariot archer, 8 priest, 3 catapult (pop )
 // 4 archery range, 3 temple, 3 siege workshop
 // spent bronze:  wood,  food
 
@@ -80,8 +79,6 @@ C103    Iron_Age               1      109
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-// spent iron: 7400 wood, 6300 food, 2800 gold
-
 B49       Siege_Workshop       3      -1
 U125      Priest               2      104
 
@@ -91,14 +88,14 @@ R110    Craftmanship           1      84
 R18     Afterlife              1      104
 U39       Soldier-Cavalry3_Arc 4      87
 U11       Soldier-Balista      5      49
-U125      Priest               1      104
+U125      Priest               2      104
 
 U39       Soldier-Cavalry3_Arc 4      87
 R30     Coinage                1      84
 R106    Ballistics             1      82
 R20     Fanaticism             1      104
 U11       Soldier-Balista      5      49
-U125      Priest               1      104
+U125      Priest               2      104
 U39       Soldier-Cavalry3_Arc 4      87
 B79       Watch_Tower          4      -1
 
@@ -108,7 +105,7 @@ R19     Monotheism             1      104
 B79       Watch_Tower          4      -1
 U39       Soldier-Cavalry3_Arc 4      87
 U11       Soldier-Balista      5      49
-U125      Priest               1      104
+U125      Priest               2      104
 
 R119    Medicine               1      104
 B79       Watch_Tower          4      -1
@@ -116,26 +113,23 @@ U39       Soldier-Cavalry3_Arc 4      87
 U11       Soldier-Balista      5      49
 U125      Priest               2      104
 
-// 20 helepolis, 20 horse archer, 10 priest, pop 107/132
+// 20 helepolis, 20 horse archer, 18 priest (pop )
 // spent army: 11000 wood, 9700 food, 7900 gold, 2500 stone
 
-T83       Man                  4      109       0
 B109      Town_Center1         1      -1
-R111    Siegecraft             1      84
 B50       Farm                 8      -1
-U125      Priest               2      104
 B79       Watch_Tower          4      -1
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
 
 T83       Man                  4      109       0
-B109      Town_Center1         1      -1
 B50       Farm                 8      -1
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      6      49
-U125      Priest               2      104
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
 
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      6      49
-U125      Priest               4      104
+R111    Siegecraft             1      84
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
 
 R36     Massive_Catapult       1      49
 U11       Soldier-Balista      4      49
@@ -144,23 +138,33 @@ U35       Soldier-Catapult1    2      49
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          4      -1
 
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
 
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
 
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
-U39       Soldier-Cavalry3_Arc 4      87
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      8      49
+U35       Soldier-Catapult1    4      49
 
 
 // B276      Wonder               1      -1
