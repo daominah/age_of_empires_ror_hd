@@ -1,0 +1,634 @@
+.PER Strategy List
+
+TOWN NUMBERS
+
+73	SNMinimumTownSize
+Sets the minimum size of a computer player town. Must be >= 0.
+
+74	SNMaximumTownSize
+Sets the maximum size of a computer player town. Must be >= 0 and >= SNMinimumTownSize.
+
+86	SNStoragePitMaxDistance
+Sets the maximum distance that Storage Pits may be placed from a Town Center. Must be >= 0.
+
+87	SNGranaryMaxDistance
+Sets the maximum distance that Granaries may be placed from a Town Center. Must be >= 0.
+
+88	SNTacticalUpdateFrequency
+Sets the number of seconds that pass between each tactical AI update. Must be >= 0.
+
+99	SNScalingFrequency
+Sets the number of minutes that pass between each scaling inside the tactical AI. Must be >= 0.
+
+101	SNBuildFrequency
+Sets the number of tactical AI updates that pass between each training or research attempt. Must be >= 0.
+
+112	SNMinimumWaterBodySizeForDock
+The minimum number of tiles (in surface area) that a body of water must be for a Dock to be placed on it. Must be >= 10.
+
+114	SNNumberBuildAttemptsBeforeSkip
+The maximum number of build attempts a build plan can go through before being put into skip mode. Must be >= 1.
+
+115	SNMaxSkipsPerAttempt
+The maximum number of unbuilt items that can be skipped during any build plan processing before giving up (for being too far ahead of the current position in the plan). Must be >= 1.
+
+150	SNMaxStoragePits
+The maximum number of storage pits a computer player can build in one game. Must be >= 0.
+
+151	SNMaxGranaries
+The maximum number of granaries a computer player can build in one game. Must be >= 0.
+
+152	SNHouseOverage
+The number of Houses that a computer player will autobuild over the amount needed to support 50 units. Must be >= 0.
+
+155	SNBuildPlanDivisions
+The number of divisions a computer player will place in its build list (used to calculate gathering percentages). Must be >= 1.
+
+161	SNRequiredFirstBuilding
+Controls what building a computer player must place first. 0:    No restriction, 1:    Either a Storage Pit or a granary, 2:    A Storage Pit, 3: A Granary, 4: Both a Storage Pit and a Granary. Exceptions consist of a Town Center and SNMaximumHousesBeforeDropsites.
+
+168	SNRandomPlacementFactor
+A number that gets added into the placement of the computer player to randomize building placement (off of the calculated ideal). Must be >= 0.
+
+169	SNMinimumForestTiles
+The minimum number of forest tiles that a computer player must uncover before placing its first storage pit. Must be >= 0.
+
+174	SNMaximumHousesBeforeDropsites
+The maximum number of Houses that can be built before a dropsite is built. Must be >= 0.
+
+175	SNSpecificBuildItemToBuild
+A specific build item that should be inserted into the computer player's list. Must be a valid build ID.
+
+176	SNSpecificBuildItemTime
+The time (in minutes) that the SNSpecificBuildItemToBuild should be inserted into. Must be >= 0.
+
+177	SNUnskippableItemType
+Allows the computer player to not skip a particular item type during building. Must be a valid build ID.
+
+180	SNAutoBuildHouses
+Controls whether the computer player can decide to build its houses by itself. Must be 0 or 1.
+
+181	SNUpgradeToToolAgeASAP
+Controls whether or not the computer player will abandon all to upgrade to the Tool Age as soon as it becomes available for research. Must be 0 or 1.
+
+182	SNUpgradeToBronzeAgeASAP
+Controls whether or not the computer player will abandon all to upgrade to the Bronze Age as soon as it becomes available for research. Must be 0 or 1.
+
+183	SNUpgradeToIronAgeASAP
+Controls whether or not the computer player will abandon all to upgrade to the Iron Age as soon as it becomes available for research. Must be 0 or 1.
+
+202	SNMinimumDropsiteBuffer
+Controls how far away a computer player will keep dropsites in relation to enemy Town Centers. Must be 0 or 1.
+
+205	SNAutoBuildDropsites
+Controls whether or not the computer player decides how and when to build storage pits and granaries. Must be 0 or 1.
+
+206	SNAutoBuildFarms
+Controls whether or not the computer player can use extra wood to build Farms once all of the build list buildings are constructed. Must be 0 or 1.
+
+207	SNAutoBuildTowers
+Controls whether or not the computer player can use extra stone to build towers. Must be 0 or 1.
+
+208	SNAutoBuildDocks
+Controls whether or not the computer player decides how and when to build Docks. Must be 0 or 1.
+
+209	SNAutoBuildFishingBoats
+Controls whether or not the computer player decides how and when to build fishing boats. Must be 0 or 1.
+
+210	SNAutoBuildTransports
+Controls whether or not the computer player decides how and when to build transports. Must be 0 or 1.
+
+212	SNDesiredNumberDocks
+How many Docks the computer player wants in a given game. Must be >= 0.
+
+213	SNDesiredNumberFishingBoats
+How many fishing boats the computer player wants in a given game. Must be >= 0.
+
+214	SNDesiredNumberTransports
+How many transports the computer player wants in a given game. Must be >= 0.
+
+220	SNMaxFarms
+Caps the number of Farms a computer player will build. Must be >= 0.
+
+222	SNMaxTowers
+Caps the number of towers a computer player will build. Must be >= 0.
+
+223	SNAutoBuildWarships
+Determines if the computer player is allowed to decide how and when to build warships. Must be 0 or 1.
+
+224	SNDesiredNumberWarships
+How many warships the computer player wants in a given game. Must be >= 0.
+
+
+CIVILIAN NUMBERS
+
+0	SNPercentCivilianExplorers
+Controls the normal percentage of civilian explorers allocated. Must be >= 0.
+
+1	SNPercentCivilianBuilders
+Controls the normal percentage of civilian builders allocated. Must be >= 0.
+
+2	SNPercentCivilianGatherers
+Controls the normal percentage of civilian gatherers allocated. Must be >= 0.
+
+3	SNCapCivilianExplorers
+Caps the number of civilian explorers allocated.    Ignored when set to -1. Must be >= -1.
+
+4	SNCapCivilianBuilders
+Caps the number of civilian builders allocated. Ignored when set to -1. Must be >= -1.
+
+5	SNCapCivilianGatherers
+Caps the number of civilian gatherers allocated. Ignored when set to -1. Must be >= -1.
+
+32	SNPercentExplorationRequired
+Sets the minimum amount of exploration that a computer player must have accomplished before being allowed to re-task civilian explorers. Must be >= 0 and <= 100.
+
+35	SNMinimumCivilianExplorers
+Sets a minimum number of civilian explorers.    Must be >= 0.
+
+100	SNMaximumGAIAAttackResponse
+The maximum number of civilians that respond to another civilian getting attacked by a Gaia animal. Must be >= 0.
+
+117	SNFoodGathererPercentage
+The required percentage of food gatherers. Must be >= 0 and <= 100.
+
+118	SNGoldGathererPercentage
+The required percentage of gold gatherers. Must be >= 0 and <= 100.
+
+119	SNStoneGathererPercentage
+The required percentage of stone gatherers. Must be >= 0 and <=100.
+
+120	SNWoodGathererPercentage
+The required percentage of wood gatherers. Must be >= 0 and <=100.
+
+147	SNMostNeededResourceLookAhead
+The number of build list objects the computer player will use to look ahead to tabulate the resources required. Must be >= 0.
+
+160	SNMaxBuildPlanGathererPercentage
+The maximum percentage of gatherers that a computer player will be able to task based on of the pregame requirements of the build plan. Must be >= 0 and <= 100.
+
+163	SNFoodDropsiteDistance
+The maximum number of tiles the computer player likes to walk to drop off its food. Must be >= 3.
+
+164	SNWoodDropsiteDistance
+The maximum number of tiles the computer player likes to walk to drop off its wood. Must be >= 3.
+
+165	SNStoneDropsiteDistance
+The maximum number of tiles the computer player likes to walk to drop off its stone. Must be >= 3.
+
+166	SNGoldDropsiteDistance
+The maximum number of tiless the computer player likes to walk to drop off its gold. Must be >= 3.
+
+170	SNMinimumFood
+The minimum amount of food a computer player likes to keep on hand. Must be >= 0.
+
+171	SNMinimumWood
+The minimum amount of wood a computer player likes to keep on hand. Must be >= 0.
+
+172	SNMinimumStone
+The minimum amount of stone a computer player likes to keep on hand. Must be >= 0.
+
+173	SNMinimumGold
+The minimum amount of gold a computer player likes to keep on hand. Must be >= 0.
+
+190	SNMaximumFood
+The maximum amount of food a computer player likes to have on hand. Must be >= 0.
+
+191	SNMaximumWood
+The maximum amount of wood a computer player likes to have on hand. Must be >= 0.
+192	SNMaximumStone
+The maximum amount of stone a computer player likes to have on hand. Must be >= 0.
+
+193	SNMaximumGold
+The maximum amount of gold a computer player likes to have on hand. Must be >= 0.
+
+204	SNMinimumElephantHuntGroupSize
+The number of civilians a computer player must collect before allowing elephants to be hunted for food. Must be >= 1.
+
+216	SNMinimumAmountForTrading
+Controls how much of a resource a computer player must have before using it for trading. Must be >= 0.
+
+
+GROUP-RELATED NUMBERS
+
+37	SNAttackGroupMakeup
+No description available. Must be >= 0.
+
+39	SNDefendGroupMakeup
+No description available. Must be >= 0.
+
+40	SNGroupFillMethod
+Sets the method by which a computer player fills a group of units. There are two concepts here: single group fill and level group fill. In single group fill, all available units are put into the first non-minimally full group. Once that group is full, the next group is entirely filled before the third group is considered. In level group fill, all groups are filled at the same time (one unit is placed in the first group, the next in the second, etc.). The single group fills up to the minimum in each group, then goes to level group fill. Both methods respect the maximum group sizes. 0 keys the single group fill, and 1 keys the level group fill. Must be 0 or 1.
+
+45	SNExploreGroupMakeup
+No description available. Must be >= 0.
+
+75	SNGroupCommanderSelectionMethod
+Sets the method by which group commanders are selected. 0 selects the unit with the most hit points. 1 selects the unit with the fewest hit points. 2 selects the unit with the most range. The commander is set once during a group's creation and is only reset when the commander dies. Must be >= 0 and <=2.
+
+143	SNTaskUngroupedSoldiers
+Controls whether or not ungrouped computer player soldiers get tasked to spread out and guard the computer player's general town area. Must be 0 or 1.
+
+121	SNDefendImportantGroupLeaders
+Controls whether or not important attack group leaders are defended by the other group units. A value of 1 has the members defend the leader. A value of 0 does not. Must be 0 or 1.
+
+131	SNGroupLeaderDefenseDistance
+Sets the defense distance for defenders of an important attack group leader. Must be >= 1.
+
+
+ATTACK NUMBERS
+
+30	SNPercentHealthRetreat
+Sets the percentage of hit points that a group can lose (relative to what it started the attack with) before retreating.
+Must be >= 1 and <= 100.
+
+31	SNPercentDeathRetreat
+Sets the percentage of units that a group can let die (relative to what it started the attack with) before retreating.
+Must be >= 1 and <= 100.
+
+46	SNAttackSeparationTime
+Sets the amount of time that must pass between computer player attacks. Must be >= 0.
+
+47	SNAttackCoordination
+Selects the type of coordination between computer player attacks. 0 means no coordination. 1 means that one group may attack at a time. 2 means that multiple groups can attack at the same time. Must be >= 0 and <= 2.
+
+48	SNAttackResponseSeparationTime
+Sets the amount of time that must pass before units respond to a subsequent enemy attack distress call. Must be >= 0.
+
+49	SNRetreatAfterTargetDestroyed
+Selects what happens when a target is destroyed during an attack. 0 means that the attack group will never retreat and will recenter upon their current position. 1 means that the group will retreat if no other target is reachable. 2 means that the group will always retreat when the target is destroyed. 3 means that the group will go into extermination mode; they will explore unexplored territory and attack any enemy's units they uncover. Must be >= 0 and <= 3.
+
+71	SNLockAttackAndAttackResponse
+This treats the SNAttackSeparationTime and SNAttackResponseSeparationTime as the same numbers. Must be 0 or 1.
+
+76	SNConsecutiveIdleUnitLimit
+Sets the number of consecutive seconds that pass before a group is set to idle if all of its units are idle. This is only used during attack and retreat phases. Must be >= 0.
+
+91	SNPercentUnitHealthRetreat
+Sets the percentage of hit points that a unit can lose (relative to what it started the attack with) befoer retreating.
+Must be >= 1 and <= 100.
+
+102	SNAttackSeparationTimeRandomness
+The amount of randomness incorporated into the attack separation time. Must be >= 0 and < SNAttackSeparationTime.
+
+103	SNAttackIntelligence
+Specifies whether the intelligent attack system is used. The intelligent attack system tries to avoid enemy units when attacking and tries to attack from different sides. When used with the SNAttackCoordination set to 2, this can create multi-front attacks.
+Must be 0 or 1.
+
+104	SNInitialAttackDelay
+The forced, initial delay before any computer player attacks. Must be >= 0.
+
+134	SNInitialAttackDelayType
+The type of initial attack delay. A value of 1 denotes a delay ended by the build list. A value of 2 uses the SNInitialAttackDelay timeout. A value of 3 allows the computer player to attack after he has been attacked by a non-Gaia player. A value of 0 allows any of the three occurrences to enable attacks. Must be >= 0 and <=3.
+
+196	SNCoopShareAttacking
+Controls whether allied computer players can attack to defend each other. Must be 0 or 1.
+
+
+TARGET EVALUATION NUMBERS
+
+77	SNTargetEvaluationDistance
+Sets the multiplier used for the distance rating in computer player target evaluation. Must be >= 0.
+
+78	SNTargetEvaluationHitpoints
+Sets the multiplier used for the hitpoint rating in computer player target evaluation. Must be >= 0.
+
+79	SNTargetEvaluationDamageCapability
+Sets the multiplier used for the damage capability rating in computer player target evaluation. Must be >= 0.
+
+80	SNTargetEvaluationKills
+Sets the multiplier used for the kill rating in computer player target evaluation. Must be >= 0.
+
+81	SNTargetEvaluationAllyProximity
+Sets the multiplier used for the ally proximity (number of allies in range) rating in computer player target evaluation.
+Must be >= 0.
+
+82	SNTargetEvaluationROF
+Sets the multiplier used for the rate of fire rating in computer player target evaluation. Must be >= 0.
+
+83	SNTargetEvaluationRandomness
+Sets the multiplier used for the randomness factor in computer player target evaluation. Must be >= 0.
+
+89	SNTargetEvaluationAttackAttempts
+Sets the multiplier used for the attack attempts rating in computer player target evaluation. Must be >= 0.
+
+90	SNTargetEvaluationRange
+Sets the multiplier used for the range rating in computer player target evaluation. Must be >= 0.
+
+106	SNSpecialAttackType1
+Sets the type of object (first slot) that the computer player particularly wants to attack. Must be a valid master object ID or –1 if no special attack type is desired.
+
+107	SNSpecialAttackType2
+Sets the type of object (second slot) that the computer player particularly wants to attack. Must be a valid master object id or –1 if no special attack type is desired.
+
+108	SNSpecialAttackType3
+Sets the type of object (third slot) that the computer player particularly wants to attack. Must be a valid master object ID or –1 if no special attack type is desired.
+
+109	SNSpecialAttackInfluence1
+Sets the multiplier used for the special attack type 1 rating in computer player target evaluation. Must be > 0 to influence the computer player toward attacking the special type 1, < 0 to influence the computer player away from attacking SNSpecialAttackType1.
+
+110	SNSpecialAttackInfluence2
+Sets the multiplier used for the special attack type 2 rating in computer player target evaluation. Must be > 0 to influence the computer player toward attacking the special type 2, < 0 to influence the computer player away from attacking SNSpecialAttackType2.
+
+111	SNSpecialAttackInfluence3
+Sets the multiplier used for the special attack type 3 rating in computer player target evaluation. Must be > 0 to influence the computer player toward attacking the special type 3, < 0 to influence the computer player away from attacking SNSpecialAttackType3.
+
+122	SNTargetEvaluationContinent
+Sets the additive value used for the targets on the same continent as the attack group commander. Must be > 0 to influence the computer player toward attacking the units on the same continent or 0 for no special influence.
+
+123	SNTargetEvaluationSiegeWeapon
+Sets the additive value used for influencing siege weapons to attack stationary targets (and influencing non-siege weapons not to attack those stationary targets). Must be > 0 to influence the computer player to use siege weapons to attack stationary targets or 0 for no special influence.
+
+144	SNTargetEvaluationBoat
+Sets the additive value used for influencing land units to attack or not attack boats. Must be > 0 to influence land units to attack boats, 0 for no special influence, and less than 0 for aversion.
+
+184	SNTargetEvaluationTimeKillRatio
+The amount of influence the time to kill a target has in deciding what to attack. Must be >= 0.
+
+185	SNTargetEvaluationInProgress
+The amount of influence of continuing to attack a target already under attack. Must be >= 0.
+
+188	SNAttackWinningPlayer
+Controls whether or not the computer player will attack the winning player (if there is more than one to choose from).
+Must be 0 or 1.
+
+195	SNAttackWinningPlayerFactor
+The influence the SNAttackWinningPlayer will have on deciding who to attack if it's set to 1. Must be >= 0 and <= 100.
+
+
+DEFEND NUMBERS
+
+19	SNPercentEnemySightedResponse
+Sets the percentage of idle troops that will respond to another unit being attacked. Must be >= 0 and <= 100.
+
+20	SNEnemySightedResponseDistance
+Sets the distance inside of which units will be candidates for response to an enemy attack. Must be >= 0 and <= 144.
+
+22	SNSentryDistance
+Sets the distance at which the town is defended. Must be >= 0.
+
+34	SNZeroPriorityDistance
+Sets the distance at which a computer player's order for a unit is set to a priority of 0. Must be >= 0 and <= 144.
+
+50	SNGoldDefendPriority
+Sets the priority of defending gold. A priority of 0 means that gold will not be defended. A priority of 1 means that gold has the highest defend priority. Must be >= 0 and <= 7.
+
+51	SNStoneDefendPriority
+Sets the priority of defending stone. Must be >= 0 and <= 7.
+
+52	SNForageDefendPriority
+Sets the priority of defending forage sites. Must be >= 0 and <= 7.
+
+53	SNChokePointDefendPriority
+No description available. Must be >= 0.
+
+54	SNRuinsDefendPriority
+Sets the priority of defending Ruins. Must be >= 0 and <= 7.
+
+55	SNArtifactDefendPriority
+Sets the priority of defending Artifacts. Must be >= 0 and <= 7.
+
+56	SNTownDefendPriority
+Sets the priority of defending the computer player's town. Must be >= 0 and <= 7.
+
+57	SNDefenseDistance
+Sets the distance at which items (town excluded) are defended. Must be >= 0.
+
+64	SNDesiredNumberTradeEscorts
+Sets the desired number of warboat escorts for tradeboats. Must be >= 0.
+
+65	SNDesiredNumberFishEscorts
+Sets the desired number of warboat escorts for fishing boats. Must be >= 0.
+
+66	SNDesiredNumberTransportEscorts
+Sets the desired number of warboat escorts for transports. Must be >= 0.
+
+72	SNSentryDistanceVariation
+Sets the amount of allowable variation in the defense distances. Must be >= 0.
+
+84	SNNumberWallGates
+Sets the number of gates that must be left in a wall around a computer player's town. Must be >= 0.
+
+85	SNSizeWallGates
+Sets the size (in tiles) of the gates in the wall around a computer player's town. Must be >= 0.
+
+70	SNDockDefendPriority
+Sets the priority of defending a Dock. 0 does not protect docks, 1 does. Must be 0 or 1.
+
+92	SNDefendOverlapDistance
+Sets the amount of influence that a defend group has. Defend groups will be assigned so that their circles of influence do not overlap. Must be >= 0.
+
+
+EXPLORER NUMBERS
+
+18	SNTotalNumberExplorers
+Caps the total number of explorers/explorer groups allocated. Ignored when set to -1. Must be >= -1.
+
+135	SNBlotExplorationMap
+This controls whether or not the computer player re-explores previously explored regions. A value of 1 has the computer player re-explore, a value of 0 does not. Must be 0 or 1.
+
+136	SNBlotSize
+This controls the size of the area that a computer player marks for re-exploration. Must be >0 and < the map size.
+
+145	SNNumberEnemyObjectsRequired
+The count of the number of enemy objects the computer player must see before dropping the number of civilian explorers down to the minimum level. Must be >= 0.
+
+167	SNInitialExplorationRequired
+The percentage of the map that must be explored by a computer player before any building is allowed.
+Must be >= 0 and <= 100.
+
+?	SNPercentHalfExploration
+The percentage of map exploration that allows the computer player to task down to half the number of civilian explorers.
+Must be >= 0.
+
+LAND ATTACK GROUP NUMBERS
+
+16	SNMinimumAttackGroupSize
+Sets the minimum size of land-based attack groups. Must be >= 0.
+
+26	SNMaximumAttackGroupSize
+Sets the maximum size of land-based attack groups. Must be >= 0 and >= SNMinimumAttackGroupSize.
+
+36	SNNumberAttackGroups
+Sets the desired number of land-based attack groups. Must be >= 0.
+
+98	SNAttackGroupSizeRandomness
+The randomness factor in the attack group size. This sets a cap on the amount of randomness in the minimum attack group size. The randomness factor is set once (when the group is created) and will be between 0 and this number.
+
+41	SNAttackGroupGatherSpacing
+Controls the relative proximity (to the group gather point) that grouped units must be in before the group is considered gathered. Must be >= 1.
+
+
+LAND DEFEND GROUP NUMBERS
+
+25	SNMinimumDefendGroupSize
+Sets the minimum size of land-based defend groups. Must be >= 0.
+
+28	SNMaximumDefendGroupSize
+Sets the maximum size of land-based defend groups. Must be >= 0 and >= SNMinimumDefendGroupSize.
+
+38	SNNumberDefendGroups
+Sets the desired number of land-based defend groups. Must be >= 0.
+
+
+LAND EXPLORE GROUP NUMBERS
+
+42	SNNumberExploreGroups
+Sets the desired number of land-based soldier exploration groups. Must be >= 0.
+
+43	SNMinimumExploreGroupSize
+Sets the minimum size of land-based soldier exploration groups. Must be >= 0.
+
+44	SNMaximumExploreGroupSize
+Sets the maximum size of land-based soldier exploration groups. Must be >= 0 and >= SNMinimumExploreGroupSize.
+
+198	SNPercentageExploreExterminators
+Determines how many of the computer player's land-based soldier exploration groups are set as extermination groups.
+Must be >= 0 and <= 100.
+
+
+BOAT ATTACK GROUP NUMBERS
+
+58	SNNumberBoatAttackGroups
+Sets the desired number of boat attack groups. Must be >= 0.
+
+59	SNMinimumBoatAttackGroupSize
+Sets the minimum size of boat attack groups. A group must meet its minimum size as one of the tasking prerequisites.
+Must be >= 0.
+
+60	SNMaximumBoatAttackGroupSize
+Sets the maximum size of boat attack groups. Must be >= 0 and >= SNMinimumBoatAttackGroupSize.
+
+
+BOAT DEFEND GROUP NUMBERS
+
+67	SNNumberBoatDefendGroups
+Sets the desired number of boat defend groups. Must be >= 0.
+
+68	SNMinimumBoatDefendGroupSize
+Sets the minimum size of boat defend groups. Must be >= 0.
+
+69	SNMaximumBoatDefendGroupSize
+Sets the maximum size of boat defend groups. Must be >= 0 and >= SNMinimumBoatDefendGroupSize.
+
+
+BOAT EXPLORE GROUP NUMBERS
+
+61	SNNumberBoatExploreGroups
+Sets the desired number of boat exploration groups. Must be >= 0.
+
+62	SNMinimumBoatExploreGroupSize
+Sets the minimum size of boat exploration groups. Must be >= 0.
+
+63	SNMaximumBoatExploreGroupSize
+Sets the maximum size of boat exploration groups. Must be >= 0 and >= SNMinimumBoatExploreGroupSize.
+
+
+DIPLOMACY NUMBERS
+
+29	SNMinimumPeaceLikeLevel
+Sets the level at which computer players must like another player before allying with that player. Must be >= 0 and <= 100.
+
+178	SNAttackDiplomacyImpact
+The inpact (positive or negative) that a computer player injects into his diplomacy system when attacked.
+Must be >= 0 and <= 100.
+
+215	SNAllowDiplomacyChangeOnAllyAttack
+Controls whether or not the computer player can change his alliance when attacked by an ally. Must be 0 or 1.
+
+217	SNAllowDiplomacyChangeOnTribute
+Controls whether or not the computer player will allow his diplomacy change when he receives tribute from a player.
+Must be 0 or 1.
+
+221	SNHitsBeforeAllianceChange
+Sets the number of times a computer player will allow his units to be hit by an ally before allowing his diplomacy to be changed. Must be >= 0.
+
+
+TRIBUTE NUMBERS
+
+124	SNTributeAmount
+Sets the required amount of gold that must be tributed to the computer player. If this is 0, no computer player tributing is monitored for the special system (thus, the normal tribute system is in effect). When this value is > 0, the computer player will expect some gold in tribute. Must be >= 0.
+
+125	SNTributeChatFrequency
+Sets the frequency of the computer player's chat messages asking for tribute. Must be >= 0.
+
+126	SNTributeChatRandomness
+Sets the randomness of the computer player's chat messages asking for tribute.
+Must be >= 0 and < SNTributeChatFrequency.
+
+127	SNTributeTimeout
+Sets the amount of time (in seconds) within which the tribute must take place. Must be >= 0.
+
+128	SNTributePlayer
+Sets the player ID# of the player the computer player will target for the tribute request. Must be a valid player number for the game.
+
+129	SNTributeSuccessOutcome
+Controls what happens when the tribute request is fulfilled within the allotted time. If set to 0, nothing happens. If set to 1, the computer player will ally when the tribute amount is paid. Must be 0 or 1.
+
+130	SNTributeFailureOutcome
+Controls what happens when the tribute request is not fulfilled within the allotted time. If set to 0, nothing happens. If set to 1, the computer player will go to war when the tribute amount is not paid. Must be 0 or 1.
+
+132	SNTributePersistence
+Controls whether or not the interactive tribute system operates once or forever. A value of 1 makes it last the entire game (i.e. the computer player will continue to demand SNTributeAmount of gold for the entire game, at intervals roughly equivalent to SNTributeChatFrequency from the outcome evaluation). A value of 0 makes the interactive tribute occur one time.
+Must be 0 or 1.
+133	SNTributeRevokeOnAttack
+Controls whether or not the computer player rescinds the favorable tribute outcome when the SNTributePlayer attacks the computer player. A value of 1 has the computer player rescind, a value of 0 does not. Must be 0 or 1.
+
+186	SNCoopDemandTributeInterval
+Controls how often the computer player may demand tribute from his computer player allies. Must be >= 0.
+
+187	SNCoopDemandTributeMaximum
+Controls the maximum amount a computer player may demand from his computer player allies at any one time. Must be >= 1.
+
+
+OTHER NUMBERS
+
+23	SNArtifactReturnDistance
+Sets the distance that Artifacts must be within to be considered returned to the Town Center. Must be >= 0.
+
+24	SNPercentVictoryClamp
+No description available. Must be >= 0 and <= 100.
+
+93	SNScaleMinimumAttackGroupSize
+The scaling factor for the minimum attack group size. Added to SNMinimumAttackGroupSize when the tactical AI does it's scaling.
+
+94	SNScaleMaximumAttackGroupSize
+The scaling factor for the maximum attack group size. Added to SNMaximumAttackGroupSize when the tactical AI does it's scaling.
+
+95	SNScalePercentHealthRetreat
+The scaling factor for the percent health retreat. Added to SNPercentHealthRetreat when the tactical AI does it's scaling.
+Must be >= -100 and <= 100.
+
+96	SNScalePercentDeathRetreat
+The scaling factor for the percent death retreat. Added to SNPercentDeathRetreat when the tactical AI does it's scaling.
+Must be >= -100 and <= 100.
+
+97	SNScalePercentUnitHealthRetreat
+The scaling factor for the percent unit health retreat. Added to SNPercentUnitHealthRetreat when the tactical AI does it's scaling. Must be >= -100 and <= 100.
+
+105	SNSaveScenarioInformation
+Controls whether or not the learning information is saved at the end of the scenario for a given computer player. Must be 0 or 1.
+
+148	SNRetaskGatherAmount
+The minimum amount that a gatherer must gather before the computer player allows him to be retasked to another resource type. Must be >= 0.
+
+149	SNMaxRetaskGatherAmount
+The maximum amount that a gatherer can be told to gather before being allowed to be retasked. Must be >= 0.
+
+194	SNCoopShareInformation
+Controls whether or not allied computer players share information about what they uncover. Must be 0 or 1.
+
+197	SNCoopShareAttackingInterval
+Controls how often this computer player can ask another for help. Must be >= 0.
+
+201	SNTrackPlayerHistory
+Decides whether or not a human player's tendencies are tracked or not. Must be 0 or 1.
+
+203	SNUseByTypeMaxGathering
+Controls whether or not logical, type-specific gatherer requirements are placed on the quantity of resources gatherers must collect before being allowed to be retasked. Must be 0 or 1.
+
+218	SNEasiestReactionPercentage
+Sets the effective reaction percentage a computer player unit will use in single player Easiest level scenario or campaign games. Must be >= 0 and <= 100.
+
+219	SNEasierReactionPercentage
+Sets the effective reaction percentage a computer player unit will use in single player Easier level scenario or campaign games. Must be >= 0 and <= 100.

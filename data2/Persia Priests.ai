@@ -14,7 +14,7 @@ B101      Stable1              1      -1
 R46     Toolworking            1      103
 B87       Range1               1      -1
 // R41     Leather_Armor_-_Archer 1      103
-T299      Soldier-Scout        1      101       1
+T299      Soldier-Scout        1      101       0
 // T4        Soldier-Archer1      1      87        4
 U83       Man                  4      109
 B84       Market1              1      -1
@@ -54,12 +54,13 @@ B79       Watch_Tower          4      -1
 B109      Town_Center1         1      -1
 B49       Siege_Workshop       2      -1
 U125      Priest               2      104
+R24     Polytheism             1      104
 T83       Man                  2      109       0
 B79       Watch_Tower          4      -1
 
 // R34     Nobility               1      82
-R24     Polytheism             1      104
 U125      Priest               2      104
+R22     Astrology              1      104
 U35       Soldier-Catapult1    2      49
 B101      Stable1              2      -1
 
