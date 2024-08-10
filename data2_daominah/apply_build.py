@@ -29,6 +29,7 @@ def main():
             "Greek Phalanx.ai",
             "Greek Priests.ai",
             "Greek Siege.ai",
+            "Immortal Greek.ai",
         },
         "Hittite_Horse_Archer.ai": {
             "Hittite Bowmen.ai",

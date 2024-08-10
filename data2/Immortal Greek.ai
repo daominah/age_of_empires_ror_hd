@@ -3,11 +3,8 @@
 // Iron Age: 24 centurion, 16 priest
 
 
-B70       House                2      -1
-U83       Man                  10      109
 B109      Town_Center1         1      -1
-B70       House                3      -1
-U83       Man                  8      109
+U83       Man                  16      109
 B12       Barracks1            1      -1
 
 
@@ -17,7 +14,7 @@ U83       Man                  2      109
 B101      Stable1              1      -1
 B87       Range1               1      -1
 R16     Watch_Tower            1      68
-T299      Soldier-Scout        1      101       1
+T299      Soldier-Scout        1      101       0
 // T4        Soldier-Archer1      1      87        4
 // pop 21/24, 1 scout
 
@@ -30,7 +27,6 @@ B0        Academy              4      -1
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 R51     Metal_Working          1      103
-B70       House                5      -1
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              3      -1
@@ -56,7 +52,6 @@ U93       Soldier-Phal1        4      0
 T83       Man                  2      109       0
 // R109    Stone_Mining           1      84
 
-B70       House                5      -1
 R24     Polytheism             1      104
 U125      Priest               2      104
 B79       Watch_Tower          4      -1
@@ -72,7 +67,6 @@ R114    Writing                1      82
 
 
 C103    Iron_Age               1      109
-B70       House                5      -1
 T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 8      -1
@@ -89,7 +83,6 @@ R117    Iron_Shield            1      103
 R18     Afterlife              1      104
 R110    Craftmanship           1      84
 
-B70       House                5      -1
 R48     Chain_Mail_-_Soldiers  1      103
 R20     Fanaticism             1      104
 T125      Priest               2      104       0
@@ -110,20 +103,17 @@ B109      Town_Center1         1      -1
 B50       Farm                 8      -1
 T125      Priest               2      104       2
 B50       Farm                 8      -1
-B70       House                5      -1
 U93       Soldier-Phal1        4      0
 U93       Soldier-Phal1        4      0
 B79       Watch_Tower          4      -1
 
 B109      Town_Center1         1      -1
-B70       House                5      -1
 U93       Soldier-Phal1        4      0
 R15     Guard_Tower            1      68
 R106    Ballistics             1      82
 U93       Soldier-Phal1        4      0
 B79       Watch_Tower          4      -1
 
-B70       House                5      -1
 B50       Farm                 8      -1
 
 // R111    Siegecraft             1      84
@@ -131,22 +121,18 @@ R2      Ballista_Tower         1      68
 B79       Watch_Tower          4      -1
 // 32 tower
 
-B70       House                5      -1
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
-B70       House                5      -1
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
-B70       House                5      -1
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
-B70       House                5      -1
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
