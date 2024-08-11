@@ -12,7 +12,7 @@ def main():
 
     # mapBuilds maps source file to targets it will be copied to
     mapBuilds = {
-        "Assyria_Helepolis.ai": {
+        "Assyria_Archer.ai": {
             "Assyria Archer Bronze.ai",
             "Assyria Archer Iron.ai",
             "Assyria Ballista.ai",
