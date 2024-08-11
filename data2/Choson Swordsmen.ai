@@ -67,7 +67,7 @@ R22     Astrology              1      104
 R114    Writing                1      82
 
 // 28 villager, 12 swordsmen, 5 priest, 2 cavalry (pop 42+6)
-// 4 barrack, 3 temple (6 tower)
+// 4 barrack, 3 temple, 6 tower
 // spent bronze: 3000 wood, 5500 food, 1800 gold
 
 
@@ -181,7 +181,7 @@ T11       Soldier-Balista      3      49        2
 U75       Soldier-Inf3         8      12
 
 
-// B276      Wonder               1      -1
+B276      Wonder               1      -1
 B50       Farm                 24     -1
 
 

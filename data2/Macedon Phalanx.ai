@@ -65,8 +65,7 @@ R114    Writing                1      82
 
 C103    Iron_Age               1      109
 // T83       Man                  4      109       0
-B109      Town_Center1         1      -1
-B50       Farm                 8      -1
+B50       Farm                 4      -1
 // spent iron: 5400 wood, 6300 food, 2400 gold
 
 U93       Soldier-Phal1        4      0
@@ -104,7 +103,6 @@ U11       Soldier-Balista      8      49
 R15     Guard_Tower            1      68
 U93       Soldier-Phal1        4      0
 
-B109      Town_Center1         1      -1
 U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 B50       Farm                 8      -1
@@ -112,10 +110,8 @@ B50       Farm                 8      -1
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          4      -1
 
-U93       Soldier-Phal1        8      0
-U11       Soldier-Balista      8      49
-U93       Soldier-Phal1        8      0
-U93       Soldier-Phal1        8      0
+
+B109      Town_Center1         1      -1
 
 U93       Soldier-Phal1        8      0
 U11       Soldier-Balista      8      49
@@ -132,6 +128,11 @@ U11       Soldier-Balista      8      49
 U93       Soldier-Phal1        8      0
 U93       Soldier-Phal1        8      0
 
+U93       Soldier-Phal1        8      0
+U11       Soldier-Balista      8      49
+U93       Soldier-Phal1        8      0
+U93       Soldier-Phal1        8      0
 
-// B276      Wonder               1      -1
+
+B276      Wonder               1      -1
 B50       Farm                 24     -1

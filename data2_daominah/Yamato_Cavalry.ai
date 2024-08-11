@@ -91,7 +91,7 @@ T125      Priest               1      104       1
 // spent army: 4500 wood, 10700 food, 6300 gold, 0 stone
 
 B109      Town_Center1         1      -1
-B50       Farm                 4      -1
+B50       Farm                 2      -1
 U39       Soldier-Cavalry3_Arc 2      87
 U37       Soldier-Cavalry1     6      101
 T125      Priest               1      104       0
@@ -106,7 +106,8 @@ U39       Soldier-Cavalry3_Arc 2      87
 U37       Soldier-Cavalry1     6      101
 
 T83       Man                  4      109       0
-B50       Farm                 4      -1
+B109      Town_Center1         1      -1
+B50       Farm                 2      -1
 R44     Scale_Armor_-_Archers  1      103
 R110    Craftmanship           1      84
 R37     Alchemy                1      82
