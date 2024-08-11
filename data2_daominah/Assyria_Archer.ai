@@ -1,6 +1,6 @@
-// Assyrian Archer (missing Engineering, bad Iron Age civilization)
-// Bronze Age: 20 chariot archer, 8 priest, 3 stone thrower
-// Iron Age: 20 helepolis, 20 horse archer, 18 priest
+// Assyrian Archer (then Helepolis without Engineering)
+// Bronze Age: 36 chariot archer, 7 priest, 3 stone thrower
+// Iron Age: 16 helepolis, 24 horse archer, 18 priest
 
 
 B109      Town_Center1         1      -1
@@ -71,7 +71,7 @@ U83       Man                  2      109
 R81     Domestication          1      84
 R114    Writing                1      82
 
-// 32 villager, 24 chariot archer, 7 priest, 3 catapult (pop )
+// 32 villager, 36 chariot archer, 7 priest, 3 catapult (pop )
 // 6 archery range, 3 temple, 2 siege workshop
 // spent bronze: 6900 wood, 5700 food, 1700 gold
 
@@ -116,6 +116,7 @@ R23     Jihad                  1      104
 U83       Man                  2      109
 B109      Town_Center1         1      -1
 B50       Farm                 4      -1
+U83       Man                  2      109
 B79       Watch_Tower          2      -1
 U11       Soldier-Balista      4      49
 U35       Soldier-Catapult1    2      49
@@ -125,15 +126,14 @@ B50       Farm                 4      -1
 B79       Watch_Tower          2      -1
 U11       Soldier-Balista      4      49
 U35       Soldier-Catapult1    2      49
+U83       Man                  2      109
 
 R109    Stone_Mining           1      84
-U83       Man                  2      109
 B79       Watch_Tower          2      -1
 U11       Soldier-Balista      4      49
 U35       Soldier-Catapult1    2      49
 
 R111    Siegecraft             1      84
-U83       Man                  2      109
 B50       Farm                 4      -1
 B79       Watch_Tower          2      -1
 U11       Soldier-Balista      4      49
