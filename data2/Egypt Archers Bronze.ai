@@ -95,7 +95,7 @@ R37     Alchemy                1      82
 R110    Craftmanship           1      84
 R15     Guard_Tower            1      68
 U125      Priest               2      104
-C20     Fanaticism             1      104
+R20     Fanaticism             1      104
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 U40       Soldier-Chariot1     7      101
@@ -148,10 +148,6 @@ B79       Watch_Tower          2      -1
 
 
 B109      Town_Center1         1      -1
-
-U40       Soldier-Chariot1     8      101
-U41       Soldier-Chariot2     3      87
-U40       Soldier-Chariot1     8      101
 
 U40       Soldier-Chariot1     8      101
 U41       Soldier-Chariot2     3      87
