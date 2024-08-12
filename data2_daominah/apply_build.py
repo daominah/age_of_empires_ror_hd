@@ -25,6 +25,14 @@ def main():
             "Choson Priests.ai",
             "Choson Swordsmen.ai",
         },
+        "Egypt_Chariot_Priest.ai": {
+            "Egypt Archers Bronze.ai",
+            "Egypt Archers Iron.ai",
+            "Egypt Chariot Archer.ai",
+            "Egypt Chariots.ai",
+            "Egypt War Elephants.ai",
+            "Immortal Egypt.ai",
+        },
         "Greek_Centurion.ai": {
             "Greek Phalanx.ai",
             "Greek Priests.ai",
