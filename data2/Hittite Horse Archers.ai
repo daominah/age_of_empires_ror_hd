@@ -56,7 +56,7 @@ T83       Man                  2      109       0
 B50       Farm                 2      -1
 U35       Soldier-Catapult1    2      49
 
-R108    Gold_Mining
+R108    Gold_Mining            1      84
 R114    Writing                1      82
 
 // 30 villager, 12 chariot archer, 3 catapult
@@ -94,28 +94,28 @@ B79       Watch_Tower          2      -1
 U39       Soldier-Cavalry3_Arc 6      87
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          2      -1
-// 24 heavy horse archer, 18 catapult (pop )
+// 24 heavy horse archer, 18 catapult, 10 tower (pop )
 // spent army: 10000 wood, 10600 food, 6200 gold, 3100 stone (TODO update)
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 R15     Guard_Tower            1      68
+B79       Watch_Tower          4      -1
+
+U35       Soldier-Catapult1    4      49
+B50       Farm                 4      -1
 C109    Stone_Mining           1      84
 B79       Watch_Tower          4      -1
 
-T83       Man                  2      109       0
-U35       Soldier-Catapult1    4      49
 B50       Farm                 4      -1
 B79       Watch_Tower          4      -1
-C111    Siegecraft             1      84
+U39       Soldier-Cavalry3_Arc 6      87
 
-B50       Farm                 4      -1
-B79       Watch_Tower          4      -1
+C111    Siegecraft             1      84
 B109      Town_Center1         1      -1
 
 C36     Massive_Catapult       1      49
 
-T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
@@ -126,11 +126,6 @@ B79       Watch_Tower          2      -1
 
 
 B109      Town_Center1         1      -1
-
-T39       Soldier-Cavalry3_Arc 6      87        1
-U35       Soldier-Catapult1    4      49
-T39       Soldier-Cavalry3_Arc 6      87        1
-U35       Soldier-Catapult1    4      49
 
 T25       Soldier-El_Archer    6      87        1
 U35       Soldier-Catapult1    4      49

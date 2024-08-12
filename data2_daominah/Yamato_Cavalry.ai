@@ -68,7 +68,7 @@ R114    Writing                1      82
 C103    Iron_Age               1      109
 R24     Polytheism             1      104
 B101      Stable1              2      -1
-B50       Farm                 4      -1
+B50       Farm                 2      -1
 
 R71     Heavy_Cavalry          1      101
 C52     Metallurgy             1      103
@@ -78,12 +78,13 @@ U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 1      87
 B87       Range1               1      -1
 
+C78     Cataphracts            1      101
 R50     Chain_Mail_-_Cavalry   1      103
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 1      87
+B50       Farm                 2      -1
 T125      Priest               1      104       1
 
-C78     Cataphracts            1      101
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 T125      Priest               1      104       1
@@ -91,21 +92,21 @@ T125      Priest               1      104       1
 // spent army: 4500 wood, 10700 food, 6300 gold, 0 stone
 
 B109      Town_Center1         1      -1
-B50       Farm                 2      -1
-U39       Soldier-Cavalry3_Arc 2      87
-U37       Soldier-Cavalry1     6      101
+B50       Farm                 4      -1
 T125      Priest               1      104       0
 
-T83       Man                  4      109       0
+T83       Man                  2      109       0
 B50       Farm                 4      -1
+U39       Soldier-Cavalry3_Arc 2      87
+U37       Soldier-Cavalry1     6      101
 B87       Range1               2      -1
+
 R41     Leather_Armor_-_Archer 1      103
 R32     Artisanship            1      84
 R106    Ballistics             1      82
 U39       Soldier-Cavalry3_Arc 2      87
 U37       Soldier-Cavalry1     6      101
 
-T83       Man                  4      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 R44     Scale_Armor_-_Archers  1      103
@@ -115,7 +116,7 @@ U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 
 R49     Chain_Mail_-_Archers   1      103
-B50       Farm                 4      -1
+B50       Farm                 2      -1
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 
@@ -134,15 +135,12 @@ U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
-U39       Soldier-Cavalry3_Arc 4      87
-U37       Soldier-Cavalry1     6      101
-U39       Soldier-Cavalry3_Arc 4      87
-U37       Soldier-Cavalry1     6      101
 
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
+
 U39       Soldier-Cavalry3_Arc 4      87
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87
