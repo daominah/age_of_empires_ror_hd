@@ -46,12 +46,12 @@ def main():
             "Persia Priests.ai",
             "Persia War Elephant.ai",
         },
-        # "Phoenicia_Elephant_Archer.ai": {
-        #     "Phoenicia Elephants.ai",
-        # },
-        "Phoenicia_Bronze.ai": {
+        "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",
         },
+        # "Phoenicia_Bronze.ai": {
+        #     "Phoenicia Elephants.ai",
+        # },
         "Yamato_Cavalry.ai": {
             "Immortal Yamato.ai",
             "Yamato Heavy Cavalry.ai",
