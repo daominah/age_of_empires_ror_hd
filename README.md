@@ -1,5 +1,10 @@
 # Age of Empires: The Rise of Rome
 
+## Download
+
+From [github.com/daominah/age_of_empires_ror_hd](https://github.com/daominah/age_of_empires_ror_hd) (this page)
+click on green button `Code` then `Download ZIP` (size about 100 MB).
+
 ## Run the game
 
 * Init setup: run file `SETUP.EXE`
