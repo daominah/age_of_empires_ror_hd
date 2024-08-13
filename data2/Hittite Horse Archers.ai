@@ -52,14 +52,13 @@ B50       Farm                 2      -1
 U35       Soldier-Catapult1    1      49
 B49       Siege_Workshop       1      -1
 
-T83       Man                  2      109       0
 B50       Farm                 2      -1
 U35       Soldier-Catapult1    2      49
 
 R108    Gold_Mining            1      84
 R114    Writing                1      82
 
-// 30 villager, 12 chariot archer, 3 catapult
+// 28 villager, 12 chariot archer, 3 catapult
 // 6 archery range, 2 siege workshop
 // spent bronze:  wood,  food
 
@@ -81,38 +80,39 @@ B50       Farm                 2      -1
 U39       Soldier-Cavalry3_Arc 6      87
 R30     Coinage                1      84
 R106    Ballistics             1      82
-C38     Heavy_Horse_Archer     1      87
 U35       Soldier-Catapult1    3      49
 T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
+U39       Soldier-Cavalry3_Arc 5      87
 R35     Engineering            1      82
-U39       Soldier-Cavalry3_Arc 6      87
 U35       Soldier-Catapult1    3      49
+C38     Heavy_Horse_Archer     1      87
 B79       Watch_Tower          2      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
+U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          2      -1
+U39       Soldier-Cavalry3_Arc 2      87
 // 24 heavy horse archer, 18 catapult, 10 tower (pop )
-// spent army: 10000 wood, 10600 food, 6200 gold, 3100 stone (TODO update)
+// spent army: 10000 wood, 10400 food, 6200 gold, 3100 stone (TODO update)
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
-R15     Guard_Tower            1      68
-B79       Watch_Tower          4      -1
+B79       Watch_Tower          2      -1
 
 U35       Soldier-Catapult1    4      49
 B50       Farm                 4      -1
-C109    Stone_Mining           1      84
+R15     Guard_Tower            1      68
 B79       Watch_Tower          4      -1
 
 B50       Farm                 4      -1
+C109    Stone_Mining           1      84
 B79       Watch_Tower          4      -1
 U39       Soldier-Cavalry3_Arc 6      87
 
 C111    Siegecraft             1      84
-B109      Town_Center1         1      -1
+B79       Watch_Tower          2      -1
 
 C36     Massive_Catapult       1      49
 
