@@ -1,6 +1,6 @@
 // Egyptian Chariot Priest
 // Bronze Age: 6 camel, 22 chariot, 15 chariot archer, 7 priest
-// Iron Age: 32 scythe chariot, 30 priest
+// Iron Age: 32 scythe chariot, 40 priest
 
 
 B109      Town_Center1         1      -1
@@ -33,17 +33,17 @@ R12     Sentry_Tower           1      68
 U83       Man                  1      109
 B82       Government_Center    1      -1
 T338      Soldier-Camel        3      101       0
-B50       Farm                 2      -1
 U83       Man                  1      109
+B104      Temple1              1      -1
 
 U41       Soldier-Chariot2     3      87
 U40       Soldier-Chariot1     4      101
 R32     Artisanship            1      84
 R34     Nobility               1      82
 R45     Scale_Armor_-_Cavalry  1      103
-B104      Temple1              1      -1
+U125      Priest               1      104
+B104      Temple1              2      -1
 T83       Man                  2      109       0
-B50       Farm                 2      -1
 
 U40       Soldier-Chariot1     4      101
 U41       Soldier-Chariot2     3      87
@@ -51,97 +51,91 @@ U83       Man                  2      109
 R112    Architecture           1      82
 R44     Scale_Armor_-_Archers  1      103
 R81     Domestication          1      84
-U125      Priest               1      104
+U125      Priest               2      104
+R21     Mysticism              1      104
 B104      Temple1              2      -1
 
 T83       Man                  2      109       0
 U40       Soldier-Chariot1     4      101
 U41       Soldier-Chariot2     3      87
-U125      Priest               2      104
-R21     Mysticism              1      104
-B79       Watch_Tower          2      -1
+U125      Priest               4      104
+R24     Polytheism             1      104
+B101      Stable1              2      -1
 
 U40       Soldier-Chariot1     4      101
 U41       Soldier-Chariot2     3      87
-B101      Stable1              2      -1
 U83       Man                  2      109
-U125      Priest               2      104
-R24     Polytheism             1      104
-B79       Watch_Tower          2      -1
+U125      Priest               4      104
+R16     Watch_Tower            1      68
 
 U40       Soldier-Chariot1     6      101
 U41       Soldier-Chariot2     3      87
-U125      Priest               2      104
+U125      Priest               4      104
 R22     Astrology              1      104
-U83       Man                  2      109
-B50       Farm                 2      -1
 
 R114    Writing                1      82
 
-// 32 villager, 6 camel, 22 chariot, 15 chariot archer, 7 priest
-// 6 stable, 3 archery range, 3 temple, 4 tower
+// 30 villager, 6 camel, 22 chariot, 15 chariot archer, 15 priest
+// 6 stable, 3 archery range, 5 temple, 1 tower
 // spent bronze: 5600 wood, 7000 food, 2300 gold
 
 
 C103    Iron_Age               1      109
-U125      Priest               3      104
-B50       Farm                 2      -1
+U125      Priest               5      104
+R16     Watch_Tower            2      68
 U40       Soldier-Chariot1     6      101
 B101      Stable1              2      -1
+R16     Watch_Tower            2      68
 
 C126    Scythe_Chariot         1      101
 R52     Metallurgy             1      103
 R37     Alchemy                1      82
 R110    Craftmanship           1      84
 R15     Guard_Tower            1      68
-U125      Priest               2      104
+U125      Priest               4      104
 R20     Fanaticism             1      104
 B50       Farm                 2      -1
-B109      Town_Center1         1      -1
 U40       Soldier-Chariot1     7      101
-T83       Man                  2      109       0
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
-U125      Priest               2      104
+U40       Soldier-Chariot1     7      101
+U125      Priest               4      104
 R18     Afterlife              1      104
 R106    Ballistics             1      82
 R50     Chain_Mail_-_Cavalry   1      103
-B50       Farm                 2      -1
-U40       Soldier-Chariot1     7      101
-T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
-B50       Farm                 2      -1
 R49     Chain_Mail_-_Archers   1      103
-U40       Soldier-Chariot1     8      101
-U125      Priest               2      104
+U125      Priest               4      104
 R19     Monotheism             1      104
-T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
-// 50 scythe chariot, 16 priest, 10 tower, 38 villager (pop )
+// 42 scythe chariot, 32 priest, 10 tower, 38 villager (pop )
 // spent army:  wood,  food,  gold,  stone
 
-U125      Priest               2      104
+U125      Priest               4      104
 R119    Medicine               1      104
-B79       Watch_Tower          4      -1
-
 B50       Farm                 2      -1
-U125      Priest               3      104
+B79       Watch_Tower          2      -1
+
+U125      Priest               4      104
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
 
 B50       Farm                 2      -1
-U125      Priest               3      104
 B79       Watch_Tower          2      -1
 
-U125      Priest               3      104
-B79       Watch_Tower          4      -1
-U40       Soldier-Chariot1     6      101
+B50       Farm                 2      -1
+U40       Soldier-Chariot1     4      101
+B79       Watch_Tower          2      -1
+U40       Soldier-Chariot1     4      101
 
-U125      Priest               3      104
+B50       Farm                 2      -1
+B79       Watch_Tower          4      -1
 U40       Soldier-Chariot1     8      101
 
+B50       Farm                 4      -1
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          2      -1
 // 30 priest, 64 scythe chariot, 24 tower
