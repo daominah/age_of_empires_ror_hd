@@ -29,13 +29,15 @@ B79       Watch_Tower          2      -1
 T37       Soldier-Cavalry1     1      101       1
 C64     Short_Sword            1      12
 R28     Wheel                  1      84
-R51     Metal_Working          1      103
 R12     Sentry_Tower           1      68
+R51     Metal_Working          1      103
 U83       Man                  2      109
 B82       Government_Center    1      -1
+
 T37       Soldier-Cavalry1     1      101       1
 U75       Soldier-Inf3         5      12
 B104      Temple1              1      -1
+
 // 20 villager, 3 swordsmen, 2 cavalry (pop 26)
 // 4 barrack, 1 temple, 1 stable, 4 tower
 // spent bronze: 1900 wood, 3600 food, 400 gold
