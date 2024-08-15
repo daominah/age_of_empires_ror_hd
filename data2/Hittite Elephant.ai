@@ -75,7 +75,7 @@ B50       Farm                 2      -1
 U39       Soldier-Cavalry3_Arc 5      87
 R35     Engineering            1      82
 U35       Soldier-Catapult1    4      49
-C38     Heavy_Horse_Archer     1      87
+R38     Heavy_Horse_Archer     1      87
 B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 5      87
@@ -107,13 +107,13 @@ B79       Watch_Tower          3      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
 // 48 heavy horse archer
-C109    Stone_Mining           1      84
+R109    Stone_Mining           1      84
 B79       Watch_Tower          4      -1
 
-C111    Siegecraft             1      84
+R111    Siegecraft             1      84
 B79       Watch_Tower          2      -1
 
-C36     Massive_Catapult       1      49
+R36     Massive_Catapult       1      49
 
 R2      Ballista_Tower         1      68
 B79       Watch_Tower          2      -1

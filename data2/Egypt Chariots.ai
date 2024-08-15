@@ -92,18 +92,20 @@ R52     Metallurgy             1      103
 R37     Alchemy                1      82
 R110    Craftmanship           1      84
 R15     Guard_Tower            1      68
+R18     Afterlife              1      104
 U125      Priest               4      104
-R20     Fanaticism             1      104
 B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+R20     Fanaticism             1      104
 U40       Soldier-Chariot1     7      101
 B79       Watch_Tower          1      -1
 
-U40       Soldier-Chariot1     7      101
 U125      Priest               4      104
-R18     Afterlife              1      104
 R106    Ballistics             1      82
 R50     Chain_Mail_-_Cavalry   1      103
-B79       Watch_Tower          2      -1
+U40       Soldier-Chariot1     7      101
+B79       Watch_Tower          1      -1
 
 R49     Chain_Mail_-_Archers   1      103
 U125      Priest               4      104
