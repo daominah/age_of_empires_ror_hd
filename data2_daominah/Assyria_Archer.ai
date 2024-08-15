@@ -1,5 +1,5 @@
 // Assyrian Archer (then Helepolis without Engineering)
-// Bronze Age: 36 chariot archer, 7 priest, 3 stone thrower
+// Bronze Age:  chariot archer,  priest,  stone thrower
 // Iron Age: 16 helepolis, 24 horse archer, 18 priest
 
 
@@ -9,13 +9,12 @@ B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
-R16     Watch_Tower            1      68
+// R16     Watch_Tower            1      68
 B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
-B101      Stable1              1      -1
-// R46     Toolworking            1      103
-// T299      Soldier-Scout        1      101       0
-T4        Soldier-Archer1      1      87        2
+// R16     Watch_Tower            1      68
+B87       Range1               1      -1
+T4        Soldier-Archer1      1      87        0
 U83       Man                  4      109
 B84       Market1              1      -1
 // 20 villager, 1 bowman
@@ -23,145 +22,128 @@ B84       Market1              1      -1
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-// R42     Leather_Armor_Mounted  1      103
-// B101      Stable1              1      -1
 B87       Range1               5      -1
 
 R28     Wheel                  1      84
 R44     Scale_Armor_-_Archers  1      103
-R12     Sentry_Tower           1      68
-// T37       Soldier-Cavalry1     3      101       0
-U83       Man                  2      109
-B104      Temple1              1      -1
-B79       Watch_Tower          2      -1
-
-U41       Soldier-Chariot2     6      87
-R32     Artisanship            1      84
-U125      Priest               1      104
-B79       Watch_Tower          2      -1
-
-U41       Soldier-Chariot2     6      87
-B104      Temple1              2      -1
-U83       Man                  2      109
-R108    Gold_Mining            1      84
-B82       Government_Center    1      -1
+// R12     Sentry_Tower           1      68
+U83       Man                  1      109
 B49       Siege_Workshop       1      -1
+U83       Man                  1      109
+B104      Temple1              1      -1
 
-U41       Soldier-Chariot2     6      87
+U41       Soldier-Chariot2     7      87
+R32     Artisanship            1      84
+U35       Soldier-Catapult1    1      49
+U125      Priest               1      104
+B104      Temple1              2      -1
+T83       Man                  2      109       0
+
+U41       Soldier-Chariot2     7      87
 U125      Priest               2      104
 R21     Mysticism              1      104
-U83       Man                  2      109
-
-U41       Soldier-Chariot2     6      87
+U35       Soldier-Catapult1    1      49
 B49       Siege_Workshop       1      -1
 U83       Man                  2      109
-B79       Watch_Tower          2      -1
 
-U41       Soldier-Chariot2     6      87
+U41       Soldier-Chariot2     7      87
 U125      Priest               2      104
-U35       Soldier-Catapult1    1      49
 R24     Polytheism             1      104
+R81     Domestication          1      84
+U35       Soldier-Catapult1    2      49
+B49       Siege_Workshop       1      -1
 U83       Man                  2      109
 
-U41       Soldier-Chariot2     6      87
+U41       Soldier-Chariot2     7      87
 U125      Priest               2      104
 R22     Astrology              1      104
 U35       Soldier-Catapult1    2      49
 U83       Man                  2      109
 
-R81     Domestication          1      84
-R114    Writing                1      82
-
-// 32 villager, 36 chariot archer, 7 priest, 3 catapult (pop )
-// 6 archery range, 3 temple, 2 siege workshop
+// 30 villager, 28 chariot archer, 7 priest, 6 catapult (pop )
+// 7 archery range, 3 temple, 3 siege workshop
 // spent bronze: 6900 wood, 5700 food, 1700 gold
 
 
 C103    Iron_Age               1      109
-B49       Siege_Workshop       4      -1
+B50       Farm                 2      -1
+B82       Government_Center    1      -1
 U125      Priest               3      104
+B49       Siege_Workshop       3      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
+U39       Soldier-Cavalry3_Arc 7      87
+U11       Soldier-Balista      5      49
 R54     Heavy_Catapult         1      49
 R110    Craftmanship           1      84
-R18     Afterlife              1      104
-U11       Soldier-Balista      4      49
-U125      Priest               2      104
-B50       Farm                 2      -1
-
-U39       Soldier-Cavalry3_Arc 6      87
-R30     Coinage                1      84
 R106    Ballistics             1      82
 U125      Priest               2      104
-R20     Fanaticism             1      104
-U11       Soldier-Balista      4      49
-U39       Soldier-Cavalry3_Arc 6      87
-B79       Watch_Tower          2      -1
+R18     Afterlife              1      104
+B50       Farm                 2      -1
 
+U39       Soldier-Cavalry3_Arc 7      87
+U11       Soldier-Balista      5      49
+U125      Priest               2      104
+R20     Fanaticism             1      104
+R114    Writing                1      82
+B50       Farm                 2      -1
 C27     Helepolis              1      49
-R15     Guard_Tower            1      68
+
+U11       Soldier-Balista      6      49
+U39       Soldier-Cavalry3_Arc 7      87
 U125      Priest               2      104
 R19     Monotheism             1      104
-U39       Soldier-Cavalry3_Arc 6      87
-U11       Soldier-Balista      4      49
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
 
-R119    Medicine               1      104
-U11       Soldier-Balista      4      49
+U11       Soldier-Balista      6      49
+U39       Soldier-Cavalry3_Arc 7      87
+B50       Farm                 2      -1
+
 U125      Priest               2      104
+R119    Medicine               1      104
+U11       Soldier-Balista      6      49
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
 
-// 16 helepolis, 24 horse archer, 18 priest (pop 124)
-// spent army: 11000 wood, 10300 food, 8400 gold, 2000 stone
+// 22 helepolis, 28 horse archer, 18 priest (pop )
+// spent army: 11000 wood, 10300 food, 8400 gold, 2000 stone (TODO update)
+
+U83       Man                  2      109
+B109      Town_Center1         1      -1
+
+U83       Man                  2      109
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
+
+B50       Farm                 2      -1
+R109    Stone_Mining           1      84
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
+U83       Man                  2      109
+
+R111    Siegecraft             1      84
+B50       Farm                 2      -1
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
+U83       Man                  2      109
 
 R23     Jihad                  1      104
 U83       Man                  2      109
-B109      Town_Center1         1      -1
-B50       Farm                 2      -1
-U83       Man                  2      109
-B79       Watch_Tower          2      -1
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
-
-U83       Man                  2      109
-B50       Farm                 4      -1
-B79       Watch_Tower          2      -1
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
-U83       Man                  2      109
-
-R109    Stone_Mining           1      84
-B79       Watch_Tower          2      -1
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
-
-R111    Siegecraft             1      84
-B50       Farm                 4      -1
-B79       Watch_Tower          2      -1
-B109      Town_Center1         1      -1
-U11       Soldier-Balista      4      49
-U35       Soldier-Catapult1    2      49
 
 R36     Massive_Catapult       1      49
-B79       Watch_Tower          2      -1
 
-R2      Ballista_Tower         1      68
-B79       Watch_Tower          2      -1
-// x helepolis, x catapult, 24 tower (pop )
-// spent extras:  wood,  food,  gold
+// R2      Ballista_Tower         1      68
 
 
 B109      Town_Center1         1      -1
 
-U41       Soldier-Chariot2     4      87
-U11       Soldier-Balista      8      49
-U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
 
-U41       Soldier-Chariot2     4      87
-U11       Soldier-Balista      8      49
-U35       Soldier-Catapult1    4      49
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Balista      4      49
+U35       Soldier-Catapult1    2      49
 
 
 // B276      Wonder               1      -1

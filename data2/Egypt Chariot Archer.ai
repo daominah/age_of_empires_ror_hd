@@ -66,7 +66,7 @@ U40       Soldier-Chariot1     4      101
 U41       Soldier-Chariot2     3      87
 U83       Man                  2      109
 U125      Priest               4      104
-R16     Watch_Tower            1      68
+B79       Watch_Tower          1      -1
 
 U40       Soldier-Chariot1     6      101
 U41       Soldier-Chariot2     3      87
@@ -82,10 +82,10 @@ R114    Writing                1      82
 
 C103    Iron_Age               1      109
 U125      Priest               5      104
-R16     Watch_Tower            2      68
+B79       Watch_Tower          2      -1
 U40       Soldier-Chariot1     6      101
 B101      Stable1              2      -1
-R16     Watch_Tower            2      68
+B79       Watch_Tower          2      -1
 
 C126    Scythe_Chariot         1      101
 R52     Metallurgy             1      103
