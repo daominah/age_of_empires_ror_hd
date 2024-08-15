@@ -13,10 +13,6 @@ click on green button `Code` then `Download ZIP` (size about 100 MB).
 
 * For multi player, run file `EMPIRESX.EXE`, if someone uses cheat code in the game, theirs units will be deleted then kicked from the game.
 
-## File size
-
-This git repository size is about 100MB.
-
 ## Edit AI (computer player)
 
 Guides to edit how computer player plays are in directory
