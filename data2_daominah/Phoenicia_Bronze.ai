@@ -104,7 +104,7 @@ B79       Watch_Tower          2      -1
 R30     Coinage                1      84
 R106    Ballistics             1      82
 U125      Priest               2      104
-C20     Fanaticism             1      104
+R20     Fanaticism             1      104
 B50       Farm                 2      -1
 U40       Soldier-Chariot1     7      101
 T83       Man                  2      109       0
