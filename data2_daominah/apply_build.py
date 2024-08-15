@@ -20,6 +20,10 @@ def main():
             "Assyria Infantry Bronze.ai",
             "Immortal Assyria.ai",
         },
+        "Babylon_Tower_Priest.ai": {
+            "Babylon Scouts.ai",
+            "Babylon Swordsmen.ai",
+        },
         "Choson_Swordsmen.ai": {
             "Choson Axemen.ai",
             "Choson Priests.ai",
@@ -60,6 +64,12 @@ def main():
         # "Phoenicia_Bronze.ai": {
         #     "Phoenicia Elephants.ai",
         # },
+        "Sumeria_Catapult.ai": {
+            "Immortal Sumeria.ai",
+            "Sumeria Catapults.ai",
+            "Sumeria Chariots.ai",
+            "Sumeria Scouts.ai",
+        },
         "Yamato_Cavalry.ai": {
             "Immortal Yamato.ai",
             "Yamato Heavy Cavalry.ai",
