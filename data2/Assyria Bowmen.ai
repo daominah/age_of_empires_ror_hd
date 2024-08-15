@@ -12,7 +12,6 @@ C101    Tool_Age               1      109
 // R16     Watch_Tower            1      68
 B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
-// R16     Watch_Tower            1      68
 B87       Range1               1      -1
 T4        Soldier-Archer1      1      87        0
 U83       Man                  4      109
@@ -27,9 +26,9 @@ B87       Range1               5      -1
 R28     Wheel                  1      84
 R44     Scale_Armor_-_Archers  1      103
 // R12     Sentry_Tower           1      68
-U83       Man                  1      109
+T83       Man                  1      109       0
 B49       Siege_Workshop       1      -1
-U83       Man                  1      109
+T83       Man                  1      109       0
 B104      Temple1              1      -1
 
 U41       Soldier-Chariot2     7      87
@@ -51,7 +50,7 @@ U125      Priest               2      104
 R24     Polytheism             1      104
 R81     Domestication          1      84
 U35       Soldier-Catapult1    2      49
-B49       Siege_Workshop       1      -1
+B82       Government_Center    1      -1
 U83       Man                  2      109
 
 U41       Soldier-Chariot2     7      87
@@ -66,14 +65,12 @@ U83       Man                  2      109
 
 
 C103    Iron_Age               1      109
-B50       Farm                 2      -1
-B82       Government_Center    1      -1
 U125      Priest               3      104
-B49       Siege_Workshop       3      -1
+B49       Siege_Workshop       4      -1
 
 U39       Soldier-Cavalry3_Arc 7      87
-U11       Soldier-Balista      5      49
 R54     Heavy_Catapult         1      49
+U11       Soldier-Balista      4      49
 R110    Craftmanship           1      84
 R106    Ballistics             1      82
 U125      Priest               2      104
@@ -88,26 +85,27 @@ R114    Writing                1      82
 B50       Farm                 2      -1
 C27     Helepolis              1      49
 
-U11       Soldier-Balista      6      49
+U11       Soldier-Balista      5      49
 U39       Soldier-Cavalry3_Arc 7      87
 U125      Priest               2      104
 R19     Monotheism             1      104
 B50       Farm                 2      -1
 
-U11       Soldier-Balista      6      49
+U11       Soldier-Balista      5      49
 U39       Soldier-Cavalry3_Arc 7      87
 B50       Farm                 2      -1
 
 U125      Priest               2      104
 R119    Medicine               1      104
-U11       Soldier-Balista      6      49
+U11       Soldier-Balista      5      49
 B50       Farm                 2      -1
 
-// 22 helepolis, 28 horse archer, 18 priest (pop )
+// 24 helepolis, 28 horse archer, 18 priest (pop )
 // spent army: 11000 wood, 10300 food, 8400 gold, 2000 stone (TODO update)
 
 U83       Man                  2      109
 B109      Town_Center1         1      -1
+B50       Farm                 2      -1
 
 U83       Man                  2      109
 U11       Soldier-Balista      4      49
