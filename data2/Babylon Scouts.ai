@@ -135,24 +135,24 @@ U35       Soldier-Catapult1    3      49
 T125      Priest               2      104       2
 B50       Farm                 4      -1
 
+T125      Priest               2      104       2
+B79       Watch_Tower          2      -1
+
+U35       Soldier-Catapult1    4      49
+T125      Priest               2      104       2
+B79       Watch_Tower          2      -1
+
+U35       Soldier-Catapult1    4      49
+T125      Priest               2      104       2
+B79       Watch_Tower          2      -1
+
+U35       Soldier-Catapult1    4      49
+B79       Watch_Tower          2      -1
+
+U35       Soldier-Catapult1    4      49
+B79       Watch_Tower          2      -1
+
+
 B276      Wonder               1      -1
-
-T125      Priest               2      104       2
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-T125      Priest               2      104       2
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-T125      Priest               2      104       2
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-B79       Watch_Tower          2      -1
-
 
 // B50       Farm                 24     -1
