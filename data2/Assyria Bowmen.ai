@@ -12,10 +12,10 @@ C101    Tool_Age               1      109
 // R16     Watch_Tower            1      68
 B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
+B84       Market1              1      -1
 B87       Range1               1      -1
 T4        Soldier-Archer1      1      87        0
 U83       Man                  4      109
-B84       Market1              1      -1
 // 20 villager, 1 bowman
 
 
