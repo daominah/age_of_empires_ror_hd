@@ -1,4 +1,5 @@
-// Hittite Horse Archer
+// Sumerian Catapult
+// Civ bonus: catapult +42% fire rate; villager +15 HP; farm +250 food
 // Bronze Age: 8 chariot archer, 2 stone thrower
 // Iron Age: 24 heavy catapult, 20 horse archer
 
@@ -12,10 +13,10 @@ C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
 B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
-B79       Watch_Tower          1      -1
-T4        Soldier-Archer1      1      87        2
-U83       Man                  4      109
 B84       Market1              1      -1
+B79       Watch_Tower          1      -1
+T4        Soldier-Archer1      1      87        0
+U83       Man                  4      109
 // 20 villager, 1 bowman
 
 
@@ -47,7 +48,7 @@ T83       Man                  2      109       0
 R114    Writing                1      82
 
 // 26 villager, 8 chariot archer, 2 catapult
-// 6 archery range, 2 siege workshop, 4 tower
+// 4 archery range, 2 siege workshop, 4 tower
 // spent bronze:  wood,  food
 
 
