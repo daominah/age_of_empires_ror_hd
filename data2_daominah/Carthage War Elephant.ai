@@ -69,13 +69,13 @@ B109      Town_Center1         1      -1
 // B276      Wonder               1      -1
 
 B49       Siege_Workshop       1      -1
-U11       Soldier-Balista      2      49
+U11       Soldier-Ballista      2      49
 B101      Stable1              1      -1
 U46       Soldier-Elephant     12     101
 U125      Priest               1      104
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U46       Soldier-Elephant     24     101
-U11       Soldier-Balista      8      49
+U11       Soldier-Ballista      8      49
 B101      Stable1              1      -1
 U46       Soldier-Elephant     175    101
 B109      Town_Center1         1      -1

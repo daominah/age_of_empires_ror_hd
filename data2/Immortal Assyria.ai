@@ -70,7 +70,7 @@ B49       Siege_Workshop       4      -1
 
 U39       Soldier-Cavalry3_Arc 7      87
 R54     Heavy_Catapult         1      49
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 R110    Craftmanship           1      84
 R106    Ballistics             1      82
 U125      Priest               2      104
@@ -78,26 +78,26 @@ R18     Afterlife              1      104
 B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 7      87
-U11       Soldier-Balista      5      49
+U11       Soldier-Ballista      5      49
 U125      Priest               2      104
 R20     Fanaticism             1      104
 R114    Writing                1      82
 B50       Farm                 2      -1
 R27     Helepolis              1      49
 
-U11       Soldier-Balista      5      49
+U11       Soldier-Ballista      5      49
 U39       Soldier-Cavalry3_Arc 7      87
 U125      Priest               2      104
 R19     Monotheism             1      104
 B50       Farm                 2      -1
 
-U11       Soldier-Balista      5      49
+U11       Soldier-Ballista      5      49
 U39       Soldier-Cavalry3_Arc 7      87
 B50       Farm                 2      -1
 
 U125      Priest               2      104
 R119    Medicine               1      104
-U11       Soldier-Balista      5      49
+U11       Soldier-Ballista      5      49
 B50       Farm                 2      -1
 
 // 24 helepolis, 28 horse archer, 18 priest (pop )
@@ -108,18 +108,18 @@ B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 
 U83       Man                  2      109
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
 
 B50       Farm                 2      -1
 R109    Stone_Mining           1      84
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
 U83       Man                  2      109
 
 R111    Siegecraft             1      84
 B50       Farm                 2      -1
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
 U83       Man                  2      109
 
@@ -133,14 +133,14 @@ R36     Massive_Catapult       1      49
 
 B109      Town_Center1         1      -1
 
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
 
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 U35       Soldier-Catapult1    2      49
 
 

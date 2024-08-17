@@ -1,6 +1,6 @@
 // Macedonian Centurion
 // Bronze Age: 2 cavalry, 16 hoplite
-// Iron Age: 30 centurion, 50 balista
+// Iron Age: 30 centurion, 50 ballista
 
 
 B109      Town_Center1         1      -1
@@ -77,16 +77,16 @@ B49       Siege_Workshop       2      -1
 R122    Tower_Shield           1      103
 R79     Centurion              1      0
 U93       Soldier-Phal1        3      0
-U11       Soldier-Balista      2      49
+U11       Soldier-Ballista      2      49
 B49       Siege_Workshop       2      -1
 B50       Farm                 2      -1
 
 R52     Metallurgy             1      103
 U93       Soldier-Phal1        3      0
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 B50       Farm                 2      -1
 B49       Siege_Workshop       2      -1
-// 32 centurion, 6 balista, 8 tower (pop )
+// 32 centurion, 6 ballista, 8 tower (pop )
 // spent army: 5700 wood, 10700 food, 5700 gold, 1600 stone
 
 // R108    Gold_Mining            1      84
@@ -94,33 +94,33 @@ B49       Siege_Workshop       2      -1
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
-U11       Soldier-Balista      4      49
+U11       Soldier-Ballista      4      49
 B79       Watch_Tower          2      -1
 
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
 U93       Soldier-Phal1        4      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 B79       Watch_Tower          2      -1
 U93       Soldier-Phal1        4      0
 R15     Guard_Tower            1      68
 
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 R37     Alchemy                1      82
 B79       Watch_Tower          2      -1
 U93       Soldier-Phal1        4      0
 
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 B79       Watch_Tower          4      -1
 B0        Academy              2      -1
 U93       Soldier-Phal1        4      0
-// 48 centurion, 40 balista
+// 48 centurion, 40 ballista
 
 R2      Catapult_Tower         1      68
 B79       Watch_Tower          2      -1
@@ -129,19 +129,19 @@ B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 
 U93       Soldier-Phal1        6      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 U93       Soldier-Phal1        6      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 
 U93       Soldier-Phal1        6      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 U93       Soldier-Phal1        6      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 
 U93       Soldier-Phal1        6      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 U93       Soldier-Phal1        6      0
-U11       Soldier-Balista      6      49
+U11       Soldier-Ballista      6      49
 
 
 B276      Wonder               1      -1
