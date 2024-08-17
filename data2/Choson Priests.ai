@@ -105,17 +105,17 @@ B79       Watch_Tower          2      -1
 R21     Mysticism              1      104
 R24     Polytheism             1      104
 U125      Priest               2      104
-T11       Soldier-Balista      4      49        2
+T11       Soldier-Ballista      4      49        2
 
 R22     Astrology              1      104
-T11       Soldier-Balista      4      49
+T11       Soldier-Ballista      4      49
 R18     Afterlife              1      104
 U125      Priest               2      104
 B50       Farm                 4      -1
 B79       Watch_Tower          2      -1
 
 R19     Monotheism             1      104
-T11       Soldier-Balista      4      49
+T11       Soldier-Ballista      4      49
 R119    Medicine               1      104
 B109      Town_Center1         1      -1
 U125      Priest               2      104
@@ -123,14 +123,14 @@ B50       Farm                 4      -1
 B79       Watch_Tower          2      -1
 
 U125      Priest               4      104
-T11       Soldier-Balista      4      49
+T11       Soldier-Ballista      4      49
 B50       Farm                 4      -1
 U125      Priest               4      104
 B79       Watch_Tower          4      -1
 U75       Soldier-Inf3         8      12
 
 U125      Priest               4      104
-T11       Soldier-Balista      4      49
+T11       Soldier-Ballista      4      49
 B79       Watch_Tower          4      -1
 U75       Soldier-Inf3         8      12
 
@@ -139,7 +139,7 @@ B79       Watch_Tower          4      -1
 U75       Soldier-Inf3         8      12
 
 U125      Priest               4      104
-T11       Soldier-Balista      4      49
+T11       Soldier-Ballista      4      49
 U125      Priest               4      104
 B79       Watch_Tower          4      -1
 U125      Priest               4      104
@@ -149,7 +149,7 @@ B79       Watch_Tower          4      -1
 
 R27     Helepolis              1      49
 
-// 82 legion, 38 priest, 24 balista, 40 tower
+// 82 legion, 38 priest, 24 ballista, 40 tower
 // spent extras: 10500 wood, 14800 food, 9200 gold (TODO update)
 
 
