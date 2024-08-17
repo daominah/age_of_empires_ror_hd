@@ -1,11 +1,11 @@
 // Hittite Horst Archer
 // Civ bonus: archer +1 atk; catapult x2 HP; ship +4 range
-// Bronze Age: 12 chariot archer, 2 stone thrower
-// Iron Age: 27 heavy horse archer, 18 catapult
+// Bronze Age: 12 chariot archer (+12 while Ironing) , 2 catapult
+// Iron Age: 32 heavy horse archer, 20 catapult
 
 
 B109      Town_Center1         1      -1
-U83       Man                  16      109
+U83       Man                  12      109
 B12       Barracks1            1      -1
 
 
@@ -16,75 +16,82 @@ R41     Leather_Armor_-_Archer 1      103
 B84       Market1              1      -1
 B79       Watch_Tower          1      -1
 T4        Soldier-Archer1      1      87        0
-U83       Man                  4      109
-// 20 villager, 1 bowman
+T83       Man                  2      109       0
+// 14 villager, 1 bowman
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B87       Range1               2      -1
-B87       Range1               3      -1
+B87       Range1               5      -1
 
 R28     Wheel                  1      84
 R44     Scale_Armor_-_Archers  1      103
 R12     Sentry_Tower           1      68
-T83       Man                  1      109       0
+T83       Man                  2      109       0
 B82       Government_Center    1      -1
-T83       Man                  1      109       0
-B79       Watch_Tower          1      -1
+B79       Watch_Tower          2      -1
 
 U41       Soldier-Chariot2     3      87
+U41       Soldier-Chariot2     3      87
+T83       Man                  2      109       0
 R32     Artisanship            1      84
-U41       Soldier-Chariot2     3      87
 R112    Architecture           1      82
-B49       Siege_Workshop       1      -1
+B49       Siege_Workshop       2      -1
 
-U41       Soldier-Chariot2     3      87
-B49       Siege_Workshop       1      -1
+T41       Soldier-Chariot2     6      87        0
+T83       Man                  2      109       0
 R34     Nobility               1      82
-T83       Man                  2      109       0
-U41       Soldier-Chariot2     3      87
-U35       Soldier-Catapult1    1      49
-B79       Watch_Tower          1      -1
-
-U35       Soldier-Catapult1    1      49
-B79       Watch_Tower          1      -1
-T83       Man                  2      109       0
+U35       Soldier-Catapult1    2      49
+B79       Watch_Tower          2      -1
 
 R114    Writing                1      82
 
-// 26 villager, 12 chariot archer, 2 catapult
-// 6 archery range, 2 siege workshop, 4 tower
+// 20 villager, 12 chariot archer, 2 catapult
+// 6 archery range, 2 siege workshop, 5 tower
 // spent bronze:  wood,  food
 
 
 C103    Iron_Age               1      109
-U41       Soldier-Chariot2     6      87
+T41       Soldier-Chariot2     6      87        0
+U35       Soldier-Catapult1    2      49
+T41       Soldier-Chariot2     6      87        0
 U35       Soldier-Catapult1    2      49
 B49       Siege_Workshop       2      -1
 B79       Watch_Tower          3      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
-R37     Alchemy                1      82
-C54     Heavy_Catapult         1      49
-C49     Chain_Mail_-_Archers   1      103
-R110    Craftmanship           1      84
+T83       Man                  2      109       0
 U35       Soldier-Catapult1    3      49
+R37     Alchemy                1      82
+R54     Heavy_Catapult         1      49
+R49     Chain_Mail_-_Archers   1      103
+R110    Craftmanship           1      84
+B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
-R106    Ballistics             1      82
+T83       Man                  2      109       0
 U35       Soldier-Catapult1    3      49
 
-R35     Engineering            1      82
-U39       Soldier-Cavalry3_Arc 5      87
-U35       Soldier-Catapult1    4      49
 R38     Heavy_Horse_Archer     1      87
+U39       Soldier-Cavalry3_Arc 5      87
+R106    Ballistics             1      82
+T83       Man                  2      109       0
+B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 5      87
 U35       Soldier-Catapult1    4      49
-B79       Watch_Tower          2      -1
+R35     Engineering            1      82
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+
 U39       Soldier-Cavalry3_Arc 5      87
-// 28 heavy horse archer, 18 catapult, 7 tower (pop )
+U35       Soldier-Catapult1    4      49
+B50       Farm                 2      -1
+
+U39       Soldier-Cavalry3_Arc 5      87
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+// 32 heavy horse archer, 20 catapult, 10 tower (pop )
 // spent army: 10000 wood, 10400 food, 6200 gold, 3100 stone (TODO update)
 
 // R108    Gold_Mining            1      84
@@ -95,14 +102,13 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-U39       Soldier-Cavalry3_Arc 3      87
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
@@ -112,7 +118,6 @@ R15     Guard_Tower            1      68
 B79       Watch_Tower          2      -1
 U39       Soldier-Cavalry3_Arc 6      87
 
-U39       Soldier-Cavalry3_Arc 6      87
 // 48 heavy horse archer
 R109    Stone_Mining           1      84
 B79       Watch_Tower          2      -1
@@ -120,9 +125,9 @@ B79       Watch_Tower          2      -1
 R111    Siegecraft             1      84
 B79       Watch_Tower          2      -1
 
-R36     Massive_Catapult       1      49
+C36     Massive_Catapult       1      49
 
-R2      Catapult_Tower         1      68
+C2      Catapult_Tower         1      68
 B79       Watch_Tower          2      -1
 // 24 tower
 
