@@ -41,7 +41,7 @@ B79       Watch_Tower          2      -1
 
 T41       Soldier-Chariot2     6      87        0
 T83       Man                  2      109       0
-U35       Soldier-Catapult1    1      49
+T35       Soldier-Catapult1    1      49        0
 R34     Nobility               1      82
 B49       Siege_Workshop       1      -1
 
@@ -54,9 +54,9 @@ R114    Writing                1      82
 
 C103    Iron_Age               1      109
 T41       Soldier-Chariot2     6      87        0
-U35       Soldier-Catapult1    1      49
+T35       Soldier-Catapult1    1      49        0
 T41       Soldier-Chariot2     6      87        0
-U35       Soldier-Catapult1    2      49
+T35       Soldier-Catapult1    2      49        0
 B49       Siege_Workshop       2      -1
 B79       Watch_Tower          3      -1
 
