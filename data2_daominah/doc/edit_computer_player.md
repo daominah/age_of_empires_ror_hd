@@ -58,34 +58,6 @@ so I removed them to force computer to use civilization-specific AI files.
 Should edit in dir [data2_daominah](..) then copy to files in data2 with the
 corresponding civilization (can do by running [apply_build.py](../apply_build.py)).
 
-## PER file
-
-Not work when start with Random Map, but work with scenarios.
-
-Control personalities of computer players,
-e.g. an option like `SNUpgradeToToolAgeASAP=1` will make computer skip some
-build orders to research Tool Age first, then back to what skipped.
-
-TODO: read and try more about PER file.
-
-## PLY file
-
-"I made some of my own plays and tested them, and yes, the did work.
-It was very rewarding to see the AI come in with 3 groups of units, one made of priests.
-The two groups of units split up to attempt to flank my army,
-then attacked my fastest moving units (cavalry).
-After taking some damage, they retreated to a point, where they were healed by
-the group of priests, and then attacked again, making sure to take out the same
-unit they attacked last time. Quite interesting"
-
-Cons: the `.ply` file works for ALL computer players, in all scenarios, and random maps.
-So if you make a play that is useful only in one scenario, it will be used in
-all aspects of the game, and could cause some extremely stupid AI attacks.
-
-TLDR: should edit `.per` files instead.
-
-https://aoe.heavengames.com/siegeworkshop/ply/
-
 ## Helper tool
 
 ### speed editor
@@ -103,39 +75,52 @@ you can see what is happening.
 Not easy to search string, so better to use normal text editor to edit then
 check syntax and give summary of a build order with this tool.
 
-````text
-Example statistics from Persian_War_Elephants.ai:
-Units: 107 total
-    48 War Elephant
-    4 Elephant Archer
-    4 Camel Rider
-    1 Scout
-    50 Villager
-Buildings: 90 total
-    5 Town Center
-    1 Granary (auto build)
-    1 Storage Pit (auto build)
-    1 Barracks
-    34 Farm
-    10 Tower
-    6 Stable
-    1 Archery Range
-    1 Market
-    1 Government Center
-    1 Temple
-Research: 16 total
-````
-
 Known bug: when check condition to research `Heavy Horse Archer`,
 it require `Chain Mail Cavalry`, but it should be `Chain Mail Archer`.
 
-### .per file editor
+### empires.dat editor
 
-[per_edit.exe](../tool/per_edit.exe)
-(downloaded from `https://aoe.heavengames.com/dl-php/showfile.php?fileid=1668`).
+[AdvancedGenieEditor3.exe](../tool/genie_engine_editor/AdvancedGenieEditor3.exe)
+can be used to check units stats from file `data/empires.dat`.
+Should view on a cloned dir, avoiding accidentally save.
 
-Similar to the AI file editor, this tool does not provide a good search function,
-still can be used to check documentation and syntax of `.per` files.
+Example output for Bowman:
+
+* hit point: 35
+* move speed: 1.2
+* range: 5
+* sight: 7
+* attack: 3
+* attack reload: 1.4
+* armor: 0; armor vs Slinger: -2
+* train time: 30
+* cost: 40 food, 20 wood
+
+Downloaded from https://github.com/Tapsa/AGE
+
+## PER file
+
+Not work when start with Random Map, but work with scenarios.
+
+Control personalities of computer players,
+e.g. an option like `SNUpgradeToToolAgeASAP=1` will make computer skip some
+build orders to research Tool Age first, then back to what skipped.
+
+## PLY file
+
+"I made some of my own plays and tested them, and yes, the did work.
+It was very rewarding to see the AI come in with 3 groups of units, one made of priests.
+The two groups of units split up to attempt to flank my army,
+then attacked my fastest moving units (cavalry).
+After taking some damage, they retreated to a point, where they were healed by
+the group of priests, and then attacked again, making sure to take out the same
+unit they attacked last time. Quite interesting"
+
+Cons: the `.ply` file works for ALL computer players, in all scenarios, and random maps.
+So if you make a play that is useful only in one scenario, it will be used in
+all aspects of the game, and could cause some extremely stupid AI attacks.
+
+https://aoe.heavengames.com/siegeworkshop/ply/
 
 ## References
 

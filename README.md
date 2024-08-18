@@ -20,7 +20,7 @@ click on green button `Code` then `Download ZIP` (size about 100 MB).
 Guides to edit how computer player plays are in directory
 [data2_daominah/doc](data2_daominah/doc/edit_computer_player.md).
 
-## AoE version detail 
+## AoE version detail
 
 ### Farm replenish bug available
 
@@ -31,23 +31,25 @@ the same as Sumerian and Minoan Farm bonus).
 
 ### Civilization bonuses
 
-The result here comes from real tests and compares with the game document. 
+The result here comes from real tests and compares with the game document.
 
 #### 1. Assyrian
 
+* Villager move speed +0.2: starting at 1.3 instead of 1.1 (so +18% but stated +30%).
 * Archers attack speed +36% (stated +40%).
-* Villager move speed +0.2: start with 1.3 instead of 1.1 (so +18% but stated +30%).
 
 #### 2. Babylonian
 
-* Priest cooldown reduce to 36s instead of 50s, with Fanaticism from 29s to 24s (stated 50%).
+* Priest rejuvenation +0.75: starting at 2.75 instead of 2 (stated +50%),
+  so cooldown reduced to 36s instead of 50s,
+  with Fanaticism, it is 24s instead of 29s.
 * Stone mining +38% gathering rate and +3 capacity (stated 30%).
 * Tower, Wall x2 HP.
-
+ 
 #### 3. Carthaginian
 
 * Elephant and Academy units +25% HP (750 instead of 600).
-* Light Transport move speed +20%, Heavy Transport +50% (stated 30%).
+* Light Transport move speed +25%, Heavy Transport +43% (stated 30%).
   Carthaginian Heavy Transport speed is 2.5, as fast as Heavy Horse Archer.
 * Fire Galley +6 attack (24+12 instead of 24+6).
 
@@ -84,6 +86,10 @@ The result here comes from real tests and compares with the game document.
 * All units are 4 times more resistant to conversion.
 
 #### 9. Minoan
+
+* Composite Bowman +2 Composite Bowman range
+* Farm have +x food
+* Ships cost -30%.
 
 #### 10. Palmyran
 
