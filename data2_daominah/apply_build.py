@@ -75,6 +75,7 @@ def main():
             "Yamato Heavy Cavalry.ai",
         },
     }
+    print("number of source files: ", len(mapBuilds))
     for src, targets in mapBuilds.items():
         srcPath = os.path.join(sourceDir, src)
         if not Path(srcPath).exists():
