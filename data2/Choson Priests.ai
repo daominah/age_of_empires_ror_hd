@@ -188,7 +188,7 @@ B50       Farm                 24     -1
 // R22     Astrology              1      104  // +30% convert (30% to 39% chance/chant) and heal (3 to 4 HP/s)
 //
 // R18     Afterlife              1      104  // +3 range (10 to 13 tile)
-// R20     Fanaticism             1      104  // +50% rejuvenate (so rest duration reduce from 50s to 33s)
+// R20     Fanaticism             1      104  // +1.5 rejuvenate (2 to 3.5, but stated +50%), so rest duration reduced from 50s to 29s
 // R19     Monotheism             1      104  // convert enemy Priests and buildings
 // R119    Medicine               1      104  // x3 healing rate (3 to 9 HP/s, or 4 to 12 with Astrology)
 //
