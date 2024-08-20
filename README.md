@@ -42,65 +42,66 @@ The result here comes from real tests and compares with the game document.
 
 #### 2. Babylonian
 
-* Priest rejuvenation +0.75: starting at 2.75 instead of 2 (so +38% but stated +50%).  
+* Priest rejuvenation +0.75: starting at 2.75 instead of 2 (+38% but stated +50%).  
   So Priest's rest duration is 36s instead of 50s,
   with Fanaticism, it is 24s instead of 29s.
-* Stone Miner work rate +44%  and capacity +3 (stated 30%).
-* Tower and Wall hit points x2.
+* Stone Miner work rate +44% and capacity +3 (stated 30%).
+* Tower and Wall HP x2.
 
 #### 3. Carthaginian
 
-* Elephant and Academy units hit points +25%.
-* Light Transport move speed +25%, Heavy Transport move speed +43% (stated 30%),
+* Elephant and Academy units HP +25%.
+* Light Transport move speed +25%, Heavy Transport move speed +43%
+  (stated transport ships +30%),
   so Heavy Transport moves as fast as Heavy Horse Archer.
 * Fire Galley attack +6 (24+12 instead of 24+6).
 
 #### 4. Choson
 
 * Priest cost -32% (stated -30%): 85 gold instead of 125.
-* Iron Age Swordsmen +80 HP
-  (Long Swordsman HP is 160 instead of 80, Legion 240 instead of 160).
-* Towers +2 range.
+* Iron Age Swordsmen HP +80
+  (Long Swordsman is 160 instead of 80, Legion is 240 instead of 160).
+* Towers range +2.
 
 #### 5. Egyptian
 
-* Chariots +33% HP (Chariot Archer HP starts at 93 instead of 70,
-  Scythe Chariot HP is 182 instead of 137).
-* Priest +3 range (from 10+3 to 10+6).
-* Gold Miner +44% work rate and capacity +2 (stated +20%).
+* Chariots HP +33% (e.g. Chariot Archer starts at 93 instead of 70,
+  Scythe Chariot is 182 instead of 137).
+* Priest range +3 (10+6 instead of 10+3).
+* Gold Miner work rate +44% and capacity +2 (stated +20%).
 
 #### 6. Greek
 
 * Academy units move speed +33% (stated +30%):  
   +0.3 tiles/s, Hoplite starts at 1.2 instead of 0.9,
   with Aristocracy, the speed is 1.45 instead of 1.15.
-* War ships move speed +17% (stated +30%).
+* Warships move speed +17% (stated +30%).
 
 #### 7. Hittite
 
-* Archers +1 attack.
-* Siege units x2 HP.
-* Warship +4 range.
+* Archers attack +1.
+* Siege units HP x2.
+* Warships range +4.
 
 #### 8. Macedonian
 
-* Academy units +2 pierce armor.
-* Melee units +2 sight.
+* Academy units pierce armor +2.
+* Melee units sight +2.
 * Siege units cost -50%.
 * All units are 4 times more resistant to conversion
   (not sure how conversion works, will have tests in the next chapter).
 
 #### 9. Minoan
 
-* Composite Bowman +2 Composite Bowman range
-* Farm have +60 food (starting at 310 instead of 250).
+* Composite Bowman range +2.
+* Farm food +60 (starting at 310 instead of 250).
 * Ships cost -30%.
 
 #### 10. Palmyran
 
-* Forager, Hunter, Gold Miner, Stone Miner work rate +44%, Woodcutter +36%,  
-  (Farmer and Builder work as same as normal Villager, stated Villager work rate +25%).
-* Villager +1 armor and +1 pierce armor (in game only show +1 melee armor).
+* Forager, Hunter, Gold Miner, Stone Miner work rate +44%; Woodcutter +36%,  
+  (Farmer and Builder work rate are normal, stated Villager work rate +25%).
+* Villager armor +1 and pierce armor +1 (in game only show armor +1).
 * Villager cost +50% (so 75 food instead of 50).
 * Camel Rider move speed +25% (so as fast as Heavy Horse Archer).
 * Free tribute
@@ -114,13 +115,32 @@ The result here comes from real tests and compares with the game document.
 
 #### 12. Phoenician
 
+* Woodcutter work rate +36% and capacity +3 (stated +30%).
+* Elephants cost -25%.
+* Catapult Trireme and Juggernaught attack speed +72%.
+
 #### 13. Roman
+
+* Buildings cost -15% (except Tower, Wall, Wonder).  
+  Tower cost -50%.
+* Swordsmen attack speed +50% (stated 33%, they mean attack reload time).
 
 #### 14. Shang
 
+* Villager cost -30% (so 35 food instead of 50).
+* Wall HP x2.
+
 #### 15. Sumerian
 
+* Villager HP +15 (so 40 instead of 25).
+* Siege units attack speed +43%.
+* Farm food +250 (starting at 500 instead of 250).
+
 #### 16. Yamato
+
+* Villager move speed +18% (stated +30%).
+* Mounted units cost -25% (e.g. Cavalry cost reduced to 52 food, 60 gold).
+* Ships HP +30%.
 
 ### Priest conversion test
 
