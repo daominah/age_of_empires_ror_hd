@@ -1,7 +1,10 @@
-// Sumerian Catapult
-// Civ bonus: catapult +43% attack speed; villager +15 HP; farm +250 food
-// Bronze Age: 8 chariot archer, 1 catapult
-// Iron Age: 20 heavy catapult, 24 horse archer
+// Sumerian bonus:
+// * Siege units attack speed +43%.
+// * Villager HP +15 (so 40 instead of 25).
+// * Farm food +250 (starting at 500 instead of 250).
+// Build summary:
+// * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+2 Tower.
+// * Iron Age: 20 Heavy Catapult, 24 Horse Archer.
 
 
 B109      Town_Center1         1      -1
@@ -51,14 +54,13 @@ R114    Writing                1      82
 
 // 20 villager, 8 chariot archer, 1 catapult
 // 4 archery range, 2 siege workshop, 9 tower
-// spent bronze:  wood,  food
 
 
 C103    Iron_Age               1      109
 T41       Soldier-Chariot2     4      87        0
 T35       Soldier-Catapult1    1      49        0
 T41       Soldier-Chariot2     4      87        0
-T35       Soldier-Catapult1    2      49        0
+T35       Soldier-Catapult1    1      49        0
 B49       Siege_Workshop       4      -1
 B79       Watch_Tower          2      -1
 
@@ -96,8 +98,8 @@ B50       Farm                 2      -1
 U39       Soldier-Cavalry3_Arc 4      87
 T83       Man                  2      109       0
 B50       Farm                 2      -1
-// 20 heavy catapult, 24 horse archer, 16 tower (pop )
-// spent army: 10000 wood, 10400 food, 6200 gold, 3100 stone (TODO update)
+// 19 heavy catapult, 24 horse archer, 16 tower (pop 90)
+// spent army: 9800 wood, 10400 food, 4600 gold, 2700 stone
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
