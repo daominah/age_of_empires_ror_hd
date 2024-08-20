@@ -35,25 +35,25 @@ The result here comes from real tests and compares with the game document.
 
 #### 1. Assyrian
 
-* Villager move speed +18% (stated +30%):
+* Villager move speed +18% (stated +30%):  
   +0.2 tiles/second, starting at 1.3 instead of 1.1.
-* Archers attack speed +36% (stated +40%):
+* Archers attack speed +36% (stated +40%):  
   attack reload time reduced to 1.1 instead of 1.5.
 
 #### 2. Babylonian
 
-* Priest rejuvenation +0.75: starting at 2.75 instead of 2 (stated +50%).
+* Priest rejuvenation +0.75: starting at 2.75 instead of 2 (so +38% but stated +50%).  
   So Priest's rest duration is 36s instead of 50s,
   with Fanaticism, it is 24s instead of 29s.
-* Stone mining +44% gathering rate and +3 capacity (stated 30%).
-* Tower, Wall x2 HP.
- 
+* Stone Miner work rate +44%  and capacity +3 (stated 30%).
+* Tower and Wall hit points x2.
+
 #### 3. Carthaginian
 
-* Elephant and Academy units +25% HP.
-* Light Transport move speed +25%, Heavy Transport +43% (stated 30%),
+* Elephant and Academy units hit points +25%.
+* Light Transport move speed +25%, Heavy Transport move speed +43% (stated 30%),
   so Heavy Transport moves as fast as Heavy Horse Archer.
-* Fire Galley +6 attack (24+12 instead of 24+6).
+* Fire Galley attack +6 (24+12 instead of 24+6).
 
 #### 4. Choson
 
@@ -64,16 +64,15 @@ The result here comes from real tests and compares with the game document.
 
 #### 5. Egyptian
 
-* Chariots +33% HP:
-  Chariot Archer HP starts at 93 instead of 70,
-  Scythe Chariot HP is 182 instead of 137.
+* Chariots +33% HP (Chariot Archer HP starts at 93 instead of 70,
+  Scythe Chariot HP is 182 instead of 137).
 * Priest +3 range (from 10+3 to 10+6).
-* Gold mining +44% gathering rate and +2 capacity (stated +20%).
+* Gold Miner +44% work rate and capacity +2 (stated +20%).
 
 #### 6. Greek
 
-* Academy units move speed +33% (stated +30%):
-  +0.3, Hoplite starts at 1.2 instead of 0.9,
+* Academy units move speed +33% (stated +30%):  
+  +0.3 tiles/s, Hoplite starts at 1.2 instead of 0.9,
   with Aristocracy, the speed is 1.45 instead of 1.15.
 * War ships move speed +17% (stated +30%).
 
@@ -99,17 +98,19 @@ The result here comes from real tests and compares with the game document.
 
 #### 10. Palmyran
 
-
-* Villager work g
-44% faster (stated 25%)
-* Villager have 1 armor.
-  Villagers cost +50% (so 75 food instead of 50).
+* Forager, Hunter, Gold Miner, Stone Miner work rate +44%, Woodcutter +36%,  
+  (Farmer and Builder work as same as normal Villager, stated Villager work rate +25%).
+* Villager +1 armor and +1 pierce armor (in game only show +1 melee armor).
+* Villager cost +50% (so 75 food instead of 50).
 * Camel Rider move speed +25% (so as fast as Heavy Horse Archer).
-* Free tribute (instead of 25% taxed).
-* Gold received per Trade Ship doubled.
-"unblo
+* Free tribute
+  (instead of 25% taxed, other civilizations lost 125 resource to give 100).
 
 #### 11. Persian
+
+* Hunter work rate +66% and capacity +3 (stated +30%).
+* Elephants move speed +56% (stated +50%).
+* Trireme attack speed +38% (stated 50%).
 
 #### 12. Phoenician
 
