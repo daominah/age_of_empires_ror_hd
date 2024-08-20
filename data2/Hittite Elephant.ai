@@ -3,7 +3,7 @@
 // * Siege units HP x2.
 // * Warships range +4.
 // Build summary:
-// * Bronze Age: 12+12 Chariot Archer , 1+4 Catapult.
+// * Bronze Age: 12+12 Chariot Archer , 1+3 Catapult.
 // * Iron Age: 32 Heavy Horse Archer, 16 Catapult.
 
 
@@ -97,6 +97,7 @@ B50       Farm                 2      -1
 // 32 heavy horse archer, 16 catapult, 10 tower (pop )
 // spent army: 9500 wood, 10800 food, 5800 gold, 1600 stone
 
+
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
 
@@ -159,5 +160,5 @@ T39       Soldier-Cavalry3_Arc 6      87        1
 U35       Soldier-Catapult1    4      49
 
 
-// B276      Wonder               1      -1
+B276      Wonder               1      -1
 B50       Farm                 24     -1

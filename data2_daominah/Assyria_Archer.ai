@@ -1,23 +1,25 @@
-// Assyrian: Chariot Archer + Horse Archer + Helepolis (miss Engineering)
-// Civ bonus:
-// Bronze Age:  chariot archer,  priest,  stone thrower
-// Iron Age: 16 helepolis, 24 horse archer, 18 priest
+// Assyrian bonus:
+// * Archers attack speed +36%.
+// * Villager move speed +18%.
+//
+// Build summary:
+// * Bronze Age: 28+14 chariot archer, 5+3 priest, 4+4 catapult
+// * Iron Age: 60 horse archer, 15 priest, 12 catapult
 
 
 B109      Town_Center1         1      -1
-U83       Man                  16      109
+U83       Man                  12      109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
-// R16     Watch_Tower            1      68
 B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
 B84       Market1              1      -1
 B87       Range1               1      -1
 T4        Soldier-Archer1      1      87        0
-U83       Man                  4      109
-// 20 villager, 1 bowman
+T83       Man                  2      109       0
+// 14 villager, 1 bowman
 
 
 C102    Bronze_Age             1      109
@@ -26,123 +28,108 @@ B87       Range1               5      -1
 
 R28     Wheel                  1      84
 R44     Scale_Armor_-_Archers  1      103
-// R12     Sentry_Tower           1      68
-T83       Man                  1      109       0
+T83       Man                  2      109       0
 B49       Siege_Workshop       1      -1
-T83       Man                  1      109       0
 B104      Temple1              1      -1
 
-U41       Soldier-Chariot2     7      87
+U41       Soldier-Chariot2     3      87
+U41       Soldier-Chariot2     4      87
+T83       Man                  2      109       0
 R32     Artisanship            1      84
-U35       Soldier-Catapult1    1      49
+T35       Soldier-Catapult1    1      49        0
 U125      Priest               1      104
 B104      Temple1              2      -1
-T83       Man                  2      109       0
 
 U41       Soldier-Chariot2     7      87
+U83       Man                  2      109
+T35       Soldier-Catapult1    1      49        0
 U125      Priest               2      104
 R21     Mysticism              1      104
-U35       Soldier-Catapult1    1      49
 B49       Siege_Workshop       1      -1
-U83       Man                  2      109
-
-U41       Soldier-Chariot2     7      87
-U125      Priest               2      104
-R24     Polytheism             1      104
-R81     Domestication          1      84
-U35       Soldier-Catapult1    2      49
 B82       Government_Center    1      -1
-U83       Man                  2      109
 
 U41       Soldier-Chariot2     7      87
+U83       Man                  2      109
+R24     Polytheism             1      104
+R114    Writing                1      82
+
+U41       Soldier-Chariot2     7      87
+U83       Man                  2      109
+T35       Soldier-Catapult1    2      49        0
 U125      Priest               2      104
 R22     Astrology              1      104
-U35       Soldier-Catapult1    2      49
-U83       Man                  2      109
 
-// 30 villager, 28 chariot archer, 7 priest, 6 catapult (pop )
-// 7 archery range, 3 temple, 3 siege workshop
-// spent bronze: 6900 wood, 5700 food, 1700 gold
+// 24 villager, 28 chariot archer, 5 priest, 4 catapult (pop )
+// 7 archery range, 3 temple, 2 siege workshop
 
 
 C103    Iron_Age               1      109
+U41       Soldier-Chariot2     7      87
+T35       Soldier-Catapult1    2      49        0
 U125      Priest               3      104
-B49       Siege_Workshop       4      -1
+U41       Soldier-Chariot2     7      87
+T35       Soldier-Catapult1    2      49        0
+U125      Priest               3      104
+B87       Range1               3      -1
 
-U39       Soldier-Cavalry3_Arc 7      87
+U39       Soldier-Cavalry3_Arc 5      87
 R54     Heavy_Catapult         1      49
-U11       Soldier-Ballista      4      49
+U39       Soldier-Cavalry3_Arc 5      87
 R110    Craftmanship           1      84
 R106    Ballistics             1      82
-U125      Priest               2      104
 R18     Afterlife              1      104
-B50       Farm                 2      -1
-
-U39       Soldier-Cavalry3_Arc 7      87
-U11       Soldier-Ballista      5      49
-U125      Priest               2      104
 R20     Fanaticism             1      104
-R114    Writing                1      82
+U125      Priest               1      104
+U35       Soldier-Catapult1    1      49
+T83       Man                  2      109       0
 B50       Farm                 2      -1
-R27     Helepolis              1      49
 
-U11       Soldier-Ballista      5      49
-U39       Soldier-Cavalry3_Arc 7      87
-U125      Priest               2      104
+U39       Soldier-Cavalry3_Arc 10      87
+U125      Priest               1      104
+U35       Soldier-Catapult1    1      49
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+
+U39       Soldier-Cavalry3_Arc 10      87
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+
+U39       Soldier-Cavalry3_Arc 10      87
 R19     Monotheism             1      104
-B50       Farm                 2      -1
-
-U11       Soldier-Ballista      5      49
-U39       Soldier-Cavalry3_Arc 7      87
-B50       Farm                 2      -1
-
-U125      Priest               2      104
 R119    Medicine               1      104
-U11       Soldier-Ballista      5      49
+U125      Priest               1      104
+U35       Soldier-Catapult1    1      49
+T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-// 24 helepolis, 28 horse archer, 18 priest (pop )
-// spent army: 11000 wood, 10300 food, 8400 gold, 2000 stone (TODO update)
+U39       Soldier-Cavalry3_Arc 10      87
+U125      Priest               1      104
+U35       Soldier-Catapult1    1      49
+T83       Man                  2      109       0
+B50       Farm                 2      -1
 
-U83       Man                  2      109
+U39       Soldier-Cavalry3_Arc 10      87
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+// 60 horse archer, 15 priest, 12 catapult
+// spent army:  wood,  food,  gold,  stone
+
+
+// R108    Gold_Mining            1      84
+// R30     Coinage                1      84
+
 B109      Town_Center1         1      -1
+T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-U83       Man                  2      109
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
-
+T83       Man                  2      109       0
 B50       Farm                 2      -1
+// 40 villager, 16 farm
+
 R109    Stone_Mining           1      84
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
-U83       Man                  2      109
-
-R111    Siegecraft             1      84
-B50       Farm                 2      -1
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
-U83       Man                  2      109
-
 R23     Jihad                  1      104
-U83       Man                  2      109
-
-R36     Massive_Catapult       1      49
-
-// R2      Catapult_Tower         1      68
-
-
-B109      Town_Center1         1      -1
-
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
-
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
-U11       Soldier-Ballista      4      49
-U35       Soldier-Catapult1    2      49
+R111    Siegecraft             1      84
+C36     Massive_Catapult       1      49
 
 
 // B276      Wonder               1      -1
