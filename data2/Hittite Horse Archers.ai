@@ -1,7 +1,10 @@
-// Hittite: Heavy Horse Archer + Catapult
-// Civ bonus: archer +1 atk; catapult x2 HP; ship +4 range
-// Bronze Age: 12 chariot archer (+12 while Ironing) , 1 catapult
-// Iron Age: 32 heavy horse archer, 16 catapult
+// Hittite bonus:
+// * Archers attack +1.
+// * Siege units HP x2.
+// * Warships range +4.
+// Build summary:
+// * Bronze Age: 12+12 Chariot Archer , 1+4 Catapult.
+// * Iron Age: 32 Heavy Horse Archer, 16 Catapult.
 
 
 B109      Town_Center1         1      -1
@@ -49,7 +52,6 @@ R114    Writing                1      82
 
 // 20 villager, 12 chariot archer, 1 catapult
 // 6 archery range, 2 siege workshop, 5 tower
-// spent bronze:  wood,  food
 
 
 C103    Iron_Age               1      109
@@ -93,7 +95,7 @@ U39       Soldier-Cavalry3_Arc 5      87
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 // 32 heavy horse archer, 16 catapult, 10 tower (pop )
-// spent army: 10000 wood, 10400 food, 6200 gold, 3100 stone (TODO update)
+// spent army: 9500 wood, 10800 food, 5800 gold, 1600 stone
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
@@ -104,6 +106,7 @@ B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
+R15     Guard_Tower            1      68
 
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
@@ -112,19 +115,19 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+
 B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
-R15     Guard_Tower            1      68
-B79       Watch_Tower          2      -1
 U39       Soldier-Cavalry3_Arc 6      87
 
 // 48 heavy horse archer
+B79       Watch_Tower          2      -1
 R109    Stone_Mining           1      84
-B79       Watch_Tower          2      -1
 
-R111    Siegecraft             1      84
 B79       Watch_Tower          2      -1
+R111    Siegecraft             1      84
 
 C36     Massive_Catapult       1      49
 
