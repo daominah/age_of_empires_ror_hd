@@ -88,7 +88,8 @@ The result here comes from real tests and compares with the game document.
 * Academy units +2 pierce armor.
 * Melee units +2 sight.
 * Siege units cost -50%.
-* All units are 4 times more resistant to conversion (hard to measure).
+* All units are 4 times more resistant to conversion
+  (not sure how conversion works, will have tests in the next chapter).
 
 #### 9. Minoan
 
@@ -119,3 +120,46 @@ The result here comes from real tests and compares with the game document.
 #### 15. Sumerian
 
 #### 16. Yamato
+
+### Priest conversion test
+
+In the following tests, 20 priests start to convert enemy unit at range 10,
+the result number is the number of failed conversions.
+
+#### Priest vs Cavalry
+
+[14, 13, 14, 13, 11, 13, 15, 11, 16, 15, 10, 11, 14, 14, 7, 13, 13, 11, 13, 16]
+
+#### Priest vs Cavalry
+
+36% converted.
+
+#### Mysticism Astrology Priest vs Cavalry
+
+[7, 5, 6, 8, 8, 7, 5, 10, 5, 9, 6, 5, 4, 5, 4, 5, 6, 7, 8, 6]
+
+68% converted.
+
+#### Priest vs Centurion
+
+[7, 6, 5, 4, 4, 8, 4, 3, 6, 3, 6, 9, 11, 3, 6, 3, 7, 4, 8, 4]
+
+72% converted.
+
+#### Mysticism Astrology Priest vs Centurion
+
+[3, 2, 7, 5, 3, 4, 6, 2, 2, 4, 8, 2, 3, 5, 3, 3, 5, 5, 5, 6]
+
+79% converted.
+
+#### Priest vs Macedonian Centurion
+
+[16, 14, 15, 19, 18, 16, 16, 19, 15, 14, 11, 15, 13, 15, 17, 11, 18, 15, 17, 13]
+
+23% converted.
+
+#### Mysticism Astrology Priest vs Macedonian Centurion
+
+[15, 16, 17, 16, 15, 11, 9, 14, 12, 19, 17, 16, 13, 17, 16, 11, 17, 18, 16, 11]
+
+26% converted.
