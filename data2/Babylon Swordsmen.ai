@@ -1,158 +1,177 @@
-// Babylonian Tower Priest
-// Bronze Age: 2 cavalry
-// Iron Age: 40 legion, 40 priest, 24 ballista, 40 tower
+// Copied from Choson, TODO: edit Babylon build
+// *
+// *
+// *
+// Build summary:
+// * Bronze Age:
+// * Iron Age:
 
 
 B109      Town_Center1         1      -1
-U83       Man                  14      109
+U83       Man                  10      109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
+B12       Barracks1            5      -1
 R16     Watch_Tower            1      68
-B87       Range1               1      -1
-R41     Leather_Armor_-_Archer 1      103
+R63     Axe                    1      12
+B101      Stable1              1      -1
+R46     Toolworking            1      103
 B84       Market1              1      -1
 B79       Watch_Tower          1      -1
-T4        Soldier-Archer1      1      87        0
-U83       Man                  4      109
-// 18 villager, 1 bowman
+T299      Soldier-Scout        1      101       0
+T83       Man                  2      109       0
+// 12 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-R44     Scale_Armor_-_Archers  1      103
+R40     Leather_Armor_-_Soldie 1      103
 B79       Watch_Tower          2      -1
 
+T37       Soldier-Cavalry1     1      101       0
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
+R64     Short_Sword            1      12
+R51     Metal_Working          1      103
+U83       Man                  2      109
 B82       Government_Center    1      -1
-U83       Man                  1      109
-B79       Watch_Tower          1      -1
-
-R112    Architecture           1      82
-R32     Artisanship            1      84
 B104      Temple1              1      -1
-U83       Man                  1      109
-U41       Soldier-Chariot2     1      87
-B79       Watch_Tower          1      -1
 
-// 20 villager, 5 tower
-// spent bronze:  wood,  food,  gold
+T37       Soldier-Cavalry1     1      101       0
+T75       Soldier-Inf3         5      12        0
+U83       Man                  2      109
+
+// 16 villager, 5 swordsmen, 2 cavalry
+// 6 barrack, 1 temple, 1 stable, 3 tower
 
 
 C103    Iron_Age               1      109
-R108    Gold_Mining            1      84
-U125      Priest               2      104
-U41       Soldier-Chariot2     2      87
+R112    Architecture           1      82
+R32     Artisanship            1      84
+R43     Scale_Armor_-_Soldiers 1      103
+R65     Broad_Sword            1      12
+T75       Soldier-Inf3         5      12        0
+U125      Priest               1      104
 B79       Watch_Tower          2      -1
-R114    Writing                1      82
-B104      Temple1              1      -1
+T75       Soldier-Inf3         5      12        0
+T75       Soldier-Inf3         5      12        0
+T75       Soldier-Inf3         6      12        0
 B79       Watch_Tower          2      -1
+T75       Soldier-Inf3         6      12        0
+B12       Barracks1            2      -1
+// 32 swordsman
 
-C15     Guard_Tower            1      68
-R110    Craftmanship           1      84
+R66     Long_Sword             1      12
+R15     Guard_Tower            1      68
 R20     Fanaticism             1      104
-C106    Ballistics             1      82
-U83       Man                  2      109
-U39       Soldier-Cavalry3_Arc 1      87
-B104      Temple1              1      -1
+R110    Craftmanship           1      84
+R106    Ballistics             1      82
+// R52     Metallurgy             1      103
+T75       Soldier-Inf3         7      12        0
+T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
-U83       Man                  2      109
-R37     Alchemy                1      82
+T75       Soldier-Inf3         7      12        0
+T83       Man                  2      109       0
+U125      Priest               1      104
+B79       Watch_Tower          3      -1
+
 R2      Catapult_Tower         1      68
-R30     Coinage                1      84
+R37     Alchemy                1      82
+// R121    Logistics              1      82
+R47     Bronze_Shield          1      103
+U75       Soldier-Inf3         7      12
+T83       Man                  2      109       0
 U125      Priest               1      104
-U39       Soldier-Cavalry3_Arc 1      87
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 
-R109    Stone_Mining           1      84
-U83       Man                  2      109
-U125      Priest               1      104
-U39       Soldier-Cavalry3_Arc 1      87
-B79       Watch_Tower          2      -1
+U75       Soldier-Inf3         7      12
+T83       Man                  2      109       0
+B79       Watch_Tower          4      -1
 
-R111    Siegecraft             1      84
 R35     Engineering            1      82
-U83       Man                  2      109
+T83       Man                  2      109       0
 U125      Priest               1      104
-R18     Afterlife              1      104
+B87       Range1               1      -1
+B104      Temple1              3      -1
+U75       Soldier-Inf3         7      12
+B79       Watch_Tower          4      -1
+
+
+B49       Siege_Workshop       4      -1
+// 26 village, 60 long swordsman, 4 priest (pop 35+74/2)
+// 8 barracks, 4 temple, 15 tower
+// spent army: 3600 wood, 11000 food, 4100 gold, 2100 stone
+// (easy more legion later, 24 legion only cost 840 food + 360 gold)
+
+// R108    Gold_Mining            1      84
+// R30     Coinage                1      84
+
+B109      Town_Center1         1      -1
+R54     Heavy_Catapult         1      49
+B50       Farm                 2      -1
+
+
+R114    Writing                1      82
 R21     Mysticism              1      104
-U39       Soldier-Cavalry3_Arc 1      87
-B79       Watch_Tower          2      -1
-
-U83       Man                  2      109
-U125      Priest               1      104
 R24     Polytheism             1      104
-R22     Astrology              1      104
-U39       Soldier-Cavalry3_Arc 1      87
-B79       Watch_Tower          2      -1
+U35       Soldier-Catapult1    3      49
+U125      Priest               2      104
+B79       Watch_Tower          4      -1
 
-U83       Man                  2      109
-U125      Priest               1      104
+R22     Astrology              1      104
+R18     Afterlife              1      104
+U35       Soldier-Catapult1    3      49
+U125      Priest               2      104
+B50       Farm                 2      -1
+B79       Watch_Tower          4      -1
+
 R19     Monotheism             1      104
 R119    Medicine               1      104
-B104      Temple1              2      -1
-U39       Soldier-Cavalry3_Arc 1      87
+U35       Soldier-Catapult1    4      49
+U125      Priest               2      104
+B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
-// 32 village, 7 priest, 6 horse archer
-// 5 temple, 20 ballista tower
-// spent army:  wood,  food,  gold,  stone
+T35       Soldier-Catapult1    4      49        0
+U125      Priest               2      104
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
-T83       Man                  2      109       0
+T35       Soldier-Catapult1    4      49        0
+U125      Priest               4      104
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+T35       Soldier-Catapult1    4      49        0
+U125      Priest               4      104
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U125      Priest               4      104
 B79       Watch_Tower          2      -1
 
 B109      Town_Center1         1      -1
-T83       Man                  2      109       0
-U125      Priest               5      104
+
 B79       Watch_Tower          2      -1
-
-B50       Farm                 4      -1
-T83       Man                  2      109       0
-U125      Priest               5      104
-B49       Siege_Workshop       4      -1
-
-B50       Farm                 4      -1
-T83       Man                  2      109       0
-U125      Priest               5      104
-R54     Heavy_Catapult         1      49
-B79       Watch_Tower          2      -1
-
-B109      Town_Center1         1      -1
-T83       Man                  2      109       0
-U125      Priest               5      104
-R36     Massive_Catapult       1      49
-U35       Soldier-Catapult1    3      49
-B79       Watch_Tower          2      -1
-
-B50       Farm                 4      -1
-U125      Priest               5      104
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    3      49
-T125      Priest               2      104       2
-B50       Farm                 4      -1
-
-T125      Priest               2      104       2
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-T125      Priest               2      104       2
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-T125      Priest               2      104       2
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-B79       Watch_Tower          2      -1
-
-U35       Soldier-Catapult1    4      49
-B79       Watch_Tower          2      -1
-
-
 B276      Wonder               1      -1
 
-// B50       Farm                 24     -1
+
+R109    Stone_Mining           1      84
+R111    Siegecraft             1      84
+R36     Massive_Catapult       1      49
+
+T35       Soldier-Catapult1    4      49        0
+T35       Soldier-Catapult1    4      49        0
+T35       Soldier-Catapult1    4      49        0
+T35       Soldier-Catapult1    4      49        0
+
+R77     Legion                 1      12
+
+U75       Soldier-Inf3         8      12
+U75       Soldier-Inf3         8      12
+U75       Soldier-Inf3         8      12
+
+B50       Farm                 24     -1
