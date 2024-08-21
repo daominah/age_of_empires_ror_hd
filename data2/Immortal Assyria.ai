@@ -3,8 +3,8 @@
 // * Villager move speed +18%.
 //
 // Build summary:
-// * Bronze Age: 28+14 chariot archer, 5+3 priest, 4+4 catapult
-// * Iron Age: 60 horse archer, 15 priest, 12 catapult
+// * Bronze Age: 28+14 chariot archer, 5+4 priest, 4+2 catapult
+// * Iron Age: 56 horse archer, 15 priest, 10 catapult
 
 
 B109      Town_Center1         1      -1
@@ -32,49 +32,48 @@ T83       Man                  2      109       0
 B49       Siege_Workshop       1      -1
 B104      Temple1              1      -1
 
-U41       Soldier-Chariot2     3      87
-U41       Soldier-Chariot2     4      87
+T41       Soldier-Chariot2     3      87        0
+T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 R32     Artisanship            1      84
 T35       Soldier-Catapult1    1      49        0
-U125      Priest               1      104
+T125      Priest               1      104       0
 B104      Temple1              2      -1
 
-U41       Soldier-Chariot2     7      87
-U83       Man                  2      109
+T41       Soldier-Chariot2     7      87        0
+T83       Man                  2      109       0
 T35       Soldier-Catapult1    1      49        0
-U125      Priest               2      104
+T125      Priest               2      104       0
 R21     Mysticism              1      104
 B49       Siege_Workshop       1      -1
 B82       Government_Center    1      -1
 
-U41       Soldier-Chariot2     7      87
-U83       Man                  2      109
-R24     Polytheism             1      104
+T41       Soldier-Chariot2     7      87        0
+T83       Man                  2      109       0
 R114    Writing                1      82
 
-U41       Soldier-Chariot2     7      87
-U83       Man                  2      109
+T41       Soldier-Chariot2     7      87        0
+T83       Man                  2      109       0
 T35       Soldier-Catapult1    2      49        0
-U125      Priest               2      104
-R22     Astrology              1      104
+T125      Priest               2      104       0
+R24     Polytheism             1      104
 
 // 24 villager, 28 chariot archer, 5 priest, 4 catapult (pop )
 // 7 archery range, 3 temple, 2 siege workshop
 
 
 C103    Iron_Age               1      109
-U41       Soldier-Chariot2     7      87
+B87       Range1               1      -1
+T41       Soldier-Chariot2     7      87        0
 T35       Soldier-Catapult1    2      49        0
-U125      Priest               3      104
-U41       Soldier-Chariot2     7      87
-T35       Soldier-Catapult1    2      49        0
-U125      Priest               3      104
-B87       Range1               3      -1
+T125      Priest               2      104       0
+R22     Astrology              1      104
+T41       Soldier-Chariot2     7      87        0
+T125      Priest               2      104       0
 
-U39       Soldier-Cavalry3_Arc 5      87
+U39       Soldier-Cavalry3_Arc 4      87
 R54     Heavy_Catapult         1      49
-U39       Soldier-Cavalry3_Arc 5      87
+U39       Soldier-Cavalry3_Arc 4      87
 R110    Craftmanship           1      84
 R106    Ballistics             1      82
 R18     Afterlife              1      104
@@ -84,41 +83,48 @@ U35       Soldier-Catapult1    1      49
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-U39       Soldier-Cavalry3_Arc 10      87
+U39       Soldier-Cavalry3_Arc 8      87
 U125      Priest               1      104
 U35       Soldier-Catapult1    1      49
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-U39       Soldier-Cavalry3_Arc 10      87
+U39       Soldier-Cavalry3_Arc 8      87
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-U39       Soldier-Cavalry3_Arc 10      87
+U39       Soldier-Cavalry3_Arc 8      87
 R19     Monotheism             1      104
-R119    Medicine               1      104
-U125      Priest               1      104
+// R119    Medicine               1      104
+U125      Priest               2      104
 U35       Soldier-Catapult1    1      49
-T83       Man                  2      109       0
-B50       Farm                 2      -1
+T83       Man                  1      109       0
+B50       Farm                 1      -1
 
-U39       Soldier-Cavalry3_Arc 10      87
-U125      Priest               1      104
+U39       Soldier-Cavalry3_Arc 8      87
+U125      Priest               2      104
 U35       Soldier-Catapult1    1      49
-T83       Man                  2      109       0
-B50       Farm                 2      -1
+T83       Man                  1      109       0
+B50       Farm                 1      -1
 
-U39       Soldier-Cavalry3_Arc 10      87
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-// 60 horse archer, 15 priest, 12 catapult
-// spent army:  wood,  food,  gold,  stone
+U39       Soldier-Cavalry3_Arc 8      87
+T83       Man                  1      109       0
+B50       Farm                 1      -1
+
+U39       Soldier-Cavalry3_Arc 8      87
+T83       Man                  1      109       0
+B50       Farm                 1      -1
+// 56 horse archer, 10 catapult, 15 priest (pop 157)
+// spent army: 10500 wood, 10000 food, 8700 gold, 0 stone
 
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
 
 B109      Town_Center1         1      -1
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
@@ -132,5 +138,16 @@ R111    Siegecraft             1      84
 C36     Massive_Catapult       1      49
 
 
-// B276      Wonder               1      -1
+B109      Town_Center1         1      -1
+
+U39       Soldier-Cavalry3_Arc 8      87
+U35       Soldier-Catapult1    2      49
+U125      Priest               3      104
+
+U39       Soldier-Cavalry3_Arc 8      87
+U35       Soldier-Catapult1    2      49
+U125      Priest               3      104
+
+
+B276      Wonder               1      -1
 B50       Farm                 24     -1
