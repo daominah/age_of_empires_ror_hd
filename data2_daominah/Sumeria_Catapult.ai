@@ -4,7 +4,7 @@
 // * Farm food +250 (starting at 500 instead of 250).
 // Build summary:
 // * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+2 Tower.
-// * Iron Age: 20 Heavy Catapult, 24 Horse Archer.
+// * Iron Age: 19 Heavy Catapult, 24 Horse Archer.
 
 
 B109      Town_Center1         1      -1
@@ -43,7 +43,7 @@ R112    Architecture           1      82
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          2      -1
 
-U41       Soldier-Chariot2     4      87
+T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 T35       Soldier-Catapult1    1      49        0
 R34     Nobility               1      82
@@ -53,7 +53,7 @@ B79       Watch_Tower          2      -1
 R114    Writing                1      82
 
 // 20 villager, 8 chariot archer, 1 catapult
-// 4 archery range, 2 siege workshop, 9 tower
+// 4 archery range, 1 siege workshop, 9 tower
 
 
 C103    Iron_Age               1      109
