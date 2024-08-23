@@ -35,13 +35,13 @@ R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 R64     Short_Sword            1      12
 R51     Metal_Working          1      103
-U83       Man                  2      109
+T83       Man                  2      109       0
 B82       Government_Center    1      -1
 B104      Temple1              1      -1
 
 T37       Soldier-Cavalry1     1      101       0
 T75       Soldier-Inf3         5      12        0
-U83       Man                  2      109
+T83       Man                  2      109       0
 
 // 16 villager, 5 swordsmen, 2 cavalry
 // 6 barrack, 1 temple, 1 stable, 3 tower
@@ -53,7 +53,7 @@ R32     Artisanship            1      84
 R43     Scale_Armor_-_Soldiers 1      103
 R65     Broad_Sword            1      12
 T75       Soldier-Inf3         5      12        0
-U125      Priest               1      104
+T125      Priest               1      104       0
 B79       Watch_Tower          2      -1
 T75       Soldier-Inf3         5      12        0
 T75       Soldier-Inf3         5      12        0
@@ -75,7 +75,7 @@ B79       Watch_Tower          2      -1
 
 T75       Soldier-Inf3         7      12        0
 T83       Man                  2      109       0
-U125      Priest               1      104
+T125      Priest               1      104       0
 B79       Watch_Tower          2      -1
 
 R77     Legion                 1      12
@@ -109,7 +109,6 @@ B49       Siege_Workshop       4      -1
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
-
 
 R21     Mysticism              1      104
 R24     Polytheism             1      104
@@ -199,4 +198,4 @@ B50       Farm                 24     -1
 // R119    Medicine               1      104  // x3 healing rate (3 to 9 HP/s, or 4 to 12 with Astrology)
 //
 // R120    Martyrdom              1      104  // sacrifice to instantly convert an enemy unit (computer don't use)
-// R23     Jihad                  1      104  // village + 0.3 MS (1.8 to 2.1 tile/s with Wheel), +7 ATK, +40 HP, -8 gather cap
+// R23     Jihad                  1      104  // a.k.a. Zealotry, village + 0.3 MS (1.8 to 2.1 tile/s with Wheel), +7 ATK, +40 HP, -8 gather cap
