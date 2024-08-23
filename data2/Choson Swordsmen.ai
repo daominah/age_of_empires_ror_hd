@@ -110,7 +110,6 @@ B49       Siege_Workshop       4      -1
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 
-
 R21     Mysticism              1      104
 R24     Polytheism             1      104
 T11       Soldier-Ballista     4      49        0
@@ -199,4 +198,4 @@ B50       Farm                 24     -1
 // R119    Medicine               1      104  // x3 healing rate (3 to 9 HP/s, or 4 to 12 with Astrology)
 //
 // R120    Martyrdom              1      104  // sacrifice to instantly convert an enemy unit (computer don't use)
-// R23     Jihad                  1      104  // village + 0.3 MS (1.8 to 2.1 tile/s with Wheel), +7 ATK, +40 HP, -8 gather cap
+// R23     Jihad                  1      104  // a.k.a. Zealotry, village + 0.3 MS (1.8 to 2.1 tile/s with Wheel), +7 ATK, +40 HP, -8 gather cap
