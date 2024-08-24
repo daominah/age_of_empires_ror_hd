@@ -87,7 +87,7 @@ R106    Ballistics             1      82
 T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
-R35     Engineering            1      82
+C35     Engineering            1      82
 U39       Soldier-Cavalry3_Arc 6      87
 U35       Soldier-Catapult1    4      49
 T83       Man                  2      109       0
