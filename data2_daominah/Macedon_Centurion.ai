@@ -1,10 +1,14 @@
-// Macedonian Centurion
-// Bronze Age: 2 cavalry, 16 hoplite
-// Iron Age: 30 centurion, 50 ballista
+// Macedonian bonus:
+// * Academy units pierce armor +2.
+// * Siege units cost -50%.
+// * Melee units sight +2.
+// * All units are 4 times more resistant to conversion.
+// * Bronze Age: 2+1 cavalry, 1+9 hoplite
+// * Iron Age: 32 centurion, 56 ballista
 
 
 B109      Town_Center1         1      -1
-U83       Man                  14      109
+U83       Man                  10      109
 B12       Barracks1            1      -1
 
 
@@ -15,8 +19,8 @@ R46     Toolworking            1      103
 B84       Market1              1      -1
 B79       Watch_Tower          1      -1
 T299      Soldier-Scout        1      101       0
-U83       Man                  4      109
-// 18 villager, 1 scout
+T83       Man                  2      109       0
+// 12 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
@@ -27,121 +31,122 @@ B79       Watch_Tower          2      -1
 T37       Soldier-Cavalry1     1      101       1
 R32     Artisanship            1      84
 R12     Sentry_Tower           1      68
-R51     Metal_Working          1      103
-T83       Man                  2      109       0
-B0        Academy              4      -1
-
-T37       Soldier-Cavalry1     1      101       1
-T83       Man                  2      109       0
-U93       Soldier-Phal1        4      0
 R43     Scale_Armor_-_Soldiers 1      103
+T83       Man                  2      109       0
+B0        Academy              1      -1
 B82       Government_Center    1      -1
+B0        Academy              1      -1
+B0        Academy              1      -1
 
-U93       Soldier-Phal1        4      0
-R112    Architecture           1      82
+T37       Soldier-Cavalry1     1      101       0
 T83       Man                  2      109       0
-B79       Watch_Tower          1      -1
+T93       Soldier-Phal1        1      0         0
 
-U93       Soldier-Phal1        4      0
-R47     Bronze_Shield          1      103
-T83       Man                  2      109       0
-B79       Watch_Tower          1      -1
-
-U93       Soldier-Phal1        4      0
-
-// R81     Domestication          1      84
-R114    Writing                1      82
-
-// 26 villager, 16 hoplite, 2 cavalry
-// 4 academy, 5 tower
-// spent bronze:  wood,  food,  gold
-
+// 16 villager, 2 cavalry, 1 hoplite, 3 tower
 
 C103    Iron_Age               1      109
-B79       Watch_Tower          1      -1
-U93       Soldier-Phal1        4      0
+R112    Architecture           1      82
+R51     Metal_Working          1      103
+T37       Soldier-Cavalry1     1      101       0
+T93       Soldier-Phal1        3      0         0
 B79       Watch_Tower          2      -1
+B87       Range1               1      -1
+B0        Academy              2      -1
+R47     Bronze_Shield          1      103
+T93       Soldier-Phal1        3      0         0
+B79       Watch_Tower          2       -1
+B49       Siege_Workshop       2      -1
+T93       Soldier-Phal1        3      0         0
 
 C73     Phalanx                1      0
-R48     Chain_Mail_-_Soldiers  1      103
 C113    Aristocracy            1      82
-U93       Soldier-Phal1        3      0
-B87       Range1               1      -1
-B50       Farm                 2      -1
+R48     Chain_Mail_-_Soldiers  1      103
+R15     Guard_Tower            1      68
+R37     Alchemy                1      82
+T93       Soldier-Phal1        4      0         0
+T11       Soldier-Ballista     2      49        0
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
+
+T93       Soldier-Phal1        4      0         0
+T83       Man                  1      109       0
+T11       Soldier-Ballista     2      49        0
+B49       Siege_Workshop       2      -1
+U93       Soldier-Phal1        4      0
+T83       Man                  1      109       0
+B79       Watch_Tower          2      -1
 
 R117    Iron_Shield            1      103
 R106    Ballistics             1      82
-U93       Soldier-Phal1        3      0
-B49       Siege_Workshop       2      -1
-
-R122    Tower_Shield           1      103
 R79     Centurion              1      0
-U93       Soldier-Phal1        3      0
-U11       Soldier-Ballista      2      49
+U93       Soldier-Phal1        4      0
+T83       Man                  2      109       0
 B49       Siege_Workshop       2      -1
-B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+
+U11       Soldier-Ballista     4      49
+R122    Tower_Shield           1      103
+U93       Soldier-Phal1        4      0
+T83       Man                  1      109       0
+B79       Watch_Tower          1      -1
 
 R52     Metallurgy             1      103
-U93       Soldier-Phal1        3      0
-U11       Soldier-Ballista      4      49
+U11       Soldier-Ballista     6      49
+U93       Soldier-Phal1        2      0
+T83       Man                  1      109       0
+B79       Watch_Tower          1      -1
+
+// 30 centurion, 14 ballista, 24 village, pop
+// 4 academy, 15 tower, 4 siege
+// spent army:  wood,  food,  gold,  stone
+
+U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
-B49       Siege_Workshop       2      -1
-// 32 centurion, 6 ballista, 8 tower (pop )
-// spent army: 5700 wood, 10700 food, 5700 gold, 1600 stone
+B79       Watch_Tower          1      -1
 
-// R108    Gold_Mining            1      84
-// R30     Coinage                1      84
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
 B109      Town_Center1         1      -1
-B50       Farm                 2      -1
-U11       Soldier-Ballista      4      49
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
-U11       Soldier-Ballista      6      49
+U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
-U11       Soldier-Ballista      6      49
+U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
-U93       Soldier-Phal1        4      0
-U11       Soldier-Ballista      6      49
-B79       Watch_Tower          2      -1
-U93       Soldier-Phal1        4      0
-R15     Guard_Tower            1      68
-
-U11       Soldier-Ballista      6      49
-R37     Alchemy                1      82
-B79       Watch_Tower          2      -1
-U93       Soldier-Phal1        4      0
-
-U11       Soldier-Ballista      6      49
-B79       Watch_Tower          4      -1
-B0        Academy              2      -1
-U93       Soldier-Phal1        4      0
-// 48 centurion, 40 ballista
-
-R2      Catapult_Tower         1      68
-B79       Watch_Tower          2      -1
-// 24 tower
-
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
+B79       Watch_Tower          2      -1
 
 U93       Soldier-Phal1        6      0
-U11       Soldier-Ballista      6      49
 U93       Soldier-Phal1        6      0
-U11       Soldier-Ballista      6      49
+U11       Soldier-Ballista     6      49
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U11       Soldier-Ballista     6      49
+
+C2      Catapult_Tower         1      68
 
 U93       Soldier-Phal1        6      0
-U11       Soldier-Ballista      6      49
 U93       Soldier-Phal1        6      0
-U11       Soldier-Ballista      6      49
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
 
 U93       Soldier-Phal1        6      0
-U11       Soldier-Ballista      6      49
 U93       Soldier-Phal1        6      0
-U11       Soldier-Ballista      6      49
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
 
 
 B276      Wonder               1      -1

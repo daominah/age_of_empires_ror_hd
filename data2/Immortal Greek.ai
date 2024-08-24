@@ -3,8 +3,8 @@
 // * Warships move speed +17% (stated +30%).
 //
 // Build summary:
-// Bronze Age: 2+1 cavalry, 1+9 hoplite
-// Iron Age: 34 centurion, 22 priest
+// * Bronze Age: 2+1 cavalry, 1+9 hoplite
+// * Iron Age: 34 centurion, 22 priest
 
 
 B109      Town_Center1         1      -1
@@ -136,23 +136,22 @@ U93       Soldier-Phal1        6      0
 U93       Soldier-Phal1        6      0
 U93       Soldier-Phal1        6      0
 
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        6      0
+
 C2      Catapult_Tower         1      68
-
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-
 
 B276      Wonder               1      -1
 B50       Farm                 24     -1
