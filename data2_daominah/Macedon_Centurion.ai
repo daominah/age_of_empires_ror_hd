@@ -4,7 +4,7 @@
 // * Melee units sight +2.
 // * All units are 4 times more resistant to conversion.
 // * Bronze Age: 2+1 cavalry, 1+9 hoplite
-// * Iron Age: 32 centurion, 56 ballista
+// * Iron Age: 34 centurion, 62 ballista
 
 
 B109      Town_Center1         1      -1
@@ -46,13 +46,13 @@ T93       Soldier-Phal1        1      0         0
 
 C103    Iron_Age               1      109
 R112    Architecture           1      82
-R51     Metal_Working          1      103
+R47     Bronze_Shield          1      103
 T37       Soldier-Cavalry1     1      101       0
 T93       Soldier-Phal1        3      0         0
 B79       Watch_Tower          2      -1
 B87       Range1               1      -1
 B0        Academy              2      -1
-R47     Bronze_Shield          1      103
+R51     Metal_Working          1      103
 T93       Soldier-Phal1        3      0         0
 B79       Watch_Tower          2       -1
 B49       Siege_Workshop       2      -1
@@ -62,13 +62,13 @@ C73     Phalanx                1      0
 C113    Aristocracy            1      82
 R48     Chain_Mail_-_Soldiers  1      103
 R15     Guard_Tower            1      68
-R37     Alchemy                1      82
 T93       Soldier-Phal1        4      0         0
 T11       Soldier-Ballista     2      49        0
 T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
 T93       Soldier-Phal1        4      0         0
+R37     Alchemy                1      82
 T83       Man                  1      109       0
 T11       Soldier-Ballista     2      49        0
 B49       Siege_Workshop       2      -1
@@ -92,13 +92,13 @@ B79       Watch_Tower          1      -1
 
 R52     Metallurgy             1      103
 U11       Soldier-Ballista     6      49
-U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        4      0
 T83       Man                  1      109       0
 B79       Watch_Tower          1      -1
 
-// 30 centurion, 14 ballista, 24 village, pop
-// 4 academy, 15 tower, 4 siege
-// spent army:  wood,  food,  gold,  stone
+// 34 centurion, 14 ballista, 24 village, pop
+// 5 academy, 15 tower, 6 siege workshop
+// spent army: 4900 wood, 10800 food, 5500 gold, 2400 stone
 
 U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
@@ -122,31 +122,35 @@ B79       Watch_Tower          1      -1
 
 U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
 U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
 U11       Soldier-Ballista     6      49
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 U11       Soldier-Ballista     6      49
+U93       Soldier-Phal1        5      0
 
 C2      Catapult_Tower         1      68
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
 
 B276      Wonder               1      -1
