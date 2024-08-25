@@ -1,162 +1,114 @@
-// Persian War Elephant
-// Bronze Age: 6 camel rider, 6 priest
-// Iron Age: 18 armored elephant, 24 catapult, 18 priest
+// Persian bonus:
+// * Elephants move speed +56% (stated +50%).
+// * Hunter work rate +66% and capacity +3 (stated +30%).
+// * Trireme attack speed +38% (stated 50%).
+// Build summary:
+// * Bronze Age: 2+4 camel rider, 0+3 priest, 3+4 tower
+// * Iron Age: 18 armored elephant, 24 catapult, 18 priest
 
 
 B109      Town_Center1         1      -1
-U83       Man                  16      109
+U83       Man                  10      109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
 B101      Stable1              1      -1
-R46     Toolworking            1      103
-B87       Range1               1      -1
-// R41     Leather_Armor_-_Archer 1      103
-T299      Soldier-Scout        1      101       0
-// T4        Soldier-Archer1      1      87        4
-U83       Man                  4      109
+R42     Leather_Armor_Mounted  1      103
 B84       Market1              1      -1
-B79       Watch_Tower          4      -1
-// 20 villager, 1 scout
+B79       Watch_Tower          1      -1
+T83       Man                  2      109       0
+T299      Soldier-Scout        1      101       0
+// 12 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-R42     Leather_Armor_Mounted  1      103
-B101      Stable1              1      -1
-// B87       Range1               3      -1
+R46     Toolworking            1      103
+B79       Watch_Tower          2      -1
 
-// R28     Wheel                  1      84
-B82       Government_Center    1      -1
+T338      Soldier-Camel        1      101       0
 R12     Sentry_Tower           1      68
 R45     Scale_Armor_-_Cavalry  1      103
-// R44     Scale_Armor_-_Archers  1      103
-T338      Soldier-Camel        2      101       1
+T83       Man                  2      109       0
+B82       Government_Center    1      -1
 B104      Temple1              1      -1
-T338      Soldier-Camel        2      101       1
-T83       Man                  2      109       0
 
-R112    Architecture           1      82
-U125      Priest               1      104
-B104      Temple1              2      -1
-// R32     Artisanship            1      84
-T83       Man                  2      109       0
+T338      Soldier-Camel        1      101       0
+T83       Man                  1      109       0
 
-R47     Bronze_Shield          1      103
-R108    Gold_Mining            1      84
-U125      Priest               2      104
-R21     Mysticism              1      104
-T83       Man                  2      109       0
-B79       Watch_Tower          4      -1
-
-B49       Siege_Workshop       2      -1
-U125      Priest               2      104
-R24     Polytheism             1      104
-T83       Man                  2      109       0
-B79       Watch_Tower          4      -1
-
-// R34     Nobility               1      82
-U125      Priest               2      104
-R22     Astrology              1      104
-U35       Soldier-Catapult1    2      49
-B101      Stable1              2      -1
-
-// R81     Domestication          1      84
-R114    Writing                1      82            1      82
-
-// 28 villager, 4 camel, 8 priest, 2 catapult (pop )
-// 4 stable, 3 temple, 2 siege workshop (12 tower)
-// spent bronze:  wood,  food,  gold
+// 15 villager, 2 camel
+// 1 stable, 1 temple, 3 tower
 
 
 C103    Iron_Age               1      109
-T83       Man                  4      109       0
-B109      Town_Center1         1      -1
-B50       Farm                 8      -1
-B101      Stable1              2      -1
-B49       Siege_Workshop       1      -1
-T125      Priest               2      104       2
+R112    Architecture           1      82
+R47     Bronze_Shield          1      103
+U125      Priest               1      104
+T338      Soldier-Camel        1      101       0
+B79       Watch_Tower          1      -1
+T338      Soldier-Camel        1      101       0
+U125      Priest               1      104
+B79       Watch_Tower          1      -1
+T338      Soldier-Camel        1      101       0
+B79       Watch_Tower          1      -1
+B101      Stable1              3      -1
+B79       Watch_Tower          1      -1
+T338      Soldier-Camel        1      101       0
+U125      Priest               1      104
 
-R35     Engineering            1      82
-R50     Chain_Mail_-_Cavalry   1      103
-R54     Heavy_Catapult         1      49
-R18     Afterlife              1      104
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     3      101
-T125      Priest               2      104       2
-
-C117    Iron_Shield            1      103
-R20     Fanaticism             1      104
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     3      101
-T125      Priest               2      104       2
-B79       Watch_Tower          4      -1
-
-C125    Armored Elephants      1      101
-R119    Medicine               1      104
-U46       Soldier-Elephant     3      101
-T125      Priest               2      104       2
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     3      101
-
-B79       Watch_Tower          4      -1
-T125      Priest               2      104       2
-
-// 18 armored elephant, 18 priest, 8 catapult (pop 80)
-// spent army:  wood,  food,  gold, 3100 stone
-
-B109      Town_Center1         1      -1
-B50       Farm                 8      -1
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     3      101
-
-B50       Farm                 8      -1
-R19     Monotheism             1      104
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     3      101
-
-B50       Farm                 8      -1
-U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     3      101
-
+R117    Iron_Shield            1      103
 R15     Guard_Tower            1      68
-R37     Alchemy                1      82
+T46       Soldier-Elephant     3      101       0
+T83       Man                  1      109       0
+U125      Priest               1      104
+// R37     Alchemy                1      82
+B104      Temple1              1      -1
+B87       Range1               1      -1
+B79       Watch_Tower          1      -1
+
+T46       Soldier-Elephant     3      101       0
+T83       Man                  2      109       0
+R20     Fanaticism             1      104
+U125      Priest               1      104
+B104      Temple1              1      -1
+B49       Siege_Workshop       1      -1
+B79       Watch_Tower          1      -1
+
+R50     Chain_Mail_-_Cavalry   1      103
+C125    Armored Elephants      1      101
+R35     Engineering            1      82
+R18     Afterlife              1      104
+R21     Mysticism              1      104
+U125      Priest               1      104
+B104      Temple1              1      -1
+B49       Siege_Workshop       1      -1
+B79       Watch_Tower          1      -1
+
 U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
+T83       Man                  2      109       0
+B49       Siege_Workshop       2      -1
+B79       Watch_Tower          2      -1
+
+R54     Heavy_Catapult         1      49
 U46       Soldier-Elephant     3      101
+T83       Man                  2      109       0
+R24     Polytheism             1      104
+R22     Astrology              1      104
+U35       Soldier-Catapult1    3      49
+U125      Priest               1      104
+B79       Watch_Tower          2      -1
+
 U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    2      49
+T83       Man                  2      109       0
+R119    Medicine               1      104
+U125      Priest               3      104
+U35       Soldier-Catapult1    3      49
+B79       Watch_Tower          2      -1
+
 U46       Soldier-Elephant     3      101
-// 48 armored elephant, 18 catapult (pop 120)
-// spent extras:  wood,  food,  gold
+U35       Soldier-Catapult1    4      49
 
-B109      Town_Center1         1      -1
-
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     6      101
-U125      Priest               2      104
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     6      101
-U125      Priest               2      104
-
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     6      101
-U125      Priest               2      104
-U46       Soldier-Elephant     6      101
-U35       Soldier-Catapult1    2      49
-U46       Soldier-Elephant     6      101
-U125      Priest               2      104
-
-
-// B276      Wonder               1      -1
-B50       Farm                 24     -1
+// 18 armored elephant, 10 priest, 10 catapult (pop 80)
+// spent army:  wood,  food,  gold, 3100 stone
