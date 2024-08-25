@@ -4,7 +4,7 @@
 // * Trireme attack speed +38% (stated 50%).
 // Build summary:
 // * Bronze Age: 2+4 camel rider, 0+3 priest, 3+4 tower
-// * Iron Age: 18 armored elephant, 24 catapult, 18 priest
+// * Iron Age: 21 armored elephant, 18 catapult, 16 priest
 
 
 B109      Town_Center1         1      -1
@@ -45,25 +45,26 @@ T83       Man                  1      109       0
 C103    Iron_Age               1      109
 R112    Architecture           1      82
 R47     Bronze_Shield          1      103
-U125      Priest               1      104
+T125      Priest               1      104       0
 T338      Soldier-Camel        1      101       0
 B79       Watch_Tower          1      -1
 T338      Soldier-Camel        1      101       0
-U125      Priest               1      104
+T125      Priest               1      104       0
 B79       Watch_Tower          1      -1
+R114    Writing                1      82
 T338      Soldier-Camel        1      101       0
 B79       Watch_Tower          1      -1
 B101      Stable1              3      -1
 B79       Watch_Tower          1      -1
 T338      Soldier-Camel        1      101       0
-U125      Priest               1      104
+T125      Priest               1      104       0
 
 R117    Iron_Shield            1      103
 R15     Guard_Tower            1      68
+R37     Alchemy                1      82
 T46       Soldier-Elephant     3      101       0
 T83       Man                  1      109       0
-U125      Priest               1      104
-// R37     Alchemy                1      82
+T125      Priest               1      104       0
 B104      Temple1              1      -1
 B87       Range1               1      -1
 B79       Watch_Tower          1      -1
@@ -71,7 +72,7 @@ B79       Watch_Tower          1      -1
 T46       Soldier-Elephant     3      101       0
 T83       Man                  2      109       0
 R20     Fanaticism             1      104
-U125      Priest               1      104
+T125      Priest               1      104       0
 B104      Temple1              1      -1
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          1      -1
@@ -81,6 +82,7 @@ C125    Armored Elephants      1      101
 R35     Engineering            1      82
 R18     Afterlife              1      104
 R21     Mysticism              1      104
+U46       Soldier-Elephant     3      101
 U125      Priest               1      104
 B104      Temple1              1      -1
 B49       Siege_Workshop       1      -1
@@ -97,18 +99,92 @@ T83       Man                  2      109       0
 R24     Polytheism             1      104
 R22     Astrology              1      104
 U35       Soldier-Catapult1    3      49
-U125      Priest               1      104
+U125      Priest               2      104
 B79       Watch_Tower          2      -1
 
 U46       Soldier-Elephant     3      101
 T83       Man                  2      109       0
 R119    Medicine               1      104
-U125      Priest               3      104
+R19     Monotheism             1      104
+U125      Priest               2      104
 U35       Soldier-Catapult1    3      49
 B79       Watch_Tower          2      -1
 
 U46       Soldier-Elephant     3      101
-U35       Soldier-Catapult1    4      49
+U125      Priest               2      104
+T35       Soldier-Catapult1    4      49        0
+T125      Priest               2      104       0
 
-// 18 armored elephant, 10 priest, 10 catapult (pop 80)
-// spent army:  wood,  food,  gold, 3100 stone
+// 18 armored elephant, 14 priest, 10 catapult (pop 76)
+// 16 tower, 4 stable, 4 temple, 4 siege workshop, 24 man
+// spent army: 6100 wood, 11000 food, 8000 gold, 2000 stone
+
+B50       Farm                 2      -1
+T35       Soldier-Catapult1    4      49        0
+T125      Priest               2      104       0
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+T35       Soldier-Catapult1    4      49        0
+B79       Watch_Tower          1      -1
+
+B109      Town_Center1         1      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+B109      Town_Center1         1      -1
+B79       Watch_Tower          1      -1
+
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+
+B50       Farm                 24     -1
+
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U25       Soldier-El_Archer    1      87
