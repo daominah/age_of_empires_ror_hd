@@ -3,8 +3,8 @@
 // * Siege units HP x2.
 // * Warships range +4.
 // Build summary:
-// * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+2 Tower.
-// * Iron Age: 32 Heavy Horse Archer, 16 Catapult.
+// * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+3 Tower.
+// * Iron Age: 32 Heavy Horse Archer, 12 Catapult.
 
 
 B109      Town_Center1         1      -1
@@ -57,14 +57,13 @@ R114    Writing                1      82
 
 C103    Iron_Age               1      109
 T41       Soldier-Chariot2     4      87        0
-T35       Soldier-Catapult1    1      49        0
 T41       Soldier-Chariot2     4      87        0
 T35       Soldier-Catapult1    1      49        0
-B49       Siege_Workshop       3      -1
+B49       Siege_Workshop       2      -1
 B87       Range1               2      -1
 B79       Watch_Tower          1      -1
 B87       Range1               1      -1
-B79       Watch_Tower          1      -1
+B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
 T83       Man                  2      109       0
@@ -78,29 +77,29 @@ B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
 T83       Man                  2      109       0
-U35       Soldier-Catapult1    3      49
+U35       Soldier-Catapult1    2      49
 B79       Watch_Tower          1      -1
 
 R38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 6      87
 R106    Ballistics             1      82
 T83       Man                  2      109       0
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
 C35     Engineering            1      82
 U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    4      49
+U35       Soldier-Catapult1    3      49
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    4      49
+U35       Soldier-Catapult1    3      49
 B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
 B50       Farm                 2      -1
-// 36 heavy horse archer, 16 catapult, 16 tower (pop )
-// spent army: 9300 wood, 10900 food, 6100 gold, 2700 stone
+// 36 heavy horse archer, 12 catapult, 16 tower (pop )
+// spent army: 8400 wood, 10900 food, 5900 gold, 2700 stone
 
 
 // R108    Gold_Mining            1      84
@@ -143,25 +142,25 @@ B79       Watch_Tower          2      -1
 
 B109      Town_Center1         1      -1
 
-T25       Soldier-El_Archer    6      87        1
-U35       Soldier-Catapult1    4      49
-T39       Soldier-Cavalry3_Arc 6      87        1
-U35       Soldier-Catapult1    4      49
+U25       Soldier-El_Archer    6      87
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    3      49
 
-T25       Soldier-El_Archer    6      87        1
-U35       Soldier-Catapult1    4      49
-T39       Soldier-Cavalry3_Arc 6      87        1
-U35       Soldier-Catapult1    4      49
+U25       Soldier-El_Archer    6      87
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    3      49
 
-T25       Soldier-El_Archer    6      87        1
-U35       Soldier-Catapult1    4      49
-T39       Soldier-Cavalry3_Arc 6      87        1
-U35       Soldier-Catapult1    4      49
+U25       Soldier-El_Archer    6      87
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    3      49
 
-T25       Soldier-El_Archer    6      87        1
-U35       Soldier-Catapult1    4      49
-T39       Soldier-Cavalry3_Arc 6      87        1
-U35       Soldier-Catapult1    4      49
+U25       Soldier-El_Archer    6      87
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    3      49
+
+U25       Soldier-El_Archer    6      87
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    3      49
 
 
 B276      Wonder               1      -1
