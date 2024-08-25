@@ -117,17 +117,17 @@ B79       Watch_Tower          2      -1
 // 48 scythe chariot, 26 priest, 14 tower, 30 villager (pop 123)
 // spent army: 10000 wood, 10100 food, 7600 gold, 2300 stone
 
-B109      Town_Center1         1      -1
+B50       Farm                 2      -1
 U125      Priest               3      104
 B79       Watch_Tower          2      -1
-B50       Farm                 2      -1
 
-U125      Priest               3      104
 B50       Farm                 2      -1
+U125      Priest               3      104
 B79       Watch_Tower          1      -1
 
-U125      Priest               4      104
 B50       Farm                 2      -1
+U125      Priest               4      104
+B109      Town_Center1         1      -1
 B79       Watch_Tower          1      -1
 
 U125      Priest               4      104

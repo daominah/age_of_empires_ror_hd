@@ -53,6 +53,10 @@ def main():
             "Macedon Elephant.ai",
             "Macedon Phalanx.ai",
         },
+        "Minoa_Composite_Bowmen.ai": {
+            "Immortal Minoa.ai",
+            # "Minoa Composite Bowmen.ai",
+        },
         "Persia_War_Elephant.ai": {
             "Persia Elephant Archers.ai",
             "Persia Priests.ai",
