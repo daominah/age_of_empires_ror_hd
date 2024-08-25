@@ -65,9 +65,6 @@ def main():
         "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",
         },
-        # "Phoenicia_Bronze.ai": {
-        #     "Phoenicia Elephants.ai",
-        # },
         "Sumeria_Catapult.ai": {
             "Immortal Sumeria.ai",
             "Sumeria Catapults.ai",
