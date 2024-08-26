@@ -4,7 +4,7 @@
 // * Catapult Trireme and Juggernaught attack speed +72%.
 // Build summary:
 // Bronze Age: 8+12 Chariot Archer, 2+3 Priest, 9+3 Tower
-// Iron Age: 24 Elephant Archer, 22 Priest
+// Iron Age: 24 Elephant Archer, 20 Priest
 
 
 B109      Town_Center1         1      -1
@@ -49,13 +49,12 @@ T125      Priest               1      104       0
 R34     Nobility               1      82
 B79       Watch_Tower          2      -1
 
-R114    Writing                1      82
-
 // 20 villager, 8 chariot archer, 2 priest
 // 4 archery range, 1 temple, 9 tower
 
 
 C103    Iron_Age               1      109
+R114    Writing                1      82
 T41       Soldier-Chariot2     4      87        0
 T41       Soldier-Chariot2     4      87        0
 T125      Priest               1      104       0
@@ -63,8 +62,6 @@ B104      Temple1              2      -1
 B79       Watch_Tower          1      -1
 B87       Range1               2      -1
 T41       Soldier-Chariot2     4      87        0
-R21     Mysticism              1      104
-R24     Polytheism             1      104
 T125      Priest               1      104       0
 B79       Watch_Tower          2      -1
 
@@ -85,15 +82,17 @@ U125      Priest               1      104
 B79       Watch_Tower          1      -1
 
 R106    Ballistics             1      82
-R119    Medicine               1      104
-R19     Monotheism             1      104
+R21     Mysticism              1      104
+R24     Polytheism             1      104
 U125      Priest               1      104
 U25       Soldier-El_Archer    3      87
 U41       Soldier-Chariot2     3      87
 T83       Man                  2      109       0
 B79       Watch_Tower          1      -1
 
-U125      Priest               3      104
+U125      Priest               1      104
+R119    Medicine               1      104
+R19     Monotheism             1      104
 U25       Soldier-El_Archer    3      87
 U41       Soldier-Chariot2     3      87
 T83       Man                  2      109       0
@@ -117,9 +116,9 @@ U125      Priest               3      104
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-// 24 elephant archer, 22 priest, 32 chariot archer (pop 111)
+// 24 elephant archer, 20 priest, 32 chariot archer (pop 111)
 // 16 tower, 32 villager
-// spent army: 6800 wood, 10600 food, 6500 gold, 2600 stone
+// spent army: 6800 wood, 10600 food, 6300 gold, 2600 stone
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
