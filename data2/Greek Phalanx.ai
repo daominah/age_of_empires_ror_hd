@@ -91,6 +91,7 @@ T83       Man                  1      109       0
 B79       Watch_Tower          1      -1
 
 R122    Tower_Shield           1      103
+// R114    Writing                1      82
 U93       Soldier-Phal1        4      0
 T83       Man                  1      109       0
 R21     Mysticism              1      104
@@ -103,7 +104,7 @@ R119    Medicine               1      104
 U125      Priest               2      104
 
 // 34 centurion, 10 priest, 24 village, pop
-// 4 academy, 15 tower, 4 temple
+// 5 academy, 15 tower, 4 temple
 // spent army: 4100 wood, 11000 food, 8500 gold, 3800 stone
 
 U125      Priest               4      104       0
@@ -131,28 +132,32 @@ B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
 C2      Catapult_Tower         1      68
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
-U93       Soldier-Phal1        6      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        5      0
 
 B276      Wonder               1      -1
 B50       Farm                 24     -1

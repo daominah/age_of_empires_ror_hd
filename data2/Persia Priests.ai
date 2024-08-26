@@ -115,8 +115,8 @@ U125      Priest               2      104
 T35       Soldier-Catapult1    4      49        0
 T125      Priest               2      104       0
 
-// 18 armored elephant, 14 priest, 10 catapult (pop 76)
-// 16 tower, 4 stable, 4 temple, 4 siege workshop, 24 man
+// 21 armored elephant, 14 priest, 10 catapult, 24 villager (pop 76)
+// 16 tower, 4 stable, 4 temple, 4 siege workshop
 // spent army: 6100 wood, 11000 food, 8000 gold, 2000 stone
 
 B50       Farm                 2      -1

@@ -108,32 +108,33 @@ T83       Man                  1      109       0
 B50       Farm                 1      -1
 
 U39       Soldier-Cavalry3_Arc 8      87
+R108    Gold_Mining            1      84
 T83       Man                  1      109       0
 B50       Farm                 1      -1
 
+R30     Coinage                1      84
 U39       Soldier-Cavalry3_Arc 8      87
 T83       Man                  1      109       0
 B50       Farm                 1      -1
-// 56 horse archer, 10 catapult, 15 priest (pop 157)
-// spent army: 10500 wood, 10000 food, 8700 gold, 0 stone
-
-
-// R108    Gold_Mining            1      84
-// R30     Coinage                1      84
 
 B109      Town_Center1         1      -1
-T83       Man                  2      109       0
-B50       Farm                 2      -1
 
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
 T83       Man                  2      109       0
 B50       Farm                 2      -1
-// 40 villager, 16 farm
+
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+
+R23     Jihad                  1      104
+
+// 56 horse archer, 10 catapult, 15 priest (pop 164)
+// 40 villager, 16 farm, 8 range
+// spent army: 11250 wood, 10620 food, 8955 gold, 0 stone
 
 R109    Stone_Mining           1      84
-R23     Jihad                  1      104
 
 R111    Siegecraft             1      84
 
