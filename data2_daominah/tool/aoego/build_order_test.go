@@ -5,66 +5,60 @@ import (
 	"testing"
 )
 
-func TestStep_String(t *testing.T) {
+func TestStep(t *testing.T) {
 	for _, c := range []struct {
-		step Step
-		want string
+		step    Step
+		stepStr string
 	}{
 		{
 			step: Step{
 				Action:       Train,
-				UnitOrTechID: HopliteID.ID(),
+				UnitOrTechID: HopliteID,
 				Quantity:     4,
-				Location:     AcademyID,
 			},
-			want: "U93       Soldier-Phal1        4      0",
+			stepStr: "U93       Soldier-Phal1        4      0",
 		},
 		{
 			step: Step{
 				Action:       TrainLimit,
-				UnitOrTechID: ScoutID.ID(),
+				UnitOrTechID: ScoutID,
 				Quantity:     1,
-				Location:     StableID,
 				LimitRebuild: 2,
 			},
-			want: "T299      Soldier-Scout        1      101       2",
+			stepStr: "T299      Soldier-Scout        1      101       2",
 		},
 		{
 			step: Step{
 				Action:       Build,
-				UnitOrTechID: GovernmentCenterID.ID(),
+				UnitOrTechID: GovernmentCenterID,
 				Quantity:     1,
-				Location:     NullUnitID,
 			},
-			want: "B82       Government_Center    1      -1",
+			stepStr: "B82       Government_Center    1      -1",
 		},
 		{
 			step: Step{
 				Action:       BuildLimit,
-				UnitOrTechID: TowerID.ID(),
+				UnitOrTechID: TowerID,
 				Quantity:     2,
-				Location:     NullUnitID,
 				LimitRebuild: 1,
 			},
-			want: "A79       Watch_Tower          2      -1        1",
+			stepStr: "A79       Watch_Tower          2      -1        1",
 		},
 		{
 			step: Step{
 				Action:       ResearchCritical,
-				UnitOrTechID: BronzeAgeID.ID(),
+				UnitOrTechID: BronzeAgeID,
 				Quantity:     1,
-				Location:     TownCenterID,
 			},
-			want: "C102    Bronze_Age             1      109",
+			stepStr: "C102    Bronze_Age             1      109",
 		},
 		{
 			step: Step{
 				Action:       Research,
-				UnitOrTechID: WheelID.ID(),
+				UnitOrTechID: WheelID,
 				Quantity:     1,
-				Location:     MarketID,
 			},
-			want: "C102    Bronze_Age             1      109",
+			stepStr: "R28     Wheel                  1      84",
 		},
 	} {
 		stepStr, err := c.step.String()
@@ -72,8 +66,17 @@ func TestStep_String(t *testing.T) {
 			t.Errorf("error step.String(%+v): %v", c.step, err)
 			continue
 		}
-		if stepStr != c.want {
-			t.Errorf("error step.String(%+v) got:\n%v, but want:\n%v", c.step, stepStr, c.want)
+		if stepStr != c.stepStr {
+			t.Errorf("error step.String(%+v) got:\n%v, but want:\n%v", c.step, stepStr, c.stepStr)
+		}
+
+		parsedStep, err := NewStep(c.stepStr)
+		if err != nil {
+			t.Errorf("error NewStep(%v): %v", c.stepStr, err)
+			continue
+		}
+		if !c.step.CheckEqual(*parsedStep) {
+			t.Errorf("error NewStep(%v): got: %+v, but want: %+v", c.stepStr, parsedStep, c.step)
 		}
 	}
 }
@@ -86,24 +89,15 @@ func TestStep_StringError(t *testing.T) {
 		{
 			step: Step{
 				Action:       TrainLimit,
-				UnitOrTechID: CavalryID.ID(),
+				UnitOrTechID: CavalryID,
 				Quantity:     1,
-				Location:     StableID,
 				LimitRebuild: 2,
 			},
 		},
 		{
 			step: Step{
 				Action:       Research,
-				UnitOrTechID: WheelID.ID(),
-				Quantity:     1,
-			},
-			wantErr: ErrLocationNotMatched,
-		},
-		{
-			step: Step{
-				Action:       Research,
-				UnitOrTechID: WheelID.ID(),
+				UnitOrTechID: WheelID,
 				Quantity:     2,
 			},
 			wantErr: ErrResearchQuantity,
@@ -111,10 +105,18 @@ func TestStep_StringError(t *testing.T) {
 		{
 			step: Step{
 				Action:       Build,
-				UnitOrTechID: 123123123,
+				UnitOrTechID: NullUnitID,
 				Quantity:     1,
 			},
 			wantErr: ErrUnitIDNotFound,
+		},
+		{
+			step: Step{
+				Action:       Research,
+				UnitOrTechID: TechID(123456789),
+				Quantity:     1,
+			},
+			wantErr: ErrTechIDNotFound,
 		},
 	} {
 		_, err := c.step.String()
