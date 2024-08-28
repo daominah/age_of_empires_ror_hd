@@ -192,9 +192,10 @@ type EmpireDeveloping struct {
 	IsFullTechTree bool // if true, Civilization and TechsDisabled don't matter
 
 	Spent      Cost
-	Combatants []Unit          // trained units are not buildings
-	Buildings  []Unit          // built buildings
-	Techs      map[TechID]bool // researched technologies
+	UnitStats  map[UnitID]*Unit // unit stats, can be changed by civilization or upgraded techs
+	Combatants map[UnitID]int   // trained units are not buildings
+	Buildings  map[UnitID]int   // built buildings
+	Techs      map[TechID]bool  // researched technologies
 }
 
 // Do tries to execute a Step (probably from a BuildOrder),

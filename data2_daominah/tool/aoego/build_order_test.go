@@ -13,7 +13,7 @@ func TestStep(t *testing.T) {
 		{
 			step: Step{
 				Action:       Train,
-				UnitOrTechID: HopliteID,
+				UnitOrTechID: Hoplite,
 				Quantity:     4,
 			},
 			stepStr: "U93       Soldier-Phal1        4      0",
@@ -21,7 +21,7 @@ func TestStep(t *testing.T) {
 		{
 			step: Step{
 				Action:       TrainLimit,
-				UnitOrTechID: ScoutID,
+				UnitOrTechID: Scout,
 				Quantity:     1,
 				LimitRebuild: 2,
 			},
@@ -30,7 +30,7 @@ func TestStep(t *testing.T) {
 		{
 			step: Step{
 				Action:       Build,
-				UnitOrTechID: GovernmentCenterID,
+				UnitOrTechID: GovernmentCenter,
 				Quantity:     1,
 			},
 			stepStr: "B82       Government_Center    1      -1",
@@ -38,7 +38,7 @@ func TestStep(t *testing.T) {
 		{
 			step: Step{
 				Action:       BuildLimit,
-				UnitOrTechID: TowerID,
+				UnitOrTechID: Tower,
 				Quantity:     2,
 				LimitRebuild: 1,
 			},
@@ -47,7 +47,7 @@ func TestStep(t *testing.T) {
 		{
 			step: Step{
 				Action:       ResearchCritical,
-				UnitOrTechID: BronzeAgeID,
+				UnitOrTechID: BronzeAge,
 				Quantity:     1,
 			},
 			stepStr: "C102    Bronze_Age             1      109",
@@ -55,7 +55,7 @@ func TestStep(t *testing.T) {
 		{
 			step: Step{
 				Action:       Research,
-				UnitOrTechID: WheelID,
+				UnitOrTechID: Wheel,
 				Quantity:     1,
 			},
 			stepStr: "R28     Wheel                  1      84",
@@ -81,6 +81,18 @@ func TestStep(t *testing.T) {
 	}
 }
 
+func TestStep_Weird(t *testing.T) {
+	// should be "R125    Armored_Elephant       1      101", but `Default.ai` has this weird exception:
+	step, err := NewStep("R125    Armored Elephants      1      101")
+	if err != nil {
+		t.Fatalf("error NewStep weird Armored Elephants: %v", err)
+	}
+	want := Step{Action: Research, UnitOrTechID: ArmoredElephant, Quantity: 1}
+	if !step.CheckEqual(want) {
+		t.Errorf("error NewStep weird Armored Elephants: got: %+v, but want: %+v", step, want)
+	}
+}
+
 func TestStep_StringError(t *testing.T) {
 	for _, c := range []struct {
 		step    Step
@@ -89,7 +101,7 @@ func TestStep_StringError(t *testing.T) {
 		{
 			step: Step{
 				Action:       TrainLimit,
-				UnitOrTechID: CavalryID,
+				UnitOrTechID: Cavalry,
 				Quantity:     1,
 				LimitRebuild: 2,
 			},
@@ -97,7 +109,7 @@ func TestStep_StringError(t *testing.T) {
 		{
 			step: Step{
 				Action:       Research,
-				UnitOrTechID: WheelID,
+				UnitOrTechID: Wheel,
 				Quantity:     2,
 			},
 			wantErr: ErrResearchQuantity,
@@ -105,7 +117,7 @@ func TestStep_StringError(t *testing.T) {
 		{
 			step: Step{
 				Action:       Build,
-				UnitOrTechID: NullUnitID,
+				UnitOrTechID: NullUnit,
 				Quantity:     1,
 			},
 			wantErr: ErrUnitIDNotFound,
