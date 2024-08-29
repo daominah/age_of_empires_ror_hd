@@ -1,5 +1,9 @@
 package aoego
 
+import (
+	"fmt"
+)
+
 type Technology struct {
 	ID               TechID
 	Name             string // name without spaces, e.g. "Catapult_Tower", "Heavy_Horse_Archer", ...
@@ -117,12 +121,32 @@ const (
 	Sacrifice  TechID = 120
 
 	NullTech TechID = -1
+
+	// the following are internal techs, not shown in the game,
+	// they will be automatically researched when a building is built:
+
+	EnableGranaryStoragePitBarracksDock TechID = 105
+	GranaryTech                         TechID = 10
+	StoragePitTech                      TechID = 39
+	BarracksTech                        TechID = 62
+	DockTech                            TechID = 0
+
+	EnableMarket     TechID = 94
+	MarketTech       TechID = 26
+	ArcheryRangeTech TechID = 55
+	StableTech       TechID = 67
+
+	GovernmentCenterTech TechID = 33
+	TempleTech           TechID = 17
+	SiegeWorkshopTech    TechID = 53
+	AcademyTech          TechID = 72
 )
 
 // EffectFunc can modify Unit attributes, enable or disable Technology
 // or modify player resources. TODO: real type EffectFunc func
-type EffectFunc func()
+type EffectFunc func(empire *EmpireDeveloping)
 
+// NewTechnology PANIC if the TechID is not found.
 func NewTechnology(id TechID) *Technology {
 	t := &Technology{ID: id, RequiredTechs: map[TechID]bool{}}
 	switch id {
@@ -130,10 +154,21 @@ func NewTechnology(id TechID) *Technology {
 		t.NameInGame, t.Name = "Tool Age", "Tool_Age"
 		t.Cost = Cost{Food: 500}
 		t.Time, t.Location = 120, TownCenter
+		t.RequiredTechs, t.MinRequiredTechs = map[TechID]bool{
+			GranaryTech:    true,
+			StoragePitTech: true,
+			BarracksTech:   true,
+			DockTech:       true,
+		}, 2
 	case BronzeAge:
 		t.NameInGame, t.Name = "Bronze Age", "Bronze_Age"
 		t.Cost = Cost{Food: 800}
 		t.Time, t.Location = 140, TownCenter
+		t.RequiredTechs, t.MinRequiredTechs = map[TechID]bool{
+			MarketTech:       true,
+			ArcheryRangeTech: true,
+			StableTech:       true,
+		}, 2
 	case IronAge:
 		t.NameInGame, t.Name = "Iron Age", "Iron_Age"
 		t.Cost = Cost{Food: 1000, Gold: 800}
@@ -396,8 +431,31 @@ func NewTechnology(id TechID) *Technology {
 		t.Cost = Cost{Gold: 600}
 		t.Time, t.Location = 100, Temple
 
+	// from here are internal techs, not shown in the game,
+	// they will be automatically researched when a building is built:
+
+	case EnableGranaryStoragePitBarracksDock:
+		t.Effects = append(t.Effects, EnableGranaryStoragePitBarracksDockEffect)
+	case EnableMarket:
+		t.RequiredTechs, t.MinRequiredTechs = map[TechID]bool{
+			GranaryTech: true,
+			ToolAge:     true,
+		}, 2
+		t.Effects = append(t.Effects, EnableMarketEffect)
+
 	default:
-		return nil
+		panic(fmt.Errorf("NewTechnology: %v: %w", id, ErrTechIDNotFound))
 	}
 	return t
+}
+
+func EnableGranaryStoragePitBarracksDockEffect(e *EmpireDeveloping) {
+	e.UnitStats[Granary] = NewUnit(Granary)
+	e.UnitStats[StoragePit] = NewUnit(StoragePit)
+	e.UnitStats[Barracks] = NewUnit(Barracks)
+	e.UnitStats[Dock] = NewUnit(Dock)
+}
+
+func EnableMarketEffect(e *EmpireDeveloping) {
+	e.UnitStats[Market] = NewUnit(Market)
 }
