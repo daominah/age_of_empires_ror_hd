@@ -6,12 +6,14 @@ import (
 
 // Unit can be a Villager, Swordsman, Cavalry, ...
 // or a building like TownCenter, Granary, ...
+// Should be initialized with func NewUnit for default values.
 type Unit struct {
 	ID           UnitID
 	Name         string // name without spaces, e.g. "Man", "Soldier-Chariot2", ...
 	NameInGame   string // name shown in the game, e.g. "Villager", "Chariot Archer", ...
 	Cost         Cost
 	Time         float64 // train time in seconds
+	Population   float64 // almost all units have 1 population, except Barracks units after Logistics researched
 	Location     UnitID  // building that trains this unit
 	IsBuilding   bool
 	InitiateTech TechID // when the building is created, this tech is researched
@@ -119,18 +121,17 @@ const (
 	NullUnit UnitID = -1
 )
 
-// Buildings is a list of all building,
-// used as a constant (do not change this var in runtime)
-var Buildings = map[UnitID]bool{
+// AllBuildings is used as a constant (do not change this var in runtime)
+var AllBuildings = map[UnitID]bool{
 	TownCenter: true, House: true, Granary: true, StoragePit: true, Barracks: true, Dock: true,
 	ArcheryRange: true, Stable: true, Market: true, Farm: true, Tower: true, Wall: true,
 	GovernmentCenter: true, Temple: true, SiegeWorkshop: true, Academy: true,
 	Wonder: true,
 }
 
-// Combatants is a list of all units that is not a building,
+// AllCombatants is a list of all units that is not a building,
 // used as a constant (do not change this var in runtime)
-var Combatants = map[UnitID]bool{
+var AllCombatants = map[UnitID]bool{
 	Villager: true,
 	Clubman:  true, Swordsman: true, Slinger: true,
 	Bowman: true, ImprovedBowman: true, ChariotArcher: true, HorseArcher: true, ElephantArcher: true,
@@ -140,14 +141,38 @@ var Combatants = map[UnitID]bool{
 	Hoplite: true,
 }
 
+// AllUnits includes all units in the game (including buildings),
+// initialized in func init then will be used as a constant
+var AllUnits = make(map[UnitID]Unit)
+
+func init() {
+	for _, a := range []map[UnitID]bool{AllBuildings, AllCombatants} {
+		for unitID := range a {
+			tmp, err := NewUnit(unitID)
+			if err != nil {
+				panic(fmt.Sprintf("error init AllUnits: %v", err))
+			}
+			AllUnits[unitID] = *tmp
+		}
+	}
+}
+
+func UnitName(id UnitID) string {
+	u, found := AllUnits[id]
+	if !found {
+		return ""
+	}
+	return u.NameInGame
+}
+
 // NewUnit returns a Unit based on the given UnitID,
-// with default attributes values (not considering civilization bonus),
-// this func PANIC if the UnitID is not found.
-func NewUnit(id UnitID) *Unit {
+// with default attributes values (not considering civilization bonus)
+func NewUnit(id UnitID) (*Unit, error) {
 	u := &Unit{
 		ID:           id,
+		Population:   1,
 		Location:     NullUnit, // will be corrected later in the switch
-		IsBuilding:   Buildings[id],
+		IsBuilding:   AllBuildings[id],
 		InitiateTech: NullTech,
 	}
 	switch id {
@@ -234,7 +259,6 @@ func NewUnit(id UnitID) *Unit {
 		u.NameInGame, u.Name = "Town Center", "Town_Center1"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
-		u.InitiateTech = EnableGranaryStoragePitBarracksDock
 	case House:
 		u.NameInGame, u.Name = "House", "House"
 		u.Cost = Cost{Wood: 30}
@@ -316,7 +340,7 @@ func NewUnit(id UnitID) *Unit {
 		u.Time = 8000
 
 	default:
-		panic(fmt.Errorf("NewUnit: %v: %w", id, ErrUnitIDNotFound))
+		return nil, ErrUnitIDNotFound
 	}
-	return u
+	return u, nil
 }

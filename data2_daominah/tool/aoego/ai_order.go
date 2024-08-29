@@ -27,27 +27,27 @@ var (
 	ErrTechIDNotFound   = errors.New("techID not found")
 	ErrResearchQuantity = errors.New("research quantity must be 1")
 
-	ErrUnitDisabledByCiv   = errors.New("unit is disabled by civilization")
-	ErrUnitNotAvailableYet = errors.New("unit is not available yet")
-	ErrTechDisabledByCiv   = errors.New("technology is disabled by civilization")
-	ErrTechNotAvailableYet = errors.New("technology is not available yet")
+	ErrUnitDisabledByCiv    = errors.New("unit is disabled by civilization")
+	ErrUnitNotAvailableYet  = errors.New("unit is not available yet")
+	ErrUnitLocationNotBuilt = errors.New("location is not built yet")
+	ErrTechDisabledByCiv    = errors.New("technology is disabled by civilization")
+	ErrTechNotAvailableYet  = errors.New("technology is not available yet")
 )
-
-// BuildOrder is equivalent to a ".ai" file, each step is a line in the file.
-type BuildOrder struct {
-	Civilization CivilizationID
-	Steps        []Step
-}
 
 // NewBuildOrder creates a BuildOrder from a ".ai" file format,
 // this parses the file line by line, returns error for the first invalid line if any.
-func NewBuildOrder(aiFileData string) (*BuildOrder, error) {
-	//aiFileData = strings.ReplaceAll(aiFileData, "\r\n", "\n")
-	//lines := strings.Split(aiFileData, "\n")
-	//for i, line := range lines {
-	//	step, err := NewStep(line)
-	//}
-	return nil, ErrNotImplemented
+func NewBuildOrder(aiFileData string) ([]Step, error) {
+	aiFileData = strings.ReplaceAll(aiFileData, "\r\n", "\n")
+	lines := strings.Split(aiFileData, "\n")
+	var buildOrder []Step
+	for i, line := range lines {
+		step, err := NewStep(line)
+		if err != nil {
+			return nil, fmt.Errorf("line %v: %w", i+1, err)
+		}
+		buildOrder = append(buildOrder, *step)
+	}
+	return buildOrder, nil
 }
 
 type Step struct {
@@ -62,6 +62,9 @@ type Step struct {
 // train 1 Scout at Stable, if killed, retrain max 2 times.
 // This func is the inverse function of Step.String().
 func NewStep(line string) (*Step, error) {
+	// workaround for the exceptional name with space  in `Default.ai` file
+	line = strings.ReplaceAll(line, "Armored Elephants", "Armored_Elephants")
+
 	words := strings.Fields(line)
 	if len(words) < 4 {
 		return nil, ErrNotEnoughStepFields
@@ -150,16 +153,16 @@ func (s Step) CheckEqual(other Step) bool {
 // this func does not use Step.UnitOrTechID so the field can be nil when calling this func.
 func (s Step) determineUnitOrTech(unitOrTechID int) (UnitOrTech, error) {
 	if s.Action == Research || s.Action == ResearchCritical {
-		t := NewTechnology(TechID(unitOrTechID))
-		if t == nil {
+		t, err := NewTechnology(TechID(unitOrTechID))
+		if err != nil {
 			return nil, ErrTechIDNotFound
 		}
 		return t, nil
 	}
 	if s.Action == Build || s.Action == BuildLimit ||
 		s.Action == Train || s.Action == TrainLimit {
-		u := NewUnit(UnitID(unitOrTechID))
-		if u == nil {
+		u, err := NewUnit(UnitID(unitOrTechID))
+		if err != nil {
 			return nil, ErrUnitIDNotFound
 		}
 		return u, nil
@@ -195,37 +198,46 @@ type UnitOrTech interface {
 // This can be used to store state of a running BuildOrder.
 // MUST be initialized by func NewEmpireDeveloping.
 type EmpireDeveloping struct {
-	Civilization Civilization
-	Spent        Cost
-	// units stats are available units that can be trained,
-	// this map is initialized by civilization, later can be changed by completing a tech or building
-	UnitStats       map[UnitID]*Unit
-	TechStats       map[TechID]*Technology
+	Civilization    Civilization
+	AutoBuildHouse  int // if reach population limit, automatically build this number of houses
+	Spent           Cost
+	UnitStats       map[UnitID]*Unit // excluding the disabled units of the civilization
+	EnabledUnits    map[UnitID]bool
 	Combatants      map[UnitID]int  // trained units are not buildings
 	Buildings       map[UnitID]int  // built buildings
 	Techs           map[TechID]bool // researched technologies, including auto-researched
 	TechnologyCount int             // only count the techs that are not auto-researched
 }
 
-func NewEmpireDeveloping(civilizationID CivilizationID) (*EmpireDeveloping, error) {
+func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
+	fullTechTreeCiv, err := NewCivilization(FullTechTree)
+	if err != nil { // unlikely to happen
+		return nil, fmt.Errorf("NewCivilization FullTechTree: %w", err)
+	}
 	e := &EmpireDeveloping{
-		UnitStats:  make(map[UnitID]*Unit),
-		Combatants: make(map[UnitID]int),
-		Buildings:  make(map[UnitID]int),
-		Techs:      make(map[TechID]bool),
+		Civilization:   *fullTechTreeCiv,
+		AutoBuildHouse: 5,
+		UnitStats:      make(map[UnitID]*Unit),
+		Combatants:     map[UnitID]int{Villager: 3},
+		Buildings:      map[UnitID]int{TownCenter: 1},
+		Techs:          make(map[TechID]bool),
 	}
-	civilization, err := NewCivilization(civilizationID)
-	if err != nil {
-		return nil, fmt.Errorf("NewCivilization: %w", err)
+
+	for _, option := range options {
+		option(e)
 	}
-	e.Civilization = *civilization
-	for _, unitID := range []UnitID{TownCenter, House} {
-		u := NewUnit(unitID)
+
+	for unitID := range AllUnits {
 		if e.Civilization.DisabledUnits[unitID] {
+			continue
+		}
+		u, err := NewUnit(unitID)
+		if err != nil { // unlikely to happen
 			continue
 		}
 		e.UnitStats[unitID] = u
 	}
+
 	for _, v := range e.Civilization.Bonuses {
 		v(e) // TODO: implement Civilization Bonuses
 	}
@@ -243,16 +255,72 @@ func (e *EmpireDeveloping) Do(s Step) error {
 	}
 	switch v := target.(type) {
 	case *Unit:
-		if e.Civilization.DisabledUnits[v.ID] {
+		if _, found := e.UnitStats[v.ID]; !found {
 			return fmt.Errorf("%w: %v is disabled for civilization %v", ErrUnitDisabledByCiv, v.NameInGame, e.Civilization.Name)
 		}
-		if _, found := e.UnitStats[v.ID]; !found {
-			return fmt.Errorf("%w: %v is not available yet", ErrUnitNotAvailableYet, v.NameInGame)
+		if v.Location != NullUnit {
+			if !(e.Buildings[v.Location] > 0) {
+				return fmt.Errorf("%w: need %v first to train %v", ErrUnitLocationNotBuilt, v.Location, v.NameInGame)
+			}
 		}
-		return ErrNotImplemented
+
 	case *Technology:
 		return ErrNotImplemented
 	default:
 		return fmt.Errorf("invalid target type: %T", target)
+	}
+	return ErrNotImplemented
+}
+
+func (e *EmpireDeveloping) CountPopulation() int {
+	pop := float64(0)
+	for unitID, count := range e.Combatants {
+		unit, found := e.UnitStats[unitID]
+		if !found { // unlikely to happen
+			continue
+		}
+		pop += float64(count) * unit.Population
+	}
+	return int(pop)
+}
+
+func (e *EmpireDeveloping) build(unitID UnitID, quantity int) error {
+	//unit, found := e.UnitStats[unitID]
+	//if !found {
+	//	return fmt.Errorf("%w: %v is disabled for civilization %v", ErrUnitDisabledByCiv, UnitName(unitID), e.Civilization.Name)
+	//}
+	return ErrNotImplemented
+}
+
+func (e *EmpireDeveloping) autoBuildHouse() error {
+	if e.AutoBuildHouse <= 0 {
+		return nil
+	}
+	return ErrNotImplemented
+}
+
+// EmpireOption can set civilization and choose to
+type EmpireOption func(*EmpireDeveloping)
+
+func WithCivilization(civID CivilizationID) EmpireOption {
+	return func(e *EmpireDeveloping) {
+		tmp, err := NewCivilization(civID)
+		if err != nil {
+			return
+		}
+		e.Civilization = *tmp
+	}
+}
+
+func WithNoUnit() EmpireOption {
+	return func(e *EmpireDeveloping) {
+		e.Buildings[TownCenter] = 0
+		e.Combatants[Villager] = 0
+	}
+}
+
+func WithDisableAutoBuildHouse() EmpireOption {
+	return func(e *EmpireDeveloping) {
+		e.AutoBuildHouse = 0
 	}
 }

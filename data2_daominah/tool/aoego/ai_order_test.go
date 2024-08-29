@@ -1,6 +1,7 @@
 package aoego
 
 import (
+	_ "embed"
 	"errors"
 	"testing"
 )
@@ -82,7 +83,7 @@ func TestStep(t *testing.T) {
 }
 
 func TestStep_Weird(t *testing.T) {
-	// should be "R125    Armored_Elephant       1      101", but `Default.ai` has this weird exception:
+	// `Default.ai` has a weird exception internal name with space
 	step, err := NewStep("R125    Armored Elephants      1      101")
 	if err != nil {
 		t.Fatalf("error NewStep weird Armored Elephants: %v", err)
@@ -134,6 +135,29 @@ func TestStep_StringError(t *testing.T) {
 		_, err := c.step.String()
 		if !errors.Is(err, c.wantErr) {
 			t.Errorf("error step.String(%+v): got: %v, but want: %v", c.step, err, c.wantErr)
+		}
+	}
+}
+
+//go:embed Default.ai
+var testDefaultAI string
+
+func TestNewStep_DefaultAI(t *testing.T) {
+	if len(testDefaultAI) == 0 {
+		t.Fatalf("error testDefaultAI: empty")
+	}
+	steps, err := NewBuildOrder(testDefaultAI)
+	if err != nil {
+		t.Fatalf("error NewBuildOrder(Default.ai): %v", err)
+	}
+	empire, err := NewEmpireDeveloping()
+	if err != nil {
+		t.Fatalf("error NewEmpireDeveloping: %v", err)
+	}
+	for _, step := range steps {
+		err := empire.Do(step)
+		if err != nil {
+			t.Errorf("error DoStep(%v): %v", step, err)
 		}
 	}
 }
