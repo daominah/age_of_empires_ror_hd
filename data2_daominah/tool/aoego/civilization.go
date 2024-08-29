@@ -49,6 +49,7 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	}
 	switch civID {
 	case FullTechTree:
+		c.Name = "FullTechTree"
 		return c, nil
 
 	case Assyrian:
