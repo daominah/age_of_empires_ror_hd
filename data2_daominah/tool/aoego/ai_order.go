@@ -26,6 +26,11 @@ var (
 	ErrUnitIDNotFound   = errors.New("unitID not found")
 	ErrTechIDNotFound   = errors.New("techID not found")
 	ErrResearchQuantity = errors.New("research quantity must be 1")
+
+	ErrUnitDisabledByCiv   = errors.New("unit is disabled by civilization")
+	ErrUnitNotAvailableYet = errors.New("unit is not available yet")
+	ErrTechDisabledByCiv   = errors.New("technology is disabled by civilization")
+	ErrTechNotAvailableYet = errors.New("technology is not available yet")
 )
 
 // BuildOrder is equivalent to a ".ai" file, each step is a line in the file.
@@ -70,7 +75,7 @@ func NewStep(line string) (*Step, error) {
 		return nil, fmt.Errorf("%v: %w", unitOrTechIDStr, ErrTargetIDNotInt)
 	}
 	s := &Step{Action: Action(words[0][:1])}
-	unitOrTech, err := determineUnitOrTech(s.Action, unitOrTechID)
+	unitOrTech, err := s.determineUnitOrTech(unitOrTechID)
 	if err != nil {
 		return nil, fmt.Errorf("determineUnitOrTech: %w", err)
 	}
@@ -103,7 +108,7 @@ func NewStep(line string) (*Step, error) {
 // train 1 Scout at Stable, if killed, retrain max 2 times.
 // This func is the inverse function of NewStep().
 func (s Step) String() (string, error) {
-	target, err := determineUnitOrTech(s.Action, s.UnitOrTechID.IntID())
+	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
 	if err != nil {
 		return "", fmt.Errorf("determineUnitOrTech: %w", err)
 	}
@@ -141,16 +146,18 @@ func (s Step) CheckEqual(other Step) bool {
 	return true
 }
 
-func determineUnitOrTech(action Action, unitOrTechID int) (UnitOrTech, error) {
-	if action == Research || action == ResearchCritical {
+// determineUnitOrTech use the Action to determine if the input arg is a UnitID or a TechID,
+// this func does not use Step.UnitOrTechID so the field can be nil when calling this func.
+func (s Step) determineUnitOrTech(unitOrTechID int) (UnitOrTech, error) {
+	if s.Action == Research || s.Action == ResearchCritical {
 		t := NewTechnology(TechID(unitOrTechID))
 		if t == nil {
 			return nil, ErrTechIDNotFound
 		}
 		return t, nil
 	}
-	if action == Build || action == BuildLimit ||
-		action == Train || action == TrainLimit {
+	if s.Action == Build || s.Action == BuildLimit ||
+		s.Action == Train || s.Action == TrainLimit {
 		u := NewUnit(UnitID(unitOrTechID))
 		if u == nil {
 			return nil, ErrUnitIDNotFound
@@ -184,18 +191,45 @@ type UnitOrTech interface {
 	GetCost() Cost
 }
 
-// EmpireDeveloping represents state of an empire at a moment.
+// EmpireDeveloping represents state of an empire at a moment,
 // This can be used to store state of a running BuildOrder.
+// MUST be initialized by func NewEmpireDeveloping.
 type EmpireDeveloping struct {
-	Civilization   CivilizationID
-	TechsDisabled  map[TechID]bool
-	IsFullTechTree bool // if true, Civilization and TechsDisabled don't matter
+	Civilization Civilization
+	Spent        Cost
+	// units stats are available units that can be trained,
+	// this map is initialized by civilization, later can be changed by completing a tech or building
+	UnitStats       map[UnitID]*Unit
+	TechStats       map[TechID]*Technology
+	Combatants      map[UnitID]int  // trained units are not buildings
+	Buildings       map[UnitID]int  // built buildings
+	Techs           map[TechID]bool // researched technologies, including auto-researched
+	TechnologyCount int             // only count the techs that are not auto-researched
+}
 
-	Spent      Cost
-	UnitStats  map[UnitID]*Unit // unit stats, can be changed by civilization or upgraded techs
-	Combatants map[UnitID]int   // trained units are not buildings
-	Buildings  map[UnitID]int   // built buildings
-	Techs      map[TechID]bool  // researched technologies
+func NewEmpireDeveloping(civilizationID CivilizationID) (*EmpireDeveloping, error) {
+	e := &EmpireDeveloping{
+		UnitStats:  make(map[UnitID]*Unit),
+		Combatants: make(map[UnitID]int),
+		Buildings:  make(map[UnitID]int),
+		Techs:      make(map[TechID]bool),
+	}
+	civilization, err := NewCivilization(civilizationID)
+	if err != nil {
+		return nil, fmt.Errorf("NewCivilization: %w", err)
+	}
+	e.Civilization = *civilization
+	for _, unitID := range []UnitID{TownCenter, House} {
+		u := NewUnit(unitID)
+		if e.Civilization.DisabledUnits[unitID] {
+			continue
+		}
+		e.UnitStats[unitID] = u
+	}
+	for _, v := range e.Civilization.Bonuses {
+		v(e) // TODO: implement Civilization Bonuses
+	}
+	return e, nil
 }
 
 // Do tries to execute a Step (probably from a BuildOrder),
@@ -203,5 +237,22 @@ type EmpireDeveloping struct {
 // for the civilization or not satisfied the requirement,
 // unit's location is not built yet, ...
 func (e *EmpireDeveloping) Do(s Step) error {
-	return ErrNotImplemented
+	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
+	if err != nil {
+		return fmt.Errorf("determineUnitOrTech: %w", err)
+	}
+	switch v := target.(type) {
+	case *Unit:
+		if e.Civilization.DisabledUnits[v.ID] {
+			return fmt.Errorf("%w: %v is disabled for civilization %v", ErrUnitDisabledByCiv, v.NameInGame, e.Civilization.Name)
+		}
+		if _, found := e.UnitStats[v.ID]; !found {
+			return fmt.Errorf("%w: %v is not available yet", ErrUnitNotAvailableYet, v.NameInGame)
+		}
+		return ErrNotImplemented
+	case *Technology:
+		return ErrNotImplemented
+	default:
+		return fmt.Errorf("invalid target type: %T", target)
+	}
 }

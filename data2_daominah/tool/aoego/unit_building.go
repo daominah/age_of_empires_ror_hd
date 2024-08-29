@@ -1,5 +1,9 @@
 package aoego
 
+import (
+	"fmt"
+)
+
 // Unit can be a Villager, Swordsman, Cavalry, ...
 // or a building like TownCenter, Granary, ...
 type Unit struct {
@@ -115,29 +119,35 @@ const (
 	NullUnit UnitID = -1
 )
 
-func CheckIsBuilding(id UnitID) bool {
-	switch id {
-	case TownCenter, House, Granary, StoragePit, Barracks, Dock:
-		return true
-	case ArcheryRange, Stable, Market, Farm, Tower, Wall:
-		return true
-	case GovernmentCenter, Temple, SiegeWorkshop, Academy:
-		return true
-	case Wonder:
-		return true
-	default:
-		return false
-	}
+// Buildings is a list of all building,
+// used as a constant (do not change this var in runtime)
+var Buildings = map[UnitID]bool{
+	TownCenter: true, House: true, Granary: true, StoragePit: true, Barracks: true, Dock: true,
+	ArcheryRange: true, Stable: true, Market: true, Farm: true, Tower: true, Wall: true,
+	GovernmentCenter: true, Temple: true, SiegeWorkshop: true, Academy: true,
+	Wonder: true,
+}
+
+// Combatants is a list of all units that is not a building,
+// used as a constant (do not change this var in runtime)
+var Combatants = map[UnitID]bool{
+	Villager: true,
+	Clubman:  true, Swordsman: true, Slinger: true,
+	Bowman: true, ImprovedBowman: true, ChariotArcher: true, HorseArcher: true, ElephantArcher: true,
+	Scout: true, Chariot: true, Cavalry: true, Elephant: true, Camel: true,
+	Priest:       true,
+	StoneThrower: true, Ballista: true,
+	Hoplite: true,
 }
 
 // NewUnit returns a Unit based on the given UnitID,
 // with default attributes values (not considering civilization bonus),
-// if the UnitID is not found, returns nil
+// this func PANIC if the UnitID is not found.
 func NewUnit(id UnitID) *Unit {
 	u := &Unit{
 		ID:           id,
 		Location:     NullUnit, // will be corrected later in the switch
-		IsBuilding:   CheckIsBuilding(id),
+		IsBuilding:   Buildings[id],
 		InitiateTech: NullTech,
 	}
 	switch id {
@@ -224,38 +234,48 @@ func NewUnit(id UnitID) *Unit {
 		u.NameInGame, u.Name = "Town Center", "Town_Center1"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
+		u.InitiateTech = EnableGranaryStoragePitBarracksDock
 	case House:
 		u.NameInGame, u.Name = "House", "House"
 		u.Cost = Cost{Wood: 30}
 		u.Time = 20
+
 	case Granary:
 		u.NameInGame, u.Name = "Granary", "Granary"
 		u.Cost = Cost{Wood: 120}
 		u.Time = 30
+		u.InitiateTech = GranaryTech
 	case StoragePit:
 		u.NameInGame, u.Name = "Storage Pit", "Storage_Pit1"
 		u.Cost = Cost{Wood: 120}
 		u.Time = 30
+		u.InitiateTech = StoragePitTech
 	case Barracks:
 		u.NameInGame, u.Name = "Barracks", "Barracks1"
 		u.Cost = Cost{Wood: 125}
 		u.Time = 30
+		u.InitiateTech = BarracksTech
 	case Dock:
 		u.NameInGame, u.Name = "Dock", "Dock_1"
 		u.Cost = Cost{Wood: 100}
 		u.Time = 50
+		u.InitiateTech = DockTech
+
 	case ArcheryRange:
 		u.NameInGame, u.Name = "Archery Range", "Range1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
+		u.InitiateTech = ArcheryRangeTech
 	case Stable:
 		u.NameInGame, u.Name = "Stable", "Stable1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
+		u.InitiateTech = StableTech
 	case Market:
 		u.NameInGame, u.Name = "Market", "Market1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
+		u.InitiateTech = MarketTech
 	case Farm:
 		u.NameInGame, u.Name = "Farm", "Farm"
 		u.Cost = Cost{Wood: 75}
@@ -268,29 +288,35 @@ func NewUnit(id UnitID) *Unit {
 		u.NameInGame, u.Name = "Small Wall", "Wall_Small"
 		u.Cost = Cost{Stone: 5}
 		u.Time = 7
+
 	case GovernmentCenter:
 		u.NameInGame, u.Name = "Government Center", "Government_Center"
 		u.Cost = Cost{Wood: 175}
 		u.Time = 60
+		u.InitiateTech = GovernmentCenterTech
 	case Temple:
 		u.NameInGame, u.Name = "Temple", "Temple1"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
+		u.InitiateTech = TempleTech
 	case SiegeWorkshop:
 		u.NameInGame, u.Name = "Siege Workshop", "Siege_Workshop"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
+		u.InitiateTech = SiegeWorkshopTech
 	case Academy:
 		u.NameInGame, u.Name = "Academy", "Academy"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
+		u.InitiateTech = AcademyTech
+
 	case Wonder:
 		u.NameInGame, u.Name = "Wonder", "Wonder"
 		u.Cost = Cost{Wood: 1000, Gold: 1000, Stone: 1000}
 		u.Time = 8000
 
 	default:
-		return nil
+		panic(fmt.Errorf("NewUnit: %v: %w", id, ErrUnitIDNotFound))
 	}
 	return u
 }
