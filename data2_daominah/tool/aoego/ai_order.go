@@ -7,6 +7,7 @@ package aoego
 import (
 	"errors"
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -14,7 +15,8 @@ import (
 var (
 	ErrNotImplemented = errors.New("not implemented")
 
-	ErrNotEnoughStepFields     = errors.New("not enough fields in a step")
+	ErrEmptyLine               = errors.New("line is empty or a comment")
+	ErrMissingStepFields       = errors.New("not enough fields in a step")
 	ErrInvalidAction           = errors.New("invalid action, check action enum list")
 	ErrInvalidActionOrTargetID = errors.New("invalid action and targetID")
 	ErrTargetIDNotInt          = errors.New("invalid unitID or techID, must be an integer")
@@ -27,27 +29,45 @@ var (
 	ErrTechIDNotFound   = errors.New("techID not found")
 	ErrResearchQuantity = errors.New("research quantity must be 1")
 
-	ErrUnitDisabledByCiv    = errors.New("unit is disabled by civilization")
-	ErrUnitNotAvailableYet  = errors.New("unit is not available yet")
-	ErrUnitLocationNotBuilt = errors.New("location is not built yet")
-	ErrTechDisabledByCiv    = errors.New("technology is disabled by civilization")
-	ErrTechNotAvailableYet  = errors.New("technology is not available yet")
+	ErrLocationNotBuilt    = errors.New("location is not built yet")
+	ErrUnitDisabledByCiv   = errors.New("unit is disabled by civilization")
+	ErrTechDisabledByCiv   = errors.New("technology is disabled by civilization")
+	ErrMissingRequireTechs = errors.New("missing required techs")
+	ErrTechResearched      = errors.New("technology is already researched")
 )
+
+type BuildOrder []Step
 
 // NewBuildOrder creates a BuildOrder from a ".ai" file format,
 // this parses the file line by line, returns error for the first invalid line if any.
-func NewBuildOrder(aiFileData string) ([]Step, error) {
+func NewBuildOrder(aiFileData string) ([]Step, []error) {
 	aiFileData = strings.ReplaceAll(aiFileData, "\r\n", "\n")
 	lines := strings.Split(aiFileData, "\n")
 	var buildOrder []Step
+	var errs []error
 	for i, line := range lines {
 		step, err := NewStep(line)
 		if err != nil {
-			return nil, fmt.Errorf("line %v: %w", i+1, err)
+			if !errors.Is(err, ErrEmptyLine) {
+				errs = append(errs, fmt.Errorf("line %v: err: %w, line: %v", i+1, err, line))
+			}
+			continue
 		}
 		buildOrder = append(buildOrder, *step)
 	}
-	return buildOrder, nil
+	return buildOrder, errs
+}
+
+func (b BuildOrder) Marshal() (string, error) {
+	var lines []string
+	for i, step := range b {
+		line, err := step.String()
+		if err != nil {
+			return "", fmt.Errorf("line %v step.String: %w", i+1, err)
+		}
+		lines = append(lines, line)
+	}
+	return strings.Join(lines, "\n"), nil
 }
 
 type Step struct {
@@ -62,12 +82,21 @@ type Step struct {
 // train 1 Scout at Stable, if killed, retrain max 2 times.
 // This func is the inverse function of Step.String().
 func NewStep(line string) (*Step, error) {
+	commentBegin := strings.Index(line, `//`)
+	if commentBegin != -1 {
+		line = line[:commentBegin]
+	}
+	line = strings.TrimSpace(line)
+
 	// workaround for the exceptional name with space  in `Default.ai` file
 	line = strings.ReplaceAll(line, "Armored Elephants", "Armored_Elephants")
 
 	words := strings.Fields(line)
+	if len(words) == 0 {
+		return nil, ErrEmptyLine
+	}
 	if len(words) < 4 {
-		return nil, ErrNotEnoughStepFields
+		return nil, ErrMissingStepFields
 	}
 	if len(words[0]) < 2 {
 		return nil, fmt.Errorf("%v: %w", words[0], ErrInvalidActionOrTargetID)
@@ -96,7 +125,7 @@ func NewStep(line string) (*Step, error) {
 	}
 	if s.Action == BuildLimit || s.Action == TrainLimit {
 		if len(words) < 5 {
-			return nil, fmt.Errorf("missing limit times: %w", ErrNotEnoughStepFields)
+			return nil, fmt.Errorf("missing limit times: %w", ErrMissingStepFields)
 		}
 		s.LimitRebuild, err = strconv.Atoi(words[4])
 		if err != nil {
@@ -116,12 +145,16 @@ func (s Step) String() (string, error) {
 		return "", fmt.Errorf("determineUnitOrTech: %w", err)
 	}
 	internalName := target.GetName()
+	internalName = strings.ReplaceAll(internalName, " ", "_")
 	if target.IsUnit() {
 		internalName = "  " + internalName
 	} else { // research quantity should always be 1
 		if s.Quantity != 1 {
 			return "", ErrResearchQuantity
 		}
+	}
+	if len(internalName) > 22 {
+		internalName = internalName[:22]
 	}
 	line := fmt.Sprintf("%v%-7v%-23v%-7v%-10v",
 		s.Action, s.UnitOrTechID, internalName, s.Quantity, target.GetLocation())
@@ -184,14 +217,16 @@ const (
 )
 
 // UnitOrTechID is a UnitID or TechID
-type UnitOrTechID interface{ IntID() int }
+type UnitOrTechID interface {
+	IntID() int
+	GetNameInGame() string // name with spaces, easier to read
+}
 
 type UnitOrTech interface {
 	IsUnit() bool
 	GetID() UnitOrTechID
 	GetName() string // name without spaces
 	GetLocation() UnitID
-	GetCost() Cost
 }
 
 // EmpireDeveloping represents state of an empire at a moment,
@@ -199,14 +234,14 @@ type UnitOrTech interface {
 // MUST be initialized by func NewEmpireDeveloping.
 type EmpireDeveloping struct {
 	Civilization    Civilization
-	AutoBuildHouse  int // if reach population limit, automatically build this number of houses
-	Spent           Cost
+	AutoBuildHouse  int              // if reach population limit, automatically build this number of houses
 	UnitStats       map[UnitID]*Unit // excluding the disabled units of the civilization
-	EnabledUnits    map[UnitID]bool
-	Combatants      map[UnitID]int  // trained units are not buildings
-	Buildings       map[UnitID]int  // built buildings
-	Techs           map[TechID]bool // researched technologies, including auto-researched
-	TechnologyCount int             // only count the techs that are not auto-researched
+	EnabledUnits    map[UnitID]bool  // example research Wheel add Chariot and Chariot Archer to this map
+	Combatants      map[UnitID]int   // trained units are not buildings
+	Buildings       map[UnitID]int   // built buildings
+	Techs           map[TechID]bool  // researched technologies, including auto-researched
+	TechnologyCount int              // only count the techs that are not auto-researched
+	Spent           Cost
 }
 
 func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
@@ -216,11 +251,16 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 	}
 	e := &EmpireDeveloping{
 		Civilization:   *fullTechTreeCiv,
-		AutoBuildHouse: 5,
+		AutoBuildHouse: 5, // build 5 houses if close to population limit
 		UnitStats:      make(map[UnitID]*Unit),
-		Combatants:     map[UnitID]int{Villager: 3},
-		Buildings:      map[UnitID]int{TownCenter: 1},
-		Techs:          make(map[TechID]bool),
+		EnabledUnits: map[UnitID]bool{
+			TownCenter: true, Villager: true, House: true,
+			Granary: true, StoragePit: true, Barracks: true, Dock: true,
+		},
+		Combatants: map[UnitID]int{Villager: 3},
+		Buildings:  map[UnitID]int{TownCenter: 1, Granary: 1, StoragePit: 1},
+		Techs:      map[TechID]bool{StoneAge: true, GranaryBuilt: true, StoragePitBuilt: true},
+		Spent:      Cost{Wood: 240},
 	}
 
 	for _, option := range options {
@@ -255,24 +295,15 @@ func (e *EmpireDeveloping) Do(s Step) error {
 	}
 	switch v := target.(type) {
 	case *Unit:
-		if _, found := e.UnitStats[v.ID]; !found {
-			return fmt.Errorf("%w: %v is disabled for civilization %v", ErrUnitDisabledByCiv, v.NameInGame, e.Civilization.Name)
-		}
-		if v.Location != NullUnit {
-			if !(e.Buildings[v.Location] > 0) {
-				return fmt.Errorf("%w: need %v first to train %v", ErrUnitLocationNotBuilt, v.Location, v.NameInGame)
-			}
-		}
-
+		return e.build(*v, s.Quantity)
 	case *Technology:
-		return ErrNotImplemented
+		return e.research(*v)
 	default:
 		return fmt.Errorf("invalid target type: %T", target)
 	}
-	return ErrNotImplemented
 }
 
-func (e *EmpireDeveloping) CountPopulation() int {
+func (e *EmpireDeveloping) CountPopulation() float64 {
 	pop := float64(0)
 	for unitID, count := range e.Combatants {
 		unit, found := e.UnitStats[unitID]
@@ -281,22 +312,170 @@ func (e *EmpireDeveloping) CountPopulation() int {
 		}
 		pop += float64(count) * unit.Population
 	}
-	return int(pop)
+	return pop
 }
 
-func (e *EmpireDeveloping) build(unitID UnitID, quantity int) error {
-	//unit, found := e.UnitStats[unitID]
-	//if !found {
-	//	return fmt.Errorf("%w: %v is disabled for civilization %v", ErrUnitDisabledByCiv, UnitName(unitID), e.Civilization.Name)
-	//}
-	return ErrNotImplemented
-}
-
-func (e *EmpireDeveloping) autoBuildHouse() error {
-	if e.AutoBuildHouse <= 0 {
-		return nil
+func (e *EmpireDeveloping) CountPopulationLimit() float64 {
+	popLimit := float64(0)
+	for unitID, count := range e.Buildings {
+		if unitID == House || unitID == TownCenter {
+			popLimit += 4 * float64(count)
+		}
 	}
-	return ErrNotImplemented
+	return popLimit
+}
+
+// Build a combatant(s) or a building(s). if quantity is not provided, build 1.
+func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
+	n := 1 // number of units to build
+	if len(quantity) > 0 {
+		n = quantity[0]
+	}
+	if _, found := e.UnitStats[u.ID]; !found {
+		return fmt.Errorf("%w: %v is disabled for %v", ErrUnitDisabledByCiv, u.NameInGame, e.Civilization.Name)
+	}
+
+	// cannot build this unit: return why
+
+	if !e.EnabledUnits[u.ID] {
+		enableTechID, found := UnitEnabledByTechs[u.ID]
+		if !found { // unlikely to happen
+			return fmt.Errorf("%w for %v, missing key %v in UnitEnabledByTechs", ErrMissingRequireTechs, u.NameInGame, u.ID)
+		}
+		enableTech, found := AllTechs[enableTechID]
+		if !found { // unlikely to happen
+			return fmt.Errorf("%w for %v, missing key %v in AllTechs", ErrMissingRequireTechs, u.NameInGame, enableTechID)
+		}
+		missingTechsCount := enableTech.MinRequiredTechs
+		var missingTechs []string
+		for _, techID := range enableTech.RequiredTechs {
+			if e.Techs[techID] {
+				missingTechsCount--
+				continue
+			}
+			missingTechs = append(missingTechs, techID.GetNameInGame())
+		}
+		if missingTechsCount == 0 { // unlikely to happen
+			return fmt.Errorf("not miss required techs but %v(%v) is still disabled, check effect funcs: %v", u.NameInGame, u.ID.ActionID(), enableTech.GetEffectsName())
+		}
+		return fmt.Errorf("%w for %v: at least %v of %v", ErrMissingRequireTechs, u.NameInGame, missingTechsCount, strings.Join(missingTechs, ", "))
+	}
+	if u.Location != NullUnit {
+		if e.Buildings[u.Location] <= 0 {
+			return fmt.Errorf("%w: need %v first to train %v", ErrLocationNotBuilt, u.Location, u.NameInGame)
+		}
+	}
+
+	// can build this unit: update the empire
+
+	e.Spent.Add(*(u.Cost.Multiply(float64(n))))
+	if u.IsBuilding {
+		if e.Buildings[u.ID] == 0 && u.InitiateTech != NullTech {
+			e.Techs[u.InitiateTech] = true
+			for _, effect := range AllTechs[u.InitiateTech].Effects {
+				effect(e)
+			}
+			e.refreshAutoTechs()
+		}
+		e.Buildings[u.ID] += n
+	} else {
+		e.Combatants[u.ID] += n
+		if e.AutoBuildHouse > 0 {
+			remainingHousesBlock := (e.CountPopulationLimit() - e.CountPopulation()) / float64(4*e.AutoBuildHouse)
+			if remainingHousesBlock <= 0.5 { // TODO: correct house pop limit math
+				e.buildHouse(e.AutoBuildHouse * int(math.Ceil(1-remainingHousesBlock)))
+			}
+		}
+	}
+	return nil
+}
+
+func (e *EmpireDeveloping) buildHouse(n int) {
+	house := AllUnits[House]
+	e.Spent.Add(*(house.Cost.Multiply(float64(n))))
+	e.Buildings[House] += n
+}
+
+func (e *EmpireDeveloping) research(t Technology) error {
+	if e.Civilization.DisabledTechs[t.ID] {
+		return fmt.Errorf("%w: %v is disabled for %v", ErrTechDisabledByCiv, t.NameInGame, e.Civilization.Name)
+	}
+	if e.Techs[t.ID] {
+		return fmt.Errorf("%w: %v", ErrTechResearched, t.NameInGame)
+	}
+	missingTechsCount := t.MinRequiredTechs
+	var missingTechs []string
+	for _, techID := range t.RequiredTechs {
+		if e.Techs[techID] {
+			missingTechsCount--
+			continue
+		}
+		missingTechs = append(missingTechs, techID.GetNameInGame())
+	}
+	if missingTechsCount > 0 {
+		return fmt.Errorf("%w for %v: at least %v of %v", ErrMissingRequireTechs, t.NameInGame, missingTechsCount, strings.Join(missingTechs, ", "))
+	}
+
+	e.Spent.Add(t.Cost)
+	e.Techs[t.ID] = true
+	if !t.Cost.IsZero() {
+		e.TechnologyCount++
+	}
+	for _, effect := range t.Effects {
+		effect(e)
+	}
+	return nil
+}
+
+func (e *EmpireDeveloping) refreshAutoTechs() {
+	for autoID, autoTech := range AllAutoTechs {
+		if e.Techs[autoID] {
+			continue
+		}
+		isSatified := true
+		for _, require := range autoTech.RequiredTechs {
+			if !e.Techs[require] {
+				isSatified = false
+				break
+			}
+		}
+		if isSatified {
+			e.Techs[autoID] = true
+			for _, effect := range autoTech.Effects {
+				effect(e)
+			}
+		}
+	}
+}
+
+func (e *EmpireDeveloping) Summary() string {
+	var lines []string
+	lines = append(lines, fmt.Sprintf("civilization: %v", e.Civilization.Name))
+	lines = append(lines, fmt.Sprintf("spent: %+v", e.Spent))
+	lines = append(lines, fmt.Sprintf("population: %.0f/%.0f", e.CountPopulation(), e.CountPopulationLimit()))
+	lines = append(lines, fmt.Sprintf("buildings: %v", beautyUnits(e.Buildings)))
+	lines = append(lines, fmt.Sprintf("combatants: %v", beautyUnits(e.Combatants)))
+	lines = append(lines, fmt.Sprintf("techs count: %v", e.TechnologyCount))
+	lines = append(lines, fmt.Sprintf("techs researched: %+v", beautyTechs(e.Techs)))
+	return strings.Join(lines, "\n")
+}
+
+func beautyUnits(m map[UnitID]int) string {
+	var keyValues []string
+	for unitID, count := range m {
+		keyValues = append(keyValues, fmt.Sprintf("%v(%v): %v", unitID.GetNameInGame(), unitID.ActionID(), count))
+	}
+	return strings.Join(keyValues, ", ")
+}
+
+func beautyTechs(m map[TechID]bool) string {
+	var words []string
+	for techID, researched := range m {
+		if researched {
+			words = append(words, fmt.Sprintf("%v(R%v)", techID.GetNameInGame(), techID))
+		}
+	}
+	return strings.Join(words, ", ")
 }
 
 // EmpireOption can set civilization and choose to

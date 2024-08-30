@@ -16,7 +16,7 @@ type Unit struct {
 	Population   float64 // almost all units have 1 population, except Barracks units after Logistics researched
 	Location     UnitID  // building that trains this unit
 	IsBuilding   bool
-	InitiateTech TechID // when the building is created, this tech is researched
+	InitiateTech TechID // when the building is created, this tech is automatically researched
 }
 
 func (u Unit) IsUnit() bool {
@@ -35,10 +35,6 @@ func (u Unit) GetLocation() UnitID {
 	return u.Location
 }
 
-func (u Unit) GetCost() Cost {
-	return u.Cost
-}
-
 // Cost holds a certain amount of collectible resources
 type Cost struct {
 	Wood  float64
@@ -47,28 +43,48 @@ type Cost struct {
 	Stone float64
 }
 
-func (c Cost) Add(d Cost) Cost {
-	return Cost{
-		Wood:  c.Wood + d.Wood,
-		Food:  c.Food + d.Food,
-		Gold:  c.Gold + d.Gold,
-		Stone: c.Stone + d.Stone,
-	}
+// Add adds the argument to the receiver, then return the receiver for chaining
+func (c *Cost) Add(d Cost) *Cost {
+	c.Wood += d.Wood
+	c.Food += d.Food
+	c.Gold += d.Gold
+	c.Stone += d.Stone
+	return c
 }
 
-func (c Cost) Multiply(m float64) Cost {
-	return Cost{
-		Wood:  c.Wood * m,
-		Food:  c.Food * m,
-		Gold:  c.Gold * m,
-		Stone: c.Stone * m,
-	}
+// Multiply multiplies the receiver with the argument, then return the receiver for chaining
+func (c *Cost) Multiply(m float64) *Cost {
+	c.Wood *= m
+	c.Food *= m
+	c.Gold *= m
+	c.Stone *= m
+	return c
+}
+
+func (c *Cost) IsZero() bool {
+	return c.Wood == 0 && c.Food == 0 && c.Gold == 0 && c.Stone == 0
 }
 
 // UnitID is enum
 type UnitID int
 
 func (id UnitID) IntID() int { return int(id) }
+func (id UnitID) GetNameInGame() string {
+	if u, found := AllUnits[id]; found {
+		return u.NameInGame
+	}
+	return fmt.Sprintf("UnitID%v", id) // should not happen
+}
+
+func (id UnitID) ActionID() string {
+	if u, found := AllUnits[id]; found {
+		if u.IsBuilding {
+			return fmt.Sprintf("B%v", id)
+		}
+		return fmt.Sprintf("U%v", id)
+	}
+	return fmt.Sprintf("UnitID%v", id) // should not happen
+}
 
 // UnitID enum
 const (
@@ -155,14 +171,6 @@ func init() {
 			AllUnits[unitID] = *tmp
 		}
 	}
-}
-
-func UnitName(id UnitID) string {
-	u, found := AllUnits[id]
-	if !found {
-		return ""
-	}
-	return u.NameInGame
 }
 
 // NewUnit returns a Unit based on the given UnitID,
@@ -268,38 +276,38 @@ func NewUnit(id UnitID) (*Unit, error) {
 		u.NameInGame, u.Name = "Granary", "Granary"
 		u.Cost = Cost{Wood: 120}
 		u.Time = 30
-		u.InitiateTech = GranaryTech
+		u.InitiateTech = GranaryBuilt
 	case StoragePit:
 		u.NameInGame, u.Name = "Storage Pit", "Storage_Pit1"
 		u.Cost = Cost{Wood: 120}
 		u.Time = 30
-		u.InitiateTech = StoragePitTech
+		u.InitiateTech = StoragePitBuilt
 	case Barracks:
 		u.NameInGame, u.Name = "Barracks", "Barracks1"
 		u.Cost = Cost{Wood: 125}
 		u.Time = 30
-		u.InitiateTech = BarracksTech
+		u.InitiateTech = BarracksBuilt
 	case Dock:
 		u.NameInGame, u.Name = "Dock", "Dock_1"
 		u.Cost = Cost{Wood: 100}
 		u.Time = 50
-		u.InitiateTech = DockTech
+		u.InitiateTech = DockBuilt
 
 	case ArcheryRange:
 		u.NameInGame, u.Name = "Archery Range", "Range1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
-		u.InitiateTech = ArcheryRangeTech
+		u.InitiateTech = ArcheryRangeBuilt
 	case Stable:
 		u.NameInGame, u.Name = "Stable", "Stable1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
-		u.InitiateTech = StableTech
+		u.InitiateTech = StableBuilt
 	case Market:
 		u.NameInGame, u.Name = "Market", "Market1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
-		u.InitiateTech = MarketTech
+		u.InitiateTech = MarketBuilt
 	case Farm:
 		u.NameInGame, u.Name = "Farm", "Farm"
 		u.Cost = Cost{Wood: 75}
@@ -317,22 +325,22 @@ func NewUnit(id UnitID) (*Unit, error) {
 		u.NameInGame, u.Name = "Government Center", "Government_Center"
 		u.Cost = Cost{Wood: 175}
 		u.Time = 60
-		u.InitiateTech = GovernmentCenterTech
+		u.InitiateTech = GovernmentCenterBuilt
 	case Temple:
 		u.NameInGame, u.Name = "Temple", "Temple1"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
-		u.InitiateTech = TempleTech
+		u.InitiateTech = TempleBuilt
 	case SiegeWorkshop:
 		u.NameInGame, u.Name = "Siege Workshop", "Siege_Workshop"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
-		u.InitiateTech = SiegeWorkshopTech
+		u.InitiateTech = SiegeWorkshopBuilt
 	case Academy:
 		u.NameInGame, u.Name = "Academy", "Academy"
 		u.Cost = Cost{Wood: 200}
 		u.Time = 60
-		u.InitiateTech = AcademyTech
+		u.InitiateTech = AcademyBuilt
 
 	case Wonder:
 		u.NameInGame, u.Name = "Wonder", "Wonder"
