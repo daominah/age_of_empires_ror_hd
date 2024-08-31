@@ -43,6 +43,10 @@ func (t Technology) GetEffectsName() string {
 	return strings.Join(effectNames, ", ")
 }
 
+func (t Technology) GetFullName() string {
+	return fmt.Sprintf("%v(%v)", t.NameInGame, t.ID.ActionID())
+}
+
 // TechID is enum
 type TechID int
 
@@ -194,20 +198,84 @@ const (
 	EnableFireBoat       TechID = 118
 )
 
-// the following vars are used as constants, not changed during runtime
-var (
-	AllStoneTechs = []TechID{
-		GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt,
+// UnitEnabledByTechs is used to know how to enable a unit
+var UnitEnabledByTechs = map[UnitID]TechID{
+	Slinger:   EnableSlinger,
+	Swordsman: ShortSword, // needs manually researched
+
+	ImprovedBowman: ImprovedBow, // needs  manually researched
+	ChariotArcher:  EnableChariotArcher,
+	HorseArcher:    EnableHorseArcher,
+	ElephantArcher: EnableElephantArcher,
+
+	Chariot:  EnableChariot,
+	Cavalry:  EnableCavalry,
+	Elephant: EnableWarElephant,
+	Camel:    EnableCamel,
+
+	Ballista: EnableBallista,
+
+	TransportBoat: EnableTransportBoat,
+	WarBoat:       EnableWarBoat,
+	CatapultBoat:  CatapultTrireme, // needs manually researched
+	FireBoat:      EnableFireBoat,
+
+	Market:           EnableMarket,
+	ArcheryRange:     EnableArcheryRange,
+	Stable:           EnableStable,
+	GovernmentCenter: EnableGovernmentCenter,
+	Temple:           EnableTemple,
+	SiegeWorkshop:    EnableSiegeWorkshop,
+	Academy:          EnableAcademy,
+	Wonder:           IronAge,
+}
+
+// CheckIsBuiltTech returns true if the tech is researched when a building is built.
+func CheckIsBuiltTech(techID TechID) bool {
+	switch techID {
+	case GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt,
+		MarketBuilt, ArcheryRangeBuilt, StableBuilt,
+		GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt:
+		return true
+	default:
+		return false
 	}
-	AllToolTechs = []TechID{
+}
+
+// CheckIsAutoTech returns true if the tech is automatically researched when
+// their required techs are researched. Auto techs have zero cost, zero time.
+// Example: EnableHorseArcher will be automatically researched when Iron Age is
+// researched, EnableAcademy will be automatically researched when Bronze Age
+// and StableBuilt are researched.
+func CheckIsAutoTech(techID TechID) bool {
+	switch techID {
+	case EnableMarket, EnableArcheryRange, EnableStable,
+		EnableGovernmentCenter, EnableTemple, EnableSiegeWorkshop, EnableAcademy,
+		EnableSlinger, EnableTransportBoat, EnableWarBoat,
+		EnableChariotArcher, EnableChariot, EnableCavalry, EnableCamel,
+		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
+		EnableFireBoat:
+		return true
+	default:
+		return false
+	}
+}
+
+// GetTechnologyAge returns StoneAge, ToolAge, BronzeAge or IronAge.
+func GetTechnologyAge(id TechID) TechID {
+	switch id {
+	case StoneAge,
+		GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt:
+		return StoneAge
+	case ToolAge,
 		EnableMarket, EnableArcheryRange, EnableStable,
 		EnableSlinger, EnableTransportBoat, EnableWarBoat,
 		MarketBuilt, ArcheryRangeBuilt, StableBuilt,
 		WatchTower, SmallWall,
 		Toolworking, LeatherArmorInfantry, LeatherArmorArchers, LeatherArmorCavalry,
-		Woodworking, StoneMining, GoldMining, Domestication,
-	}
-	AllBronzeTechs = []TechID{
+		Woodworking, StoneMining, GoldMining, Domestication:
+		return ToolAge
+	case BronzeAge,
 		EnableGovernmentCenter, EnableTemple, EnableSiegeWorkshop, EnableAcademy,
 		EnableChariotArcher, EnableChariot, EnableCavalry, EnableCamel,
 		GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt,
@@ -218,9 +286,9 @@ var (
 		Wheel, Artisanship, Plow,
 		ImprovedBow, CompositeBow,
 		Nobility, Writing, Architecture, Logistics,
-		Astrology, Mysticism, Polytheism,
-	}
-	AllIronTechs = []TechID{
+		Astrology, Mysticism, Polytheism:
+		return BronzeAge
+	case IronAge,
 		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
 		GuardTower, BallistaTower, FortifiedWall,
 		Metallurgy, ChainMailInfantry, ChainMailArchers, ChainMailCavalry, IronShield, TowerShield,
@@ -232,50 +300,12 @@ var (
 		Aristocracy, Ballistics, Alchemy, Engineering,
 		Medicine, Monotheism, Fanaticism, Jihad, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
-		Phalanx, Centurion,
+		Phalanx, Centurion:
+		return IronAge
+	default: // should not happen
+		return StoneAge
 	}
-
-	// UnitEnabledByTechs is used to know how to enable a unit
-	UnitEnabledByTechs = map[UnitID]TechID{
-		Slinger:   EnableSlinger,
-		Swordsman: ShortSword, // needs manually researched
-
-		ImprovedBowman: ImprovedBow, // needs  manually researched
-		ChariotArcher:  EnableChariotArcher,
-		HorseArcher:    EnableHorseArcher,
-		ElephantArcher: EnableElephantArcher,
-
-		Chariot:  EnableChariot,
-		Cavalry:  EnableCavalry,
-		Elephant: EnableWarElephant,
-		Camel:    EnableCamel,
-
-		Ballista: EnableBallista,
-
-		TransportBoat: EnableTransportBoat,
-		WarBoat:       EnableWarBoat,
-		CatapultBoat:  CatapultTrireme, // needs manually researched
-		FireBoat:      EnableFireBoat,
-
-		Market:           EnableMarket,
-		ArcheryRange:     EnableArcheryRange,
-		Stable:           EnableStable,
-		GovernmentCenter: EnableGovernmentCenter,
-		Temple:           EnableTemple,
-		SiegeWorkshop:    EnableSiegeWorkshop,
-		Academy:          EnableAcademy,
-		Wonder:           IronAge,
-	}
-
-	// AllBuiltTechs are corresponding to a building type, they will be
-	// researched when a building is built and can be un-researched when the
-	// last building is destroyed
-	AllBuiltTechs = map[TechID]bool{
-		GranaryBuilt: true, StoragePitBuilt: true, BarracksBuilt: true, DockBuilt: true,
-		MarketBuilt: true, ArcheryRangeBuilt: true, StableBuilt: true,
-		GovernmentCenterBuilt: true, TempleBuilt: true, SiegeWorkshopBuilt: true, AcademyBuilt: true,
-	}
-)
+}
 
 var (
 	// AllTechs is a convenient way to read Tech info instead of func NewTechnology.
@@ -291,34 +321,53 @@ var (
 )
 
 func init() {
-	for _, list := range [][]TechID{
-		{ToolAge, BronzeAge, IronAge},
-		AllStoneTechs,
-		AllToolTechs,
-		AllBronzeTechs,
-		AllIronTechs,
+	for _, id := range []TechID{
+		StoneAge,
+		GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt,
+		ToolAge,
+		EnableMarket, EnableArcheryRange, EnableStable,
+		EnableSlinger, EnableTransportBoat, EnableWarBoat,
+		MarketBuilt, ArcheryRangeBuilt, StableBuilt,
+		WatchTower, SmallWall,
+		Toolworking, LeatherArmorInfantry, LeatherArmorArchers, LeatherArmorCavalry,
+		Woodworking, StoneMining, GoldMining, Domestication,
+		BronzeAge,
+		EnableGovernmentCenter, EnableTemple, EnableSiegeWorkshop, EnableAcademy,
+		EnableChariotArcher, EnableChariot, EnableCavalry, EnableCamel,
+		GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt,
+		SentryTower, MediumWall, Axe,
+		Metalworking, ScaleArmorInfantry, ScaleArmorArchers, ScaleArmorCavalry, BronzeShield,
+		ShortSword, Broadsword,
+		FishingShip, MerchantShip, WarGalley,
+		Wheel, Artisanship, Plow,
+		ImprovedBow, CompositeBow,
+		Nobility, Writing, Architecture, Logistics,
+		Astrology, Mysticism, Polytheism,
+		IronAge,
+		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
+		GuardTower, BallistaTower, FortifiedWall,
+		Metallurgy, ChainMailInfantry, ChainMailArchers, ChainMailCavalry, IronShield, TowerShield,
+		LongSword, Legion,
+		HeavyTransport, Trireme, CatapultTrireme, Juggernaught,
+		Craftsmanship, Siegecraft, Coinage, Irrigation,
+		HeavyHorseArcher,
+		HeavyCalvary, Cataphract, ArmoredElephant,
+		Aristocracy, Ballistics, Alchemy, Engineering,
+		Medicine, Monotheism, Fanaticism, Jihad, Sacrifice,
+		Catapult, MassiveCatapult, Helepolis,
+		Phalanx, Centurion,
 	} {
-		for _, id := range list {
-			t, err := NewTechnology(id)
-			if err != nil {
-				panic(fmt.Errorf("error NewTechnology(%v): %w", id, err))
-			}
-			AllTechs[id] = *t
-			if AllBuiltTechs[id] {
-				continue
-			}
-			if t.Cost.IsZero() {
-				AllAutoTechs[id] = *t
-			}
+		t, err := NewTechnology(id)
+		if err != nil {
+			panic(fmt.Errorf("error NewTechnology(%v): %w", id, err))
+		}
+		AllTechs[id] = *t
+		if CheckIsAutoTech(id) {
+			AllAutoTechs[id] = *t
 		}
 	}
-
-	println("len(AllTechs):", len(AllTechs))           // Output: len(AllTechs): 97
-	println("len(AllAutoTechs):", len(AllAutoTechs))   // Output: len(AllAutoTechs): 18 units enabled by techs
-	println("len(AllBuiltTechs):", len(AllBuiltTechs)) // Output: len(AllBuiltTechs): 11 corresponding to 11 buildings
-	for k := range AllAutoTechs {
-		println(fmt.Sprintf("%-4v: %v", k.ActionID(), k.GetNameInGame()))
-	}
+	println("len(AllTechs):", len(AllTechs))         // Output: len(AllTechs): 104
+	println("len(AllAutoTechs):", len(AllAutoTechs)) // Output: len(AllAutoTechs): 18
 }
 
 // EffectFunc can modify Unit attributes, enable or disable Technology
@@ -412,6 +461,16 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Wood: 150, Food: 300}
 		t.Time, t.Location = 100, Dock
 		t.RequiredTechs = []TechID{IronAge, Trireme}
+	case Juggernaught:
+		t.NameInGame, t.Name = "Juggernaught", "Juggernaught"
+		t.Cost = Cost{Wood: 900, Food: 2000}
+		t.Time, t.Location = 180, Dock
+		t.RequiredTechs = []TechID{IronAge, CatapultTrireme, Engineering}
+	case HeavyTransport:
+		t.NameInGame, t.Name = "Heavy Transport", "Heavy_Transport"
+		t.Cost = Cost{Wood: 125, Food: 150}
+		t.Time, t.Location = 75, Dock
+		t.RequiredTechs = []TechID{IronAge}
 
 	case Wheel:
 		t.NameInGame, t.Name = "Wheel", "Wheel"
@@ -955,4 +1014,20 @@ func GetFunctionName(i interface{}) string {
 		return fullName
 	}
 	return fullName[lastDot+1:]
+}
+
+type SortByAgeLocationName []UnitOrTech
+
+func (a SortByAgeLocationName) Len() int      { return len(a) }
+func (a SortByAgeLocationName) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+func (a SortByAgeLocationName) Less(i, j int) bool {
+	techAge1 := GetTechnologyAge(TechID(a[i].GetID().IntID()))
+	techAge2 := GetTechnologyAge(TechID(a[j].GetID().IntID()))
+	if techAge1 != techAge2 {
+		return techAge1 < techAge2
+	}
+	if a[i].GetLocation() != a[j].GetLocation() {
+		return a[i].GetLocation() < a[j].GetLocation()
+	}
+	return a[i].GetName() < a[j].GetName()
 }

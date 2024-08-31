@@ -13,7 +13,7 @@ type Unit struct {
 	NameInGame   string // name shown in the game, e.g. "Villager", "Chariot Archer", ...
 	Cost         Cost
 	Time         float64 // train time in seconds
-	Population   float64 // almost all units have 1 population, except Barracks units after Logistics researched
+	Population   float64 // almost all units needs 1 population, except Barracks units after Logistics researched
 	Location     UnitID  // building that trains this unit
 	IsBuilding   bool
 	InitiateTech TechID // when the building is created, this tech is automatically researched
@@ -33,6 +33,10 @@ func (u Unit) GetName() string {
 
 func (u Unit) GetLocation() UnitID {
 	return u.Location
+}
+
+func (t Unit) GetFullName() string {
+	return fmt.Sprintf("%v(%v)", t.NameInGame, t.ID.ActionID())
 }
 
 // Cost holds a certain amount of collectible resources
