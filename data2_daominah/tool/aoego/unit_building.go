@@ -115,6 +115,13 @@ const (
 	Swordsman UnitID = 75
 	Slinger   UnitID = 347
 
+	FishingBoat   UnitID = 13
+	TradeBoat     UnitID = 15
+	TransportBoat UnitID = 17
+	WarBoat       UnitID = 19
+	CatapultBoat  UnitID = 250
+	FireBoat      UnitID = 360
+
 	Bowman         UnitID = 4
 	ImprovedBowman UnitID = 5
 	ChariotArcher  UnitID = 41
@@ -201,6 +208,31 @@ func NewUnit(id UnitID) (*Unit, error) {
 		u.NameInGame, u.Name = "Slinger", "Soldier-Slinger"
 		u.Cost = Cost{Food: 40, Stone: 10}
 		u.Time, u.Location = 24, Barracks
+
+	case FishingBoat:
+		u.NameInGame, u.Name = "Fishing Boat", "Boat-Fishing1"
+		u.Cost = Cost{Wood: 50}
+		u.Time, u.Location = 40, Dock
+	case TradeBoat:
+		u.NameInGame, u.Name = "Trade Boat", "Boat-Trade1"
+		u.Cost = Cost{Wood: 100}
+		u.Time, u.Location = 50, Dock
+	case TransportBoat:
+		u.NameInGame, u.Name = "Light Transport", "Boat-Transport1"
+		u.Cost = Cost{Wood: 150}
+		u.Time, u.Location = 75, Dock
+	case WarBoat:
+		u.NameInGame, u.Name = "Scout Ship", "Boat-War1"
+		u.Cost = Cost{Wood: 135}
+		u.Time, u.Location = 60, Dock
+	case CatapultBoat:
+		u.NameInGame, u.Name = "Catapult Trireme", "Boat-War4"
+		u.Cost = Cost{Wood: 135, Gold: 75}
+		u.Time, u.Location = 90, Dock
+	case FireBoat:
+		u.NameInGame, u.Name = "Fire Galley", "Boat-War6"
+		u.Cost = Cost{Wood: 115, Gold: 40}
+		u.Time, u.Location = 45, Dock
 
 	case Bowman:
 		u.NameInGame, u.Name = "Bowman", "Soldier-Archer1"

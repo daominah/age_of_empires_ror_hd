@@ -233,15 +233,15 @@ type UnitOrTech interface {
 // This can be used to store state of a running BuildOrder.
 // MUST be initialized by func NewEmpireDeveloping.
 type EmpireDeveloping struct {
-	Civilization    Civilization
-	AutoBuildHouse  int              // if reach population limit, automatically build this number of houses
-	UnitStats       map[UnitID]*Unit // excluding the disabled units of the civilization
-	EnabledUnits    map[UnitID]bool  // example research Wheel add Chariot and Chariot Archer to this map
-	Combatants      map[UnitID]int   // trained units are not buildings
-	Buildings       map[UnitID]int   // built buildings
-	Techs           map[TechID]bool  // researched technologies, including auto-researched
-	TechnologyCount int              // only count the techs that are not auto-researched
-	Spent           Cost
+	Civilization     Civilization
+	IsAutoBuildHouse bool             // build 5 houses if close to population limit
+	UnitStats        map[UnitID]*Unit // excluding the disabled units of the civilization
+	EnabledUnits     map[UnitID]bool  // example research Wheel add Chariot and Chariot Archer to this map
+	Combatants       map[UnitID]int   // trained units are not buildings
+	Buildings        map[UnitID]int   // built buildings
+	Techs            map[TechID]bool  // researched technologies, including auto-researched
+	TechnologyCount  int              // only count the techs that are not auto-researched
+	Spent            Cost
 }
 
 func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
@@ -250,16 +250,16 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 		return nil, fmt.Errorf("NewCivilization FullTechTree: %w", err)
 	}
 	e := &EmpireDeveloping{
-		Civilization:   *fullTechTreeCiv,
-		AutoBuildHouse: 5, // build 5 houses if close to population limit
-		UnitStats:      make(map[UnitID]*Unit),
+		Civilization:     *fullTechTreeCiv,
+		IsAutoBuildHouse: true,
+		UnitStats:        make(map[UnitID]*Unit),
 		EnabledUnits: map[UnitID]bool{
 			TownCenter: true, Villager: true, House: true,
 			Granary: true, StoragePit: true, Barracks: true, Dock: true,
 		},
-		Combatants: map[UnitID]int{Villager: 3},
-		Buildings:  map[UnitID]int{TownCenter: 1, Granary: 1, StoragePit: 1},
-		Techs:      map[TechID]bool{StoneAge: true, GranaryBuilt: true, StoragePitBuilt: true},
+		Combatants: map[UnitID]int{},
+		Buildings:  map[UnitID]int{Granary: 1, StoragePit: 1}, // AI will always build these 2 buildings without instruction
+		Techs:      map[TechID]bool{GranaryBuilt: true, StoragePitBuilt: true},
 		Spent:      Cost{Wood: 240},
 	}
 
@@ -380,10 +380,10 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 		e.Buildings[u.ID] += n
 	} else {
 		e.Combatants[u.ID] += n
-		if e.AutoBuildHouse > 0 {
-			remainingHousesBlock := (e.CountPopulationLimit() - e.CountPopulation()) / float64(4*e.AutoBuildHouse)
-			if remainingHousesBlock <= 0.5 { // TODO: correct house pop limit math
-				e.buildHouse(e.AutoBuildHouse * int(math.Ceil(1-remainingHousesBlock)))
+		if e.IsAutoBuildHouse {
+			remainingHousesBlock := (e.CountPopulationLimit() - e.CountPopulation()) / 20.0
+			if remainingHousesBlock <= 0.5 {
+				e.buildHouse(5 * int(math.Ceil(1-remainingHousesBlock)))
 			}
 		}
 	}
@@ -432,14 +432,14 @@ func (e *EmpireDeveloping) refreshAutoTechs() {
 		if e.Techs[autoID] {
 			continue
 		}
-		isSatified := true
+		isSatisfied := true
 		for _, require := range autoTech.RequiredTechs {
 			if !e.Techs[require] {
-				isSatified = false
+				isSatisfied = false
 				break
 			}
 		}
-		if isSatified {
+		if isSatisfied {
 			e.Techs[autoID] = true
 			for _, effect := range autoTech.Effects {
 				effect(e)
@@ -493,13 +493,14 @@ func WithCivilization(civID CivilizationID) EmpireOption {
 
 func WithNoUnit() EmpireOption {
 	return func(e *EmpireDeveloping) {
-		e.Buildings[TownCenter] = 0
-		e.Combatants[Villager] = 0
+		e.Buildings = map[UnitID]int{}
+		e.Techs = map[TechID]bool{}
+		e.Spent = Cost{}
 	}
 }
 
 func WithDisableAutoBuildHouse() EmpireOption {
 	return func(e *EmpireDeveloping) {
-		e.AutoBuildHouse = 0
+		e.IsAutoBuildHouse = false
 	}
 }
