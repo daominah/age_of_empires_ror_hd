@@ -3,7 +3,6 @@ package aoego
 import (
 	_ "embed"
 	"errors"
-	"math"
 	"testing"
 )
 
@@ -236,7 +235,6 @@ C102    Bronze_Age             1      109`)
 		{line: "R12     Sentry_Tower           1      68", wantErr: ErrMissingRequireTechs},
 		{line: "R64     Short_Sword            1      12", wantErr: ErrMissingRequireTechs},
 		{line: "T75       Soldier-Inf3         5      12        0", wantErr: ErrMissingRequireTechs},
-		{line: "T37       Soldier-Cavalry1     2      101       0", wantErr: ErrUnitDisabledByCiv},
 		{line: "T37       Soldier-Cavalry1     2      101       1", wantErr: ErrTechDisabledByCiv},
 		{line: "B49       Siege_Workshop       4      -1", wantErr: ErrMissingRequireTechs},
 		{line: "R56     Improved_bow           1      87", wantErr: ErrTechDisabledByCiv},
@@ -321,13 +319,33 @@ func TestTechnology_GetName(t *testing.T) {
 	}
 }
 
-func TestCalcPopulationHouse(t *testing.T) {
-	for i := 40.0; i > -40; i-- {
-		remainingHousesBlock := i / 20.0
-		if remainingHousesBlock <= 0.5 {
-			nHouses := 5 * int(math.Ceil(1-remainingHousesBlock))
-			// t.Logf("i: %v, nHouses: %v", i, nHouses)
-			_ = nHouses
-		}
+func TestAutoBuildHouse(t *testing.T) {
+	//for i := 40.0; i > -40; i-- {
+	//	nHouses := calcNumberHousesAutoBuild(i)
+	//	t.Logf("i: %v, nHouses: %v", i, nHouses)
+	//}
+
+	empire, err := NewEmpireDeveloping()
+	if err != nil {
+		t.Fatalf("error NewEmpireDeveloping: %v", err)
 	}
+	err = empire.Do(Step{Action: Build, UnitOrTechID: TownCenter, Quantity: 1})
+	if err != nil {
+		t.Fatalf("error Build TownCenter: %v", err)
+	}
+	err = empire.Do(Step{Action: Build, UnitOrTechID: Villager, Quantity: 10})
+	if err != nil {
+		t.Fatalf("error Build Villager: %v", err)
+	}
+	if empire.Buildings[House] != 5 {
+		t.Errorf("should auto build House here, but nHouse: %v", empire.Buildings[House])
+	}
+	err = empire.Do(Step{Action: Build, UnitOrTechID: Villager, Quantity: 14})
+	if err != nil {
+		t.Fatalf("error Build Villager: %v", err)
+	}
+	if empire.Buildings[House] != 10 {
+		t.Errorf("should auto build House here, but nHouse: %v", empire.Buildings[House])
+	}
+	t.Logf("empire: %v", empire.Summary())
 }

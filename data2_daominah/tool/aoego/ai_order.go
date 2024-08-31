@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -34,6 +35,7 @@ var (
 	ErrTechDisabledByCiv   = errors.New("technology is disabled by civilization")
 	ErrMissingRequireTechs = errors.New("missing required techs")
 	ErrTechResearched      = errors.New("technology is already researched")
+	ErrExceedPopLimit      = errors.New("build units will exceed population limit, build more houses first")
 )
 
 type BuildOrder []Step
@@ -227,6 +229,7 @@ type UnitOrTech interface {
 	GetID() UnitOrTechID
 	GetName() string // name without spaces
 	GetLocation() UnitID
+	GetFullName() string // e.g. "Town Center(B109)", for print debug purpose
 }
 
 // EmpireDeveloping represents state of an empire at a moment,
@@ -362,13 +365,12 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 	}
 	if u.Location != NullUnit {
 		if e.Buildings[u.Location] <= 0 {
-			return fmt.Errorf("%w: need %v first to train %v", ErrLocationNotBuilt, u.Location, u.NameInGame)
+			return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, u.Location.GetNameInGame(), u.Location.ActionID(), u.NameInGame, u.ID.ActionID())
 		}
 	}
 
 	// can build this unit: update the empire
 
-	e.Spent.Add(*(u.Cost.Multiply(float64(n))))
 	if u.IsBuilding {
 		if e.Buildings[u.ID] == 0 && u.InitiateTech != NullTech {
 			e.Techs[u.InitiateTech] = true
@@ -377,13 +379,27 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 			}
 			e.refreshAutoTechs()
 		}
+		e.Spent.Add(*(u.Cost.Multiply(float64(n))))
 		e.Buildings[u.ID] += n
 	} else {
+		remainingPopLimit := e.CountPopulationLimit() - e.CountPopulation()
+		need := float64(n) * u.Population
+		if e.IsAutoBuildHouse {
+			autoHouses := calcNumberHousesAutoBuild(remainingPopLimit)
+			if autoHouses > 0 {
+				e.buildHouse(autoHouses)
+				remainingPopLimit = e.CountPopulationLimit() - e.CountPopulation()
+			}
+		}
+		if remainingPopLimit < need {
+			return fmt.Errorf("%w: remaining %.0f, but need %.0f", ErrExceedPopLimit, remainingPopLimit, need)
+		}
+		e.Spent.Add(*(u.Cost.Multiply(float64(n))))
 		e.Combatants[u.ID] += n
 		if e.IsAutoBuildHouse {
-			remainingHousesBlock := (e.CountPopulationLimit() - e.CountPopulation()) / 20.0
-			if remainingHousesBlock <= 0.5 {
-				e.buildHouse(5 * int(math.Ceil(1-remainingHousesBlock)))
+			afterTrainAutoHouses := calcNumberHousesAutoBuild(e.CountPopulationLimit() - e.CountPopulation())
+			if afterTrainAutoHouses > 0 {
+				e.buildHouse(afterTrainAutoHouses)
 			}
 		}
 	}
@@ -394,6 +410,13 @@ func (e *EmpireDeveloping) buildHouse(n int) {
 	house := AllUnits[House]
 	e.Spent.Add(*(house.Cost.Multiply(float64(n))))
 	e.Buildings[House] += n
+}
+
+func calcNumberHousesAutoBuild(remainingPopLimit float64) int {
+	if remainingPopLimit >= 10 {
+		return 0
+	}
+	return 5 * int(math.Ceil(1-remainingPopLimit/20))
 }
 
 func (e *EmpireDeveloping) research(t Technology) error {
@@ -457,10 +480,11 @@ func (e *EmpireDeveloping) Summary() string {
 	lines = append(lines, fmt.Sprintf("combatants: %v", beautyUnits(e.Combatants)))
 	lines = append(lines, fmt.Sprintf("techs count: %v", e.TechnologyCount))
 	lines = append(lines, fmt.Sprintf("techs researched: %+v", beautyTechs(e.Techs)))
+	lines = append(lines, fmt.Sprintf("units enabled: %+v", beautyUnitsList(e.EnabledUnits)))
 	return strings.Join(lines, "\n")
 }
 
-func beautyUnits(m map[UnitID]int) string {
+func beautyUnits[T int | bool](m map[UnitID]T) string {
 	var keyValues []string
 	for unitID, count := range m {
 		keyValues = append(keyValues, fmt.Sprintf("%v(%v): %v", unitID.GetNameInGame(), unitID.ActionID(), count))
@@ -468,12 +492,39 @@ func beautyUnits(m map[UnitID]int) string {
 	return strings.Join(keyValues, ", ")
 }
 
-func beautyTechs(m map[TechID]bool) string {
-	var words []string
-	for techID, researched := range m {
-		if researched {
-			words = append(words, fmt.Sprintf("%v(R%v)", techID.GetNameInGame(), techID))
+func beautyUnitsList(m map[UnitID]bool) string {
+	var units SortByAgeLocationName
+	for unitID, enabled := range m {
+		if !enabled {
+			continue
 		}
+		u, found := AllUnits[unitID]
+		if found {
+			units = append(units, u)
+		} else { // should not happen
+			println("missing key in AllUnits: ", unitID)
+		}
+	}
+	sort.Sort(units)
+	var words []string
+	for _, u := range units {
+		words = append(words, u.GetFullName())
+	}
+	return strings.Join(words, ", ")
+}
+
+func beautyTechs(m map[TechID]bool) string {
+	var techs SortByAgeLocationName
+	for techID, researched := range m {
+		if !researched {
+			continue
+		}
+		techs = append(techs, AllTechs[techID])
+	}
+	sort.Sort(techs)
+	var words []string
+	for _, tech := range techs {
+		words = append(words, tech.GetFullName())
 	}
 	return strings.Join(words, ", ")
 }
