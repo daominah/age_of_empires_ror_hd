@@ -35,8 +35,8 @@ func (u Unit) GetLocation() UnitID {
 	return u.Location
 }
 
-func (t Unit) GetFullName() string {
-	return fmt.Sprintf("%v(%v)", t.NameInGame, t.ID.ActionID())
+func (u Unit) GetFullName() string {
+	return fmt.Sprintf("%v(%v)", u.NameInGame, u.ID.ActionID())
 }
 
 // Cost holds a certain amount of collectible resources
@@ -148,6 +148,32 @@ const (
 	NullUnit UnitID = -1
 )
 
+// GetAge returns StoneAge, ToolAge, BronzeAge or IronAge.
+func (id UnitID) GetAge() TechID {
+	switch id {
+	case TownCenter, Villager, House, Granary, StoragePit,
+		Barracks, Clubman,
+		Dock, FishingBoat, TradeBoat:
+		return StoneAge
+	case Slinger, TransportBoat, WarBoat,
+		ArcheryRange, Bowman,
+		Stable, Scout,
+		Market, Farm, Tower, Wall:
+		return ToolAge
+	case Swordsman, ImprovedBowman, ChariotArcher, Chariot, Cavalry, Camel,
+		Temple, Priest,
+		SiegeWorkshop, StoneThrower,
+		Academy, Hoplite:
+		return BronzeAge
+	case HorseArcher, ElephantArcher, Elephant, Ballista,
+		CatapultBoat, FireBoat,
+		Wonder:
+		return IronAge
+	default: // should not happen
+		return StoneAge
+	}
+}
+
 // AllBuildings is used as a constant (do not change this var in runtime)
 var AllBuildings = map[UnitID]bool{
 	TownCenter: true, House: true, Granary: true, StoragePit: true, Barracks: true, Dock: true,
@@ -161,6 +187,7 @@ var AllBuildings = map[UnitID]bool{
 var AllCombatants = map[UnitID]bool{
 	Villager: true,
 	Clubman:  true, Swordsman: true, Slinger: true,
+	FishingBoat: true, TradeBoat: true, TransportBoat: true, WarBoat: true, CatapultBoat: true, FireBoat: true,
 	Bowman: true, ImprovedBowman: true, ChariotArcher: true, HorseArcher: true, ElephantArcher: true,
 	Scout: true, Chariot: true, Cavalry: true, Elephant: true, Camel: true,
 	Priest:       true,
@@ -387,4 +414,39 @@ func NewUnit(id UnitID) (*Unit, error) {
 		return nil, ErrUnitIDNotFound
 	}
 	return u, nil
+}
+
+// UnitEnabledByTechs is used to know how to enable a unit
+var UnitEnabledByTechs = map[UnitID]TechID{
+	Slinger:   EnableSlinger,
+	Swordsman: ShortSword, // needs manually research
+
+	ImprovedBowman: ImprovedBow, // needs  manually researched
+	ChariotArcher:  EnableChariotArcher,
+	HorseArcher:    EnableHorseArcher,
+	ElephantArcher: EnableElephantArcher,
+
+	Chariot:  EnableChariot,
+	Cavalry:  EnableCavalry,
+	Elephant: EnableWarElephant,
+	Camel:    EnableCamel,
+
+	Ballista: EnableBallista,
+
+	TransportBoat: EnableTransportBoat,
+	WarBoat:       EnableWarBoat,
+	CatapultBoat:  CatapultTrireme, // needs manually research
+	FireBoat:      EnableFireBoat,
+
+	Market:           EnableMarket,
+	Farm:             MarketBuilt, // needs manually build
+	Tower:            WatchTower,  // needs manually research
+	Wall:             SmallWall,   // needs manually research
+	ArcheryRange:     EnableArcheryRange,
+	Stable:           EnableStable,
+	GovernmentCenter: EnableGovernmentCenter,
+	Temple:           EnableTemple,
+	SiegeWorkshop:    EnableSiegeWorkshop,
+	Academy:          EnableAcademy,
+	Wonder:           IronAge, // needs manually research
 }

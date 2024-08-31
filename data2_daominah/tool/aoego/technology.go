@@ -38,7 +38,7 @@ func (t Technology) GetLocation() UnitID {
 func (t Technology) GetEffectsName() string {
 	var effectNames []string
 	for _, f := range t.Effects {
-		effectNames = append(effectNames, GetFunctionName(f))
+		effectNames = append(effectNames, getFunctionName(f))
 	}
 	return strings.Join(effectNames, ", ")
 }
@@ -157,7 +157,7 @@ const (
 	Afterlife  TechID = 18
 	Monotheism TechID = 19
 	Fanaticism TechID = 20
-	Jihad      TechID = 23
+	Zealotry   TechID = 23
 	Sacrifice  TechID = 120
 
 	NullTech TechID = -1
@@ -198,71 +198,8 @@ const (
 	EnableFireBoat       TechID = 118
 )
 
-// UnitEnabledByTechs is used to know how to enable a unit
-var UnitEnabledByTechs = map[UnitID]TechID{
-	Slinger:   EnableSlinger,
-	Swordsman: ShortSword, // needs manually researched
-
-	ImprovedBowman: ImprovedBow, // needs  manually researched
-	ChariotArcher:  EnableChariotArcher,
-	HorseArcher:    EnableHorseArcher,
-	ElephantArcher: EnableElephantArcher,
-
-	Chariot:  EnableChariot,
-	Cavalry:  EnableCavalry,
-	Elephant: EnableWarElephant,
-	Camel:    EnableCamel,
-
-	Ballista: EnableBallista,
-
-	TransportBoat: EnableTransportBoat,
-	WarBoat:       EnableWarBoat,
-	CatapultBoat:  CatapultTrireme, // needs manually researched
-	FireBoat:      EnableFireBoat,
-
-	Market:           EnableMarket,
-	ArcheryRange:     EnableArcheryRange,
-	Stable:           EnableStable,
-	GovernmentCenter: EnableGovernmentCenter,
-	Temple:           EnableTemple,
-	SiegeWorkshop:    EnableSiegeWorkshop,
-	Academy:          EnableAcademy,
-	Wonder:           IronAge,
-}
-
-// CheckIsBuiltTech returns true if the tech is researched when a building is built.
-func CheckIsBuiltTech(techID TechID) bool {
-	switch techID {
-	case GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt,
-		MarketBuilt, ArcheryRangeBuilt, StableBuilt,
-		GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt:
-		return true
-	default:
-		return false
-	}
-}
-
-// CheckIsAutoTech returns true if the tech is automatically researched when
-// their required techs are researched. Auto techs have zero cost, zero time.
-// Example: EnableHorseArcher will be automatically researched when Iron Age is
-// researched, EnableAcademy will be automatically researched when Bronze Age
-// and StableBuilt are researched.
-func CheckIsAutoTech(techID TechID) bool {
-	switch techID {
-	case EnableMarket, EnableArcheryRange, EnableStable,
-		EnableGovernmentCenter, EnableTemple, EnableSiegeWorkshop, EnableAcademy,
-		EnableSlinger, EnableTransportBoat, EnableWarBoat,
-		EnableChariotArcher, EnableChariot, EnableCavalry, EnableCamel,
-		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
-		EnableFireBoat:
-		return true
-	default:
-		return false
-	}
-}
-
-// GetTechnologyAge returns StoneAge, ToolAge, BronzeAge or IronAge.
-func GetTechnologyAge(id TechID) TechID {
+// GetAge returns StoneAge, ToolAge, BronzeAge or IronAge.
+func (id TechID) GetAge() TechID {
 	switch id {
 	case StoneAge,
 		GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt:
@@ -298,12 +235,43 @@ func GetTechnologyAge(id TechID) TechID {
 		HeavyHorseArcher,
 		HeavyCalvary, Cataphract, ArmoredElephant,
 		Aristocracy, Ballistics, Alchemy, Engineering,
-		Medicine, Monotheism, Fanaticism, Jihad, Sacrifice,
+		Medicine, Monotheism, Fanaticism, Zealotry, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
 		Phalanx, Centurion:
 		return IronAge
 	default: // should not happen
 		return StoneAge
+	}
+}
+
+// CheckIsBuiltTech returns true if the tech is researched when a building is built.
+func CheckIsBuiltTech(techID TechID) bool {
+	switch techID {
+	case GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt,
+		MarketBuilt, ArcheryRangeBuilt, StableBuilt,
+		GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt:
+		return true
+	default:
+		return false
+	}
+}
+
+// CheckIsAutoTech returns true if the tech is automatically researched when
+// their required techs are researched. Auto techs have zero cost, zero time.
+// Example: EnableHorseArcher will be automatically researched when Iron Age is
+// researched, EnableAcademy will be automatically researched when Bronze Age
+// and StableBuilt are researched.
+func CheckIsAutoTech(techID TechID) bool {
+	switch techID {
+	case EnableMarket, EnableArcheryRange, EnableStable,
+		EnableGovernmentCenter, EnableTemple, EnableSiegeWorkshop, EnableAcademy,
+		EnableSlinger, EnableTransportBoat, EnableWarBoat,
+		EnableChariotArcher, EnableChariot, EnableCavalry, EnableCamel,
+		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
+		EnableFireBoat:
+		return true
+	default:
+		return false
 	}
 }
 
@@ -353,7 +321,7 @@ func init() {
 		HeavyHorseArcher,
 		HeavyCalvary, Cataphract, ArmoredElephant,
 		Aristocracy, Ballistics, Alchemy, Engineering,
-		Medicine, Monotheism, Fanaticism, Jihad, Sacrifice,
+		Medicine, Monotheism, Fanaticism, Zealotry, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
 		Phalanx, Centurion,
 	} {
@@ -366,8 +334,8 @@ func init() {
 			AllAutoTechs[id] = *t
 		}
 	}
-	println("len(AllTechs):", len(AllTechs))         // Output: len(AllTechs): 104
-	println("len(AllAutoTechs):", len(AllAutoTechs)) // Output: len(AllAutoTechs): 18
+	// println("len(AllTechs):", len(AllTechs))         // Output: len(AllTechs): 105
+	// println("len(AllAutoTechs):", len(AllAutoTechs)) // Output: len(AllAutoTechs): 18
 }
 
 // EffectFunc can modify Unit attributes, enable or disable Technology
@@ -679,7 +647,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.NameInGame, t.Name = "Scythe Chariot", "Scythe_Chariot"
 		t.Cost = Cost{Wood: 1200, Gold: 800}
 		t.Time, t.Location = 150, Stable
-		t.RequiredTechs = []TechID{IronAge, Nobility}
+		t.RequiredTechs = []TechID{IronAge, EnableChariot, Nobility}
 	case HeavyCalvary:
 		t.NameInGame, t.Name = "Heavy Calvary", "Heavy_Cavalry"
 		t.Cost = Cost{Food: 350, Gold: 125}
@@ -694,7 +662,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.NameInGame, t.Name = "Armored Elephant", "Armored_Elephant"
 		t.Cost = Cost{Food: 1000, Gold: 1200}
 		t.Time, t.Location = 150, Stable
-		t.RequiredTechs = []TechID{IronAge, IronShield}
+		t.RequiredTechs = []TechID{IronAge, EnableWarElephant, IronShield}
 
 	case ImprovedBow:
 		t.NameInGame, t.Name = "Improved Bow", "Improved_Bow"
@@ -710,7 +678,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.NameInGame, t.Name = "Heavy Horse Archer", "Heavy_Horse_Archer"
 		t.Cost = Cost{Food: 1750, Gold: 800}
 		t.Time, t.Location = 150, ArcheryRange
-		t.RequiredTechs = []TechID{IronAge, ChainMailArchers}
+		t.RequiredTechs = []TechID{IronAge, EnableHorseArcher, ChainMailArchers}
 
 	case Catapult:
 		t.NameInGame, t.Name = "Catapult", "Heavy_Catapult"
@@ -726,7 +694,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.NameInGame, t.Name = "Helepolis", "Helepolis"
 		t.Cost = Cost{Wood: 1000, Food: 1500}
 		t.Time, t.Location = 150, SiegeWorkshop
-		t.RequiredTechs = []TechID{IronAge, Craftsmanship}
+		t.RequiredTechs = []TechID{IronAge, EnableBallista, Craftsmanship}
 
 	case Phalanx:
 		t.NameInGame, t.Name = "Phalanx", "Phalanx"
@@ -774,7 +742,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Gold: 150}
 		t.Time, t.Location = 60, Temple
 		t.RequiredTechs = []TechID{IronAge}
-	case Jihad:
+	case Zealotry:
 		t.NameInGame, t.Name = "Zealotry", "Jihad"
 		t.Cost = Cost{Gold: 120}
 		t.Time, t.Location = 60, Temple
@@ -796,23 +764,31 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Name = "_StoragePitBuilt"
 	case BarracksBuilt:
 		t.Name = "_BarracksBuilt"
-		t.Effects = []EffectFunc{BarracksBuiltEffect}
+		t.Effects = []EffectFunc{BarracksBuiltEffect62}
 	case DockBuilt:
 		t.Name = "_DockBuilt"
+		t.Effects = []EffectFunc{DockBuiltEffect0}
 	case MarketBuilt:
 		t.Name = "_MarketBuilt"
+		t.Effects = []EffectFunc{MarketBuiltEffect26}
 	case ArcheryRangeBuilt:
 		t.Name = "_ArcheryRangeBuilt"
+		t.Effects = []EffectFunc{ArcheryRangeBuiltEffect55}
 	case StableBuilt:
 		t.Name = "_StableBuilt"
+		t.Effects = []EffectFunc{StableBuiltEffect67}
 	case GovernmentCenterBuilt:
 		t.Name = "_GovernmentCenterBuilt"
+		t.Effects = []EffectFunc{GovernmentCenterBuiltEffect33}
 	case TempleBuilt:
 		t.Name = "_TempleBuilt"
+		t.Effects = []EffectFunc{TempleBuiltEffect17}
 	case SiegeWorkshopBuilt:
 		t.Name = "_SiegeWorkshopBuilt"
+		t.Effects = []EffectFunc{SiegeWorkshopBuiltEffect53}
 	case AcademyBuilt:
 		t.Name = "_AcademyBuilt"
+		t.Effects = []EffectFunc{AcademyBuiltEffect72}
 
 	case EnableMarket:
 		t.Name = "enableMarket"
@@ -908,22 +884,42 @@ func NewTechnology(id TechID) (*Technology, error) {
 	return t, nil
 }
 
-// effects after normal tech is researched:
-
-func ToolAgeEffect95(e *EmpireDeveloping) {
-	if e.Techs[BarracksBuilt] {
-		e.Techs[EnableStable] = true
-		EnableStableEffect79(e)
-	}
-}
-
 // effects after building is built:
 
-func BarracksBuiltEffect(e *EmpireDeveloping) {
-	if e.Techs[ToolAge] {
-		e.Techs[EnableStable] = true
-		EnableStableEffect79(e)
-	}
+func BarracksBuiltEffect62(e *EmpireDeveloping) {
+	e.EnabledUnits[Clubman] = true
+}
+
+func DockBuiltEffect0(e *EmpireDeveloping) {
+	e.EnabledUnits[FishingBoat] = true
+	e.EnabledUnits[TradeBoat] = true
+}
+
+func MarketBuiltEffect26(e *EmpireDeveloping) {
+	e.EnabledUnits[Farm] = true
+}
+
+func ArcheryRangeBuiltEffect55(e *EmpireDeveloping) {
+	e.EnabledUnits[Bowman] = true
+}
+
+func StableBuiltEffect67(e *EmpireDeveloping) {
+	e.EnabledUnits[Scout] = true
+}
+
+func GovernmentCenterBuiltEffect33(e *EmpireDeveloping) {
+}
+
+func TempleBuiltEffect17(e *EmpireDeveloping) {
+	e.EnabledUnits[Priest] = true
+}
+
+func SiegeWorkshopBuiltEffect53(e *EmpireDeveloping) {
+	e.EnabledUnits[StoneThrower] = true
+}
+
+func AcademyBuiltEffect72(e *EmpireDeveloping) {
+	e.EnabledUnits[Hoplite] = true
 }
 
 // effects enable buildings:
@@ -1006,7 +1002,19 @@ func EnableBallistaEffect58(e *EmpireDeveloping) {
 	e.EnabledUnits[Ballista] = true
 }
 
-func GetFunctionName(i interface{}) string {
+// effects after new age is researched:
+
+func ToolAgeEffect95(e *EmpireDeveloping) {
+}
+
+func BronzeAgeEffect96(e *EmpireDeveloping) {
+}
+
+func IronAgeEffect97(e *EmpireDeveloping) {
+}
+
+// getFunctionName returns Go function name to debug.
+func getFunctionName(i interface{}) string {
 	// fullName example: github.com/daominah/age_of_empires_ror_hd/data2_daominah/tool/aoego.EnableStableEffect79
 	fullName := runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
 	lastDot := strings.LastIndex(fullName, ".")
@@ -1014,20 +1022,4 @@ func GetFunctionName(i interface{}) string {
 		return fullName
 	}
 	return fullName[lastDot+1:]
-}
-
-type SortByAgeLocationName []UnitOrTech
-
-func (a SortByAgeLocationName) Len() int      { return len(a) }
-func (a SortByAgeLocationName) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
-func (a SortByAgeLocationName) Less(i, j int) bool {
-	techAge1 := GetTechnologyAge(TechID(a[i].GetID().IntID()))
-	techAge2 := GetTechnologyAge(TechID(a[j].GetID().IntID()))
-	if techAge1 != techAge2 {
-		return techAge1 < techAge2
-	}
-	if a[i].GetLocation() != a[j].GetLocation() {
-		return a[i].GetLocation() < a[j].GetLocation()
-	}
-	return a[i].GetName() < a[j].GetName()
 }

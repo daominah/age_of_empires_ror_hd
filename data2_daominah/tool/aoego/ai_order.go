@@ -222,6 +222,7 @@ const (
 type UnitOrTechID interface {
 	IntID() int
 	GetNameInGame() string // name with spaces, easier to read
+	GetAge() TechID
 }
 
 type UnitOrTech interface {
@@ -338,16 +339,20 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 		return fmt.Errorf("%w: %v is disabled for %v", ErrUnitDisabledByCiv, u.NameInGame, e.Civilization.Name)
 	}
 
-	// cannot build this unit: return why
-
-	if !e.EnabledUnits[u.ID] {
+	if !e.EnabledUnits[u.ID] { // cannot build this unit: return why
 		enableTechID, found := UnitEnabledByTechs[u.ID]
-		if !found { // unlikely to happen
+		if !found {
+			if u.Location != NullUnit && e.Buildings[u.Location] <= 0 {
+				return fmt.Errorf("%w: need %v(%v) first to train %v", ErrLocationNotBuilt, u.Location.GetNameInGame(), u.Location.ActionID(), u.GetFullName())
+			}
 			return fmt.Errorf("%w for %v, missing key %v in UnitEnabledByTechs", ErrMissingRequireTechs, u.NameInGame, u.ID)
 		}
 		enableTech, found := AllTechs[enableTechID]
 		if !found { // unlikely to happen
 			return fmt.Errorf("%w for %v, missing key %v in AllTechs", ErrMissingRequireTechs, u.NameInGame, enableTechID)
+		}
+		if !CheckIsAutoTech(enableTechID) {
+			return fmt.Errorf("%w for %v, need to research %v first", ErrMissingRequireTechs, u.GetFullName(), enableTech.GetFullName())
 		}
 		missingTechsCount := enableTech.MinRequiredTechs
 		var missingTechs []string
@@ -359,17 +364,13 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 			missingTechs = append(missingTechs, techID.GetNameInGame())
 		}
 		if missingTechsCount == 0 { // unlikely to happen
-			return fmt.Errorf("not miss required techs but %v(%v) is still disabled, check effect funcs: %v", u.NameInGame, u.ID.ActionID(), enableTech.GetEffectsName())
+			return fmt.Errorf("not miss required techs but %v is still disabled, check effect funcs: %v", u.GetFullName(), enableTech.GetEffectsName())
 		}
 		return fmt.Errorf("%w for %v: at least %v of %v", ErrMissingRequireTechs, u.NameInGame, missingTechsCount, strings.Join(missingTechs, ", "))
 	}
-	if u.Location != NullUnit {
-		if e.Buildings[u.Location] <= 0 {
-			return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, u.Location.GetNameInGame(), u.Location.ActionID(), u.NameInGame, u.ID.ActionID())
-		}
+	if u.Location != NullUnit && e.Buildings[u.Location] <= 0 {
+		return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, u.Location.GetNameInGame(), u.Location.ActionID(), u.NameInGame, u.ID.ActionID())
 	}
-
-	// can build this unit: update the empire
 
 	if u.IsBuilding {
 		if e.Buildings[u.ID] == 0 && u.InitiateTech != NullTech {
@@ -447,22 +448,25 @@ func (e *EmpireDeveloping) research(t Technology) error {
 	for _, effect := range t.Effects {
 		effect(e)
 	}
+	e.refreshAutoTechs()
 	return nil
 }
 
 func (e *EmpireDeveloping) refreshAutoTechs() {
 	for autoID, autoTech := range AllAutoTechs {
+		if e.Civilization.DisabledTechs[autoID] {
+			continue
+		}
 		if e.Techs[autoID] {
 			continue
 		}
-		isSatisfied := true
+		nSatisfied := 0
 		for _, require := range autoTech.RequiredTechs {
-			if !e.Techs[require] {
-				isSatisfied = false
-				break
+			if e.Techs[require] {
+				nSatisfied += 1
 			}
 		}
-		if isSatisfied {
+		if nSatisfied >= autoTech.MinRequiredTechs {
 			e.Techs[autoID] = true
 			for _, effect := range autoTech.Effects {
 				effect(e)
@@ -527,6 +531,22 @@ func beautyTechs(m map[TechID]bool) string {
 		words = append(words, tech.GetFullName())
 	}
 	return strings.Join(words, ", ")
+}
+
+type SortByAgeLocationName []UnitOrTech
+
+func (a SortByAgeLocationName) Len() int      { return len(a) }
+func (a SortByAgeLocationName) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+func (a SortByAgeLocationName) Less(i, j int) bool {
+	age1 := a[i].GetID().GetAge()
+	age2 := a[j].GetID().GetAge()
+	if age1 != age2 {
+		return age1 < age2
+	}
+	if a[i].GetLocation() != a[j].GetLocation() {
+		return a[i].GetLocation() < a[j].GetLocation()
+	}
+	return a[i].GetName() < a[j].GetName()
 }
 
 // EmpireOption can set civilization and choose to

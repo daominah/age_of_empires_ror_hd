@@ -193,6 +193,7 @@ C101    Tool_Age               1      109
 // R16     Watch_Tower            1      68
 // R63     Axe                    1      12
 B101      Stable1              1      -1
+R46     Toolworking            1      103
 B84       Market1              1      -1
 C102    Bronze_Age             1      109`)
 	if len(errs) != 0 {
@@ -235,7 +236,7 @@ C102    Bronze_Age             1      109`)
 		{line: "R12     Sentry_Tower           1      68", wantErr: ErrMissingRequireTechs},
 		{line: "R64     Short_Sword            1      12", wantErr: ErrMissingRequireTechs},
 		{line: "T75       Soldier-Inf3         5      12        0", wantErr: ErrMissingRequireTechs},
-		{line: "T37       Soldier-Cavalry1     2      101       1", wantErr: ErrTechDisabledByCiv},
+		{line: "T37       Soldier-Cavalry1     2      101       1", wantErr: ErrUnitDisabledByCiv},
 		{line: "B49       Siege_Workshop       4      -1", wantErr: ErrMissingRequireTechs},
 		{line: "R56     Improved_bow           1      87", wantErr: ErrTechDisabledByCiv},
 	} {
