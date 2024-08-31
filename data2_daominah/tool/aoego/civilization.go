@@ -96,9 +96,76 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Sumerian:
 		c.Name = "Sumerian"
+		c.DisabledTechs = map[TechID]bool{
+			ImprovedBow:   true,
+			Metallurgy:    true,
+			Astrology:     true,
+			EnableCavalry: true,
+
+			IronShield:     true,
+			Craftsmanship:  true,
+			Coinage:        true,
+			Afterlife:      true,
+			Monotheism:     true,
+			Fanaticism:     true,
+			Zealotry:       true,
+			EnableBallista: true,
+
+			HeavyTransport:  true,
+			CatapultTrireme: true,
+		}
+		c.DisabledUnits = map[UnitID]bool{
+			Cavalry:  true,
+			Ballista: true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// Siege units attack speed +43%.
+			},
+			func(e *EmpireDeveloping) {
+				// Villager HP +15 (so 40 instead of 25).
+			},
+			func(e *EmpireDeveloping) {
+				// Farm food +250 (starting at 500 instead of 250).
+			},
+		}
 
 	case Yamato:
 		c.Name = "Yamato"
+		c.DisabledTechs = map[TechID]bool{
+			EnableChariotArcher:  true,
+			EnableChariot:        true,
+			EnableCamel:          true,
+			Broadsword:           true,
+			Astrology:            true,
+			Mysticism:            true,
+			Medicine:             true,
+			Monotheism:           true,
+			Fanaticism:           true,
+			Zealotry:             true,
+			Sacrifice:            true,
+			GuardTower:           true,
+			EnableBallista:       true,
+			Catapult:             true,
+			FortifiedWall:        true,
+			EnableElephantArcher: true,
+			EnableWarElephant:    true,
+			EnableFireBoat:       true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// Villager move speed +18%
+			},
+			func(e *EmpireDeveloping) {
+				// Mounted units cost -25%
+				e.UnitStats[Scout].Cost.Multiply(0.75)
+				e.UnitStats[Cavalry].Cost.Multiply(0.75)
+				e.UnitStats[HorseArcher].Cost.Multiply(0.75)
+			},
+			func(e *EmpireDeveloping) {
+				// Ships HP +30%
+			},
+		}
 
 	default:
 		return nil, fmt.Errorf("civID %v: %w", civID, ErrInvalidCivID)
