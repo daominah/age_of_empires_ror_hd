@@ -56,7 +56,7 @@ func (id TechID) GetNameInGame() string {
 
 func (id TechID) ActionID() string {
 	switch id {
-	case StoneAge, ToolAge, BronzeAge, IronAge:
+	case ToolAge, BronzeAge, IronAge:
 		return fmt.Sprintf("C%v", id)
 	default:
 		return fmt.Sprintf("R%v", id)
@@ -65,7 +65,7 @@ func (id TechID) ActionID() string {
 
 // TechID enum
 const (
-	StoneAge  TechID = 100 // always pre-researched
+	StoneAge  TechID = 100
 	ToolAge   TechID = 101
 	BronzeAge TechID = 102
 	IronAge   TechID = 103
@@ -115,6 +115,14 @@ const (
 	Ballistics   TechID = 106
 	Alchemy      TechID = 37
 	Engineering  TechID = 35
+
+	FishingShip     TechID = 4
+	MerchantShip    TechID = 6
+	WarGalley       TechID = 5 // Bronze Medium War Ship
+	Trireme         TechID = 7 // Iron Big War Ship
+	CatapultTrireme TechID = 9
+	Juggernaught    TechID = 25
+	HeavyTransport  TechID = 8
 
 	Axe        TechID = 63
 	ShortSword TechID = 64
@@ -173,8 +181,8 @@ const (
 	EnableAcademy          TechID = 92
 
 	EnableSlinger        TechID = 123
-	EnableLightTransport TechID = 1
-	EnableScoutShip      TechID = 3
+	EnableTransportBoat  TechID = 1
+	EnableWarBoat        TechID = 3
 	EnableChariotArcher  TechID = 59
 	EnableChariot        TechID = 68
 	EnableCavalry        TechID = 69
@@ -183,6 +191,7 @@ const (
 	EnableElephantArcher TechID = 61
 	EnableWarElephant    TechID = 70
 	EnableBallista       TechID = 58
+	EnableFireBoat       TechID = 118
 )
 
 // the following vars are used as constants, not changed during runtime
@@ -192,7 +201,7 @@ var (
 	}
 	AllToolTechs = []TechID{
 		EnableMarket, EnableArcheryRange, EnableStable,
-		EnableSlinger,
+		EnableSlinger, EnableTransportBoat, EnableWarBoat,
 		MarketBuilt, ArcheryRangeBuilt, StableBuilt,
 		WatchTower, SmallWall,
 		Toolworking, LeatherArmorInfantry, LeatherArmorArchers, LeatherArmorCavalry,
@@ -200,11 +209,12 @@ var (
 	}
 	AllBronzeTechs = []TechID{
 		EnableGovernmentCenter, EnableTemple, EnableSiegeWorkshop, EnableAcademy,
-		EnableChariot, EnableCavalry, EnableCamel, EnableChariotArcher,
+		EnableChariotArcher, EnableChariot, EnableCavalry, EnableCamel,
 		GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt,
 		SentryTower, MediumWall, Axe,
 		Metalworking, ScaleArmorInfantry, ScaleArmorArchers, ScaleArmorCavalry, BronzeShield,
 		ShortSword, Broadsword,
+		FishingShip, MerchantShip, WarGalley,
 		Wheel, Artisanship, Plow,
 		ImprovedBow, CompositeBow,
 		Nobility, Writing, Architecture, Logistics,
@@ -215,6 +225,7 @@ var (
 		GuardTower, BallistaTower, FortifiedWall,
 		Metallurgy, ChainMailInfantry, ChainMailArchers, ChainMailCavalry, IronShield, TowerShield,
 		LongSword, Legion,
+		HeavyTransport, Trireme, CatapultTrireme, Juggernaught,
 		Craftsmanship, Siegecraft, Coinage, Irrigation,
 		HeavyHorseArcher,
 		HeavyCalvary, Cataphract, ArmoredElephant,
@@ -224,17 +235,27 @@ var (
 		Phalanx, Centurion,
 	}
 
+	// UnitEnabledByTechs is used to know how to enable a unit
 	UnitEnabledByTechs = map[UnitID]TechID{
-		Swordsman:      ShortSword,
-		Chariot:        EnableChariot,
-		Cavalry:        EnableCavalry,
-		Elephant:       EnableWarElephant,
-		Camel:          EnableCamel,
-		ImprovedBowman: ImprovedBow,
+		Slinger:   EnableSlinger,
+		Swordsman: ShortSword, // needs manually researched
+
+		ImprovedBowman: ImprovedBow, // needs  manually researched
 		ChariotArcher:  EnableChariotArcher,
 		HorseArcher:    EnableHorseArcher,
 		ElephantArcher: EnableElephantArcher,
-		Ballista:       EnableBallista,
+
+		Chariot:  EnableChariot,
+		Cavalry:  EnableCavalry,
+		Elephant: EnableWarElephant,
+		Camel:    EnableCamel,
+
+		Ballista: EnableBallista,
+
+		TransportBoat: EnableTransportBoat,
+		WarBoat:       EnableWarBoat,
+		CatapultBoat:  CatapultTrireme, // needs manually researched
+		FireBoat:      EnableFireBoat,
 
 		Market:           EnableMarket,
 		ArcheryRange:     EnableArcheryRange,
@@ -245,21 +266,33 @@ var (
 		Academy:          EnableAcademy,
 		Wonder:           IronAge,
 	}
+
+	// AllBuiltTechs are corresponding to a building type, they will be
+	// researched when a building is built and can be un-researched when the
+	// last building is destroyed
+	AllBuiltTechs = map[TechID]bool{
+		GranaryBuilt: true, StoragePitBuilt: true, BarracksBuilt: true, DockBuilt: true,
+		MarketBuilt: true, ArcheryRangeBuilt: true, StableBuilt: true,
+		GovernmentCenterBuilt: true, TempleBuilt: true, SiegeWorkshopBuilt: true, AcademyBuilt: true,
+	}
 )
 
 var (
-	// AllTechs is initialized in func init then will be used as a constant
+	// AllTechs is a convenient way to read Tech info instead of func NewTechnology.
+	// This map is initialized in func init then will be used as a constant.
 	AllTechs = make(map[TechID]Technology)
+
 	// AllAutoTechs are techs not shown in the game, zero cost, zero time,
-	// they will be automatically researched when a building is built
-	// or another tech is researched (e.g. Iron Age researched will make
-	// EnableHorseArcher, EnableBallista, ... automatically researched)
+	// they will be automatically researched when their required techs are
+	// researched (e.g. Iron Age researched will automatically make
+	// EnableHorseArcher, EnableBallista, ... automatically researched).
+	// This map is initialized in func init then will be used as a constant.
 	AllAutoTechs = make(map[TechID]Technology)
 )
 
 func init() {
 	for _, list := range [][]TechID{
-		{StoneAge, ToolAge, BronzeAge, IronAge},
+		{ToolAge, BronzeAge, IronAge},
 		AllStoneTechs,
 		AllToolTechs,
 		AllBronzeTechs,
@@ -271,17 +304,25 @@ func init() {
 				panic(fmt.Errorf("error NewTechnology(%v): %w", id, err))
 			}
 			AllTechs[id] = *t
+			if AllBuiltTechs[id] {
+				continue
+			}
 			if t.Cost.IsZero() {
 				AllAutoTechs[id] = *t
 			}
 		}
 	}
-	println("len(AllTechs):", len(AllTechs))         // Output: len(AllTechs): 96
-	println("len(AllAutoTechs):", len(AllAutoTechs)) // Output: len(AllAutoTechs): 28
+
+	println("len(AllTechs):", len(AllTechs))           // Output: len(AllTechs): 97
+	println("len(AllAutoTechs):", len(AllAutoTechs))   // Output: len(AllAutoTechs): 18 units enabled by techs
+	println("len(AllBuiltTechs):", len(AllBuiltTechs)) // Output: len(AllBuiltTechs): 11 corresponding to 11 buildings
+	for k := range AllAutoTechs {
+		println(fmt.Sprintf("%-4v: %v", k.ActionID(), k.GetNameInGame()))
+	}
 }
 
 // EffectFunc can modify Unit attributes, enable or disable Technology
-// or modify player resources. TODO: real type EffectFunc func
+// or modify player resources.
 type EffectFunc func(empire *EmpireDeveloping)
 
 func NewTechnology(id TechID) (*Technology, error) {
@@ -293,8 +334,8 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.NameInGame, t.Name = "Tool Age", "Tool_Age"
 		t.Cost = Cost{Food: 500}
 		t.Time, t.Location = 120, TownCenter
-		t.RequiredTechs = []TechID{StoneAge, GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt}
-		t.MinRequiredTechs = 3
+		t.RequiredTechs = []TechID{GranaryBuilt, StoragePitBuilt, BarracksBuilt, DockBuilt}
+		t.MinRequiredTechs = 2
 		t.Effects = []EffectFunc{ToolAgeEffect95}
 	case BronzeAge:
 		t.NameInGame, t.Name = "Bronze Age", "Bronze_Age"
@@ -345,6 +386,32 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Food: 300, Stone: 175}
 		t.Time, t.Location = 75, Granary
 		t.RequiredTechs = []TechID{IronAge, MediumWall}
+
+	case FishingShip:
+		t.NameInGame, t.Name = "Fishing Ship", "Fishing_Ship"
+		t.Cost = Cost{Wood: 100, Food: 50}
+		t.Time, t.Location = 30, Dock
+		t.RequiredTechs = []TechID{BronzeAge}
+	case MerchantShip:
+		t.NameInGame, t.Name = "Merchant Ship", "Merchant_Ship"
+		t.Cost = Cost{Wood: 75, Food: 200}
+		t.Time, t.Location = 60, Dock
+		t.RequiredTechs = []TechID{BronzeAge}
+	case WarGalley:
+		t.NameInGame, t.Name = "War Galley", "Medium_War_Ship"
+		t.Cost = Cost{Wood: 75, Food: 150}
+		t.Time, t.Location = 75, Dock
+		t.RequiredTechs = []TechID{BronzeAge}
+	case Trireme:
+		t.NameInGame, t.Name = "Trireme", "Trireme"
+		t.Cost = Cost{Wood: 100, Food: 250}
+		t.Time, t.Location = 100, Dock
+		t.RequiredTechs = []TechID{IronAge, WarGalley}
+	case CatapultTrireme:
+		t.NameInGame, t.Name = "Catapult Trireme", "Trireme_with_Catapult"
+		t.Cost = Cost{Wood: 150, Food: 300}
+		t.Time, t.Location = 100, Dock
+		t.RequiredTechs = []TechID{IronAge, Trireme}
 
 	case Wheel:
 		t.NameInGame, t.Name = "Wheel", "Wheel"
@@ -665,105 +732,107 @@ func NewTechnology(id TechID) (*Technology, error) {
 	// EnableHorseArcher, EnableBallista, ... automatically researched)
 
 	case GranaryBuilt:
-		t.NameInGame, t.Name = "GranaryBuilt", "GranaryBuilt"
+		t.Name = "_GranaryBuilt"
 	case StoragePitBuilt:
-		t.NameInGame, t.Name = "StoragePitBuilt", "StoragePitBuilt"
+		t.Name = "_StoragePitBuilt"
 	case BarracksBuilt:
-		t.NameInGame, t.Name = "BarracksBuilt", "BarracksBuilt"
+		t.Name = "_BarracksBuilt"
 		t.Effects = []EffectFunc{BarracksBuiltEffect}
 	case DockBuilt:
-		t.NameInGame, t.Name = "DockBuilt", "DockBuilt"
+		t.Name = "_DockBuilt"
+	case MarketBuilt:
+		t.Name = "_MarketBuilt"
+	case ArcheryRangeBuilt:
+		t.Name = "_ArcheryRangeBuilt"
+	case StableBuilt:
+		t.Name = "_StableBuilt"
+	case GovernmentCenterBuilt:
+		t.Name = "_GovernmentCenterBuilt"
+	case TempleBuilt:
+		t.Name = "_TempleBuilt"
+	case SiegeWorkshopBuilt:
+		t.Name = "_SiegeWorkshopBuilt"
+	case AcademyBuilt:
+		t.Name = "_AcademyBuilt"
 
 	case EnableMarket:
-		t.Name = "EnableMarket"
+		t.Name = "enableMarket"
 		t.RequiredTechs = []TechID{ToolAge, GranaryBuilt}
 		t.Effects = []EffectFunc{EnableMarketEffect77}
 	case EnableArcheryRange:
-		t.Name = "EnableArcheryRange"
+		t.Name = "enableArcheryRange"
 		t.RequiredTechs = []TechID{ToolAge, BarracksBuilt}
 		t.Effects = []EffectFunc{EnableArcheryRangeEffect75}
 	case EnableStable:
-		t.Name = "EnableStable"
+		t.Name = "enableStable"
 		t.RequiredTechs = []TechID{ToolAge, BarracksBuilt}
 		t.Effects = []EffectFunc{EnableStableEffect79}
 
-	case MarketBuilt:
-		t.NameInGame, t.Name = "MarketBuilt", "MarketBuilt"
-	case ArcheryRangeBuilt:
-		t.NameInGame, t.Name = "ArcheryRangeBuilt", "ArcheryRangeBuilt"
-	case StableBuilt:
-		t.NameInGame, t.Name = "StableBuilt", "StableBuilt"
-
 	case EnableGovernmentCenter:
-		t.Name = "EnableGovernmentCenter"
+		t.Name = "enableGovernmentCenter"
 		t.RequiredTechs = []TechID{BronzeAge, MarketBuilt}
 		t.Effects = []EffectFunc{EnableGovernmentCenterEffect76}
 	case EnableTemple:
-		t.Name = "EnableTemple"
+		t.Name = "enableTemple"
 		t.RequiredTechs = []TechID{BronzeAge, MarketBuilt}
 		t.Effects = []EffectFunc{EnableTempleEffect80}
 	case EnableSiegeWorkshop:
-		t.Name = "EnableSiegeWorkshop"
+		t.Name = "enableSiegeWorkshop"
 		t.RequiredTechs = []TechID{BronzeAge, ArcheryRangeBuilt}
 		t.Effects = []EffectFunc{EnableSiegeWorkshopEffect78}
 	case EnableAcademy:
-		t.Name = "EnableAcademy"
+		t.Name = "enableAcademy"
 		t.RequiredTechs = []TechID{BronzeAge, StableBuilt}
 		t.Effects = []EffectFunc{EnableAcademyEffect74}
 
-	case GovernmentCenterBuilt:
-		t.Name = "GovernmentCenterBuilt"
-	case TempleBuilt:
-		t.Name = "TempleBuilt"
-	case SiegeWorkshopBuilt:
-		t.Name = "SiegeWorkshopBuilt"
-	case AcademyBuilt:
-		t.Name = "AcademyBuilt"
-
 	case EnableSlinger:
-		t.NameInGame, t.Name = "EnableSlinger", "EnableSlinger"
+		t.Name = "enableSlinger"
 		t.RequiredTechs = []TechID{ToolAge}
 		t.Effects = []EffectFunc{EnableSlingerEffect201}
-	case EnableLightTransport:
-		t.Name = "EnableLightTransport"
+	case EnableTransportBoat:
+		t.Name = "enableTransportBoat"
 		t.RequiredTechs = []TechID{ToolAge}
 		t.Effects = []EffectFunc{EnableLightTransportEffect1}
-	case EnableScoutShip:
-		t.Name = "EnableScoutShip"
+	case EnableWarBoat:
+		t.Name = "enableWarBoat"
 		t.RequiredTechs = []TechID{ToolAge}
-		t.Effects = []EffectFunc{EnableScoutShipEffect3}
+		t.Effects = []EffectFunc{EnableWarBoatEffect3}
+	case EnableFireBoat:
+		t.Name = "enableFireBoat"
+		t.RequiredTechs = []TechID{IronAge}
+		t.Effects = []EffectFunc{EnableFireBoatEffect202}
 
 	case EnableChariotArcher:
-		t.Name = "EnableChariotArcher"
+		t.Name = "enableChariotArcher"
 		t.RequiredTechs = []TechID{BronzeAge, Wheel}
 		t.Effects = []EffectFunc{EnableChariotArcherEffect59}
 	case EnableChariot:
-		t.Name = "EnableChariot"
+		t.Name = "enableChariot"
 		t.RequiredTechs = []TechID{BronzeAge, Wheel}
 		t.Effects = []EffectFunc{EnableChariotEffect68}
 	case EnableCavalry:
-		t.Name = "EnableCavalry"
+		t.Name = "enableCavalry"
 		t.RequiredTechs = []TechID{BronzeAge}
 		t.Effects = []EffectFunc{EnableCavalryEffect69}
 	case EnableCamel:
-		t.Name = "EnableCamel"
+		t.Name = "enableCamel"
 		t.RequiredTechs = []TechID{BronzeAge}
 		t.Effects = []EffectFunc{EnableCamelEffect209}
 
 	case EnableHorseArcher:
-		t.Name = "EnableHorseArcher"
+		t.Name = "enableHorseArcher"
 		t.RequiredTechs = []TechID{IronAge}
 		t.Effects = []EffectFunc{EnableHorseArcherEffect60}
 	case EnableElephantArcher:
-		t.Name = "EnableElephantArcher"
+		t.Name = "enableElephantArcher"
 		t.RequiredTechs = []TechID{IronAge}
 		t.Effects = []EffectFunc{EnableElephantArcherEffect61}
 	case EnableWarElephant:
-		t.Name = "EnableWarElephant"
+		t.Name = "enableWarElephant"
 		t.RequiredTechs = []TechID{IronAge}
 		t.Effects = []EffectFunc{EnableWarElephantEffect70}
 	case EnableBallista:
-		t.Name = "EnableBallista"
+		t.Name = "enableBallista"
 		t.RequiredTechs = []TechID{IronAge}
 		t.Effects = []EffectFunc{EnableBallistaEffect58}
 
@@ -835,11 +904,15 @@ func EnableSlingerEffect201(e *EmpireDeveloping) {
 }
 
 func EnableLightTransportEffect1(e *EmpireDeveloping) {
-	// e.EnabledUnits[LightTransport] = true
+	e.EnabledUnits[TransportBoat] = true
 }
 
-func EnableScoutShipEffect3(e *EmpireDeveloping) {
-	// e.EnabledUnits[ScoutShip] = true
+func EnableWarBoatEffect3(e *EmpireDeveloping) {
+	e.EnabledUnits[WarBoat] = true
+}
+
+func EnableFireBoatEffect202(e *EmpireDeveloping) {
+	e.EnabledUnits[FireBoat] = true
 }
 
 func EnableChariotArcherEffect59(e *EmpireDeveloping) {

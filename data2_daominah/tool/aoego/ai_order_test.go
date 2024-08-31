@@ -3,6 +3,7 @@ package aoego
 import (
 	_ "embed"
 	"errors"
+	"math"
 	"testing"
 )
 
@@ -316,6 +317,17 @@ func TestTechnology_GetName(t *testing.T) {
 		name := v.NameInGame
 		if name == "" {
 			t.Errorf("error tech empty name: id %v", k)
+		}
+	}
+}
+
+func TestCalcPopulationHouse(t *testing.T) {
+	for i := 40.0; i > -40; i-- {
+		remainingHousesBlock := i / 20.0
+		if remainingHousesBlock <= 0.5 {
+			nHouses := 5 * int(math.Ceil(1-remainingHousesBlock))
+			// t.Logf("i: %v, nHouses: %v", i, nHouses)
+			_ = nHouses
 		}
 	}
 }
