@@ -4,7 +4,7 @@
 // * Tower and Wall HP x2.
 // Build summary:
 // * Bronze Age: 2+2 cavalry, 0+3 priest, 0+3 chariot archer, 4+6 tower
-// * Iron Age: 40 tower, 32 priest, 16 heavy catapult, 5 horse archer
+// * Iron Age: 36 tower, 32 priest, 16 heavy catapult, 5 horse archer
 
 
 B109      Town_Center1         1      -1
@@ -136,9 +136,10 @@ B79       Watch_Tower          2      -1
 U125      Priest               4      104
 U35       Soldier-Catapult1    4      49
 B79       Watch_Tower          2      -1
-// 36 tower
+
 // spent army: 10205 wood, 10990 food, 9510 gold, 7450 stone (counted Wonder)
 // 32 priest, 16 heavy catapult, 34 jihad, 12 mix horse (pop 94)
+// 36 tower, 4 farm, 1 wonder, 4 siege workshop, 4 temple
 
 
 U35       Soldier-Catapult1    4      49

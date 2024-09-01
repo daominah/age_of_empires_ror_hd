@@ -233,6 +233,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Time, t.Location = 160, TownCenter
 		t.RequiredTechs = []TechID{BronzeAge, GovernmentCenterBuilt, TempleBuilt, SiegeWorkshopBuilt, AcademyBuilt}
 		t.MinRequiredTechs = 3
+		t.Effects = []EffectFunc{IronAgeEffect97}
 
 	case WatchTower:
 		t.NameInGame, t.Name = "Watch Tower", "Watch_Tower"
@@ -384,6 +385,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Food: 180, Gold: 100}
 		t.Time, t.Location = 60, GovernmentCenter
 		t.RequiredTechs = []TechID{BronzeAge}
+		t.Effects = []EffectFunc{LogisticsEffect200}
 	case Aristocracy:
 		t.NameInGame, t.Name = "Aristocracy", "Aristocracy"
 		t.Cost = Cost{Food: 175, Gold: 150}
@@ -884,7 +886,7 @@ func ImprovedBowEffect56(e *EmpireDeveloping) {
 	e.EnabledUnits[ImprovedBowman] = true
 }
 
-// effects after new age is researched:
+// other effects:
 
 func ToolAgeEffect95(e *EmpireDeveloping) {
 }
@@ -893,6 +895,15 @@ func BronzeAgeEffect96(e *EmpireDeveloping) {
 }
 
 func IronAgeEffect97(e *EmpireDeveloping) {
+	e.EnabledUnits[Wonder] = true
+}
+
+func LogisticsEffect200(e *EmpireDeveloping) {
+	for _, u := range []UnitID{Clubman, Swordsman, Slinger} {
+		if _, found := e.UnitStats[u]; found {
+			e.UnitStats[u].Population -= 0.5
+		}
+	}
 }
 
 // getFunctionName returns Go function name to debug.

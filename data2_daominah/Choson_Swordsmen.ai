@@ -4,7 +4,7 @@
 // * Towers range +2.
 // Build summary:
 // * Bronze Age: 2 cavalry, 5+27 swordsman
-// * Iron Age: 74 legion, 24+16 priest, 24 ballista, 40 tower
+// * Iron Age: 74 legion, 36 priest, 20 ballista, 40 tower
 
 
 B109      Town_Center1         1      -1
@@ -100,8 +100,6 @@ U75       Soldier-Inf3         7      12
 B49       Siege_Workshop       4      -1
 // 26 village, 74 legion, 4 priest (pop 35+74/2)
 // 8 barracks, 4 temple, 15 tower
-// spent army: 3600 wood, 11000 food, 4100 gold, 2100 stone
-// (easy more legion later, 24 legion only cost 840 food + 360 gold)
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
@@ -110,14 +108,14 @@ B49       Siege_Workshop       4      -1
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 
+R18     Afterlife              1      104
 R21     Mysticism              1      104
-R24     Polytheism             1      104
 T11       Soldier-Ballista     4      49        0
 U125      Priest               2      104
 B79       Watch_Tower          3      -1
 
+R24     Polytheism             1      104
 R22     Astrology              1      104
-R18     Afterlife              1      104
 T11       Soldier-Ballista     4      49        0
 U125      Priest               2      104
 B50       Farm                 2      -1
@@ -131,7 +129,7 @@ B50       Farm                 2      -1
 B79       Watch_Tower          4      -1
 
 T11       Soldier-Ballista     4      49        0
-U125      Priest               2      104
+T125      Priest               2      104       0
 B50       Farm                 2      -1
 B79       Watch_Tower          4      -1
 
@@ -140,30 +138,36 @@ U125      Priest               4      104
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
-T11       Soldier-Ballista     4      49        0
+// T11       Soldier-Ballista     4      49        0
 U125      Priest               4      104
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
 U125      Priest               4      104
+B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
 T125      Priest               4      104       0
-B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 
 T125      Priest               4      104       0
-U75       Soldier-Inf3         8      12
+B79       Watch_Tower          2      -1
 
 T125      Priest               4      104       0
-U75       Soldier-Inf3         8      12
+B79       Watch_Tower          2      -1
 
-T125      Priest               4      104       0
+// spent army: 8490 wood, 11030 food, 9550 gold, 6150 stone
+// 26 man, 74 legion, 36 priest, 20 ballista (pop 122+37)
+// 40 tower, 14 farm
+
+
+U75       Soldier-Inf3         8      12
+U75       Soldier-Inf3         8      12
 U75       Soldier-Inf3         8      12
 
 
 C2      Catapult_Tower         1      68
-B79       Watch_Tower          2      -1
+
 B276      Wonder               1      -1
 
 // R27     Helepolis              1      49

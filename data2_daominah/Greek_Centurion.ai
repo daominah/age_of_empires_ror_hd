@@ -103,10 +103,6 @@ R22     Astrology              1      104
 R119    Medicine               1      104
 U125      Priest               2      104
 
-// 34 centurion, 10 priest, 24 village, pop
-// 5 academy, 15 tower, 4 temple
-// spent army: 4100 wood, 11000 food, 8500 gold, 3800 stone
-
 U125      Priest               4      104       0
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
@@ -120,6 +116,7 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B109      Town_Center1         1      -1
+B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
@@ -131,6 +128,11 @@ B79       Watch_Tower          2      -1
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
+
+// 34 centurion, 22 priest (pop 84)
+// 24 tower, 24 village, 14 farm, 5 academy, 4 temple
+// spent army: 5515 wood, 10950 food, 8485 gold, 3750 stone
+
 
 U93       Soldier-Phal1        5      0
 U93       Soldier-Phal1        5      0

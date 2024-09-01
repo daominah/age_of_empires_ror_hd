@@ -105,7 +105,7 @@ func (id TechID) GetAge() TechID {
 		HeavyHorseArcher,
 		HeavyCalvary, Cataphract, ArmoredElephant,
 		Aristocracy, Ballistics, Alchemy, Engineering,
-		Medicine, Monotheism, Fanaticism, Zealotry, Sacrifice,
+		Medicine, Afterlife, Monotheism, Fanaticism, Zealotry, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
 		Phalanx, Centurion:
 		return IronAge
@@ -236,7 +236,7 @@ func init() {
 		HeavyHorseArcher,
 		HeavyCalvary, Cataphract, ArmoredElephant,
 		Aristocracy, Ballistics, Alchemy, Engineering,
-		Medicine, Monotheism, Fanaticism, Zealotry, Sacrifice,
+		Medicine, Afterlife, Monotheism, Fanaticism, Zealotry, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
 		Phalanx, Centurion,
 	} {

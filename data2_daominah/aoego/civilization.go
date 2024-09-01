@@ -3,6 +3,7 @@ package aoego
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 var ErrInvalidCivID = errors.New("invalid civilization ID, check civilization enum list")
@@ -11,6 +12,7 @@ var ErrInvalidCivID = errors.New("invalid civilization ID, check civilization en
 type Civilization struct {
 	ID            CivilizationID
 	Name          string
+	Name2         string
 	DisabledUnits map[UnitID]bool
 	DisabledTechs map[TechID]bool
 	Bonuses       []EffectFunc
@@ -49,32 +51,44 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	}
 	switch civID {
 	case FullTechTree:
-		c.Name = "FullTechTree"
+		c.Name, c.Name2 = "FullTechTree", "FullTechTree"
 		return c, nil
 
 	case Assyrian:
-		c.Name = "Assyrian"
+		c.Name, c.Name2 = "Assyrian", "Assyria"
 
 	case Babylonian:
-		c.Name = "Babylonian"
+		c.Name, c.Name2 = "Babylonian", "Babylon"
 
 	case Carthaginian:
-		c.Name = "Carthaginian"
+		c.Name, c.Name2 = "Carthaginian", "Carthage"
 
 	case Choson:
-		c.Name = "Choson"
+		c.Name, c.Name2 = "Choson", "Choson"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Priest cost -32% (stated -30%): 85 gold instead of 125.
+				e.UnitStats[Priest].Cost.Multiply(0.68)
+			},
+			func(e *EmpireDeveloping) {
+				// * Iron Age Swordsmen HP +80.
+			},
+			func(e *EmpireDeveloping) {
+				// * Towers range +2.
+			},
+		}
 
 	case Egyptian:
-		c.Name = "Egyptian"
+		c.Name, c.Name2 = "Egyptian", "Egypt"
 
 	case Greek:
-		c.Name = "Greek"
+		c.Name, c.Name2 = "Greek", "Greek"
 
 	case Hittite:
-		c.Name = "Hittite"
+		c.Name, c.Name2 = "Hittite", "Hittite"
 
 	case Macedonian:
-		c.Name = "Macedonian"
+		c.Name, c.Name2 = "Macedonian", "Macedon"
 		c.DisabledTechs = map[TechID]bool{
 			Wheel:                true,
 			EnableChariotArcher:  true,
@@ -125,25 +139,80 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		}
 
 	case Minoan:
-		c.Name = "Minoan"
+		c.Name, c.Name2 = "Minoan", "Minoa"
 
 	case Palmyran:
-		c.Name = "Palmyran"
+		c.Name, c.Name2 = "Palmyran", "Palmyra"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Forager, Hunter, Gold Miner, Stone Miner work rate +44%; Woodcutter +36%,
+				//	(Farmer and Builder work rate are normal, stated Villager work rate +25%).
+				// * Villager armor +1 and pierce armor +1 (in game only show armor +1).
+				// * Villager cost +50% (so 75 food instead of 50).
+				e.UnitStats[Villager].Cost.Multiply(1.5)
+			},
+			func(e *EmpireDeveloping) {
+				// * Camel Rider move speed +25% (so as fast as Heavy Horse Archer).
+			},
+			func(e *EmpireDeveloping) {
+				// * Free tribute (instead of 25% taxed, other civilizations lost 125 resource to give 100).
+			},
+		}
 
 	case Persian:
-		c.Name = "Persian"
+		c.Name, c.Name2 = "Persian", "Persia"
 
 	case Phoenician:
-		c.Name = "Phoenician"
+		c.Name, c.Name2 = "Phoenician", "Phoenicia"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Woodcutter work rate +36% and capacity +3 (stated +30%).
+			},
+			func(e *EmpireDeveloping) {
+				// * Elephants cost -25%.
+				e.UnitStats[Elephant].Cost.Multiply(0.75)
+				e.UnitStats[ElephantArcher].Cost.Multiply(0.75)
+			},
+			func(e *EmpireDeveloping) {
+				// * Catapult Trireme and Juggernaught attack speed +72%.
+			},
+		}
 
 	case Roman:
-		c.Name = "Roman"
+		c.Name, c.Name2 = "Roman", "Rome"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Buildings cost -15% (except Tower, Wall, Wonder).
+				for building := range AllBuildings {
+					if building == Tower || building == Wall || building == Wonder {
+						continue
+					}
+					e.UnitStats[building].Cost.Multiply(0.85)
+				}
+			},
+			func(e *EmpireDeveloping) {
+				//   Tower cost -50%.
+				e.UnitStats[Tower].Cost.Multiply(0.5)
+			},
+			func(e *EmpireDeveloping) {
+				//* Swordsmen attack speed +50% (stated 33%, they mean attack reload time).
+			},
+		}
 
 	case Shang:
-		c.Name = "Shang"
+		c.Name, c.Name2 = "Shang", "Shang"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Villager cost 35 food instead of 50 (so Villager cost -30%).
+				e.UnitStats[Villager].Cost.Food = 35
+			},
+			func(e *EmpireDeveloping) {
+				// * Wall HP x2.
+			},
+		}
 
 	case Sumerian:
-		c.Name = "Sumerian"
+		c.Name, c.Name2 = "Sumerian", "Sumeria"
 		c.DisabledTechs = map[TechID]bool{
 			EnableCavalry: true,
 			ImprovedBow:   true,
@@ -180,7 +249,7 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		}
 
 	case Yamato:
-		c.Name = "Yamato"
+		c.Name, c.Name2 = "Yamato", "Yamato"
 		c.DisabledTechs = map[TechID]bool{
 			EnableChariotArcher: true,
 			EnableChariot:       true,
@@ -223,4 +292,32 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		return nil, fmt.Errorf("civID %v: %w", civID, ErrInvalidCivID)
 	}
 	return c, nil
+}
+
+var AllCivilizations []Civilization
+
+func init() {
+	for _, civID := range []CivilizationID{
+		Assyrian, Egyptian, Sumerian,
+		Babylonian, Hittite, Persian,
+		Carthaginian, Macedonian, Palmyran, Roman,
+		Choson, Shang, Yamato,
+		Greek, Minoan, Phoenician,
+	} {
+		civilization, err := NewCivilization(civID)
+		if err != nil {
+			panic(fmt.Errorf("error NewCivilization(%v): %w", civID, err))
+		}
+		AllCivilizations = append(AllCivilizations, *civilization)
+	}
+}
+
+func GuessCivilization(fileName string) CivilizationID {
+	for _, civ := range AllCivilizations {
+		if strings.Contains(fileName, civ.Name) ||
+			strings.Contains(fileName, civ.Name2) {
+			return civ.ID
+		}
+	}
+	return FullTechTree
 }

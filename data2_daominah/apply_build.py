@@ -24,6 +24,8 @@ def main():
             "Babylon Scouts.ai",
             "Babylon Swordsmen.ai",
         },
+        # "Carthage_.ai": {
+        # },
         "Choson_Swordsmen.ai": {
             "Choson Axemen.ai",
             "Choson Priests.ai",
@@ -57,6 +59,8 @@ def main():
             "Immortal Minoa.ai",
             # "Minoa Composite Bowmen.ai",
         },
+        # "Palmyra_Camel_Rider.ai": {
+        # },
         "Persia_War_Elephant.ai": {
             "Persia Elephant Archers.ai",
             "Persia Priests.ai",
@@ -65,6 +69,10 @@ def main():
         "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",
         },
+        # "Rome_.ai": {
+        # },
+        # "Shang_.ai": {
+        # },
         "Sumeria_Catapult.ai": {
             "Immortal Sumeria.ai",
             "Sumeria Catapults.ai",

@@ -78,6 +78,7 @@ type Step struct {
 	UnitOrTechID UnitOrTechID
 	Quantity     int
 	LimitRebuild int // number times retrain if unit is destroyed, only meaningful if Action is BuildLimit or TrainLimit
+	OriginStr    string
 }
 
 // NewStep parses a line in ".ai" file format to a Step object.
@@ -87,6 +88,9 @@ type Step struct {
 func NewStep(line string) (*Step, error) {
 	commentBegin := strings.Index(line, `//`)
 	if commentBegin != -1 {
+		if strings.HasPrefix(line, `// spent`) {
+			return &Step{Action: PrintSummary, OriginStr: line}, nil
+		}
 		line = line[:commentBegin]
 	}
 	line = strings.TrimSpace(line)
@@ -109,10 +113,10 @@ func NewStep(line string) (*Step, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", unitOrTechIDStr, ErrTargetIDNotInt)
 	}
-	s := &Step{Action: Action(words[0][:1])}
+	s := &Step{Action: Action(words[0][:1]), OriginStr: line}
 	unitOrTech, err := s.determineUnitOrTech(unitOrTechID)
 	if err != nil {
-		return nil, fmt.Errorf("determineUnitOrTech: %w", err)
+		return nil, fmt.Errorf("determineUnitOrTech(%v): %w", unitOrTechID, err)
 	}
 	s.UnitOrTechID = unitOrTech.GetID()
 	s.Quantity, err = strconv.Atoi(words[2])
@@ -143,6 +147,9 @@ func NewStep(line string) (*Step, error) {
 // train 1 Scout at Stable, if killed, retrain max 2 times.
 // This func is the inverse function of NewStep().
 func (s Step) Marshal() (string, error) {
+	if s.Action == PrintSummary {
+		return "// spent:", nil
+	}
 	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
 	if err != nil {
 		return "", fmt.Errorf("determineUnitOrTech: %w", err)
@@ -171,6 +178,9 @@ func (s Step) Marshal() (string, error) {
 
 // Strings is for debugging purpose.
 func (s Step) String() string {
+	if s.Action == PrintSummary {
+		return "// spent:"
+	}
 	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
 	if err != nil { // unlikely to happen
 		return fmt.Sprintf("%#v", s)
@@ -226,6 +236,8 @@ const (
 	TrainLimit       Action = "T" // will be trained up to the limit times specified
 	Research         Action = "R" // item will be researched if possible, can be skipped if failed too many attempts
 	ResearchCritical Action = "C" // the build stuck until this research is done
+
+	PrintSummary Action = "P" // special action for debugging, do nothing except current empire summary
 )
 
 // UnitOrTechID is a UnitID or TechID
@@ -316,6 +328,9 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 // for the civilization or not satisfied the requirement,
 // unit's location is not built yet, ...
 func (e *EmpireDeveloping) Do(s Step) error {
+	if s.Action == PrintSummary {
+		return nil
+	}
 	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
 	if err != nil {
 		return fmt.Errorf("determineUnitOrTech: %w", err)
@@ -518,51 +533,35 @@ func (e *EmpireDeveloping) Summary() string {
 	lines = append(lines, fmt.Sprintf("* combatants: %v", beautyUnits(e.Combatants)))
 	lines = append(lines, fmt.Sprintf("* techs count: %v", e.TechnologyCount))
 	lines = append(lines, fmt.Sprintf("* techs researched: %+v", beautyTechs(e.Techs)))
-	// lines = append(lines, fmt.Sprintf("* units enabled: %+v", beautyUnitsList(e.EnabledUnits)))
-	return "\n" + strings.Join(lines, "\n")
+	return "\n" + strings.Join(lines, "\n") + "\n"
 }
 
 func beautyUnits(m map[UnitID]int) string {
-	var units SortByAgeLocationName
+	var a SortByAgeLocationName
 	for unitID := range m {
 		u, found := AllUnits[unitID]
 		if found {
-			units = append(units, u)
+			a = append(a, u)
 		} else { // should not happen
 			println("missing key in AllUnits: ", unitID)
 		}
 	}
-	var keyValues []string
-	for _, unit := range units {
-		unitID := UnitID(unit.GetID().IntID())
-		keyValues = append(keyValues, fmt.Sprintf("%v: %v", unit.GetFullName(), m[unitID]))
-	}
-	return strings.Join(keyValues, ", ")
-}
-
-func beautyUnitsList(m map[UnitID]bool) string {
-	var units SortByAgeLocationName
-	for unitID, enabled := range m {
-		if !enabled {
-			continue
-		}
-		u, found := AllUnits[unitID]
-		if found {
-			units = append(units, u)
-		} else { // should not happen
-			println("missing key in AllUnits: ", unitID)
+	sort.Sort(a)
+	var ret strings.Builder
+	for i, v := range a {
+		unitID := UnitID(v.GetID().IntID())
+		ret.WriteString(fmt.Sprintf("%v %v", m[unitID], v.GetFullName()))
+		if i < len(a)-1 && a[i+1].GetID().GetAge() != v.GetID().GetAge() {
+			ret.WriteString(",\n  ")
+		} else {
+			ret.WriteString(", ")
 		}
 	}
-	sort.Sort(units)
-	var words []string
-	for _, u := range units {
-		words = append(words, u.GetFullName())
-	}
-	return strings.Join(words, ", ")
+	return ret.String()
 }
 
 func beautyTechs(m map[TechID]bool) string {
-	var techs SortByAgeLocationName
+	var a SortByAgeLocationName
 	for techID, researched := range m {
 		if !researched {
 			continue
@@ -570,14 +569,24 @@ func beautyTechs(m map[TechID]bool) string {
 		if CheckIsAutoTech(techID) || CheckIsBuiltTech(techID) {
 			continue
 		}
-		techs = append(techs, AllTechs[techID])
+		t, found := AllTechs[techID]
+		if found {
+			a = append(a, t)
+		} else { // should not happen
+			println("missing key in AllTechs: ", techID)
+		}
 	}
-	sort.Sort(techs)
-	var words []string
-	for _, tech := range techs {
-		words = append(words, tech.GetFullName())
+	sort.Sort(a)
+	var ret strings.Builder
+	for i, v := range a {
+		ret.WriteString(fmt.Sprintf("%v", v.GetFullName()))
+		if i < len(a)-1 && a[i+1].GetID().GetAge() != v.GetID().GetAge() {
+			ret.WriteString(",\n  ")
+		} else {
+			ret.WriteString(", ")
+		}
 	}
-	return strings.Join(words, ", ")
+	return ret.String()
 }
 
 type SortByAgeLocationName []UnitOrTech
