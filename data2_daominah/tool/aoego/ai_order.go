@@ -251,10 +251,6 @@ type EmpireDeveloping struct {
 	Civilization     Civilization
 	IsAutoBuildHouse bool             // build 5 houses if close to population limit
 	UnitStats        map[UnitID]*Unit // excluding the disabled units of the civilization
-	// FreeUnits for example 1st Town Center and 3 Villagers when every game starts,
-	// if there are already units that are also in the Strategy,
-	// these units will be counted as already created and will not be rebuilt.
-	FreeUnits map[UnitID]int
 
 	EnabledUnits    map[UnitID]bool // example research Wheel add Chariot and Chariot Archer to this map
 	Combatants      map[UnitID]int  // trained units are not buildings
@@ -262,6 +258,15 @@ type EmpireDeveloping struct {
 	Techs           map[TechID]bool // researched technologies, including auto-researched
 	TechnologyCount int             // only count the techs that are not auto-researched
 	Spent           *Cost
+	// FreeUnits for example 1st Town Center and 3 Villagers when every game starts,
+	// if there are already units that are also in the Strategy,
+	// these units will be counted as already created and will not be rebuilt,
+	// the cost of these units will be subtracted from Spent.
+	FreeUnits map[UnitID]int
+
+	// for testing Spent, allow to build or research without checking required
+	// techs or location
+	IsIgnoreRequiredTechOrBuilding bool
 }
 
 func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
@@ -301,7 +306,7 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 	}
 
 	for _, v := range e.Civilization.Bonuses {
-		v(e) // TODO: implement Civilization Bonuses
+		v(e)
 	}
 	return e, nil
 }
@@ -396,16 +401,9 @@ func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 	}
 
 	if e.FreeUnits[unitID] > 0 {
-		println(fmt.Sprintf("FreeUnits %+v", e.FreeUnits))
-		if n >= e.FreeUnits[unitID] {
-			e.FreeUnits[unitID] = 0
-			e.Spent.Add(*(civUnit.GetCost().Multiply(float64(-e.FreeUnits[unitID]))))
-		} else {
-			e.FreeUnits[unitID] -= n
-			e.Spent.Add(*(civUnit.GetCost().Multiply(float64(-n))))
-		}
-		// TODO: wrong FreeUnits cost subtracted
-		println(fmt.Sprintf("Spent %+v", e.Spent))
+		freeCountThisStep := min(n, e.FreeUnits[unitID])
+		e.Spent.Add(*civUnit.GetCost().Multiply(-float64(freeCountThisStep)))
+		e.FreeUnits[unitID] -= freeCountThisStep
 	}
 
 	if civUnit.IsBuilding {
@@ -520,14 +518,24 @@ func (e *EmpireDeveloping) Summary() string {
 	lines = append(lines, fmt.Sprintf("* combatants: %v", beautyUnits(e.Combatants)))
 	lines = append(lines, fmt.Sprintf("* techs count: %v", e.TechnologyCount))
 	lines = append(lines, fmt.Sprintf("* techs researched: %+v", beautyTechs(e.Techs)))
-	lines = append(lines, fmt.Sprintf("* units enabled: %+v", beautyUnitsList(e.EnabledUnits)))
+	// lines = append(lines, fmt.Sprintf("* units enabled: %+v", beautyUnitsList(e.EnabledUnits)))
 	return "\n" + strings.Join(lines, "\n")
 }
 
-func beautyUnits[T int | bool](m map[UnitID]T) string {
+func beautyUnits(m map[UnitID]int) string {
+	var units SortByAgeLocationName
+	for unitID := range m {
+		u, found := AllUnits[unitID]
+		if found {
+			units = append(units, u)
+		} else { // should not happen
+			println("missing key in AllUnits: ", unitID)
+		}
+	}
 	var keyValues []string
-	for unitID, count := range m {
-		keyValues = append(keyValues, fmt.Sprintf("%v(%v): %v", unitID.GetNameInGame(), unitID.ActionID(), count))
+	for _, unit := range units {
+		unitID := UnitID(unit.GetID().IntID())
+		keyValues = append(keyValues, fmt.Sprintf("%v: %v", unit.GetFullName(), m[unitID]))
 	}
 	return strings.Join(keyValues, ", ")
 }
@@ -557,6 +565,9 @@ func beautyTechs(m map[TechID]bool) string {
 	var techs SortByAgeLocationName
 	for techID, researched := range m {
 		if !researched {
+			continue
+		}
+		if CheckIsAutoTech(techID) || CheckIsBuiltTech(techID) {
 			continue
 		}
 		techs = append(techs, AllTechs[techID])
@@ -603,11 +614,18 @@ func WithNoUnit() EmpireOption {
 		e.Buildings = map[UnitID]int{}
 		e.Techs = map[TechID]bool{}
 		e.Spent = &Cost{}
+		e.FreeUnits = map[UnitID]int{}
 	}
 }
 
 func WithDisableAutoBuildHouse() EmpireOption {
 	return func(e *EmpireDeveloping) {
 		e.IsAutoBuildHouse = false
+	}
+}
+
+func WithIgnoreRequiredTechOrBuilding() EmpireOption {
+	return func(e *EmpireDeveloping) {
+		e.IsIgnoreRequiredTechOrBuilding = true
 	}
 }
