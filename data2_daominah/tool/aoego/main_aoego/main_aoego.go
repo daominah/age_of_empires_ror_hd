@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-// inputFilePath is the path to the "*.ai" file that defines the build order
+// inputFilePath is the path to the "*.ai" file that defines the strategy
 var inputFilePath string
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	flag.StringVar(&inputFilePath,
 		"i",
 		`D:\game\age_of_empires_ror_hd\data2_daominah\Assyria_Archer.ai`,
-		`the path to the "*.ai" file that defines the build order`)
+		`the path to the "*.ai" file that defines the strategy`)
 	flag.Parse()
 	if inputFilePath == "" {
 		log.Printf("empty input file path")
