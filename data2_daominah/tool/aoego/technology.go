@@ -7,11 +7,13 @@ import (
 	"strings"
 )
 
+// Technology can be a Tool Age, Leather Armor Infantry, EnableHorseArcher, ...
+// Should be initialized with func NewTechnology for default values.
 type Technology struct {
 	ID               TechID
-	Name             string // name without spaces, e.g. "Catapult_Tower", "Heavy_Horse_Archer", ...
-	NameInGame       string // name shown in the game, e.g. "Ballista Tower", "Heavy Horse Archer", ...
-	Cost             Cost
+	Name             string  // name without spaces, e.g. "Catapult_Tower", "Heavy_Horse_Archer", ...
+	NameInGame       string  // name shown in the game, e.g. "Ballista Tower", "Heavy Horse Archer", ...
+	Cost             Cost    // no civ bonus affects it technologies cost
 	Time             float64 // research time in seconds
 	Location         UnitID  // building that researches this technology
 	RequiredTechs    []TechID
@@ -372,6 +374,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Food: 50}
 		t.Time, t.Location = 10, Granary
 		t.RequiredTechs = []TechID{ToolAge}
+		t.Effects = []EffectFunc{EnableTowerEffect12}
 		// if not set MinRequiredTechs, it will be set to require all at the end of this function
 	case SentryTower:
 		t.NameInGame, t.Name = "Sentry Tower", "Sentry_Tower"
@@ -1000,6 +1003,10 @@ func EnableElephantArcherEffect61(e *EmpireDeveloping) {
 
 func EnableBallistaEffect58(e *EmpireDeveloping) {
 	e.EnabledUnits[Ballista] = true
+}
+
+func EnableTowerEffect12(e *EmpireDeveloping) {
+	e.EnabledUnits[Tower] = true
 }
 
 // effects after new age is researched:

@@ -477,15 +477,15 @@ func (e *EmpireDeveloping) refreshAutoTechs() {
 
 func (e *EmpireDeveloping) Summary() string {
 	var lines []string
-	lines = append(lines, fmt.Sprintf("civilization: %v", e.Civilization.Name))
-	lines = append(lines, fmt.Sprintf("spent: %+v", e.Spent))
-	lines = append(lines, fmt.Sprintf("population: %.0f/%.0f", e.CountPopulation(), e.CountPopulationLimit()))
-	lines = append(lines, fmt.Sprintf("buildings: %v", beautyUnits(e.Buildings)))
-	lines = append(lines, fmt.Sprintf("combatants: %v", beautyUnits(e.Combatants)))
-	lines = append(lines, fmt.Sprintf("techs count: %v", e.TechnologyCount))
-	lines = append(lines, fmt.Sprintf("techs researched: %+v", beautyTechs(e.Techs)))
-	lines = append(lines, fmt.Sprintf("units enabled: %+v", beautyUnitsList(e.EnabledUnits)))
-	return strings.Join(lines, "\n")
+	lines = append(lines, fmt.Sprintf("* civilization: %v", e.Civilization.Name))
+	lines = append(lines, fmt.Sprintf("* spent: %+v", e.Spent))
+	lines = append(lines, fmt.Sprintf("* population: %.0f/%.0f", e.CountPopulation(), e.CountPopulationLimit()))
+	lines = append(lines, fmt.Sprintf("* buildings: %v", beautyUnits(e.Buildings)))
+	lines = append(lines, fmt.Sprintf("* combatants: %v", beautyUnits(e.Combatants)))
+	lines = append(lines, fmt.Sprintf("* techs count: %v", e.TechnologyCount))
+	lines = append(lines, fmt.Sprintf("* techs researched: %+v", beautyTechs(e.Techs)))
+	lines = append(lines, fmt.Sprintf("* units enabled: %+v", beautyUnitsList(e.EnabledUnits)))
+	return "\n" + strings.Join(lines, "\n")
 }
 
 func beautyUnits[T int | bool](m map[UnitID]T) string {

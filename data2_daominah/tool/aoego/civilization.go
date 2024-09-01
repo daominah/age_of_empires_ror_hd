@@ -75,6 +75,54 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Macedonian:
 		c.Name = "Macedonian"
+		c.DisabledTechs = map[TechID]bool{
+			Wheel:                true,
+			EnableChariotArcher:  true,
+			EnableElephantArcher: true,
+			EnableChariot:        true,
+			ScytheChariot:        true,
+			EnableCamel:          true,
+			Nobility:             true,
+			LongSword:            true,
+			Legion:               true,
+
+			Engineering:     true,
+			Siegecraft:      true,
+			Craftsmanship:   true,
+			Helepolis:       true,
+			Catapult:        true,
+			MassiveCatapult: true,
+			EnableFireBoat:  true,
+
+			EnableTemple: true,
+			TempleBuilt:  true,
+			Astrology:    true,
+			Mysticism:    true,
+			Polytheism:   true,
+			Afterlife:    true,
+			Monotheism:   true,
+			Fanaticism:   true,
+			Zealotry:     true,
+			Sacrifice:    true,
+
+			FortifiedWall: true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Academy units pierce armor +2.
+			},
+			func(e *EmpireDeveloping) {
+				// * Siege units cost -50%.
+				e.UnitStats[StoneThrower].Cost.Multiply(0.5)
+				e.UnitStats[Ballista].Cost.Multiply(0.5)
+			},
+			func(e *EmpireDeveloping) {
+				// * Melee units sight +2.
+			},
+			func(e *EmpireDeveloping) {
+				// * All units are 4 times more resistant to conversion.
+			},
+		}
 
 	case Minoan:
 		c.Name = "Minoan"
@@ -121,13 +169,13 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
-				// Siege units attack speed +43%.
+				// * Siege units attack speed +43%.
 			},
 			func(e *EmpireDeveloping) {
-				// Villager HP +15 (so 40 instead of 25).
+				// * Villager HP +15 (so 40 instead of 25).
 			},
 			func(e *EmpireDeveloping) {
-				// Farm food +250 (starting at 500 instead of 250).
+				// * Farm food +250 (starting at 500 instead of 250).
 			},
 		}
 
@@ -158,16 +206,16 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
-				// Villager move speed +18%
+				// * Villager move speed +18%
 			},
 			func(e *EmpireDeveloping) {
-				// Mounted units cost -25%
+				// * Mounted units cost -25%
 				e.UnitStats[Scout].Cost.Multiply(0.75)
 				e.UnitStats[Cavalry].Cost.Multiply(0.75)
 				e.UnitStats[HorseArcher].Cost.Multiply(0.75)
 			},
 			func(e *EmpireDeveloping) {
-				// Ships HP +30%
+				// * Ships HP +30%
 			},
 		}
 
