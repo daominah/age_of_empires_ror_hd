@@ -897,7 +897,7 @@ func IronAgeEffect97(e *EmpireDeveloping) {
 
 // getFunctionName returns Go function name to debug.
 func getFunctionName(i interface{}) string {
-	// fullName example: github.com/daominah/age_of_empires_ror_hd/data2_daominah/tool/aoego.EnableStableEffect79
+	// fullName example: github.com/daominah/age_of_empires_ror_hd/data2_daominah/aoego.EnableStableEffect79
 	fullName := runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
 	lastDot := strings.LastIndex(fullName, ".")
 	if lastDot == -1 {
