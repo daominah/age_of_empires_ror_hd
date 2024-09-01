@@ -97,19 +97,20 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	case Sumerian:
 		c.Name = "Sumerian"
 		c.DisabledTechs = map[TechID]bool{
-			ImprovedBow:   true,
-			Metallurgy:    true,
-			Astrology:     true,
 			EnableCavalry: true,
+			ImprovedBow:   true,
+			Astrology:     true,
 
+			Metallurgy:     true,
 			IronShield:     true,
 			Craftsmanship:  true,
 			Coinage:        true,
-			Afterlife:      true,
-			Monotheism:     true,
-			Fanaticism:     true,
-			Zealotry:       true,
 			EnableBallista: true,
+
+			Afterlife:  true,
+			Monotheism: true,
+			Fanaticism: true,
+			Zealotry:   true,
 
 			HeavyTransport:  true,
 			CatapultTrireme: true,
@@ -133,23 +134,26 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	case Yamato:
 		c.Name = "Yamato"
 		c.DisabledTechs = map[TechID]bool{
-			EnableChariotArcher:  true,
-			EnableChariot:        true,
-			EnableCamel:          true,
-			Broadsword:           true,
-			Astrology:            true,
-			Mysticism:            true,
-			Medicine:             true,
-			Monotheism:           true,
-			Fanaticism:           true,
-			Zealotry:             true,
-			Sacrifice:            true,
+			EnableChariotArcher: true,
+			EnableChariot:       true,
+			EnableCamel:         true,
+			Broadsword:          true,
+			Astrology:           true,
+			Mysticism:           true,
+
+			Catapult:       true,
+			EnableBallista: true,
+
+			Medicine:   true,
+			Monotheism: true,
+			Fanaticism: true,
+			Zealotry:   true,
+			Sacrifice:  true,
+
 			GuardTower:           true,
-			EnableBallista:       true,
-			Catapult:             true,
-			FortifiedWall:        true,
 			EnableElephantArcher: true,
 			EnableWarElephant:    true,
+			FortifiedWall:        true,
 			EnableFireBoat:       true,
 		}
 		c.Bonuses = []EffectFunc{
