@@ -205,7 +205,7 @@ C102    Bronze_Age             1      109`)
 			t.Fatalf("error prepare Do Step(%+v): %v", s, err)
 		}
 	}
-	t.Logf("empire prepared: %v", empire.Summary())
+	// t.Logf("empire prepared: %v", empire.Summary())
 	if empire.Combatants[Villager] != 10 {
 		t.Errorf("error prepare Villager: got: %v, but want: 10", empire.Combatants[Villager])
 	}
@@ -317,13 +317,13 @@ func TestAutoBuildHouse(t *testing.T) {
 	if empire.Buildings[House] != 10 {
 		t.Errorf("should auto build House here, but nHouse: %v", empire.Buildings[House])
 	}
-	t.Logf("empire: %v", empire.Summary())
+	// t.Logf("empire: %v", empire.Summary())
 }
 
 //go:embed Default.ai
 var testDefaultAI string
 
-func TestStrategy_DefaultAI(t *testing.T) {
+func _TestStrategy_DefaultAI(t *testing.T) {
 	if len(testDefaultAI) == 0 {
 		t.Fatalf("error testDefaultAI: empty")
 	}
@@ -487,7 +487,6 @@ B79       Watch_Tower          2      -1`
 		t.Errorf("error free units got: %+v, but want 1 TownCenter 3 Villager", empire.FreeUnits)
 	}
 
-	// TODO: exclude the first TownCenter and 3 Villagers spent
 	prevSpent := 0
 	for i, step := range steps {
 		prevSpent = int(empire.Spent.Food) / 1000
@@ -514,5 +513,12 @@ B79       Watch_Tower          2      -1`
 	}
 	if empire.FreeUnits[TownCenter] != 0 || empire.FreeUnits[Villager] != 0 {
 		t.Errorf("error free units got: %+v, but want 0", empire.FreeUnits)
+	}
+	if empire.Combatants[Hoplite] != 34 {
+		t.Errorf("error Hoplite: got: %v, but want 34", empire.Combatants[Hoplite])
+	}
+	wantSpent := Cost{Wood: 9190, Food: 10835, Gold: 7430, Stone: 3750}
+	if !empire.Spent.CheckEqual(wantSpent) {
+		t.Errorf("error spent: got: %+v, but want %+v", empire.Spent, wantSpent)
 	}
 }

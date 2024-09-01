@@ -70,6 +70,10 @@ func (c *Cost) Multiply(m float64) *Cost {
 	return c
 }
 
+func (c *Cost) CheckEqual(d Cost) bool {
+	return c.Wood == d.Wood && c.Food == d.Food && c.Gold == d.Gold && c.Stone == d.Stone
+}
+
 func (c *Cost) IsZero() bool {
 	return c.Wood == 0 && c.Food == 0 && c.Gold == 0 && c.Stone == 0
 }
@@ -152,70 +156,6 @@ const (
 
 	NullUnit UnitID = -1
 )
-
-// GetAge returns StoneAge, ToolAge, BronzeAge or IronAge.
-func (id UnitID) GetAge() TechID {
-	switch id {
-	case TownCenter, Villager, House, Granary, StoragePit,
-		Barracks, Clubman,
-		Dock, FishingBoat, TradeBoat:
-		return StoneAge
-	case Slinger, TransportBoat, WarBoat,
-		ArcheryRange, Bowman,
-		Stable, Scout,
-		Market, Farm, Tower, Wall:
-		return ToolAge
-	case Swordsman, ImprovedBowman, ChariotArcher, Chariot, Cavalry, Camel,
-		GovernmentCenter,
-		Temple, Priest,
-		SiegeWorkshop, StoneThrower,
-		Academy, Hoplite:
-		return BronzeAge
-	case HorseArcher, ElephantArcher, Elephant, Ballista,
-		CatapultBoat, FireBoat,
-		Wonder:
-		return IronAge
-	default: // should not happen
-		return StoneAge
-	}
-}
-
-// AllBuildings is used as a constant (do not change this var in runtime)
-var AllBuildings = map[UnitID]bool{
-	TownCenter: true, House: true, Granary: true, StoragePit: true, Barracks: true, Dock: true,
-	ArcheryRange: true, Stable: true, Market: true, Farm: true, Tower: true, Wall: true,
-	GovernmentCenter: true, Temple: true, SiegeWorkshop: true, Academy: true,
-	Wonder: true,
-}
-
-// AllCombatants is a list of all units that is not a building,
-// used as a constant (do not change this var in runtime)
-var AllCombatants = map[UnitID]bool{
-	Villager: true,
-	Clubman:  true, Swordsman: true, Slinger: true,
-	FishingBoat: true, TradeBoat: true, TransportBoat: true, WarBoat: true, CatapultBoat: true, FireBoat: true,
-	Bowman: true, ImprovedBowman: true, ChariotArcher: true, HorseArcher: true, ElephantArcher: true,
-	Scout: true, Chariot: true, Cavalry: true, Elephant: true, Camel: true,
-	Priest:       true,
-	StoneThrower: true, Ballista: true,
-	Hoplite: true,
-}
-
-// AllUnits includes all units in the game (including buildings),
-// initialized in func init then will be used as a constant
-var AllUnits = make(map[UnitID]Unit)
-
-func init() {
-	for _, a := range []map[UnitID]bool{AllBuildings, AllCombatants} {
-		for unitID := range a {
-			tmp, err := NewUnit(unitID)
-			if err != nil {
-				panic(fmt.Sprintf("error init AllUnits: %v", err))
-			}
-			AllUnits[unitID] = *tmp
-		}
-	}
-}
 
 // NewUnit returns a Unit based on the given UnitID,
 // with default attributes values (not considering civilization bonus)
@@ -421,39 +361,4 @@ func NewUnit(id UnitID) (*Unit, error) {
 		return nil, ErrUnitIDNotFound
 	}
 	return u, nil
-}
-
-// UnitEnabledByTechs is used to know how to enable a unit
-var UnitEnabledByTechs = map[UnitID]TechID{
-	Slinger:   EnableSlinger,
-	Swordsman: ShortSword, // needs manually research
-
-	ImprovedBowman: ImprovedBow, // needs  manually researched
-	ChariotArcher:  EnableChariotArcher,
-	HorseArcher:    EnableHorseArcher,
-	ElephantArcher: EnableElephantArcher,
-
-	Chariot:  EnableChariot,
-	Cavalry:  EnableCavalry,
-	Elephant: EnableWarElephant,
-	Camel:    EnableCamel,
-
-	Ballista: EnableBallista,
-
-	TransportBoat: EnableTransportBoat,
-	WarBoat:       EnableWarBoat,
-	CatapultBoat:  CatapultTrireme, // needs manually research
-	FireBoat:      EnableFireBoat,
-
-	Market:           EnableMarket,
-	Farm:             MarketBuilt, // needs manually build
-	Tower:            WatchTower,  // needs manually research
-	Wall:             SmallWall,   // needs manually research
-	ArcheryRange:     EnableArcheryRange,
-	Stable:           EnableStable,
-	GovernmentCenter: EnableGovernmentCenter,
-	Temple:           EnableTemple,
-	SiegeWorkshop:    EnableSiegeWorkshop,
-	Academy:          EnableAcademy,
-	Wonder:           IronAge, // needs manually research
 }
