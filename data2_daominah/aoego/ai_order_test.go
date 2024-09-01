@@ -386,6 +386,7 @@ T83       Man                  2      109       0
 T93       Soldier-Phal1        1      0         0
 
 // 16 villager, 2 cavalry, 1 hoplite, 3 tower
+// spent Bronze:
 
 C103    Iron_Age               1      109
 R112    Architecture           1      82
@@ -471,7 +472,9 @@ B79       Watch_Tower          1      -1
 U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
-B79       Watch_Tower          2      -1`
+B79       Watch_Tower          2      -1
+
+// spent army:`
 	steps, errs := NewStrategy(buildOrder)
 	if len(errs) > 0 {
 		t.Logf("errors in NewStrategy:")
@@ -503,7 +506,7 @@ B79       Watch_Tower          2      -1`
 	}
 	_ = prevSpent
 
-	t.Logf("summary: %v", empire.Summary())
+	// t.Logf("summary: %v", empire.Summary())
 
 	if empire.UnitStats[Ballista].Cost.Wood != 50 || empire.UnitStats[Ballista].Cost.Gold != 40 {
 		t.Errorf("error Ballista cost: %v", empire.UnitStats[Ballista].Cost)
@@ -520,5 +523,21 @@ B79       Watch_Tower          2      -1`
 	wantSpent := Cost{Wood: 9190, Food: 10835, Gold: 7430, Stone: 3750}
 	if !empire.Spent.CheckEqual(wantSpent) {
 		t.Errorf("error spent: got: %+v, but want %+v", empire.Spent, wantSpent)
+	}
+}
+
+func TestGuessCivilization(t *testing.T) {
+	for _, c := range []struct {
+		fileName string
+		want     CivilizationID
+	}{
+		{fileName: "Assyria_Archer.ai", want: Assyrian},
+		{fileName: "Babylon_Tower_Priest.ai.ai", want: Babylonian},
+		{fileName: "Minoa_Composite_Bowmen.ai", want: Minoan},
+		{fileName: "Rome Legion.ai", want: Roman},
+	} {
+		if guess := GuessCivilization(c.fileName); guess != c.want {
+			t.Errorf("error GuessCivilization(%v): got: %v, but want: %v", c.fileName, guess, c.want)
+		}
 	}
 }

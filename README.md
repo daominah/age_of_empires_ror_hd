@@ -127,7 +127,7 @@ The result here comes from real tests and compares with the game document.
 
 #### 14. Shang
 
-* Villager cost -30% (so 35 food instead of 50).
+* Villager cost 35 food instead of 50 (so Villager cost -30%).
 * Wall HP x2.
 
 #### 15. Sumerian

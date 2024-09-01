@@ -98,12 +98,6 @@ B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 6      87
 B50       Farm                 2      -1
-// 36 heavy horse archer, 12 catapult, 16 tower (pop )
-// spent army: 8400 wood, 10900 food, 5900 gold, 2700 stone
-
-
-// R108    Gold_Mining            1      84
-// R30     Coinage                1      84
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
@@ -119,9 +113,14 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 
 B79       Watch_Tower          4      -1
+
+// 36 heavy horse archer, 12 catapult, 16 chariot archer (pop 93)
+// 28 tower, 28 man, 16 farm, 7 range, 3 siege
+// spent army: 8815 wood, 10805 food, 5675 gold, 4350 stone
+
 
 U39       Soldier-Cavalry3_Arc 6      87
 U39       Soldier-Cavalry3_Arc 6      87
@@ -136,9 +135,6 @@ R111    Siegecraft             1      84
 C36     Massive_Catapult       1      49
 
 C2      Catapult_Tower         1      68
-B79       Watch_Tower          2      -1
-// 24 tower
-
 
 B109      Town_Center1         1      -1
 

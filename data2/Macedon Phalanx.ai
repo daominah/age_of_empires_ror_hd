@@ -97,10 +97,6 @@ U93       Soldier-Phal1        4      0
 T83       Man                  1      109       0
 B79       Watch_Tower          1      -1
 
-// 34 centurion, 14 ballista, 24 village, pop
-// 5 academy, 15 tower, 6 siege workshop
-// spent army: 4900 wood, 10800 food, 5500 gold, 2400 stone
-
 U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
@@ -133,6 +129,11 @@ U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
+
+// 34 centurion, 62 ballista, 24 village, pop 124
+// 24 tower, 24 man, 14 farm, 5 academy, 6 siege workshop
+// spent army: 4900 wood, 10800 food, 5500 gold, 2400 stone
+
 
 U93       Soldier-Phal1        5      0
 U11       Soldier-Ballista     6      49
