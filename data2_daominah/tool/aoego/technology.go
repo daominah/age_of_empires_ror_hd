@@ -33,8 +33,17 @@ func (t Technology) GetName() string {
 	return t.Name
 }
 
+func (t Technology) GetFullName() string {
+	return fmt.Sprintf("%v(%v)", t.NameInGame, t.ID.ActionID())
+}
+
 func (t Technology) GetLocation() UnitID {
 	return t.Location
+}
+
+func (t Technology) GetCost() *Cost {
+	clone := t.Cost
+	return &clone
 }
 
 func (t Technology) GetEffectsName() string {
@@ -43,10 +52,6 @@ func (t Technology) GetEffectsName() string {
 		effectNames = append(effectNames, getFunctionName(f))
 	}
 	return strings.Join(effectNames, ", ")
-}
-
-func (t Technology) GetFullName() string {
-	return fmt.Sprintf("%v(%v)", t.NameInGame, t.ID.ActionID())
 }
 
 // TechID is enum

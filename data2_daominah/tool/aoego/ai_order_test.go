@@ -70,13 +70,13 @@ func TestStep_String_NewStep(t *testing.T) {
 			stepStr: "R40     Leather_Armor_-_Soldie 1      103",
 		},
 	} {
-		stepStr, err := c.step.String()
+		stepStr, err := c.step.Marshal()
 		if err != nil {
-			t.Errorf("error step.String(%+v): %v", c.step, err)
+			t.Errorf("error step.Marshal(%+v): %v", c.step, err)
 			continue
 		}
 		if stepStr != c.stepStr {
-			t.Errorf("error step.String(%+v) got:\n%v, but want:\n%v", c.step, stepStr, c.stepStr)
+			t.Errorf("error step.Marshal(%+v) got:\n%v, but want:\n%v", c.step, stepStr, c.stepStr)
 		}
 
 		parsedStep, err := NewStep(c.stepStr)
@@ -84,7 +84,7 @@ func TestStep_String_NewStep(t *testing.T) {
 			t.Errorf("error NewStep(%v): %v", c.stepStr, err)
 			continue
 		}
-		if !c.step.CheckEqual(*parsedStep) {
+		if !c.step.checkEqual(*parsedStep) {
 			t.Errorf("error NewStep(%v): got: %+v, but want: %+v", c.stepStr, parsedStep, c.step)
 		}
 	}
@@ -97,7 +97,7 @@ func TestNewStep_Weird(t *testing.T) {
 		t.Fatalf("error NewStep weird Armored Elephants: %v", err)
 	}
 	want := Step{Action: Research, UnitOrTechID: ArmoredElephant, Quantity: 1}
-	if !step.CheckEqual(want) {
+	if !step.checkEqual(want) {
 		t.Errorf("error NewStep weird Armored Elephants: got: %+v, but want: %+v", step, want)
 	}
 }
@@ -173,9 +173,9 @@ func TestStep_StringError(t *testing.T) {
 			wantErr: ErrTechIDNotFound,
 		},
 	} {
-		_, err := c.step.String()
+		_, err := c.step.Marshal()
 		if !errors.Is(err, c.wantErr) {
-			t.Errorf("error step.String(%+v): got: %v, but want: %v", c.step, err, c.wantErr)
+			t.Errorf("error step.Marshal(%+v): got: %v, but want: %v", c.step, err, c.wantErr)
 		}
 	}
 }
@@ -483,12 +483,29 @@ B79       Watch_Tower          2      -1`
 	if err != nil {
 		t.Fatalf("error NewEmpireDeveloping: %v", err)
 	}
+
+	// TODO: exclude the first TownCenter and 3 Villagers spent
+	prevSpent := 0
 	for i, step := range steps {
+		prevSpent = int(empire.Spent.Food) / 1000
 		err := empire.Do(step)
 		if err != nil {
 			t.Errorf("error i %v DoStep(%v): %v", i, step, err)
 		}
+		spent := int(empire.Spent.Food) / 1000
+		if spent > prevSpent {
+			t.Logf("i %v DoStep(%v): spent: %+v", i, step, empire.Spent.Food)
+		}
+		prevSpent = spent
 	}
+	_ = prevSpent
 
 	t.Logf("summary: %v", empire.Summary())
+
+	if empire.UnitStats[Ballista].Cost.Wood != 50 || empire.UnitStats[Ballista].Cost.Gold != 40 {
+		t.Errorf("error Ballista cost: %v", empire.UnitStats[Ballista].Cost)
+	}
+	if empire.UnitStats[House].Cost.Wood != 30 {
+		t.Errorf("error House cost: %v", empire.UnitStats[House].Cost)
+	}
 }

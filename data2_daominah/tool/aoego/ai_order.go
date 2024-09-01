@@ -63,9 +63,9 @@ func NewBuildOrder(aiFileData string) ([]Step, []error) {
 func (b BuildOrder) Marshal() (string, error) {
 	var lines []string
 	for i, step := range b {
-		line, err := step.String()
+		line, err := step.Marshal()
 		if err != nil {
-			return "", fmt.Errorf("line %v step.String: %w", i+1, err)
+			return "", fmt.Errorf("line %v step.Marshal: %w", i+1, err)
 		}
 		lines = append(lines, line)
 	}
@@ -82,7 +82,7 @@ type Step struct {
 // NewStep parses a line in ".ai" file format to a Step object.
 // e.g "T299      Soldier-Scout        1      101       2" means
 // train 1 Scout at Stable, if killed, retrain max 2 times.
-// This func is the inverse function of Step.String().
+// This func is the inverse function of Step.Marshal().
 func NewStep(line string) (*Step, error) {
 	commentBegin := strings.Index(line, `//`)
 	if commentBegin != -1 {
@@ -137,11 +137,11 @@ func NewStep(line string) (*Step, error) {
 	return s, nil
 }
 
-// String returns a string representation of a Step in ".ai" file format,
+// Marshal returns a string representation of a Step in ".ai" file format,
 // e.g "T299      Soldier-Scout        1      101       2" means
 // train 1 Scout at Stable, if killed, retrain max 2 times.
 // This func is the inverse function of NewStep().
-func (s Step) String() (string, error) {
+func (s Step) Marshal() (string, error) {
 	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
 	if err != nil {
 		return "", fmt.Errorf("determineUnitOrTech: %w", err)
@@ -168,7 +168,16 @@ func (s Step) String() (string, error) {
 	return line, nil
 }
 
-func (s Step) CheckEqual(other Step) bool {
+// Strings is for debugging purpose.
+func (s Step) String() string {
+	target, err := s.determineUnitOrTech(s.UnitOrTechID.IntID())
+	if err != nil { // unlikely to happen
+		return fmt.Sprintf("%#v", s)
+	}
+	return fmt.Sprintf("%v %v%v %v", target.GetName(), s.Action, s.UnitOrTechID, s.Quantity)
+}
+
+func (s Step) checkEqual(other Step) bool {
 	if s.Action != other.Action {
 		return false
 	}
@@ -228,9 +237,10 @@ type UnitOrTechID interface {
 type UnitOrTech interface {
 	IsUnit() bool
 	GetID() UnitOrTechID
-	GetName() string // name without spaces
-	GetLocation() UnitID
+	GetName() string     // name without spaces, e.g. "Town_Center1"
 	GetFullName() string // e.g. "Town Center(B109)", for print debug purpose
+	GetLocation() UnitID
+	GetCost() *Cost // clone value of the cost, for easily chain Multi without changing the original cost
 }
 
 // EmpireDeveloping represents state of an empire at a moment,
@@ -245,7 +255,7 @@ type EmpireDeveloping struct {
 	Buildings        map[UnitID]int   // built buildings
 	Techs            map[TechID]bool  // researched technologies, including auto-researched
 	TechnologyCount  int              // only count the techs that are not auto-researched
-	Spent            Cost
+	Spent            *Cost
 }
 
 func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
@@ -261,10 +271,10 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 			TownCenter: true, Villager: true, House: true,
 			Granary: true, StoragePit: true, Barracks: true, Dock: true,
 		},
-		Combatants: map[UnitID]int{},
-		Buildings:  map[UnitID]int{Granary: 1, StoragePit: 1}, // AI will always build these 2 buildings without instruction
+		Combatants: map[UnitID]int{Villager: 3},
+		Buildings:  map[UnitID]int{TownCenter: 1, Granary: 1, StoragePit: 1}, // AI will always auto build Granary and Storage Pit
 		Techs:      map[TechID]bool{GranaryBuilt: true, StoragePitBuilt: true},
-		Spent:      Cost{Wood: 240},
+		Spent:      &Cost{Wood: 240}, // Town Center and 3 Villagers are free
 	}
 
 	for _, option := range options {
@@ -299,7 +309,7 @@ func (e *EmpireDeveloping) Do(s Step) error {
 	}
 	switch v := target.(type) {
 	case *Unit:
-		return e.build(*v, s.Quantity)
+		return e.build(v.ID, s.Quantity)
 	case *Technology:
 		return e.research(*v)
 	default:
@@ -330,17 +340,22 @@ func (e *EmpireDeveloping) CountPopulationLimit() float64 {
 }
 
 // Build a combatant(s) or a building(s). if quantity is not provided, build 1.
-func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
+func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 	n := 1 // number of units to build
 	if len(quantity) > 0 {
 		n = quantity[0]
 	}
-	if _, found := e.UnitStats[u.ID]; !found {
-		return fmt.Errorf("%w: %v is disabled for %v", ErrUnitDisabledByCiv, u.NameInGame, e.Civilization.Name)
+	civUnit, found := e.UnitStats[unitID] // get unit stats applied civilization bonuses
+	if !found {
+		return fmt.Errorf("%w: %v is disabled for %v", ErrUnitDisabledByCiv, unitID.GetNameInGame(), e.Civilization.Name)
 	}
 
-	if !e.EnabledUnits[u.ID] { // cannot build this unit: return why
-		enableTechID, found := UnitEnabledByTechs[u.ID]
+	if !e.EnabledUnits[unitID] { // cannot build this unit: return why
+		u, err := NewUnit(unitID)
+		if err != nil {
+			return fmt.Errorf("%w: %v", ErrUnitIDNotFound, unitID)
+		}
+		enableTechID, found := UnitEnabledByTechs[unitID]
 		if !found {
 			if u.Location != NullUnit && e.Buildings[u.Location] <= 0 {
 				return fmt.Errorf("%w: need %v(%v) first to train %v", ErrLocationNotBuilt, u.Location.GetNameInGame(), u.Location.ActionID(), u.GetFullName())
@@ -368,23 +383,23 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 		}
 		return fmt.Errorf("%w for %v: at least %v of %v", ErrMissingRequireTechs, u.NameInGame, missingTechsCount, strings.Join(missingTechs, ", "))
 	}
-	if u.Location != NullUnit && e.Buildings[u.Location] <= 0 {
-		return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, u.Location.GetNameInGame(), u.Location.ActionID(), u.NameInGame, u.ID.ActionID())
+	if civUnit.Location != NullUnit && e.Buildings[civUnit.Location] <= 0 {
+		return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, civUnit.Location.GetNameInGame(), civUnit.Location.ActionID(), civUnit.NameInGame, civUnit.ID.ActionID())
 	}
 
-	if u.IsBuilding {
-		if e.Buildings[u.ID] == 0 && u.InitiateTech != NullTech {
-			e.Techs[u.InitiateTech] = true
-			for _, effect := range AllTechs[u.InitiateTech].Effects {
+	if civUnit.IsBuilding {
+		if e.Buildings[civUnit.ID] == 0 && civUnit.InitiateTech != NullTech {
+			e.Techs[civUnit.InitiateTech] = true
+			for _, effect := range AllTechs[civUnit.InitiateTech].Effects {
 				effect(e)
 			}
 			e.refreshAutoTechs()
 		}
-		e.Spent.Add(*(u.Cost.Multiply(float64(n))))
-		e.Buildings[u.ID] += n
+		e.Spent.Add(*(civUnit.GetCost().Multiply(float64(n))))
+		e.Buildings[civUnit.ID] += n
 	} else {
 		remainingPopLimit := e.CountPopulationLimit() - e.CountPopulation()
-		need := float64(n) * u.Population
+		need := float64(n) * civUnit.Population
 		if e.IsAutoBuildHouse {
 			autoHouses := calcNumberHousesAutoBuild(remainingPopLimit)
 			if autoHouses > 0 {
@@ -395,8 +410,8 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 		if remainingPopLimit < need {
 			return fmt.Errorf("%w: remaining %.0f, but need %.0f", ErrExceedPopLimit, remainingPopLimit, need)
 		}
-		e.Spent.Add(*(u.Cost.Multiply(float64(n))))
-		e.Combatants[u.ID] += n
+		e.Spent.Add(*(civUnit.GetCost().Multiply(float64(n))))
+		e.Combatants[civUnit.ID] += n
 		if e.IsAutoBuildHouse {
 			afterTrainAutoHouses := calcNumberHousesAutoBuild(e.CountPopulationLimit() - e.CountPopulation())
 			if afterTrainAutoHouses > 0 {
@@ -409,7 +424,7 @@ func (e *EmpireDeveloping) build(u Unit, quantity ...int) error {
 
 func (e *EmpireDeveloping) buildHouse(n int) {
 	house := AllUnits[House]
-	e.Spent.Add(*(house.Cost.Multiply(float64(n))))
+	e.Spent.Add(*(house.GetCost().Multiply(float64(n))))
 	e.Buildings[House] += n
 }
 
@@ -566,7 +581,7 @@ func WithNoUnit() EmpireOption {
 	return func(e *EmpireDeveloping) {
 		e.Buildings = map[UnitID]int{}
 		e.Techs = map[TechID]bool{}
-		e.Spent = Cost{}
+		e.Spent = &Cost{}
 	}
 }
 
