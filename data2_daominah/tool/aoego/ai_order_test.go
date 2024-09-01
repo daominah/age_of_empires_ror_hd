@@ -280,37 +280,6 @@ C102    Bronze_Age             1      109`)
 	}
 }
 
-//go:embed Default.ai
-var testDefaultAI string
-
-func TestNewStep_DefaultAI(t *testing.T) {
-	if len(testDefaultAI) == 0 {
-		t.Fatalf("error testDefaultAI: empty")
-	}
-	steps, errs := NewBuildOrder(testDefaultAI)
-	if len(errs) > 0 {
-		t.Logf("errors in NewBuildOrder:")
-		for _, err := range errs {
-			t.Error(err)
-		}
-	}
-	empire, err := NewEmpireDeveloping()
-	if err != nil {
-		t.Fatalf("error NewEmpireDeveloping: %v", err)
-	}
-	for _, step := range steps {
-		err := empire.Do(step)
-		if err != nil {
-			t.Errorf("error DoStep(%v): %v", step, err)
-		}
-	}
-
-	t.Logf("spent: %+v", empire.Spent)
-	t.Logf("population: %+v", empire.CountPopulation())
-	t.Logf("buildings: %+v", empire.Buildings)
-	t.Logf("techs count: %v", empire.TechnologyCount)
-}
-
 func TestTechnology_GetName(t *testing.T) {
 	for k, v := range AllTechs {
 		name := v.NameInGame
@@ -349,4 +318,177 @@ func TestAutoBuildHouse(t *testing.T) {
 		t.Errorf("should auto build House here, but nHouse: %v", empire.Buildings[House])
 	}
 	t.Logf("empire: %v", empire.Summary())
+}
+
+//go:embed Default.ai
+var testDefaultAI string
+
+func TestNewBuildOrder_DefaultAI(t *testing.T) {
+	if len(testDefaultAI) == 0 {
+		t.Fatalf("error testDefaultAI: empty")
+	}
+	steps, errs := NewBuildOrder(testDefaultAI)
+	if len(errs) > 0 {
+		t.Logf("errors in NewBuildOrder:")
+		for _, err := range errs {
+			t.Error(err)
+		}
+	}
+	empire, err := NewEmpireDeveloping()
+	if err != nil {
+		t.Fatalf("error NewEmpireDeveloping: %v", err)
+	}
+	for i, step := range steps {
+		err := empire.Do(step)
+		if err != nil {
+			t.Errorf("error i %v DoStep(%v): %v", i, step, err)
+		}
+	}
+
+	t.Logf("summary: %v", empire.Summary())
+}
+
+func TestNewBuildOrder_Macedonian(t *testing.T) {
+	buildOrder := `
+B109      Town_Center1         1      -1
+U83       Man                  10      109
+B12       Barracks1            1      -1
+
+
+C101    Tool_Age               1      109
+R16     Watch_Tower            1      68
+B101      Stable1              1      -1
+R46     Toolworking            1      103
+B84       Market1              1      -1
+B79       Watch_Tower          1      -1
+T83       Man                  2      109       0
+T299      Soldier-Scout        1      101       0
+// 12 villager, 1 scout
+
+
+C102    Bronze_Age             1      109
+R107    Wood_Working           1      84
+R40     Leather_Armor_-_Soldie 1      103
+B79       Watch_Tower          2      -1
+
+T37       Soldier-Cavalry1     1      101       1
+R32     Artisanship            1      84
+R12     Sentry_Tower           1      68
+R43     Scale_Armor_-_Soldiers 1      103
+T83       Man                  2      109       0
+B0        Academy              1      -1
+B82       Government_Center    1      -1
+B0        Academy              1      -1
+B0        Academy              1      -1
+
+T37       Soldier-Cavalry1     1      101       0
+T83       Man                  2      109       0
+T93       Soldier-Phal1        1      0         0
+
+// 16 villager, 2 cavalry, 1 hoplite, 3 tower
+
+C103    Iron_Age               1      109
+R112    Architecture           1      82
+R47     Bronze_Shield          1      103
+T37       Soldier-Cavalry1     1      101       0
+T93       Soldier-Phal1        3      0         0
+B79       Watch_Tower          2      -1
+B87       Range1               1      -1
+B0        Academy              2      -1
+R51     Metal_Working          1      103
+T93       Soldier-Phal1        3      0         0
+B79       Watch_Tower          2       -1
+B49       Siege_Workshop       2      -1
+T93       Soldier-Phal1        3      0         0
+
+C73     Phalanx                1      0
+C113    Aristocracy            1      82
+R48     Chain_Mail_-_Soldiers  1      103
+R15     Guard_Tower            1      68
+T93       Soldier-Phal1        4      0         0
+T11       Soldier-Ballista     2      49        0
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
+
+T93       Soldier-Phal1        4      0         0
+R37     Alchemy                1      82
+T83       Man                  1      109       0
+T11       Soldier-Ballista     2      49        0
+B49       Siege_Workshop       2      -1
+U93       Soldier-Phal1        4      0
+T83       Man                  1      109       0
+B79       Watch_Tower          2      -1
+
+R117    Iron_Shield            1      103
+R106    Ballistics             1      82
+R79     Centurion              1      0
+U93       Soldier-Phal1        4      0
+T83       Man                  2      109       0
+B49       Siege_Workshop       2      -1
+B79       Watch_Tower          2      -1
+
+U11       Soldier-Ballista     4      49
+R122    Tower_Shield           1      103
+// R114    Writing                1      82
+U93       Soldier-Phal1        4      0
+T83       Man                  1      109       0
+B79       Watch_Tower          1      -1
+
+R52     Metallurgy             1      103
+U11       Soldier-Ballista     6      49
+U93       Soldier-Phal1        4      0
+T83       Man                  1      109       0
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B109      Town_Center1         1      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+U11       Soldier-Ballista     6      49
+B50       Farm                 2      -1
+B109      Town_Center1         1      -1
+B79       Watch_Tower          2      -1`
+	steps, errs := NewBuildOrder(buildOrder)
+	if len(errs) > 0 {
+		t.Logf("errors in NewBuildOrder:")
+		for _, err := range errs {
+			t.Error(err)
+		}
+	}
+	empire, err := NewEmpireDeveloping(WithCivilization(Macedonian))
+	if err != nil {
+		t.Fatalf("error NewEmpireDeveloping: %v", err)
+	}
+	for i, step := range steps {
+		err := empire.Do(step)
+		if err != nil {
+			t.Errorf("error i %v DoStep(%v): %v", i, step, err)
+		}
+	}
+
+	t.Logf("summary: %v", empire.Summary())
 }

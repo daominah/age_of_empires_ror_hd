@@ -9,9 +9,9 @@ import (
 // Should be initialized with func NewUnit for default values.
 type Unit struct {
 	ID           UnitID
-	Name         string // name without spaces, e.g. "Man", "Soldier-Chariot2", ...
-	NameInGame   string // name shown in the game, e.g. "Villager", "Chariot Archer", ...
-	Cost         Cost
+	Name         string  // name without spaces, e.g. "Man", "Soldier-Chariot2", ...
+	NameInGame   string  // name shown in the game, e.g. "Villager", "Chariot Archer", ...
+	Cost         *Cost   // unit's cost as pointer so easier to apply civilization bonus
 	Time         float64 // train time in seconds
 	Population   float64 // almost all units needs 1 population, except Barracks units after Logistics researched
 	Location     UnitID  // building that trains this unit
@@ -161,6 +161,7 @@ func (id UnitID) GetAge() TechID {
 		Market, Farm, Tower, Wall:
 		return ToolAge
 	case Swordsman, ImprovedBowman, ChariotArcher, Chariot, Cavalry, Camel,
+		GovernmentCenter,
 		Temple, Priest,
 		SiegeWorkshop, StoneThrower,
 		Academy, Hoplite:
@@ -216,6 +217,7 @@ func init() {
 func NewUnit(id UnitID) (*Unit, error) {
 	u := &Unit{
 		ID:           id,
+		Cost:         &Cost{},
 		Population:   1,
 		Location:     NullUnit, // will be corrected later in the switch
 		IsBuilding:   AllBuildings[id],
@@ -224,190 +226,190 @@ func NewUnit(id UnitID) (*Unit, error) {
 	switch id {
 	case Villager:
 		u.NameInGame, u.Name = "Villager", "Man"
-		u.Cost = Cost{Food: 50}
+		u.Cost = &Cost{Food: 50}
 		u.Time, u.Location = 20, TownCenter
 
 	case Clubman:
 		u.NameInGame, u.Name = "Clubman", "Soldier-Inf1"
-		u.Cost = Cost{Food: 50}
+		u.Cost = &Cost{Food: 50}
 		u.Time, u.Location = 26, Barracks
 	case Swordsman:
 		u.NameInGame, u.Name = "Short Swordsman", "Soldier-Inf3"
-		u.Cost = Cost{Food: 35, Gold: 15}
+		u.Cost = &Cost{Food: 35, Gold: 15}
 		u.Time, u.Location = 26, Barracks
 	case Slinger:
 		u.NameInGame, u.Name = "Slinger", "Soldier-Slinger"
-		u.Cost = Cost{Food: 40, Stone: 10}
+		u.Cost = &Cost{Food: 40, Stone: 10}
 		u.Time, u.Location = 24, Barracks
 
 	case FishingBoat:
 		u.NameInGame, u.Name = "Fishing Boat", "Boat-Fishing1"
-		u.Cost = Cost{Wood: 50}
+		u.Cost = &Cost{Wood: 50}
 		u.Time, u.Location = 40, Dock
 	case TradeBoat:
 		u.NameInGame, u.Name = "Trade Boat", "Boat-Trade1"
-		u.Cost = Cost{Wood: 100}
+		u.Cost = &Cost{Wood: 100}
 		u.Time, u.Location = 50, Dock
 	case TransportBoat:
 		u.NameInGame, u.Name = "Light Transport", "Boat-Transport1"
-		u.Cost = Cost{Wood: 150}
+		u.Cost = &Cost{Wood: 150}
 		u.Time, u.Location = 75, Dock
 	case WarBoat:
 		u.NameInGame, u.Name = "Scout Ship", "Boat-War1"
-		u.Cost = Cost{Wood: 135}
+		u.Cost = &Cost{Wood: 135}
 		u.Time, u.Location = 60, Dock
 	case CatapultBoat:
 		u.NameInGame, u.Name = "Catapult Trireme", "Boat-War4"
-		u.Cost = Cost{Wood: 135, Gold: 75}
+		u.Cost = &Cost{Wood: 135, Gold: 75}
 		u.Time, u.Location = 90, Dock
 	case FireBoat:
 		u.NameInGame, u.Name = "Fire Galley", "Boat-War6"
-		u.Cost = Cost{Wood: 115, Gold: 40}
+		u.Cost = &Cost{Wood: 115, Gold: 40}
 		u.Time, u.Location = 45, Dock
 
 	case Bowman:
 		u.NameInGame, u.Name = "Bowman", "Soldier-Archer1"
-		u.Cost = Cost{Wood: 20, Food: 40}
+		u.Cost = &Cost{Wood: 20, Food: 40}
 		u.Time, u.Location = 30, ArcheryRange
 	case ImprovedBowman:
 		u.NameInGame, u.Name = "Improved Bowman", "Soldier-Archer2"
-		u.Cost = Cost{Food: 40, Gold: 20}
+		u.Cost = &Cost{Food: 40, Gold: 20}
 		u.Time, u.Location = 30, ArcheryRange
 	case ChariotArcher:
 		u.NameInGame, u.Name = "Chariot Archer", "Soldier-Chariot2"
-		u.Cost = Cost{Wood: 70, Food: 40}
+		u.Cost = &Cost{Wood: 70, Food: 40}
 		u.Time, u.Location = 40, ArcheryRange
 	case HorseArcher:
 		u.NameInGame, u.Name = "Horse Archer", "Soldier-Cavalry3_Arc"
-		u.Cost = Cost{Food: 50, Gold: 70}
+		u.Cost = &Cost{Food: 50, Gold: 70}
 		u.Time, u.Location = 40, ArcheryRange
 	case ElephantArcher:
 		u.NameInGame, u.Name = "Elephant Archer", "Soldier-Elephant1"
-		u.Cost = Cost{Food: 180, Gold: 60}
+		u.Cost = &Cost{Food: 180, Gold: 60}
 		u.Time, u.Location = 50, ArcheryRange
 
 	case Scout:
 		u.NameInGame, u.Name = "Scout", "Soldier-Scout"
-		u.Cost = Cost{Food: 100}
+		u.Cost = &Cost{Food: 100}
 		u.Time, u.Location = 30, Stable
 	case Chariot:
 		u.NameInGame, u.Name = "Chariot", "Soldier-Chariot1"
-		u.Cost = Cost{Wood: 60, Food: 40}
+		u.Cost = &Cost{Wood: 60, Food: 40}
 		u.Time, u.Location = 40, Stable
 	case Cavalry:
 		u.NameInGame, u.Name = "Cavalry", "Soldier-Cavalry1"
-		u.Cost = Cost{Food: 70, Gold: 80}
+		u.Cost = &Cost{Food: 70, Gold: 80}
 		u.Time, u.Location = 40, Stable
 	case Elephant:
 		u.NameInGame, u.Name = "War Elephant", "Soldier-Elephant"
-		u.Cost = Cost{Food: 170, Gold: 40}
+		u.Cost = &Cost{Food: 170, Gold: 40}
 		u.Time, u.Location = 50, Stable
 	case Camel:
 		u.NameInGame, u.Name = "Camel Rider", "Soldier-Camel"
-		u.Cost = Cost{Food: 70, Gold: 60}
+		u.Cost = &Cost{Food: 70, Gold: 60}
 		u.Time, u.Location = 30, Stable
 
 	case Priest:
 		u.NameInGame, u.Name = "Priest", "Priest"
-		u.Cost = Cost{Gold: 125}
+		u.Cost = &Cost{Gold: 125}
 		u.Time, u.Location = 50, Temple
 
 	case StoneThrower:
 		u.NameInGame, u.Name = "Stone Thrower", "Soldier-Catapult1"
-		u.Cost = Cost{Wood: 180, Gold: 80}
+		u.Cost = &Cost{Wood: 180, Gold: 80}
 		u.Time, u.Location = 60, SiegeWorkshop
 	case Ballista:
 		u.NameInGame, u.Name = "Ballista", "Soldier-Ballista"
-		u.Cost = Cost{Wood: 100, Gold: 80}
+		u.Cost = &Cost{Wood: 100, Gold: 80}
 		u.Time, u.Location = 60, SiegeWorkshop
 
 	case Hoplite:
 		u.NameInGame, u.Name = "Hoplite", "Soldier-Phal1"
-		u.Cost = Cost{Food: 60, Gold: 40}
+		u.Cost = &Cost{Food: 60, Gold: 40}
 		u.Time, u.Location = 36, Academy
 
 	case TownCenter:
 		u.NameInGame, u.Name = "Town Center", "Town_Center1"
-		u.Cost = Cost{Wood: 200}
+		u.Cost = &Cost{Wood: 200}
 		u.Time = 60
 	case House:
 		u.NameInGame, u.Name = "House", "House"
-		u.Cost = Cost{Wood: 30}
+		u.Cost = &Cost{Wood: 30}
 		u.Time = 20
 
 	case Granary:
 		u.NameInGame, u.Name = "Granary", "Granary"
-		u.Cost = Cost{Wood: 120}
+		u.Cost = &Cost{Wood: 120}
 		u.Time = 30
 		u.InitiateTech = GranaryBuilt
 	case StoragePit:
 		u.NameInGame, u.Name = "Storage Pit", "Storage_Pit1"
-		u.Cost = Cost{Wood: 120}
+		u.Cost = &Cost{Wood: 120}
 		u.Time = 30
 		u.InitiateTech = StoragePitBuilt
 	case Barracks:
 		u.NameInGame, u.Name = "Barracks", "Barracks1"
-		u.Cost = Cost{Wood: 125}
+		u.Cost = &Cost{Wood: 125}
 		u.Time = 30
 		u.InitiateTech = BarracksBuilt
 	case Dock:
 		u.NameInGame, u.Name = "Dock", "Dock_1"
-		u.Cost = Cost{Wood: 100}
+		u.Cost = &Cost{Wood: 100}
 		u.Time = 50
 		u.InitiateTech = DockBuilt
 
 	case ArcheryRange:
 		u.NameInGame, u.Name = "Archery Range", "Range1"
-		u.Cost = Cost{Wood: 150}
+		u.Cost = &Cost{Wood: 150}
 		u.Time = 40
 		u.InitiateTech = ArcheryRangeBuilt
 	case Stable:
 		u.NameInGame, u.Name = "Stable", "Stable1"
-		u.Cost = Cost{Wood: 150}
+		u.Cost = &Cost{Wood: 150}
 		u.Time = 40
 		u.InitiateTech = StableBuilt
 	case Market:
 		u.NameInGame, u.Name = "Market", "Market1"
-		u.Cost = Cost{Wood: 150}
+		u.Cost = &Cost{Wood: 150}
 		u.Time = 40
 		u.InitiateTech = MarketBuilt
 	case Farm:
 		u.NameInGame, u.Name = "Farm", "Farm"
-		u.Cost = Cost{Wood: 75}
+		u.Cost = &Cost{Wood: 75}
 		u.Time = 30
 	case Tower:
 		u.NameInGame, u.Name = "Watch Tower", "Watch_Tower"
-		u.Cost = Cost{Stone: 150}
+		u.Cost = &Cost{Stone: 150}
 		u.Time = 80
 	case Wall:
 		u.NameInGame, u.Name = "Small Wall", "Wall_Small"
-		u.Cost = Cost{Stone: 5}
+		u.Cost = &Cost{Stone: 5}
 		u.Time = 7
 
 	case GovernmentCenter:
 		u.NameInGame, u.Name = "Government Center", "Government_Center"
-		u.Cost = Cost{Wood: 175}
+		u.Cost = &Cost{Wood: 175}
 		u.Time = 60
 		u.InitiateTech = GovernmentCenterBuilt
 	case Temple:
 		u.NameInGame, u.Name = "Temple", "Temple1"
-		u.Cost = Cost{Wood: 200}
+		u.Cost = &Cost{Wood: 200}
 		u.Time = 60
 		u.InitiateTech = TempleBuilt
 	case SiegeWorkshop:
 		u.NameInGame, u.Name = "Siege Workshop", "Siege_Workshop"
-		u.Cost = Cost{Wood: 200}
+		u.Cost = &Cost{Wood: 200}
 		u.Time = 60
 		u.InitiateTech = SiegeWorkshopBuilt
 	case Academy:
 		u.NameInGame, u.Name = "Academy", "Academy"
-		u.Cost = Cost{Wood: 200}
+		u.Cost = &Cost{Wood: 200}
 		u.Time = 60
 		u.InitiateTech = AcademyBuilt
 
 	case Wonder:
 		u.NameInGame, u.Name = "Wonder", "Wonder"
-		u.Cost = Cost{Wood: 1000, Gold: 1000, Stone: 1000}
+		u.Cost = &Cost{Wood: 1000, Gold: 1000, Stone: 1000}
 		u.Time = 8000
 
 	default:
