@@ -180,12 +180,12 @@ func TestStep_StringError(t *testing.T) {
 	}
 }
 
-func TestNewBuildOrder_RequiredTechs(t *testing.T) {
+func TestNewStrategy_RequiredTechs(t *testing.T) {
 	empire, err := NewEmpireDeveloping(WithCivilization(Sumerian))
 	if err != nil {
 		t.Fatalf("error NewEmpireDeveloping: %v", err)
 	}
-	prepare, errs := NewBuildOrder(`
+	prepare, errs := NewStrategy(`
 		B109      Town_Center1         1      -1
 U83       Man                  10      109
 B12       Barracks1            1      -1
@@ -197,7 +197,7 @@ R46     Toolworking            1      103
 B84       Market1              1      -1
 C102    Bronze_Age             1      109`)
 	if len(errs) != 0 {
-		t.Fatalf("error prepare NewBuildOrder: %v", errs)
+		t.Fatalf("error prepare NewStrategy: %v", errs)
 	}
 	for _, s := range prepare {
 		err := empire.Do(s)
@@ -323,13 +323,13 @@ func TestAutoBuildHouse(t *testing.T) {
 //go:embed Default.ai
 var testDefaultAI string
 
-func TestNewBuildOrder_DefaultAI(t *testing.T) {
+func TestStrategy_DefaultAI(t *testing.T) {
 	if len(testDefaultAI) == 0 {
 		t.Fatalf("error testDefaultAI: empty")
 	}
-	steps, errs := NewBuildOrder(testDefaultAI)
+	steps, errs := NewStrategy(testDefaultAI)
 	if len(errs) > 0 {
-		t.Logf("errors in NewBuildOrder:")
+		t.Logf("errors in NewStrategy:")
 		for _, err := range errs {
 			t.Error(err)
 		}
@@ -348,7 +348,7 @@ func TestNewBuildOrder_DefaultAI(t *testing.T) {
 	t.Logf("summary: %v", empire.Summary())
 }
 
-func TestNewBuildOrder_Macedonian(t *testing.T) {
+func TestNewStrategy_Macedonian(t *testing.T) {
 	buildOrder := `
 B109      Town_Center1         1      -1
 U83       Man                  10      109
@@ -472,9 +472,9 @@ U11       Soldier-Ballista     6      49
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1`
-	steps, errs := NewBuildOrder(buildOrder)
+	steps, errs := NewStrategy(buildOrder)
 	if len(errs) > 0 {
-		t.Logf("errors in NewBuildOrder:")
+		t.Logf("errors in NewStrategy:")
 		for _, err := range errs {
 			t.Error(err)
 		}
@@ -482,6 +482,9 @@ B79       Watch_Tower          2      -1`
 	empire, err := NewEmpireDeveloping(WithCivilization(Macedonian))
 	if err != nil {
 		t.Fatalf("error NewEmpireDeveloping: %v", err)
+	}
+	if empire.FreeUnits[TownCenter] != 1 || empire.FreeUnits[Villager] != 3 {
+		t.Errorf("error free units got: %+v, but want 1 TownCenter 3 Villager", empire.FreeUnits)
 	}
 
 	// TODO: exclude the first TownCenter and 3 Villagers spent
@@ -492,9 +495,10 @@ B79       Watch_Tower          2      -1`
 		if err != nil {
 			t.Errorf("error i %v DoStep(%v): %v", i, step, err)
 		}
+
 		spent := int(empire.Spent.Food) / 1000
 		if spent > prevSpent {
-			t.Logf("i %v DoStep(%v): spent: %+v", i, step, empire.Spent.Food)
+			// t.Logf("i %v DoStep(%v): spent: %+v", i, step, empire.Spent.Food)
 		}
 		prevSpent = spent
 	}
@@ -507,5 +511,8 @@ B79       Watch_Tower          2      -1`
 	}
 	if empire.UnitStats[House].Cost.Wood != 30 {
 		t.Errorf("error House cost: %v", empire.UnitStats[House].Cost)
+	}
+	if empire.FreeUnits[TownCenter] != 0 || empire.FreeUnits[Villager] != 0 {
+		t.Errorf("error free units got: %+v, but want 0", empire.FreeUnits)
 	}
 }

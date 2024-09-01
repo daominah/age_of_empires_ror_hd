@@ -1,7 +1,7 @@
 // Package aoego is used to define the data structure in the game
 // Age of Empires: The Rise of Rome.
-// This can be used to validate and calculate the cost of
-// build order (".ai" file), which defines computer player's strategy.
+// This can be used to validate and calculate the cost of a strategy (".ai" file),
+// which defines computer player's order to build and train units.
 package aoego
 
 import (
@@ -38,14 +38,15 @@ var (
 	ErrExceedPopLimit      = errors.New("build units will exceed population limit, build more houses first")
 )
 
-type BuildOrder []Step
+// Strategy defines order to build and train units.
+type Strategy []Step
 
-// NewBuildOrder creates a BuildOrder from a ".ai" file format,
+// NewStrategy creates a Strategy from a ".ai" file format,
 // this parses the file line by line, returns error for the first invalid line if any.
-func NewBuildOrder(aiFileData string) ([]Step, []error) {
+func NewStrategy(aiFileData string) ([]Step, []error) {
 	aiFileData = strings.ReplaceAll(aiFileData, "\r\n", "\n")
 	lines := strings.Split(aiFileData, "\n")
-	var buildOrder []Step
+	var strategy []Step
 	var errs []error
 	for i, line := range lines {
 		step, err := NewStep(line)
@@ -55,12 +56,12 @@ func NewBuildOrder(aiFileData string) ([]Step, []error) {
 			}
 			continue
 		}
-		buildOrder = append(buildOrder, *step)
+		strategy = append(strategy, *step)
 	}
-	return buildOrder, errs
+	return strategy, errs
 }
 
-func (b BuildOrder) Marshal() (string, error) {
+func (b Strategy) Marshal() (string, error) {
 	var lines []string
 	for i, step := range b {
 		line, err := step.Marshal()
@@ -244,18 +245,23 @@ type UnitOrTech interface {
 }
 
 // EmpireDeveloping represents state of an empire at a moment,
-// This can be used to store state of a running BuildOrder.
+// This can be used to store state of a running Strategy.
 // MUST be initialized by func NewEmpireDeveloping.
 type EmpireDeveloping struct {
 	Civilization     Civilization
 	IsAutoBuildHouse bool             // build 5 houses if close to population limit
 	UnitStats        map[UnitID]*Unit // excluding the disabled units of the civilization
-	EnabledUnits     map[UnitID]bool  // example research Wheel add Chariot and Chariot Archer to this map
-	Combatants       map[UnitID]int   // trained units are not buildings
-	Buildings        map[UnitID]int   // built buildings
-	Techs            map[TechID]bool  // researched technologies, including auto-researched
-	TechnologyCount  int              // only count the techs that are not auto-researched
-	Spent            *Cost
+	// FreeUnits for example 1st Town Center and 3 Villagers when every game starts,
+	// if there are already units that are also in the Strategy,
+	// these units will be counted as already created and will not be rebuilt.
+	FreeUnits map[UnitID]int
+
+	EnabledUnits    map[UnitID]bool // example research Wheel add Chariot and Chariot Archer to this map
+	Combatants      map[UnitID]int  // trained units are not buildings
+	Buildings       map[UnitID]int  // built buildings
+	Techs           map[TechID]bool // researched technologies, including auto-researched
+	TechnologyCount int             // only count the techs that are not auto-researched
+	Spent           *Cost
 }
 
 func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
@@ -267,12 +273,14 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 		Civilization:     *fullTechTreeCiv,
 		IsAutoBuildHouse: true,
 		UnitStats:        make(map[UnitID]*Unit),
+		FreeUnits:        map[UnitID]int{TownCenter: 1, Villager: 3},
+
 		EnabledUnits: map[UnitID]bool{
 			TownCenter: true, Villager: true, House: true,
 			Granary: true, StoragePit: true, Barracks: true, Dock: true,
 		},
-		Combatants: map[UnitID]int{Villager: 3},
-		Buildings:  map[UnitID]int{TownCenter: 1, Granary: 1, StoragePit: 1}, // AI will always auto build Granary and Storage Pit
+		Combatants: map[UnitID]int{},
+		Buildings:  map[UnitID]int{Granary: 1, StoragePit: 1}, // AI will always auto build Granary and Storage Pit
 		Techs:      map[TechID]bool{GranaryBuilt: true, StoragePitBuilt: true},
 		Spent:      &Cost{Wood: 240}, // Town Center and 3 Villagers are free
 	}
@@ -298,7 +306,7 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 	return e, nil
 }
 
-// Do tries to execute a Step (probably from a BuildOrder),
+// Do tries to execute a Step (probably from a Strategy),
 // it will return error if the Step is invalid, e.g. technology is not available
 // for the civilization or not satisfied the requirement,
 // unit's location is not built yet, ...
@@ -384,11 +392,24 @@ func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 		return fmt.Errorf("%w for %v: at least %v of %v", ErrMissingRequireTechs, u.NameInGame, missingTechsCount, strings.Join(missingTechs, ", "))
 	}
 	if civUnit.Location != NullUnit && e.Buildings[civUnit.Location] <= 0 {
-		return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, civUnit.Location.GetNameInGame(), civUnit.Location.ActionID(), civUnit.NameInGame, civUnit.ID.ActionID())
+		return fmt.Errorf("%w: need %v(%v) first to train %v(%v)", ErrLocationNotBuilt, civUnit.Location.GetNameInGame(), civUnit.Location.ActionID(), civUnit.NameInGame, unitID.ActionID())
+	}
+
+	if e.FreeUnits[unitID] > 0 {
+		println(fmt.Sprintf("FreeUnits %+v", e.FreeUnits))
+		if n >= e.FreeUnits[unitID] {
+			e.FreeUnits[unitID] = 0
+			e.Spent.Add(*(civUnit.GetCost().Multiply(float64(-e.FreeUnits[unitID]))))
+		} else {
+			e.FreeUnits[unitID] -= n
+			e.Spent.Add(*(civUnit.GetCost().Multiply(float64(-n))))
+		}
+		// TODO: wrong FreeUnits cost subtracted
+		println(fmt.Sprintf("Spent %+v", e.Spent))
 	}
 
 	if civUnit.IsBuilding {
-		if e.Buildings[civUnit.ID] == 0 && civUnit.InitiateTech != NullTech {
+		if e.Buildings[unitID] == 0 && civUnit.InitiateTech != NullTech {
 			e.Techs[civUnit.InitiateTech] = true
 			for _, effect := range AllTechs[civUnit.InitiateTech].Effects {
 				effect(e)
@@ -396,7 +417,7 @@ func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 			e.refreshAutoTechs()
 		}
 		e.Spent.Add(*(civUnit.GetCost().Multiply(float64(n))))
-		e.Buildings[civUnit.ID] += n
+		e.Buildings[unitID] += n
 	} else {
 		remainingPopLimit := e.CountPopulationLimit() - e.CountPopulation()
 		need := float64(n) * civUnit.Population
@@ -411,7 +432,7 @@ func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 			return fmt.Errorf("%w: remaining %.0f, but need %.0f", ErrExceedPopLimit, remainingPopLimit, need)
 		}
 		e.Spent.Add(*(civUnit.GetCost().Multiply(float64(n))))
-		e.Combatants[civUnit.ID] += n
+		e.Combatants[unitID] += n
 		if e.IsAutoBuildHouse {
 			afterTrainAutoHouses := calcNumberHousesAutoBuild(e.CountPopulationLimit() - e.CountPopulation())
 			if afterTrainAutoHouses > 0 {
