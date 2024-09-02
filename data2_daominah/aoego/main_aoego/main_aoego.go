@@ -34,13 +34,13 @@ func main() {
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Horse_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Composite_Bowmen.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Camel.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Persia_War_Elephant.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Phoenicia_Elephant_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Sumeria_Catapult.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
 
 	log.Printf("input file path: %v", inputFilePath)
 	strategyBytes, err := os.ReadFile(inputFilePath)

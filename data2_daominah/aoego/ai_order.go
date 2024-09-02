@@ -7,7 +7,6 @@ package aoego
 import (
 	"errors"
 	"fmt"
-	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -432,26 +431,19 @@ func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 		e.Spent.Add(*(civUnit.GetCost().Multiply(float64(n))))
 		e.Buildings[unitID] += n
 	} else {
-		remainingPopLimit := e.CountPopulationLimit() - e.CountPopulation()
+		now := e.CountPopulation()
 		need := float64(n) * civUnit.Population
+		goodLimit := now + need + 10
 		if e.IsAutoBuildHouse {
-			autoHouses := calcNumberHousesAutoBuild(remainingPopLimit)
-			if autoHouses > 0 {
-				e.buildHouse(autoHouses)
-				remainingPopLimit = e.CountPopulationLimit() - e.CountPopulation()
+			for e.CountPopulationLimit() < goodLimit {
+				e.buildHouse(5)
 			}
 		}
-		if remainingPopLimit < need {
-			return fmt.Errorf("%w: remaining %.0f, but need %.0f", ErrExceedPopLimit, remainingPopLimit, need)
+		if popCap := e.CountPopulationLimit(); popCap < now+need {
+			return fmt.Errorf("%w: now %.0f/%.0f, need %.0f", ErrExceedPopLimit, now, popCap, need)
 		}
 		e.Spent.Add(*(civUnit.GetCost().Multiply(float64(n))))
 		e.Combatants[unitID] += n
-		if e.IsAutoBuildHouse {
-			afterTrainAutoHouses := calcNumberHousesAutoBuild(e.CountPopulationLimit() - e.CountPopulation())
-			if afterTrainAutoHouses > 0 {
-				e.buildHouse(afterTrainAutoHouses)
-			}
-		}
 	}
 	return nil
 }
@@ -460,13 +452,6 @@ func (e *EmpireDeveloping) buildHouse(n int) {
 	house := AllUnits[House]
 	e.Spent.Add(*(house.GetCost().Multiply(float64(n))))
 	e.Buildings[House] += n
-}
-
-func calcNumberHousesAutoBuild(remainingPopLimit float64) int {
-	if remainingPopLimit >= 10 {
-		return 0
-	}
-	return 5 * int(math.Ceil(1-remainingPopLimit/20))
 }
 
 func (e *EmpireDeveloping) research(t Technology) error {
@@ -532,7 +517,7 @@ func (e *EmpireDeveloping) Summary() string {
 	lines = append(lines, fmt.Sprintf("* combatants: %v", beautyUnits(e.Combatants)))
 	lines = append(lines, fmt.Sprintf("* buildings: %v", beautyUnits(e.Buildings)))
 	lines = append(lines, fmt.Sprintf("* techs count: %v", e.TechnologyCount))
-	// lines = append(lines, fmt.Sprintf("* techs researched: %+v", beautyTechs(e.Techs)))
+	lines = append(lines, fmt.Sprintf("* techs researched: %+v", beautyTechs(e.Techs)))
 	return "\n" + strings.Join(lines, "\n") + "\n"
 }
 
