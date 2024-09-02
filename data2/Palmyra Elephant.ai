@@ -1,83 +1,159 @@
-B109      Town_Center1         1      -1     
-U83       Man                  12      109    
-B12       Barracks1            1      -1     
-T83       Man                  2      109    2
+// Palmyran bonus:
+// * Camel Rider move speed +25% (so as fast as Heavy Horse Archer).
+// * Villager gather faster, have 1 armor, but cost +50%.
+// * Free tribute.
+// Build summary:
+// * Bronze Age: 16+16 camel, 6+9 chariot archer, 1+2 catapult, 4+4 tower
+// * Iron Age: 16 horse archer, 11 catapult, priest
 
-C101    Tool_Age               1      109    
-T347      Slinger              2      12     2
-B84       Market1              1      -1     
-B101      Stable1              1      -1     
-T299      Soldier-Scout        1      101    3
-U83       Man                  2      109    
-R16     Watch_Tower            1      68     
-B50       Farm                 2      -1     
-B79       Watch_Tower          2      -1     
-U83       Man                  2      109    
-T347      Slinger              2      12     2
-U83       Man                  2      109    
-R81     Domestication          1      84     
-B50       Farm                 2      -1     
 
-C102    Bronze_Age             1      109 
-R107    Wood_Working           1      84        
-B104      Temple1              1      -1     
-U83       Man                  2      109    
-U125      Priest               1      104    
-U338      Soldier-Camel        2      101
-R46     Tool_Working           1      103    
-R28     Wheel                  1      84     
-B50       Farm                 2      -1     
-R42     Leather_Armor_Mounted  1      103    
-B82       Government_Center    1      -1
-R45     Scale_Armor_-_Cavalry  1      103    
-U338      Soldier-Camel        2      101
-R51     Metal_Working          1      103    
-R12     Sentry_Tower           1      68 
-B87       Range1               1      -1     
-B49       Siege_Workshop       1      -1     
-U35       Soldier-Catapult1    1      49       
-R22     Astrology              1      104    
+B109      Town_Center1         1      -1
+U83       Man                  10      109
+B12       Barracks1            1      -1
+
+
+C101    Tool_Age               1      109
 B101      Stable1              1      -1
-U338      Soldier-Camel        2      101
-R34     Nobility               1      82     
-B50       Farm                 2      -1     
+R16     Watch_Tower            1      68
+R42     Leather_Armor_Mounted  1      103
+B84       Market1              1      -1
+B87       Range1               1      -1
+R46     Toolworking            1      103
+T83       Man                  2      109       0
+T299      Soldier-Scout        1      101       0
+// 12 villager, 1 scout
 
-C103    Iron_Age               1      109    
-R108    Gold_Mining            1      84          
-U46       Soldier-Elephant     2      101    
-R50     Chain_Mail_-_Cavalry   1      103    
-U46       Soldier-Elephant     2      101        
-R106    Ballistics             1      82     
-U35       Soldier-Catapult1    1      49     
-R20     Fanaticism             1      104    
-U125      Priest               1      104    
-B101      Stable1              1      -1     
-U46       Soldier-Elephant     2      101 
-R54     Heavy_Catapult         1      49 
-U46       Soldier-Elephant     2      101    
-R37     Alchemy                1      82     
-U35       Soldier-Catapult1    2      49     
-U125      Priest               1      104    
-R18     Afterlife              1      104    
-U46       Soldier-Elephant     4      101    
-R47     Bronze_Shield          1      103    
-R117    Iron_Shield            1      103    
-R125    Armored-Elephant       1      101
-B109      Town_Center1         1      -1     
 
-B276      Wonder               1      -1     
+C102    Bronze_Age             1      109
+R107    Wood_Working           1      84
+R41     Leather_Armor_-_Archer 1      103
+B101      Stable1              3      -1
+B87       Range1               2      -1
 
-R30	Coinage                1      84          
-U338      Soldier-Camel        4      101
+R28     Wheel                  1      84
+T338      Soldier-Camel        4      101       0
+R51     Metal_Working          1      103
+R12     Sentry_Tower           1      68
+T83       Man                  1      109       0
+B82       Government_Center    1      -1
+T338      Soldier-Camel        4      101       0
+T83       Man                  1      109       0
 B49       Siege_Workshop       1      -1
-U35       Soldier-Catapult1    2      49
-B101      Stable1              1      -1     
-U46       Soldier-Elephant     12     101   
-U125      Priest               1      104    
-U35       Soldier-Catapult1    4      49
-U46       Soldier-Elephant     24     101   
-U35       Soldier-Catapult1    8      49
-B101      Stable1              1      -1     
-U338      Soldier-Camel        8      101
-U46       Soldier-Elephant     175    101   
-B109      Town_Center1         1      -1     
+
+T338      Soldier-Camel        4      101       0
+T41       Soldier-Chariot2     3      87        0
+T83       Man                  1      109       0
+R32     Artisanship            1      84
+R34     Nobility               1      82
+R45     Scale_Armor_-_Cavalry  1      103
+T35       Soldier-Catapult1    1      49        0
+B79       Watch_Tower          2      -1
+
+T338      Soldier-Camel        4      101       0
+T41       Soldier-Chariot2     3      87        0
+T83       Man                  1      109       0
+R44     Scale_Armor_-_Archers  1      103
+B79       Watch_Tower          2      -1
+
+// 16 villager, 16 camel, 6 chariot archer, 1 catapult, 1 scout
+// 4 stable, 3 archery range, 1 siege, 4 tower
+
+
+C103    Iron_Age               1      109
+R112    Architecture           1      82
+T338      Soldier-Camel        4      101       0
+T35       Soldier-Catapult1    1      49        0
+T41       Soldier-Chariot2     3      87        0
+B49       Siege_Workshop       1      -1
+B87       Range1               1      -1
+T338      Soldier-Camel        4      101       0
+R114    Writing                1      82
+B79       Watch_Tower          2      -1
+T338      Soldier-Camel        4      101       0
+T41       Soldier-Chariot2     3      87        0
+T35       Soldier-Catapult1    1      49        0
+B79       Watch_Tower          2      -1
+T338      Soldier-Camel        4      101       0
+T41       Soldier-Chariot2     3      87        0
+
+R50     Chain_Mail_-_Cavalry   1      103
+R37     Alchemy                1      82
+R54     Heavy_Catapult         1      49
+R15     Guard_Tower            1      68
+U35       Soldier-Catapult1    1      49        0
+U39       Soldier-Cavalry3_Arc 4      87
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
+
+U39       Soldier-Cavalry3_Arc 4      87
+U35       Soldier-Catapult1    1      49        0
+T83       Man                  2      109       0
+B104      Temple1              3      -1
+
+R49     Chain_Mail_-_Archers   1      103
+U39       Soldier-Cavalry3_Arc 4      87
+T83       Man                  1      109       0
+
+U39       Soldier-Cavalry3_Arc 4      87
+U35       Soldier-Catapult1    2      49        0
+T83       Man                  1      109       0
+R106    Ballistics             1      82
+R18     Afterlife              1      104
+R20     Fanaticism             1      104
+R22     Astrology              1      104
+B79       Watch_Tower          2      -1
+
+U39       Soldier-Cavalry3_Arc 4      87
+U35       Soldier-Catapult1    2      49        0
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+T125      Priest               3      104       0
+U35       Soldier-Catapult1    2      49        0
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+U125      Priest               3      104
+B109      Town_Center1         1      -1
+B79       Watch_Tower          2      -1
+
+B50       Farm                 2      -1
+U125      Priest               3      104
+B79       Watch_Tower          2      -1
+
+B50       Farm                 2      -1
+U125      Priest               3      104
+B79       Watch_Tower          2      -1
+
+B79       Watch_Tower          4      -1
+
+// 32 camel, 20 horse archer, 11 catapult, 12 priest (pop 113)
+// 24 tower, 22 villager, 10 farm, 4 range, 4 stable, 2 siege, 3 temple
+// spent army: 8495 wood, 11000 food, 7940 gold, 3750 stone
+
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        4      101
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        4      101
+U39       Soldier-Cavalry3_Arc 4      87
+U39       Soldier-Cavalry3_Arc 4      87
+
+R38     Heavy_Horse_Archer     1      87
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        4      101
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        4      101
+U39       Soldier-Cavalry3_Arc 4      87
+
+C2      Catapult_Tower         1      68
+
+U39       Soldier-Cavalry3_Arc 4      87
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        4      101
+U39       Soldier-Cavalry3_Arc 4      87
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        4      101
+
+B276      Wonder               1      -1
+B50       Farm                 24     -1
