@@ -62,6 +62,33 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Carthaginian:
 		c.Name, c.Name2 = "Carthaginian", "Carthage"
+		c.DisabledTechs = map[TechID]bool{
+			Astrology:           true,
+			Monotheism:          true,
+			Fanaticism:          true,
+			ChainMailInfantry:   true,
+			ChainMailArchers:    true,
+			ChainMailCavalry:    true,
+			Metallurgy:          true,
+			CompositeBow:        true,
+			EnableChariotArcher: true,
+			EnableChariot:       true,
+			Catapult:            true,
+			Siegecraft:          true,
+			FortifiedWall:       true,
+			CatapultTrireme:     true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Elephant and Academy units HP +25%.
+			},
+			func(e *EmpireDeveloping) {
+				// * Light Transport move speed +25%, Heavy Transport move speed +43%
+			},
+			func(e *EmpireDeveloping) {
+				// * Fire Galley attack +6 (24+12 instead of 24+6).
+			},
+		}
 
 	case Choson:
 		c.Name, c.Name2 = "Choson", "Choson"
@@ -143,6 +170,27 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Palmyran:
 		c.Name, c.Name2 = "Palmyran", "Palmyra"
+		c.DisabledTechs = map[TechID]bool{
+			Mysticism:  true,
+			Polytheism: true,
+			Medicine:   true,
+			Monotheism: true,
+			Sacrifice:  true,
+
+			Craftsmanship: true,
+			Engineering:   true,
+			Metallurgy:    true,
+			TowerShield:   true,
+
+			Aristocracy:          true,
+			EnableElephantArcher: true,
+			LongSword:            true,
+			Plow:                 true,
+			Coinage:              true,
+			Logistics:            true,
+			HeavyTransport:       true,
+			CatapultTrireme:      true,
+		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
 				// * Forager, Hunter, Gold Miner, Stone Miner work rate +44%; Woodcutter +36%,
@@ -180,6 +228,21 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Roman:
 		c.Name, c.Name2 = "Roman", "Rome"
+		c.DisabledTechs = map[TechID]bool{
+			Astrology:            true,
+			Afterlife:            true,
+			GuardTower:           true,
+			Alchemy:              true,
+			HeavyCalvary:         true,
+			EnableWarElephant:    true,
+			EnableCamel:          true,
+			CompositeBow:         true,
+			EnableChariotArcher:  true,
+			EnableHorseArcher:    true,
+			EnableElephantArcher: true,
+			Irrigation:           true,
+			EnableFireBoat:       true,
+		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
 				// * Buildings cost -15% (except Tower, Wall, Wonder).
