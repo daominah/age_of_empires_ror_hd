@@ -4,7 +4,7 @@
 // * Trireme attack speed +38% (stated 50%).
 // Build summary:
 // * Bronze Age: 2+4 camel rider, 0+3 priest, 3+4 tower
-// * Iron Age: 21 armored elephant, 18 catapult, 16 priest
+// * Iron Age: 21 armored elephant, 16 catapult, 16 priest
 
 
 B109      Town_Center1         1      -1
@@ -90,7 +90,7 @@ B79       Watch_Tower          1      -1
 
 U46       Soldier-Elephant     3      101
 T83       Man                  2      109       0
-B49       Siege_Workshop       2      -1
+B49       Siege_Workshop       1      -1
 B79       Watch_Tower          2      -1
 
 R54     Heavy_Catapult         1      49
@@ -98,7 +98,7 @@ U46       Soldier-Elephant     3      101
 T83       Man                  2      109       0
 R24     Polytheism             1      104
 R22     Astrology              1      104
-U35       Soldier-Catapult1    3      49
+U35       Soldier-Catapult1    2      49
 U125      Priest               2      104
 B79       Watch_Tower          2      -1
 
@@ -107,20 +107,16 @@ T83       Man                  2      109       0
 R119    Medicine               1      104
 R19     Monotheism             1      104
 U125      Priest               2      104
-U35       Soldier-Catapult1    3      49
+U35       Soldier-Catapult1    2      49
 B79       Watch_Tower          2      -1
 
 U46       Soldier-Elephant     3      101
 U125      Priest               2      104
-T35       Soldier-Catapult1    4      49        0
+T35       Soldier-Catapult1    3      49        0
 T125      Priest               2      104       0
 
-// 21 armored elephant, 14 priest, 10 catapult, 24 villager (pop 76)
-// 16 tower, 4 stable, 4 temple, 4 siege workshop
-// spent army: 6100 wood, 11000 food, 8000 gold, 2000 stone
-
 B50       Farm                 2      -1
-T35       Soldier-Catapult1    4      49        0
+T35       Soldier-Catapult1    3      49        0
 T125      Priest               2      104       0
 B79       Watch_Tower          1      -1
 
@@ -128,10 +124,11 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-T35       Soldier-Catapult1    4      49        0
+T35       Soldier-Catapult1    3      49        0
 B79       Watch_Tower          1      -1
 
 B109      Town_Center1         1      -1
+T35       Soldier-Catapult1    3      49        0
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
@@ -146,6 +143,11 @@ B79       Watch_Tower          1      -1
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          1      -1
+
+// 21 armored elephant, 16 priest, 16 catapult, 24 villager (pop 84)
+// 24 tower, 14 farm, 4 stable, 4 temple, 3 siege workshop
+// spent army: 8520 wood, 11030 food, 8720 gold, 3750 stone
+
 
 U46       Soldier-Elephant     4      101
 U46       Soldier-Elephant     4      101

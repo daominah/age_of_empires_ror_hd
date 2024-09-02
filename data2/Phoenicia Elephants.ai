@@ -116,10 +116,6 @@ U125      Priest               3      104
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-// 24 elephant archer, 20 priest, 32 chariot archer (pop 111)
-// 16 tower, 32 villager
-// spent army: 6800 wood, 10600 food, 6300 gold, 2600 stone
-
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
@@ -134,7 +130,12 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
+
+// 24 elephant archer, 20 priest, 32 chariot archer (pop 109)
+// 24 tower, 32 villager, 20 farm, 6 range, 3 temple
+// spent army: 7550 wood, 10535 food, 6190 gold, 3750 stone
+
 
 U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
@@ -142,7 +143,6 @@ U25       Soldier-El_Archer    6      87
 U41       Soldier-Chariot2     6      87
 
 C2      Catapult_Tower         1      68
-B79       Watch_Tower          2      -1
 // 24 tower
 
 U25       Soldier-El_Archer    6      87

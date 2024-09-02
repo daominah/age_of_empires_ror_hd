@@ -323,11 +323,11 @@ func NewUnit(id UnitID) (*Unit, error) {
 		u.Cost = Cost{Wood: 75}
 		u.Time = 30
 	case Tower:
-		u.NameInGame, u.Name = "Watch Tower", "Watch_Tower"
+		u.NameInGame, u.Name = "Tower", "Watch_Tower"
 		u.Cost = Cost{Stone: 150}
 		u.Time = 80
 	case Wall:
-		u.NameInGame, u.Name = "Small Wall", "Wall_Small"
+		u.NameInGame, u.Name = "Wall", "Wall_Small"
 		u.Cost = Cost{Stone: 5}
 		u.Time = 7
 
