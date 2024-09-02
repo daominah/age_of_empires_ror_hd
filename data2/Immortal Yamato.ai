@@ -89,9 +89,7 @@ T125      Priest               3      104       0
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 T125      Priest               3      104       0
-// 60 cataphract, 16 priest, 6 horse archer, 26 villager (pop 109)
-// spent army: 4700 wood, 11000 food, 8900 gold, 0 stone
-
+B50       Farm                 2      -1
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
@@ -102,6 +100,11 @@ B50       Farm                 2      -1
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 B87       Range1               2      -1
+
+// 60 cataphract, 16 priest, 6 horse archer (pop 109)
+// 26 villager, 16 farm, 8 stable, 4 range, 3 temple
+// spent army: 5840 wood, 11000 food, 8730 gold, 0 stone
+
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
@@ -123,9 +126,6 @@ U39       Soldier-Cavalry3_Arc 4      87
 
 R38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 4      87
-// 72 cataphract, 24 heavy horse archer (pop 143)
-// spent extras: 7500 wood, 16400 food, 10500 gold
-
 
 B109      Town_Center1         1      -1
 

@@ -4,7 +4,7 @@
 // * Farm food +250 (starting at 500 instead of 250).
 // Build summary:
 // * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+2 Tower.
-// * Iron Age: 19 Heavy Catapult, 24 Horse Archer.
+// * Iron Age: 20 Heavy Catapult, 24 Horse Archer.
 
 
 B109      Town_Center1         1      -1
@@ -98,8 +98,6 @@ B50       Farm                 2      -1
 U39       Soldier-Cavalry3_Arc 4      87
 T83       Man                  2      109       0
 B50       Farm                 2      -1
-// 19 heavy catapult, 24 horse archer, 16 tower (pop 90)
-// spent army: 9800 wood, 10400 food, 4600 gold, 2700 stone
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
@@ -112,19 +110,18 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-U35       Soldier-Catapult1    5      49
 B79       Watch_Tower          2      -1
 
+B79       Watch_Tower          4      -1
+
+// 19 heavy catapult, 24 horse archer (pop 90)
+// 24 tower, 30 man, 12 farm, 5 siege, 4 range
+// spent army: 10425 wood, 10405 food, 4595 gold, 3900 stone
+
+
+U35       Soldier-Catapult1    5      49
+
 C2      Catapult_Tower         1      68
-B79       Watch_Tower          1      -1
 
 C38     Heavy_Horse_Archer     1      87
 

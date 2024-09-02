@@ -4,7 +4,7 @@
 // * Ships cost -30%.
 // Build summary:
 // * Bronze Age: 14+30 composite bowman, 1+3 catapult
-// * Iron Age: 62 composite bowman, 18 heavy catapult
+// * Iron Age: 60 composite bowman, 21 heavy catapult
 
 
 B109      Town_Center1         1      -1
@@ -92,7 +92,7 @@ U35       Soldier-Catapult1    3      49        0
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
-U5        Soldier-Archer2      6      87
+U5        Soldier-Archer2      3      87
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
@@ -117,11 +117,12 @@ U35       Soldier-Catapult1    3      49
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
+U35       Soldier-Catapult1    3      49
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
-// 62 bowman, 18 catapult, 26 villager (pop 108)
-// spent army: 10300 wood, 11000 food, 4200 gold
+// 60 bowman, 21 catapult, 26 villager (pop 105)
+// spent army: 10445 wood, 10850 food, 4155 gold, 3200 stone
 
 
 B109      Town_Center1         1      -1
