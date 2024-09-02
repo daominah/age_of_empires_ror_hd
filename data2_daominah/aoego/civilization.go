@@ -173,8 +173,8 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		c.DisabledTechs = map[TechID]bool{
 			Mysticism:  true,
 			Polytheism: true,
-			Medicine:   true,
 			Monotheism: true,
+			Medicine:   true,
 			Sacrifice:  true,
 
 			Craftsmanship: true,

@@ -1,10 +1,10 @@
-// Yamato bonus:
-// * Villager move speed +18% (stated +30%).
-// * Mounted units cost -25% (e.g. Cavalry cost reduced to 52 food, 60 gold).
-// * Ships HP +30%.
+// Palmyran bonus:
+// * Camel Rider move speed +25% (so as fast as Heavy Horse Archer).
+// * Villager work faster, have 1 armor, but cost +50%.
+// * Free tribute.
 // Build summary:
-// * Bronze Age: 24 cavalry, 2 priest
-// * Iron Age: 60 cataphract, 6 priest, 3 horse archer
+// * Bronze Age: 16+16 camel
+// * Iron Age: 24 horse archer
 
 
 B109      Town_Center1         1      -1
