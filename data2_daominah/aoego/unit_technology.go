@@ -96,14 +96,14 @@ func (id TechID) GetAge() TechID {
 		Astrology, Mysticism, Polytheism:
 		return BronzeAge
 	case IronAge,
-		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
+		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista, EnableFireBoat,
 		GuardTower, BallistaTower, FortifiedWall,
 		Metallurgy, ChainMailInfantry, ChainMailArchers, ChainMailCavalry, IronShield, TowerShield,
 		LongSword, Legion,
 		HeavyTransport, Trireme, CatapultTrireme, Juggernaught,
 		Craftsmanship, Siegecraft, Coinage, Irrigation,
 		HeavyHorseArcher,
-		HeavyCalvary, Cataphract, ArmoredElephant,
+		ScytheChariot, HeavyCalvary, Cataphract, ArmoredElephant,
 		Aristocracy, Ballistics, Alchemy, Engineering,
 		Medicine, Afterlife, Monotheism, Fanaticism, Zealotry, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
@@ -191,6 +191,9 @@ var (
 	// EnableHorseArcher, EnableBallista, ... automatically researched).
 	// This map is initialized in func init then will be used as a constant.
 	AllAutoTechs = make(map[TechID]Technology)
+
+	// AllNormalTechs are techs shown in the game, cost resources and time to research.
+	AllNormalTechs = make(map[TechID]Technology)
 )
 
 func init() {
@@ -227,14 +230,14 @@ func init() {
 		Nobility, Writing, Architecture, Logistics,
 		Astrology, Mysticism, Polytheism,
 		IronAge,
-		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista,
+		EnableHorseArcher, EnableElephantArcher, EnableWarElephant, EnableBallista, EnableFireBoat,
 		GuardTower, BallistaTower, FortifiedWall,
 		Metallurgy, ChainMailInfantry, ChainMailArchers, ChainMailCavalry, IronShield, TowerShield,
 		LongSword, Legion,
 		HeavyTransport, Trireme, CatapultTrireme, Juggernaught,
 		Craftsmanship, Siegecraft, Coinage, Irrigation,
 		HeavyHorseArcher,
-		HeavyCalvary, Cataphract, ArmoredElephant,
+		ScytheChariot, HeavyCalvary, Cataphract, ArmoredElephant,
 		Aristocracy, Ballistics, Alchemy, Engineering,
 		Medicine, Afterlife, Monotheism, Fanaticism, Zealotry, Sacrifice,
 		Catapult, MassiveCatapult, Helepolis,
@@ -248,7 +251,11 @@ func init() {
 		if CheckIsAutoTech(id) {
 			AllAutoTechs[id] = *t
 		}
+		if !t.Cost.IsZero() {
+			AllNormalTechs[id] = *t
+		}
 	}
-	// println("len(AllTechs):", len(AllTechs))         // Output: len(AllTechs): 105
-	// println("len(AllAutoTechs):", len(AllAutoTechs)) // Output: len(AllAutoTechs): 18
+	// println("len(AllTechs):", len(AllTechs))             // Output: len(AllTechs): 108
+	// println("len(AllAutoTechs):", len(AllAutoTechs))     // Output: len(AllAutoTechs): 19
+	// println("len(AllNormalTechs):", len(AllNormalTechs)) // Output: len(AllNormalTechs): 77
 }

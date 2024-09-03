@@ -298,6 +298,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Wood: 150, Food: 300}
 		t.Time, t.Location = 100, Dock
 		t.RequiredTechs = []TechID{IronAge, Trireme}
+		t.Effects = []EffectFunc{CatapultTriremeEffect9}
 	case Juggernaught:
 		t.NameInGame, t.Name = "Juggernaught", "Juggernaught"
 		t.Cost = Cost{Wood: 900, Food: 2000}
@@ -840,6 +841,10 @@ func EnableWarBoatEffect3(e *EmpireDeveloping) {
 
 func EnableFireBoatEffect202(e *EmpireDeveloping) {
 	e.EnabledUnits[FireBoat] = true
+}
+
+func CatapultTriremeEffect9(e *EmpireDeveloping) {
+	e.EnabledUnits[CatapultBoat] = true
 }
 
 func EnableChariotArcherEffect59(e *EmpireDeveloping) {

@@ -13,6 +13,9 @@ def main():
     # mapBuilds maps strategy source file to targets it will be copied to,
     # for Assyria, Egypt, Greek, Minoa, Sumeria, Yamato only Immortal file is
     # meaningful, other strategies are not selected randomly.
+    # remaining civilizations randomly select one of their strategies:
+    # Babylon:2, Carthage:2, Choson:3, Hittite:3, Macedon:3,
+    # Palmyra:3, Persia:3, Phoenicia:1, Rome:3, Shang:3
     mapBuilds = {
         "Assyria_Archer.ai": {
             "Assyria Archer Bronze.ai",
@@ -80,10 +83,16 @@ def main():
         "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",
         },
-        # "Rome_.ai": {
-        # },
-        # "Shang_.ai": {
-        # },
+        "Rome_.ai": {
+            "Rome Axemen.ai",
+            "Rome Legion.ai",
+            "Rome Siege.ai",
+        },
+        "Shang_.ai": {
+            "Shang Cavalry.ai",
+            "Shang Clubmen.ai",
+            "Shang Heavy Cavalry.ai",
+        },
         "Sumeria_Catapult.ai": {
             "Immortal Sumeria.ai",
             "Sumeria Catapults.ai",
@@ -101,7 +110,7 @@ def main():
         if not Path(srcPath).exists():
             print(f"file {srcPath} does not exist")
             continue
-        print(f"copying '{src}'")
+        print(f"copying '{src}' to {len(targets)} targets:")
         for target in targets:
             targetPath = os.path.join(targetDir, target)
             try:

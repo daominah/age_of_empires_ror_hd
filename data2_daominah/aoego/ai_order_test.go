@@ -323,7 +323,7 @@ func TestAutoBuildHouse(t *testing.T) {
 //go:embed Default.ai
 var testDefaultAI string
 
-func _TestStrategy_DefaultAI(t *testing.T) {
+func TestStrategy_DefaultAI(t *testing.T) {
 	if len(testDefaultAI) == 0 {
 		t.Fatalf("error testDefaultAI: empty")
 	}
@@ -341,11 +341,21 @@ func _TestStrategy_DefaultAI(t *testing.T) {
 	for i, step := range steps {
 		err := empire.Do(step)
 		if err != nil {
+			if errors.Is(err, ErrMissingRequireTechs) && step.UnitOrTechID == Medicine {
+				continue // maybe Microsoft wants Medicine is a Bronze tech, but it is Iron tech
+			}
 			t.Errorf("error i %v DoStep(%v): %v", i, step, err)
 		}
 	}
 
-	t.Logf("summary: %v", empire.Summary())
+	// t.Logf("summary: %v", empire.Summary())
+
+	//for _, tech := range AllNormalTechs {
+	//	if !empire.Techs[tech.ID] {
+	//		t.Logf("tech not in the file: %v", tech.NameInGame)
+	//		// Medicine, Sacrifice, Writing, SmallWall, MediumWall, FortifiedWall
+	//	}
+	//}
 }
 
 func TestNewStrategy_Macedonian(t *testing.T) {
@@ -523,6 +533,42 @@ B79       Watch_Tower          2      -1
 	wantSpent := Cost{Wood: 9190, Food: 10835, Gold: 7430, Stone: 3750}
 	if !empire.Spent.CheckEqual(wantSpent) {
 		t.Errorf("error spent: got: %+v, but want %+v", empire.Spent, wantSpent)
+	}
+}
+
+func TestUnitOrTechID_GetAge(t *testing.T) {
+	for _, c := range []struct {
+		id  UnitOrTechID
+		age TechID
+	}{
+		{id: TownCenter, age: StoneAge},
+		{id: House, age: StoneAge},
+		{id: Villager, age: StoneAge},
+		{id: Clubman, age: StoneAge},
+		{id: GranaryBuilt, age: StoneAge},
+		{id: StoneAge, age: StoneAge},
+		{id: Market, age: ToolAge},
+		{id: Scout, age: ToolAge},
+		{id: Bowman, age: ToolAge},
+		{id: ArcheryRange, age: ToolAge},
+		{id: EnableSlinger, age: ToolAge},
+		{id: Woodworking, age: ToolAge},
+		{id: Camel, age: BronzeAge},
+		{id: Temple, age: BronzeAge},
+		{id: GovernmentCenter, age: BronzeAge},
+		{id: Hoplite, age: BronzeAge},
+		{id: Wheel, age: BronzeAge},
+		{id: EnableCavalry, age: BronzeAge},
+		{id: HorseArcher, age: IronAge},
+		{id: Elephant, age: IronAge},
+		{id: Ballista, age: IronAge},
+		{id: Wonder, age: IronAge},
+		{id: Centurion, age: IronAge},
+		{id: Alchemy, age: IronAge},
+	} {
+		if age := c.id.GetAge(); age != c.age {
+			t.Errorf("error %v.GetAge(): got: %v, but want: %v", c.id, age, c.age)
+		}
 	}
 }
 
