@@ -264,6 +264,21 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Shang:
 		c.Name, c.Name2 = "Shang", "Shang"
+		c.DisabledTechs = map[TechID]bool{
+			Coinage:              true,
+			EnableWarElephant:    true,
+			EnableElephantArcher: true,
+			Aristocracy:          true,
+			Ballistics:           true,
+			Alchemy:              true,
+			Engineering:          true,
+			Siegecraft:           true,
+			Trireme:              true,
+			CatapultTrireme:      true,
+			HeavyTransport:       true,
+			Phalanx:              true,
+			LongSword:            true,
+		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
 				// * Villager cost 35 food instead of 50 (so Villager cost -30%).

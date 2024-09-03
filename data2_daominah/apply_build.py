@@ -26,8 +26,10 @@ def main():
             "Babylon Scouts.ai",
             "Babylon Swordsmen.ai",
         },
-        # "Carthage_.ai": {
-        # },
+        "Carthage_Helepolis.ai": {
+            "Carthage Phalanx.ai",
+            "Carthage War Elephant.ai",
+        },
         "Choson_Swordsmen.ai": {
             "Choson Axemen.ai",
             "Choson Priests.ai",
