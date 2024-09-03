@@ -55,6 +55,7 @@ func NewStrategy(aiFileData string) ([]Step, []error) {
 			}
 			continue
 		}
+		step.OriginLineNo = i + 1
 		strategy = append(strategy, *step)
 	}
 	return strategy, errs
@@ -78,6 +79,7 @@ type Step struct {
 	Quantity     int
 	LimitRebuild int // number times retrain if unit is destroyed, only meaningful if Action is BuildLimit or TrainLimit
 	OriginStr    string
+	OriginLineNo int // line number in the original file, not handled in func NewStep
 }
 
 // NewStep parses a line in ".ai" file format to a Step object.
