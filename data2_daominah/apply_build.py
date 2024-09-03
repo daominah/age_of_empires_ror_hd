@@ -10,7 +10,9 @@ def main():
     print(f"targetDir: {targetDir}")
     # return 0
 
-    # mapBuilds maps source file to targets it will be copied to
+    # mapBuilds maps strategy source file to targets it will be copied to,
+    # for Assyria, Egypt, Greek, Minoa, Sumeria, Yamato only Immortal file is
+    # meaningful, other strategies are not selected randomly.
     mapBuilds = {
         "Assyria_Archer.ai": {
             "Assyria Archer Bronze.ai",
@@ -46,9 +48,13 @@ def main():
             "Immortal Greek.ai",
         },
         "Hittite_Horse_Archer.ai": {
-            "Hittite Bowmen.ai",
+            # "Hittite Bowmen.ai",
             "Hittite Elephant.ai",
             "Hittite Horse Archers.ai",
+        },
+        # very similar to Sumeria_Catapult.ai, focus on Massive Catapult
+        "Hittite_Catapult.ai": {
+            "Hittite Bowmen.ai",
         },
         "Macedon_Centurion.ai": {
             "Macedon Cavalry.ai",
@@ -57,7 +63,7 @@ def main():
         },
         "Minoa_Composite_Bowmen.ai": {
             "Immortal Minoa.ai",
-            # "Minoa Composite Bowmen.ai",
+            "Minoa Composite Bowmen.ai",
         },
         "Palmyra_Camel.ai": {
             "Palmyra Composite Bow.ai",
