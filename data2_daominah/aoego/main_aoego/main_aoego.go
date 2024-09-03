@@ -25,6 +25,8 @@ func main() {
 		return
 	}
 
+	// daominah optimized strategies:
+
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Assyria_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Tower_Priest.ai`
 	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Helepolis.ai`
@@ -43,6 +45,41 @@ func main() {
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Sumeria_Catapult.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
 
+	// bull shit original strategies, e.g. Rome Legion without researching ShortSword
+
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Immortal Assyria.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Babylon Scouts.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Babylon Swordsmen.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Carthage Phalanx.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Carthage War Elephant.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Choson Axemen.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Choson Priests.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Choson Swordsmen.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Immortal Egypt.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Immortal Greek.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Hittite Bowmen.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Hittite Elephant.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Hittite Horse Archers.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Macedon Cavalry.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Macedon Elephant.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Macedon Phalanx.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Immortal Minoa.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Palmyra Composite Bow.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Palmyra Elephant.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Palmyra Horse Archer.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Persia Elephant Archers.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Persia Priests.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Persia War Elephant.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Phoenicia Elephants.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Rome Axemen.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Rome Legion.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Rome Siege.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Shang Cavalry.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Shang Clubmen.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Shang Heavy Cavalry.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Immortal Sumeria.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_no_edit_20240801\Immortal Yamato.ai`
+
 	log.Printf("input file path: %v", inputFilePath)
 	strategyBytes, err := os.ReadFile(inputFilePath)
 	if err != nil {
@@ -53,7 +90,9 @@ func main() {
 		for _, err := range errs {
 			log.Printf("error parsing strategy: %v", err)
 		}
-		log.Fatalf("error parsing strategy len(errs): %v", len(errs))
+		log.Printf("____________________________________________________")
+		log.Printf("ERROR PARSING STRATEGY len(errs): %v", len(errs))
+		log.Printf("____________________________________________________")
 	}
 	civilizationID := aoego.GuessCivilization(inputFilePath)
 	empire, err := aoego.NewEmpireDeveloping(aoego.WithCivilization(civilizationID))
@@ -70,6 +109,13 @@ func main() {
 			log.Printf("empire: %v", empire.Summary())
 			continue
 		}
+
+		//if step.UnitOrTechID == aoego.Wonder {
+		//	log.Printf("----------------")
+		//	log.Printf("empire: %v", empire.Summary())
+		//	break // origin AI files add nonsense number of units after Wonder
+		//}
+
 		err := empire.Do(step)
 		if err != nil {
 			log.Printf("error line %v empire.Do(%v): %v", step.OriginLineNo, step, err)

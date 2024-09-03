@@ -13,7 +13,6 @@ type Civilization struct {
 	ID            CivilizationID
 	Name          string
 	Name2         string
-	DisabledUnits map[UnitID]bool
 	DisabledTechs map[TechID]bool
 	Bonuses       []EffectFunc
 }
@@ -46,7 +45,6 @@ const (
 func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	c := &Civilization{
 		ID:            civID,
-		DisabledUnits: make(map[UnitID]bool),
 		DisabledTechs: make(map[TechID]bool),
 	}
 	switch civID {
@@ -55,26 +53,78 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 		return c, nil
 
 	case Assyrian:
+		c.DisabledTechs = map[TechID]bool{
+			EnableSlinger:        true,
+			ImprovedBow:          true,
+			EnableElephantArcher: true,
+			EnableWarElephant:    true,
+			Nobility:             true,
+			Architecture:         true,
+			Aristocracy:          true,
+			Alchemy:              true,
+			Engineering:          true,
+			ChainMailInfantry:    true,
+			ChainMailArchers:     true,
+			ChainMailCavalry:     true,
+			BronzeShield:         true,
+			Phalanx:              true,
+			CatapultTrireme:      true,
+			HeavyTransport:       true,
+		}
 		c.Name, c.Name2 = "Assyrian", "Assyria"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Archers attack reload to 1.1
+			},
+			func(e *EmpireDeveloping) {
+				// * Villager move speed +0.2
+			},
+		}
 
 	case Babylonian:
 		c.Name, c.Name2 = "Babylonian", "Babylon"
+		c.DisabledTechs = map[TechID]bool{
+			EnableElephantArcher: true,
+			HeavyCalvary:         true,
+			EnableWarElephant:    true,
+			Metallurgy:           true,
+			ChainMailInfantry:    true,
+			ChainMailArchers:     true,
+			ChainMailCavalry:     true,
+			IronShield:           true,
+			EnableBallista:       true,
+			Phalanx:              true,
+			Trireme:              true,
+			CatapultTrireme:      true,
+			HeavyTransport:       true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Priest's rejuvenation +0.75
+			},
+			func(e *EmpireDeveloping) {
+				// * Stone Miner work rate +0.2 and capacity +3 (stated 30%).
+			},
+			func(e *EmpireDeveloping) {
+				// * Tower and Wall HP x2.
+			},
+		}
 
 	case Carthaginian:
 		c.Name, c.Name2 = "Carthaginian", "Carthage"
 		c.DisabledTechs = map[TechID]bool{
-			Astrology:           true,
-			Monotheism:          true,
-			Fanaticism:          true,
-			ChainMailInfantry:   true,
-			ChainMailArchers:    true,
-			ChainMailCavalry:    true,
-			Metallurgy:          true,
 			CompositeBow:        true,
 			EnableChariotArcher: true,
 			EnableChariot:       true,
-			Catapult:            true,
+			Metallurgy:          true,
+			ChainMailInfantry:   true,
+			ChainMailArchers:    true,
+			ChainMailCavalry:    true,
 			Siegecraft:          true,
+			Astrology:           true,
+			Monotheism:          true,
+			Fanaticism:          true,
+			Catapult:            true,
 			FortifiedWall:       true,
 			CatapultTrireme:     true,
 		}
@@ -92,6 +142,27 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Choson:
 		c.Name, c.Name2 = "Choson", "Choson"
+		c.DisabledTechs = map[TechID]bool{
+			CompositeBow:         true,
+			EnableChariotArcher:  true,
+			EnableElephantArcher: true,
+			EnableCamel:          true,
+			EnableChariot:        true,
+			EnableWarElephant:    true,
+			Nobility:             true,
+			Aristocracy:          true,
+			Alchemy:              true,
+			Engineering:          true,
+			ChainMailInfantry:    true,
+			ChainMailArchers:     true,
+			ChainMailCavalry:     true,
+			IronShield:           true,
+			Phalanx:              true,
+			Catapult:             true,
+			CatapultTrireme:      true,
+			EnableFireBoat:       true,
+			HeavyTransport:       true,
+		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
 				// * Priest cost -32% (stated -30%): 85 gold instead of 125.
@@ -107,12 +178,88 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Egyptian:
 		c.Name, c.Name2 = "Egyptian", "Egypt"
+		c.DisabledTechs = map[TechID]bool{
+			EnableHorseArcher: true,
+			EnableCavalry:     true,
+			BronzeShield:      true,
+			Coinage:           true,
+			Siegecraft:        true,
+			Catapult:          true,
+			EnableBallista:    true,
+			Phalanx:           true,
+			LongSword:         true,
+			EnableFireBoat:    true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Chariots HP +33%
+			},
+			func(e *EmpireDeveloping) {
+				// * Priest range +3 (10+6 instead of 10+3).
+			},
+			func(e *EmpireDeveloping) {
+				// * Gold Miner work rate +44% and capacity +2 (stated +20%).
+			},
+		}
 
 	case Greek:
+		c.DisabledTechs = map[TechID]bool{
+			ImprovedBow:          true,
+			EnableChariotArcher:  true,
+			EnableHorseArcher:    true,
+			EnableElephantArcher: true,
+			EnableChariot:        true,
+			EnableCamel:          true,
+			EnableWarElephant:    true,
+			Metallurgy:           true,
+			Monotheism:           true,
+			Zealotry:             true,
+			Sacrifice:            true,
+			Broadsword:           true,
+			EnableFireBoat:       true,
+		}
 		c.Name, c.Name2 = "Greek", "Greek"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Academy  +0.3 tiles/s
+			},
+			func(e *EmpireDeveloping) {
+				// * Warships move speed +17% (stated +30%).
+			},
+		}
 
 	case Hittite:
+		c.DisabledTechs = map[TechID]bool{
+			EnableSlinger:   true,
+			ImprovedBow:     true,
+			HeavyCalvary:    true,
+			Mysticism:       true,
+			Polytheism:      true,
+			Medicine:        true,
+			Afterlife:       true,
+			Monotheism:      true,
+			Fanaticism:      true,
+			Zealotry:        true,
+			Sacrifice:       true,
+			EnableBallista:  true,
+			LongSword:       true,
+			Trireme:         true,
+			CatapultTrireme: true,
+			FishingShip:     true,
+			HeavyTransport:  true,
+		}
 		c.Name, c.Name2 = "Hittite", "Hittite"
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Archers attack +1.
+			},
+			func(e *EmpireDeveloping) {
+				// * Siege units HP x2.
+			},
+			func(e *EmpireDeveloping) {
+				// * Warships range +4.
+			},
+		}
 
 	case Macedonian:
 		c.Name, c.Name2 = "Macedonian", "Macedon"
@@ -121,32 +268,26 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 			EnableChariotArcher:  true,
 			EnableElephantArcher: true,
 			EnableChariot:        true,
-			ScytheChariot:        true,
 			EnableCamel:          true,
 			Nobility:             true,
+			Engineering:          true,
+			Craftsmanship:        true,
+			Siegecraft:           true,
+			EnableTemple:         true,
+			TempleBuilt:          true,
+			Astrology:            true,
+			Mysticism:            true,
+			Polytheism:           true,
+			Medicine:             true,
+			Afterlife:            true,
+			Monotheism:           true,
+			Fanaticism:           true,
+			Zealotry:             true,
+			Sacrifice:            true,
+			Catapult:             true,
 			LongSword:            true,
-			Legion:               true,
-
-			Engineering:     true,
-			Siegecraft:      true,
-			Craftsmanship:   true,
-			Helepolis:       true,
-			Catapult:        true,
-			MassiveCatapult: true,
-			EnableFireBoat:  true,
-
-			EnableTemple: true,
-			TempleBuilt:  true,
-			Astrology:    true,
-			Mysticism:    true,
-			Polytheism:   true,
-			Afterlife:    true,
-			Monotheism:   true,
-			Fanaticism:   true,
-			Zealotry:     true,
-			Sacrifice:    true,
-
-			FortifiedWall: true,
+			FortifiedWall:        true,
+			EnableFireBoat:       true,
 		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
@@ -167,29 +308,56 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Minoan:
 		c.Name, c.Name2 = "Minoan", "Minoa"
+		c.DisabledTechs = map[TechID]bool{
+			EnableChariotArcher:  true,
+			EnableHorseArcher:    true,
+			EnableElephantArcher: true,
+			EnableChariot:        true,
+			HeavyCalvary:         true,
+			EnableWarElephant:    true,
+			Astrology:            true,
+			Mysticism:            true,
+			Afterlife:            true,
+			Monotheism:           true,
+			Fanaticism:           true,
+			Zealotry:             true,
+			Sacrifice:            true,
+			GuardTower:           true,
+			FortifiedWall:        true,
+			EnableFireBoat:       true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Composite Bowman range +2.
+			},
+			func(e *EmpireDeveloping) {
+				// * Farm food +60 (starting at 310 instead of 250).
+			},
+			func(e *EmpireDeveloping) {
+				// * Ships cost -30%.
+			},
+		}
 
 	case Palmyran:
 		c.Name, c.Name2 = "Palmyran", "Palmyra"
 		c.DisabledTechs = map[TechID]bool{
-			Mysticism:  true,
-			Polytheism: true,
-			Monotheism: true,
-			Medicine:   true,
-			Sacrifice:  true,
-
-			Craftsmanship: true,
-			Engineering:   true,
-			Metallurgy:    true,
-			TowerShield:   true,
-
-			Aristocracy:          true,
 			EnableElephantArcher: true,
+			Metallurgy:           true,
+			Logistics:            true,
+			Aristocracy:          true,
+			Engineering:          true,
+			Craftsmanship:        true,
+			Coinage:              true,
+			TowerShield:          true,
+			Mysticism:            true,
+			Polytheism:           true,
+			Monotheism:           true,
+			Medicine:             true,
+			Sacrifice:            true,
 			LongSword:            true,
 			Plow:                 true,
-			Coinage:              true,
-			Logistics:            true,
-			HeavyTransport:       true,
 			CatapultTrireme:      true,
+			HeavyTransport:       true,
 		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
@@ -209,9 +377,47 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 
 	case Persian:
 		c.Name, c.Name2 = "Persian", "Persia"
+		c.DisabledTechs = map[TechID]bool{
+			EnableChariotArcher: true,
+			EnableChariot:       true,
+			Aristocracy:         true,
+			Ballistics:          true,
+			Wheel:               true,
+			Plow:                true,
+			Artisanship:         true,
+			Coinage:             true,
+			Siegecraft:          true,
+			EnableAcademy:       true,
+			EnableBallista:      true,
+			EnableFireBoat:      true,
+		}
+		c.Bonuses = []EffectFunc{
+			func(e *EmpireDeveloping) {
+				// * Hunter work rate +66% and capacity +3 (stated +30%).
+			},
+			func(e *EmpireDeveloping) {
+				// * Elephants move speed +56% (stated +50%).
+			},
+			func(e *EmpireDeveloping) {
+				// * Trireme attack speed +38% (stated 50%).
+			},
+		}
 
 	case Phoenician:
 		c.Name, c.Name2 = "Phoenician", "Phoenicia"
+		c.DisabledTechs = map[TechID]bool{
+			EnableHorseArcher: true,
+			HeavyCalvary:      true,
+			Architecture:      true,
+			Siegecraft:        true,
+			Catapult:          true,
+			EnableBallista:    true,
+			Metallurgy:        true,
+			ChainMailInfantry: true,
+			ChainMailArchers:  true,
+			ChainMailCavalry:  true,
+			EnableFireBoat:    true,
+		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
 				// * Woodcutter work rate +36% and capacity +3 (stated +30%).
@@ -229,17 +435,17 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	case Roman:
 		c.Name, c.Name2 = "Roman", "Rome"
 		c.DisabledTechs = map[TechID]bool{
-			Astrology:            true,
-			Afterlife:            true,
-			GuardTower:           true,
-			Alchemy:              true,
-			HeavyCalvary:         true,
-			EnableWarElephant:    true,
-			EnableCamel:          true,
 			CompositeBow:         true,
 			EnableChariotArcher:  true,
 			EnableHorseArcher:    true,
 			EnableElephantArcher: true,
+			HeavyCalvary:         true,
+			EnableWarElephant:    true,
+			EnableCamel:          true,
+			Alchemy:              true,
+			Astrology:            true,
+			Afterlife:            true,
+			GuardTower:           true,
 			Irrigation:           true,
 			EnableFireBoat:       true,
 		}
@@ -254,30 +460,30 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 				}
 			},
 			func(e *EmpireDeveloping) {
-				//   Tower cost -50%.
+				// * Tower cost -50%.
 				e.UnitStats[Tower].Cost.Multiply(0.5)
 			},
 			func(e *EmpireDeveloping) {
-				//* Swordsmen attack speed +50% (stated 33%, they mean attack reload time).
+				// * Swordsmen attack speed +50% (stated 33%, they mean attack reload time).
 			},
 		}
 
 	case Shang:
 		c.Name, c.Name2 = "Shang", "Shang"
 		c.DisabledTechs = map[TechID]bool{
-			Coinage:              true,
-			EnableWarElephant:    true,
 			EnableElephantArcher: true,
+			EnableWarElephant:    true,
 			Aristocracy:          true,
 			Ballistics:           true,
 			Alchemy:              true,
 			Engineering:          true,
+			Coinage:              true,
 			Siegecraft:           true,
+			Phalanx:              true,
+			LongSword:            true,
 			Trireme:              true,
 			CatapultTrireme:      true,
 			HeavyTransport:       true,
-			Phalanx:              true,
-			LongSword:            true,
 		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
@@ -292,27 +498,20 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	case Sumerian:
 		c.Name, c.Name2 = "Sumerian", "Sumeria"
 		c.DisabledTechs = map[TechID]bool{
-			EnableCavalry: true,
-			ImprovedBow:   true,
-			Astrology:     true,
-
-			Metallurgy:     true,
-			IronShield:     true,
-			Craftsmanship:  true,
-			Coinage:        true,
-			EnableBallista: true,
-
-			Afterlife:  true,
-			Monotheism: true,
-			Fanaticism: true,
-			Zealotry:   true,
-
-			HeavyTransport:  true,
+			ImprovedBow:     true,
+			EnableCavalry:   true,
+			Craftsmanship:   true,
+			Metallurgy:      true,
+			IronShield:      true,
+			Coinage:         true,
+			Astrology:       true,
+			Afterlife:       true,
+			Monotheism:      true,
+			Fanaticism:      true,
+			Zealotry:        true,
+			EnableBallista:  true,
 			CatapultTrireme: true,
-		}
-		c.DisabledUnits = map[UnitID]bool{
-			Cavalry:  true,
-			Ballista: true,
+			HeavyTransport:  true,
 		}
 		c.Bonuses = []EffectFunc{
 			func(e *EmpireDeveloping) {
@@ -329,25 +528,22 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 	case Yamato:
 		c.Name, c.Name2 = "Yamato", "Yamato"
 		c.DisabledTechs = map[TechID]bool{
-			EnableChariotArcher: true,
-			EnableChariot:       true,
-			EnableCamel:         true,
-			Broadsword:          true,
-			Astrology:           true,
-			Mysticism:           true,
-
-			Catapult:       true,
-			EnableBallista: true,
-
-			Medicine:   true,
-			Monotheism: true,
-			Fanaticism: true,
-			Zealotry:   true,
-			Sacrifice:  true,
-
-			GuardTower:           true,
+			EnableChariotArcher:  true,
 			EnableElephantArcher: true,
+			EnableChariot:        true,
 			EnableWarElephant:    true,
+			EnableCamel:          true,
+			Astrology:            true,
+			Mysticism:            true,
+			Medicine:             true,
+			Monotheism:           true,
+			Fanaticism:           true,
+			Zealotry:             true,
+			Sacrifice:            true,
+			Catapult:             true,
+			EnableBallista:       true,
+			Broadsword:           true,
+			GuardTower:           true,
 			FortifiedWall:        true,
 			EnableFireBoat:       true,
 		}

@@ -307,8 +307,14 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 		option(e)
 	}
 
+	disabledUnits := make(map[UnitID]bool)
+	for unitID, techID := range UnitEnabledByTechs {
+		if e.Civilization.DisabledTechs[techID] {
+			disabledUnits[unitID] = true
+		}
+	}
 	for unitID := range AllUnits {
-		if e.Civilization.DisabledUnits[unitID] {
+		if disabledUnits[unitID] {
 			continue
 		}
 		u, err := NewUnit(unitID)
@@ -586,10 +592,15 @@ func (a SortByAgeLocationName) Less(i, j int) bool {
 	if age1 != age2 {
 		return age1 < age2
 	}
-	if a[i].GetLocation() != a[j].GetLocation() {
-		return a[i].GetLocation() < a[j].GetLocation()
+	location1, location2 := a[i].GetLocation(), a[j].GetLocation()
+	if location1 != location2 {
+		locationAge1, locationAge2 := location1.GetAge(), location2.GetAge()
+		if locationAge1 != locationAge2 {
+			return locationAge1 < locationAge2
+		}
+		return location1 > location2
 	}
-	return a[i].GetName() < a[j].GetName()
+	return a[i].GetFullName() < a[j].GetFullName()
 }
 
 // EmpireOption can set civilization and choose to
