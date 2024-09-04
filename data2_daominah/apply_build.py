@@ -83,7 +83,7 @@ def main():
         "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",
         },
-        "Rome_Swordsmen.ai": {
+        "Rome_Siege.ai": {
             "Rome Axemen.ai",
             "Rome Legion.ai",
             "Rome Siege.ai",
