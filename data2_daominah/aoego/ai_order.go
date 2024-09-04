@@ -13,10 +13,9 @@ import (
 )
 
 var (
-	ErrNotImplemented = errors.New("not implemented")
-
 	ErrEmptyLine               = errors.New("line is empty or a comment")
 	ErrMissingStepFields       = errors.New("not enough fields in a step")
+	ErrRedundantFields         = errors.New("too many fields in a step")
 	ErrInvalidAction           = errors.New("invalid action, check action enum list")
 	ErrInvalidActionOrTargetID = errors.New("invalid action and targetID")
 	ErrTargetIDNotInt          = errors.New("invalid unitID or techID, must be an integer")
@@ -51,7 +50,7 @@ func NewStrategy(aiFileData string) ([]Step, []error) {
 		step, err := NewStep(line)
 		if err != nil {
 			if !errors.Is(err, ErrEmptyLine) {
-				errs = append(errs, fmt.Errorf("line %v: err: %w, line: %v", i+1, err, line))
+				errs = append(errs, fmt.Errorf("line %v: %w: %v", i+1, err, line))
 			}
 			continue
 		}
@@ -133,11 +132,15 @@ func NewStep(line string) (*Step, error) {
 	}
 	if s.Action == BuildLimit || s.Action == TrainLimit {
 		if len(words) < 5 {
-			return nil, fmt.Errorf("missing limit times: %w", ErrMissingStepFields)
+			return nil, fmt.Errorf("missing limit times for action %v: %w", s.Action, ErrMissingStepFields)
 		}
 		s.LimitRebuild, err = strconv.Atoi(words[4])
 		if err != nil {
 			return nil, fmt.Errorf("%v: %w", words[4], ErrLimitRebuildNotInt)
+		}
+	} else {
+		if len(words) > 4 {
+			return nil, fmt.Errorf("too many fields for action %v: %w", s.Action, ErrRedundantFields)
 		}
 	}
 	return s, nil

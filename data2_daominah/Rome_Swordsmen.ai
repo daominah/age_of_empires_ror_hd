@@ -1,7 +1,7 @@
 // Roman bonus:
-// * Swordsmen attack speed +50% (stated 33%, they mean attack reload time).
-// * Buildings cost -15% (except Tower, Wall, Wonder). Tower cost -50%.
-//
+// * Swordsmen attack speed +50% (attack reload time -33%).
+// * Buildings cost -15% (except Tower, Wall, Wonder).
+// * Tower cost -50% (but disabled tech GuardTower).
 // Build summary:
 // * Bronze Age: 2 cavalry, 5+27 swordsman
 // * Iron Age: 74 legion, 36 priest, 20 ballista, 40 tower
@@ -57,17 +57,15 @@ T125      Priest               1      104       0
 B79       Watch_Tower          2      -1
 T75       Soldier-Inf3         5      12        0
 T75       Soldier-Inf3         5      12        0
-T75       Soldier-Inf3         6      12        0
+T75       Soldier-Inf3         5      12        0
 B79       Watch_Tower          2      -1
-T75       Soldier-Inf3         6      12        0
 B12       Barracks1            2      -1
 // 32 swordsman
 
 R66     Long_Sword             1      12
-R15     Guard_Tower            1      68
 R20     Fanaticism             1      104
 R110    Craftmanship           1      84
-R106    Ballistics             1      82
+R35     Engineering            1      82
 R52     Metallurgy             1      103
 T75       Soldier-Inf3         7      12        0
 T83       Man                  2      109       0
@@ -76,85 +74,84 @@ B79       Watch_Tower          2      -1
 T75       Soldier-Inf3         7      12        0
 T83       Man                  2      109       0
 T125      Priest               1      104       0
-B79       Watch_Tower          2      -1
+B50       Farm                 2      -1
 
 R77     Legion                 1      12
 R121    Logistics              1      82
 R47     Bronze_Shield          1      103
+R106    Ballistics             1      82
 U75       Soldier-Inf3         7      12
 T83       Man                  2      109       0
 U125      Priest               1      104
-B79       Watch_Tower          2      -1
+B50       Farm                 2      -1
 
 U75       Soldier-Inf3         7      12
 T83       Man                  2      109       0
-B79       Watch_Tower          2      -1
+B50       Farm                 2      -1
 
+R48     Chain_Mail_-_Soldiers  1      103
 R114    Writing                1      82
 U75       Soldier-Inf3         7      12
 T83       Man                  2      109       0
 U125      Priest               1      104
 B87       Range1               1      -1
 B104      Temple1              3      -1
-U75       Soldier-Inf3         7      12
-B49       Siege_Workshop       4      -1
-// 26 village, 74 legion, 4 priest (pop 35+74/2)
-// 8 barracks, 4 temple, 15 tower
-
-// R108    Gold_Mining            1      84
-// R30     Coinage                1      84
-
+B49       Siege_Workshop       6      -1
 
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
 
-R18     Afterlife              1      104
 R21     Mysticism              1      104
-T11       Soldier-Ballista     4      49        0
-U125      Priest               2      104
-B79       Watch_Tower          3      -1
-
-R24     Polytheism             1      104
-R22     Astrology              1      104
-T11       Soldier-Ballista     4      49        0
+R117    Iron_Shield            1      103
+U11       Soldier-Ballista     6      49
 U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
+
+R24     Polytheism             1      104
+R122    Tower_Shield           1      103
+T11       Soldier-Ballista     6      49        0
+U125      Priest               2      104
+B50       Farm                 2      -1
+B109      Town_Center1         1      -1
+B79       Watch_Tower          1      -1
 
 R19     Monotheism             1      104
 R119    Medicine               1      104
-T11       Soldier-Ballista     4      49        0
+T11       Soldier-Ballista     6      49        0
 U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
+B79       Watch_Tower          1      -1
 
-T11       Soldier-Ballista     4      49        0
+T11       Soldier-Ballista     6      49        0
 T125      Priest               2      104       0
 B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
+B79       Watch_Tower          1      -1
 
 T11       Soldier-Ballista     4      49        0
-U125      Priest               4      104
-B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
-// T11       Soldier-Ballista     4      49        0
-U125      Priest               4      104
-B50       Farm                 2      -1
+T11       Soldier-Ballista     4      49        0
 B79       Watch_Tower          2      -1
-
-U125      Priest               4      104
-B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
-
-T125      Priest               4      104       0
 B109      Town_Center1         1      -1
 
-T125      Priest               4      104       0
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
 
-T125      Priest               4      104       0
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
 
 // 26 man, 74 legion, 36 priest, 20 ballista (pop 122+37)
 // 40 tower, 14 farm
@@ -164,9 +161,6 @@ B79       Watch_Tower          2      -1
 U75       Soldier-Inf3         8      12
 U75       Soldier-Inf3         8      12
 U75       Soldier-Inf3         8      12
-
-
-C2      Catapult_Tower         1      68
 
 B276      Wonder               1      -1
 
