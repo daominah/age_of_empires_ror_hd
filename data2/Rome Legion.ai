@@ -1,10 +1,10 @@
 // Roman bonus:
 // * Swordsmen attack speed +50% (attack reload time -33%).
 // * Buildings cost -15% (except Tower, Wall, Wonder).
-// * Tower cost -50% (but disabled tech GuardTower).
+// * Tower cost -50% (but Guard Tower disabled).
 // Build summary:
-// * Bronze Age: 2 cavalry, 5+27 swordsman
-// * Iron Age: 74 legion, 36 priest, 20 ballista, 40 tower
+// * Bronze Age: 2 cavalry, 5+20 swordsman
+// * Iron Age: 65 legion, 6 priest, 24 ballista, 40 tower
 
 
 B109      Town_Center1         1      -1
@@ -57,29 +57,27 @@ T125      Priest               1      104       0
 B79       Watch_Tower          2      -1
 T75       Soldier-Inf3         5      12        0
 T75       Soldier-Inf3         5      12        0
+T125      Priest               1      104       0
+R47     Bronze_Shield          1      103
 T75       Soldier-Inf3         5      12        0
 B79       Watch_Tower          2      -1
 B12       Barracks1            2      -1
-// 32 swordsman
 
 R66     Long_Sword             1      12
 R20     Fanaticism             1      104
 R110    Craftmanship           1      84
-R35     Engineering            1      82
+R121    Logistics              1      82
 R52     Metallurgy             1      103
-T75       Soldier-Inf3         7      12        0
-T83       Man                  2      109       0
+T75       Soldier-Inf3         5      12        0
+T83       Man                  1      109       0
 B79       Watch_Tower          2      -1
 
 T75       Soldier-Inf3         7      12        0
-T83       Man                  2      109       0
-T125      Priest               1      104       0
+T83       Man                  1      109       0
 B50       Farm                 2      -1
 
 R77     Legion                 1      12
-R121    Logistics              1      82
-R47     Bronze_Shield          1      103
-R106    Ballistics             1      82
+R48     Chain_Mail_-_Soldiers  1      103
 U75       Soldier-Inf3         7      12
 T83       Man                  2      109       0
 U125      Priest               1      104
@@ -89,41 +87,41 @@ U75       Soldier-Inf3         7      12
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
-R48     Chain_Mail_-_Soldiers  1      103
-R114    Writing                1      82
+R117    Iron_Shield            1      103
+R35     Engineering            1      82
 U75       Soldier-Inf3         7      12
 T83       Man                  2      109       0
 U125      Priest               1      104
 B87       Range1               1      -1
-B104      Temple1              3      -1
-B49       Siege_Workshop       6      -1
+B49       Siege_Workshop       4      -1
 
+U75       Soldier-Inf3         7      12
+T83       Man                  2      109       0
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
+B104      Temple1              1      -1
 
-R21     Mysticism              1      104
-R117    Iron_Shield            1      103
-U11       Soldier-Ballista     6      49
-U125      Priest               2      104
+R122    Tower_Shield           1      103
+R106    Ballistics             1      82
+U11       Soldier-Ballista     4      49
+U125      Priest               1      104
 B50       Farm                 2      -1
+
+U11       Soldier-Ballista     4      49
+U125      Priest               1      104
+B50       Farm                 2      -1
+B109      Town_Center1         1      -1
+B79       Watch_Tower          1      -1
 
 R24     Polytheism             1      104
-R122    Tower_Shield           1      103
-T11       Soldier-Ballista     6      49        0
-U125      Priest               2      104
-B50       Farm                 2      -1
-B109      Town_Center1         1      -1
-B79       Watch_Tower          1      -1
-
-R19     Monotheism             1      104
-R119    Medicine               1      104
-T11       Soldier-Ballista     6      49        0
-U125      Priest               2      104
+// R19     Monotheism             1      104
+// R119    Medicine               1      104
+U11       Soldier-Ballista     4      49
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
-T11       Soldier-Ballista     6      49        0
-T125      Priest               2      104       0
+R21     Mysticism              1      104
+T11       Soldier-Ballista     4      49        0
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
@@ -139,45 +137,40 @@ B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
 
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
 
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-
-// 26 man, 74 legion, 36 priest, 20 ballista (pop 122+37)
-// 40 tower, 14 farm
-// spent army: 8490 wood, 10930 food, 9550 gold, 6150 stone
+// 65 legion, 6 priest, 24 ballista (pop 90+32)
+// 26 man, 16 farm, 36 tower
+// spent army: 7948 wood, 10890 food, 7245 gold, 2750 stone
 
 
 U75       Soldier-Inf3         8      12
 U75       Soldier-Inf3         8      12
+U83       Man                  4      109
+U75       Soldier-Inf3         8      12
+U83       Man                  4      109
+B50       Farm                 4     -1
+
+U75       Soldier-Inf3         8      12
+U75       Soldier-Inf3         8      12
+U75       Soldier-Inf3         8      12
+
+C27     Helepolis              1      49
+
+U11       Soldier-Ballista     4      49
+U75       Soldier-Inf3         8      12
+U11       Soldier-Ballista     4      49
+U75       Soldier-Inf3         8      12
+U11       Soldier-Ballista     4      49
 U75       Soldier-Inf3         8      12
 
 B276      Wonder               1      -1
 
-// R27     Helepolis              1      49
-
-
+U11       Soldier-Ballista     4      49
 U75       Soldier-Inf3         8      12
+U11       Soldier-Ballista     4      49
 U75       Soldier-Inf3         8      12
+U11       Soldier-Ballista     4      49
 U75       Soldier-Inf3         8      12
-
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-
 
 B50       Farm                 24     -1

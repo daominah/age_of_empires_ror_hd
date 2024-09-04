@@ -303,9 +303,8 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 		Combatants: map[UnitID]int{},
 		Buildings:  map[UnitID]int{Granary: 1, StoragePit: 1}, // AI will always auto build Granary and Storage Pit
 		Techs:      map[TechID]bool{GranaryBuilt: true, StoragePitBuilt: true},
-		Spent:      &Cost{Wood: 240}, // Town Center and 3 Villagers are free
+		Spent:      &Cost{},
 	}
-
 	for _, option := range options {
 		option(e)
 	}
@@ -326,9 +325,13 @@ func NewEmpireDeveloping(options ...EmpireOption) (*EmpireDeveloping, error) {
 		}
 		e.UnitStats[unitID] = u
 	}
-
 	for _, v := range e.Civilization.Bonuses {
 		v(e)
+	}
+	if e.UnitStats[Granary] != nil && e.UnitStats[StoragePit] != nil {
+		granaries := e.UnitStats[Granary].GetCost().Multiply(float64(e.Buildings[Granary]))
+		storagePits := e.UnitStats[StoragePit].GetCost().Multiply(float64(e.Buildings[StoragePit]))
+		e.Spent.Add(*granaries).Add(*storagePits)
 	}
 	return e, nil
 }
@@ -460,7 +463,7 @@ func (e *EmpireDeveloping) build(unitID UnitID, quantity ...int) error {
 }
 
 func (e *EmpireDeveloping) buildHouse(n int) {
-	house := AllUnits[House]
+	house := e.UnitStats[House]
 	e.Spent.Add(*(house.GetCost().Multiply(float64(n))))
 	e.Buildings[House] += n
 }

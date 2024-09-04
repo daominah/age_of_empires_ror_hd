@@ -587,3 +587,54 @@ func TestGuessCivilization(t *testing.T) {
 		}
 	}
 }
+
+func TestSpentRoman(t *testing.T) {
+	empire, err := NewEmpireDeveloping(WithCivilization(Roman))
+	if err != nil {
+		t.Fatalf("error NewEmpireDeveloping: %v", err)
+	}
+	strategy := []Step{
+		{Action: Build, UnitOrTechID: TownCenter, Quantity: 1},
+		{Action: Build, UnitOrTechID: Villager, Quantity: 10},
+		{Action: Build, UnitOrTechID: Barracks, Quantity: 1},
+		{Action: Research, UnitOrTechID: ToolAge, Quantity: 1},
+		{Action: Build, UnitOrTechID: Barracks, Quantity: 5},
+		{Action: Research, UnitOrTechID: WatchTower, Quantity: 1},
+		{Action: Research, UnitOrTechID: Axe, Quantity: 1},
+		{Action: Build, UnitOrTechID: Stable, Quantity: 1},
+		{Action: Research, UnitOrTechID: Toolworking, Quantity: 1},
+		{Action: Build, UnitOrTechID: Market, Quantity: 1},
+		{Action: Build, UnitOrTechID: Tower, Quantity: 1},
+		{Action: Train, UnitOrTechID: Villager, Quantity: 2},
+		{Action: Research, UnitOrTechID: BronzeAge, Quantity: 1},
+		{Action: Research, UnitOrTechID: Woodworking, Quantity: 1},
+	}
+	for i, step := range strategy {
+		err := empire.Do(step)
+		if err != nil {
+			t.Fatalf("error i %v DoStep(%v): %v", i, step, err)
+		}
+		if i == 0 {
+			if want := (120 + 120) * 0.85; empire.Spent.Wood != want {
+				t.Errorf("error i %v spent Wood: got: %v, but want %v", i, empire.Spent.Wood, want)
+			}
+		} else if i == 1 {
+			if want := (120 + 120 + 30*5) * 0.85; empire.Spent.Wood != want {
+				t.Errorf("error i %v spent Wood: got: %v, but want %v", i, empire.Spent.Wood, want)
+			}
+		} else if i == 4 {
+			if want := (120 + 120 + 30*5 + 125*6) * 0.85; empire.Spent.Wood != want {
+				t.Errorf("error i %v spent Wood: got: %v, but want %v", i, empire.Spent.Wood, want)
+			}
+		}
+	}
+	want := Cost{
+		Wood:  (120+120+30*5+125*6+150+150)*0.85 + 75,
+		Food:  9*50 + 500 + 800 + 100 + 120 + 100 + 50,
+		Gold:  0,
+		Stone: 75,
+	}
+	if !empire.Spent.CheckEqual(want) {
+		t.Errorf("error spent: got: %+v, but want %+v", empire.Spent, want)
+	}
+}
