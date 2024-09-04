@@ -131,10 +131,11 @@ B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
 B79       Watch_Tower          4      -1
+B79       Watch_Tower          4      -1
 
 // 24 elephant archer, 20 priest, 32 chariot archer (pop 109)
-// 24 tower, 32 villager, 20 farm, 6 range, 3 temple
-// spent army: 7550 wood, 10535 food, 6190 gold, 3750 stone
+// 28 tower, 32 villager, 20 farm, 6 range, 3 temple
+// spent army: 7550 wood, 10535 food, 6190 gold, 4350 stone
 
 
 U25       Soldier-El_Archer    6      87

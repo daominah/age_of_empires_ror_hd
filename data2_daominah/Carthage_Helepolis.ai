@@ -4,7 +4,7 @@
 // * Fire Galley attack +6 (24+12 instead of 24+6).
 // Build summary:
 // * Bronze Age: 9+9 camel
-// * Iron Age: 32 helepolis, 9 war elephant, 15 priest
+// * Iron Age: 32 helepolis, 9 war elephant, 15 priest, 30 tower.
 
 
 B109      Town_Center1         1      -1
@@ -84,7 +84,7 @@ B104      Temple1              2      -1
 R35     Engineering            1      82
 R27     Helepolis              1      49
 T83       Man                  2      109       0
-U46       Soldier-Elephant     3      101       0
+U46       Soldier-Elephant     3      101
 B79       Watch_Tower          2      -1
 
 R106    Ballistics             1      82
@@ -125,11 +125,13 @@ B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
 B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
 
 // 32 helepolis, 9 war elephant, 15 priest (pop 103)
-// 24 tower, 26 villager, 14 farm, 6 siege, 3 temple, 3 stable
-// spent army: 10215 wood, 10765 food, 7955 gold, 3750 stone
+// 30 tower, 26 villager, 14 farm, 6 siege, 3 temple, 3 stable
+// spent army: 10215 wood, 10765 food, 7955 gold, 4650 stone
 
 U11       Soldier-Ballista     6      49
 U11       Soldier-Ballista     6      49

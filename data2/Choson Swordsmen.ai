@@ -98,40 +98,36 @@ B87       Range1               1      -1
 B104      Temple1              3      -1
 U75       Soldier-Inf3         7      12
 B49       Siege_Workshop       4      -1
-// 26 village, 74 legion, 4 priest (pop 35+74/2)
-// 8 barracks, 4 temple, 15 tower
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
 
-
-B109      Town_Center1         1      -1
 B50       Farm                 2      -1
-
 R18     Afterlife              1      104
 R21     Mysticism              1      104
 T11       Soldier-Ballista     4      49        0
 U125      Priest               2      104
-B79       Watch_Tower          3      -1
+B79       Watch_Tower          1      -1
 
 R24     Polytheism             1      104
 R22     Astrology              1      104
 T11       Soldier-Ballista     4      49        0
 U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
+B79       Watch_Tower          1      -1
 
 R19     Monotheism             1      104
 R119    Medicine               1      104
 T11       Soldier-Ballista     4      49        0
 U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
+B79       Watch_Tower          1      -1
 
 T11       Soldier-Ballista     4      49        0
 T125      Priest               2      104       0
 B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
+B109      Town_Center1         1      -1
+B79       Watch_Tower          2      -1
 
 T11       Soldier-Ballista     4      49        0
 U125      Priest               4      104
@@ -145,26 +141,25 @@ B79       Watch_Tower          2      -1
 
 U125      Priest               4      104
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 
 T125      Priest               4      104       0
 B109      Town_Center1         1      -1
 
 T125      Priest               4      104       0
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 
 T125      Priest               4      104       0
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          4      -1
 
 // 26 man, 74 legion, 36 priest, 20 ballista (pop 122+37)
-// 40 tower, 14 farm
-// spent army: 8490 wood, 10930 food, 9550 gold, 6150 stone
+// 36 tower, 14 farm
+// spent army: 8490 wood, 10930 food, 9550 gold, 5550 stone
 
 
 U75       Soldier-Inf3         8      12
 U75       Soldier-Inf3         8      12
 U75       Soldier-Inf3         8      12
-
 
 C2      Catapult_Tower         1      68
 

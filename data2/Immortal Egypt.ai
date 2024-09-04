@@ -81,7 +81,7 @@ R22     Astrology              1      104
 T40       Soldier-Chariot1     6      101       0
 T41       Soldier-Chariot2     2      87        0
 T125      Priest               3      104       0
-U40       Soldier-Chariot1     6      101       0
+U40       Soldier-Chariot1     6      101
 T41       Soldier-Chariot2     2      87        0
 T125      Priest               3      104       0
 B79       Watch_Tower          4      -1
@@ -133,12 +133,12 @@ B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
+B79       Watch_Tower          3      -1
+B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
 
 // 50 scythe chariot, 40 priest (pop 143)
-// 24 tower, 30 villager
+// 30 tower, 30 villager
 // spent army: 10925 wood, 10445 food, 9560 gold, 3750 stone
 
 

@@ -4,7 +4,7 @@
 // * Warships range +4.
 // Build summary:
 // * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+3 Tower.
-// * Iron Age: 36 Heavy Horse Archer, 12 Catapult.
+// * Iron Age: 36 Heavy Horse Archer, 12 Catapult, 30 tower.
 
 
 B109      Town_Center1         1      -1
@@ -114,14 +114,12 @@ B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
-
 B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
 
 // 36 heavy horse archer, 12 catapult, 16 chariot archer (pop 93)
-// 32 tower, 28 man, 16 farm, 7 range, 3 siege
-// spent army: 8990 wood, 10805 food, 5675 gold, 4950 stone
+// 30 tower, 28 man, 16 farm, 7 range, 3 siege
+// spent army: 8990 wood, 10805 food, 5675 gold, 4650 stone
 
 
 U39       Soldier-Cavalry3_Arc 6      87
