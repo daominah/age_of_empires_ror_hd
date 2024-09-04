@@ -1,89 +1,153 @@
-B109      Town_Center1         1      -1           
-U83       Man                  12      109          
-B12       Barracks1            1      -1           
+// Shang bonus:
+// * Villager cost 35 food instead of 50 (so Villager cost -30%).
+// * Wall HP x2.
+//
+// Build summary:
+// * Bronze Age: 12 camel, 12 cavalry, 6+18 chariot, 5+4 priest
+// * Iron Age: 50 scythe chariot, 40 priest, 50 villager
+
+
+B109      Town_Center1         1      -1
+U83       Man                  12      109
+B12       Barracks1            1      -1
+
 
 C101    Tool_Age               1      109
-T73       Soldier-Inf1         4      12        1
-B84       Market1              1      -1  
-R63     Axe                    1      12            
-B50       Farm                 2      -1     
-T73       Soldier-Inf1         3      12        1
-U83       Man                  2      109          
-B12       Barracks1            1      -1           
-R40     Leather_Infantry       1      103
-T347      Soldier-Slinger      2      12        2
-T73       Soldier-Inf1         2      12        2    
-R46     Tool_Working           1      103          
-U83       Man                  2      109          
-R81     Domestication          1      84     
-B50       Farm                 2      -1     
-T347      Soldier-Slinger      2      12        2
-B101      Stable1              1      -1       
-U83       Man                  2      109          
-B50       Farm                 2      -1     
-B87       Range1               1      -1     
+B101      Stable1              1      -1
+R16     Watch_Tower            1      68
+R42     Leather_Armor_Mounted  1      103
+B84       Market1              1      -1
+R46     Toolworking            1      103
+T83       Man                  2      109       0
+T299      Soldier-Scout        1      101       0
+// 14 villager, 1 bowman
 
-C102    Bronze_Age             1      109          
-R28     Wheel                  1      84           
-U83       Man                  2      109          
-B101      Stable1              1      -1           
-R108    Gold_Mining            1      84          
-U37       Soldier-Cavalry1     2      101        
-R16     Watch_Tower            1      68           
-B79       Watch_Tower          1      -1       
-U37       Soldier-Cavalry1     2      101          
-T83       Man                  2      109         2 
-U37       Soldier-Cavalry1     2      101        
-B50       Farm                 2      -1     
-B79       Watch_Tower          1      -1       
-U37       Soldier-Cavalry1     2      101        
-T83       Man                  2      109         2
-B49       Siege_Workshop       1      -1           
-U37       Soldier-Cavalry1     1      101        
-R12     Sentry_Tower           1      68       
-R31     Plow                   1      84       
-T83       Man                  2      109         1
-U37       Soldier-Cavalry1     1      101        
-B79       Watch_Tower          1      -1       
-U37       Soldier-Cavalry1     2      101        
-R51     Metal_Working          1      103          
-U37       Soldier-Cavalry1     2      101        
+
+C102    Bronze_Age             1      109
+R107    Wood_Working           1      84
+B101      Stable1              5      -1
+
+R28     Wheel                  1      84
+T338      Soldier-Camel        6      101       0
+R45     Scale_Armor_-_Cavalry  1      103
+R12     Sentry_Tower           1      68
+T83       Man                  1      109       0
+B82       Government_Center    1      -1
+T338      Soldier-Camel        6      101       0
+T83       Man                  1      109       0
 B104      Temple1              1      -1
-U37       Soldier-Cavalry1     2      101
-R42     Leather_Armor_Mounted  1      103 
-U125      Priest               1      104
-R45     Scale_Armor_-_Cavalry  1      103    
-B101      Stable1              1      -1                 
-B82       Government_Center    1      -1           
+T83       Man                  1      109       0
 
-C103    Iron_Age               1      109    
-B49       Siege_Workshop       1      -1           
-U11       Soldier-Ballista     2      49
-R24     Polytheism             1      104    
+T40       Soldier-Chariot1     6      101       0
+T83       Man                  2      109       0
+R51     Metal_Working          1      103
+R32     Artisanship            1      84
+R34     Nobility               1      82
+T125      Priest               1      104       0
+B104      Temple1              2      -1
+
+T37       Soldier-Cavalry1     6      101       0
+T83       Man                  2      109       0
+R112    Architecture           1      82
+T125      Priest               1      104       0
+R21     Mysticism              1      104
+B109      Town_Center1         2      -1
+
+T37       Soldier-Cavalry1     6      101       0
+T83       Man                  2      109       0
+T125      Priest               3      104       0
+B79       Watch_Tower          2      -1
+
+// 12 camel, 12 cavalry, 6+18 chariot, 5+4 priest
+// 23+15 man, 2+4 tower, 3 town center, 6+2 stable
+
+
+C103    Iron_Age               1      109
+R114    Writing                1      82
+R24     Polytheism             1      104
+R22     Astrology              1      104
+T40       Soldier-Chariot1     6      101       0
+T83       Man                  4      109       0
+T125      Priest               1      104       0
+B101      Stable1              2      -1
+B79       Watch_Tower          2      -1
+T40       Soldier-Chariot1     6      101       0
+T83       Man                  4      109       0
+U40       Soldier-Chariot1     6      101
+T83       Man                  4      109       0
+T125      Priest               3      104       0
+T83       Man                  3      109       0
+B79       Watch_Tower          2      -1
+
 R71     Heavy_Cavalry          1      101
-U11       Soldier-Ballista     2      49
-R18     Afterlife              1      104    
-U125      Priest               1      104
-R34     Nobility               1      82     
-R52     Metallurgy             1      103    
-R50     Chain_Mail_-_Cavalry   1      103    
-U125      Priest               1      104
-R78     Cataphracts            1      101    
-U125      Priest               1      104
-R15     Guard_Tower            1      68     
-R30	Coinage                1      84
-B109      Town_Center1         1      -1     
+R126    Scythe_Chariot         1      101
+R52     Metallurgy             1      103
+R15     Guard_Tower            1      68
+R110    Craftmanship           1      84
+R18     Afterlife              1      104
+R20     Fanaticism             1      104
+T37       Soldier-Cavalry1     6      101       0
+T83       Man                  3      109       0
+T125      Priest               1      104       0
+T83       Man                  3      109       0
+B79       Watch_Tower          2      -1
 
-B276      Wonder               1      -1     
+U40       Soldier-Chariot1     6      101
+U83       Man                  3      109
+T125      Priest               1      104       0
+U83       Man                  3      109
+B79       Watch_Tower          2      -1
 
-B49       Siege_Workshop       1      -1
-U11       Soldier-Balista      2      49
-B101      Stable1              1      -1     
-U37       Soldier-Cavalry1     12     101   
-U125      Priest               1      104    
-U11       Soldier-Balista      4      49
-U37       Soldier-Cavalry1     24     101   
-U11       Soldier-Balista      8      49
-B101      Stable1              1      -1     
-U37       Soldier-Cavalry1     175    101   
-B109      Town_Center1         1      -1     
+R50     Chain_Mail_-_Cavalry   1      103
+U40       Soldier-Chariot1     6      101
+B50       Farm                 4      -1
+B79       Watch_Tower          1      -1
+
+R19     Monotheism             1      104
+R119    Medicine               1      104
+U40       Soldier-Chariot1     6      101
+T125      Priest               1      104       0
+B50       Farm                 4      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 4      -1
+B109      Town_Center1         1      -1
+U125      Priest               1      104
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+U125      Priest               3      104
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+U125      Priest               3      104
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+U125      Priest               3      104
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+
+B109      Town_Center1         1      -1
+B79       Watch_Tower          6      -1
+
+// 42 scythe chariot, 22 priest, 18 heavy cavalry (pop 145)
+// 50 villager, 20 farm, 24 tower
+// spent army: 10235 wood, 10925 food, 8595 gold, 3750 stone
+
+
+U40       Soldier-Chariot1     8      101
+U40       Soldier-Chariot1     8      101
+U40       Soldier-Chariot1     8      101
+
+B109      Town_Center1         1      -1
+
+U40       Soldier-Chariot1     8      101
+U40       Soldier-Chariot1     8      101
+U40       Soldier-Chariot1     8      101
+
+
+B276      Wonder               1      -1
+B50       Farm                 24     -1

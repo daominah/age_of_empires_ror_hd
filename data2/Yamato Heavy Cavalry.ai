@@ -85,7 +85,7 @@ R50     Chain_Mail_-_Cavalry   1      103
 R78     Cataphracts            1      101
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
-U125      Priest               3      104       0
+U125      Priest               3      104
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
@@ -109,7 +109,7 @@ B87       Range1               2      -1
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 R107    Wood_Working           1      84
-R37     Alchemy                1      82
+C37     Alchemy                1      82
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87

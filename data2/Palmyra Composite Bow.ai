@@ -80,13 +80,13 @@ R50     Chain_Mail_-_Cavalry   1      103
 R37     Alchemy                1      82
 R54     Heavy_Catapult         1      49
 R15     Guard_Tower            1      68
-U35       Soldier-Catapult1    1      49        0
+U35       Soldier-Catapult1    1      49
 U39       Soldier-Cavalry3_Arc 4      87
 T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 4      87
-U35       Soldier-Catapult1    1      49        0
+U35       Soldier-Catapult1    1      49
 T83       Man                  2      109       0
 B104      Temple1              3      -1
 
@@ -95,7 +95,7 @@ U39       Soldier-Cavalry3_Arc 4      87
 T83       Man                  1      109       0
 
 U39       Soldier-Cavalry3_Arc 4      87
-U35       Soldier-Catapult1    2      49        0
+U35       Soldier-Catapult1    2      49
 T83       Man                  1      109       0
 R106    Ballistics             1      82
 R18     Afterlife              1      104
@@ -104,13 +104,13 @@ R22     Astrology              1      104
 B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 4      87
-U35       Soldier-Catapult1    2      49        0
+U35       Soldier-Catapult1    2      49
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
 T125      Priest               3      104       0
-U35       Soldier-Catapult1    2      49        0
+U35       Soldier-Catapult1    2      49
 B79       Watch_Tower          1      -1
 
 B50       Farm                 2      -1
@@ -139,7 +139,7 @@ U338      Soldier-Camel        4      101
 U39       Soldier-Cavalry3_Arc 4      87
 U39       Soldier-Cavalry3_Arc 4      87
 
-R38     Heavy_Horse_Archer     1      87
+C38     Heavy_Horse_Archer     1      87
 U39       Soldier-Cavalry3_Arc 4      87
 U338      Soldier-Camel        4      101
 U39       Soldier-Cavalry3_Arc 4      87
