@@ -1,10 +1,10 @@
-// Palmyran bonus:
-// * Camel Rider move speed +25% (so as fast as Heavy Horse Archer).
-// * Villager work faster, have 1 armor, but cost +50%.
-// * Free tribute.
+// Yamato bonus:
+// * Villager move speed +18% (stated +30%).
+// * Mounted units cost -25% (e.g. Cavalry cost reduced to 52 food, 60 gold).
+// * Ships HP +30%.
 // Build summary:
-// * Bronze Age: 16+16 camel
-// * Iron Age: 24 horse archer
+// * Bronze Age: 24 cavalry, 5 priest
+// * Iron Age: 60 cataphract, 14 priest, 3 horse archer
 
 
 B109      Town_Center1         1      -1
@@ -46,29 +46,29 @@ B104      Temple1              2      -1
 
 T37       Soldier-Cavalry1     6      101       0
 T83       Man                  2      109       0
-T125      Priest               2      104       0
-R24     Polytheism             1      104
+T125      Priest               1      104       0
 B109      Town_Center1         1      -1
 
 T37       Soldier-Cavalry1     6      101       0
-R112    Architecture           1      82
 T83       Man                  2      109       0
-T125      Priest               3      104       0
+T125      Priest               1      104       0
 B101      Stable1              2      -1
 
-// 22 villager, 30 cavalry, 6 priest (pop 59)
+// 22 villager, 30 cavalry, 3 priest (pop 56)
 // 8 stable, 1 archery range, 3 temple
 
 
 C103    Iron_Age               1      109
-R114    Writing                1      82
+R24     Polytheism             1      104
+R112    Architecture           1      82
 T37       Soldier-Cavalry1     6      101       0
-T125      Priest               2      104       0
+T125      Priest               3      104       0
 T83       Man                  2      109       0
 B87       Range1               1      -1
 B50       Farm                 2      -1
 T37       Soldier-Cavalry1     6      101       0
-T125      Priest               2      104       0
+R114    Writing                1      82
+T125      Priest               3      104       0
 T83       Man                  2      109       0
 B50       Farm                 2      -1
 
@@ -84,50 +84,53 @@ U39       Soldier-Cavalry3_Arc 2      87
 R50     Chain_Mail_-_Cavalry   1      103
 R78     Cataphracts            1      101
 B50       Farm                 2      -1
-T125      Priest               3      104       0
+B109      Town_Center1         1      -1
+U125      Priest               3      104       0
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
-T125      Priest               3      104       0
 B50       Farm                 2      -1
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
 
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
-B50       Farm                 2      -1
-B50       Farm                 2      -1
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 B87       Range1               2      -1
 
-// 60 cataphract, 16 priest, 6 horse archer (pop 109)
+// 60 cataphract, 12 priest, 6 horse archer (pop 105)
 // 26 villager, 16 farm, 8 stable, 4 range, 3 temple
-// spent army: 5840 wood, 11000 food, 8730 gold, 0 stone
+// spent army: 6040 wood, 11000 food, 8730 gold, 0 stone
 
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 R107    Wood_Working           1      84
-R41     Leather_Armor_-_Archer 1      103
+R37     Alchemy                1      82
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87
 R32     Artisanship            1      84
-R44     Scale_Armor_-_Archers  1      103
+R41     Leather_Armor_-_Archer 1      103
+
+U39       Soldier-Cavalry3_Arc 4      87
 R106    Ballistics             1      82
+R44     Scale_Armor_-_Archers  1      103
 
+U39       Soldier-Cavalry3_Arc 4      87
 R110    Craftmanship           1      84
-R37     Alchemy                1      82
-U39       Soldier-Cavalry3_Arc 4      87
-
 R49     Chain_Mail_-_Archers   1      103
-U39       Soldier-Cavalry3_Arc 4      87
 
-R38     Heavy_Horse_Archer     1      87
+T83       Man                  4      109       0
 U39       Soldier-Cavalry3_Arc 4      87
 
 B109      Town_Center1         1      -1
+B50       Farm                 4      -1
+
+C38     Heavy_Horse_Archer     1      87
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87
