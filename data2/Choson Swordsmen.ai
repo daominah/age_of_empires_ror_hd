@@ -48,8 +48,8 @@ T83       Man                  2      109       0
 
 
 C103    Iron_Age               1      109
-R112    Architecture           1      82
 R32     Artisanship            1      84
+R112    Architecture           1      82
 R43     Scale_Armor_-_Soldiers 1      103
 R65     Broad_Sword            1      12
 T75       Soldier-Inf3         5      12        0

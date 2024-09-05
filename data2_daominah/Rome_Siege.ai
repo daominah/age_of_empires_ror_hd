@@ -3,181 +3,141 @@
 // * Buildings cost -15% (except Tower, Wall, Wonder).
 // * Tower cost -50% (but disabled tech GuardTower).
 // Build summary:
-// * Bronze Age: 2 cavalry, 5+27 swordsman
-// * Iron Age: 74 legion, 36 priest, 20 ballista, 40 tower
+// * Bronze Age: 2+4 cavalry
+// * Iron Age: 30 helepolis, 12 catapult
 
 
 B109      Town_Center1         1      -1
-U83       Man                  10      109
+U83       Man                  12      109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
-B12       Barracks1            5      -1
 R16     Watch_Tower            1      68
-R63     Axe                    1      12
 B101      Stable1              1      -1
-R46     Toolworking            1      103
 B84       Market1              1      -1
 B79       Watch_Tower          1      -1
 T83       Man                  2      109       0
-// T299      Soldier-Scout        1      101       0
-// 12 villager
+// 14 villager
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-R40     Leather_Armor_-_Soldie 1      103
+B87       Range1               1      -1
 B79       Watch_Tower          2      -1
 
 T37       Soldier-Cavalry1     1      101       0
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
-R64     Short_Sword            1      12
-R51     Metal_Working          1      103
+R42     Leather_Armor_Mounted  1      103
 T83       Man                  2      109       0
 B82       Government_Center    1      -1
-B104      Temple1              1      -1
+B49       Siege_Workshop       1      -1
 
 T37       Soldier-Cavalry1     1      101       0
-T75       Soldier-Inf3         5      12        0
 T83       Man                  2      109       0
 
-// 16 villager, 5 swordsmen, 2 cavalry
-// 6 barrack, 1 temple, 1 stable, 3 tower
+// 18 man, 2+4 cavalry, 3+4 tower
 
 
 C103    Iron_Age               1      109
-R112    Architecture           1      82
 R32     Artisanship            1      84
-R43     Scale_Armor_-_Soldiers 1      103
-R65     Broad_Sword            1      12
-T75       Soldier-Inf3         5      12        0
-T125      Priest               1      104       0
-B79       Watch_Tower          2      -1
-T75       Soldier-Inf3         5      12        0
-T75       Soldier-Inf3         5      12        0
-T75       Soldier-Inf3         5      12        0
-B79       Watch_Tower          2      -1
-B12       Barracks1            2      -1
-// 32 swordsman
-
-R66     Long_Sword             1      12
-R20     Fanaticism             1      104
-R110    Craftmanship           1      84
-R35     Engineering            1      82
-R52     Metallurgy             1      103
-T75       Soldier-Inf3         7      12        0
-T83       Man                  2      109       0
-B79       Watch_Tower          2      -1
-
-T75       Soldier-Inf3         7      12        0
-T83       Man                  2      109       0
-T125      Priest               1      104       0
-B50       Farm                 2      -1
-
-R77     Legion                 1      12
-R121    Logistics              1      82
-R47     Bronze_Shield          1      103
-R106    Ballistics             1      82
-U75       Soldier-Inf3         7      12
-T83       Man                  2      109       0
-U125      Priest               1      104
-B50       Farm                 2      -1
-
-U75       Soldier-Inf3         7      12
-T83       Man                  2      109       0
-B50       Farm                 2      -1
-
-R48     Chain_Mail_-_Soldiers  1      103
-R114    Writing                1      82
-U75       Soldier-Inf3         7      12
-T83       Man                  2      109       0
-U125      Priest               1      104
-B87       Range1               1      -1
-B104      Temple1              3      -1
+R112    Architecture           1      82
+T37       Soldier-Cavalry1     1      101       0
+T35       Soldier-Catapult1    1      49        0
+T37       Soldier-Cavalry1     1      101       0
+// R114    Writing                1      82
+R109    Stone_Mining           1      84
+T37       Soldier-Cavalry1     1      101       0
+T35       Soldier-Catapult1    1      49        0
+T37       Soldier-Cavalry1     1      101       0
 B49       Siege_Workshop       6      -1
+B79       Watch_Tower          4      -1
 
-B109      Town_Center1         1      -1
-B50       Farm                 2      -1
+R35     Engineering            1      82
+R54     Heavy_Catapult         1      49
+R110    Craftmanship           1      84
+T11       Soldier-Ballista     6      49        0
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
 
-R21     Mysticism              1      104
-R117    Iron_Shield            1      103
+T11       Soldier-Ballista     6      49        0
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
+
+R106    Ballistics             1      82
+R27     Helepolis              1      49
+R111    Siegecraft             1      84
+T83       Man                  2      109       0
 U11       Soldier-Ballista     6      49
-U125      Priest               2      104
-B50       Farm                 2      -1
-
-R24     Polytheism             1      104
-R122    Tower_Shield           1      103
-T11       Soldier-Ballista     6      49        0
-U125      Priest               2      104
-B50       Farm                 2      -1
-B109      Town_Center1         1      -1
 B79       Watch_Tower          1      -1
-
-R19     Monotheism             1      104
-R119    Medicine               1      104
-T11       Soldier-Ballista     6      49        0
-U125      Priest               2      104
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-T11       Soldier-Ballista     6      49        0
-T125      Priest               2      104       0
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-T11       Soldier-Ballista     4      49        0
-B79       Watch_Tower          2      -1
-
-T11       Soldier-Ballista     4      49        0
-B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
+T83       Man                  2      109       0
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     3      49
+R36     Massive_Catapult       1      49
+B79       Watch_Tower          2      -1
+
+T83       Man                  2      109       0
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     3      49
+B79       Watch_Tower          2      -1
+
+T83       Man                  2      109       0
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     4      49
+B79       Watch_Tower          2      -1
+
+T83       Man                  2      109       0
+U35       Soldier-Catapult1    4      49
+U11       Soldier-Ballista     2      49
+B79       Watch_Tower          2      -1
+
+U83       Man                  4      109
+B109      Town_Center1         1      -1
+B79       Watch_Tower          2      -1
+
+U83       Man                  4      109
 B79       Watch_Tower          4      -1
 
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
+// 30 helepolis, 12 catapult (pop 88)
+// 40 villager, 0 farm, 26 tower, 7 siege workshop
+// spent army: 11094 wood, 10010 food, 4690 gold, 2150 stone
 
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
 
-// 26 man, 74 legion, 36 priest, 20 ballista (pop 122+37)
-// 40 tower, 14 farm
-// spent army: 8490 wood, 10930 food, 9550 gold, 6150 stone
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
 
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
 
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
+// B276      Wonder               1      -1
 
-B276      Wonder               1      -1
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
 
-// R27     Helepolis              1      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
 
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
 
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-U75       Soldier-Inf3         8      12
-
-
-B50       Farm                 24     -1
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
+U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     5      49
