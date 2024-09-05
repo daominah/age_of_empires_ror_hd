@@ -638,3 +638,16 @@ func TestSpentRoman(t *testing.T) {
 		t.Errorf("error spent: got: %+v, but want %+v", empire.Spent, want)
 	}
 }
+
+func TestBeautyMainArmy(t *testing.T) {
+	army := map[UnitID]int{
+		Villager:    30,
+		Scout:       1,
+		Cavalry:     48,
+		Priest:      12,
+		HorseArcher: 8,
+	}
+	if want := "48 cataphract, 12 priest, 8 horse archer"; beautyMainArmy(army) != want {
+		t.Errorf("error beautyMainArmy: got: %v, want: %v", beautyMainArmy(army), want)
+	}
+}

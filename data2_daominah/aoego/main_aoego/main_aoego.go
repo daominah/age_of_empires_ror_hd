@@ -107,7 +107,7 @@ func main() {
 				// continue
 			}
 			log.Printf("----------------")
-			log.Printf("empire: %v", empire.Summary())
+			log.Printf(empire.Summary())
 			continue
 		}
 

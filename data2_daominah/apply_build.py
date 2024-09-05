@@ -97,9 +97,9 @@ def main():
             "Rome Siege.ai",
         },
         "Shang_Stable.ai": {
-            "Shang Cavalry.ai",
-            "Shang Clubmen.ai",
-            "Shang Heavy Cavalry.ai",
+            # "Shang Cavalry.ai",
+            # "Shang Clubmen.ai",
+            # "Shang Heavy Cavalry.ai",
         },
         "Sumeria_Catapult.ai": {
             "Immortal Sumeria.ai",
