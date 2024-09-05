@@ -15,63 +15,70 @@ B12       Barracks1            1      -1
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
 B101      Stable1              1      -1
-R46     Toolworking            1      103
+R42     Leather_Armor_Mounted  1      103
 B84       Market1              1      -1
-B87       Range1               1      -1
+B79       Watch_Tower          1      -1
 T83       Man                  2      109       0
 T299      Soldier-Scout        1      101       0
 // 14 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
-// R107    Wood_Working           1      84
-B101      Stable1              5      -1
-R42     Leather_Armor_Mounted  1      103
+R107    Wood_Working           1      84
+R46     Toolworking            1      103
+B101      Stable1              2      -1
+B79       Watch_Tower          9      -1
+B87       Range1               9      -1
 
 R28     Wheel                  1      84
 T37       Soldier-Cavalry1     3      101       0
 R51     Metal_Working          1      103
-T37       Soldier-Cavalry1     3      101       0
-T83       Man                  1      109       0
+R12     Sentry_Tower           1      68
+T83       Man                  2      109       0
 B82       Government_Center    1      -1
-T37       Soldier-Cavalry1     6      101       0
-T83       Man                  1      109       0
+
+T37       Soldier-Cavalry1     3      101       0
+T83       Man                  2      109       0
 B104      Temple1              1      -1
 
-T37       Soldier-Cavalry1     6      101       0
+T37       Soldier-Cavalry1     3      101       0
 T83       Man                  2      109       0
 R34     Nobility               1      82
 R45     Scale_Armor_-_Cavalry  1      103
 T125      Priest               1      104       0
-B104      Temple1              2      -1
-
-T37       Soldier-Cavalry1     6      101       0
-T83       Man                  2      109       0
-T125      Priest               1      104       0
+B104      Temple1              1      -1
 B109      Town_Center1         1      -1
 
-T37       Soldier-Cavalry1     6      101       0
+T37       Soldier-Cavalry1     3      101       0
 T83       Man                  2      109       0
-T125      Priest               1      104       0
-B101      Stable1              2      -1
+T125      Priest               2      104       0
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
-// 22 villager, 30 cavalry, 3 priest (pop 56)
-// 8 stable, 1 archery range, 3 temple
+T37       Soldier-Cavalry1     3      101       0
+T83       Man                  4      109       0
+T125      Priest               2      104       0
+B50       Farm                 4      -1
+
+// 20 cavalry, 5 priest (pop 52)
+// 26 villager, 6 farm, 4 stable, 2 temple, 2 town center
 
 
 C103    Iron_Age               1      109
-R24     Polytheism             1      104
 R112    Architecture           1      82
-T37       Soldier-Cavalry1     6      101       0
-T125      Priest               3      104       0
+R24     Polytheism             1      104
+T37       Soldier-Cavalry1     3      101       0
 T83       Man                  2      109       0
-B87       Range1               1      -1
+B101      Stable1              4      -1
+T37       Soldier-Cavalry1     3      101       0
+T125      Priest               1      104       0
+T83       Man                  2      109       0
+B87       Range1               2      -1
 B50       Farm                 2      -1
-T37       Soldier-Cavalry1     6      101       0
 R114    Writing                1      82
-T125      Priest               3      104       0
+T37       Soldier-Cavalry1     3      101       0
+T125      Priest               1      104       0
 T83       Man                  2      109       0
-B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
 R71     Heavy_Cavalry          1      101
@@ -79,37 +86,42 @@ C52     Metallurgy             1      103
 R18     Afterlife              1      104
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
+T83       Man                  4      109       0
+B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
+T83       Man                  4      109       0
+U125      Priest               1      104
+B50       Farm                 2      -1
+B109      Town_Center1         1      -1
 
 R50     Chain_Mail_-_Cavalry   1      103
 R78     Cataphracts            1      101
-B50       Farm                 2      -1
 B109      Town_Center1         1      -1
-U125      Priest               3      104
+U125      Priest               2      104
+B50       Farm                 4      -1
+B79       Watch_Tower          1      -1
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+U125      Priest               2      104
+B50       Farm                 4      -1
+B109      Town_Center1         1      -1
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
 
-B50       Farm                 2      -1
-B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
-B50       Farm                 2      -1
 B109      Town_Center1         1      -1
-B50       Farm                 2      -1
 B87       Range1               2      -1
 B79       Watch_Tower          1      -1
 
-// 60 cataphract, 12 priest, 6 horse archer (pop 105)
-// 26 villager, 16 farm, 8 stable, 4 range, 3 temple
-// spent army: 6040 wood, 11000 food, 8730 gold, 0 stone
+//  cataphract,  priest,  horse archer (pop )
+//  villager,  farm,  stable,  range,  temple
+// spent army:  wood,  food,  gold,  stone
 
 
 U37       Soldier-Cavalry1     6      101
