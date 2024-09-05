@@ -71,9 +71,11 @@ def main():
             "Minoa Composite Bowmen.ai",
         },
         "Palmyra_Camel.ai": {
+            "Palmyra Horse Archer.ai",
+        },
+        "Palmyra_Stable.ai": {
             "Palmyra Composite Bow.ai",
             "Palmyra Elephant.ai",
-            "Palmyra Horse Archer.ai",
         },
         "Persia_War_Elephant.ai": {
             "Persia Elephant Archers.ai",

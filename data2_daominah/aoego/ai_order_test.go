@@ -640,13 +640,14 @@ func TestSpentRoman(t *testing.T) {
 }
 
 func TestEmpireDeveloping_BeautyMainArmy(t *testing.T) {
-	empire, err := NewEmpireDeveloping(WithCivilization(Yamato))
+	empire, err := NewEmpireDeveloping(WithCivilization(FullTechTree))
 	if err != nil {
 		t.Fatalf("error NewEmpireDeveloping: %v", err)
 	}
 	empire.Combatants = map[UnitID]int{
 		Villager:    30,
 		Scout:       1,
+		Chariot:     8,
 		Cavalry:     48,
 		Priest:      12,
 		HorseArcher: 8,
@@ -661,7 +662,7 @@ func TestEmpireDeveloping_BeautyMainArmy(t *testing.T) {
 	EnableHorseArcherEffect60(empire)
 
 	got := empire.beautyMainArmy()
-	want := "48 cataphract, 12 priest, 8 horse archer (7 stable, 2 temple, 4 range)"
+	want := "48 cataphract, 12 priest, 8 horse archer, 8 chariot (7 stable, 2 temple, 4 range)"
 	if got != want {
 		t.Errorf("error beautyMainArmy: got: %v, want: %v", got, want)
 	}

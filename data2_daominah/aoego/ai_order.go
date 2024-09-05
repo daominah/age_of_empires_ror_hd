@@ -525,7 +525,7 @@ func (e *EmpireDeveloping) refreshAutoTechs() {
 
 func (e *EmpireDeveloping) Summary() string {
 	var lines []string
-	lines = append(lines, fmt.Sprintf("// civilization: %v", e.Civilization.Name))
+	lines = append(lines, "//")
 	lines = append(lines, "// "+e.beautyMainArmy())
 	economy := fmt.Sprintf("// %v villager", e.Combatants[Villager])
 	if e.Buildings[Farm] > 0 {
@@ -537,6 +537,8 @@ func (e *EmpireDeveloping) Summary() string {
 	economy += fmt.Sprintf(" (pop %.0f, tech %v)", e.CountPopulation(), e.TechnologyCount)
 	lines = append(lines, economy)
 	lines = append(lines, fmt.Sprintf("// spent: %+v", e.Spent))
+	lines = append(lines, "//")
+	lines = append(lines, fmt.Sprintf("// civilization: %v", e.Civilization.Name))
 	lines = append(lines, fmt.Sprintf("// combatants: %v", beautyUnits(e.Combatants)))
 	lines = append(lines, fmt.Sprintf("// buildings: %v", beautyUnits(e.Buildings)))
 	lines = append(lines, fmt.Sprintf("// techs researched: %+v", beautyTechs(e.Techs)))
@@ -556,23 +558,30 @@ func (e *EmpireDeveloping) beautyMainArmy() string {
 		a = append(a, Pair{UnitID: unit, Count: count})
 	}
 	sort.Slice(a, func(i, j int) bool {
+		if a[i].Count == a[j].Count {
+			return a[i].UnitID.GetAge() > a[j].UnitID.GetAge()
+		}
 		return a[i].Count > a[j].Count
 	})
 	var c strings.Builder // main combatants
 	var b strings.Builder // main combatants location
+	sameLocations := make(map[UnitID]bool)
 	for i, pair := range a {
 		upgradedUnit, found := e.UnitStats[pair.UnitID]
 		if !found {
 			continue
 		}
 		c.WriteString(fmt.Sprintf("%v %v", pair.Count, strings.ToLower(upgradedUnit.NameInGame)))
-		b.WriteString(fmt.Sprintf("%v %v", e.Buildings[upgradedUnit.Location], strings.ToLower(upgradedUnit.Location.GetNameInGame())))
 		if i != len(a)-1 {
 			c.WriteString(", ")
+		}
+		if !sameLocations[upgradedUnit.Location] {
+			sameLocations[upgradedUnit.Location] = true
+			b.WriteString(fmt.Sprintf("%v %v", e.Buildings[upgradedUnit.Location], strings.ToLower(upgradedUnit.Location.GetNameInGame())))
 			b.WriteString(", ")
 		}
 	}
-	return fmt.Sprintf("%v (%v)", c.String(), b.String())
+	return fmt.Sprintf("%v (%v)", c.String(), strings.TrimSuffix(b.String(), ", "))
 }
 
 func beautyUnits(m map[UnitID]int) string {
