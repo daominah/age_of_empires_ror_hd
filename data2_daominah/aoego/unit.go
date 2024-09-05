@@ -78,6 +78,10 @@ func (c *Cost) IsZero() bool {
 	return c.Wood == 0 && c.Food == 0 && c.Gold == 0 && c.Stone == 0
 }
 
+func (c *Cost) String() string {
+	return fmt.Sprintf("%.0f wood, %.0f food, %.0f gold, %.0f stone", c.Wood, c.Food, c.Gold, c.Stone)
+}
+
 // UnitID is enum
 type UnitID int
 
@@ -304,7 +308,7 @@ func NewUnit(id UnitID) (*Unit, error) {
 		u.InitiateTech = DockBuilt
 
 	case ArcheryRange:
-		u.NameInGame, u.Name = "Archery Range", "Range1"
+		u.NameInGame, u.Name = "Range", "Range1"
 		u.Cost = Cost{Wood: 150}
 		u.Time = 40
 		u.InitiateTech = ArcheryRangeBuilt

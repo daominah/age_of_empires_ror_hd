@@ -525,14 +525,33 @@ func (e *EmpireDeveloping) refreshAutoTechs() {
 
 func (e *EmpireDeveloping) Summary() string {
 	var lines []string
-	lines = append(lines, fmt.Sprintf("* civilization: %v", e.Civilization.Name))
-	lines = append(lines, fmt.Sprintf("* spent: %+v", e.Spent))
-	lines = append(lines, fmt.Sprintf("* population: %.0f/%.0f", e.CountPopulation(), e.CountPopulationLimit()))
-	lines = append(lines, fmt.Sprintf("* combatants: %v", beautyUnits(e.Combatants)))
-	lines = append(lines, fmt.Sprintf("* buildings: %v", beautyUnits(e.Buildings)))
-	lines = append(lines, fmt.Sprintf("* techs count: %v", e.TechnologyCount))
-	lines = append(lines, fmt.Sprintf("* techs researched: %+v", beautyTechs(e.Techs)))
+	lines = append(lines, fmt.Sprintf("// civilization: %v", e.Civilization.Name))
+	lines = append(lines, fmt.Sprintf("// %v villager, %v farm, %v tower (pop %.0f, tech %v)",
+		e.Combatants[Villager], e.Buildings[Farm], e.Buildings[Tower], e.CountPopulation(), e.TechnologyCount))
+	lines = append(lines, fmt.Sprintf("// spent: %+v", e.Spent))
+	lines = append(lines, fmt.Sprintf("// combatants: %v", beautyUnits(e.Combatants)))
+	lines = append(lines, fmt.Sprintf("// buildings: %v", beautyUnits(e.Buildings)))
+	lines = append(lines, fmt.Sprintf("// techs researched: %+v", beautyTechs(e.Techs)))
 	return "\n" + strings.Join(lines, "\n") + "\n"
+}
+
+func beautyMainArmy(combatants map[UnitID]int) string {
+	type Pair struct {
+		key UnitID
+		val int
+	}
+	var a []Pair
+	for k, v := range combatants {
+		a = append(a, Pair{k, v})
+	}
+	sort.Slice(a, func(i, j int) bool {
+		return a[i].val > a[j].val
+	})
+	return ""
+}
+
+func beautyMainArmyLocation(combatants map[UnitID]int, buildings map[UnitID]int) string {
+	return ""
 }
 
 func beautyUnits(m map[UnitID]int) string {
@@ -551,7 +570,7 @@ func beautyUnits(m map[UnitID]int) string {
 		unitID := UnitID(v.GetID().IntID())
 		ret.WriteString(fmt.Sprintf("%v %v", m[unitID], v.GetFullName()))
 		if i < len(a)-1 && a[i+1].GetID().GetAge() != v.GetID().GetAge() {
-			ret.WriteString(",\n  ")
+			ret.WriteString(",\n   ")
 		} else {
 			ret.WriteString(", ")
 		}
@@ -580,7 +599,9 @@ func beautyTechs(m map[TechID]bool) string {
 	for i, v := range a {
 		ret.WriteString(fmt.Sprintf("%v", v.GetFullName()))
 		if i < len(a)-1 && a[i+1].GetID().GetAge() != v.GetID().GetAge() {
-			ret.WriteString(",\n  ")
+			ret.WriteString(",\n   ")
+		} else if i == len(a)-1 {
+			ret.WriteString(".")
 		} else {
 			ret.WriteString(", ")
 		}
