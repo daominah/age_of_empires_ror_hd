@@ -215,7 +215,7 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 			Monotheism:           true,
 			Zealotry:             true,
 			Sacrifice:            true,
-			Broadsword:           true,
+			BroadSword:           true,
 			EnableFireBoat:       true,
 		}
 		c.Name, c.Name2 = "Greek", "Greek"
@@ -542,7 +542,7 @@ func NewCivilization(civID CivilizationID) (*Civilization, error) {
 			Sacrifice:            true,
 			Catapult:             true,
 			EnableBallista:       true,
-			Broadsword:           true,
+			BroadSword:           true,
 			GuardTower:           true,
 			FortifiedWall:        true,
 			EnableFireBoat:       true,
