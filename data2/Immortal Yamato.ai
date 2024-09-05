@@ -13,6 +13,7 @@ B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
+R16     Watch_Tower            1      68
 B101      Stable1              1      -1
 R46     Toolworking            1      103
 B84       Market1              1      -1
@@ -71,6 +72,7 @@ R114    Writing                1      82
 T125      Priest               3      104       0
 T83       Man                  2      109       0
 B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
 R71     Heavy_Cavalry          1      101
 C52     Metallurgy             1      103
@@ -90,16 +92,20 @@ U125      Priest               3      104
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
 
 // R108    Gold_Mining            1      84
 // R30     Coinage                1      84
 
 B50       Farm                 2      -1
 B50       Farm                 2      -1
+B79       Watch_Tower          1      -1
+
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
-B50       Farm                 2      -1
 B87       Range1               2      -1
+B79       Watch_Tower          1      -1
 
 // 60 cataphract, 12 priest, 6 horse archer (pop 105)
 // 26 villager, 16 farm, 8 stable, 4 range, 3 temple
