@@ -47,16 +47,15 @@ T41       Soldier-Chariot2     4      87        0
 T83       Man                  2      109       0
 T35       Soldier-Catapult1    1      49        0
 R34     Nobility               1      82
-R109    Stone_Mining           1      84
 B79       Watch_Tower          2      -1
-
-R114    Writing                1      82
 
 // 20 villager, 8 chariot archer, 1 catapult
 // 4 archery range, 1 siege workshop, 9 tower
 
 
 C103    Iron_Age               1      109
+R109    Stone_Mining           1      84
+R114    Writing                1      82
 T41       Soldier-Chariot2     4      87        0
 T35       Soldier-Catapult1    1      49        0
 T41       Soldier-Chariot2     4      87        0
@@ -67,9 +66,9 @@ B79       Watch_Tower          2      -1
 U39       Soldier-Cavalry3_Arc 4      87
 T83       Man                  2      109       0
 U35       Soldier-Catapult1    4      49
+R15     Guard_Tower            1      68
 R37     Alchemy                1      82
 R54     Heavy_Catapult         1      49
-R15     Guard_Tower            1      68
 R111    Siegecraft             1      84
 R49     Chain_Mail_-_Archers   1      103
 B79       Watch_Tower          2      -1
@@ -117,7 +116,7 @@ B79       Watch_Tower          4      -1
 B79       Watch_Tower          4      -1
 
 // 19 heavy catapult, 24 horse archer (pop 90)
-// 32 tower, 30 man, 12 farm, 5 siege, 4 range
+// 30 man, 12 farm, 30 tower, 5 siege, 4 range
 // spent army: 10625 wood, 10645 food, 4595 gold, 4800 stone
 
 
