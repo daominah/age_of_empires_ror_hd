@@ -89,10 +89,12 @@ def main():
         "Rome_Legion.ai": {
             "Rome Axemen.ai",
             "Rome Legion.ai",
-            "Rome Siege.ai",
+            # "Rome Siege.ai",
         },
         "Rome_Siege.ai": {
-            # "Rome Siege.ai",
+            # "Rome Axemen.ai",
+            # "Rome Legion.ai",
+            "Rome Siege.ai",
         },
         "Shang_Stable.ai": {
             "Shang Cavalry.ai",
