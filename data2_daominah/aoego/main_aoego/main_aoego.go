@@ -37,13 +37,14 @@ func main() {
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Composite_Bowmen.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Camel.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Stable.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Persia_War_Elephant.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Phoenicia_Elephant_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Legion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Siege.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang_Stable.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Sumeria_Catapult.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
 
 	// bull shit original strategies, e.g. Rome Legion without researching ShortSword
 
@@ -102,7 +103,6 @@ func main() {
 
 	for _, step := range strategy {
 		if step.Action == aoego.PrintSummary {
-			log.Printf("----------------")
 			log.Printf(empire.Summary())
 			continue
 		}
