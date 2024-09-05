@@ -4,7 +4,6 @@ import (
 	"flag"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/daominah/age_of_empires_ror_hd/data2_daominah/aoego"
 )
@@ -103,9 +102,6 @@ func main() {
 
 	for _, step := range strategy {
 		if step.Action == aoego.PrintSummary {
-			if !strings.Contains(step.OriginStr, "spent army") {
-				// continue
-			}
 			log.Printf("----------------")
 			log.Printf(empire.Summary())
 			continue

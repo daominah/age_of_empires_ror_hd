@@ -137,7 +137,7 @@ const (
 
 	Axe        TechID = 63
 	ShortSword TechID = 64
-	Broadsword TechID = 65
+	BroadSword TechID = 65
 	LongSword  TechID = 66
 	Legion     TechID = 77
 
@@ -227,6 +227,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Time, t.Location = 140, TownCenter
 		t.RequiredTechs = []TechID{ToolAge, MarketBuilt, ArcheryRangeBuilt, StableBuilt}
 		t.MinRequiredTechs = 3
+		t.Effects = []EffectFunc{BronzeAgeEffect96}
 	case IronAge:
 		t.NameInGame, t.Name = "Iron Age", "Iron_Age"
 		t.Cost = Cost{Food: 1000, Gold: 800}
@@ -499,42 +500,49 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Time, t.Location = 50, Barracks
 		t.RequiredTechs = []TechID{BronzeAge, Axe}
 		t.Effects = []EffectFunc{ShortSwordEffect64}
-	case Broadsword:
-		t.NameInGame, t.Name = "Broadsword", "Broad_Sword"
+	case BroadSword:
+		t.NameInGame, t.Name = "Broad Sword", "Broad_Sword"
 		t.Cost = Cost{Food: 140, Gold: 50}
 		t.Time, t.Location = 80, Barracks
 		t.RequiredTechs = []TechID{BronzeAge, ShortSword}
+		t.Effects = []EffectFunc{BroadSwordEffect65}
 	case LongSword:
 		t.NameInGame, t.Name = "Long Sword", "Long_Sword"
 		t.Cost = Cost{Food: 160, Gold: 50}
 		t.Time, t.Location = 90, Barracks
-		t.RequiredTechs = []TechID{IronAge, Broadsword}
+		t.RequiredTechs = []TechID{IronAge, BroadSword}
+		t.Effects = []EffectFunc{LongSwordEffect66}
 	case Legion:
 		t.NameInGame, t.Name = "Legion", "Legion"
 		t.Cost = Cost{Food: 1400, Gold: 600}
 		t.Time, t.Location = 150, Barracks
 		t.RequiredTechs = []TechID{IronAge, LongSword, Fanaticism}
+		t.Effects = []EffectFunc{LegionEffect123}
 
 	case ScytheChariot:
 		t.NameInGame, t.Name = "Scythe Chariot", "Scythe_Chariot"
 		t.Cost = Cost{Wood: 1200, Gold: 800}
 		t.Time, t.Location = 150, Stable
 		t.RequiredTechs = []TechID{IronAge, EnableChariot, Nobility}
+		t.Effects = []EffectFunc{ScytheChariotEffect204}
 	case HeavyCalvary:
 		t.NameInGame, t.Name = "Heavy Calvary", "Heavy_Cavalry"
 		t.Cost = Cost{Food: 350, Gold: 125}
 		t.Time, t.Location = 90, Stable
 		t.RequiredTechs = []TechID{IronAge}
+		t.Effects = []EffectFunc{HeavyCalvaryEffect71}
 	case Cataphract:
 		t.NameInGame, t.Name = "Cataphract", "Cataphracts"
 		t.Cost = Cost{Food: 2000, Gold: 850}
 		t.Time, t.Location = 150, Stable
 		t.RequiredTechs = []TechID{IronAge, HeavyCalvary, Metallurgy}
+		t.Effects = []EffectFunc{CataphractEffect126}
 	case ArmoredElephant:
 		t.NameInGame, t.Name = "Armored Elephant", "Armored_Elephant"
 		t.Cost = Cost{Food: 1000, Gold: 1200}
 		t.Time, t.Location = 150, Stable
 		t.RequiredTechs = []TechID{IronAge, EnableWarElephant, IronShield}
+		t.Effects = []EffectFunc{ArmoredElephantEffect203}
 
 	case ImprovedBow:
 		t.NameInGame, t.Name = "Improved Bow", "Improved_Bow"
@@ -547,38 +555,45 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Wood: 100, Food: 180}
 		t.Time, t.Location = 100, ArcheryRange
 		t.RequiredTechs = []TechID{BronzeAge, ImprovedBow}
+		t.Effects = []EffectFunc{CompositeBowEffect57}
 	case HeavyHorseArcher:
 		t.NameInGame, t.Name = "Heavy Horse Archer", "Heavy_Horse_Archer"
 		t.Cost = Cost{Food: 1750, Gold: 800}
 		t.Time, t.Location = 150, ArcheryRange
 		t.RequiredTechs = []TechID{IronAge, EnableHorseArcher, ChainMailArchers}
+		t.Effects = []EffectFunc{HeavyHorseArcherEffect124}
 
 	case Catapult:
 		t.NameInGame, t.Name = "Catapult", "Heavy_Catapult"
 		t.Cost = Cost{Wood: 250, Food: 300}
 		t.Time, t.Location = 100, SiegeWorkshop
 		t.RequiredTechs = []TechID{IronAge}
+		t.Effects = []EffectFunc{CatapultEffect54}
 	case MassiveCatapult:
 		t.NameInGame, t.Name = "Heavy Catapult", "Massive_Catapult"
 		t.Cost = Cost{Wood: 900, Food: 1800}
 		t.Time, t.Location = 150, SiegeWorkshop
 		t.RequiredTechs = []TechID{IronAge, Catapult, Siegecraft}
+		t.Effects = []EffectFunc{MassiveCatapultEffect122}
 	case Helepolis:
 		t.NameInGame, t.Name = "Helepolis", "Helepolis"
 		t.Cost = Cost{Wood: 1000, Food: 1500}
 		t.Time, t.Location = 150, SiegeWorkshop
 		t.RequiredTechs = []TechID{IronAge, EnableBallista, Craftsmanship}
+		t.Effects = []EffectFunc{HelepolisEffect125}
 
 	case Phalanx:
 		t.NameInGame, t.Name = "Phalanx", "Phalanx"
 		t.Cost = Cost{Food: 300, Gold: 100}
 		t.Time, t.Location = 90, Academy
 		t.RequiredTechs = []TechID{IronAge}
+		t.Effects = []EffectFunc{PhalanxEffect73}
 	case Centurion:
 		t.NameInGame, t.Name = "Centurion", "Centurion"
 		t.Cost = Cost{Food: 1800, Gold: 700}
 		t.Time, t.Location = 150, Academy
 		t.RequiredTechs = []TechID{IronAge, Phalanx, Aristocracy}
+		t.Effects = []EffectFunc{CenturionEffect25}
 
 	case Astrology:
 		t.NameInGame, t.Name = "Astrology", "Astrology"
@@ -652,7 +667,6 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Effects = []EffectFunc{StableBuiltEffect67}
 	case GovernmentCenterBuilt:
 		t.Name = "_GovernmentCenterBuilt"
-		t.Effects = []EffectFunc{GovernmentCenterBuiltEffect33}
 	case TempleBuilt:
 		t.Name = "_TempleBuilt"
 		t.Effects = []EffectFunc{TempleBuiltEffect17}
@@ -780,9 +794,6 @@ func StableBuiltEffect67(e *EmpireDeveloping) {
 	e.EnabledUnits[Scout] = true
 }
 
-func GovernmentCenterBuiltEffect33(e *EmpireDeveloping) {
-}
-
 func TempleBuiltEffect17(e *EmpireDeveloping) {
 	e.EnabledUnits[Priest] = true
 }
@@ -891,12 +902,72 @@ func ImprovedBowEffect56(e *EmpireDeveloping) {
 	e.EnabledUnits[ImprovedBowman] = true
 }
 
-// other effects:
+// effects upgrade units:
 
-func ToolAgeEffect95(e *EmpireDeveloping) {
+func BroadSwordEffect65(e *EmpireDeveloping) {
+	e.UnitStats[Swordsman].NameInGame = "Broad Swordsman"
 }
 
-func BronzeAgeEffect96(e *EmpireDeveloping) {
+func LongSwordEffect66(e *EmpireDeveloping) {
+	e.UnitStats[Swordsman].NameInGame = "Long Swordsman"
+}
+
+func LegionEffect123(e *EmpireDeveloping) {
+	e.UnitStats[Swordsman].NameInGame = "Legion"
+}
+
+func CompositeBowEffect57(e *EmpireDeveloping) {
+	e.UnitStats[ImprovedBowman].NameInGame = "Composite Bowman"
+}
+
+func HeavyHorseArcherEffect124(e *EmpireDeveloping) {
+	e.UnitStats[HorseArcher].NameInGame = "Heavy Horse Archer"
+}
+
+func ScytheChariotEffect204(e *EmpireDeveloping) {
+	e.UnitStats[Chariot].NameInGame = "Scythe Chariot"
+}
+
+func HeavyCalvaryEffect71(e *EmpireDeveloping) {
+	e.UnitStats[Cavalry].NameInGame = "Heavy Cavalry"
+}
+
+func CataphractEffect126(e *EmpireDeveloping) {
+	e.UnitStats[Cavalry].NameInGame = "Cataphract"
+}
+
+func ArmoredElephantEffect203(e *EmpireDeveloping) {
+	e.UnitStats[Elephant].NameInGame = "Armored Elephant"
+}
+
+func CatapultEffect54(e *EmpireDeveloping) {
+	e.UnitStats[StoneThrower].NameInGame = "Catapult"
+}
+
+func MassiveCatapultEffect122(e *EmpireDeveloping) {
+	e.UnitStats[StoneThrower].NameInGame = "Massive Catapult"
+}
+
+func HelepolisEffect125(e *EmpireDeveloping) {
+	e.UnitStats[Ballista].NameInGame = "Helepolis"
+}
+
+func PhalanxEffect73(e *EmpireDeveloping) {
+	e.UnitStats[Hoplite].NameInGame = "Phalanx"
+}
+
+func CenturionEffect25(e *EmpireDeveloping) {
+	e.UnitStats[Hoplite].NameInGame = "Centurion"
+}
+
+// other effects:
+
+func ToolAgeEffect95(_ *EmpireDeveloping) {
+	// Scout +2 sight
+}
+
+func BronzeAgeEffect96(_ *EmpireDeveloping) {
+	// Scout +2 sight
 }
 
 func IronAgeEffect97(e *EmpireDeveloping) {

@@ -4,7 +4,7 @@
 // * Ships HP +30%.
 // Build summary:
 // * Bronze Age: 15 cavalry, 4 priest
-// * Iron Age: 60 cataphract, 14 priest, 3 horse archer
+// * Iron Age: 48 cataphract, 12 priest, 8 horse archer
 
 
 B109      Town_Center1         1      -1
@@ -58,8 +58,8 @@ T83       Man                  2      109       0
 R112    Architecture           1      82
 B79       Watch_Tower          2      -1
 
-// 15 cavalry, 4 priest (pop 46)
-// 26 villager, 4 tower, 3 stable, 2 temple, 2 town
+// 15 cavalry, 4 priest (3 stable, 2 temple)
+// 26 villager, 4 tower (pop 46, tech 12)
 // 2515 wood, 4678 food, 1690 gold, 650 stone
 
 
@@ -117,9 +117,9 @@ B87       Range1               2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-// 48 cataphract, 12 priest, 8 horse archer (7 stable, 2 temple, 4 archery range)
+// 48 cataphract, 12 priest, 8 horse archer (7 stable, 2 temple, 4 range)
 // 30 villager, 16 farm, 16 tower (pop 99, tech 20)
-// spent army: 5765 wood, 10935 food, 7615 gold, 2450 stone
+// spent: 5765 wood, 10935 food, 7615 gold, 2450 stone
 
 
 // R108    Gold_Mining            1      84

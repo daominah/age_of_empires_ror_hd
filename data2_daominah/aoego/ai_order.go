@@ -241,7 +241,7 @@ const (
 	Research         Action = "R" // item will be researched if possible, can be skipped if failed too many attempts
 	ResearchCritical Action = "C" // the build stuck until this research is done
 
-	PrintSummary Action = "P" // special action for debugging, do nothing except current empire summary
+	PrintSummary Action = "P" // special action treats a line has prefix "// spent" as a Step
 )
 
 // UnitOrTechID is a UnitID or TechID
@@ -526,8 +526,16 @@ func (e *EmpireDeveloping) refreshAutoTechs() {
 func (e *EmpireDeveloping) Summary() string {
 	var lines []string
 	lines = append(lines, fmt.Sprintf("// civilization: %v", e.Civilization.Name))
-	lines = append(lines, fmt.Sprintf("// %v villager, %v farm, %v tower (pop %.0f, tech %v)",
-		e.Combatants[Villager], e.Buildings[Farm], e.Buildings[Tower], e.CountPopulation(), e.TechnologyCount))
+	lines = append(lines, "// "+e.beautyMainArmy())
+	economy := fmt.Sprintf("// %v villager", e.Combatants[Villager])
+	if e.Buildings[Farm] > 0 {
+		economy += fmt.Sprintf(", %v farm", e.Buildings[Farm])
+	}
+	if e.Buildings[Tower] > 0 {
+		economy += fmt.Sprintf(", %v tower", e.Buildings[Tower])
+	}
+	economy += fmt.Sprintf(" (pop %.0f, tech %v)", e.CountPopulation(), e.TechnologyCount)
+	lines = append(lines, economy)
 	lines = append(lines, fmt.Sprintf("// spent: %+v", e.Spent))
 	lines = append(lines, fmt.Sprintf("// combatants: %v", beautyUnits(e.Combatants)))
 	lines = append(lines, fmt.Sprintf("// buildings: %v", beautyUnits(e.Buildings)))
@@ -535,33 +543,44 @@ func (e *EmpireDeveloping) Summary() string {
 	return "\n" + strings.Join(lines, "\n") + "\n"
 }
 
-func beautyMainArmy(combatants map[UnitID]int) string {
+func (e *EmpireDeveloping) beautyMainArmy() string {
 	type Pair struct {
-		key UnitID
-		val int
+		UnitID UnitID
+		Count  int
 	}
 	var a []Pair
-	for k, v := range combatants {
-		a = append(a, Pair{k, v})
+	for unit, count := range e.Combatants {
+		if unit.GetAge() < BronzeAge {
+			continue
+		}
+		a = append(a, Pair{UnitID: unit, Count: count})
 	}
 	sort.Slice(a, func(i, j int) bool {
-		return a[i].val > a[j].val
+		return a[i].Count > a[j].Count
 	})
-	return ""
-}
-
-func beautyMainArmyLocation(combatants map[UnitID]int, buildings map[UnitID]int) string {
-	return ""
+	var c strings.Builder // main combatants
+	var b strings.Builder // main combatants location
+	for i, pair := range a {
+		upgradedUnit, found := e.UnitStats[pair.UnitID]
+		if !found {
+			continue
+		}
+		c.WriteString(fmt.Sprintf("%v %v", pair.Count, strings.ToLower(upgradedUnit.NameInGame)))
+		b.WriteString(fmt.Sprintf("%v %v", e.Buildings[upgradedUnit.Location], strings.ToLower(upgradedUnit.Location.GetNameInGame())))
+		if i != len(a)-1 {
+			c.WriteString(", ")
+			b.WriteString(", ")
+		}
+	}
+	return fmt.Sprintf("%v (%v)", c.String(), b.String())
 }
 
 func beautyUnits(m map[UnitID]int) string {
 	var a SortByAgeLocationName
 	for unitID := range m {
-		u, found := AllUnits[unitID]
-		if found {
+		u, err := NewUnit(unitID)
+		if err == nil {
 			a = append(a, u)
-		} else { // should not happen
-			println("missing key in AllUnits: ", unitID)
 		}
 	}
 	sort.Sort(a)

@@ -639,15 +639,30 @@ func TestSpentRoman(t *testing.T) {
 	}
 }
 
-func TestBeautyMainArmy(t *testing.T) {
-	army := map[UnitID]int{
+func TestEmpireDeveloping_BeautyMainArmy(t *testing.T) {
+	empire, err := NewEmpireDeveloping(WithCivilization(Yamato))
+	if err != nil {
+		t.Fatalf("error NewEmpireDeveloping: %v", err)
+	}
+	empire.Combatants = map[UnitID]int{
 		Villager:    30,
 		Scout:       1,
 		Cavalry:     48,
 		Priest:      12,
 		HorseArcher: 8,
 	}
-	if want := "48 cataphract, 12 priest, 8 horse archer"; beautyMainArmy(army) != want {
-		t.Errorf("error beautyMainArmy: got: %v, want: %v", beautyMainArmy(army), want)
+	empire.Buildings = map[UnitID]int{
+		Barracks: 1, Granary: 1, House: 30, StoragePit: 1, TownCenter: 4,
+		Farm: 16, Market: 1, ArcheryRange: 4, Stable: 7, Tower: 16,
+		GovernmentCenter: 1, Temple: 2,
+	}
+	CataphractEffect126(empire)
+	TempleBuiltEffect17(empire)
+	EnableHorseArcherEffect60(empire)
+
+	got := empire.beautyMainArmy()
+	want := "48 cataphract, 12 priest, 8 horse archer (7 stable, 2 temple, 4 range)"
+	if got != want {
+		t.Errorf("error beautyMainArmy: got: %v, want: %v", got, want)
 	}
 }
