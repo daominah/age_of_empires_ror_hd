@@ -4,7 +4,7 @@
 // * Free tribute.
 // Build summary:
 // * Bronze Age: 12 camel rider, 5 chariot, 2 priest
-// * Iron Age: 56 scythe chariot, 24 camel rider, 20 priest
+// * Iron Age: 50 scythe chariot, 24 camel, 20 priest, 12 horse archer
 
 
 B109      Town_Center1         1      -1
@@ -48,7 +48,7 @@ R45     Scale_Armor_-_Cavalry  1      103
 R34     Nobility               1      82
 T125      Priest               1      104       0
 T83       Man                  1      109       0
-B87       Range1               2      -1
+B79       Watch_Tower          2      -1
 
 T338      Soldier-Camel        2      101       0
 T83       Man                  1      109       0
@@ -59,7 +59,6 @@ T83       Man                  1      109       0
 T125      Priest               1      104       0
 T40       Soldier-Chariot1     3      101       0
 T83       Man                  1      109       0
-B79       Watch_Tower          2      -1
 
 // 12 camel rider, 5 chariot, 2 priest (3 stable, 1 temple)
 // 20 villager, 4 tower (pop 40, tech 12)
@@ -68,16 +67,19 @@ B79       Watch_Tower          2      -1
 
 C103    Iron_Age               1      109
 R112    Architecture           1      82
+R41     Leather_Armor_-_Archer 1      103
 T338      Soldier-Camel        2      101       0
 T125      Priest               1      104       0
 T40       Soldier-Chariot1     3      101       0
 B101      Stable1              2      -1
 T338      Soldier-Camel        2      101       0
+R44     Scale_Armor_-_Archers  1      103
 R114    Writing                1      82
 T40       Soldier-Chariot1     3      101       0
 T338      Soldier-Camel        2      101       0
 T125      Priest               1      104       0
 B101      Stable1              2      -1
+B87       Range1               2      -1
 T40       Soldier-Chariot1     3      101       0
 T338      Soldier-Camel        3      101       0
 T338      Soldier-Camel        3      101       0
@@ -89,67 +91,79 @@ R15     Guard_Tower            1      68
 R37     Alchemy                1      82
 U40       Soldier-Chariot1     6      101
 T83       Man                  2      109       0
+U39       Soldier-Cavalry3_Arc 2      87
 B104      Temple1              2      -1
 
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
 
 R18     Afterlife              1      104
 R20     Fanaticism             1      104
 R22     Astrology              1      104
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 2      87
 B79       Watch_Tower          2      -1
 
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               1      104
 B79       Watch_Tower          2      -1
 
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               3      104
 B79       Watch_Tower          2      -1
 
 U40       Soldier-Chariot1     6      101
-
-U40       Soldier-Chariot1     6      101
-U125      Priest               3      104
-B50       Farm                 2     -1
+U39       Soldier-Cavalry3_Arc 2      87
 
 U125      Priest               3      104
-B50       Farm                 2     -1
+B50       Farm                 2      -1
+
+U125      Priest               3      104
+B50       Farm                 2      -1
 T125      Priest               3      104       0
-B50       Farm                 2     -1
+B50       Farm                 2      -1
 T125      Priest               3      104       0
-B50       Farm                 2     -1
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 
-B50       Farm                 2     -1
-B50       Farm                 2     -1
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-// 56 scythe chariot, 24 camel rider, 20 priest (7 stable, 3 temple)
-// 24 villager, 12 farm, 20 tower (pop 125, tech 22)
-// spent: 9825 wood, 10355 food, 6780 gold, 3150 stone
+// 50 scythe chariot, 24 camel, 20 priest, 12 horse archer (7 stable, 3 temple, 2 range)
+// 24 villager, 12 farm, 20 tower (pop 131, tech 24)
+// spent: 9465 wood, 10940 food, 7670 gold, 3150 stone
 
 
+R106    Ballistics             1      82
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 2      87
 U40       Soldier-Chariot1     6      101
-U40       Soldier-Chariot1     6      101
-U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 2      87
+
+B87       Range1               2      -1
+R49     Chain_Mail_-_Archers   1      103
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
+
+R38     Heavy_Horse_Archer     1      87
+U39       Soldier-Cavalry3_Arc 4      87
 
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
 U40       Soldier-Chariot1     6      101
-U40       Soldier-Chariot1     6      101
-U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
 
 U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
 U40       Soldier-Chariot1     6      101
-U40       Soldier-Chariot1     6      101
-U40       Soldier-Chariot1     6      101
+U39       Soldier-Cavalry3_Arc 4      87
 
 // B276      Wonder               1      -1
 B50       Farm                 24     -1
-
-// spent
