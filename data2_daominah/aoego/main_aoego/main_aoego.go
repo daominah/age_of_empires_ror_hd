@@ -37,11 +37,11 @@ func main() {
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Composite_Bowmen.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Camel.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Stable.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Stable.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Persia_War_Elephant.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Phoenicia_Elephant_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Legion.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Siege.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Siege.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang_Stable.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Sumeria_Catapult.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
