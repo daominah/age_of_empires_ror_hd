@@ -254,7 +254,7 @@ func NewUnit(id UnitID) (*Unit, error) {
 		u.Cost = Cost{Food: 170, Gold: 40}
 		u.Time, u.Location = 50, Stable
 	case Camel:
-		u.NameInGame, u.Name = "Camel Rider", "Soldier-Camel"
+		u.NameInGame, u.Name = "Camel", "Soldier-Camel"
 		u.Cost = Cost{Food: 70, Gold: 60}
 		u.Time, u.Location = 30, Stable
 

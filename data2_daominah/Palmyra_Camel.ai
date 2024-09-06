@@ -153,15 +153,7 @@ U39       Soldier-Cavalry3_Arc 4      87
 U338      Soldier-Camel        2      101
 U39       Soldier-Cavalry3_Arc 4      87
 
-U39       Soldier-Cavalry3_Arc 4      87
-U338      Soldier-Camel        2      101
-U39       Soldier-Cavalry3_Arc 4      87
-U338      Soldier-Camel        2      101
-U39       Soldier-Cavalry3_Arc 4      87
-U338      Soldier-Camel        2      101
-U39       Soldier-Cavalry3_Arc 4      87
-
-C2      Catapult_Tower         1      68
+C38     Heavy_Horse_Archer     1      87
 
 U39       Soldier-Cavalry3_Arc 4      87
 U338      Soldier-Camel        2      101
@@ -171,6 +163,8 @@ U39       Soldier-Cavalry3_Arc 4      87
 U338      Soldier-Camel        2      101
 U39       Soldier-Cavalry3_Arc 4      87
 
+R2      Catapult_Tower         1      68
+
 U39       Soldier-Cavalry3_Arc 4      87
 U338      Soldier-Camel        2      101
 U39       Soldier-Cavalry3_Arc 4      87
@@ -179,7 +173,13 @@ U39       Soldier-Cavalry3_Arc 4      87
 U338      Soldier-Camel        2      101
 U39       Soldier-Cavalry3_Arc 4      87
 
-B276      Wonder               1      -1
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        2      101
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        2      101
+U39       Soldier-Cavalry3_Arc 4      87
+U338      Soldier-Camel        2      101
+U39       Soldier-Cavalry3_Arc 4      87
+
+// B276      Wonder               1      -1
 B50       Farm                 24     -1
-
-// spent
