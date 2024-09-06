@@ -3,63 +3,73 @@
 // * Buildings cost -15% (except Tower, Wall, Wonder).
 // * Tower cost -50% (but disabled tech GuardTower).
 // Build summary:
-// * Bronze Age: 2+4 cavalry, 0+4+4 hoplite
+// * Bronze Age: 2+6 cavalry, 0+8 hoplite
 // * Iron Age: 30 helepolis, 10 massive catapult
 
 
 B109      Town_Center1         1      -1
-U83       Man                  12      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
+U83       Man                  1      109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
-R42     Leather_Armor_Mounted  1      103
+// R42     Leather_Armor_Mounted  1      103
 B101      Stable1              1      -1
 B84       Market1              1      -1
 T83       Man                  2      109       0
 R46     Toolworking            1      103
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 // T299      Soldier-Scout        1      101       0
 // 14 villager
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B79       Watch_Tower          1      -1
 B87       Range1               1      -1
+B79       Watch_Tower          1      -1
+B79       Watch_Tower          1      -1
 
 T37       Soldier-Cavalry1     1      101       0
 R28     Wheel                  1      84
 R12     Sentry_Tower           1      68
 R40     Leather_Armor_-_Soldie 1      103
-T83       Man                  1      109       0
-B82       Government_Center    1      -1
+T83       Man                  2      109       0
 B0        Academy              1      -1
+B82       Government_Center    1      -1
 
 T37       Soldier-Cavalry1     1      101       0
-T83       Man                  1      109       0
+T83       Man                  2      109       0
 B49       Siege_Workshop       2      -1
 
 // 2 cavalry (1 stable)
-// 16 villager, 3 tower (pop 18, tech 9)
-// 1756 wood, 2855 food, 160 gold, 275 stone
+// 16 villager, 3 tower (pop 18, tech 8)
+// _spent: 1756 wood, 2730 food, 160 gold, 275 stone
 
 
 C103    Iron_Age               1      109
 R43     Scale_Armor_-_Soldiers 1      103
 R112    Architecture           1      82
 R32     Artisanship            1      84
-T37       Soldier-Cavalry1     1      101       0
 T93       Soldier-Phal1        1      0         0
 T37       Soldier-Cavalry1     1      101       0
 T93       Soldier-Phal1        1      0         0
+T37       Soldier-Cavalry1     1      101       0
 B49       Siege_Workshop       2      -1
 R109    Stone_Mining           1      84
-T37       Soldier-Cavalry1     1      101       0
 T93       Soldier-Phal1        1      0         0
 T37       Soldier-Cavalry1     1      101       0
 T93       Soldier-Phal1        1      0         0
+T37       Soldier-Cavalry1     1      101       0
 B49       Siege_Workshop       2      -1
 
 R35     Engineering            1      82
@@ -68,6 +78,7 @@ T11       Soldier-Ballista     2      49        0
 T11       Soldier-Ballista     2      49        0
 T93       Soldier-Phal1        1      0         0
 T83       Man                  1      109       0
+T37       Soldier-Cavalry1     1      101       0
 T11       Soldier-Ballista     2      49        0
 T93       Soldier-Phal1        1      0         0
 T83       Man                  1      109       0
@@ -77,9 +88,9 @@ T11       Soldier-Ballista     2      49        0
 T11       Soldier-Ballista     2      49        0
 T11       Soldier-Ballista     2      49        0
 T93       Soldier-Phal1        1      0         0
+T37       Soldier-Cavalry1     1      101       0
 T83       Man                  1      109       0
 T11       Soldier-Ballista     2      49        0
-T93       Soldier-Phal1        1      0         0
 T83       Man                  1      109       0
 
 R106    Ballistics             1      82
@@ -89,6 +100,7 @@ R111    Siegecraft             1      84
 U11       Soldier-Ballista     2      49
 U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     2      49
+T93       Soldier-Phal1        1      0         0
 T83       Man                  2      109       0
 B109      Town_Center1         1      -1
 B79       Watch_Tower          1      -1
@@ -111,7 +123,7 @@ U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     2      49
 U11       Soldier-Ballista     2      49
 T83       Man                  2      109       0
-T83       Man                  2      109       0
+U83       Man                  2      109
 B50       Farm                 2      -1
 
 U35       Soldier-Catapult1    2      49
@@ -128,13 +140,16 @@ B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-// 30 helepolis, 10 massive catapult, 8 hoplite, 6 cavalry (8 siege workshop, 1 academy, 1 stable)
-// 40 villager, 6 farm, 16 tower (pop 94, tech 21)
-// spent: 11286 wood, 10765 food, 4900 gold, 1400 stone
+// 30 helepolis, 10 massive catapult, 8 cavalry, 8 hoplite (8 siege workshop, 1 stable, 1 academy)
+// 40 villager, 6 farm, 16 tower (pop 96, tech 20)
+// spent: 11286 wood, 10780 food, 5060 gold, 1400 stone
 
 
 B109      Town_Center1         1      -1
 
+U11       Soldier-Ballista     3      49
+U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     3      49
 U11       Soldier-Ballista     3      49
 U35       Soldier-Catapult1    2      49
@@ -150,10 +165,6 @@ U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     3      49
 U11       Soldier-Ballista     3      49
 U35       Soldier-Catapult1    2      49
-
-U11       Soldier-Ballista     3      49
-U11       Soldier-Ballista     3      49
-U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     3      49
 U11       Soldier-Ballista     3      49
 U35       Soldier-Catapult1    2      49
@@ -164,6 +175,9 @@ U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     3      49
 U11       Soldier-Ballista     3      49
 U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     3      49
+U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
 
 U11       Soldier-Ballista     3      49
 U11       Soldier-Ballista     3      49
@@ -171,3 +185,10 @@ U35       Soldier-Catapult1    2      49
 U11       Soldier-Ballista     3      49
 U11       Soldier-Ballista     3      49
 U35       Soldier-Catapult1    2      49
+U11       Soldier-Ballista     3      49
+U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
+
+// 102 helepolis, 34 massive catapult, 8 cavalry, 8 hoplite (8 siege workshop, 1 stable, 1 academy)
+// 40 villager, 6 farm, 16 tower (pop 192, tech 20)
+// _spent: 24614 wood, 10780 food, 13740 gold, 2400 stone

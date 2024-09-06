@@ -89,8 +89,8 @@ def main():
             # "Rome Axemen.ai",
         },
         "Rome_Legion.ai": {
-            "Rome Axemen.ai",
-            "Rome Legion.ai",
+            # "Rome Axemen.ai",
+            # "Rome Legion.ai",
             # "Rome Siege.ai",
         },
         "Rome_Siege.ai": {

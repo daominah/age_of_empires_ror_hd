@@ -177,7 +177,7 @@
 //ID 	   Description	     Qty     Parent  Retrains
 //---    -------------------   ------   ------ ---------
 B109      Town_Center1         1      -1
-U83       Man                  10      109
+U83       Man                  10     109
 B12       Barracks1            1      -1
 T83       Man                  2      109    1
 
