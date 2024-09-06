@@ -187,7 +187,7 @@ func TestNewStrategy_RequiredTechs(t *testing.T) {
 	}
 	prepare, errs := NewStrategy(`
 		B109      Town_Center1         1      -1
-U83       Man                  10      109
+U83       Man                  10     109
 B12       Barracks1            1      -1
 C101    Tool_Age               1      109
 // R16     Watch_Tower            1      68
@@ -361,7 +361,7 @@ func TestStrategy_DefaultAI(t *testing.T) {
 func TestNewStrategy_Macedonian(t *testing.T) {
 	buildOrder := `
 B109      Town_Center1         1      -1
-U83       Man                  10      109
+U83       Man                  10     109
 B12       Barracks1            1      -1
 
 
