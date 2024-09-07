@@ -8,7 +8,7 @@
 
 
 B109      Town_Center1         1      -1
-U83       Man                  10      109
+U83       Man                  10     109
 B12       Barracks1            1      -1
 
 
@@ -53,7 +53,7 @@ B79       Watch_Tower          2      -1
 B0        Academy              2      -1
 R47     Bronze_Shield          1      103
 T93       Soldier-Phal1        3      0         0
-B79       Watch_Tower          2       -1
+B79       Watch_Tower          2      -1
 B104      Temple1              2      -1
 T93       Soldier-Phal1        3      0         0
 

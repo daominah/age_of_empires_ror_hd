@@ -3,162 +3,196 @@
 // * Light Transport move speed +25%, Heavy Transport move speed +43% (stated +30%).
 // * Fire Galley attack +6 (24+12 instead of 24+6).
 // Build summary:
-// * Bronze Age: 9+9 camel
-// * Iron Age: 32 helepolis, 9 war elephant, 15 priest, 30 tower.
+// * Bronze Age: 10 camel, 2 priest
+// * Iron Age: 32 helepolis, 18 camel, 12 priest, 8 war elephant
 
 
 B109      Town_Center1         1      -1
-U83       Man                  10     109
+U83       Man                  12     109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
-B101      Stable1              1      -1
 R16     Watch_Tower            1      68
 R42     Leather_Armor_Mounted  1      103
+B101      Stable1              1      -1
 B84       Market1              1      -1
-B79       Watch_Tower          1      -1
-R46     Toolworking            1      103
 T83       Man                  2      109       0
+R46     Toolworking            1      103
+B79       Watch_Tower          1      -1
 T299      Soldier-Scout        1      101       0
-// 12 villager, 1 scout
+// 14 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B101      Stable1              2      -1
+B101      Stable1              1      -1
 B79       Watch_Tower          1      -1
-B87       Range1               1      -1
+B79       Watch_Tower          1      -1
 
-T338      Soldier-Camel        3      101       0
+T338      Soldier-Camel        2      101       0
 R28     Wheel                  1      84
 R51     Metal_Working          1      103
 R12     Sentry_Tower           1      68
-T83       Man                  1      109       0
+T83       Man                  2      109       0
 B82       Government_Center    1      -1
-T338      Soldier-Camel        3      101       0
-T83       Man                  1      109       0
 B104      Temple1              1      -1
 
-T338      Soldier-Camel        3      101       0
+T338      Soldier-Camel        2      101       0
+T83       Man                  1      109       0
+
+T338      Soldier-Camel        2      101       0
 T83       Man                  2      109       0
 R32     Artisanship            1      84
-R34     Nobility               1      82
 R45     Scale_Armor_-_Cavalry  1      103
+R112    Architecture           1      82
 T125      Priest               1      104       0
+B87       Range1               1      -1
+B104      Temple1              1      -1
 
-// 16 villager, 9 camel, 1 priest, 2 tower
+T338      Soldier-Camel        2      101       0
+T83       Man                  1      109       0
+
+R34     Nobility               1      82
+T338      Soldier-Camel        2      101       0
+T125      Priest               1      104       0
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
+
+// 10 camel, 2 priest (2 stable, 2 temple)
+// 22 villager, 5 tower (pop 35, tech 13)
+// _spent: 2465 wood, 4585 food, 1140 gold, 800 stone
 
 
 C103    Iron_Age               1      109
-R112    Architecture           1      82
-T338      Soldier-Camel        3      101       0
-B49       Siege_Workshop       3      -1
-T338      Soldier-Camel        3      101       0
-T125      Priest               1      104       0
+T338      Soldier-Camel        2      101       0
+T338      Soldier-Camel        2      101       0
+T125      Priest               2      104       0
+B49       Siege_Workshop       2      -1
 R114    Writing                1      82
-B79       Watch_Tower          2      -1
-T338      Soldier-Camel        3      101       0
-T125      Priest               1      104       0
-B79       Watch_Tower          2      -1
+T338      Soldier-Camel        2      101       0
+B49       Siege_Workshop       2      -1
+T338      Soldier-Camel        2      101       0
+T125      Priest               2      104       0
+B49       Siege_Workshop       2      -1
 
 R110    Craftmanship           1      84
 R37     Alchemy                1      82
 R15     Guard_Tower            1      68
-T46       Soldier-Elephant     3      101       0
+T46       Soldier-Elephant     2      101       0
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
+T125      Priest               2      104       0
 T83       Man                  2      109       0
-T125      Priest               1      104       0
-T11       Soldier-Ballista     3      49        0
+T11       Soldier-Ballista     2      49        0
+B49       Siege_Workshop       1      -1
+B79       Watch_Tower          1      -1
+
+T46       Soldier-Elephant     2      101       0
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
+T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
-
-T46       Soldier-Elephant     3      101       0
-T83       Man                  2      109       0
-T125      Priest               1      104       0
-T11       Soldier-Ballista     3      49        0
-B49       Siege_Workshop       3      -1
-
-T83       Man                  2      109       0
-T125      Priest               1      104       0
-B104      Temple1              2      -1
 
 R35     Engineering            1      82
 R27     Helepolis              1      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
 T83       Man                  2      109       0
-U46       Soldier-Elephant     3      101
+T46       Soldier-Elephant     2      101       0
 B79       Watch_Tower          2      -1
 
 R106    Ballistics             1      82
 R18     Afterlife              1      104
-R21     Mysticism              1      104
-T83       Man                  2      109       0
-U11       Soldier-Ballista     5      49
-U125      Priest               1      104
-B79       Watch_Tower          2      -1
-
 R24     Polytheism             1      104
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+T83       Man                  2      109       0
+U46       Soldier-Elephant     2      101
+B50       Farm                 2      -1
+B50       Farm                 2      -1
+
+R21     Mysticism              1      104
 R119    Medicine               1      104
-U11       Soldier-Ballista     5      49
-U125      Priest               1      104
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-U11       Soldier-Ballista     5      49
-U125      Priest               1      104
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
 
-U11       Soldier-Ballista     5      49
-U125      Priest               3      104
+U11       Soldier-Ballista     2      49
+U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-U11       Soldier-Ballista     6      49
-U125      Priest               3      104
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+B79       Watch_Tower          2      -1
 
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
-B50       Farm                 2      -1
+
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
+// 32 helepolis, 18 camel, 12 priest, 8 war elephant (7 siege workshop, 2 stable, 2 temple)
+// 30 villager, 16 farm, 24 tower (pop 101, tech 25)
+// spent: 10215 wood, 10795 food, 7540 gold, 3750 stone
 
-B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
 
-// 32 helepolis, 9 war elephant, 15 priest (pop 103)
-// 30 tower, 26 villager, 14 farm, 6 siege, 3 temple, 3 stable
-// spent army: 10215 wood, 10765 food, 7955 gold, 4650 stone
+R108    Gold_Mining            1      84
+R30     Coinage                1      84
 
-U11       Soldier-Ballista     6      49
-U11       Soldier-Ballista     6      49
-U46       Soldier-Elephant     6      101
-U11       Soldier-Ballista     6      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U46       Soldier-Elephant     1      101
+
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U46       Soldier-Elephant     1      101
+
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
+U46       Soldier-Elephant     2      101
 
 C2      Catapult_Tower         1      68
 
 B276      Wonder               1      -1
-B50       Farm                 24     -1
 
-U46       Soldier-Elephant     6      101
-U46       Soldier-Elephant     6      101
+B101      Stable1              2      -1
+
 U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
+U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
 
 R47     Bronze_Shield          1      103
 R117    Iron_Shield            1      103
 C125    Armored Elephants      1      101
 
-U46       Soldier-Elephant     6      101
-U46       Soldier-Elephant     6      101
-U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
+U46       Soldier-Elephant     4      101
 
-U46       Soldier-Elephant     6      101
-U46       Soldier-Elephant     6      101
 U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
+U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
 
-U46       Soldier-Elephant     6      101
-U46       Soldier-Elephant     6      101
 U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
+U11       Soldier-Ballista     6      49
+U46       Soldier-Elephant     4      101
+
+// 86 helepolis, 48 armored elephant, 18 camel, 12 priest (7 siege workshop, 4 stable, 2 temple)
+// 30 villager, 16 farm, 24 tower (pop 195, tech 31)
+// _spent: 17615 wood, 21065 food, 16260 gold, 5500 stone
