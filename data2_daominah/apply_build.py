@@ -114,22 +114,32 @@ def main():
             "Yamato Heavy Cavalry.ai",
         },
     }
-    print("number of source files: ", len(mapBuilds))
+
+    print("___________________________________________________________________")
+    usedSources = []
+    unusedSources = []
     for src, targets in mapBuilds.items():
         srcPath = os.path.join(sourceDir, src)
         if not Path(srcPath).exists():
-            print(f"file {srcPath} does not exist")
+            print(f"error file {srcPath} does not exist")
             continue
-        print(f"copying '{src}' to {len(targets)} targets:")
+        nCopiedTargets = 0
         for target in targets:
             targetPath = os.path.join(targetDir, target)
             try:
                 shutil.copyfile(srcPath, targetPath)
-                print(f"    to '{target}'")
+                nCopiedTargets += 1
             except Exception as err:
                 print(f"error copyfile '{srcPath}' to '{targetPath}': {err}")
+        if nCopiedTargets > 0:
+            usedSources.append(src)
+        else:
+            unusedSources.append(src)
+        print(f"copied '{src}' to {nCopiedTargets} targets.")
+    print("___________________________________________________________________")
+    print(f"unused source files: {unusedSources}")
+    print(f"used {len(usedSources)} source files: {usedSources}")
 
 
 if __name__ == "__main__":
     main()
-    print("main returned")

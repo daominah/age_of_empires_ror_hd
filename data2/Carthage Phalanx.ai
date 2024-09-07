@@ -71,9 +71,9 @@ T125      Priest               2      104       0
 B49       Siege_Workshop       2      -1
 R114    Writing                1      82
 T338      Soldier-Camel        2      101       0
-B49       Siege_Workshop       2      -1
 T338      Soldier-Camel        2      101       0
 T125      Priest               2      104       0
+B49       Siege_Workshop       2      -1
 B49       Siege_Workshop       2      -1
 
 R110    Craftmanship           1      84
@@ -84,12 +84,10 @@ T11       Soldier-Ballista     2      49        0
 T11       Soldier-Ballista     2      49        0
 T125      Priest               2      104       0
 T83       Man                  2      109       0
-T11       Soldier-Ballista     2      49        0
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          1      -1
 
 T46       Soldier-Elephant     2      101       0
-T11       Soldier-Ballista     2      49        0
 T11       Soldier-Ballista     2      49        0
 T11       Soldier-Ballista     2      49        0
 T83       Man                  2      109       0
@@ -124,6 +122,8 @@ U125      Priest               2      104
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 
+U11       Soldier-Ballista     2      49
+U11       Soldier-Ballista     2      49
 U11       Soldier-Ballista     2      49
 U125      Priest               2      104
 B50       Farm                 2      -1
