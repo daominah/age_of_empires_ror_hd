@@ -156,16 +156,12 @@ B50       Farm                 2      -1
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
-B109      Town_Center1         1      -1
-
-B79       Watch_Tower          2      -1
-B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
 // 48 horse archer, 40 chariot archer, 15 priest, 12 catapult (7 range, 3 temple, 2 siege workshop)
-// 42 villager, 16 farm, 20 tower (pop 158, tech 23)
-// spent: 11370 wood, 10710 food, 8435 gold, 3150 stone
+// 42 villager, 16 farm, 16 tower (pop 158, tech 23)
+// spent: 11170 wood, 10710 food, 8435 gold, 2550 stone
 
 
 R109    Stone_Mining           1      84

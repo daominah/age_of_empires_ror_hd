@@ -102,7 +102,8 @@ T35       Soldier-Catapult1    1      49        0
 U39       Soldier-Cavalry3_Arc 3      87
 T35       Soldier-Catapult1    1      49        0
 T125      Priest               2      104       0
-B79       Watch_Tower          2      -1
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 3      87
 U35       Soldier-Catapult1    1      49
@@ -111,8 +112,7 @@ U35       Soldier-Catapult1    1      49
 R18     Afterlife              1      104
 R20     Fanaticism             1      104
 R22     Astrology              1      104
-B50       Farm                 2      -1
-B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
 
 U35       Soldier-Catapult1    2      49
 U125      Priest               2      104
@@ -126,15 +126,12 @@ B50       Farm                 2      -1
 B50       Farm                 2      -1
 
 B79       Watch_Tower          2      -1
-B79       Watch_Tower          2      -1
-B79       Watch_Tower          2      -1
-B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
 // 30 heavy horse archer, 12 catapult, 10 camel, 8 chariot archer, 8 priest (7 range, 2 siege workshop, 1 stable, 2 temple)
-// 20 villager, 12 farm, 20 tower (pop 89, tech 25)
-// spent: 8185 wood, 10905 food, 7480 gold, 3150 stone
+// 20 villager, 12 farm, 16 tower (pop 89, tech 25)
+// spent: 7985 wood, 10905 food, 7480 gold, 2550 stone
 
 
 U39       Soldier-Cavalry3_Arc 6      87
