@@ -71,11 +71,14 @@ def main():
             "Minoa Composite Bowmen.ai",
         },
         "Palmyra_Camel.ai": {
-            "Palmyra Horse Archer.ai",
-        },
-        "Palmyra_Stable.ai": {
             "Palmyra Composite Bow.ai",
             "Palmyra Elephant.ai",
+            # "Palmyra Horse Archer.ai",
+        },
+        "Palmyra_Horse_Archer.ai": {
+            # "Palmyra Composite Bow.ai",
+            # "Palmyra Elephant.ai",
+            "Palmyra Horse Archer.ai",
         },
         "Persia_War_Elephant.ai": {
             "Persia Elephant Archers.ai",
@@ -90,12 +93,12 @@ def main():
         },
         "Rome_Legion.ai": {
             # "Rome Axemen.ai",
-            # "Rome Legion.ai",
+            "Rome Legion.ai",
             # "Rome Siege.ai",
         },
         "Rome_Siege.ai": {
             "Rome Axemen.ai",
-            "Rome Legion.ai",
+            # "Rome Legion.ai",
             "Rome Siege.ai",
         },
         "Shang_Stable.ai": {
