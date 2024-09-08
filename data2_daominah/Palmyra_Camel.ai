@@ -108,7 +108,8 @@ B79       Watch_Tower          2      -1
 U40       Soldier-Chariot1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               1      104
-B79       Watch_Tower          2      -1
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 
 U40       Soldier-Chariot1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
@@ -132,6 +133,7 @@ B109      Town_Center1         1      -1
 
 B50       Farm                 2      -1
 B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 

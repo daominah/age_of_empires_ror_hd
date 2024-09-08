@@ -19,17 +19,18 @@ B101      Stable1              1      -1
 B84       Market1              1      -1
 T83       Man                  2      109       0
 R46     Toolworking            1      103
-B79       Watch_Tower          2      -1
+B101      Stable1              2      -1
 T299      Soldier-Scout        1      101       0
 // 14 villager, 1 scout
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B101      Stable1              2      -1
+B79       Watch_Tower          2      -1
 
-T37       Soldier-Cavalry1     3      101       0
+T37       Soldier-Cavalry1     1      101       0
 R28     Wheel                  1      84
+T37       Soldier-Cavalry1     2      101       0
 R51     Metal_Working          1      103
 R12     Sentry_Tower           1      68
 T83       Man                  2      109       0
@@ -48,22 +49,19 @@ B104      Temple1              1      -1
 B109      Town_Center1         1      -1
 
 T37       Soldier-Cavalry1     3      101       0
-T83       Man                  2      109       0
 T125      Priest               1      104       0
-
-T37       Soldier-Cavalry1     3      101       0
 T83       Man                  2      109       0
-T125      Priest               2      104       0
-T83       Man                  2      109       0
-R112    Architecture           1      82
-B79       Watch_Tower          2      -1
 
-// 15 cavalry, 4 priest (3 stable, 2 temple)
-// 26 villager, 4 tower (pop 46, tech 12)
-// 2515 wood, 4678 food, 1690 gold, 650 stone
+// 12 cavalry, 2 priest (3 stable, 2 temple)
+// 22 villager, 2 tower (pop 37, tech 11)
+// _spent: 2190 wood, 4170 food, 1260 gold, 350 stone
 
 
 C103    Iron_Age               1      109
+T37       Soldier-Cavalry1     3      101       0
+T125      Priest               2      104       0
+T83       Man                  2      109       0
+R112    Architecture           1      82
 R24     Polytheism             1      104
 T37       Soldier-Cavalry1     3      101       0
 T83       Man                  2      109       0
@@ -80,15 +78,19 @@ B87       Range1               2      -1
 R71     Heavy_Cavalry          1      101
 R52     Metallurgy             1      103
 R18     Afterlife              1      104
-U37       Soldier-Cavalry1     6      101
+U37       Soldier-Cavalry1     2      101
+U37       Soldier-Cavalry1     2      101
+U37       Soldier-Cavalry1     2      101
+T125      Priest               1      104       0
+T39       Soldier-Cavalry3_Arc 2      87        0
+T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
+
+U37       Soldier-Cavalry1     3      101
+U37       Soldier-Cavalry1     3      101
 U39       Soldier-Cavalry3_Arc 2      87
 T125      Priest               1      104       0
 B79       Watch_Tower          2      -1
-
-U37       Soldier-Cavalry1     6      101
-U39       Soldier-Cavalry3_Arc 2      87
-T125      Priest               1      104       0
-B50       Farm                 2      -1
 
 R50     Chain_Mail_-_Cavalry   1      103
 R78     Cataphracts            1      101
@@ -96,34 +98,32 @@ U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               2      104
 B50       Farm                 2      -1
+B50       Farm                 2      -1
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               2      104
 B50       Farm                 2      -1
-
 B50       Farm                 2      -1
-B79       Watch_Tower          2      -1
 B109      Town_Center1         1      -1
 
 B50       Farm                 2      -1
 B50       Farm                 2      -1
-B50       Farm                 2      -1
-B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
+
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B79       Watch_Tower          2      -1
+
 B87       Range1               2      -1
-B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
 // 48 cataphract, 12 priest, 8 horse archer (7 stable, 2 temple, 4 range)
-// 30 villager, 16 farm, 16 tower (pop 99, tech 20)
-// spent: 5765 wood, 10935 food, 7615 gold, 2450 stone
+// 30 villager, 16 farm, 12 tower (pop 99, tech 20)
+// spent: 5765 wood, 10935 food, 7615 gold, 1850 stone
 
 
-// R108    Gold_Mining            1      84
-// R30     Coinage                1      84
 R32     Artisanship            1      84
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87
@@ -139,8 +139,11 @@ R44     Scale_Armor_-_Archers  1      103
 U39       Soldier-Cavalry3_Arc 4      87
 
 R49     Chain_Mail_-_Archers   1      103
+R108    Gold_Mining            1      84
 U39       Soldier-Cavalry3_Arc 4      87
 B50       Farm                 4      -1
+
+R30     Coinage                1      84
 
 C38     Heavy_Horse_Archer     1      87
 

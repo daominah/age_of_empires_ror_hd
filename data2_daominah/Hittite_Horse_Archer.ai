@@ -3,8 +3,8 @@
 // * Siege units HP x2.
 // * Warships range +4.
 // Build summary:
-// * Bronze Age: 8+8 Chariot Archer, 1+2 Catapult, 9+3 Tower.
-// * Iron Age: 36 Heavy Horse Archer, 12 Catapult, 30 tower.
+// * Bronze Age: 12+12 chariot archer, 2 stone thrower
+// * Iron Age: 30 heavy horse archer, 14 catapult, 24 tower
 
 
 B109      Town_Center1         1      -1
@@ -14,147 +14,182 @@ B12       Barracks1            1      -1
 
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
-B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
+B87       Range1               1      -1
 B84       Market1              1      -1
-B79       Watch_Tower          1      -1
 T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
 T4        Soldier-Archer1      1      87        0
 // 14 villager, 1 bowman
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B79       Watch_Tower          2      -1
-B87       Range1               3      -1
+B87       Range1               2      -1
 
 R28     Wheel                  1      84
 R44     Scale_Armor_-_Archers  1      103
 R12     Sentry_Tower           1      68
 T83       Man                  2      109       0
+B87       Range1               1      -1
 B82       Government_Center    1      -1
-B79       Watch_Tower          2      -1
 
 U41       Soldier-Chariot2     2      87
 U41       Soldier-Chariot2     2      87
 T83       Man                  2      109       0
 R32     Artisanship            1      84
 R112    Architecture           1      82
-B49       Siege_Workshop       1      -1
-B79       Watch_Tower          2      -1
+B49       Siege_Workshop       2      -1
 
-T41       Soldier-Chariot2     4      87        0
-T83       Man                  2      109       0
-T35       Soldier-Catapult1    1      49        0
+U41       Soldier-Chariot2     2      87
+U41       Soldier-Chariot2     2      87
 R34     Nobility               1      82
+T83       Man                  2      109       0
+
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
+T35       Soldier-Catapult1    2      49        0
+T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
 
-// 20 villager, 8 chariot archer, 1 catapult
-// 4 archery range, 1 siege workshop, 9 tower
+// 12 chariot archer, 2 stone thrower (4 range, 2 siege workshop)
+// 22 villager, 4 tower (pop 37, tech 11)
+// _spent: 3835 wood, 3955 food, 330 gold, 650 stone
 
 
 C103    Iron_Age               1      109
 R114    Writing                1      82
-T41       Soldier-Chariot2     4      87        0
-T41       Soldier-Chariot2     4      87        0
-T35       Soldier-Catapult1    1      49        0
-B49       Siege_Workshop       2      -1
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
+T35       Soldier-Catapult1    2      49        0
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
 B87       Range1               2      -1
-B79       Watch_Tower          1      -1
-B82       Government_Center    1      -1
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
+T35       Soldier-Catapult1    2      49        0
 B87       Range1               1      -1
-B79       Watch_Tower          2      -1
+B82       Government_Center    1      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
-T83       Man                  2      109       0
-U35       Soldier-Catapult1    2      49
+T39       Soldier-Cavalry3_Arc 2      87        0
+T39       Soldier-Cavalry3_Arc 2      87        0
 R15     Guard_Tower            1      68
 R37     Alchemy                1      82
 R54     Heavy_Catapult         1      49
 R49     Chain_Mail_-_Archers   1      103
 R110    Craftmanship           1      84
 R35     Engineering            1      82
+T83       Man                  2      109       0
+T35       Soldier-Catapult1    1      49        0
+T39       Soldier-Cavalry3_Arc 2      87        0
 B79       Watch_Tower          2      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
-U35       Soldier-Catapult1    2      49
-B79       Watch_Tower          1      -1
+T35       Soldier-Catapult1    1      49        0
+U39       Soldier-Cavalry3_Arc 2      87
+B79       Watch_Tower          2      -1
 
 R38     Heavy_Horse_Archer     1      87
-U39       Soldier-Cavalry3_Arc 6      87
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
 R106    Ballistics             1      82
 T83       Man                  2      109       0
-B79       Watch_Tower          1      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
-T83       Man                  2      109       0
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
+U35       Soldier-Catapult1    2      49
+B50       Farm                 2      -1
 B50       Farm                 2      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
+U35       Soldier-Catapult1    2      49
+B50       Farm                 2      -1
 B50       Farm                 2      -1
 
-U39       Soldier-Cavalry3_Arc 6      87
-B50       Farm                 2      -1
+U35       Soldier-Catapult1    2      49
+B79       Watch_Tower          2      -1
 
+B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
-
-B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-
-// 36 heavy horse archer, 12 catapult, 16 chariot archer (pop 93)
-// 30 tower, 28 man, 16 farm, 7 range, 3 siege
-// spent army: 8990 wood, 10805 food, 5675 gold, 4650 stone
+// 30 heavy horse archer, 24 chariot archer, 14 catapult (7 range, 2 siege workshop)
+// 28 villager, 14 farm, 24 tower (pop 97, tech 21)
+// spent: 9710 wood, 10825 food, 5415 gold, 3750 stone
 
 
-U39       Soldier-Cavalry3_Arc 6      87
-U39       Soldier-Cavalry3_Arc 6      87
-// 48 heavy horse archer
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 3      87
 
 R109    Stone_Mining           1      84
 
 R111    Siegecraft             1      84
 
-B109      Town_Center1         1      -1
-
 C36     Massive_Catapult       1      49
 
 C2      Catapult_Tower         1      68
 
-U25       Soldier-El_Archer    6      87
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
+R108    Gold_Mining            1      84
 
-U25       Soldier-El_Archer    6      87
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
+R30     Coinage                1      84
 
-U25       Soldier-El_Archer    6      87
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
+U35       Soldier-Catapult1    2      49
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U39       Soldier-Cavalry3_Arc 2      87
 
-U25       Soldier-El_Archer    6      87
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
+U35       Soldier-Catapult1    2      49
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U39       Soldier-Cavalry3_Arc 2      87
 
-U25       Soldier-El_Archer    6      87
-U39       Soldier-Cavalry3_Arc 6      87
-U35       Soldier-Catapult1    3      49
+U35       Soldier-Catapult1    2      49
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U39       Soldier-Cavalry3_Arc 2      87
 
+U35       Soldier-Catapult1    2      49
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U39       Soldier-Cavalry3_Arc 2      87
+
+U35       Soldier-Catapult1    2      49
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U39       Soldier-Cavalry3_Arc 2      87
+
+U35       Soldier-Catapult1    2      49
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U39       Soldier-Cavalry3_Arc 2      87
+
+U35       Soldier-Catapult1    2      49
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
+U39       Soldier-Cavalry3_Arc 6      87
 
 B276      Wonder               1      -1
 B50       Farm                 24     -1
+
+// 84 heavy horse archer, 34 massive catapult, 24 elephant archer, 24 chariot archer (7 range, 2 siege workshop)
+// 28 villager, 38 farm, 24 tower (pop 195, tech 27)
+// _spent: 17710 wood, 22055 food, 13335 gold, 5650 stone
