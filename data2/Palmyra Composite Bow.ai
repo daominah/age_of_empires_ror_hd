@@ -19,8 +19,8 @@ B101      Stable1              1      -1
 B84       Market1              1      -1
 T83       Man                  2      109       0
 R46     Toolworking            1      103
-B79       Watch_Tower          2      -1
 T299      Soldier-Scout        1      101       0
+B79       Watch_Tower          2      -1
 // 12 villager, 1 scout
 
 
@@ -167,3 +167,8 @@ U39       Soldier-Cavalry3_Arc 4      87
 
 // B276      Wonder               1      -1
 B50       Farm                 24     -1
+
+// 86 scythe chariot, 40 heavy horse archer, 24 camel, 20 priest (7 stable, 4 ra
+nge, 3 temple)
+// 24 villager, 36 farm, 20 tower (pop 195, tech 27)
+// _spent: 14175 wood, 15880 food, 10580 gold, 3150 stone

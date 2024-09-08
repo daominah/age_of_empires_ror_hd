@@ -80,17 +80,17 @@ R110    Craftmanship           1      84
 R37     Alchemy                1      82
 R15     Guard_Tower            1      68
 T46       Soldier-Elephant     2      101       0
-T11       Soldier-Ballista     2      49        0
-T11       Soldier-Ballista     2      49        0
 T125      Priest               2      104       0
 T83       Man                  2      109       0
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
 B49       Siege_Workshop       1      -1
 B79       Watch_Tower          1      -1
 
 T46       Soldier-Elephant     2      101       0
-T11       Soldier-Ballista     2      49        0
-T11       Soldier-Ballista     2      49        0
 T83       Man                  2      109       0
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
 B79       Watch_Tower          2      -1
 
 R35     Engineering            1      82
