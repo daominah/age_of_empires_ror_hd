@@ -34,15 +34,15 @@ T83       Man                  2      109       0
 B87       Range1               1      -1
 B82       Government_Center    1      -1
 
-U41       Soldier-Chariot2     2      87
-U41       Soldier-Chariot2     2      87
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
 T83       Man                  2      109       0
 R32     Artisanship            1      84
 R112    Architecture           1      82
 B49       Siege_Workshop       2      -1
 
-U41       Soldier-Chariot2     2      87
-U41       Soldier-Chariot2     2      87
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
 R34     Nobility               1      82
 T83       Man                  2      109       0
 
