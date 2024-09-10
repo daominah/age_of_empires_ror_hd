@@ -3,8 +3,8 @@
 // * Villager move speed +18%.
 //
 // Build summary:
-// * Bronze Age: 25+15 chariot archer, 8 stone thrower, 4 priest
-// * Iron Age: 48 horse archer15 priest, 12 catapult
+// * Bronze Age: 15+15 chariot archer, 4 stone thrower, 1 priest
+// * Iron Age: 48 horse archer, 15 priest, 12 catapult
 
 
 B109      Town_Center1         1      -1
@@ -52,44 +52,31 @@ T41       Soldier-Chariot2     3      87        0
 T125      Priest               1      104       0
 T83       Man                  2      109       0
 R114    Writing                1      82
-B104      Temple1              1      -1
-B109      Town_Center1         1      -1
+B104      Temple1              2      -1
 
-T41       Soldier-Chariot2     2      87        0
-T41       Soldier-Chariot2     3      87        0
-T35       Soldier-Catapult1    2      49        0
-T83       Man                  2      109       0
-T125      Priest               1      104       0
-
-T41       Soldier-Chariot2     2      87        0
-T41       Soldier-Chariot2     3      87        0
-T83       Man                  2      109       0
-T35       Soldier-Catapult1    2      49        0
-T83       Man                  2      109       0
-T125      Priest               2      104       0
-
-// 25 chariot archer, 8 stone thrower, 4 priest (5 range, 2 siege workshop, 2 temple)
-// 28 villager, 2 tower (pop 66, tech 10)
-// _spent: 6550 wood, 4650 food, 1265 gold, 350 stone
+// 15 chariot archer, 4 stone thrower, 1 priest (5 range, 2 siege workshop, 3 temple)
+// 22 villager, 2 tower (pop 43, tech 10)
+// _spent: 4980 wood, 3950 food, 570 gold, 350 stone
 
 
 C103    Iron_Age               1      109
-B104      Temple1              1      -1
-B79       Watch_Tower          1      -1
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     3      87        0
+T35       Soldier-Catapult1    2      49        0
+T125      Priest               1      104       0
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     3      87        0
+T35       Soldier-Catapult1    2      49        0
+T125      Priest               3      104       0
+B109      Town_Center1         1      -1
+B87       Range1               1      -1
 T41       Soldier-Chariot2     2      87        0
 T41       Soldier-Chariot2     3      87        0
 T83       Man                  2      109       0
-B87       Range1               2      -1
 R21     Mysticism              1      104
 R24     Polytheism             1      104
 R22     Astrology              1      104
-T41       Soldier-Chariot2     2      87        0
-T41       Soldier-Chariot2     3      87        0
-T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
-T41       Soldier-Chariot2     2      87        0
-T41       Soldier-Chariot2     3      87        0
-T83       Man                  2      109       0
 
 U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
@@ -104,64 +91,73 @@ U39       Soldier-Cavalry3_Arc 2      87
 U35       Soldier-Catapult1    1      49
 T125      Priest               1      104       0
 T83       Man                  2      109       0
-B50       Farm                 2      -1
-B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
-U39       Soldier-Cavalry3_Arc 3      87
+U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
 U35       Soldier-Catapult1    1      49
-B50       Farm                 2      -1
-B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
 
 U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 3      87
+T83       Man                  2      109       0
+U39       Soldier-Cavalry3_Arc 2      87
 R108    Gold_Mining            1      84
 R19     Monotheism             1      104
 // R119    Medicine               1      104
 // R23     Jihad                  1      104
 U125      Priest               2      104
-B79       Watch_Tower          2      -1
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 
 U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 3      87
+T83       Man                  2      109       0
+U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               2      104
+T83       Man                  2      109       0
 U35       Soldier-Catapult1    2      49
 
 R30     Coinage                1      84
 U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 3      87
-U125      Priest               3      104
-// U35       Soldier-Catapult1    2      49
-B79       Watch_Tower          2      -1
-
+T83       Man                  2      109       0
 U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 3      87
-
-U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 2      87
-U39       Soldier-Cavalry3_Arc 3      87
 U125      Priest               3      104
 B50       Farm                 2      -1
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+B79       Watch_Tower          2      -1
 
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
+
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
+U125      Priest               3      104
+B50       Farm                 2      -1
+B50       Farm                 2      -1
+
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
+U39       Soldier-Cavalry3_Arc 2      87
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 
+B50       Farm                 2      -1
+B50       Farm                 2      -1
 B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-// 48 horse archer, 40 chariot archer, 15 priest, 12 catapult (7 range, 3 temple, 2 siege workshop)
-// 42 villager, 16 farm, 16 tower (pop 158, tech 23)
-// spent: 11170 wood, 10710 food, 8435 gold, 2550 stone
+// 48 horse archer, 30 chariot archer, 16 priest, 12 catapult (6 range, 3 temple, 2 siege workshop)
+// 42 villager, 20 farm, 16 tower (pop 149, tech 23)
+// spent: 10620 wood, 10310 food, 8560 gold, 2550 stone
 
 
 R109    Stone_Mining           1      84
@@ -171,16 +167,25 @@ R111    Siegecraft             1      84
 B49       Siege_Workshop       1      -1
 R36     Massive_Catapult       1      49
 
-U39       Soldier-Cavalry3_Arc 8      87
-U35       Soldier-Catapult1    3      49
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
 U125      Priest               3      104
 
-U39       Soldier-Cavalry3_Arc 8      87
-U35       Soldier-Catapult1    3      49
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
 U125      Priest               3      104
 
-U39       Soldier-Cavalry3_Arc 8      87
-U35       Soldier-Catapult1    3      49
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
+U125      Priest               3      104
+
+U39       Soldier-Cavalry3_Arc 6      87
+U35       Soldier-Catapult1    2      49
+U125      Priest               3      104
 
 // B276      Wonder               1      -1
 B50       Farm                 24     -1
+
+// 72 horse archer, 30 chariot archer, 28 priest, 20 massive catapult (6 range, 3 temple, 3 siege workshop)
+// 42 villager, 44 farm, 16 tower (pop 193, tech 26)
+// _spent: 15260 wood, 13600 food, 12380 gold, 2700 stone
