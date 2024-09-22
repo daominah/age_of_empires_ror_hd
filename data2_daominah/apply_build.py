@@ -18,11 +18,11 @@ def main():
     # Palmyra:3, Persia:3, Phoenicia:1, Rome:3, Shang:3
     mapBuilds = {
         "Assyria_Archer.ai": {
-            "Assyria Archer Bronze.ai",
-            "Assyria Archer Iron.ai",
-            "Assyria Ballista.ai",
-            "Assyria Bowmen.ai",
-            "Assyria Infantry Bronze.ai",
+            # "Assyria Archer Bronze.ai",
+            # "Assyria Archer Iron.ai",
+            # "Assyria Ballista.ai",
+            # "Assyria Bowmen.ai",
+            # "Assyria Infantry Bronze.ai",
             "Immortal Assyria.ai",
         },
         "Babylon_Tower_Priest.ai": {
@@ -39,17 +39,17 @@ def main():
             "Choson Swordsmen.ai",
         },
         "Egypt_Chariot_Priest.ai": {
-            "Egypt Archers Bronze.ai",
-            "Egypt Archers Iron.ai",
-            "Egypt Chariot Archer.ai",
-            "Egypt Chariots.ai",
-            "Egypt War Elephants.ai",
+            # "Egypt Archers Bronze.ai",
+            # "Egypt Archers Iron.ai",
+            # "Egypt Chariot Archer.ai",
+            # "Egypt Chariots.ai",
+            # "Egypt War Elephants.ai",
             "Immortal Egypt.ai",
         },
         "Greek_Centurion.ai": {
-            "Greek Phalanx.ai",
-            "Greek Priests.ai",
-            "Greek Siege.ai",
+            # "Greek Phalanx.ai",
+            # "Greek Priests.ai",
+            # "Greek Siege.ai",
             "Immortal Greek.ai",
         },
         "Hittite_Horse_Archer.ai": {
@@ -68,7 +68,7 @@ def main():
         },
         "Minoa_Composite_Bowmen.ai": {
             "Immortal Minoa.ai",
-            "Minoa Composite Bowmen.ai",
+            # "Minoa Composite Bowmen.ai",
         },
         "Palmyra_Camel.ai": {
             "Palmyra Composite Bow.ai",
@@ -108,13 +108,13 @@ def main():
         },
         "Sumeria_Catapult.ai": {
             "Immortal Sumeria.ai",
-            "Sumeria Catapults.ai",
-            "Sumeria Chariots.ai",
-            "Sumeria Scouts.ai",
+            # "Sumeria Catapults.ai",
+            # "Sumeria Chariots.ai",
+            # "Sumeria Scouts.ai",
         },
         "Yamato_Cavalry.ai": {
             "Immortal Yamato.ai",
-            "Yamato Heavy Cavalry.ai",
+            # "Yamato Heavy Cavalry.ai",
         },
     }
 
