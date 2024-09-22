@@ -579,7 +579,7 @@ func TestGuessCivilization(t *testing.T) {
 	}{
 		{fileName: "Assyria_Archer.ai", want: Assyrian},
 		{fileName: "Babylon_Tower_Priest.ai.ai", want: Babylonian},
-		{fileName: "Minoa_Composite_Bowmen.ai", want: Minoan},
+		{fileName: "Minoa_Bowmen_Helepolis.ai", want: Minoan},
 		{fileName: "Rome Legion.ai", want: Roman},
 	} {
 		if guess := GuessCivilization(c.fileName); guess != c.want {
