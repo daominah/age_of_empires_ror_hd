@@ -66,7 +66,7 @@ def main():
             "Macedon Elephant.ai",
             "Macedon Phalanx.ai",
         },
-        "Minoa_Composite_Bowmen.ai": {
+        "Minoa_Bowmen_Helepolis.ai": {
             "Immortal Minoa.ai",
             # "Minoa Composite Bowmen.ai",
         },

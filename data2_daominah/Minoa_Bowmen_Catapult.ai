@@ -3,8 +3,8 @@
 // * Farm food +60 (starting at 310 instead of 250).
 // * Ships cost -30%.
 // Build summary:
-// * Bronze Age: 18+24 composite bowman, 6 camel, 4 hoplite
-// * Iron Age: 66 composite bowman, 28 helepolis
+// * Bronze Age: 13+20 composite bowman, 6 camel, 4 hoplite
+// * Iron Age: 48 composite bowman, 20 heavy catapult
 
 
 B109      Town_Center1         1      -1
@@ -19,12 +19,13 @@ B101      Stable1              1      -1
 B84       Market1              1      -1
 T83       Man                  2      109       0
 R46     Toolworking            1      103
+B79       Watch_Tower          1      -1
 // 14 villager
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B87       Range1               2      -1
+B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
 B79       Watch_Tower          1      -1
 B79       Watch_Tower          1      -1
@@ -44,145 +45,149 @@ B87       Range1               2      -1
 
 R57     Composite_Bow          1      87
 T338      Soldier-Camel        1      101       0
-T5        Soldier-Archer2      2      87        0
+T5        Soldier-Archer2      1      87        0
 T93       Soldier-Phal1        1      0         0
-T5        Soldier-Archer2      2      87        0
 T83       Man                  2      109       0
 
 R32     Artisanship            1      84
 T338      Soldier-Camel        1      101       0
-T5        Soldier-Archer2      2      87        0
+T5        Soldier-Archer2      1      87        0
 T83       Man                  1      109       0
 T93       Soldier-Phal1        1      0         0
 T5        Soldier-Archer2      2      87        0
 B87       Range1               1      -1
 B82       Government_Center    1      -1
 
+T338      Soldier-Camel        1      101       0
 T5        Soldier-Archer2      2      87        0
 T83       Man                  2      109       0
-T93       Soldier-Phal1        1      0         0
 T5        Soldier-Archer2      2      87        0
+T93       Soldier-Phal1        1      0         0
 
-T5        Soldier-Archer2      3      87        0
+T338      Soldier-Camel        1      101       0
+T5        Soldier-Archer2      2      87        0
 T83       Man                  1      109       0
 T5        Soldier-Archer2      3      87        0
 R112    Architecture           1      82
 B49       Siege_Workshop       2      -1
 
-// 18 composite bowman, 4 camel, 3 hoplite (6 range, 1 stable, 1 academy)
-// 23 villager, 2 tower (pop 48, tech 14)
-// _spent: 3445 wood, 5035 food, 770 gold, 350 stone
+// 13 composite bowman, 6 camel, 3 hoplite (5 range, 1 stable, 1 academy)
+// 23 villager, 3 tower (pop 45, tech 14)
+// _spent: 3295 wood, 4975 food, 790 gold, 500 stone
 
 
 C103    Iron_Age               1      109
-T5        Soldier-Archer2      3      87        0
+R109    Stone_Mining           1      84
+T5        Soldier-Archer2      2      87        0
 T5        Soldier-Archer2      3      87        0
 T93       Soldier-Phal1        1      0         0
 B49       Siege_Workshop       2      -1
-T5        Soldier-Archer2      3      87        0
+T5        Soldier-Archer2      2      87        0
 T5        Soldier-Archer2      3      87        0
 T35       Soldier-Catapult1    2      49        0
-T5        Soldier-Archer2      3      87        0
+T5        Soldier-Archer2      2      87        0
 T5        Soldier-Archer2      3      87        0
 B82       Government_Center    1      -1
-B49       Siege_Workshop       1      -1
-T5        Soldier-Archer2      3      87        0
+B84       Market1              1      -1
+T5        Soldier-Archer2      2      87        0
 T5        Soldier-Archer2      3      87        0
 T35       Soldier-Catapult1    2      49        0
 B79       Watch_Tower          2      -1
 
 R37     Alchemy                1      82
 R110    Craftmanship           1      84
-// R54     Heavy_Catapult         1      49
+R54     Heavy_Catapult         1      49
 R49     Chain_Mail_-_Archers   1      103
+R111    Siegecraft             1      84
 R35     Engineering            1      82
 T83       Man                  1      109       0
-T5        Soldier-Archer2      3      87        0
-T11       Soldier-Ballista     2      49        0
-T5        Soldier-Archer2      3      87        0
-T11       Soldier-Ballista     2      49        0
+U5        Soldier-Archer2      2      87
+T35       Soldier-Catapult1    1      49        0
+U5        Soldier-Archer2      3      87
+T35       Soldier-Catapult1    2      49        0
 
 T83       Man                  1      109       0
+U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     2      49
-U11       Soldier-Ballista     2      49
 B79       Watch_Tower          2      -1
 
 T83       Man                  1      109       0
+U5        Soldier-Archer2      2      87
+T35       Soldier-Catapult1    1      49        0
 U5        Soldier-Archer2      3      87
-U5        Soldier-Archer2      3      87
+T35       Soldier-Catapult1    2      49        0
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 
 R106    Ballistics             1      82
-R27     Helepolis              1      49
-T83       Man                  1      109       0
-U5        Soldier-Archer2      3      87
-U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     2      49
-U11       Soldier-Ballista     2      49
+C36     Massive_Catapult       1      49
+U35       Soldier-Catapult1    1      49
+U35       Soldier-Catapult1    2      49
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 B109      Town_Center1         1      -1
 
-T83       Man                  1      109       0
+U35       Soldier-Catapult1    1      49
+U35       Soldier-Catapult1    2      49
 B50       Farm                 2      -1
 B50       Farm                 2      -1
 B79       Watch_Tower          1      -1
 
-U11       Soldier-Ballista     2      49
-U11       Soldier-Ballista     2      49
-B79       Watch_Tower          1      -1
-
-U11       Soldier-Ballista     2      49
-U11       Soldier-Ballista     2      49
-B79       Watch_Tower          1      -1
-
-U11       Soldier-Ballista     2      49
-U11       Soldier-Ballista     2      49
-B79       Watch_Tower          1      -1
-
-U11       Soldier-Ballista     2      49
-U11       Soldier-Ballista     2      49
+U35       Soldier-Catapult1    2      49
+U35       Soldier-Catapult1    2      49
+B79       Watch_Tower          2      -1
 B79       Watch_Tower          2      -1
 
-// 66 composite bowman, 28 helepolis, 4 camel, 4 hoplite, 4 stone thrower (6 range, 5 siege workshop, 1 stable, 1 academy)
-// 28 villager, 12 farm, 12 tower (pop 134, tech 21)
-// spent: 10740 wood, 10805 food, 5480 gold, 1850 stone
+// 48 composite bowman, 20 massive catapult, 6 camel, 4 hoplite (5 range, 4 siege workshop, 1 stable, 1 academy)
+// 26 villager, 12 farm, 12 tower (pop 104, tech 24)
+// spent: 10620 wood, 11015 food, 4280 gold, 2000 stone
 
 
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     2      49
+U35       Soldier-Catapult1    2      49
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
 
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     2      49
+U35       Soldier-Catapult1    2      49
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
 
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     2      49
+U35       Soldier-Catapult1    2      49
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
 
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     2      49
+U35       Soldier-Catapult1    2      49
 U5        Soldier-Archer2      2      87
 U5        Soldier-Archer2      3      87
-U11       Soldier-Ballista     3      49
+U35       Soldier-Catapult1    2      49
+
+U5        Soldier-Archer2      2      87
+U5        Soldier-Archer2      3      87
+U35       Soldier-Catapult1    2      49
+U5        Soldier-Archer2      2      87
+U5        Soldier-Archer2      3      87
+U35       Soldier-Catapult1    2      49
+
+U5        Soldier-Archer2      2      87
+U5        Soldier-Archer2      3      87
+U35       Soldier-Catapult1    2      49
+U5        Soldier-Archer2      2      87
+U5        Soldier-Archer2      3      87
+U35       Soldier-Catapult1    2      49
 
 // B276      Wonder               1      -1
 B50       Farm                 24     -1
 
-// 104 composite bowman, 50 helepolis, 6 camel, 4 hoplite, 4 stone thrower (5 range, 5 siege workshop, 1 stable, 1 academy)
-// 28 villager, 36 farm, 12 tower (pop 196, tech 22)
-// _spent: 15040 wood, 12565 food, 8120 gold, 1900 stone
+// 108 composite bowman, 44 massive catapult, 6 camel, 4 hoplite (5 range, 4 siege workshop, 1 stable, 1 academy)
+// 26 villager, 36 farm, 12 tower (pop 188, tech 24)
+// _spent: 17340 wood, 13415 food, 7400 gold, 2000 stone
