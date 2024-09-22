@@ -78,18 +78,17 @@ C103    Iron_Age               1      109
 T5        Soldier-Archer2      3      87        0
 T5        Soldier-Archer2      3      87        0
 T93       Soldier-Phal1        1      0         0
-B49       Siege_Workshop       2      -1
-T5        Soldier-Archer2      3      87        0
-T5        Soldier-Archer2      3      87        0
-T35       Soldier-Catapult1    2      49        0
-T5        Soldier-Archer2      3      87        0
-T5        Soldier-Archer2      3      87        0
 B82       Government_Center    1      -1
 B49       Siege_Workshop       1      -1
 T5        Soldier-Archer2      3      87        0
 T5        Soldier-Archer2      3      87        0
 T35       Soldier-Catapult1    2      49        0
-B79       Watch_Tower          2      -1
+T5        Soldier-Archer2      3      87        0
+T5        Soldier-Archer2      3      87        0
+B49       Siege_Workshop       2      -1
+T5        Soldier-Archer2      3      87        0
+T5        Soldier-Archer2      3      87        0
+T35       Soldier-Catapult1    2      49        0
 
 R37     Alchemy                1      82
 R110    Craftmanship           1      84
@@ -101,6 +100,7 @@ T5        Soldier-Archer2      3      87        0
 T11       Soldier-Ballista     2      49        0
 T5        Soldier-Archer2      3      87        0
 T11       Soldier-Ballista     2      49        0
+B79       Watch_Tower          2      -1
 
 T83       Man                  1      109       0
 U5        Soldier-Archer2      3      87
