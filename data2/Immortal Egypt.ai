@@ -3,8 +3,8 @@
 // * Priest range +3 (10+6 instead of 10+3).
 // * Gold Miner work rate +44% and capacity +2 (stated +20%).
 // Build summary:
-// * Bronze Age: 10 camel, 20+12 chariot, 8+4 chariot archer, 10 priest
-// * Iron Age: 50 scythe chariot, 40 priest
+// * Bronze Age: 6 camel, 3+12 chariot, 2+8 chariot archer, 1+3 priest
+// * Iron Age: 50 scythe chariot, 40 priest, 20 chariot archer
 
 
 B109      Town_Center1         1      -1
@@ -13,153 +13,204 @@ B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
-B87       Range1               1      -1
 R16     Watch_Tower            1      68
-R41     Leather_Armor_-_Archer 1      103
-B84       Market1              1      -1
+R42     Leather_Armor_Mounted  1      103
 B101      Stable1              1      -1
-R46     Toolworking            1      103
+B84       Market1              1      -1
 T83       Man                  2      109       0
-T4        Soldier-Archer1      1      87        0
-// 14 villager, 1 bowman
+R46     Toolworking            1      103
+// T299      Soldier-Scout        1      101       0
+// 14 villager
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-R42     Leather_Armor_Mounted  1      103
-B101      Stable1              4      -1
-B87       Range1               1      -1
+B101      Stable1              2      -1
+R41     Leather_Armor_-_Archer 1      103
+B79       Watch_Tower          2      -1
 
+T338      Soldier-Camel        2      101       0
 R28     Wheel                  1      84
-T338      Soldier-Camel        5      101       0
 R45     Scale_Armor_-_Cavalry  1      103
 R12     Sentry_Tower           1      68
-T83       Man                  1      109       0
+T83       Man                  2      109       0
 B82       Government_Center    1      -1
-T338      Soldier-Camel        5      101       0
-T83       Man                  1      109       0
-B104      Temple1              1      -1
+B87       Range1               1      -1
 
-T40       Soldier-Chariot1     5      101       0
-T41       Soldier-Chariot2     2      87        0
+T338      Soldier-Camel        2      101       0
+T83       Man                  1      109       0
+
+T338      Soldier-Camel        2      101       0
 T83       Man                  2      109       0
 R51     Metal_Working          1      103
 R32     Artisanship            1      84
+R112    Architecture           1      82
+B87       Range1               1      -1
+B104      Temple1              1      -1
+
+T40       Soldier-Chariot1     3      101       0
+T41       Soldier-Chariot2     2      87        0
+T83       Man                  1      109       0
 R34     Nobility               1      82
+R44     Scale_Armor_-_Archers  1      103
 T125      Priest               1      104       0
 B104      Temple1              2      -1
 
-T40       Soldier-Chariot1     5      101       0
-T41       Soldier-Chariot2     2      87        0
-T83       Man                  2      109       0
-R112    Architecture           1      82
-R44     Scale_Armor_-_Archers  1      103
-// R81     Domestication          1      84
-T125      Priest               2      104       0
-R21     Mysticism              1      104
-B104      Temple1              2      -1
-
-T40       Soldier-Chariot1     5      101       0
-T41       Soldier-Chariot2     2      87        0
-T83       Man                  2      109       0
-T125      Priest               2      104       0
-B79       Watch_Tower          2      -1
-
-T40       Soldier-Chariot1     5      101       0
-T41       Soldier-Chariot2     2      87        0
-T83       Man                  2      109       0
-T125      Priest               5      104       0
-B101      Stable1              2      -1
-// 24 villager, 10 camel, 20 chariot, 8 chariot archer, 10 priest (pop 73)
-// 7 stable, 2 archery range, 5 temple, 2 tower
+// 6 camel, 3 chariot, 2 chariot archer, 1 priest (3 stable, 2 range, 3 temple)
+// 20 villager, 2 tower (pop 33, tech 15)
+// _spent: 3135 wood, 4630 food, 825 gold, 350 stone
 
 
 C103    Iron_Age               1      109
 R114    Writing                1      82
-R24     Polytheism             1      104
-R22     Astrology              1      104
-T40       Soldier-Chariot1     6      101       0
+T40       Soldier-Chariot1     3      101       0
 T41       Soldier-Chariot2     2      87        0
-T125      Priest               3      104       0
-U40       Soldier-Chariot1     6      101
+T125      Priest               1      104       0
+B101      Stable1              2      -1
+T40       Soldier-Chariot1     3      101       0
 T41       Soldier-Chariot2     2      87        0
-T125      Priest               3      104       0
-B79       Watch_Tower          4      -1
+T125      Priest               2      104       0
+T40       Soldier-Chariot1     3      101       0
+T41       Soldier-Chariot2     2      87        0
+B101      Stable1              2      -1
+T40       Soldier-Chariot1     3      101       0
+T41       Soldier-Chariot2     2      87        0
 
 R126    Scythe_Chariot         1      101
 R52     Metallurgy             1      103
-R37     Alchemy                1      82
-R110    Craftmanship           1      84
 R15     Guard_Tower            1      68
+R110    Craftmanship           1      84
+R37     Alchemy                1      82
 R18     Afterlife              1      104
 R20     Fanaticism             1      104
-U40       Soldier-Chariot1     6      101
+R21     Mysticism              1      104
+T40       Soldier-Chariot1     2      101       0
+T40       Soldier-Chariot1     2      101       0
+T41       Soldier-Chariot2     2      87        0
 T83       Man                  2      109       0
-U125      Priest               3      104
 B79       Watch_Tower          2      -1
 
-U40       Soldier-Chariot1     6      101
+T40       Soldier-Chariot1     2      101       0
+T40       Soldier-Chariot1     2      101       0
+T40       Soldier-Chariot1     2      101       0
+U41       Soldier-Chariot2     2      87
 T83       Man                  2      109       0
-U125      Priest               3      104
-B79       Watch_Tower          2      -1
+B104      Temple1              1      -1
+B79       Watch_Tower          1      -1
 
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U41       Soldier-Chariot2     2      87
+U83       Man                  2      109
+U125      Priest               2      104
 R50     Chain_Mail_-_Cavalry   1      103
-U40       Soldier-Chariot1     6      101
-T83       Man                  2      109       0
 R106    Ballistics             1      82
+U125      Priest               2      104
+B79       Watch_Tower          1      -1
+B50       Farm                 2      -1
+
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U41       Soldier-Chariot2     2      87
+U83       Man                  2      109
+T40       Soldier-Chariot1     3      101       0
+U125      Priest               2      104
+R49     Chain_Mail_-_Archers   1      103
+R24     Polytheism             1      104
+R22     Astrology              1      104
 B79       Watch_Tower          2      -1
 
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U125      Priest               2      104
+U41       Soldier-Chariot2     2      87
+U125      Priest               2      104
+T83       Man                  2      109       0
+B50       Farm                 2      -1
+B50       Farm                 2      -1
+
+U40       Soldier-Chariot1     2      101
+U125      Priest               2      104
+T83       Man                  2      109       0
 R19     Monotheism             1      104
 R119    Medicine               1      104
-U125      Priest               3      104
-R49     Chain_Mail_-_Archers   1      103
-B79       Watch_Tower          2      -1
-
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
 B50       Farm                 2      -1
-U125      Priest               3      104
-B79       Watch_Tower          2      -1
-
-B50       Farm                 2      -1
-U125      Priest               5      104
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-U125      Priest               5      104
 B109      Town_Center1         1      -1
-B79       Watch_Tower          1      -1
 
 U125      Priest               2      104
+U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
 
+U125      Priest               2      104
+U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          3      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
 
-// 50 scythe chariot, 40 priest (pop 143)
-// 30 tower, 30 villager
-// spent army: 10925 wood, 10445 food, 9560 gold, 3750 stone
+T125      Priest               2      104       0
+T125      Priest               2      104       0
+B79       Watch_Tower          2      -1
+
+T125      Priest               2      104       0
+T125      Priest               2      104       0
+B79       Watch_Tower          2      -1
+
+T125      Priest               2      104       0
+T125      Priest               2      104       0
+B79       Watch_Tower          2      -1
+
+T125      Priest               2      104       0
+T125      Priest               2      104       0
+B79       Watch_Tower          2      -1
+
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+
+// 50 scythe chariot, 40 priest, 20 chariot archer, 6 camel (7 stable, 4 temple, 2 range)
+// 32 villager, 12 farm, 24 tower (pop 148, tech 32)
+// spent: 11415 wood, 10545 food, 9320 gold, 3750 stone
 
 
-U40       Soldier-Chariot1     7      101
 U41       Soldier-Chariot2     2      87
-U40       Soldier-Chariot1     7      101
-U41       Soldier-Chariot2     2      87
-U40       Soldier-Chariot1     7      101
-U41       Soldier-Chariot2     2      87
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
 
-C2      Catapult_Tower         1      68
+U41       Soldier-Chariot2     2      87
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+
+U41       Soldier-Chariot2     2      87
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+
+U41       Soldier-Chariot2     2      87
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
 
 B109      Town_Center1         1      -1
+C2      Catapult_Tower         1      68
 
-U40       Soldier-Chariot1     7      101
 U41       Soldier-Chariot2     2      87
-U40       Soldier-Chariot1     7      101
-U41       Soldier-Chariot2     2      87
-U40       Soldier-Chariot1     7      101
-U41       Soldier-Chariot2     2      87
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
 
+U41       Soldier-Chariot2     2      87
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
+U40       Soldier-Chariot1     2      101
 
 B276      Wonder               1      -1
 B50       Farm                 24     -1
+
+// 86 scythe chariot, 40 priest, 32 chariot archer, 6 camel (7 stable, 4 temple, 2 range)
+// 32 villager, 36 farm, 24 tower (pop 196, tech 33)
+// _spent: 17715 wood, 14265 food, 10320 gold, 5500 stone
