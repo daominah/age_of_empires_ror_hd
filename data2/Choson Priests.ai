@@ -8,27 +8,28 @@
 
 
 B109      Town_Center1         1      -1
-U83       Man                  10     109
+U83       Man                  12     109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
 B12       Barracks1            5      -1
 R16     Watch_Tower            1      68
-R63     Axe                    1      12
+R40     Leather_Armor_-_Soldie 1      103
 B101      Stable1              1      -1
-R46     Toolworking            1      103
 B84       Market1              1      -1
-B79       Watch_Tower          1      -1
 T83       Man                  2      109       0
+R46     Toolworking            1      103
+B79       Watch_Tower          1      -1
 // T299      Soldier-Scout        1      101       0
-// 12 villager
+// 14 villager
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-R40     Leather_Armor_-_Soldie 1      103
-B79       Watch_Tower          2      -1
+R63     Axe                    1      12
+B79       Watch_Tower          1      -1
+B79       Watch_Tower          1      -1
 
 T37       Soldier-Cavalry1     1      101       0
 R28     Wheel                  1      84
@@ -40,11 +41,14 @@ B82       Government_Center    1      -1
 B104      Temple1              1      -1
 
 T37       Soldier-Cavalry1     1      101       0
-T75       Soldier-Inf3         5      12        0
-T83       Man                  2      109       0
+T83       Man                  1      109       0
+T75       Soldier-Inf3         2      12        0
+T83       Man                  1      109       0
+T75       Soldier-Inf3         2      12        0
 
 // 16 villager, 5 swordsmen, 2 cavalry
 // 6 barrack, 1 temple, 1 stable, 3 tower
+// spent
 
 
 C103    Iron_Age               1      109
