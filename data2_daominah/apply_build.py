@@ -35,8 +35,13 @@ def main():
         },
         "Choson_Swordsmen.ai": {
             "Choson Axemen.ai",
-            "Choson Priests.ai",
+            # "Choson Priests.ai",
             "Choson Swordsmen.ai",
+        },
+        "Choson_Tower.ai": {
+            # "Choson Axemen.ai",
+            "Choson Priests.ai",
+            # "Choson Swordsmen.ai",
         },
         "Egypt_Chariot_Priest.ai": {
             # "Egypt Archers Bronze.ai",
