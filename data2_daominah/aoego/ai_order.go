@@ -527,12 +527,15 @@ func (e *EmpireDeveloping) Summary() string {
 	var lines []string
 	lines = append(lines, "//")
 	lines = append(lines, "// "+e.beautyMainArmy())
-	economy := fmt.Sprintf("// %v villager", e.Combatants[Villager])
+	economy := fmt.Sprintf("// %v %v", e.Combatants[Villager], strings.ToLower(e.UnitStats[Villager].NameInGame))
 	if e.Buildings[Farm] > 0 {
 		economy += fmt.Sprintf(", %v farm", e.Buildings[Farm])
 	}
 	if e.Buildings[Tower] > 0 {
 		economy += fmt.Sprintf(", %v tower", e.Buildings[Tower])
+	}
+	if e.Buildings[Wonder] > 0 {
+		economy += fmt.Sprintf(", %v wonder", e.Buildings[Wonder])
 	}
 	economy += fmt.Sprintf(" (pop %.0f, tech %v)", e.CountPopulation(), e.TechnologyCount)
 	lines = append(lines, economy)

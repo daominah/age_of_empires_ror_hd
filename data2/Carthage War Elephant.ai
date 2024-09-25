@@ -30,8 +30,8 @@ B101      Stable1              1      -1
 B79       Watch_Tower          1      -1
 B79       Watch_Tower          1      -1
 
-T338      Soldier-Camel        2      101       0
 R28     Wheel                  1      84
+T338      Soldier-Camel        2      101       0
 R51     Metal_Working          1      103
 R12     Sentry_Tower           1      68
 T83       Man                  2      109       0

@@ -27,15 +27,15 @@ func main() {
 	// daominah optimized strategies:
 
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Assyria_Archer.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Tower_Priest.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Tower_Priest.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Helepolis.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Swordsmen.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Egypt_Chariot_Priest.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Greek_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Horse_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Catapult.ai`
-	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Bowmen_Helepolis.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Bowmen_Catapult.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Camel.ai`

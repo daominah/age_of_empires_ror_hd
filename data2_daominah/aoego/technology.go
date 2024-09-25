@@ -635,6 +635,7 @@ func NewTechnology(id TechID) (*Technology, error) {
 		t.Cost = Cost{Gold: 120}
 		t.Time, t.Location = 60, Temple
 		t.RequiredTechs = []TechID{IronAge}
+		t.Effects = []EffectFunc{ZealotryEffect23}
 	case Sacrifice:
 		t.NameInGame, t.Name = "Sacrifice", "Martyrdom"
 		t.Cost = Cost{Gold: 600}
@@ -958,6 +959,10 @@ func PhalanxEffect73(e *EmpireDeveloping) {
 
 func CenturionEffect25(e *EmpireDeveloping) {
 	e.UnitStats[Hoplite].NameInGame = "Centurion"
+}
+
+func ZealotryEffect23(e *EmpireDeveloping) {
+	e.UnitStats[Villager].NameInGame = "Jihad"
 }
 
 // other effects:
