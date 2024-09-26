@@ -20,8 +20,8 @@ B84       Market1              1      -1
 T83       Man                  2      109       0
 R46     Toolworking            1      103
 B79       Watch_Tower          2      -1
-T299      Soldier-Scout        1      101       0
-// 14 villager, 1 scout
+// T299      Soldier-Scout        1      101       0
+// 14 villager
 
 
 C102    Bronze_Age             1      109
@@ -29,7 +29,7 @@ R107    Wood_Working           1      84
 R40     Leather_Armor_-_Soldie 1      103
 B79       Watch_Tower          1      -1
 
-T37       Soldier-Cavalry1     1      101       1
+T37       Soldier-Cavalry1     1      101       0
 R32     Artisanship            1      84
 R51     Metal_Working          1      103
 R12     Sentry_Tower           1      68
@@ -41,8 +41,8 @@ T37       Soldier-Cavalry1     1      101       0
 T93       Soldier-Phal1        1      0         0
 
 // 2 cavalry, 1 hoplite (1 stable, 1 academy)
-// 16 villager, 3 tower (pop 20, tech 10)
-// _spent: 1565 wood, 3210 food, 320 gold, 500 stone
+// 16 villager, 3 tower (pop 19, tech 10)
+// _spent: 1565 wood, 3110 food, 320 gold, 500 stone
 
 C103    Iron_Age               1      109
 B0        Academy              2      -1
@@ -82,24 +82,26 @@ B49       Siege_Workshop       2      -1
 R79     Centurion              1      0
 U93       Soldier-Phal1        2      0
 T83       Man                  1      109       0
-U11       Soldier-Ballista     2      49
 U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
 B49       Siege_Workshop       2      -1
 
 R122    Tower_Shield           1      103
 R37     Alchemy                1      82
-U11       Soldier-Ballista     2      49
 U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
 T83       Man                  1      109       0
-U11       Soldier-Ballista     2      49
 U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
 T83       Man                  1      109       0
 B49       Siege_Workshop       2      -1
 
 U93       Soldier-Phal1        2      0
 U11       Soldier-Ballista     2      49
+T83       Man                  1      109       0
 U93       Soldier-Phal1        2      0
 U11       Soldier-Ballista     2      49
+T83       Man                  1      109       0
 U11       Soldier-Ballista     2      49
 B79       Watch_Tower          2      -1
 
@@ -150,8 +152,8 @@ T11       Soldier-Ballista     2      49        0
 B79       Watch_Tower          2      -1
 
 // 60 ballista, 32 centurion, 4 cavalry (6 siege workshop, 5 academy, 1 stable)
-// 24 villager, 14 farm, 16 tower (pop 121, tech 24)
-// _spent: 8890 wood, 10910 food, 7350 gold, 2550 stone
+// 26 villager, 14 farm, 16 tower (pop 122, tech 24)
+// spent: 8890 wood, 10910 food, 7350 gold, 2550 stone
 
 
 U93       Soldier-Phal1        5      0

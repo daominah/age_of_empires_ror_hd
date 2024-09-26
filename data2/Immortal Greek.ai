@@ -3,164 +3,206 @@
 // * Warships move speed +17% (stated +30%).
 //
 // Build summary:
-// * Bronze Age: 2+1 cavalry, 1+9 hoplite
-// * Iron Age: 34 centurion, 22 priest
+// * Bronze Age: 2 cavalry, 1+8 hoplite
+// * Iron Age: 32 centurion, 22 priest
 
 
 B109      Town_Center1         1      -1
-U83       Man                  10     109
+U83       Man                  12     109
 B12       Barracks1            1      -1
 
 
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
 B101      Stable1              1      -1
-R46     Toolworking            1      103
 B84       Market1              1      -1
-B79       Watch_Tower          1      -1
 T83       Man                  2      109       0
-T299      Soldier-Scout        1      101       0
-// 12 villager, 1 scout
+R46     Toolworking            1      103
+B79       Watch_Tower          2      -1
+// T299      Soldier-Scout        1      101       0
+// 14 villager
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
 R40     Leather_Armor_-_Soldie 1      103
-B79       Watch_Tower          2      -1
+B79       Watch_Tower          1      -1
 
 R28     Wheel                  1      84
 T37       Soldier-Cavalry1     1      101       0
+R51     Metal_Working          1      103
 R12     Sentry_Tower           1      68
-R43     Scale_Armor_-_Soldiers 1      103
 T83       Man                  2      109       0
 B0        Academy              1      -1
 B82       Government_Center    1      -1
-B0        Academy              2      -1
 
 T37       Soldier-Cavalry1     1      101       0
 T83       Man                  2      109       0
 T93       Soldier-Phal1        1      0         0
 
-// 16 villager, 2 cavalry, 1 hoplite, 3 tower
+// 2 cavalry, 1 hoplite (1 stable, 1 academy)
+// 18 villager, 3 tower (pop 22, tech 9)
+// _spent: 1490 wood, 3190 food, 320 gold, 500 stone
 
 C103    Iron_Age               1      109
+B0        Academy              2      -1
+R43     Scale_Armor_-_Soldiers 1      103
 R112    Architecture           1      82
 R32     Artisanship            1      84
-R51     Metal_Working          1      103
-T37       Soldier-Cavalry1     1      101       0
-T93       Soldier-Phal1        3      0         0
-B79       Watch_Tower          2      -1
-B0        Academy              2      -1
+// T37       Soldier-Cavalry1     1      101       0
+T93       Soldier-Phal1        1      0         0
+// T37       Soldier-Cavalry1     1      101       0
+T93       Soldier-Phal1        1      0         0
 R47     Bronze_Shield          1      103
-T93       Soldier-Phal1        3      0         0
-B79       Watch_Tower          2      -1
-B104      Temple1              2      -1
-T93       Soldier-Phal1        3      0         0
+B0        Academy              2      -1
+T93       Soldier-Phal1        2      0         0
+T93       Soldier-Phal1        2      0         0
+T93       Soldier-Phal1        2      0         0
 
 C73     Phalanx                1      0
 C113    Aristocracy            1      82
 R48     Chain_Mail_-_Soldiers  1      103
 R15     Guard_Tower            1      68
-R110    Craftmanship           1      84
 R37     Alchemy                1      82
-T93       Soldier-Phal1        4      0         0
-T125      Priest               2      104       0
+R110    Craftmanship           1      84
+T93       Soldier-Phal1        3      0         0
 T83       Man                  2      109       0
+B87       Range1               1      -1
 B79       Watch_Tower          2      -1
 
-T93       Soldier-Phal1        4      0         0
+T93       Soldier-Phal1        2      0         0
 T83       Man                  1      109       0
-T125      Priest               2      104       0
-B104      Temple1              2      -1
-U93       Soldier-Phal1        4      0
-T83       Man                  1      109       0
-B79       Watch_Tower          2      -1
+T93       Soldier-Phal1        2      0         0
 
-R117    Iron_Shield            1      103
 R106    Ballistics             1      82
-R79     Centurion              1      0
-U93       Soldier-Phal1        4      0
-T83       Man                  2      109       0
-B79       Watch_Tower          2      -1
+R117    Iron_Shield            1      103
+T93       Soldier-Phal1        2      0         0
+T83       Man                  1      109       0
+T93       Soldier-Phal1        2      0         0
+T83       Man                  1      109       0
+B104      Temple1              2      -1
 
+R79     Centurion              1      0
+U93       Soldier-Phal1        2      0
+T83       Man                  1      109       0
+U93       Soldier-Phal1        2      0
+U125      Priest               2      104
+B104      Temple1              2      -1
+
+U93       Soldier-Phal1        2      0
+U125      Priest               2      104
+T83       Man                  1      109       0
+U93       Soldier-Phal1        2      0
+U125      Priest               2      104
+T83       Man                  1      109       0
+B49       Siege_Workshop       2      -1
+
+U93       Soldier-Phal1        2      0
 R20     Fanaticism             1      104
 R18     Afterlife              1      104
-U125      Priest               2      104
-U93       Soldier-Phal1        4      0
-T83       Man                  1      109       0
-B79       Watch_Tower          1      -1
-
-R122    Tower_Shield           1      103
-// R114    Writing                1      82
-U93       Soldier-Phal1        4      0
-T83       Man                  1      109       0
 R21     Mysticism              1      104
 R24     Polytheism             1      104
-U125      Priest               2      104
-B79       Watch_Tower          1      -1
+R122    Tower_Shield           1      103
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+B49       Siege_Workshop       2      -1
 
 R22     Astrology              1      104
 R119    Medicine               1      104
-U125      Priest               2      104
+R35     Engineering            1      82
+T125      Priest               2      104       0
+U11       Soldier-Ballista     2      49
+T125      Priest               2      104       0
+B79       Watch_Tower          2      -1
 
-U125      Priest               4      104
+T125      Priest               2      104       0
+U11       Soldier-Ballista     2      49
+T125      Priest               2      104       0
+T11       Soldier-Ballista     2      49        0
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+B50       Farm                 2      -1
 
-U125      Priest               4      104
+T125      Priest               2      104       0
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+B50       Farm                 2      -1
 
-U125      Priest               4      104
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B109      Town_Center1         1      -1
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
+T11       Soldier-Ballista     2      49        0
+T11       Soldier-Ballista     2      49        0
 B79       Watch_Tower          2      -1
 
 B50       Farm                 2      -1
+B50       Farm                 2      -1
+B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+
 B109      Town_Center1         1      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
+B79       Watch_Tower          1      -1
 
-// 34 centurion, 22 priest (pop 84)
-// 30 tower, 24 village, 14 farm, 5 academy, 4 temple
-// spent army: 5515 wood, 10950 food, 8485 gold, 4650 stone
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+
+// 32 centurion, 16 ballista, 16 priest, 2 cavalry (5 academy, 4 siege workshop, 4 temple, 1 stable)
+// 26 villager, 14 farm, 24 tower (pop 92, tech 31)
+// _spent: 7965 wood, 10960 food, 8855 gold, 3750 stone
 
 
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        3      0
+U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        3      0
+R108    Gold_Mining            1      84
+U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        3      0
+U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        3      0
 
+R30     Coinage                1      84
 C2      Catapult_Tower         1      68
 
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
+U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        3      0
+U93       Soldier-Phal1        2      0
+U93       Soldier-Phal1        3      0
 
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        3      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        3      0
 
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
+C27     Helepolis              1      49
 
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
-U93       Soldier-Phal1        5      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        3      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        3      0
+
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        3      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        2      0
+U11       Soldier-Ballista     2      49
+U93       Soldier-Phal1        3      0
+
 
 B276      Wonder               1      -1
 B50       Farm                 24     -1
+
+// 92 centurion, 40 helepolis, 16 priest, 2 cavalry (5 academy, 4 siege workshop, 4 temple, 1 stable)
+// 26 villager, 38 farm, 24 tower, 1 wonder (pop 176, tech 35)
+// spent: 14865 wood, 18180 food, 14275 gold, 5500 stone
