@@ -186,7 +186,7 @@ U5        Soldier-Archer2      3      87
 U35       Soldier-Catapult1    2      49
 
 // B276      Wonder               1      -1
-B50       Farm                 24     -1
+
 
 // 108 composite bowman, 44 massive catapult, 6 camel, 4 hoplite (5 range, 4 siege workshop, 1 stable, 1 academy)
 // 26 villager, 36 farm, 12 tower (pop 188, tech 24)
