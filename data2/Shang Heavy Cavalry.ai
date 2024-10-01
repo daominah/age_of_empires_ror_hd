@@ -193,7 +193,7 @@ U40       Soldier-Chariot1     2      101
 U40       Soldier-Chariot1     2      101
 
 // B276      Wonder               1      -1
-
+B50       Farm                 24     -1
 
 // 96 scythe chariot, 24 camel, 24 priest (7 stable, 4 temple)
 // 50 villager, 44 farm, 16 tower (pop 195, tech 28)

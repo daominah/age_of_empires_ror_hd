@@ -169,7 +169,7 @@ U39       Soldier-Cavalry3_Arc 6      87
 U338      Soldier-Camel        2      101
 
 // B276      Wonder               1      -1
-
+B50       Farm                 24     -1
 
 // 90 heavy horse archer, 30 camel, 16 catapult, 12 priest, 8 chariot archer (7 range, 1 stable, 2 siege workshop, 2 temple)
 // 20 villager, 36 farm, 20 tower (pop 177, tech 29)
