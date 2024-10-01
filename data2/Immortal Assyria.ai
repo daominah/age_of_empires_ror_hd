@@ -183,9 +183,9 @@ U39       Soldier-Cavalry3_Arc 6      87
 U35       Soldier-Catapult1    2      49
 U125      Priest               3      104
 
-// B276      Wonder               1      -1
-B50       Farm                 24     -1
-
 // 72 horse archer, 30 chariot archer, 28 priest, 20 massive catapult (6 range, 3 temple, 3 siege workshop)
 // 42 villager, 44 farm, 16 tower (pop 193, tech 26)
 // _spent: 15260 wood, 13600 food, 12380 gold, 2700 stone
+
+// B276      Wonder               1      -1
+B50       Farm                 24     -1

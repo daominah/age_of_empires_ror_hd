@@ -183,3 +183,5 @@ U35       Soldier-Catapult1    2      49
 // 102 helepolis, 34 massive catapult, 8 cavalry, 8 hoplite (8 siege workshop, 1 stable, 1 academy)
 // 40 villager, 6 farm, 16 tower (pop 192, tech 20)
 // _spent: 24614 wood, 10780 food, 13740 gold, 2400 stone
+
+B50       Farm                 24     -1
