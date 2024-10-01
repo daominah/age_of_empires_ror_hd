@@ -3,7 +3,7 @@
 // * Elephants cost -25%.
 // * Catapult Trireme and Juggernaught attack speed +72%.
 // Build summary:
-// Bronze Age: 8+12 Chariot Archer, 2+3 Priest, 9+3 Tower
+// Bronze Age: 12+12 Chariot Archer, 2+3 Priest, 9+3 Tower
 // Iron Age: 24 Elephant Archer, 20 Priest
 
 
@@ -14,147 +14,198 @@ B12       Barracks1            1      -1
 
 C101    Tool_Age               1      109
 R16     Watch_Tower            1      68
-B87       Range1               1      -1
 R41     Leather_Armor_-_Archer 1      103
+B87       Range1               1      -1
 B84       Market1              1      -1
-B79       Watch_Tower          1      -1
 T83       Man                  2      109       0
+B79       Watch_Tower          2      -1
 T4        Soldier-Archer1      1      87        0
 // 14 villager, 1 bowman
 
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
-B79       Watch_Tower          2      -1
-B87       Range1               3      -1
+B87       Range1               2      -1
 
 R28     Wheel                  1      84
 R44     Scale_Armor_-_Archers  1      103
 R12     Sentry_Tower           1      68
 T83       Man                  2      109       0
-B104      Temple1              1      -1
-B79       Watch_Tower          2      -1
+B87       Range1               1      -1
+B82       Government_Center    1      -1
 
-U41       Soldier-Chariot2     2      87
-U41       Soldier-Chariot2     2      87
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
 T83       Man                  2      109       0
 R32     Artisanship            1      84
-T125      Priest               1      104       0
-B82       Government_Center    1      -1
-B79       Watch_Tower          2      -1
+R34     Nobility               1      82
+B104      Temple1              1      -1
+B109      Town_Center1         1      -1
 
-T41       Soldier-Chariot2     4      87        0
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
+T83       Man                  2      109       0
+
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
 T83       Man                  2      109       0
 T125      Priest               1      104       0
-R34     Nobility               1      82
-B79       Watch_Tower          2      -1
+T83       Man                  2      109       0
+B104      Temple1              1      -1
+B79       Watch_Tower          1      -1
 
-// 20 villager, 8 chariot archer, 2 priest
-// 4 archery range, 1 temple, 9 tower
+// 12 chariot archer, 1 priest (4 range, 2 temple)
+// 24 villager, 3 tower (pop 38, tech 10)
+// _spent: 3350 wood, 3905 food, 295 gold, 500 stone
 
 
 C103    Iron_Age               1      109
 R114    Writing                1      82
-T41       Soldier-Chariot2     4      87        0
-T41       Soldier-Chariot2     4      87        0
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
 T125      Priest               1      104       0
-B104      Temple1              2      -1
-B79       Watch_Tower          1      -1
+T83       Man                  2      109       0
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
+T125      Priest               2      104       0
+T83       Man                  2      109       0
 B87       Range1               2      -1
-T41       Soldier-Chariot2     4      87        0
-T125      Priest               1      104       0
+T41       Soldier-Chariot2     2      87        0
+T41       Soldier-Chariot2     2      87        0
+T83       Man                  2      109       0
+T125      Priest               2      104       0
 B79       Watch_Tower          2      -1
 
-U25       Soldier-El_Archer    6      87
-T83       Man                  2      109       0
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U83       Man                  2      109
+U41       Soldier-Chariot2     2      87
+U83       Man                  2      109
 R37     Alchemy                1      82
 R15     Guard_Tower            1      68
 R110    Craftmanship           1      84
 R20     Fanaticism             1      104
 R18     Afterlife              1      104
-T125      Priest               1      104       0
-B79       Watch_Tower          2      -1
-
-U25       Soldier-El_Archer    6      87
-T83       Man                  2      109       0
-R22     Astrology              1      104
-U125      Priest               1      104
+B104      Temple1              1      -1
 B79       Watch_Tower          1      -1
 
-R106    Ballistics             1      82
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U83       Man                  2      109
+U41       Soldier-Chariot2     2      87
+U83       Man                  2      109
 R21     Mysticism              1      104
 R24     Polytheism             1      104
+B50       Farm                 2      -1
 U125      Priest               1      104
-U25       Soldier-El_Archer    3      87
-U41       Soldier-Chariot2     3      87
-T83       Man                  2      109       0
-B79       Watch_Tower          1      -1
+B50       Farm                 2      -1
 
-U125      Priest               1      104
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U83       Man                  2      109
+U41       Soldier-Chariot2     2      87
+U83       Man                  2      109
+R106    Ballistics             1      82
+R22     Astrology              1      104
 R119    Medicine               1      104
+B50       Farm                 2      -1
+U125      Priest               1      104
+B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+T83       Man                  2      109       0
+U41       Soldier-Chariot2     2      87
+T83       Man                  2      109       0
+B50       Farm                 2      -1
 R19     Monotheism             1      104
-U25       Soldier-El_Archer    3      87
-U41       Soldier-Chariot2     3      87
+U125      Priest               2      104
+B50       Farm                 2      -1
+
+U25       Soldier-El_Archer    2      87
 T83       Man                  2      109       0
-B50       Farm                 2      -1
-
-U125      Priest               3      104
-U25       Soldier-El_Archer    3      87
-U41       Soldier-Chariot2     3      87
-B50       Farm                 2      -1
-
-U125      Priest               3      104
-U25       Soldier-El_Archer    3      87
-U41       Soldier-Chariot2     3      87
-B50       Farm                 2      -1
-
-U125      Priest               3      104
+U41       Soldier-Chariot2     2      87
 T83       Man                  2      109       0
+U125      Priest               1      104
+B50       Farm                 2      -1
+U125      Priest               2      104
+B50       Farm                 2      -1
+B79       Watch_Tower          2      -1
+
+U41       Soldier-Chariot2     2      87
+U125      Priest               1      104
+B50       Farm                 2      -1
+U125      Priest               2      104
 B50       Farm                 2      -1
 
-U125      Priest               3      104
-T83       Man                  2      109       0
+U125      Priest               2      104
 B50       Farm                 2      -1
-
-B109      Town_Center1         1      -1
+U125      Priest               2      104
 B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+B79       Watch_Tower          2      -1
 
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
+B79       Watch_Tower          2      -1
 
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-B79       Watch_Tower          1      -1
-
-B50       Farm                 2      -1
-B79       Watch_Tower          4      -1
-B79       Watch_Tower          4      -1
-
-// 24 elephant archer, 20 priest, 32 chariot archer (pop 109)
-// 28 tower, 32 villager, 20 farm, 6 range, 3 temple
-// spent army: 7550 wood, 10535 food, 6190 gold, 4350 stone
+// 36 chariot archer, 20 priest, 18 elephant archer (6 range, 3 temple)
+// 50 villager, 24 farm, 20 tower (pop 125, tech 23)
+// _spent: 8280 wood, 10785 food, 5920 gold, 3150 stone
 
 
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
 
 C2      Catapult_Tower         1      68
-// 24 tower
-
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
-
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
-U25       Soldier-El_Archer    6      87
-U41       Soldier-Chariot2     6      87
-
 B276      Wonder               1      -1
-B50       Farm                 24      -1
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+U25       Soldier-El_Archer    2      87
+U25       Soldier-El_Archer    2      87
+U41       Soldier-Chariot2     2      87
+
+// 66 elephant archer, 60 chariot archer, 20 priest (6 range, 3 temple)
+// 50 villager, 24 farm, 20 tower, 1 wonder (pop 197, tech 24)
+// spent: 11410 wood, 20025 food, 9080 gold, 4900 stone
