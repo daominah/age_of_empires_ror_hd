@@ -31,7 +31,7 @@ func main() {
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Helepolis.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Swordsmen.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Egypt_Chariot_Priest.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Egypt_Chariot_Priest.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Greek_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Horse_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Catapult.ai`
@@ -41,7 +41,7 @@ func main() {
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Camel.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Horse_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Persia_War_Elephant.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Phoenicia_Elephant_Archer.ai`
+	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Phoenicia_Elephant_Archer.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Legion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Siege.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang_Stable.ai`

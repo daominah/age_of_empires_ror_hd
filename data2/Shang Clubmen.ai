@@ -90,9 +90,9 @@ R110    Craftmanship           1      84
 R18     Afterlife              1      104
 R20     Fanaticism             1      104
 U40       Soldier-Chariot1     3      101
-T83       Man                  2      109       0
+U83       Man                  2      109
 U40       Soldier-Chariot1     3      101
-T83       Man                  2      109       0
+U83       Man                  2      109
 B79       Watch_Tower          2      -1
 
 U40       Soldier-Chariot1     3      101
