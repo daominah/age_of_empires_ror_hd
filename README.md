@@ -181,6 +181,7 @@ and a few changes from [Return of Rome](https://ageofempires.fandom.com/wiki/Age
 
 To play with these changes, replace `data\empires.dat` with `data\empires_definitive_edition.dat`.
 To revert, restore `data\empires.dat.backup`.
+Script to do this [switch_data_definitive_edition.sh](switch_data_definitive_edition.sh).
 
 Because I do not want to nerf good things, I only apply the buffs in the following list.
 
