@@ -2,6 +2,9 @@
 
 scenario/default.scx
 scenario/scenario.inf
+
 savegame/syncerr0.gam
+savegame/game*.nfo
+
 de_che.lnk
 .~lock.*
