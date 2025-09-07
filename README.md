@@ -284,12 +284,21 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 1. [Assyrian](https://ageofempires.fandom.com/wiki/Assyrians#Civilization_bonuses)
 
-- [ ] Chain Mail (Infantry/Archers/Cavalry) upgrades are available at the Storage Pit.
-- [ ] Alchemy and Engineering are available at the Government Center.
-- [ ] Siege Workshops work 20% faster (team bonus).
-
+- [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available at the Storage Pit.
+  (but still missing Heavy Horse Archer).
+- [x] Alchemy and Engineering are available at the Government Center.
+- [x] Siege Workshops work 20% faster (team bonus).  
+  This change is hard to fully implement, so only applied the following to only the Assyrian:
+  - Stone Thrower line Train Time reduced to 50s (previously 60s).
+  - Ballista line Train Time reduced to 42s (previously 50s).
+  - Changes was implemented in the Genie Editor:
+    go to tab Units, disable auto copy to other civs, choose civ near top left, 
+    then edit the Train Time of 5 siege units for Assyrian only.  
+    Normally, changes are centrally implemented by the Civilization Tech Tree effect.
+- [ ] Siege units upgrades cost -50%.  
+  (probably tech cost for specific civ is not possible, so not implemented).
 - [ ] Villagers move 10% faster (previously 18% faster).
-- [ ] Archers have -25% reload time (previously -36% reload time).
+- [ ] Archers have -25% Attack Reload Time (so +33% fire rate, previously +36%).
 
 ##### 2. [Babylonian](https://ageofempires.fandom.com/wiki/Babylonians#Civilization_bonuses)
 
