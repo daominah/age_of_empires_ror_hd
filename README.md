@@ -207,43 +207,47 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 ##### 3. Barracks
 
-- [ ] Short Swordsmen directly available in the Bronze Age without any research.
-- [ ] Broad Swordsmen have +10 HP, Long Swordsmen have +20 HP. Legions lose 20 HP.
-- [ ] Long Sword: Increased the upgrade cost to 240 food, 100 gold (previously 160 food, 50 gold).
-- [ ] Slingers have higher bonus attack (+4) vs mounted archers (bonus vs foot archers unchanged).
+- [x] Short Swordsmen directly available in the Bronze Age without any research:  
+  - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe  
+  - after: costs Food 1, Gold 1, Research Time 1, only require Bronze Age
+- [ ] Long Sword upgrade cost increased to 240 food, 100 gold
+  (previously 160 food, 50 gold).
+- [x] Broad Swordsmen have +10 HP, Long Swordsmen have +20 HP.
+- [ ] Legions lose 20 HP.
+- [ ] Slinger have higher bonus attack (+4) vs mounted archers (bonus vs foot archers unchanged).
   Increased the training time from 28 to 35 seconds.
 
 ##### 4. Archery Range
 
 - [ ] Horse Archer and Heavy Horse Archer have 1 pierce armor (previously 2).
-- [ ] Elephant Archers have +1 attack, cost maintained to 180 food, 60 gold.
+- [x] Elephant Archer have +1 attack, cost maintained to 180 food, 60 gold.
 
 ##### 5. Stable
 
-- [ ] Cavalry has 1 pierce armor.
-- [ ] Heavy Cavalry +1 armor and +1 pierce armor.
-- [ ] Cataphract: +60 HP, +2 armor, +2 pierce armor;
-  upgrade cost to 1,600 food, 600 gold (previously 2,000 food, 850 gold).
+- [x] Scout cost 90 food (previously 100 food).
+- [x] Cavalry has 1 pierce armor.
+- [x] Heavy Cavalry has 2/2 melee/pierce armor (previously 1/1).
+- [x] Cataphract has 240 HP, 5/3 melee/pierce armor (previously 180 HP, 3/1 armor).
+- [x] Cataphract upgrade cost to 1600 food, 600 gold (previously 2000 food, 850 gold).
 - [ ] Camel Riders now have bonus attack against all mounted units. Missing +4 bonus attack vs. elephants added.
 - [ ] All chariots have no bonus damage against Priests, since last update. Their conversion resistance was changed to 2x (previously 8x).
 - [ ] Scythe Chariot upgrade cost increased to 1,400 wood, 1,000 gold (previously: 1,200 wood, 800 gold). They also have 1 armor now (previously 2).
 - [ ] Armored Elephant bonus attack vs. buildings decreased by 1.
-- [ ] Scout gets +2 Line of Sight per age upgrade – already present, but undocumented effect. Bonus from upgrading from Stone to Tool Age is removed (Scout isn't available in the Stone Age). Scout also lose 1 LOS. They cost 90 food (previously 100 food).
 - [ ] War/Armored Elephant and Scythe Chariot trample damage area reduced just enough so that they no longer damage enemy units/buildings on the other side of a wall.
 
-##### 6. Siege Workshop
+##### 6. Academy
 
-- [ ] Catapult, Heavy Catapult and Juggernaught have slightly smaller damage area radius.
+- [x] Academy cost reduced to 150 wood (previously 200 wood).
+
+##### 7. Siege Workshop
+
+- [ ] Catapult and Heavy Catapult have slightly smaller damage area radius.
 - [ ] Siege weapon projectiles (stones and bolts) travel slightly faster (they were very slow), but are also slightly slower to reload (affects all stone and bolt firing units).
 - [ ] Helepolis has 23% slower fire rate (previously it fired as fast as archers). Gets +5 attack. Reduced the upgrade cost to 1,200 food, 1,000 wood (previously 1,500 food, 1,000 wood).
 
-##### 7. Academy
-
-- [ ] Academy cost reduced to 150 wood (previously 200 wood).
-
 ##### 8. Temple
 
-- [ ] Priests have +1 healing range.
+- [ ] Priest have +1 healing range.
 
 ##### 9. Tower
 
@@ -256,8 +260,7 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 - [ ] Catapult Triremes now have 135 HP (previously 120 HP).
 - [ ] Catapult Triremes and Juggernaughts move 10% faster, cost reduced to 135 wood, 50 gold (previously 135 wood, 75 gold).
 - [ ] Juggernaughts can no longer destroy trees. Upgrade cost reduced to 1,300 food, 500 wood (previously: 2,000 food, 900 wood).
-
-- [ ] Trade Boats to 120 HP (previously 200 – too much for a Stone Age unit); Merchant Ships to 200 HP (previously 250).
+- [ ] Trade Boats to 120 HP (previously 200); Merchant Ships to 200 HP (previously 250).
 
 #### Technologies update
 
