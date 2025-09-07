@@ -22,7 +22,16 @@ Guides on how to edit computer player behavior are in the directory
 ## AoE version detail
 
 The game version is The Rise of Rome 1.0.
-Pressing "S" when both a Farmer and Farms are selected at the same time will
+
+### Farm bug still works
+
+The Vietnamese AoE 1 community plays with the Farm bug for a very long time,
+accepting it as a feature that balances Farms being costly to set up with a lot of wood at first,
+but a strong food source in the long run.
+Fixing the bug fundamentally changes the game,
+this is one of the reasons they do not want the Definitive Edition.
+
+The Farm bug: Pressing "S" when both a Farmer and Farms are selected at the same time will
 replenish the Farm with full food quantity, as same as a new Farm.
 (so researching Domestication, Plow, or Irrigation is not necessary,
 food quantity bonus of the Sumerian and Minoan Farm is not important).
@@ -31,6 +40,11 @@ food quantity bonus of the Sumerian and Minoan Farm is not important).
 
 The results here come from real tests and the game dat file,
 some values are slightly different from the documentation.
+
+The balance between civilizations is bad.
+Shang is absolutely the best.
+Greek, Choson, and Carthaginian are too weak in the most common "rule" game mode,
+Bronze Age without Wall (a.k.a. "Đời ba không thành").
 
 #### 1. Assyrian
 
@@ -160,13 +174,13 @@ some values are slightly different from the documentation.
 ### Balance data to Definitive Edition and Return of Rome
 
 In-game unit stats are defined in the file `data\empires.dat`.
-In the same directory, the file `empires_definitive_edition.dat` is a clone with
-changes to mimic the [Age of Empires: Definitive Edition](
-https://ageofempires.fandom.com/wiki/Summary_of_changes_in_Age_of_Empires:_Definitive_Edition)
-and a few changes from the [Return of Rome](https://ageofempires.fandom.com/wiki/Age_of_Empires_II:_Definitive_Edition_-_Return_of_Rome).
+In the same directory, the file `empires_definitive_edition.dat` is a copy with
+changes that mimic the official balance patches of the
+[Age of Empires: Definitive Edition](https://ageofempires.fandom.com/wiki/Summary_of_changes_in_Age_of_Empires:_Definitive_Edition)
+and a few changes from [Return of Rome](https://ageofempires.fandom.com/wiki/Age_of_Empires_II:_Definitive_Edition_-_Return_of_Rome).
 
-To play with these changes, replace `data\empires.dat` with `data\empires_definitive_edition.dat`.  
-To go back, restore with `data\empires.dat.backup`.
+To play with these changes, replace `data\empires.dat` with `data\empires_definitive_edition.dat`.
+To revert, restore `data\empires.dat.backup`.
 
 Because I do not want to nerf good things, I only apply the buffs in the following list.
 
@@ -187,7 +201,7 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
   so Villager speed increases from 1.1 to 1.2,  
   Wheel effect adjusted accordingly to +0.6, so Wheel Villager stays at 1.8).
 - [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
-- [x] Changes in build time:  
+- [x] Changes in build time:
   - Farms reduced to 24s (previously 30s).
   - Towers reduced to 72s (previously 80s).
 
