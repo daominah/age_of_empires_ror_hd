@@ -186,83 +186,84 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 #### Units and buildings update
 
-##### 1. Resource on the map
-
-- [x] Increased the quantity of Gold Mine from 400 to 450.
-- [x] Increased the quantity of Stone Mine from 250 to 300.
-
-##### 2. Villager
+##### 1. Villager
 
 - [x] Hunters work 5% faster than before
   (previously they were as slow as Foragers 0.45 food/s, now 0.4725 food/s).
 - [x] Fix Palmyran Farmer Work Rate not increased.
-- [x] Villagers move 10% faster after advancing to the Tool Age.  
-  (Tool Age effect adds +0.1 to Civilian Movement,  
-  so Villager speed increases from 1.1 to 1.2,  
+- [x] Villagers move 10% faster after advancing to the Tool Age.
+  (Tool Age effect now adds +0.1 to Civilian Movement, so the speed increased to 1.2,
   Wheel effect adjusted accordingly to +0.6, so Wheel Villager stays at 1.8).
 - [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
-- [x] Changes in build time:
-  - Farms reduced to 24s (previously 30s).
-  - Towers reduced to 72s (previously 80s).
+- [x] Increased the quantity of Gold Mine to 450 (previously 400).
+- [x] Increased the quantity of Stone Mine to 300 (previously 250).
+- [x] Tower build time reduced to 72s (previously 80s).
+- [x] Farm build time reduced to 24s (previously 30s).
+- [x] Farm technologies improved, fully upgraded Farm now has 550 food (prev 475):
+  - Domestication: cost reduced to 150 food, 50 wood (previously 200 food, 50 wood).
+  - Plow: +100 Farm food (previously +75).
+  - Irrigation: +125 Farm food (previously +75).
 
-##### 3. Barracks
+##### 2. Barracks
 
-- [x] Short Swordsmen directly available in the Bronze Age without any research:  
-  - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe  
+- [x] Short Swordsmen upgrade is free upon reaching the Bronze Age:
+  - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe
   - after: costs Food 1, Gold 1, Research Time 1, only require Bronze Age
+- [x] Broad Swordsmen have +10 HP, so now have 80 HP.
+- [x] Long Swordsmen have +20 HP, so now have 100 HP.
 - [ ] Long Sword upgrade cost increased to 240 food, 100 gold
   (previously 160 food, 50 gold).
-- [x] Broad Swordsmen have +10 HP, Long Swordsmen have +20 HP.
 - [ ] Legions lose 20 HP.
 - [ ] Slinger have higher bonus attack (+4) vs mounted archers (bonus vs foot archers unchanged).
   Increased the training time from 28 to 35 seconds.
 
-##### 4. Archery Range
+##### 3. Archery Range
 
-- [ ] Horse Archer and Heavy Horse Archer have 1 pierce armor (previously 2).
+- [ ] Horse Archer and Heavy Horse Archer pierce armor reduced to 1 (previously 2).
 - [x] Elephant Archer have +1 attack, cost maintained to 180 food, 60 gold.
+- [x] Improved Bow research time reduced to 45s (previously 60s).
 
-##### 5. Stable
+##### 4. Stable
 
-- [x] Scout cost 90 food (previously 100 food).
-- [x] Cavalry has 1 pierce armor.
+- [x] Scout cost reduced to 90 food (previously 100).
+- [x] Cavalry has 0/1 melee/pierce armor (previously 0/0).
 - [x] Heavy Cavalry has 2/2 melee/pierce armor (previously 1/1).
 - [x] Cataphract has 240 HP, 5/3 melee/pierce armor (previously 180 HP, 3/1 armor).
-- [x] Cataphract upgrade cost to 1600 food, 600 gold (previously 2000 food, 850 gold).
+- [x] Cataphract upgrade cost reduced to 1600 food, 600 gold (previously 2000 food, 850 gold).
 - [ ] Camel Riders now have bonus attack against all mounted units. Missing +4 bonus attack vs. elephants added.
 - [ ] All chariots have no bonus damage against Priests, since last update. Their conversion resistance was changed to 2x (previously 8x).
-- [ ] Scythe Chariot upgrade cost increased to 1,400 wood, 1,000 gold (previously: 1,200 wood, 800 gold). They also have 1 armor now (previously 2).
-- [ ] Armored Elephant bonus attack vs. buildings decreased by 1.
-- [ ] War/Armored Elephant and Scythe Chariot trample damage area reduced just enough so that they no longer damage enemy units/buildings on the other side of a wall.
+- [ ] Scythe Chariot upgrade cost increased to 1400 wood, 1000 gold (previously: 1200 wood, 800 gold). Their melee armor reduced to 1 (previously 2).
+- [ ] Armored Elephant bonus attack vs buildings decreased by 1.
+- [ ] Elephant and Scythe Chariot trample damage area reduced just enough so that they no longer damage enemy units/buildings on the other side of a wall.
 
-##### 6. Academy
+##### 5. Academy
 
 - [x] Academy cost reduced to 150 wood (previously 200 wood).
 
-##### 7. Siege Workshop
+##### 6. Siege Workshop
 
 - [ ] Catapult and Heavy Catapult have slightly smaller damage area radius.
 - [ ] Siege weapon projectiles (stones and bolts) travel slightly faster (they were very slow), but are also slightly slower to reload (affects all stone and bolt firing units).
-- [ ] Helepolis has 23% slower fire rate (previously it fired as fast as archers). Gets +5 attack. Reduced the upgrade cost to 1,200 food, 1,000 wood (previously 1,500 food, 1,000 wood).
+- [ ] Helepolis has 23% slower fire rate (previously it fired as fast as archers). Gets +5 attack.
+- [x] Helepolis upgrade cost reduced to 1200 food, 1000 wood (previously 1500 food, 1000 wood).
 
-##### 8. Temple
+##### 7. Temple
 
 - [ ] Priest have +1 healing range.
+- [x] Sacrifice costs 400 gold (previously 600 gold).
 
-##### 9. Tower
+##### 8. Tower
 
 - [ ] Watch Towers have 125 HP (previously 100 HP).
 - [ ] Sentry Towers have 185 HP (previously 150 HP).
 - [ ] Guard/Ballista Towers have 240 HP (previously 200 HP).
 
-##### 10. Dock
+##### 9. Dock
 
 - [ ] Catapult Triremes now have 135 HP (previously 120 HP).
 - [ ] Catapult Triremes and Juggernaughts move 10% faster, cost reduced to 135 wood, 50 gold (previously 135 wood, 75 gold).
 - [ ] Juggernaughts can no longer destroy trees. Upgrade cost reduced to 1,300 food, 500 wood (previously: 2,000 food, 900 wood).
 - [ ] Trade Boats to 120 HP (previously 200); Merchant Ships to 200 HP (previously 250).
-
-#### Technologies update
 
 #### Civilizations update
 
@@ -300,7 +301,7 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 ##### 17. Lac Viet (new civilization)
 
-- [x] Foragers work 20% faster.  
+- [x] Foragers work 20% faster.
   (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
 - [x] Archers have +2 melee armor.
 - [x] Ballista and Helepolis have +2 melee armor.
