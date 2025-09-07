@@ -207,21 +207,23 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 ##### 2. Barracks
 
-- [x] Short Swordsmen upgrade is free upon reaching the Bronze Age:
+- [x] Short Sword research is free upon reaching the Bronze Age:
   - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe
-  - after: costs Food 1, Gold 1, Research Time 1, only require Bronze Age
+  - after: costs Food 0, Gold 0, Research Time 1, only require Bronze Age
 - [x] Broad Swordsmen have +10 HP, so now have 80 HP.
 - [x] Long Swordsmen have +20 HP, so now have 100 HP.
 - [ ] Long Sword upgrade cost increased to 240 food, 100 gold
   (previously 160 food, 50 gold).
 - [ ] Legions lose 20 HP.
-- [ ] Slinger have higher bonus attack (+4) vs mounted archers (bonus vs foot archers unchanged).
-  Increased the training time from 28 to 35 seconds.
+- [ ] Slinger bonus attack vs mounted archers increased to +4  
+  (bonus vs foot archers unchanged at +2).
+- [ ] Slinger training time increased from 28 to 35 seconds.
 
 ##### 3. Archery Range
 
 - [ ] Horse Archer and Heavy Horse Archer pierce armor reduced to 1 (previously 2).
-- [x] Elephant Archer have +1 attack, cost maintained to 180 food, 60 gold.
+- [x] Elephant Archer attack increased to 6 (previously 5)  
+  (cost unchanged 180 food, 60 gold).
 - [x] Improved Bow research time reduced to 45s (previously 60s).
 
 ##### 4. Stable
@@ -231,7 +233,7 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 - [x] Heavy Cavalry has 2/2 melee/pierce armor (previously 1/1).
 - [x] Cataphract has 240 HP, 5/3 melee/pierce armor (previously 180 HP, 3/1 armor).
 - [x] Cataphract upgrade cost reduced to 1600 food, 600 gold (previously 2000 food, 850 gold).
-- [ ] Camel Riders now have bonus attack against all mounted units. Missing +4 bonus attack vs. elephants added.
+- [ ] Camel Riders now have bonus attack against all mounted units. Missing +4 bonus attack vs elephants added.
 - [ ] All chariots have no bonus damage against Priests, since last update. Their conversion resistance was changed to 2x (previously 8x).
 - [ ] Scythe Chariot upgrade cost increased to 1400 wood, 1000 gold (previously: 1200 wood, 800 gold). Their melee armor reduced to 1 (previously 2).
 - [ ] Armored Elephant bonus attack vs buildings decreased by 1.
@@ -268,6 +270,15 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 #### Civilizations update
 
+Shared changes to all civilizations:
+
+- [x] Writing's Research Time reduced to 30s (previously 60s).
+- [x] Wheel is available for all (previously disabled for Persian and Macedonian).
+- [x] Coinage is available for all (previously disabled for Egyptian, Palmyran, Persian, Shang and Sumerian).
+- [ ] Heavy Transport is available for all (previously disabled for Assyrian, Babylonian, Choson, Hittite, Palmyran, Shang and Sumerian).
+
+End of shared changes. The following are civilization-specific changes.
+
 ##### 1. Assyrian
 
 ##### 2. Babylonian
@@ -302,15 +313,19 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 ##### 17. Lac Viet (new civilization)
 
+TODO: need to modify the `empires.exe` to show the new civilization in the game,
+not just edit the `data/empires.dat` file.
+
 - [x] Foragers work 20% faster.
   (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
 - [x] Archers have +2 melee armor.
 - [x] Ballista and Helepolis have +2 melee armor.
 
-TODO: need to modify the `empires.exe` to show the new civilization in the game,
-not just edit the `data/empires.dat` file.
-
 ### Appendix: Priest Conversion Test
+
+Priest is the only unit that has 33% accuracy in AoE-RoR;
+all other units have 100% accuracy.
+However, it is unclear exactly how this 33% accuracy functions in practice.
 
 In the following tests, 20 priests start to convert enemy unit at range 10,
 the result number is the number of failed conversions.
