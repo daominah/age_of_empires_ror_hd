@@ -157,6 +157,94 @@ some values are slightly different from the documentation.
   Horse Archer cost reduced to 37 food, 52 gold).
 * Ships HP +30%.
 
+### Balance data to Definitive Edition and Return of Rome
+
+In-game unit stats are defined in the file `data\empires.dat`.
+In the same directory, the file `empires_definitive_edition.dat` is a clone with
+changes to mimic the [Age of Empires: Definitive Edition](
+https://ageofempires.fandom.com/wiki/Summary_of_changes_in_Age_of_Empires:_Definitive_Edition)
+and a few changes from the [Return of Rome](https://ageofempires.fandom.com/wiki/Age_of_Empires_II:_Definitive_Edition_-_Return_of_Rome).
+
+To play with these changes, replace `data\empires.dat` with `data\empires_definitive_edition.dat`.  
+To go back, restore with `data\empires.dat.backup`.
+
+Because I do not want to nerf good things, I only apply the buffs in the following list.
+
+#### Units and buildings
+
+##### 1. Resource on the map
+
+- [x] Increased the quantity of Gold Mine from 400 to 450.
+- [x] Increased the quantity of Stone Mine from 250 to 300.
+
+##### 2. Villager
+
+- [x] Hunters work 5% faster than before
+  (previously they were as slow as Foragers 0.45 food/s, now 0.4725 food/s).
+- [x] Fix Palmyran Farmer Work Rate not increased.
+- [x] Villagers move 10% faster after advancing to the Tool Age.  
+  (Tool Age effect adds +0.1 to Civilian Movement,  
+  so Villager speed increases from 1.1 to 1.2,  
+  Wheel effect adjusted accordingly to +0.6, so Wheel Villager stays at 1.8).
+- [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
+- [x] Changes in build time:  
+  - Farms reduced to 24s (previously 30s).
+  - Towers reduced to 72s (previously 80s).
+
+##### 3. Barracks
+
+- [ ] Short Swordsmen directly available in the Bronze Age without any research.
+- [ ] Broad Swordsmen have +10 HP, Long Swordsmen have +20 HP. Legions lose 20 HP.
+- [ ] Long Sword: Increased the upgrade cost to 240 food, 100 gold (previously 160 food, 50 gold).
+- [ ] Slingers have higher bonus attack (+4) vs mounted archers (bonus vs foot archers unchanged).
+  Increased the training time from 28 to 35 seconds.
+
+##### 4. Archery Range
+
+- [ ] Horse Archer and Heavy Horse Archer have 1 pierce armor (previously 2).
+- [ ] Elephant Archers have +1 attack, cost maintained to 180 food, 60 gold.
+
+##### 5. Stable
+
+- [ ] Cavalry has 1 pierce armor.
+- [ ] Heavy Cavalry +1 armor and +1 pierce armor.
+- [ ] Cataphract: +60 HP, +2 armor, +2 pierce armor;
+  upgrade cost to 1,600 food, 600 gold (previously 2,000 food, 850 gold).
+- [ ] Camel Riders now have bonus attack against all mounted units. Missing +4 bonus attack vs. elephants added.
+- [ ] All chariots have no bonus damage against Priests, since last update. Their conversion resistance was changed to 2x (previously 8x).
+- [ ] Scythe Chariot upgrade cost increased to 1,400 wood, 1,000 gold (previously: 1,200 wood, 800 gold). They also have 1 armor now (previously 2).
+- [ ] Armored Elephant bonus attack vs. buildings decreased by 1.
+- [ ] Scout gets +2 Line of Sight per age upgrade – already present, but undocumented effect. Bonus from upgrading from Stone to Tool Age is removed (Scout isn't available in the Stone Age). Scout also lose 1 LOS. They cost 90 food (previously 100 food).
+- [ ] War/Armored Elephant and Scythe Chariot trample damage area reduced just enough so that they no longer damage enemy units/buildings on the other side of a wall.
+
+##### 6. Siege Workshop
+
+- [ ] Catapult, Heavy Catapult and Juggernaught have slightly smaller damage area radius.
+- [ ] Siege weapon projectiles (stones and bolts) travel slightly faster (they were very slow), but are also slightly slower to reload (affects all stone and bolt firing units).
+- [ ] Helepolis has 23% slower fire rate (previously it fired as fast as archers). Gets +5 attack. Reduced the upgrade cost to 1,200 food, 1,000 wood (previously 1,500 food, 1,000 wood).
+
+##### 7. Academy
+
+- [ ] Academy cost reduced to 150 wood (previously 200 wood).
+
+##### 8. Temple
+
+- [ ] Priests have +1 healing range.
+
+##### 9. Tower
+
+- [ ] Watch Towers have 125 HP (previously 100 HP).
+- [ ] Sentry Towers have 185 HP (previously 150 HP).
+- [ ] Guard/Ballista Towers have 240 HP (previously 200 HP).
+
+##### 10. Dock
+
+- [ ] Catapult Triremes now have 135 HP (previously 120 HP).
+- [ ] Catapult Triremes and Juggernaughts move 10% faster, cost reduced to 135 wood, 50 gold (previously 135 wood, 75 gold).
+- [ ] Juggernaughts can no longer destroy trees. Upgrade cost reduced to 1,300 food, 500 wood (previously: 2,000 food, 900 wood).
+
+- [ ] Trade Boats to 120 HP (previously 200 – too much for a Stone Age unit); Merchant Ships to 200 HP (previously 250).
+
 ### Priest conversion test
 
 In the following tests, 20 priests start to convert enemy unit at range 10,
