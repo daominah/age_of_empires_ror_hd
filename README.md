@@ -184,7 +184,7 @@ To revert, restore `data\empires.dat.backup`.
 
 Because I do not want to nerf good things, I only apply the buffs in the following list.
 
-#### Units and buildings
+#### Units and buildings update
 
 ##### 1. Resource on the map
 
@@ -259,7 +259,53 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 - [ ] Trade Boats to 120 HP (previously 200 – too much for a Stone Age unit); Merchant Ships to 200 HP (previously 250).
 
-### Priest conversion test
+#### Technologies update
+
+#### Civilizations update
+
+##### 1. Assyrian
+
+##### 2. Babylonian
+
+##### 3. Carthaginian
+
+##### 4. Choson
+
+##### 5. Egyptian
+
+##### 6. Greek
+
+##### 7. Hittite
+
+##### 8. Macedonian
+
+##### 9. Minoan
+
+##### 10. Palmyran
+
+##### 11. Persian
+
+##### 12. Phoenician
+
+##### 13. Roman
+
+##### 14. Shang
+
+##### 15. Sumerian
+
+##### 16. Yamato
+
+##### 17. Lac Viet (new civilization)
+
+- [x] Foragers work 20% faster.  
+  (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
+- [x] Archers have +2 melee armor.
+- [x] Ballista and Helepolis have +2 melee armor.
+
+TODO: need to modify the `empires.exe` to show the new civilization in the game,
+not just edit the `data/empires.dat` file.
+
+### Appendix: Priest Conversion Test
 
 In the following tests, 20 priests start to convert enemy unit at range 10,
 the result number is the number of failed conversions.
