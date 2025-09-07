@@ -36,7 +36,7 @@ replenish the Farm with full food quantity, as same as a new Farm.
 (so researching Domestication, Plow, or Irrigation is not necessary,
 food quantity bonus of the Sumerian and Minoan Farm is not important).
 
-### Civilization bonuses
+### Civilization bonuses AoE-RoR v1.0
 
 The results here come from real tests and the game dat file,
 some values are slightly different from the documentation.
@@ -171,7 +171,7 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
   Horse Archer cost reduced to 37 food, 52 gold).
 * Ships HP +30%.
 
-### Balance data to Definitive Edition and Return of Rome
+### Balance to Definitive Edition
 
 In-game unit stats are defined in the file `data\empires.dat`.
 In the same directory, the file `empires_definitive_edition.dat` is a copy with
@@ -186,6 +186,9 @@ Script to do this [switch_data_definitive_edition.sh](switch_data_definitive_edi
 Because I do not want to nerf good things, I only apply the buffs in the following list.
 
 #### Units and buildings update
+
+Mainly buffs for weak or expensive but underperformed units:
+Swordsmen, Elephant Archer, Cataphract, Helepolis and Academy.
 
 ##### 1. Villager
 
@@ -215,14 +218,14 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 - [ ] Long Sword upgrade cost increased to 240 food, 100 gold
   (previously 160 food, 50 gold).
 - [ ] Legions lose 20 HP.
-- [ ] Slinger bonus attack vs mounted archers increased to +4  
+- [ ] Slinger bonus attack vs mounted archers increased to +4
   (bonus vs foot archers unchanged at +2).
 - [ ] Slinger training time increased from 28 to 35 seconds.
 
 ##### 3. Archery Range
 
 - [ ] Horse Archer and Heavy Horse Archer pierce armor reduced to 1 (previously 2).
-- [x] Elephant Archer attack increased to 6 (previously 5)  
+- [x] Elephant Archer attack increased to 6 (previously 5)
   (cost unchanged 180 food, 60 gold).
 - [x] Improved Bow research time reduced to 45s (previously 60s).
 
@@ -279,47 +282,172 @@ Shared changes to all civilizations:
 
 End of shared changes. The following are civilization-specific changes.
 
-##### 1. Assyrian
+##### 1. [Assyrian](https://ageofempires.fandom.com/wiki/Assyrians#Civilization_bonuses)
 
-##### 2. Babylonian
+- [ ] Chain Mail (Infantry/Archers/Cavalry) upgrades are available at the Storage Pit.
+- [ ] Alchemy and Engineering are available at the Government Center.
+- [ ] Siege Workshops work 20% faster (team bonus).
 
-##### 3. Carthaginian
+- [ ] Villagers move 10% faster (previously 18% faster).
+- [ ] Archers have -25% reload time (previously -36% reload time).
 
-##### 4. Choson
+##### 2. [Babylonian](https://ageofempires.fandom.com/wiki/Babylonians#Civilization_bonuses)
 
-##### 5. Egyptian
+- [ ] Chariot units have +1 pierce armor.
+- [ ] Metallurgy is available.
+- [ ] Chain Mail (Infantry/Archers/Cavalry) upgrades are available.
+- [ ] Market technologies cost -30%.
+- [ ] Builders work 10% faster (team bonus).
 
-##### 6. Greek
+- [ ] Towers and walls have +60% HP (previously +100% HP).
 
-##### 7. Hittite
+##### 3. [Carthaginian](https://ageofempires.fandom.com/wiki/Carthaginians#Civilization_bonuses)
 
-##### 8. Macedonian
+- [ ] Start the game with +50 of all resources Wood, Food, Gold, Stone.
+- [ ] Camel Riders have +15% HP.
+- [ ] Nobility free (still requires Government Center).
+- [ ] Academies work 20% faster (team bonus).
 
-##### 9. Minoan
+- [ ] Transport ships move 25% faster (previously 43% faster for Heavy Transport).
 
-##### 10. Palmyran
+##### 4. [Choson](https://ageofempires.fandom.com/wiki/Choson#Civilization_bonuses)
 
-##### 11. Persian
+- [ ] Axeman have +5 HP.
+- [ ] Short/Broad/Long Swordsmen and Legion have +15/+20/+60/+80 HP.
+  (previously +0/+0/+80/+80 HP).
+- [ ] Get Nobility.
+- [ ] Storage Pit technologies cost -40%.
+- [ ] Buildings have +2 Line of Sight (team bonus).
 
-##### 12. Phoenician
+##### 5. [Egyptian](https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Empires)#Civilization_bonuses)
 
-##### 13. Roman
+- [ ] Farms cost -20%, so 60 wood (previously 75 wood).
+- [ ] Get Coinage.
+- [ ] Priests have +1 pierce armor (team bonus).
 
-##### 14. Shang
+##### 6. [Greek](https://ageofempires.fandom.com/wiki/Greeks_(Age_of_Empires)#Civilization_bonuses)
 
-##### 15. Sumerian
+- [ ] Academy units cost -20% (in addition to the already present speed bonus).
+  So Hoplite/Phalanx/Centurion cost 48 food, 32 gold (previously 60 food, 40 gold).
+- [ ] Town Centers work 10% faster starting in the Tool Age.
+- [ ] Polytheism and Astrology free (requires Temple).
+- [ ] Ships are 20% faster (previously 17% faster).
+- [ ] Get Fire Galley.
+- [ ] Markets cost -50% (team bonus).
 
-##### 16. Yamato
+##### 7. [Hittite](https://ageofempires.fandom.com/wiki/Hittites#Civilization_bonuses)
 
-##### 17. Lac Viet (new civilization)
+- [ ] Wheel -50% cost and research time.
+- [ ] Towers provide +4 population room (team bonus).
 
-TODO: need to modify the `empires.exe` to show the new civilization in the game,
+- [ ] Catapults have +50% HP (previously +100% HP).
+- [ ] War ships (except Fire Galley) have +1/+2/+3 range in the Tool/Bronze/Iron Age
+  (previously +4 range for all ages).
+- [ ] Lose Centurion, Architecture and Irrigation.
+
+##### 8. [Macedonian](https://ageofempires.fandom.com/wiki/Macedonians#Civilization_bonuses)
+
+- [ ] Get Wheel.
+- [ ] Get Catapult upgrade.
+- [ ] Houses have +50 hit points (team bonus).
+
+- [ ] Academy units have +1/+2 pierce armor in the Bronze/Iron Age
+  (previously +2 pierce armor for all ages).
+- [ ] Siege Workshop units cost -25% (previously -50%).
+
+##### 9. [Minoan](https://ageofempires.fandom.com/wiki/Minoans#Civilization_bonuses)
+
+- [ ] Farmers work 10% faster.
+- [ ] Docks cost -20% (team bonus).
+
+- [ ] Bonus Farms have +60 food removed.
+- [ ] Improved Bowman line has +1/+2 range in the Bronze/Iron Age, respectively.
+  (previously +2 for Composite Bowman for all ages).
+- [ ] Ships cost -15%/-20%/-25%/-30% in the Stone/Tool/Bronze/Iron Age.
+  (previously -30% for all ages).
+
+##### 10. [Palmyran](https://ageofempires.fandom.com/wiki/Palmyrans#Civilization_bonuses)
+
+- [ ] Start the game with +75 food (previously have the same 200 food as normal).
+- [ ] Get Coinage and Plow.
+- [ ] Trade units return +20% gold.
+- [ ] Technologies researched 30% faster (team bonus).
+
+- [ ] Villagers work 25% faster for all tasks
+  (previously Farmer, Builder +0%, other task +44%).
+
+##### 11. [Persian](https://ageofempires.fandom.com/wiki/Persians_(Age_of_Empires)#Civilization_bonuses)
+
+- [ ] Get Wheel, Artisanship, Plow and Coinage at the Market.
+- [ ] Walls cost -20%, so 4 stone (previously 5 stone).
+- [ ] Stables work 20% faster (team bonus).
+
+- [ ] All elephant units move 25% faster (previously 56% faster).
+- [ ] Scout Ship line fires 18%/25%/33% faster in the Tool/Bronze/Iron Age.
+  (previously 38% faster but only for Trireme in the Iron Age).
+
+##### 12. [Phoenician](https://ageofempires.fandom.com/wiki/Phoenicians#Civilization_bonuses)
+
+- [ ] Docks have +150 hit points, +4 line of sight.
+- [ ] Archers have +2 line of sight (team bonus).
+
+- [ ] Catapult Trireme and Juggernaught fire 30% faster (previously 58% faster).
+- [ ] Woodcutters work 15% faster and carry +2 wood (previously work rate +36%, carry +3).
+
+##### 13. [Roman](https://ageofempires.fandom.com/wiki/Romans_(Age_of_Empires)#Civilization_bonuses)
+
+- [ ] Ballista and Helepolis have +1 range, so start at 9+1, max at 10+3.
+- [ ] Priests +50% heal speed (team bonus).
+
+- [ ] Buildings cost -10% (previously -15%)
+- [ ] Towers cost -40% (previously -50%)
+
+##### 14. [Shang](https://ageofempires.fandom.com/wiki/Shang#Civilization_bonuses)
+
+- [ ] Get Coinage.
+- [ ] Get Ballistics.
+- [ ] Cavalry, Heavy Cavalry, Cataphract attack 10% faster.
+- [ ] Town Centers provide +4 population room (team bonus).
+
+- [ ] Villagers cost 40 food (previously 35 food). Normal cost is 50 food.
+- [ ] Start the game with -40 food.
+- [ ] Walls have +60% HP (previously +100% HP).
+
+##### 15. [Sumerian](https://ageofempires.fandom.com/wiki/Sumerians#Civilization_bonuses)
+
+- [ ] Get Coinage.
+- [ ] Camels have +1 pierce armor.
+- [ ] Stone Thrower, Catapult, and Heavy Catapult fire 45% faster
+  (previously 43% faster).
+- [ ] Town Centers cost -25%, so 150 wood instead of 200 wood (team bonus).
+
+- [ ] Farms have +125 food (previously +250 food).
+
+##### 16. [Yamato](https://ageofempires.fandom.com/wiki/Yamato#Civilization_bonuses)
+
+- [ ] Stable and Archery Range upgrades cost -30%.
+- [ ] Fishing Boats work 20% faster.
+- [ ] Stable and Archery Range cost -33% wood (team bonus).
+  So their cost reduced to 100 wood (previously 150 wood).
+
+- [ ] Mounted units cost -15% (previously -25%).
+- [ ] Villagers move 10% faster (previously 18% faster).
+- [ ] Ships have +10%/+15%/+20%/+25% hit points in the Stone/Tool/Bronze/Iron Age
+  (previously +30% for all ages).
+
+##### 17. [Lac Viet](https://ageofempires.fandom.com/wiki/Lac_Viet#Civilization_bonuses)
+
+TODO: Lac Viet is a new civilization,
+need to modify the `empires.exe` to show the new civilization in the game,
 not just edit the `data/empires.dat` file.
 
 - [x] Foragers work 20% faster.
   (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
 - [x] Archers have +2 melee armor.
-- [x] Ballista and Helepolis have +2 melee armor.
+- [x] Ballista have +2 melee armor (but Helepolis is missing).
+- [ ] Houses and Farms are built 50% faster (team bonus).
+
+---
 
 ### Appendix: Priest Conversion Test
 
