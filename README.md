@@ -194,7 +194,6 @@ Swordsmen, Elephant Archer, Cataphract, Helepolis and Academy.
 
 - [x] Hunters work 5% faster than before
   (previously they were as slow as Foragers 0.45 food/s, now 0.4725 food/s).
-- [x] Fix Palmyran Farmer Work Rate not increased.
 - [x] Villagers move 10% faster after advancing to the Tool Age.
   (Tool Age effect now adds +0.1 to Civilian Movement, so the speed increased to 1.2,
   Wheel effect adjusted accordingly to +0.6, so Wheel Villager stays at 1.8).
@@ -271,13 +270,13 @@ Swordsmen, Elephant Archer, Cataphract, Helepolis and Academy.
 - [ ] Juggernaughts can no longer destroy trees. Upgrade cost reduced to 1,300 food, 500 wood (previously: 2,000 food, 900 wood).
 - [ ] Trade Boats to 120 HP (previously 200); Merchant Ships to 200 HP (previously 250).
 
-#### Civilizations update
+#### Civilizations bonuses Definitive Edition
 
 Shared changes to all civilizations:
 
 - [x] Writing's Research Time reduced to 30s (previously 60s).
-- [x] Wheel is available for all (previously disabled for Persian and Macedonian).
-- [x] Coinage is available for all (previously disabled for Egyptian, Palmyran, Persian, Shang and Sumerian).
+- [x] Wheel (TechID 28) is available for all (previously disabled for Persian and Macedonian).
+- [x] Coinage (TechID 30) is available for all (previously disabled for Egyptian, Palmyran, Persian, Shang and Sumerian).
 - [ ] Heavy Transport is available for all (previously disabled for Assyrian, Babylonian, Choson, Hittite, Palmyran, Shang and Sumerian).
 
 End of shared changes. The following are civilization-specific changes.
@@ -312,7 +311,7 @@ End of shared changes. The following are civilization-specific changes.
 - [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
   (but still missing Heavy Horse Archer).
 - [ ] Market technologies cost -30%.
-- [ ] Builders work 10% faster (team bonus).
+- [x] Builders work 10% faster (team bonus).
 
 - [ ] Towers and walls have +60% HP (previously +100% HP).
 
@@ -383,13 +382,14 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 10. [Palmyran](https://ageofempires.fandom.com/wiki/Palmyrans#Civilization_bonuses)
 
-- [ ] Start the game with +75 food (previously have the same 200 food as normal).
-- [ ] Get Coinage and Plow.
+- [x] Fix Palmyran Farmer, Builder, Repairman work rate to +25% (previously +0%).
+- [x] Get Coinage and Plow.
+- [x] Start the game with +75 food (previously have the same 200 food as normal).
 - [ ] Trade units return +20% gold.
 - [ ] Technologies researched 30% faster (team bonus).
 
 - [ ] Villagers work 25% faster for all tasks
-  (previously Farmer, Builder +0%, other task +44%).
+  (previously Forager, Hunter, Gold Miner, Stone Miner +44%; Woodcutter +36%).
 
 ##### 11. [Persian](https://ageofempires.fandom.com/wiki/Persians_(Age_of_Empires)#Civilization_bonuses)
 
