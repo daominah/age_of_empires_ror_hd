@@ -371,9 +371,9 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 8. [Macedonian](https://ageofempires.fandom.com/wiki/Macedonians#Civilization_bonuses)
 
-- [ ] Get Wheel.
-- [ ] Get Catapult upgrade.
-- [ ] Houses have +50 hit points (team bonus).
+- [x] Get Wheel.
+- [x] Get Catapult upgrade. (still missing Heavy Catapult).
+- [x] Houses have +50 hit points (team bonus).
 
 - [ ] Academy units have +1/+2 pierce armor in the Bronze/Iron Age
   (previously +2 pierce armor for all ages).
