@@ -286,18 +286,7 @@ End of shared changes. The following are civilization-specific changes.
 - [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
   (but still missing Heavy Horse Archer techID 38).
 - [x] Alchemy and Engineering are available at the Government Center.
-- [ ] Siege Workshops work 20% faster (team bonus).
-  This change is hard to fully implement, so it was only applied to the Assyrian civilization:
-
-  - [x] Stone Thrower, Catapult, Heavy Catapult train time reduced to 50s (previously 60s).
-  - [x] Ballista, Helepolis train time reduced to 42s (previously 50s).
-
-  How the changes were implemented in the Genie Editor:
-  Go to the Units tab, uncheck Auto Copy to other civs, choose the civ near the top left,
-  then edit the train time of the 5 siege units for Assyrian only.
-  Normally, changes are centrally implemented by the Civilization Tech Tree effect
-  while keeping all civs units stats the same.
-
+- [x] Siege Workshops work 20% faster (team bonus).
 - [ ] Siege units upgrades cost -50%.  
   (to implement this, see [Tech Cost Modifier](#tech-cost-modifier) below,
   but sadly the command seems to not work for this AoE version).
@@ -317,10 +306,10 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 3. [Carthaginian](https://ageofempires.fandom.com/wiki/Carthaginians#Civilization_bonuses)
 
-- [ ] Start the game with +50 of all resources Wood, Food, Gold, Stone.
-- [ ] Camel Riders have +15% HP.
+- [x] Start the game with +50 of all resources Wood, Food, Gold, Stone.
+- [x] Camel Riders have +15% HP.
 - [ ] Nobility free (still requires Government Center).
-- [ ] Academies work 20% faster (team bonus).
+- [x] Academy work 20% faster (team bonus).
 
 - [ ] Transport ships move 25% faster (previously 43% faster for Heavy Transport).
 
