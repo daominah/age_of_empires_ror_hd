@@ -284,17 +284,21 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 1. [Assyrian](https://ageofempires.fandom.com/wiki/Assyrians#Civilization_bonuses)
 
-- [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available at the Storage Pit.
-  (but still missing Heavy Horse Archer).
+- [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
+  (but still missing Heavy Horse Archer techID 38).
 - [x] Alchemy and Engineering are available at the Government Center.
-- [x] Siege Workshops work 20% faster (team bonus).  
-  This change is hard to fully implement, so only applied the following to only the Assyrian:
-  - Stone Thrower line Train Time reduced to 50s (previously 60s).
-  - Ballista line Train Time reduced to 42s (previously 50s).
-  - Changes was implemented in the Genie Editor:
-    go to tab Units, disable auto copy to other civs, choose civ near top left,
-    then edit the Train Time of 5 siege units for Assyrian only.  
-    Normally, changes are centrally implemented by the Civilization Tech Tree effect.
+- [ ] Siege Workshops work 20% faster (team bonus).
+  This change is hard to fully implement, so it was only applied to the Assyrian civilization:
+
+  - [x] Stone Thrower, Catapult, Heavy Catapult train time reduced to 50s (previously 60s).
+  - [x] Ballista, Helepolis train time reduced to 42s (previously 50s).
+
+  How the changes were implemented in the Genie Editor:
+  Go to the Units tab, uncheck Auto Copy to other civs, choose the civ near the top left,
+  then edit the train time of the 5 siege units for Assyrian only.
+  Normally, changes are centrally implemented by the Civilization Tech Tree effect
+  while keeping all civs units stats the same.
+
 - [ ] Siege units upgrades cost -50%.  
   (to implement this, see [Tech Cost Modifier](#tech-cost-modifier) below,
   but sadly the command seems to not work for this AoE version).
@@ -303,9 +307,10 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 2. [Babylonian](https://ageofempires.fandom.com/wiki/Babylonians#Civilization_bonuses)
 
-- [ ] Chariot units have +1 pierce armor.
-- [ ] Metallurgy is available.
-- [ ] Chain Mail (Infantry/Archers/Cavalry) upgrades are available.
+- [x] Chariot units have +1 pierce armor.
+- [x] Metallurgy is available.
+- [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
+  (but still missing Heavy Horse Archer).
 - [ ] Market technologies cost -30%.
 - [ ] Builders work 10% faster (team bonus).
 
