@@ -188,7 +188,8 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 #### Units and buildings update
 
 Mainly buffs for weak or expensive but underperformed units:
-Swordsmen, Elephant Archer, Cataphract, Helepolis and Academy.
+Swordsmen, Elephant Archer, Cataphract and Academy.
+The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 1. Villager
 
@@ -217,9 +218,9 @@ Swordsmen, Elephant Archer, Cataphract, Helepolis and Academy.
 - [ ] Long Sword upgrade cost increased to 240 food, 100 gold
   (previously 160 food, 50 gold).
 - [ ] Legions lose 20 HP.
-- [ ] Slinger bonus attack vs mounted archers increased to +4
-  (bonus vs foot archers unchanged at +2).
-- [ ] Slinger training time increased from 28 to 35 seconds.
+- [ ] Slinger pierce armor increased to 3 (previously 2).
+- [ ] Slinger bonus attack against all archers increased to +3 (previously +2).
+- [ ] Slinger training time increased 35s (previously 24s).
 
 ##### 3. Archery Range
 
@@ -247,8 +248,11 @@ Swordsmen, Elephant Archer, Cataphract, Helepolis and Academy.
 
 ##### 6. Siege Workshop
 
+- [ ] Stone Thrower/Catapult/Heavy Catapult have 3/4/5 pierce armor (previously had 0).
+- [ ] Stone Thrower/Catapult/Heavy Catapult have -2 melee armor (previously had 0).
 - [ ] Catapult and Heavy Catapult have slightly smaller damage area radius.
-- [ ] Siege weapon projectiles (stones and bolts) travel slightly faster (they were very slow), but are also slightly slower to reload (affects all stone and bolt firing units).
+- [ ] Siege weapon projectiles (stones and bolts) travel slightly faster (they were very slow),
+  but are also slightly slower to reload (affects all stone and bolt firing units).
 - [ ] Helepolis has 23% slower fire rate (previously it fired as fast as archers). Gets +5 attack.
 - [x] Helepolis upgrade cost reduced to 1200 food, 1000 wood (previously 1500 food, 1000 wood).
 
@@ -443,7 +447,8 @@ End of shared changes. The following are civilization-specific changes.
 
 TODO: Lac Viet is a new civilization,
 need to modify the `empires.exe` to show the new civilization in the game,
-not just edit the `data/empires.dat` file.
+not just edit the `data/empires.dat` file. Can consider to replace Carthaginian,
+the civilization still bad after got buffs.
 
 - [x] Foragers work 20% faster.
   (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
