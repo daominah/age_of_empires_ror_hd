@@ -342,9 +342,11 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 5. [Egyptian](https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Empires)#Civilization_bonuses)
 
-- [ ] Farms cost -20%, so 60 wood (previously 75 wood).
-- [ ] Get Coinage.
-- [ ] Priests have +1 pierce armor (team bonus).
+- [x] Farms cost -20%, so their cost reduced to 60 wood (previously 75 wood).
+- [x] Get Coinage.
+- [x] Priests have +1 pierce armor (team bonus).
+- [ ] Priests have +2/+3 range in the Bronze/Iron Age.
+  (previously +3 range for all ages).
 
 ##### 6. [Greek](https://ageofempires.fandom.com/wiki/Greeks_(Age_of_Empires)#Civilization_bonuses)
 
