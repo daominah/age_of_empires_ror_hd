@@ -347,13 +347,14 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 6. [Greek](https://ageofempires.fandom.com/wiki/Greeks_(Age_of_Empires)#Civilization_bonuses)
 
-- [ ] Academy units cost -20% (in addition to the already present speed bonus).
+- [x] Academy units cost -20% (in addition to the already present speed bonus).
   So Hoplite/Phalanx/Centurion cost 48 food, 32 gold (previously 60 food, 40 gold).
-- [ ] Town Centers work 10% faster starting in the Tool Age.
+- [x] Town Centers work 10% faster starting in the Tool Age.
+  (hard to implement, so just increased the work rate in all ages).
 - [ ] Polytheism and Astrology free (requires Temple).
 - [ ] Ships are 20% faster (previously 17% faster).
 - [ ] Get Fire Galley.
-- [ ] Markets cost -50% (team bonus).
+- [x] Market cost -50% (team bonus).
 
 ##### 7. [Hittite](https://ageofempires.fandom.com/wiki/Hittites#Civilization_bonuses)
 
