@@ -210,6 +210,7 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 2. Barracks
 
+- [x] Axeman pierce armor increased to 1 (previously 0).
 - [x] Short Sword research is free upon reaching the Bronze Age:
   - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe
   - after: costs Food 0, Gold 0, Research Time 1, only require Bronze Age
@@ -332,12 +333,12 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 4. [Choson](https://ageofempires.fandom.com/wiki/Choson#Civilization_bonuses)
 
-- [ ] Axeman have +5 HP.
-- [ ] Short/Broad/Long Swordsmen and Legion have +15/+20/+60/+80 HP.
+- [x] Axeman HP increased to 55 (previously 50 HP, same as normal).
+- [x] Short/Broad/Long Swordsmen and Legion have +15/+20/+60/+80 HP.
   (previously +0/+0/+80/+80 HP).
-- [ ] Get Nobility.
+- [x] Get Nobility.
 - [ ] Storage Pit technologies cost -40%.
-- [ ] Buildings have +2 Line of Sight (team bonus).
+- [x] Buildings have +2 Line of Sight (team bonus).
 
 ##### 5. [Egyptian](https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Empires)#Civilization_bonuses)
 
