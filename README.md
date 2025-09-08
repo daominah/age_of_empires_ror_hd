@@ -292,11 +292,12 @@ End of shared changes. The following are civilization-specific changes.
   - Stone Thrower line Train Time reduced to 50s (previously 60s).
   - Ballista line Train Time reduced to 42s (previously 50s).
   - Changes was implemented in the Genie Editor:
-    go to tab Units, disable auto copy to other civs, choose civ near top left, 
+    go to tab Units, disable auto copy to other civs, choose civ near top left,
     then edit the Train Time of 5 siege units for Assyrian only.  
     Normally, changes are centrally implemented by the Civilization Tech Tree effect.
 - [ ] Siege units upgrades cost -50%.  
-  (probably tech cost for specific civ is not possible, so not implemented).
+  (to implement this, see [Tech Cost Modifier](#tech-cost-modifier) below,
+  but sadly the command seems to not work for this AoE version).
 - [ ] Villagers move 10% faster (previously 18% faster).
 - [ ] Archers have -25% Attack Reload Time (so +33% fire rate, previously +36%).
 
@@ -455,6 +456,68 @@ not just edit the `data/empires.dat` file.
 - [x] Archers have +2 melee armor.
 - [x] Ballista have +2 melee armor (but Helepolis is missing).
 - [ ] Houses and Farms are built 50% faster (team bonus).
+
+#### Note on using Genie Editor
+
+##### Open dat file
+
+Click `Open` on the Genie Editor toolbar,
+it will show a lot of paths that we need to configure,
+can try button `Fill paths from registry` but usually not totally correct,
+we can manually fill 3 necessary paths:
+
+- Compressed data set (*.dat):
+  `D:\game\age_of_empires_ror_hd\data\empires_definitive_edition.dat`
+- Language file location:
+  `D:\game\age_of_empires_ror_hd\language.dll`
+- Language x1 file location:
+  `D:\game\age_of_empires_ror_hd\languagex.dll`
+
+##### Civilization Tech Tree
+
+In tab `Civilizations`, left panel show list of civilizations,  
+click on a civilization will show its corresponding Technology Tree, that is an EffectID,  
+then switch to tab `Effects`, find that EffectID to edit the Effect Commands.
+
+##### Tech Cost Modifier
+
+The following seems **not work** in this AoE version (The Rise of Rome 1.0),
+but still keep this note here for future trying.
+
+When adding a Command for an Effect
+(usually the Effect that defines a civilization bonuses),
+the dropdown to choose Command Type does not show all available commands,
+the list does show the most common commands that are:
+
+- Attribute Modifier (Command Type 0, 4, 5 for Set, Add, Multiply).
+- Disable Tech (Command Type 102).
+
+We have to manually type the **Command Type** to `101`,
+which is [Tech Cost Modifier](https://agecommunity.fandom.com/wiki/Tech_Cost_Modifier_(Set/%2B/-)),
+then need to fill in its arguments:
+
+- Attribute A: **TechID** to modify. Example `27` for `Helepolis` upgrade.
+- Attribute B: **ResourceID** to modify, the value can be:
+
+  - `0` for Food
+  - `1` for Wood
+  - `2` for Stone
+  - `3` for Gold
+  - ... full values list [here](https://agecommunity.fandom.com/wiki/Resource_List)
+
+- Atrtibute C: modifier **Mode**, the value can be:
+
+  - `0` for Set to exact value.
+  - `1` for Increase/Decrease to original cost.
+
+- Attribute D: the **Value** to Increase/Decrease or Set at.
+
+In the `Helepolis` upgrade example,
+if the original cost is 1200 food 1000 wood,
+and we want to -50% cost, we need to add two commands:
+
+- Command 101, TechID 27, ResourceID 0, Mode 0, Value 600 (set food cost to 600)
+- Command 101, TechID 27, ResourceID 1, Mode 0, Value 500 (set wood cost to 500)
 
 ---
 

@@ -98,6 +98,8 @@ Example output for Bowman:
 
 Downloaded from https://github.com/Tapsa/AGE
 
+For more details, see the [README.md](../../README.md) in the root dir.
+
 ## PER file
 
 Not work when start with Random Map, but work with scenarios.
@@ -126,3 +128,7 @@ https://aoe.heavengames.com/siegeworkshop/ply/
 
 [aoe.heavengames.com](https://aoe.heavengames.com/) is a good source,
 has a lot of information (but some minor infos are wrong).
+
+https://ageofempires.fandom.com/wiki/Genie_Editor
+https://agecommunity.fandom.com/wiki/Tech_Cost_Modifier_(Set/%2B/-)
+https://agecommunity.fandom.com/wiki/Resource_List
