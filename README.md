@@ -188,7 +188,7 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 #### Units and buildings update
 
 Mainly buffs for weak or expensive but underperformed units:
-Swordsmen, Elephant Archer, Cataphract and Academy.
+Swordsmen, Elephant Archer, Cataphract, Academy, Towers.
 The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 1. Villager
@@ -198,10 +198,10 @@ The Catapult line now has increased pierce armor but negative melee armor.
 - [x] Villagers move 10% faster after advancing to the Tool Age.
   (Tool Age effect now adds +0.1 to Civilian Movement, so the speed increased to 1.2,
   Wheel effect adjusted accordingly to +0.6, so Wheel Villager stays at 1.8).
-- [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
 - [x] Increased the quantity of Gold Mine to 450 (previously 400).
 - [x] Increased the quantity of Stone Mine to 300 (previously 250).
-- [x] Tower build time reduced to 72s (previously 80s).
+- [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
+- [x] Towers build time reduced to 65s (previously 80s).
 - [x] Farm build time reduced to 24s (previously 30s).
 - [x] Farm technologies improved, fully upgraded Farm now has 550 food (prev 475):
   - Domestication: cost reduced to 150 food, 50 wood (previously 200 food, 50 wood).
@@ -218,7 +218,8 @@ The Catapult line now has increased pierce armor but negative melee armor.
 - [ ] Long Sword upgrade cost increased to 240 food, 100 gold
   (previously 160 food, 50 gold).
 - [ ] Legions lose 20 HP.
-- [ ] Slinger pierce armor increased to 3 (previously 2).
+- [x] Slinger pierce armor increased to 3 (previously 2).
+- [x] Slinger line of sight increased to 6 (previously 5).
 - [ ] Slinger bonus attack against all archers increased to +3 (previously +2).
 - [ ] Slinger training time increased 35s (previously 24s).
 
@@ -235,9 +236,12 @@ The Catapult line now has increased pierce armor but negative melee armor.
 - [x] Cavalry has 0/1 melee/pierce armor (previously 0/0).
 - [x] Heavy Cavalry has 2/2 melee/pierce armor (previously 1/1).
 - [x] Cataphract has 240 HP, 5/3 melee/pierce armor (previously 180 HP, 3/1 armor).
-- [x] Cataphract upgrade cost reduced to 1600 food, 600 gold (previously 2000 food, 850 gold).
-- [ ] Camel Riders now have bonus attack against all mounted units. Missing +4 bonus attack vs elephants added.
-- [ ] All chariots have no bonus damage against Priests, since last update. Their conversion resistance was changed to 2x (previously 8x).
+- [x] Cataphract upgrade cost reduced to 1600 food, 600 gold
+  (previously 2000 food, 850 gold).
+- [ ] Camel Rider now have bonus attack against all mounted units.
+  Missing +4 bonus attack vs elephants added.
+- [ ] All chariots have no bonus damage against Priests.
+  Their conversion resistance reduced to x2 (previously x8).
 - [ ] Scythe Chariot upgrade cost increased to 1400 wood, 1000 gold (previously: 1200 wood, 800 gold). Their melee armor reduced to 1 (previously 2).
 - [ ] Armored Elephant bonus attack vs buildings decreased by 1.
 - [ ] Elephant and Scythe Chariot trample damage area reduced just enough so that they no longer damage enemy units/buildings on the other side of a wall.
@@ -263,16 +267,25 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 8. Tower
 
-- [ ] Watch Towers have 125 HP (previously 100 HP).
-- [ ] Sentry Towers have 185 HP (previously 150 HP).
-- [ ] Guard/Ballista Towers have 240 HP (previously 200 HP).
+- [ ] Watch/Sentry/Guard/Ballista Towers HP increased to 125/185/240/240
+  (previously have 100/150/200/200 HP).
+- [ ] Watch/Sentry/Guard/Ballista Towers attack increased to 5/6/8/20
+  (previously have 3/4/6/20 base pierce attack).
+- [ ] Watch/Sentry/Guard/Ballista Towers range increased to 6/7/8/8
+  (previously have 5/6/7/7 range).
+- [ ] Watch/Sentry/Guard/Ballista Towers pierce armor increased to 3/4/5/5
+  (previously have 3/4/4/4 pierce armor).
 
 ##### 9. Dock
 
-- [ ] Catapult Triremes now have 135 HP (previously 120 HP).
-- [ ] Catapult Triremes and Juggernaughts move 10% faster, cost reduced to 135 wood, 50 gold (previously 135 wood, 75 gold).
-- [ ] Juggernaughts can no longer destroy trees. Upgrade cost reduced to 1,300 food, 500 wood (previously: 2,000 food, 900 wood).
-- [ ] Trade Boats to 120 HP (previously 200); Merchant Ships to 200 HP (previously 250).
+- [ ] Catapult Trireme HP increased to 135 (previously 120).
+- [ ] Catapult Trireme and Juggernaught move 10% faster.
+- [ ] Catapult Trireme and Juggernaught cost reduced to 135 wood, 50 gold
+  (previously 135 wood, 75 gold).
+- [ ] Juggernaught upgrade cost reduced to 1300 food, 500 wood
+  (previously: 2000 food, 900 wood).
+- [ ] Juggernaught can no longer destroy trees. 
+- [ ] Trade Boat / Merchant Ship HP reduced to 120/200 (previously 200/250 HP).
 
 #### Civilizations bonuses Definitive Edition
 
