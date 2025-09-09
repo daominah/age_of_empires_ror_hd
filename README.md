@@ -290,17 +290,26 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 #### Civilizations bonuses Definitive Edition
 
-Shared changes to all civilizations:
+##### Shared changes
+
+Shared changes are applied to all civilizations:
 
 - [x] Writing's Research Time reduced to 30s (previously 60s).
 - [x] Wheel (TechID 28) is available for all (previously disabled for Persian and Macedonian).
 - [x] Coinage (TechID 30) is available for all (previously disabled for Egyptian, Palmyran, Persian, Shang and Sumerian).
 - [ ] Heavy Transport is available for all (previously disabled for Assyrian, Babylonian, Choson, Hittite, Palmyran, Shang and Sumerian).
 
-End of shared changes. The following are civilization-specific changes.
+##### Engine limitations
 
-Civilization-specific tech bonuses (such as discount or faster research) are
-difficult to implement and have not been changed yet.
+Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
+
+- Civilization-specific tech research bonuses
+  (such as free, discount or faster research) are
+  difficult to implement and have not been changed yet.  
+  TODO: consider to create a new better Tech and enable for civilization that has the bonus,
+  then show that Tech in the building UI as a replacement for the original Tech.
+- All team bonuses are implemented as normal bonuses,
+  only affecting the civilization itself, not the whole team.
 
 ##### 1. [Assyrian](https://ageofempires.fandom.com/wiki/Assyrians#Civilization_bonuses)
 
