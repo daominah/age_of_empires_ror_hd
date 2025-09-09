@@ -171,7 +171,7 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
   Horse Archer cost reduced to 37 food, 52 gold).
 * Ships HP +30%.
 
-### Balance to Definitive Edition
+### Definitive Edition balance updates
 
 In-game unit stats are defined in the file `data\empires.dat`.
 In the same directory, the file `empires_definitive_edition.dat` is a copy with
@@ -288,7 +288,7 @@ The Catapult line now has increased pierce armor but negative melee armor.
 - [ ] Juggernaught can no longer destroy trees.
 - [ ] Trade Boat / Merchant Ship HP reduced to 120/200 (previously 200/250 HP).
 
-#### Civilizations bonuses Definitive Edition
+#### Civilizations bonuses AoE-DE
 
 ##### Shared changes
 
@@ -385,7 +385,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 - [x] Get Wheel.
 - [x] Get Catapult upgrade. (still missing Heavy Catapult).
-- [x] Houses have +50 hit points (team bonus).
+- [x] Houses have +50 HP (team bonus),
+  so they have 125 HP instead of 75 HP.
 
 - [ ] Academy units have +1/+2 pierce armor in the Bronze/Iron Age
   (previously +2 pierce armor for all ages).
@@ -430,7 +431,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 Seem like no buffs, but the shared Elephant Archer +1 attack is significant
 due to the Phoenician low Elephants cost.
 
-- [x] Docks have +150 hit points, +4 line of sight.
+- [x] Docks have +150 HP, +4 line of sight.
 - [x] Archers have +2 line of sight (team bonus).
 
 - [ ] Catapult Trireme and Juggernaught fire 30% faster (previously 72% faster).
@@ -478,7 +479,7 @@ due to the Phoenician low Elephants cost.
 
 - [ ] Mounted units cost -15% (previously -25%).
 - [ ] Villagers move 10% faster (previously 18% faster).
-- [ ] Ships have +10%/+15%/+20%/+25% hit points in the Stone/Tool/Bronze/Iron Age
+- [ ] Ships have +10%/+15%/+20%/+25% HP in the Stone/Tool/Bronze/Iron Age
   (previously +30% for all ages).
 
 ##### 17. [Lac Viet](https://ageofempires.fandom.com/wiki/Lac_Viet#Civilization_bonuses)
