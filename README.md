@@ -285,7 +285,7 @@ The Catapult line now has increased pierce armor but negative melee armor.
   (previously 135 wood, 75 gold).
 - [ ] Juggernaught upgrade cost reduced to 1300 food, 500 wood
   (previously: 2000 food, 900 wood).
-- [ ] Juggernaught can no longer destroy trees. 
+- [ ] Juggernaught can no longer destroy trees.
 - [ ] Trade Boat / Merchant Ship HP reduced to 120/200 (previously 200/250 HP).
 
 #### Civilizations bonuses Definitive Edition
@@ -298,6 +298,9 @@ Shared changes to all civilizations:
 - [ ] Heavy Transport is available for all (previously disabled for Assyrian, Babylonian, Choson, Hittite, Palmyran, Shang and Sumerian).
 
 End of shared changes. The following are civilization-specific changes.
+
+Civilization-specific tech bonuses (such as discount or faster research) are
+difficult to implement and have not been changed yet.
 
 ##### 1. [Assyrian](https://ageofempires.fandom.com/wiki/Assyrians#Civilization_bonuses)
 
@@ -381,12 +384,13 @@ End of shared changes. The following are civilization-specific changes.
 
 ##### 9. [Minoan](https://ageofempires.fandom.com/wiki/Minoans#Civilization_bonuses)
 
-- [ ] Farmers work 10% faster.
-- [ ] Docks cost -20% (team bonus).
+- [x] Farmers work 10% faster.
+- [x] Docks cost -20% (team bonus).
 
 - [ ] Bonus Farms have +60 food removed.
 - [ ] Improved Bowman line has +1/+2 range in the Bronze/Iron Age, respectively.
   (previously +2 for Composite Bowman for all ages).
+  - [x] Only implement Improved Bowman +1 range for all ages.
 - [ ] Ships cost -15%/-20%/-25%/-30% in the Stone/Tool/Bronze/Iron Age.
   (previously -30% for all ages).
 
