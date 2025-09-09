@@ -416,9 +416,9 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 11. [Persian](https://ageofempires.fandom.com/wiki/Persians_(Age_of_Empires)#Civilization_bonuses)
 
-- [ ] Get Wheel, Artisanship, Plow and Coinage at the Market.
-- [ ] Walls cost -20%, so 4 stone (previously 5 stone).
-- [ ] Stables work 20% faster (team bonus).
+- [x] Get Wheel, Artisanship, Plow and Coinage at the Market.
+- [x] Walls cost -20%, so 4 stone (previously 5 stone).
+- [x] Stables work 20% faster (team bonus).
 
 - [ ] All elephant units move 25% faster (previously 56% faster).
 - [ ] Scout Ship line fires 18%/25%/33% faster in the Tool/Bronze/Iron Age.
