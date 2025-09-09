@@ -365,7 +365,7 @@ difficult to implement and have not been changed yet.
 ##### 7. [Hittite](https://ageofempires.fandom.com/wiki/Hittites#Civilization_bonuses)
 
 - [ ] Wheel -50% cost and research time.
-- [ ] Towers provide +4 population room (team bonus).
+- [x] Towers provide +4 population room (team bonus).
 
 - [ ] Catapults have +50% HP (previously +100% HP).
 - [ ] War ships (except Fire Galley) have +1/+2/+3 range in the Tool/Bronze/Iron Age
