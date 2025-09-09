@@ -416,7 +416,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 11. [Persian](https://ageofempires.fandom.com/wiki/Persians_(Age_of_Empires)#Civilization_bonuses)
 
-- [x] Get Wheel, Artisanship, Plow and Coinage at the Market.
+- [x] Wheel, Artisanship, Plow, Coinage are available.
+- [x] Ballistics is available.
 - [x] Walls cost -20%, so 4 stone (previously 5 stone).
 - [x] Stables work 20% faster (team bonus).
 
@@ -437,9 +438,13 @@ due to the Phoenician low Elephants cost.
 
 ##### 13. [Roman](https://ageofempires.fandom.com/wiki/Romans_(Age_of_Empires)#Civilization_bonuses)
 
-- [ ] Ballista and Helepolis have +1 range, so start at 9+1, max at 10+3.
-- [ ] Priests +50% heal speed (team bonus).
-
+- [x] Ballista and Helepolis have +1 range, so start at 9+1, max at 10+3.
+- [x] Priests +50% heal speed (team bonus)  
+  (implemented by set Roman `Heal Bonus (ResourceID 56)` to 1.5 (default is 0, works same as 1),
+  along with change `Medicine` effect from `set Heal Bonus to 3` to `change Heal Bonus +3`,  
+  if `Heal Bonus ≠ 0`, it will be multiplied with the base heal rate 3 HP/s;  
+  Result a Roman Priest heal rate starts at 4.5 HP/s, with Medicine it is 13.5 HP/s, missing Astrology;  
+  other civs Priest start at 3 HP/s, Astrology increases to 3.9 HP/s, combined with Medicine it is 11.7 HP/s, same as before).
 - [ ] Buildings cost -10% (previously -15%)
 - [ ] Towers cost -40% (previously -50%)
 
