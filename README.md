@@ -426,10 +426,13 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 12. [Phoenician](https://ageofempires.fandom.com/wiki/Phoenicians#Civilization_bonuses)
 
-- [ ] Docks have +150 hit points, +4 line of sight.
-- [ ] Archers have +2 line of sight (team bonus).
+Seem like no buffs, but the shared Elephant Archer +1 attack is significant
+due to the Phoenician low Elephants cost.
 
-- [ ] Catapult Trireme and Juggernaught fire 30% faster (previously 58% faster).
+- [x] Docks have +150 hit points, +4 line of sight.
+- [x] Archers have +2 line of sight (team bonus).
+
+- [ ] Catapult Trireme and Juggernaught fire 30% faster (previously 72% faster).
 - [ ] Woodcutters work 15% faster and carry +2 wood (previously work rate +36%, carry +3).
 
 ##### 13. [Roman](https://ageofempires.fandom.com/wiki/Romans_(Age_of_Empires)#Civilization_bonuses)
