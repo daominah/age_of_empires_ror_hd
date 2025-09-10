@@ -451,10 +451,10 @@ due to the Phoenician low Elephants cost.
 
 ##### 14. [Shang](https://ageofempires.fandom.com/wiki/Shang#Civilization_bonuses)
 
-- [ ] Get Coinage.
-- [ ] Get Ballistics.
-- [ ] Cavalry, Heavy Cavalry, Cataphract attack 10% faster.
-- [ ] Town Centers provide +4 population room (team bonus).
+- [x] Get Coinage.
+- [x] Get Ballistics.
+- [x] Cavalry, Heavy Cavalry, Cataphract attack 10% faster.
+- [x] Town Center provide +4 population room (team bonus).
 
 - [ ] Villagers cost 40 food (previously 35 food). Normal cost is 50 food.
 - [ ] Start the game with -40 food.
