@@ -462,11 +462,10 @@ due to the Phoenician low Elephants cost.
 
 ##### 15. [Sumerian](https://ageofempires.fandom.com/wiki/Sumerians#Civilization_bonuses)
 
-- [ ] Get Coinage.
-- [ ] Camels have +1 pierce armor.
-- [ ] Stone Thrower, Catapult, and Heavy Catapult fire 45% faster
-  (previously 43% faster).
-- [ ] Town Centers cost -25%, so 150 wood instead of 200 wood (team bonus).
+- [x] Get Coinage.
+- [x] Camels have +1 pierce armor.
+- [ ] Stone Thrower, Catapult, and Heavy Catapult fire 45% faster (previously 43%).
+- [x] Town Centers cost -25%, so 150 wood instead of 200 wood (team bonus).
 
 - [ ] Farms have +125 food (previously +250 food).
 
