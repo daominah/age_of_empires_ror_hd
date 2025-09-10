@@ -74,7 +74,7 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
 
 * Priest cost -32% (stated -30%),  
   so 85 gold instead of 125.
-* Iron Age Swordsmen receive +80 HP.  
+* Iron Age Swordsman receive +80 HP.  
   Long Swordsman has 160 HP instead of 80;  
   Legion has 240 HP instead of 160.
 * Towers range +2: fully upgraded range is 7+5 instead of 7+3.
@@ -148,7 +148,7 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
 
 * Buildings cost -15% (except Tower, Wall, Wonder).  
   Tower cost -50%.
-* Swordsmen attack speed +50%
+* Swordsman attack speed +50%
   (stated +33%; this probably refers to attack reload time).
 
 #### 14. Shang
@@ -171,13 +171,13 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
   Horse Archer cost reduced to 37 food, 52 gold).
 * Ships HP +30%.
 
-### Definitive Edition balance updates
+### Definitive Edition and Return of Rome balance
 
 In-game unit stats are defined in the file `data\empires.dat`.
 In the same directory, the file `empires_definitive_edition.dat` is a copy with
 changes that mimic the official balance patches of the
 [Age of Empires: Definitive Edition](https://ageofempires.fandom.com/wiki/Summary_of_changes_in_Age_of_Empires:_Definitive_Edition)
-and a few changes from [Return of Rome](https://ageofempires.fandom.com/wiki/Age_of_Empires_II:_Definitive_Edition_-_Return_of_Rome).
+and [Return of Rome](https://ageofempires.fandom.com/wiki/Age_of_Empires_II:_Definitive_Edition_-_Return_of_Rome).
 
 To play with these changes, replace `data\empires.dat` with `data\empires_definitive_edition.dat`.
 To revert, restore `data\empires.dat.backup`.
@@ -187,20 +187,22 @@ Because I do not want to nerf good things, I only apply the buffs in the followi
 
 #### Units and buildings update
 
-Mainly buffs for weak or expensive but underperformed units:
-Swordsmen, Elephant Archer, Cataphract, Academy, Towers.
+Mainly buffs for weak or expensive but underperformed [units](https://ageofempires.fandom.com/wiki/Unit_(Age_of_Empires)#Town_Center):
+Swordsman, Elephant Archer, Cataphract, Academy, Towers.
 The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 1. Villager
 
-- [x] Hunters work 5% faster than before
-  (previously they were as slow as Foragers 0.45 food/s, now 0.4725 food/s).
-- [x] Villagers move 10% faster after advancing to the Tool Age.
-  (Tool Age effect now adds +0.1 to Civilian Movement, so the speed increased to 1.2,
+- [x] [Villager](https://ageofempires.fandom.com/wiki/Villager_(Age_of_Empires)#Changelog)
+  move 10% faster after advancing to the Tool Age.  
+  (Tool Age effect now adds +0.1 to Civilian Movement,
+  so Villager speed increased to 1.2,
   Wheel effect adjusted accordingly to +0.6, so Wheel Villager stays at 1.8).
+- [x] Hunters work 5% faster than before  
+  (previously they worked at the same rate as Forager 0.45 food/s, now 0.4725 food/s).
+- [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
 - [x] Increased the quantity of Gold Mine to 450 (previously 400).
 - [x] Increased the quantity of Stone Mine to 300 (previously 250).
-- [ ] Gold and stone miners work 15% faster (to compensate bug fixes to technologies).
 - [x] Towers build time reduced to 65s (previously 80s).
 - [x] Farm build time reduced to 24s (previously 30s).
 - [x] Farm technologies improved, fully upgraded Farm now has 550 food (prev 475):
@@ -210,42 +212,59 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 2. Barracks
 
-- [x] Axeman pierce armor increased to 1 (previously 0).
+- [x] [Axeman](https://ageofempires.fandom.com/wiki/Axeman_(Age_of_Empires)#Changelog)
+  pierce armor increased to 1 (previously 0).
+- [ ] Axeman has +4 bonus attack vs mounted units.
 - [x] Short Sword research is free upon reaching the Bronze Age:
   - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe
   - after: costs Food 0, Gold 0, Research Time 1, only require Bronze Age
-- [x] Broad Swordsmen have +10 HP, so now have 80 HP.
-- [x] Long Swordsmen have +20 HP, so now have 100 HP.
+- [x] [Broad Swordsman](https://ageofempires.fandom.com/wiki/Broad_Swordsman#Changelog)
+  have +10 HP, so now have 80 HP.
+- [x] Long Swordsman have +20 HP, so now have 100 HP.
 - [ ] Long Sword upgrade cost increased to 240 food, 100 gold
   (previously 160 food, 50 gold).
 - [ ] Legions lose 20 HP.
-- [x] Slinger pierce armor increased to 3 (previously 2).
+- [x] [Slinger](https://ageofempires.fandom.com/wiki/Slinger_(Age_of_Empires))
+  pierce armor increased to 3 (previously 2).
 - [x] Slinger line of sight increased to 6 (previously 5).
 - [ ] Slinger bonus attack against all archers increased to +3 (previously +2).
-- [ ] Slinger training time increased 35s (previously 24s).
+- [ ] Slinger training time increased to 35s (previously 24s).
 
 ##### 3. Archery Range
 
-- [ ] Horse Archer and Heavy Horse Archer pierce armor reduced to 1 (previously 2).
-- [x] Elephant Archer attack increased to 6 (previously 5)
+- [ ] [Bowman](https://ageofempires.fandom.com/wiki/Bowman_(Age_of_Empires))
+  has +2 bonus attack vs light infantry (previously 0).
+- [ ] Chariot Archer bonus attack vs Priest removed (previously +7),
+  also conversion resistance reduced to x2 (previously x8).
+- [ ] Horse Archer and [Heavy Horse Archer](https://ageofempires.fandom.com/wiki/Heavy_Horse_Archer)
+  pierce armor reduced to 1 (previously 2).
+- [x] [Elephant Archer](https://ageofempires.fandom.com/wiki/Elephant_Archer_(Age_of_Empires))
+  attack increased to 6 (previously 5)
   (cost unchanged 180 food, 60 gold).
 - [x] Improved Bow research time reduced to 45s (previously 60s).
 
 ##### 4. Stable
 
-- [x] Scout cost reduced to 90 food (previously 100).
-- [x] Cavalry has 0/1 melee/pierce armor (previously 0/0).
+- [x] [Scout](https://ageofempires.fandom.com/wiki/Scout_(Age_of_Empires))
+  cost reduced to 90 food (previously 100).
+- [x] Scout pierce armor increased to 1 (previously 0).
+- [ ] Scout have bonus attack vs archers +3 (previously 0).
+- [ ] Chariot bonus attack vs Priest removed (previously +7),
+  also conversion resistance reduced to x2 (previously x8).
+- [ ] Scythe Chariot melee armor reduced to 1 (previously 2).
+- [ ] Scythe Chariot upgrade cost increased to 1400 wood, 1000 gold (previously 1200 wood, 800 gold).
+- [x] [Cavalry](https://ageofempires.fandom.com/wiki/Cavalry_(Age_of_Empires))
+  has 1 pierce armor (previously 0).
 - [x] Heavy Cavalry has 2/2 melee/pierce armor (previously 1/1).
-- [x] Cataphract has 240 HP, 5/3 melee/pierce armor (previously 180 HP, 3/1 armor).
+- [x] [Cataphract](https://ageofempires.fandom.com/wiki/Cataphract_(Age_of_Empires))
+  has 240 HP, 5/3 melee/pierce armor (previously 180 HP, 3/1 armor).
 - [x] Cataphract upgrade cost reduced to 1600 food, 600 gold
   (previously 2000 food, 850 gold).
-- [ ] Camel Rider now have bonus attack against all mounted units.
-  Missing +4 bonus attack vs elephants added.
-- [ ] All chariots have no bonus damage against Priests.
-  Their conversion resistance reduced to x2 (previously x8).
-- [ ] Scythe Chariot upgrade cost increased to 1400 wood, 1000 gold (previously: 1200 wood, 800 gold). Their melee armor reduced to 1 (previously 2).
-- [ ] Armored Elephant bonus attack vs buildings decreased by 1.
-- [ ] Elephant and Scythe Chariot trample damage area reduced just enough so that they no longer damage enemy units/buildings on the other side of a wall.
+- [ ] War Elephant has +25 bonus attack vs buildings (previously 0).
+- [ ] Armored Elephant bonus attack vs all buildings reduced to +35
+  (previously +40 vs buildings, additional +40/+80 vs Towers/Walls).
+- [ ] Camel Rider added +4 bonus attack vs elephants
+  (so now Camel have bonus attack vs all mounted units).
 
 ##### 5. Academy
 
@@ -253,13 +272,17 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 6. Siege Workshop
 
-- [ ] Stone Thrower/Catapult/Heavy Catapult have 3/4/5 pierce armor (previously had 0).
-- [ ] Stone Thrower/Catapult/Heavy Catapult have -2 melee armor (previously had 0).
+- [ ] Stone Thrower/Catapult/[Heavy Catapult](https://ageofempires.fandom.com/wiki/Heavy_Catapult)
+  have 3/4/5 pierce armor (previously 0).
+- [ ] Stone Thrower/Catapult/Heavy Catapult have -2 melee armor (previously 0).
 - [ ] Catapult and Heavy Catapult have slightly smaller damage area radius.
-- [ ] Siege weapon projectiles (stones and bolts) travel slightly faster (they were very slow),
+- [ ] Siege weapon projectiles (stones and bolts) travel slightly faster,
   but are also slightly slower to reload (affects all stone and bolt firing units).
-- [ ] Helepolis has 23% slower fire rate (previously it fired as fast as archers). Gets +5 attack.
-- [x] Helepolis upgrade cost reduced to 1200 food, 1000 wood (previously 1500 food, 1000 wood).
+- [x] Ballista attack reload time reduced to 2.7s (previously 3).
+- [ ] Helepolis attack reload time increased to 1.85s (previously 1.5s).
+- [ ] Helepolis attack increased to 45 (previously 40).
+- [x] Helepolis upgrade cost reduced to 1200 food, 1000 wood
+  (previously 1500 food, 1000 wood).
 
 ##### 7. Temple
 
@@ -268,14 +291,16 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 8. Tower
 
+- [x] [Towers](https://ageofempires.fandom.com/wiki/Tower#Age_of_Empires)
+  build time reduced to 65s (previously 80s).
 - [ ] Watch/Sentry/Guard/Ballista Towers HP increased to 125/185/240/240
-  (previously have 100/150/200/200 HP).
+  (previously 100/150/200/200 HP).
 - [ ] Watch/Sentry/Guard/Ballista Towers attack increased to 5/6/8/20
-  (previously have 3/4/6/20 base pierce attack).
+  (previously 3/4/6/20 base pierce attack).
 - [ ] Watch/Sentry/Guard/Ballista Towers range increased to 6/7/8/8
-  (previously have 5/6/7/7 range).
+  (previously 5/6/7/7 range).
 - [ ] Watch/Sentry/Guard/Ballista Towers pierce armor increased to 3/4/5/5
-  (previously have 3/4/4/4 pierce armor).
+  (previously 3/4/4/4 pierce armor).
 
 ##### 9. Dock
 
@@ -346,7 +371,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 ##### 4. [Choson](https://ageofempires.fandom.com/wiki/Choson#Civilization_bonuses)
 
 - [x] Axeman HP increased to 55 (previously 50 HP, same as normal).
-- [x] Short/Broad/Long Swordsmen and Legion have +15/+20/+60/+80 HP.
+- [x] Short/Broad/Long Swordsman and Legion have +15/+20/+60/+80 HP.
   (previously +0/+0/+80/+80 HP).
 - [x] Get Nobility.
 - [ ] Storage Pit technologies cost -40%.
