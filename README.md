@@ -473,7 +473,7 @@ due to the Phoenician low Elephants cost.
 
 - [ ] Stable and Archery Range upgrades cost -30%.
 - [ ] Fishing Boats work 20% faster.
-- [ ] Stable and Archery Range cost -33% wood (team bonus).
+- [x] Stable and Archery Range cost -33% wood (team bonus).
   So their cost reduced to 100 wood (previously 150 wood).
 
 - [ ] Mounted units cost -15% (previously -25%).
