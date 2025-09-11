@@ -363,7 +363,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 - [x] Start the game with +50 of all resources Wood, Food, Gold, Stone.
 - [x] Camel Riders have +15% HP.
-- [ ] Nobility cost is free (still requires Government Center, save 175 food, 120 gold).
+- [x] Nobility cost is free (still requires Government Center, save 175 food, 120 gold).
 - [x] Academy work 20% faster (team bonus).
 
 - [ ] Transport ships move 25% faster (previously 43% faster for Heavy Transport).
