@@ -341,7 +341,9 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
   (but still missing Heavy Horse Archer techID 38).
 - [x] Alchemy and Engineering are available at the Government Center.
 - [x] Siege Workshops work 20% faster (team bonus).
-- [x] Siege units upgrades cost -50%.
+- [x] Siege units upgrades cost -50%  
+  (so total saving is 1650 food, 1075 wood).
+
 - [ ] Villagers move 10% faster (previously 18% faster).
 - [ ] Archers have -25% Attack Reload Time (so +33% fire rate, previously +36%).
 
@@ -351,7 +353,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 - [x] Metallurgy is available.
 - [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
   (but still missing Heavy Horse Archer).
-- [ ] Market technologies cost -30%.
+- [x] Market technologies cost -30%  
+  (so total saving is 605 food, 248 wood, 30 gold, 45 stone; Babylonian has full 11 Market techs).
 - [x] Builders work 10% faster (team bonus).
 
 - [ ] Towers and walls have +60% HP (previously +100% HP).
@@ -360,7 +363,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 - [x] Start the game with +50 of all resources Wood, Food, Gold, Stone.
 - [x] Camel Riders have +15% HP.
-- [ ] Nobility cost is free (still requires Government Center).
+- [ ] Nobility cost is free (still requires Government Center, save 175 food, 120 gold).
 - [x] Academy work 20% faster (team bonus).
 
 - [ ] Transport ships move 25% faster (previously 43% faster for Heavy Transport).
@@ -370,8 +373,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 - [x] Axeman HP increased to 55 (previously 50 HP, same as normal).
 - [x] Short/Broad/Long Swordsman and Legion have +15/+20/+60/+80 HP.
   (previously +0/+0/+80/+80 HP).
-- [x] Get Nobility.
-- [x] Storage Pit technologies cost -40%.  
+- [x] Nobility is available.
+- [x] Storage Pit technologies cost -40%  
   (so the total saving is 570 food and 222 gold;
   could be more if Choson had Iron Age armors, but they do not).
 - [x] Buildings have +2 Line of Sight (team bonus).
@@ -567,6 +570,21 @@ My dummy unique techs list added in `data/empires_definitive_edition.dat`:
 - TechID 141: uniq_Sumerian_E90
 - TechID 142: uniq_Yamato_E92
 - TechID 143: uniq_LacViet_E218_unused
+
+##### Tech cost discount calculator
+
+```python
+import math
+
+
+class A:
+    def __init__(self, x, y):
+        self.x = x;
+        self.y = y
+
+    def mul(self, r):
+        print(f"{math.floor(self.x * r)}, {math.floor(self.y * r)}")
+```
 
 ##### Tech Cost Modifier
 
