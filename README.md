@@ -341,7 +341,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
   (but still missing Heavy Horse Archer techID 38).
 - [x] Alchemy and Engineering are available at the Government Center.
 - [x] Siege Workshops work 20% faster (team bonus).
-- [ ] Siege units upgrades cost -50%.
+- [x] Siege units upgrades cost -50%.
 - [ ] Villagers move 10% faster (previously 18% faster).
 - [ ] Archers have -25% Attack Reload Time (so +33% fire rate, previously +36%).
 
@@ -516,6 +516,7 @@ the civilization still bad after got buffs.
   (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
 - [x] Archers have +2 melee armor.
 - [x] Ballista have +2 melee armor (but Helepolis is missing).
+- [ ] All military units are created 25% faster.
 - [ ] Houses and Farms are built 50% faster (team bonus).
 
 #### Note on using Genie Editor
