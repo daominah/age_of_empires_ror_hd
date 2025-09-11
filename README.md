@@ -572,12 +572,20 @@ My dummy unique techs list added in `data/empires_definitive_edition.dat`:
 - TechID 142: uniq_Yamato_E92
 - TechID 143: uniq_LacViet_E218_unused
 
-TODO: Bug duplicated techs if the starting Age is not Stone Age,
-example Carthaginian_cheap_Nobility requires uniq_Carthaginian_E205,
-but if in other civs Tech Tree Effect we don't explicitly disable that tech,
-if the game start in Iron Age, every civ will have the effect of Nobility TWICE,
-one from normal Nobility, one from Carthaginian_cheap_Nobility.
-This is not a problem with the default Stone Age start.
+Known bugs:
+
+- Bug AI build order conflict with new tech IDs:  
+  As we replace bonus techs with new unique techs,
+  but the AI build order still use the old tech IDs,
+  they cannot research those techs,
+  example Yamato stuck at Cavalry without upgrades,
+  should be fixed by editing the AI scripts to they have Heavy Cavalry and Cataphract.
+- Bug duplicated techs if the starting Age is not Stone Age:  
+  example Carthaginian_cheap_Nobility requires uniq_Carthaginian_E205,
+  but if in other civs Tech Tree Effect we don't explicitly disable that tech,
+  if the game start in Iron Age, every civ will have the effect of Nobility TWICE,
+  one from normal Nobility, one from Carthaginian_cheap_Nobility.
+  This is not a problem with the default Stone Age start.
 
 ##### Tech discount calculator
 
