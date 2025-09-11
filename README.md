@@ -68,68 +68,68 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
 * Light Transport move speed +25%, Heavy Transport move speed +43% (stated +30%).  
   (so Heavy Transport moves as fast as a Heavy Horse Archer at 2.5 tiles/s,  
   this is the fastest move speed in the game, not counting cheat units.)
-* Fire Galley attack +6 (24+12 instead of 24+6).
+* Fire Galley attack +6 (so fully upgraded attack is 24+12 instead of 24+6).
 
 #### 4. Choson
 
-* Priest cost -32% (stated -30%),  
-  so 85 gold instead of 125.
-* Iron Age Swordsman receive +80 HP.  
-  Long Swordsman has 160 HP instead of 80;  
-  Legion has 240 HP instead of 160.
-* Towers range +2: fully upgraded range is 7+5 instead of 7+3.
+* Priest cost -32% (stated -30%), so 85 gold instead of 125.
+* Iron Age Swordsman receive +80 HP, so:
+  - Long Swordsman has 160 HP instead of 80.
+  - Legion has 240 HP instead of 160.
+* Towers range +2, so fully upgraded range is 7+5 instead of 7+3.
 
 #### 5. Egyptian
 
-* Chariots HP +33%  
-  (so Chariot Archer starts at 93 HP instead of 70,  
-  Scythe Chariot has 182 HP instead of 137).
+* Chariots HP +33%, so:
+  - Chariot Archer starts at 93 HP instead of 70.
+  - Chariot starts at 133 HP instead of 100.
+  - Scythe Chariot has 182 HP instead of 137 (Nobility upgraded).
 * Priest range +3 (fully upgraded range is 10+6 instead of 10+3).
 * Gold Miner work rate +44% and capacity +2 (stated +20%).
 
 #### 6. Greek
 
-* Academy units move speed +33% (stated +30%):  
-  +0.3 tiles/s, so starts at 1.2 instead of 0.9.  
-  With Aristocracy, the speed is 1.45 instead of 1.15.
+* Academy units move speed +33% (stated +30%) by +0.3 tiles/s, so:
+  - Start at 1.2 instead of 0.9.
+  - With Aristocracy, the speed is 1.45 instead of 1.15.
 * Warships move speed +17% (stated +30%).
 
 #### 7. Hittite
 
 * Archers attack +1.
-* Siege units HP x2.  
-  (Heavy Catapult has 300 HP.)
-* Warships range +4.
+* Siege units HP x2 (so Heavy Catapult has 300 HP).
+* Warships range +4
+  (but missing Trireme in the Iron Age).
 
 #### 8. Macedonian
 
 * Academy units pierce armor +2.
 * Melee units sight +2.
 * Siege units cost -50%.  
-  (Stone Thrower cost reduced to 90 wood, 40 gold.)
+  (so Stone Thrower cost reduced to 90 wood, 40 gold.)
 * All units are 4 times more resistant to conversion.  
   (so Cavalry usually cannot be converted by a Priest on open field.)
 
 #### 9. Minoan
 
-* Composite Bowman range +2.  
-  Fully upgraded range is 7+5 instead of 7+3.
-* Farm food +60 (starts at 310 instead of 250).
+* Composite Bowman range +2
+  (so fully upgraded range is 7+5 instead of 7+3).
+* Farm food +60 (so starts at 310 instead of 250).
 * Ships cost -30%.
 
 #### 10. Palmyran
 
 * Forager, Hunter, Gold Miner, Stone Miner work rate +44%;    
   Woodcutter +36%;  
-  Farmer and Builder work rates are normal  
+  Farmer, Builder, Repairman work just as fast as others
   (stated Villager work rate +25%).
 * Villager armor +1 and pierce armor +1  
-  (in-game not show pierce armor, but it is there).
+  (game UI not show pierce armor, but it is there).
 * Villager cost +50% (so 75 food instead of 50).
-* Camel Rider move speed +25% (as fast as a Heavy Horse Archer).
+* Camel Rider move speed +25% (so moves as fast as Heavy Horse Archer).
 * Free tribute
   (so while other civilizations lose 125 resources to give ally 100,
-  Palmyran gives 100 resources without losing anything).
+  Palmyran only lose 100 resources to give ally 100).
 
 #### 11. Persian
 
@@ -147,9 +147,9 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
 #### 13. Roman
 
 * Buildings cost -15% (except Tower, Wall, Wonder).  
-  Tower cost -50%.
-* Swordsman attack speed +50%
-  (stated +33%; this probably refers to attack reload time).
+  Tower cost -50% (but missing Guard Tower upgrade).
+* Swordsman attack speed +50%  
+  (stated +33%, probably refers to attack reload time).
 
 #### 14. Shang
 
@@ -158,17 +158,18 @@ Bronze Age without Wall (a.k.a. "Đời ba không thành").
 
 #### 15. Sumerian
 
-* Villager HP +15 (so 40 instead of 25).
-* Siege units attack speed +43%.
-  (reload time reduced to 3.5 instead of 5).
-* Farm food +250 (starts at 500 instead of 250).
+* Villager +15 HP (so has 40 HP instead of 25).
+* Siege units attack speed +43%
+  (attack reload time reduced to 3.5s instead of 5s).
+* Farm food +250 (so starts at 500 instead of 250).
 
 #### 16. Yamato
 
 * Villager move speed +18% (stated +30%, same as Assyrian).
-* Mounted units cost -25%  
-  (Cavalry cost reduced to 52 food, 60 gold,  
-  Horse Archer cost reduced to 37 food, 52 gold).
+* Mounted units cost -25%, so:
+  - Scout cost reduced to 75 food (normally 100).
+  - Cavalry cost reduced to 52 food, 60 gold (normally 70 food, 80 gold).
+  - Horse Archer cost reduced to 37 food, 52 gold (normally 50 food, 70 gold).
 * Ships HP +30%.
 
 ### Definitive Edition and Return of Rome balance
@@ -216,8 +217,8 @@ The Catapult line now has increased pierce armor but negative melee armor.
   pierce armor increased to 1 (previously 0).
 - [ ] Axeman has +4 bonus attack vs mounted units.
 - [x] Short Sword research is free upon reaching the Bronze Age:
-  - before: costs Food 120, Gold 50, Research Time 50, require Battle Axe
-  - after: costs Food 0, Gold 0, Research Time 1, only require Bronze Age
+  - previously costs Food 120, Gold 50, Research Time 50, require Battle Axe
+  - now costs Food 0, Gold 0, Research Time 1, only require Bronze Age
 - [x] [Broad Swordsman](https://ageofempires.fandom.com/wiki/Broad_Swordsman#Changelog)
   have +10 HP, so now have 80 HP.
 - [x] Long Swordsman have +20 HP, so now have 100 HP.
