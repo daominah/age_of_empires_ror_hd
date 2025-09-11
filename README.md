@@ -498,13 +498,14 @@ due to the Phoenician low Elephants cost.
 
 ##### 16. [Yamato](https://ageofempires.fandom.com/wiki/Yamato#Civilization_bonuses)
 
-- [ ] Stable and Archery Range upgrades cost -30%.
-- [ ] Fishing Boats work 20% faster.
+- [x] Stable and Archery Range upgrades cost -30%
+  (so total saving is 1206 food, 458 gold, 54 wood).
+- [x] Fishing Boats work 20% faster.
 - [x] Stable and Archery Range cost -33% wood (team bonus).
   So their cost reduced to 100 wood (previously 150 wood).
 
+- [ ] Villagers move speed bonus removed (previously +18%).
 - [ ] Mounted units cost -15% (previously -25%).
-- [ ] Villagers move 10% faster (previously 18% faster).
 - [ ] Ships have +10%/+15%/+20%/+25% HP in the Stone/Tool/Bronze/Iron Age
   (previously +30% for all ages).
 
@@ -578,19 +579,16 @@ if the game start in Iron Age, every civ will have the effect of Nobility TWICE,
 one from normal Nobility, one from Carthaginian_cheap_Nobility.
 This is not a problem with the default Stone Age start.
 
-##### Tech cost discount calculator
+##### Tech discount calculator
 
 ```python
-import math
-
-
 class A:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
     def mul(self, r):
-        print(f"{math.floor(self.x * r)}, {math.floor(self.y * r)}")
+        print(f"{int(self.x * r)}, {int(self.y * r)}")
 ```
 
 ##### Tech Cost Modifier
