@@ -329,11 +329,9 @@ Shared changes are applied to all civilizations:
 
 Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
-- Civilization-specific tech research bonuses
-  (such as free, discount or faster research) are
-  difficult to implement and have not been changed yet.  
-  TODO: consider to create a new better Tech and enable for civilization that has the bonus,
-  then show that Tech in the building UI as a replacement for the original Tech.
+- For civilization-specific tech research bonuses,  
+  in AoE2 we can use [Tech Cost Modifier](#tech-cost-modifier),  
+  but in this old AoE-RoR, we use a workaround similar to [unique tech](#unique-tech).
 - All team bonuses are implemented as normal bonuses,
   only affecting the civilization itself, not the whole team.
 
@@ -343,10 +341,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
   (but still missing Heavy Horse Archer techID 38).
 - [x] Alchemy and Engineering are available at the Government Center.
 - [x] Siege Workshops work 20% faster (team bonus).
-- [ ] Siege units upgrades cost -50%.  
-  (for this kind of bonus, AoE2 has [Tech Cost Modifier](#tech-cost-modifier),
-  but we work around by adding [dummy unique tech](#unique-tech) for each civ,
-  then require that Tech for the discounted upgrade).
+- [ ] Siege units upgrades cost -50%.
 - [ ] Villagers move 10% faster (previously 18% faster).
 - [ ] Archers have -25% Attack Reload Time (so +33% fire rate, previously +36%).
 
@@ -376,7 +371,9 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 - [x] Short/Broad/Long Swordsman and Legion have +15/+20/+60/+80 HP.
   (previously +0/+0/+80/+80 HP).
 - [x] Get Nobility.
-- [ ] Storage Pit technologies cost -40%.
+- [x] Storage Pit technologies cost -40%.  
+  (so the total saving is 570 food and 222 gold;
+  could be more if Choson had Iron Age armors, but they do not).
 - [x] Buildings have +2 Line of Sight (team bonus).
 
 ##### 5. [Egyptian](https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Empires)#Civilization_bonuses)
@@ -552,23 +549,23 @@ then change the discounted Tech to require that unique Tech.
 
 My dummy unique techs list added in `data/empires_definitive_edition.dat`:
 
-- TechID 127: unique_Assyrian_E81
-- TechID 128: unique_Babylonian_E82
-- TechID 129: unique_Carthaginian_E205
-- TechID 130: unique_Choson_E91
-- TechID 131: unique_Egyptian_E83
-- TechID 132: unique_Greek_E84
-- TechID 133: unique_Hittite_E85
-- TechID 134: unique_Macedonian_E206
-- TechID 135: unique_Minoan_E86
-- TechID 136: unique_Palmyran_E207
-- TechID 137: unique_Persian_E87
-- TechID 138: unique_Phoenician_E88
-- TechID 139: unique_Roman_E208
-- TechID 140: unique_Shang_E89
-- TechID 141: unique_Sumerian_E90
-- TechID 142: unique_Yamato_E92
-- TechID 143: unique_LacViet_E218_unused
+- TechID 127: uniq_Assyrian_E81
+- TechID 128: uniq_Babylonian_E82
+- TechID 129: uniq_Carthaginian_E205
+- TechID 130: uniq_Choson_E91
+- TechID 131: uniq_Egyptian_E83
+- TechID 132: uniq_Greek_E84
+- TechID 133: uniq_Hittite_E85
+- TechID 134: uniq_Macedonian_E206
+- TechID 135: uniq_Minoan_E86
+- TechID 136: uniq_Palmyran_E207
+- TechID 137: uniq_Persian_E87
+- TechID 138: uniq_Phoenician_E88
+- TechID 139: uniq_Roman_E208
+- TechID 140: uniq_Shang_E89
+- TechID 141: uniq_Sumerian_E90
+- TechID 142: uniq_Yamato_E92
+- TechID 143: uniq_LacViet_E218_unused
 
 ##### Tech Cost Modifier
 
