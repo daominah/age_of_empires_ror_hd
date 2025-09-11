@@ -344,8 +344,9 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 - [x] Alchemy and Engineering are available at the Government Center.
 - [x] Siege Workshops work 20% faster (team bonus).
 - [ ] Siege units upgrades cost -50%.  
-  (to implement this, see [Tech Cost Modifier](#tech-cost-modifier) below,
-  but sadly the command seems to not work for this AoE version).
+  (for this kind of bonus, AoE2 has [Tech Cost Modifier](#tech-cost-modifier),
+  but we work around by adding [dummy unique tech](#unique-tech) for each civ,
+  then require that Tech for the discounted upgrade).
 - [ ] Villagers move 10% faster (previously 18% faster).
 - [ ] Archers have -25% Attack Reload Time (so +33% fire rate, previously +36%).
 
@@ -364,7 +365,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 - [x] Start the game with +50 of all resources Wood, Food, Gold, Stone.
 - [x] Camel Riders have +15% HP.
-- [ ] Nobility free (still requires Government Center).
+- [ ] Nobility cost is free (still requires Government Center).
 - [x] Academy work 20% faster (team bonus).
 
 - [ ] Transport ships move 25% faster (previously 43% faster for Heavy Transport).
@@ -541,6 +542,33 @@ we can manually fill 3 necessary paths:
 In tab `Civilizations`, left panel show list of civilizations,  
 click on a civilization will show its corresponding Technology Tree, that is an EffectID,  
 then switch to tab `Effects`, find that EffectID to edit the Effect Commands.
+
+##### Unique Tech
+
+Some civilization bonuses are having some cheaper tech costs,
+they can be implemented by creating a new dummy unique Tech for that civilization,
+disable non-corresponding civilizations to have that Tech (all techs are enabled by default),
+then change the discounted Tech to require that unique Tech.
+
+My dummy unique techs list added in `data/empires_definitive_edition.dat`:
+
+- TechID 127: unique_Assyrian_E81
+- TechID 128: unique_Babylonian_E82
+- TechID 129: unique_Carthaginian_E205
+- TechID 130: unique_Choson_E91
+- TechID 131: unique_Egyptian_E83
+- TechID 132: unique_Greek_E84
+- TechID 133: unique_Hittite_E85
+- TechID 134: unique_Macedonian_E206
+- TechID 135: unique_Minoan_E86
+- TechID 136: unique_Palmyran_E207
+- TechID 137: unique_Persian_E87
+- TechID 138: unique_Phoenician_E88
+- TechID 139: unique_Roman_E208
+- TechID 140: unique_Shang_E89
+- TechID 141: unique_Sumerian_E90
+- TechID 142: unique_Yamato_E92
+- TechID 143: unique_LacViet_E218_unused
 
 ##### Tech Cost Modifier
 
