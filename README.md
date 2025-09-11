@@ -393,7 +393,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
   So Hoplite/Phalanx/Centurion cost 48 food, 32 gold (previously 60 food, 40 gold).
 - [x] Town Centers work 10% faster starting in the Tool Age.
   (hard to implement, so just increased the work rate in all ages).
-- [ ] Polytheism and Astrology free (requires Temple).
+- [ ] Polytheism and Astrology cost are free (still requires Temple).
 - [ ] Ships are 20% faster (previously 17% faster).
 - [ ] Get Fire Galley.
 - [x] Market cost -50% (team bonus).
@@ -571,6 +571,13 @@ My dummy unique techs list added in `data/empires_definitive_edition.dat`:
 - TechID 142: uniq_Yamato_E92
 - TechID 143: uniq_LacViet_E218_unused
 
+TODO: Bug duplicated techs if the starting Age is not Stone Age,
+example Carthaginian_cheap_Nobility requires uniq_Carthaginian_E205,
+but if in other civs Tech Tree Effect we don't explicitly disable that tech,
+if the game start in Iron Age, every civ will have the effect of Nobility TWICE,
+one from normal Nobility, one from Carthaginian_cheap_Nobility.
+This is not a problem with the default Stone Age start.
+
 ##### Tech cost discount calculator
 
 ```python
@@ -579,7 +586,7 @@ import math
 
 class A:
     def __init__(self, x, y):
-        self.x = x;
+        self.x = x
         self.y = y
 
     def mul(self, r):
