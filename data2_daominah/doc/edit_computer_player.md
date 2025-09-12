@@ -53,7 +53,8 @@ There are some AI files that are shared among civilizations, such as:
 Computer with randomly select a suitable AI file to follow.
 Shared build orders are not good,
 so I removed them to force computer to use civilization-specific AI files.
-(deleted files have backup in dir [data2_no_edit_20240801](../../data2_no_edit_20240801)).
+(deleted files have backup in dir [backup_data2](../../backup_data2),
+this dir contains all AI files before any of my edits).
 
 Should edit in dir [data2_daominah](..) then copy to files in data2 with the
 corresponding civilization (can do by running [apply_build.py](../apply_build.py)).
