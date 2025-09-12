@@ -414,8 +414,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 - [x] Wheel is available.
 - [x] Catapult upgrade is available (still missing Heavy Catapult and Engineering).
-- [x] Houses have +50 HP (team bonus),
-  so they have 125 HP instead of 75 HP.
+- [x] Houses have +50 HP (team bonus), so they have 125 HP instead of 75 HP.
 
 - [ ] Academy units have +1/+2 pierce armor in the Bronze/Iron Age
   (previously +2 pierce armor for all ages).
@@ -426,10 +425,10 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 - [x] Farmers work 10% faster.
 - [x] Docks cost -20% (team bonus).
 
-- [ ] Bonus Farms have +60 food removed.
 - [ ] Improved Bowman line has +1/+2 range in the Bronze/Iron Age, respectively.
   (previously +2 for Composite Bowman for all ages).
   - [x] Only implement Improved Bowman +1 range for all ages.
+- [ ] Bonus Farms have +60 food removed.
 - [ ] Ships cost -15%/-20%/-25%/-30% in the Stone/Tool/Bronze/Iron Age.
   (previously -30% for all ages).
 
@@ -447,7 +446,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 11. [Persian](https://ageofempires.fandom.com/wiki/Persians_(Age_of_Empires)#Civilization_bonuses)
 
-- [x] Wheel, Artisanship, Plow are available.
+- [x] Wheel is available.
+- [x] Artisanship, Plow are available.
 - [x] Coinage is available.
 - [x] Ballistics is available.
 - [x] Walls cost -20%, so 4 stone (previously 5 stone).
@@ -459,8 +459,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 12. [Phoenician](https://ageofempires.fandom.com/wiki/Phoenicians#Civilization_bonuses)
 
-Seem like no buffs, but the shared Elephant Archer +1 attack is significant
-due to the Phoenician low Elephants cost.
+Seem like no buffs, but the shared buff Elephant Archer +1 attack
+affects Phoenician the most, because of their bonus -25% Elephants cost.
 
 - [x] Docks have +150 HP, +4 line of sight.
 - [x] Archers have +2 line of sight (team bonus).
@@ -478,7 +478,7 @@ due to the Phoenician low Elephants cost.
   Result a Roman Priest heal rate starts at 4.5 HP/s, with Medicine it is 13.5 HP/s, missing Astrology;  
   other civs Priest start at 3 HP/s, Astrology increases to 3.9 HP/s, combined with Medicine it is 11.7 HP/s, same as before).
 - [ ] Buildings cost -10% (previously -15%)
-- [ ] Towers cost -40% (previously -50%)
+- [ ] Towers cost -40% (previously -50%), still missing Guard Tower upgrade as before.
 
 ##### 14. [Shang](https://ageofempires.fandom.com/wiki/Shang#Civilization_bonuses)
 
@@ -495,7 +495,8 @@ due to the Phoenician low Elephants cost.
 
 - [x] Coinage is available.
 - [x] Camels have +1 pierce armor.
-- [ ] Stone Thrower, Catapult, and Heavy Catapult fire 45% faster (previously 43%).
+- [ ] Stone Thrower, Catapult, and Heavy Catapult fire 45% faster
+  (previously 43%, caused by all others siege reload time slightly increased).
 - [x] Town Centers cost -25%, so 150 wood instead of 200 wood (team bonus).
 
 - [ ] Farms have +125 food (previously +250 food).
