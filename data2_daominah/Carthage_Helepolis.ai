@@ -54,6 +54,7 @@ T338      Soldier-Camel        2      101       0
 T83       Man                  1      109       0
 
 R34     Nobility               1      82
+R178    Carthaginian_cheap_Nob 1      82 	    // new buff
 T338      Soldier-Camel        2      101       0
 T125      Priest               1      104       0
 T83       Man                  2      109       0
