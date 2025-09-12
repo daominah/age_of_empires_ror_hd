@@ -402,7 +402,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 7. [Hittite](https://ageofempires.fandom.com/wiki/Hittites#Civilization_bonuses)
 
-- [ ] Wheel -50% cost and research time.
+- [x] Wheel -50% cost and research time.
 - [x] Towers provide +4 population room (team bonus).
 
 - [ ] Catapults have +50% HP (previously +100% HP).
