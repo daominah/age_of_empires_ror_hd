@@ -321,8 +321,10 @@ The Catapult line now has increased pierce armor but negative melee armor.
 Shared changes are applied to all civilizations:
 
 - [x] Writing's Research Time reduced to 30s (previously 60s).
-- [x] Wheel (TechID 28) is available for all (previously disabled for Persian and Macedonian).
-- [x] Coinage (TechID 30) is available for all (previously disabled for Egyptian, Palmyran, Persian, Shang and Sumerian).
+- [x] Wheel (TechID 28) is available for all civilizations
+  (previously disabled for Persian and Macedonian).
+- [x] Coinage (TechID 30) is available for all civilizations
+  (previously disabled for Egyptian, Palmyran, Persian, Shang and Sumerian).
 - [ ] Heavy Transport is available for all (previously disabled for Assyrian, Babylonian, Choson, Hittite, Palmyran, Shang and Sumerian).
 
 ##### Engine limitations
@@ -382,7 +384,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 ##### 5. [Egyptian](https://ageofempires.fandom.com/wiki/Egyptians_(Age_of_Empires)#Civilization_bonuses)
 
 - [x] Farms cost -20%, so their cost reduced to 60 wood (previously 75 wood).
-- [x] Get Coinage.
+- [x] Coinage is available.
 - [x] Priests have +1 pierce armor (team bonus).
 - [ ] Priests have +2/+3 range in the Bronze/Iron Age.
   (previously +3 range for all ages).
@@ -395,7 +397,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
   (hard to implement, so just increased the work rate in all ages).
 - [x] Polytheism and Astrology cost are free (still requires Temple, saving 270 gold).
 - [ ] Ships are 20% faster (previously 17% faster).
-- [ ] Get Fire Galley.
+- [ ] Fire Galley is available (in addition to Catapult Trireme and Juggernaught).
 - [x] Market cost -50% (team bonus).
 
 ##### 7. [Hittite](https://ageofempires.fandom.com/wiki/Hittites#Civilization_bonuses)
@@ -410,8 +412,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 8. [Macedonian](https://ageofempires.fandom.com/wiki/Macedonians#Civilization_bonuses)
 
-- [x] Get Wheel.
-- [x] Get Catapult upgrade. (still missing Heavy Catapult).
+- [x] Wheel is available.
+- [x] Catapult upgrade is available (still missing Heavy Catapult and Engineering).
 - [x] Houses have +50 HP (team bonus),
   so they have 125 HP instead of 75 HP.
 
@@ -434,8 +436,9 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 ##### 10. [Palmyran](https://ageofempires.fandom.com/wiki/Palmyrans#Civilization_bonuses)
 
 - [x] Fix Palmyran Farmer, Builder, Repairman work rate to +25% (previously +0%).
-- [x] Get Coinage and Plow.
-- [x] Start the game with +75 food (previously have the same 200 food as normal).
+- [x] Coinage is available.
+- [x] Plow is available.
+- [x] Start the game with +75 food, so 275 food instead of 200.
 - [ ] Trade units return +20% gold.
 - [ ] Technologies researched 30% faster (team bonus).
 
@@ -444,7 +447,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 11. [Persian](https://ageofempires.fandom.com/wiki/Persians_(Age_of_Empires)#Civilization_bonuses)
 
-- [x] Wheel, Artisanship, Plow, Coinage are available.
+- [x] Wheel, Artisanship, Plow are available.
+- [x] Coinage is available.
 - [x] Ballistics is available.
 - [x] Walls cost -20%, so 4 stone (previously 5 stone).
 - [x] Stables work 20% faster (team bonus).
@@ -478,8 +482,8 @@ due to the Phoenician low Elephants cost.
 
 ##### 14. [Shang](https://ageofempires.fandom.com/wiki/Shang#Civilization_bonuses)
 
-- [x] Get Coinage.
-- [x] Get Ballistics.
+- [x] Coinage is available.
+- [x] Ballistics is available.
 - [x] Cavalry, Heavy Cavalry, Cataphract attack 10% faster.
 - [x] Town Center provide +4 population room (team bonus).
 
@@ -489,7 +493,7 @@ due to the Phoenician low Elephants cost.
 
 ##### 15. [Sumerian](https://ageofempires.fandom.com/wiki/Sumerians#Civilization_bonuses)
 
-- [x] Get Coinage.
+- [x] Coinage is available.
 - [x] Camels have +1 pierce armor.
 - [ ] Stone Thrower, Catapult, and Heavy Catapult fire 45% faster (previously 43%).
 - [x] Town Centers cost -25%, so 150 wood instead of 200 wood (team bonus).
