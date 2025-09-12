@@ -24,11 +24,13 @@ B79       Watch_Tower          1      -1
 
 C102    Bronze_Age             1      109
 R107    Wood_Working           1      84
+R164    Babylonian_cheap_WoodW 1      84        // new buff
 B79       Watch_Tower          1      -1
 B79       Watch_Tower          1      -1
 B87       Range1               1      -1
 
 R28     Wheel                  1      84
+R158    Babylonian_cheap_Wheel 1      84        // new buff
 T37       Soldier-Cavalry1     1      101       0
 R12     Sentry_Tower           1      68
 T83       Man                  2      109       0
@@ -47,6 +49,7 @@ C103    Iron_Age               1      109
 R112    Architecture           1      82
 B109      Town_Center1         1      -1
 R32     Artisanship            1      84
+R161    Babylonian_cheap_Artis 1      84        // new buff
 T41       Soldier-Chariot2     1      87        0
 T37       Soldier-Cavalry1     1      101       0
 T125      Priest               1      104       0
@@ -62,6 +65,7 @@ B79       Watch_Tower          2      -1
 
 R15     Guard_Tower            1      68
 R110    Craftmanship           1      84
+R167    Babylonian_cheap_Craft 1      84        // new buff
 R106    Ballistics             1      82
 T83       Man                  2      109       0
 T39       Soldier-Cavalry3_Arc 1      87        0
@@ -83,6 +87,7 @@ T83       Man                  2      109       0
 R18     Afterlife              1      104
 R21     Mysticism              1      104
 R109    Stone_Mining           1      84
+R166    Babylonian_cheap_Stone 1      84        // new buff
 T125      Priest               1      104       0
 T39       Soldier-Cavalry3_Arc 1      87        0
 T125      Priest               1      104       0
@@ -94,6 +99,7 @@ T39       Soldier-Cavalry3_Arc 1      87        0
 R20     Fanaticism             1      104
 R24     Polytheism             1      104
 R111    Siegecraft             1      84
+R168    Babylonian_cheap_Siege 1      84        // new buff
 T125      Priest               2      104       0
 T83       Man                  2      109       0
 B79       Watch_Tower          2      -1
@@ -108,6 +114,7 @@ B49       Siege_Workshop       2      -1
 T83       Man                  2      109       0
 
 R36     Massive_Catapult       1      49
+R171    Babylonian_Massive_Cat 1      49        // new buff
 R119    Medicine               1      104
 T125      Priest               3      104       0
 B49       Siege_Workshop       1      -1
@@ -154,7 +161,7 @@ B79       Watch_Tower          2      -1
 
 // 32 priest, 16 massive catapult, 5 horse archer, 4 cavalry, 3 chariot archer (4 temple, 4 siege workshop, 1 range, 1 stable)
 // 36 jihad, 4 farm, 36 tower, 1 wonder (pop 96, tech 28)
-// _spent: 9855 wood, 10890 food, 9435 gold, 7450 stone
+// spent: 9855 wood, 10890 food, 9435 gold, 7450 stone
 
 
 U35       Soldier-Catapult1    4      49
@@ -187,6 +194,6 @@ U125      Priest               4      104
 
 // 80 priest, 64 massive catapult, 5 horse archer, 4 cavalry, 3 chariot archer (4 temple, 4 siege workshop, 1 range, 1 stable)
 // 36 jihad, 4 farm, 36 tower, 1 wonder (pop 192, tech 28)
-// spent: 19245 wood, 10890 food, 19275 gold, 7450 stone
+// _spent: 19245 wood, 10890 food, 19275 gold, 7450 stone
 
 B50       Farm                 24     -1

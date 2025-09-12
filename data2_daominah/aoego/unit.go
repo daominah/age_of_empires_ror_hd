@@ -13,7 +13,7 @@ type Unit struct {
 	NameInGame   string  // name shown in the game, e.g. "Villager", "Chariot Archer", ...
 	Cost         Cost    // unit's cost as pointer so easier to apply civilization bonus
 	Time         float64 // train time in seconds
-	Population   float64 // almost all units needs 1 population, except Barracks units after Logistics researched
+	Population   float64 // almost all units needs 1 population, except Barracks units after Logistics researched, officially called "Population Headroom"
 	Location     UnitID  // building that trains this unit
 	IsBuilding   bool
 	InitiateTech TechID // when the building is created, this tech is automatically researched

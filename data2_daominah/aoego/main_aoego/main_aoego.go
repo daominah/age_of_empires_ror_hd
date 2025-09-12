@@ -26,8 +26,9 @@ func main() {
 
 	// daominah optimized strategies:
 
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Assyria_Archer.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Tower_Priest.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Assyria_Archer.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Tower_Priest.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Chariot.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Helepolis.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Swordsmen.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
@@ -114,7 +115,7 @@ func main() {
 
 		err := empire.Do(step)
 		if err != nil {
-			log.Printf("error line %v empire.Do(%v): %v", step.OriginLineNo, step, err)
+			log.Printf("error line %-3v empire.Do(%v): %v", step.OriginLineNo, step, err)
 		}
 	}
 
