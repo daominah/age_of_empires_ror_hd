@@ -76,6 +76,7 @@ T125      Priest               1      104       0
 B87       Range1               2      -1
 
 R71     Heavy_Cavalry          1      101
+R176    Yamato_cheap_Cavalry2  1      101       // new buff
 R52     Metallurgy             1      103
 R18     Afterlife              1      104
 U37       Soldier-Cavalry1     2      101
@@ -94,6 +95,7 @@ B79       Watch_Tower          2      -1
 
 R50     Chain_Mail_-_Cavalry   1      103
 R78     Cataphracts            1      101
+R177    Yamato_cheap_Cataphrac 1      101       // new buff
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 2      87
 U125      Priest               2      104

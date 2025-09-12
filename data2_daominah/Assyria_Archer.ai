@@ -82,6 +82,7 @@ U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
 R54     Heavy_Catapult         1      49
+R156    Assyrian_cheap_Catapu 1      49        // new buff
 R110    Craftmanship           1      84
 R106    Ballistics             1      82
 R15     Guard_Tower            1      68
@@ -107,6 +108,8 @@ T83       Man                  2      109       0
 U39       Soldier-Cavalry3_Arc 2      87
 R108    Gold_Mining            1      84
 R19     Monotheism             1      104
+R37     Alchemy                1      82        // new buff
+R49     Chain_Mail_-_Archers   1      103       // new buff
 // R119    Medicine               1      104
 // R23     Jihad                  1      104
 U125      Priest               2      104
@@ -123,6 +126,7 @@ T83       Man                  2      109       0
 U35       Soldier-Catapult1    2      49
 
 R30     Coinage                1      84
+R35     Engineering            1      82        // new buff
 U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
@@ -166,6 +170,7 @@ R111    Siegecraft             1      84
 
 B49       Siege_Workshop       1      -1
 R36     Massive_Catapult       1      49
+R155    Assyrian_cheap_Massive 1      49        // new buff
 
 U39       Soldier-Cavalry3_Arc 6      87
 U35       Soldier-Catapult1    2      49

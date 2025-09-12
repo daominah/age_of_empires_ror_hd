@@ -93,9 +93,9 @@ def main():
         "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",
         },
-        "Rome_Chariot.ai": {
-            # "Rome Axemen.ai",
-        },
+        # "Rome_Chariot.ai": {
+        #     "Rome Axemen.ai",
+        # },
         "Rome_Legion.ai": {
             # "Rome Axemen.ai",
             "Rome Legion.ai",
