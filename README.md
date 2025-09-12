@@ -393,7 +393,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
   So Hoplite/Phalanx/Centurion cost 48 food, 32 gold (previously 60 food, 40 gold).
 - [x] Town Centers work 10% faster starting in the Tool Age.
   (hard to implement, so just increased the work rate in all ages).
-- [ ] Polytheism and Astrology cost are free (still requires Temple).
+- [x] Polytheism and Astrology cost are free (still requires Temple, saving 270 gold).
 - [ ] Ships are 20% faster (previously 17% faster).
 - [ ] Get Fire Galley.
 - [x] Market cost -50% (team bonus).
