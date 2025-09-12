@@ -27,6 +27,10 @@ def main():
         },
         "Babylon_Tower_Priest.ai": {
             "Babylon Scouts.ai",
+            # "Babylon Swordsmen.ai",
+        },
+        "Babylon_Chariot.ai": {
+            # "Babylon Scouts.ai",
             "Babylon Swordsmen.ai",
         },
         "Carthage_Helepolis.ai": {

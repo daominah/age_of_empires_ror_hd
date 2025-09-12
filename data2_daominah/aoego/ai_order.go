@@ -50,7 +50,7 @@ func NewStrategy(aiFileData string) ([]Step, []error) {
 		step, err := NewStep(line)
 		if err != nil {
 			if !errors.Is(err, ErrEmptyLine) {
-				errs = append(errs, fmt.Errorf("line %v: %w: %v", i+1, err, line))
+				errs = append(errs, fmt.Errorf("line %-3v: %w: %v", i+1, err, line))
 			}
 			continue
 		}
