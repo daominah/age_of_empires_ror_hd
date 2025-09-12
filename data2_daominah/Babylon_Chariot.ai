@@ -80,7 +80,7 @@ B79       Watch_Tower          1      -1
 T40       Soldier-Chariot1     3      101       0
 
 R126    Scythe_Chariot         1      101
-R178    Babylonian_Scythe_Char 1      101       // new buff
+R172    Babylonian_Scythe_Char 1      101       // new buff
 R52     Metallurgy             1      103       // new buff
 R15     Guard_Tower            1      68
 R110    Craftmanship           1      84
