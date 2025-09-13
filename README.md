@@ -340,10 +340,10 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 ##### 1. [Assyrian](https://ageofempires.fandom.com/wiki/Assyrians#Civilization_bonuses)
 
 - [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
-  (but still missing Heavy Horse Archer techID 38).
+  (but still missing Heavy Horse Archer).
 - [x] Alchemy and Engineering are available at the Government Center.
-- [x] Siege Workshops work 20% faster (team bonus).
-- [x] Siege units upgrades cost -50%  
+- [x] Siege Workshop work 20% faster (team bonus).
+- [x] Siege Workshop upgrades cost -50%  
   (so total saving is 1650 food, 1075 wood).
 
 - [ ] Villagers move 10% faster (previously 18% faster).
@@ -351,7 +351,7 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 2. [Babylonian](https://ageofempires.fandom.com/wiki/Babylonians#Civilization_bonuses)
 
-- [x] Chariot units have +1 pierce armor.
+- [x] Chariot Archer, Chariot, Scythe Chariot have +1 pierce armor (previously 0).
 - [x] Metallurgy is available.
 - [x] Chain Mail (Infantry/Archers/Cavalry) upgrades are available
   (but still missing Heavy Horse Archer).
@@ -364,7 +364,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 ##### 3. [Carthaginian](https://ageofempires.fandom.com/wiki/Carthaginians#Civilization_bonuses)
 
 - [x] Start the game with +50 of all resources Wood, Food, Gold, Stone.
-- [x] Camel Riders have +15% HP.
+- [x] Camel Riders have +15% HP.  
+  (so starts at 143 HP instead of 125, after Nobility it is 164 HP).
 - [x] Nobility cost is free (still requires Government Center, save 175 food, 120 gold).
 - [x] Academy work 20% faster (team bonus).
 
@@ -422,7 +423,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 9. [Minoan](https://ageofempires.fandom.com/wiki/Minoans#Civilization_bonuses)
 
-- [x] Farmers work 10% faster.
+- [x] Farmers work 10% faster  
+  (so about 20s per 10 food, instead of 22s).
 - [x] Docks cost -20% (team bonus).
 
 - [ ] Improved Bowman line has +1/+2 range in the Bronze/Iron Age, respectively.
@@ -434,7 +436,8 @@ Genie Engine version used in AoE Rise of Rome is old, so has some limitations:
 
 ##### 10. [Palmyran](https://ageofempires.fandom.com/wiki/Palmyrans#Civilization_bonuses)
 
-- [x] Fix Palmyran Farmer, Builder, Repairman work rate to +25% (previously +0%).
+- [x] Fix Palmyran Farmer, Builder, Repairman work rate to +25%
+  (previously +0%, big buff to Farmer, benefiting booming style).
 - [x] Coinage is available.
 - [x] Plow is available.
 - [x] Start the game with +75 food, so 275 food instead of 200.
