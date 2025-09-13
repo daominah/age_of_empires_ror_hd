@@ -28,6 +28,7 @@ R107    Wood_Working           1      84
 B87       Range1               2      -1
 
 R28     Wheel                  1      84
+R181    Hittite_cheap_Wheel    1      84        // new buff
 R44     Scale_Armor_-_Archers  1      103
 R12     Sentry_Tower           1      68
 T83       Man                  2      109       0

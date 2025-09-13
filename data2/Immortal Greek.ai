@@ -102,12 +102,14 @@ R20     Fanaticism             1      104
 R18     Afterlife              1      104
 R21     Mysticism              1      104
 R24     Polytheism             1      104
+R180    Greek_cheap_Polytheism 1      104       // new buff
 R122    Tower_Shield           1      103
 U93       Soldier-Phal1        2      0
 U11       Soldier-Ballista     2      49
 B49       Siege_Workshop       2      -1
 
 R22     Astrology              1      104
+R179    Greek_cheap_Astrology  1      104       // new buff
 R119    Medicine               1      104
 R35     Engineering            1      82
 T125      Priest               2      104       0
