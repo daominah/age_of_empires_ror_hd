@@ -2,8 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
+	"sort"
 
 	"github.com/daominah/age_of_empires_ror_hd/data2_daominah/aoego"
 )
@@ -12,7 +14,7 @@ import (
 var inputFilePath string
 
 func main() {
-	log.SetFlags(log.Lshortfile | log.LstdFlags | log.Lmicroseconds)
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
 	flag.StringVar(&inputFilePath,
 		"i",
@@ -31,12 +33,12 @@ func main() {
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Chariot.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Helepolis.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Swordsmen.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Egypt_Chariot_Priest.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Greek_Centurion.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Horse_Archer.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Catapult.ai`
-	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Greek_Centurion.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Horse_Archer.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Hittite_Catapult.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Macedon_Centurion.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Bowmen_Helepolis.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Minoa_Bowmen_Catapult.ai`
 	// inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Palmyra_Camel.ai`
@@ -89,8 +91,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("error reading file: %v", err)
 	}
-	strategy, errs := aoego.NewStrategy(string(strategyBytes))
-	// errs will be printed at the end for better readability
+
+	// cumulativeErrors will be printed at the end for better readability
+	var cumulativeErrors aoego.SortByLineNo
+
+	strategy, cumulativeErrors := aoego.NewStrategy(string(strategyBytes))
 
 	civilizationID := aoego.GuessCivilization(inputFilePath)
 	empire, err := aoego.NewEmpireDeveloping(aoego.WithCivilization(civilizationID))
@@ -115,16 +120,38 @@ func main() {
 
 		err := empire.Do(step)
 		if err != nil {
-			log.Printf("error line %-3v empire.Do(%v): %v", step.OriginLineNo, step, err)
+			cumulativeErrors = append(cumulativeErrors, aoego.ErrorWithLineNo{
+				LineNo: step.OriginLineNo,
+				Err:    fmt.Errorf("%-60v: %v", step.OriginStr, err),
+			})
+		}
+
+		// if a step researchs a tech that has a unique version for this civilization,
+		// the next line should be researching the unique tech
+		// (result in a log techID not found but expected, the line should have "// new buff" comment)
+		uniqueTechID := aoego.GetReplacementUniqueTechIfNeeded(empire.Civilization.ID, step)
+		if uniqueTechID != aoego.NullTech {
+			// should add a warning that next line should be the unique tech
+			cumulativeErrors = append(cumulativeErrors, aoego.ErrorWithLineNo{
+				IsJustWarning: true,
+				LineNo:        step.OriginLineNo,
+				Err: fmt.Errorf("R%v should be the next line, %v has unique tech for [%v]",
+					uniqueTechID, empire.Civilization.Name, step.UnitOrTechID.GetNameInGame()),
+			})
 		}
 	}
 
-	if len(errs) > 0 {
+	sort.Sort(cumulativeErrors)
+	if len(cumulativeErrors) > 0 {
 		log.Printf("____________________________________________________")
-		for _, err := range errs {
-			log.Printf("error parsing strategy: %v", err)
+		log.Printf("input file path: %v", inputFilePath)
+		log.Printf("____________________________________________________")
+		for _, err := range cumulativeErrors {
+			log.Println(err)
 		}
-		log.Printf("ERROR PARSING STRATEGY: %v", len(errs))
+		log.Printf("ERROR PARSING STRATEGY: %v", len(cumulativeErrors))
 		log.Printf("____________________________________________________")
+	} else {
+		log.Printf("nice valid strategy")
 	}
 }

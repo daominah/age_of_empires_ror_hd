@@ -29,28 +29,51 @@ var (
 	ErrResearchQuantity = errors.New("research quantity must be 1")
 
 	ErrLocationNotBuilt    = errors.New("location is not built yet")
-	ErrUnitDisabledByCiv   = errors.New("unit is disabled by civilization")
-	ErrTechDisabledByCiv   = errors.New("technology is disabled by civilization")
+	ErrUnitDisabledByCiv   = errors.New("unit disabled by civ")
+	ErrTechDisabledByCiv   = errors.New("tech disabled by civ")
 	ErrMissingRequireTechs = errors.New("missing required techs")
 	ErrTechResearched      = errors.New("technology is already researched")
 	ErrExceedPopLimit      = errors.New("build units will exceed population limit, build more houses first")
 )
+
+type ErrorWithLineNo struct {
+	LineNo        int // line number in the original file, that caused the error
+	Err           error
+	IsJustWarning bool // if true, the error can be optionally ignored
+}
+
+func (e ErrorWithLineNo) Error() string {
+	if !e.IsJustWarning {
+		return fmt.Sprintf("error at line %-3v: %v", e.LineNo, e.Err)
+	} else {
+		return fmt.Sprintf("warn  at line %-3v: %v", e.LineNo, e.Err)
+	}
+}
+
+type SortByLineNo []ErrorWithLineNo
+
+func (a SortByLineNo) Len() int           { return len(a) }
+func (a SortByLineNo) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a SortByLineNo) Less(i, j int) bool { return a[i].LineNo < a[j].LineNo }
 
 // Strategy defines order to build and train units.
 type Strategy []Step
 
 // NewStrategy creates a Strategy from a ".ai" file format,
 // this parses the file line by line, returns error for the first invalid line if any.
-func NewStrategy(aiFileData string) ([]Step, []error) {
+func NewStrategy(aiFileData string) ([]Step, []ErrorWithLineNo) {
 	aiFileData = strings.ReplaceAll(aiFileData, "\r\n", "\n")
 	lines := strings.Split(aiFileData, "\n")
 	var strategy []Step
-	var errs []error
+	var errs []ErrorWithLineNo
 	for i, line := range lines {
 		step, err := NewStep(line)
 		if err != nil {
 			if !errors.Is(err, ErrEmptyLine) {
-				errs = append(errs, fmt.Errorf("line %-3v: %w: %v", i+1, err, line))
+				errs = append(errs, ErrorWithLineNo{
+					LineNo: i + 1,
+					Err:    fmt.Errorf("%-60v: %w", line, err),
+				})
 			}
 			continue
 		}
@@ -86,10 +109,11 @@ type Step struct {
 // train 1 Scout at Stable, if killed, retrain max 2 times.
 // This func is the inverse function of Step.Marshal().
 func NewStep(line string) (*Step, error) {
+	originalLine := line
 	commentBegin := strings.Index(line, `//`)
 	if commentBegin != -1 {
 		if strings.HasPrefix(line, `// spent`) {
-			return &Step{Action: PrintSummary, OriginStr: line}, nil
+			return &Step{Action: PrintSummary, OriginStr: originalLine}, nil
 		}
 		line = line[:commentBegin]
 	}
@@ -113,7 +137,7 @@ func NewStep(line string) (*Step, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%v: %w", unitOrTechIDStr, ErrTargetIDNotInt)
 	}
-	s := &Step{Action: Action(words[0][:1]), OriginStr: line}
+	s := &Step{Action: Action(words[0][:1]), OriginStr: originalLine}
 	unitOrTech, err := s.determineUnitOrTech(unitOrTechID)
 	if err != nil {
 		return nil, fmt.Errorf("determineUnitOrTech(%v): %w", unitOrTechID, err)
