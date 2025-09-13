@@ -148,6 +148,7 @@ B50       Farm                 4      -1
 R30     Coinage                1      84
 
 C38     Heavy_Horse_Archer     1      87
+R173    Yamato_cheap_HHorseArc 1      87        // new buff
 
 U37       Soldier-Cavalry1     6      101
 U39       Soldier-Cavalry3_Arc 4      87

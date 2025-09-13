@@ -113,6 +113,11 @@ def main():
         "Shang_Stable.ai": {
             "Shang Cavalry.ai",
             "Shang Clubmen.ai",
+            # "Shang Heavy Cavalry.ai",
+        },
+        "Shang_Cataphract.ai": {
+            # "Shang Cavalry.ai",
+            # "Shang Clubmen.ai",
             "Shang Heavy Cavalry.ai",
         },
         "Sumeria_Catapult.ai": {

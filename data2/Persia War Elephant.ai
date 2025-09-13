@@ -45,6 +45,7 @@ T83       Man                  1      109       0
 C103    Iron_Age               1      109
 R112    Architecture           1      82
 R47     Bronze_Shield          1      103
+R28     Wheel                  1      84        // new buff
 T125      Priest               1      104       0
 T338      Soldier-Camel        1      101       0
 B79       Watch_Tower          1      -1
