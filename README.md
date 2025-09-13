@@ -588,9 +588,9 @@ Known bugs:
   they cannot research those techs,
   example Yamato stuck at Cavalry without upgrades.
   Fixed builds of civilizations:
-  - [ ] Assyrian
+  - [x] Assyrian
   - [x] Babylonian
-  - [ ] Carthaginian
+  - [x] Carthaginian
   - [x] Choson
   - [ ] Greek
   - [ ] Yamato

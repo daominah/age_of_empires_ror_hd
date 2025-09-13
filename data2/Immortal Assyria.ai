@@ -82,7 +82,7 @@ U39       Soldier-Cavalry3_Arc 2      87
 U39       Soldier-Cavalry3_Arc 2      87
 T83       Man                  2      109       0
 R54     Heavy_Catapult         1      49
-R156    Assyrian_cheap_Catapu 1      49        // new buff
+R156    Assyrian_cheap_Catapul 1      49        // new buff
 R110    Craftmanship           1      84
 R106    Ballistics             1      82
 R15     Guard_Tower            1      68
