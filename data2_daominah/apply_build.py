@@ -35,6 +35,10 @@ def main():
         },
         "Carthage_Helepolis.ai": {
             "Carthage Phalanx.ai",
+            # "Carthage War Elephant.ai",
+        },
+        "Carthage_Camel.ai": {
+            # "Carthage Phalanx.ai",
             "Carthage War Elephant.ai",
         },
         "Choson_Swordsmen.ai": {

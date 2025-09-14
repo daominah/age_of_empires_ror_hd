@@ -264,8 +264,8 @@ The Catapult line now has increased pierce armor but negative melee armor.
 - [ ] War Elephant has +25 bonus attack vs buildings (previously 0).
 - [ ] Armored Elephant bonus attack vs all buildings reduced to +35
   (previously +40 vs buildings, additional +40/+80 vs Towers/Walls).
-- [ ] Camel Rider added +4 bonus attack vs elephants
-  (so now Camel have bonus attack vs all mounted units).
+- [x] Camel Rider added +4 bonus attack vs Elephants
+  (so now Camel have bonus attack vs all mounted units, except Camel itself).
 
 ##### 5. Academy
 

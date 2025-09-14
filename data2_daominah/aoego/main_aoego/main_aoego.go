@@ -31,6 +31,7 @@ func main() {
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Assyria_Archer.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Tower_Priest.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Babylon_Chariot.ai`
+	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Camel.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Carthage_Helepolis.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Swordsmen.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Choson_Tower.ai`
@@ -47,7 +48,7 @@ func main() {
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Phoenicia_Elephant_Archer.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Legion.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Rome_Siege.ai`
-	inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang_Stable.ai`
+	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang_Stable.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Shang_Cataphract.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Sumeria_Catapult.ai`
 	//inputFilePath = `D:\game\age_of_empires_ror_hd\data2_daominah\Yamato_Cavalry.ai`
