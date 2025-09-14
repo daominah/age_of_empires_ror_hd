@@ -5,7 +5,8 @@
 - team 3 vs 3 (for spectator, 1 team has 4 players, but the spectator delete Town Center and move to a corner)
 - map type Hill Country, game 1 size Huge, game 2 size Large
 - all members in a team have the same civilization
-- best of 2. if 1-1, play more, or decide by which team has "nicer" gameplay (e.g. aggressive)
+- best of 2. if result is 1-1 after 2 games: play more on Huge map,
+  or decide by which team has "nicer" gameplay (e.g. aggressive)
 
 ## Standing
 
@@ -17,11 +18,11 @@
 | Carthaginian    | 1 | Choson         |   |                |    |           |   |            |
 | Choson          | 2 |                |   |                |    |           |   |            |
 | ____            |   | ____           |   |                |    |           |   |            |
-| Egyptian        |   |                |   |                |    |           |   |            |
-| Greek           |   | TBD            |   |                |    |           |   |            |
+| Egyptian        | 2 |                |   |                |    |           |   |            |
+| Greek           | 1 | Egyptian       |   |                |    |           |   |            |
 | ____            |   |                |   |                |    |           |   |            |
-| Hittite         |   | TBD            |   |                |    |           |   |            |
-| Macedonian      |   |                |   |                |    |           |   |            |
+| Hittite         | 1 | Macedonian     |   |                |    |           |   |            |
+| Macedonian      | 2 |                |   |                |    |           |   |            |
 | ____            |   | ____           |   |                |    |           |   |            |
 | Minoan          |   |                |   |                |    |           |   |            |
 | Palmyran        |   | TBD            |   |                |    |           |   |            |
@@ -103,49 +104,84 @@ Result:
 
 #### Game 1
 
-Egyptian strategies: placeholder
+Egyptian strategies: Egypt_Chariot_Priest x3
 
-Greek strategies: placeholder
+Greek strategies: Greek_Centurion x3
 
 Result:
 
-- placeholder
-- placeholder
+- A winged Greek is obliterated at 12 minutes by Camel and Chariot. Defeated at 20m.
+  Hoplite is not fast enough. Priest join the fight soon.
+- Centurion gets a lot of kills, can take down Tower too.
+- In the long run, Egyptian have much more Villager and Priest convert a lot.
+- Egyptian win by dominating the timeline (Greek has good Tower).
 
 #### Game 2
 
-Egyptian strategies: placeholder
+Egyptian strategies: Egypt_Chariot_Priest x3
 
-Greek strategies: placeholder
+Greek strategies: Greek_Centurion x3
 
 Result:
 
-- placeholder
-- placeholder
+- Hoplite arrived in time to fight Camel and Chariot,
+  attack before Egyptian have enough Priest,
+  a winged Egyptian is destroyed, balance on the other wing.
+- Phalanx defeat the middle Egyptian too, they are quite strong in small map.
+- Greek win by destroying everything in 19 minutes.
+
+#### Game 3
+
+Egyptian strategies: Egypt_Chariot_Priest x3
+
+Greek strategies: Greek_Centurion x3
+
+Result:
+
+- Chariot Archer and Priest beat a winged Greek.
+- The middle Greek has 3 small group of Centurion at 20 minutes, quite strong.
+- Egypt simply grind out the Greek. Egyptian win.
 
 ### Ro16. Pair4. Hittite vs Macedonian
 
 #### Game 1
 
-Hittite strategies: placeholder
+Hittite strategies: Hittite_Horse_Archer x2, Hittite_Catapult x1
 
-Macedonian strategies: placeholder
+Macedonian strategies: Macedon_Centurion x3
 
 Result:
 
-- placeholder
-- placeholder
+- Even map Huge, Hittite Chariot Archer is a counter of +2 pierce Mace Hoplite,
+  they still hit fast enough to dominate the timeline at 15 minutes.
+- The last Hittite with Heavy Horse Archer & Catapult kill many Centurion & Ballista.
+- Macedonian win by dominating the timeline. Hittite could grind if not 1 vs 3.
 
 #### Game 2
 
-Hittite strategies: placeholder
+Hittite strategies: Hittite_Horse_Archer x2, Hittite_Catapult x1
 
-Macedonian strategies: placeholder
+Macedonian strategies: Macedon_Centurion x3
 
 Result:
 
-- placeholder
-- placeholder
+- Hittite early mass Chariot Archer and some Stone Thrower defeat 1 Macedonian.
+- Macedonian manage to severely damage a Hittite, it turns into a 2 vs 2.
+- Later both Heavy Horse Archer or Heavy Catapult can easily fight Centurion.
+- Hittite win.
+
+#### Game 3
+
+Hittite strategies: Hittite_Horse_Archer x2, Hittite_Catapult x1
+
+Macedonian strategies: Macedon_Centurion x3
+
+Result:
+
+- Hoplite and a few Cavalry attack before Chariot Archer mass, defeat a Hittite.
+- Hittite armies absolutely have better quality.
+- But Ballista can fight Heavy Horse Archer after Hittite throw some into Tower.
+- Macedonian win by having timeline advantage. Very unexpected outcome.
 
 ### Ro16. Pair5. Minoan vs Palmyran
 
