@@ -281,7 +281,7 @@ The Catapult line now has increased pierce armor but negative melee armor.
   but are also slightly slower to reload (affects all stone and bolt firing units).
 - [x] Ballista attack reload time reduced to 2.7s (previously 3).
 - [ ] Helepolis attack reload time increased to 1.85s (previously 1.5s).
-- [ ] Helepolis attack increased to 45 (previously 40).
+- [x] Helepolis attack increased to 45 (previously 40).
 - [x] Helepolis upgrade cost reduced to 1200 food, 1000 wood
   (previously 1500 food, 1000 wood).
 
@@ -585,7 +585,7 @@ so have to disable all new cheap techs for all civs except the intended one.
 
 Known bugs:
 
-- [ ] Bug AI build order conflict with new tech IDs:  
+- [x] Bug AI build order conflict with new tech IDs:  
   As we replace bonus techs with new unique techs,
   but the AI build order still use the old tech IDs,
   they cannot research those techs,
@@ -595,9 +595,9 @@ Known bugs:
   - [x] Babylonian
   - [x] Carthaginian
   - [x] Choson
-  - [ ] Greek
-  - [ ] Yamato
-  - [ ] Hittite
+  - [x] Greek
+  - [x] Yamato
+  - [x] Hittite
 
 - [x] Bug duplicated techs if the starting Age is not Stone Age:  
   example Carthaginian_cheap_Nobility requires uniq_Carthaginian_E205,
