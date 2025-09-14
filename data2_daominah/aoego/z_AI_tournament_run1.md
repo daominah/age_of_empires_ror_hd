@@ -9,31 +9,31 @@
 
 ## Standing
 
-| **Ro16**     |   | **Ro8**    |   | **Ro4** |    | **Final** |   | **Winner** |
-|--------------|---|------------|---|---------|----|-----------|---|------------|
-| Assyrian     | 0 |            |   |         |    |           |   |            |
-| Babylonian   | 2 | Babylonian |   |         |    |           |   |            |
-|              |   |            |   |         |    |           |   |            |
-| Carthaginian | 1 | Choson     |   | TBD     |    |           |   |            |
-| Choson       | 2 |            |   |         |    |           |   |            |
-|              |   |            |   |         |    | TBD       |   |            |
-| Egyptian     | 2 |            |   |         |    |           |   |            |
-| Greek        | 1 | Egyptian   |   | TBD     |    |           |   |            |
-|              |   |            |   |         |    |           |   |            |
-| Hittite      | 1 | Macedonian |   |         |    |           |   |            |
-| Macedonian   | 2 |            |   |         |    |           |   |            |
-|              |   |            |   |         |    |           |   | TBD        |
-| Minoan       | 1 |            |   |         |    |           |   |            |
-| Palmyran     | 2 | Palmyran   |   |         |    |           |   |            |
-|              |   |            |   |         |    |           |   |            |
-| Persian      | 0 | Phoenician |   | TBD     |    |           |   |            |
-| Phoenician   | 2 |            |   |         |    |           |   |            |
-|              |   |            |   |         |    | TBD       |   |            |
-| Roman        | 0 |            |   |         |    |           |   |            |
-| Shang        | 2 | Shang      |   | TBD     |    |           |   |            |
-|              |   |            |   |         |    |           |   |            |
-| Sumerian     | 0 | Yamato     |   |         |    |           |   |            |
-| Yamato       | 2 |            |   |         |    |           |   |            |
+| **Ro16**     |   | **Ro8**    |   | **Ro4**    |    | **Final** |   | **Winner** |
+|--------------|---|------------|---|------------|----|-----------|---|------------|
+| Assyrian     | 0 |            |   |            |    |           |   |            |
+| Babylonian   | 2 | Babylonian | 2 |            |    |           |   |            |
+|              |   |            |   |            |    |           |   |            |
+| Carthaginian | 1 | Choson     | 0 | Babylonian |    |           |   |            |
+| Choson       | 2 |            |   |            |    |           |   |            |
+|              |   |            |   |            |    | TBD       |   |            |
+| Egyptian     | 2 |            |   |            |    |           |   |            |
+| Greek        | 1 | Egyptian   | 2 | Egyptian   |    |           |   |            |
+|              |   |            |   |            |    |           |   |            |
+| Hittite      | 1 | Macedonian | 1 |            |    |           |   |            |
+| Macedonian   | 2 |            |   |            |    |           |   |            |
+|              |   |            |   |            |    |           |   | TBD        |
+| Minoan       | 1 |            |   |            |    |           |   |            |
+| Palmyran     | 2 | Palmyran   | 1 |            |    |           |   |            |
+|              |   |            |   |            |    |           |   |            |
+| Persian      | 0 | Phoenician | 2 | Phoenician |    |           |   |            |
+| Phoenician   | 2 |            |   |            |    |           |   |            |
+|              |   |            |   |            |    | TBD       |   |            |
+| Roman        | 0 |            |   |            |    |           |   |            |
+| Shang        | 2 | Shang      | 2 | Shang      |    |           |   |            |
+|              |   |            |   |            |    |           |   |            |
+| Sumerian     | 0 | Yamato     | 0 |            |    |           |   |            |
+| Yamato       | 2 |            |   |            |    |           |   |            |
 
 ## Round of 16
 
@@ -50,8 +50,8 @@ Result:
 - Bronze Assyrian Chariot Archer and Stone Thrower attack Babylonian Towers, feed kills.
 - Babylonian get Iron Age Guard Tower very fast. Then Ballista Tower right after.
 - Later Horse Archer, Catapult from Assyrian weaker than Babylonian Massive Catapult.
-- Babylonian actively build Wonders, Assyrian just throw armies to the Wonders.
-- Babylonian win by resolving Wonders in 40 minutes.
+- Babylonian actively build Wonder, Assyrian just throw armies to the Wonder.
+- Babylonian win by resolving Wonder in 40 minutes.
 
 #### Game 2
 
@@ -302,101 +302,148 @@ Result:
 
 ## Round of 8
 
-### Ro8. Pair1. TBD vs TBD
+### Ro8. Pair1. Babylonian vs Choson
 
 #### Game 1
 
-CivA strategies: placeholder
+Babylonian strategies: Babylon_Chariot x2, Babylon_Tower_Priest x1
 
-CivB strategies: placeholder
+Choson strategies: Choson_Swordsmen x3
 
 Result:
 
-- placeholder
-- placeholder
+- Choson Swordsman in Bronze can fight Chariot.
+- Swordsman a little bit stronger in Iron Age.
+- Nice balance fight Scythe Chariot & Priest vs Swordsman.
+  The corner Babylonian comes out with Heavy Catapult, very strong,
+  Dream spawning positions for the Babylonian.
+- Babylonian win by Wonder at 40 minutes.
+  Even if not, each Babylonian converted 100-200 Legion, also have more Villager.
 
 #### Game 2
 
-CivA strategies: placeholder
+Babylonian strategies: Babylon_Tower_Priest x2, Babylon_Chariot x1
 
-CivB strategies: placeholder
+Choson strategies: Choson_Swordsmen x2, Choson_Tower x1
 
 Result:
 
-- placeholder
-- placeholder
+- Very close spawn positions, early completed Choson Tower kill a lot.
+- But 1 Choson mess up Swordsman train timing. Get defeated at 14 minutes.
+- Later Babylonian with Heavy Catapult and Priest dominate.
+  A Babylonian converted 100+ again. Choson converted a lot too, but not as much.
+- Babylonian win by Wonder again, also in a winning position.
 
-### Ro8. Pair2. TBD vs TBD
+### Ro8. Pair2. Egyptian vs Macedonian
 
 #### Game 1
 
-CivC strategies: placeholder
+Egyptian strategies: Egypt_Chariot_Priest x3
 
-CivD strategies: placeholder
+Macedonian strategies: Macedon_Centurion x3
 
 Result:
 
-- placeholder
-- placeholder
+- Macedonian beat every Egyptian units, include their strong Priest.
+- Egyptian let Macedonian comfortably get Phalanx.
+- At 15 minutes, a winged Egyptian is defeated.
+  At 19 minutes, the middle Egyptian is defeated.
+  On the last wing, a balanced fight.
+- Macedonian win when the last Egyptian got focused by 3 Macedonian.
 
 #### Game 2
 
-CivC strategies: placeholder
-
-CivD strategies: placeholder
+Egyptian and Macedonian currently only have 1 strategy.
 
 Result:
 
-- placeholder
-- placeholder
+- In the smaller map, Macedonian Hoplite still good,
+  but the overwhelming number of early Camel and Chariot defeat 2 Macedonian at 12 minutes.
+- The last Macedonian got Phalanx, resist a little bit.
+- Egyptian win at 20 minutes, nothing left for Macedonian.
 
-### Ro8. Pair3. TBD vs TBD
+#### Game 3
+
+Result:
+
+- Huge map again. No fight until 15 minutes.
+- Macedonian attack with Centurion,
+  but this time Egyptian set up Priest and Guard Tower well,
+  Mace are harder to be converted, but still get converted.
+- Macedonian kill a lot of Egyptian units, but with less Villager,
+  they run out of resources to train more Centurion.
+- Egyptian win at 58 minutes by Wonder (after upgraded Ballista Tower).
+
+### Ro8. Pair3. Palmyran vs Phoenician
 
 #### Game 1
 
-CivE strategies: placeholder
+Palmyran strategies: Palmyra_Camel x3
 
-CivF strategies: placeholder
+Phoenician strategies: Phoenicia_Elephant_Archer x3
 
 Result:
 
-- placeholder
-- placeholder
+- No early Bronze fight.
+- Turn into Palmyran Scythe Chariot vs Phoenician Elephant Archer grind.
+- Palmyran still looks fine, even little bit better at first.
+- But after Elephant Archer group up, 10+ of them stand are very tough.
+  And there are 50 villagers for each Phoenician, 24 Palmyran Villager cannot keep up.
+- Phoenician slowly win.
 
 #### Game 2
 
-CivE strategies: placeholder
+Palmyran strategies: Palmyra_Camel x2, Palmyra_Horse_Archer x1
 
-CivF strategies: placeholder
+Phoenician strategies: Phoenicia_Elephant_Archer x3
 
 Result:
 
-- placeholder
-- placeholder
+- In smaller map, Palmyran early mass Camel severely damage a Phoenician.
+- Very nice fight of combo Scythe Chariot & Horse Archer & Catapult vs
+  Elephant Archer & Chariot Archer. Even though it is 2 vs 3.
+- Palmyran eventually win.
 
-### Ro8. Pair4. TBD vs TBD
+#### Game 3
+
+Palmyran strategies: Palmyra_Camel x2, Palmyra_Horse_Archer x1
+
+Phoenician strategies: Phoenicia_Elephant_Archer x3
+
+Result:
+
+- Huge map again. No early Bronze fight.
+- When Palmyran bring Camel out, they get a lot of Chariot Archer kills.
+  A good Scythe Chariot attack in to Villager line too.
+- But Phoenician can group up Elephant Archer again.
+  backed by a lot of Villager.
+- Phoenician gradually win.
+
+### Ro8. Pair4. Shang vs Yamato
 
 #### Game 1
 
-CivG strategies: placeholder
+Shang strategies: Shang_Stable x3
 
-CivH strategies: placeholder
+Yamato strategies: Yamato_Cavalry x3
 
 Result:
 
-- placeholder
-- placeholder
+- Unfortunately for Yamato, all Shang are mass Camel early,
+  a lot of Cavalry are inefficiently trade before upgraded.
+- The last Yamato has 70+ Cataphract converted.
+- Shang win easily.
 
 #### Game 2
 
-CivG strategies: placeholder
+Shang strategies: Shang_Stable x2, Shang_Cataphract x1
 
-CivH strategies: placeholder
+Yamato strategies: Yamato_Cavalry x3
 
 Result:
 
-- placeholder
-- placeholder
+- Smaller map is even worse for Yamato.
+- Shang win by wiping out everything in 25 minutes.
 
 ## Round of 4
 
