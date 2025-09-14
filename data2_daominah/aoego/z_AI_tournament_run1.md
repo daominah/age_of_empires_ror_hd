@@ -5,35 +5,35 @@
 - team 3 vs 3 (for spectator, 1 team has 4 players, but the spectator delete Town Center and move to a corner)
 - map type Hill Country, game 1 size Huge, game 2 size Large
 - all members in a team have the same civilization
-- best of 2. if draw decide by which team has "nicer" gameplay (e.g. aggressive)
+- best of 2. if 1-1, play more, or decide by which team has "nicer" gameplay (e.g. aggressive)
 
 ## Standing
 
-| **Round of 16** |   | **Round of 8** |       | **Round of 4** |       | **Final** |      | **Winner** |
-|-----------------|---|----------------|-------|----------------|-------|-----------|------|------------|
-| Assyrian        | 0 |                |       |                |       |           |      |            |
-| Babylonian      | 2 | Babylonian     |       |                |       |           |      |            |
-| ____            |   |                |       |                |       |           |      |            |
-| Carthaginian    |   |                |       |                |       |           |      |            |
-| Choson          |   | TBD            |       |                |       |           |      |            |
-| ____            |   | ____           |       |                |       |           |      |            |
-| Egyptian        |   |                |       |                |       |           |      |            |
-| Greek           |   | TBD            |       |                |       |           |      |            |
-| ____            |   |                |       |                |       |           |      |            |
-| Hittite         |   | TBD            |       |                |       |           |      |            |
-| Macedonian      |   |                |       |                |       |           |      |            |
-| ____            |   | ____           |       |                |       |           |      |            |
-| Minoan          |   |                |       |                |       |           |      |            |
-| Palmyran        |   | TBD            |       |                |       |           |      |            |
-| ____            |   |                |       |                |       |           |      |            |
-| Persian         |   | TBD            |       |                |       |           |      |            |
-| Phoenician      |   |                |       |                |       |           |      |            |
-| ____            |   | ____           |       |                |       |           |      |            |
-| Roman           |   |                |       |                |       |           |      |            |
-| Shang           |   | TBD            |       |                |       |           |      |            |
-| ____            |   |                |       |                |       |           |      |            |
-| Sumerian        |   | TBD            |       |                |       |           |      |            |
-| Yamato          |   |                |       |                |       |           |      |            |
+| **Round of 16** |   | **Round of 8** |   | **Round of 4** |    | **Final** |   | **Winner** |
+|-----------------|---|----------------|---|----------------|----|-----------|---|------------|
+| Assyrian        | 0 |                |   |                |    |           |   |            |
+| Babylonian      | 2 | Babylonian     |   |                |    |           |   |            |
+| ____            |   |                |   |                |    |           |   |            |
+| Carthaginian    | 1 | Choson         |   |                |    |           |   |            |
+| Choson          | 2 |                |   |                |    |           |   |            |
+| ____            |   | ____           |   |                |    |           |   |            |
+| Egyptian        |   |                |   |                |    |           |   |            |
+| Greek           |   | TBD            |   |                |    |           |   |            |
+| ____            |   |                |   |                |    |           |   |            |
+| Hittite         |   | TBD            |   |                |    |           |   |            |
+| Macedonian      |   |                |   |                |    |           |   |            |
+| ____            |   | ____           |   |                |    |           |   |            |
+| Minoan          |   |                |   |                |    |           |   |            |
+| Palmyran        |   | TBD            |   |                |    |           |   |            |
+| ____            |   |                |   |                |    |           |   |            |
+| Persian         |   | TBD            |   |                |    |           |   |            |
+| Phoenician      |   |                |   |                |    |           |   |            |
+| ____            |   | ____           |   |                |    |           |   |            |
+| Roman           |   |                |   |                |    |           |   |            |
+| Shang           |   | TBD            |   |                |    |           |   |            |
+| ____            |   |                |   |                |    |           |   |            |
+| Sumerian        |   | TBD            |   |                |    |           |   |            |
+| Yamato          |   |                |   |                |    |           |   |            |
 
 ## Round of 16
 
@@ -72,7 +72,7 @@ Result:
 
 #### Game 1
 
-Carthaginian strategies: Carthage_Helepolis x3 
+Carthaginian strategies: Carthage_Helepolis x3
 
 Choson strategies: Choson_Tower x2, Choson_Swordsmen x1
 
@@ -80,10 +80,11 @@ Result:
 
 - Choson can mess up their Swordsman train timing.
 - Carthage early mass Camel quickly kill 1 Choson.  
-  But if Swordsman come out normally, Choson can defend well. Priest heal too. 
+  But if Swordsman come out normally, Choson can defend well. Priest heal too.
 - Choson power spike with Longswordman kill 2 Carthage in 18 minutes.
 - Later Helepolis is strong vs Swordsman, but Choson has a lot of Priest.
 - Choson win by dominating the timeline.
+- There is a game 0 where all Choson bug Swordsman, record 1 win for Carthage too.
 
 #### Game 2
 
@@ -91,12 +92,12 @@ Carthaginian strategies: Carthage_Helepolis x3
 
 Choson strategies: Choson_Swordsmen x3
 
-Result: 
+Result:
 
 - Carthage don't attack with Camel early enough.
 - Still 1 Choson mess up Swordsman train timing.
 - The Longswordman power spike obliterates winged Carthage again.
-- Choson win. Overall 2-0.
+- Choson win.
 
 ### Ro16. Pair3. Egyptian vs Greek
 
@@ -106,7 +107,7 @@ Egyptian strategies: placeholder
 
 Greek strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -117,7 +118,7 @@ Egyptian strategies: placeholder
 
 Greek strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -130,7 +131,7 @@ Hittite strategies: placeholder
 
 Macedonian strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -141,7 +142,7 @@ Hittite strategies: placeholder
 
 Macedonian strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -154,7 +155,7 @@ Minoan strategies: placeholder
 
 Palmyran strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -165,7 +166,7 @@ Minoan strategies: placeholder
 
 Palmyran strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -178,7 +179,7 @@ Persian strategies: placeholder
 
 Phoenician strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -189,7 +190,7 @@ Persian strategies: placeholder
 
 Phoenician strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -202,7 +203,7 @@ Roman strategies: placeholder
 
 Shang strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -213,7 +214,7 @@ Roman strategies: placeholder
 
 Shang strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -226,7 +227,7 @@ Sumerian strategies: placeholder
 
 Yamato strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -237,7 +238,7 @@ Sumerian strategies: placeholder
 
 Yamato strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -252,7 +253,7 @@ CivA strategies: placeholder
 
 CivB strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -263,7 +264,7 @@ CivA strategies: placeholder
 
 CivB strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -276,7 +277,7 @@ CivC strategies: placeholder
 
 CivD strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -287,7 +288,7 @@ CivC strategies: placeholder
 
 CivD strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -300,7 +301,7 @@ CivE strategies: placeholder
 
 CivF strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -311,7 +312,7 @@ CivE strategies: placeholder
 
 CivF strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -324,7 +325,7 @@ CivG strategies: placeholder
 
 CivH strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -335,7 +336,7 @@ CivG strategies: placeholder
 
 CivH strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -350,7 +351,7 @@ CivI strategies: placeholder
 
 CivJ strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -361,7 +362,7 @@ CivI strategies: placeholder
 
 CivJ strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -374,7 +375,7 @@ CivK strategies: placeholder
 
 CivL strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -385,7 +386,7 @@ CivK strategies: placeholder
 
 CivL strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -400,7 +401,7 @@ CivM strategies: placeholder
 
 CivN strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder
@@ -411,7 +412,7 @@ CivM strategies: placeholder
 
 CivN strategies: placeholder
 
-Result: 
+Result:
 
 - placeholder
 - placeholder

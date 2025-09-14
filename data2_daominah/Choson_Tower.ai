@@ -58,10 +58,10 @@ R65     Broad_Sword            1      12
 C103    Iron_Age               1      109
 R112    Architecture           1      82
 R32     Artisanship            1      84
-R51     Metal_Working          1      103
-R145    Choson_cheap_ATK4      1      103       // new buff
 T75       Soldier-Inf3         2      12        0
 T75       Soldier-Inf3         3      12        0
+R51     Metal_Working          1      103
+R145    Choson_cheap_ATK4      1      103       // new buff
 T125      Priest               1      104       0
 T75       Soldier-Inf3         2      12        0
 T75       Soldier-Inf3         3      12        0
