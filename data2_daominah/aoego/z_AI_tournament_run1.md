@@ -2,39 +2,38 @@
 
 ## Rule
 
-- team 3 vs 3 (for spectator, 1 team has 4 players, but the spectator delete Town Center and move to a corner)
-- map type Hill Country, game 1 size Huge, game 2 size Large
-- all members in a team have the same civilization
-- best of 2. if result is 1-1 after 2 games: play more on Huge map,
-  or decide by which team has "nicer" gameplay (e.g. aggressive)
+- Team 3 vs 3 (for spectator, 1 team has 4 players, but the spectator delete Town Center and move to a corner)
+- Map type Hill Country, map size Huge Large Huge for game 1, 2, 3 respectively
+- All members in a team have the same civilization
+- Best of 3
 
 ## Standing
 
-| **Round of 16** |   | **Round of 8** |   | **Round of 4** |    | **Final** |   | **Winner** |
-|-----------------|---|----------------|---|----------------|----|-----------|---|------------|
-| Assyrian        | 0 |                |   |                |    |           |   |            |
-| Babylonian      | 2 | Babylonian     |   |                |    |           |   |            |
-| ____            |   |                |   |                |    |           |   |            |
-| Carthaginian    | 1 | Choson         |   |                |    |           |   |            |
-| Choson          | 2 |                |   |                |    |           |   |            |
-| ____            |   | ____           |   |                |    |           |   |            |
-| Egyptian        | 2 |                |   |                |    |           |   |            |
-| Greek           | 1 | Egyptian       |   |                |    |           |   |            |
-| ____            |   |                |   |                |    |           |   |            |
-| Hittite         | 1 | Macedonian     |   |                |    |           |   |            |
-| Macedonian      | 2 |                |   |                |    |           |   |            |
-| ____            |   | ____           |   |                |    |           |   |            |
-| Minoan          |   |                |   |                |    |           |   |            |
-| Palmyran        |   | TBD            |   |                |    |           |   |            |
-| ____            |   |                |   |                |    |           |   |            |
-| Persian         |   | TBD            |   |                |    |           |   |            |
-| Phoenician      |   |                |   |                |    |           |   |            |
-| ____            |   | ____           |   |                |    |           |   |            |
-| Roman           |   |                |   |                |    |           |   |            |
-| Shang           |   | TBD            |   |                |    |           |   |            |
-| ____            |   |                |   |                |    |           |   |            |
-| Sumerian        |   | TBD            |   |                |    |           |   |            |
-| Yamato          |   |                |   |                |    |           |   |            |
+| **Ro16**     |   | **Ro8**    |   | **Ro4** |    | **Final** |   | **Winner** |
+|--------------|---|------------|---|---------|----|-----------|---|------------|
+| Assyrian     | 0 |            |   |         |    |           |   |            |
+| Babylonian   | 2 | Babylonian |   |         |    |           |   |            |
+|              |   |            |   |         |    |           |   |            |
+| Carthaginian | 1 | Choson     |   | TBD     |    |           |   |            |
+| Choson       | 2 |            |   |         |    |           |   |            |
+|              |   |            |   |         |    | TBD       |   |            |
+| Egyptian     | 2 |            |   |         |    |           |   |            |
+| Greek        | 1 | Egyptian   |   | TBD     |    |           |   |            |
+|              |   |            |   |         |    |           |   |            |
+| Hittite      | 1 | Macedonian |   |         |    |           |   |            |
+| Macedonian   | 2 |            |   |         |    |           |   |            |
+|              |   |            |   |         |    |           |   | TBD        |
+| Minoan       | 1 |            |   |         |    |           |   |            |
+| Palmyran     | 2 | Palmyran   |   |         |    |           |   |            |
+|              |   |            |   |         |    |           |   |            |
+| Persian      | 0 | Phoenician |   | TBD     |    |           |   |            |
+| Phoenician   | 2 |            |   |         |    |           |   |            |
+|              |   |            |   |         |    | TBD       |   |            |
+| Roman        | 0 |            |   |         |    |           |   |            |
+| Shang        | 2 | Shang      |   | TBD     |    |           |   |            |
+|              |   |            |   |         |    |           |   |            |
+| Sumerian     | 0 | Yamato     |   |         |    |           |   |            |
+| Yamato       | 2 |            |   |         |    |           |   |            |
 
 ## Round of 16
 
@@ -118,9 +117,7 @@ Result:
 
 #### Game 2
 
-Egyptian strategies: Egypt_Chariot_Priest x3
-
-Greek strategies: Greek_Centurion x3
+Egyptian and Greek currently only have 1 strategy.
 
 Result:
 
@@ -131,10 +128,6 @@ Result:
 - Greek win by destroying everything in 19 minutes.
 
 #### Game 3
-
-Egyptian strategies: Egypt_Chariot_Priest x3
-
-Greek strategies: Greek_Centurion x3
 
 Result:
 
@@ -187,97 +180,125 @@ Result:
 
 #### Game 1
 
-Minoan strategies: placeholder
+Minoan strategies: Minoa_Bowmen_Helepolis x3
 
-Palmyran strategies: placeholder
+Palmyran strategies: Palmyra_Camel x3
 
 Result:
 
-- placeholder
-- placeholder
+- Minoan Composite Bowmen and some early Hoplite resist Camel a little bit,
+  still 1 Minoan is defeated early.
+- Later, Composite Bowmen and Helepolis fight Scythe Chariot and a few Horse Archer.
+- Minoan armies have better quality, especially Palmyran don't have good Catapult.
+- Timeline is 50/50 from 30 minutes, 1 Palmyran has nothing left, 2 vs 2.
+- Minoan clearly win at 45 minutes.
 
 #### Game 2
 
-Minoan strategies: placeholder
+Minoan strategies: Minoa_Bowmen_Helepolis x3
 
-Palmyran strategies: placeholder
+Palmyran strategies: Palmyra_Camel x2, Palmyra_Horse_Archer x1
 
 Result:
 
-- placeholder
-- placeholder
+- Palmyran too strong in small map.
+- Palmyran win in 13 minutes, fastest game in the tournament.
+
+#### Game 3
+
+Minoan strategies: Minoa_Bowmen_Helepolis x3
+
+Palmyran strategies: Palmyra_Camel x2, Palmyra_Horse_Archer x1
+
+Result:
+
+- Early Bronze, Minoan Sentry Tower and Hoplite hold, but still damaged.
+- At 15 minutes, Palmyran has Scythe Chariot, group with Camel,
+  2 Minoan are defeated after reaching Iron Age not too long.
+- The Palmyran that plays Heavy Horse Archer also plays Catapult.
+- Palmyran win.
 
 ### Ro16. Pair6. Persian vs Phoenician
 
 #### Game 1
 
-Persian strategies: placeholder
+Persian strategies: Persia_War_Elephant x3
 
-Phoenician strategies: placeholder
+Phoenician strategies: Phoenicia_Elephant_Archer x3
 
 Result:
 
-- placeholder
-- placeholder
+- Early Bronze, mass Chariot Archer already have advantage over a few Camel.
+- Later Priest just crush War/Armored Elephant.
+- Persian Catapult and Priest resist Elephant Archer a little bit.
+- Phoenician clearly win.
+  They have a lot of Villager. Elephant Archer stay under Tower to take them down.
 
 #### Game 2
 
-Persian strategies: placeholder
-
-Phoenician strategies: placeholder
+Persian and Phoenician currently only have 1 strategy.
 
 Result:
 
-- placeholder
-- placeholder
+- Tower and Camel actually hold in the Bronze Age.
+- Very soon later, Persian reach Iron Age, push with War Elephant, Catapult, Priest.
+- At 30 minutes, 2 winged Phoenician are severely damaged.
+- But it is very hard to train Elephant, then feed to Priest.
+- Eventually Phoenician rebuild and win.
 
 ### Ro16. Pair7. Roman vs Shang
 
 #### Game 1
 
-Roman strategies: placeholder
+Roman strategies: Rome_Siege x3
 
-Shang strategies: placeholder
+Shang strategies: Shang_Cataphract x3
 
 Result:
 
-- placeholder
-- placeholder
+- Mass Cavalry attack too fast, at 20 minutes, 2 Roman are defeated.
+- Without Priest from Roman, Cataphract show their strength, tough and fast,
+  slowly take down very strong Roman Siege forces.
+- Shang win.
 
 #### Game 2
 
-Roman strategies: placeholder
+Roman strategies: Rome_Legion x2, Rome_Siege x1
 
-Shang strategies: placeholder
+Shang strategies: Shang_Stable x2, Shang_Cataphract x1
 
 Result:
 
-- placeholder
-- placeholder
+- Roman Swordsman is so strong,
+  can fight mass Cavalry in Bronze Age,
+  have advantage in Iron Age too.
+- But Cataphract and Shang have better economy win.
 
 ### Ro16. Pair8. Sumerian vs Yamato
 
 #### Game 1
 
-Sumerian strategies: placeholder
+Sumerian strategies: Sumeria_Catapult x3
 
-Yamato strategies: placeholder
+Yamato strategies: Yamato_Cavalry x3
 
 Result:
 
-- placeholder
-- placeholder
+- Super mass Cavalry from Yamato in Bronze so hard to stop.
+- 15' a Sumerian is defeated. 20' another Sumerian is defeated.
+- Even in the Iron Age, Heavy Catapult and Horse Archer are not good
+  vs Cataphract, and Yamato use Horse Archer too to prevent kiting.
+- Unlucky match up. Yamato absolutely win.
 
 #### Game 2
 
-Sumerian strategies: placeholder
-
-Yamato strategies: placeholder
+Sumerian and Yamato currently only have 1 strategy.
 
 Result:
 
-- placeholder
-- placeholder
+- In smaller map, Yamato Cavalry even stronger.
+- At 12 minutes, 2 Sumerian are almost defeated.
+- Yamato win.
 
 ## Round of 8
 
