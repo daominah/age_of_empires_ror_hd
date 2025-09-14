@@ -104,6 +104,7 @@ U125      Priest               2      104
 B79       Watch_Tower          2      -1
 
 U46       Soldier-Elephant     3      101
+R32     Artisanship            1      84        // new buff
 T83       Man                  2      109       0
 R119    Medicine               1      104
 R19     Monotheism             1      104

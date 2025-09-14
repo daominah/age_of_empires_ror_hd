@@ -180,9 +180,9 @@ U40       Soldier-Chariot1     2      101
 U40       Soldier-Chariot1     2      101
 U40       Soldier-Chariot1     2      101
 
-// 96 scythe chariot, 24 camel, 24 priest (7 stable, 4 temple)
-// 50 villager, 20 farm, 16 tower (pop 195, tech 28)
-// _spent: 13875 wood, 12435 food, 8000 gold, 2550 stone
+// 56 scythe chariot, 36 cataphract, 12 priest (7 stable, 4 temple)
+// 50 villager, 20 farm, 16 tower (pop 155, tech 30)
+// _spent: 11175 wood, 14025 food, 8915 gold, 2550 stone
 
 // B276      Wonder               1      -1
 B50       Farm                 24     -1
