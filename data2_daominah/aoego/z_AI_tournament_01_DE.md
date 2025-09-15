@@ -3,37 +3,37 @@
 ## Rule
 
 - Team 3 vs 3 (for spectator, 1 team has 4 players, but the spectator delete Town Center and move to a corner)
-- Map type Hill Country, map size Huge Large Huge for game 1, 2, 3 respectively
+- Map type Hill Country, map size Huge/Large/Huge for game 1/2/3 respectively
 - All members in a team have the same civilization
 - Best of 3
 
 ## Standing
 
-| **Ro16**     |   | **Ro8**    |   | **Ro4**    |   | **Final** |   | **Winner** |
-|--------------|---|------------|---|------------|---|-----------|---|------------|
-| Assyrian     | 0 |            |   |            |   |           |   |            |
-| Babylonian   | 2 | Babylonian | 2 |            |   |           |   |            |
-|              |   |            |   |            |   |           |   |            |
-| Carthaginian | 1 | Choson     | 0 | Babylonian | 0 |           |   |            |
-| Choson       | 2 |            |   |            |   |           |   |            |
-|              |   |            |   |            |   | Egyptian  | 1 |            |
-| Egyptian     | 2 |            |   |            |   |           |   |            |
-| Greek        | 1 | Egyptian   | 2 | Egyptian   | 2 |           |   |            |
-|              |   |            |   |            |   |           |   |            |
-| Hittite      | 1 | Macedonian | 1 |            |   |           |   |            |
-| Macedonian   | 2 |            |   |            |   |           |   |            |
-|              |   |            |   |            |   |           |   | Shang      |
-| Minoan       | 1 |            |   |            |   |           |   |            |
-| Palmyran     | 2 | Palmyran   | 1 |            |   |           |   |            |
-|              |   |            |   |            |   |           |   |            |
-| Persian      | 0 | Phoenician | 2 | Phoenician | 0 |           |   |            |
-| Phoenician   | 2 |            |   |            |   |           |   |            |
-|              |   |            |   |            |   | Shang     | 2 |            |
-| Roman        | 0 |            |   |            |   |           |   |            |
-| Shang        | 2 | Shang      | 2 | Shang      | 2 |           |   |            |
-|              |   |            |   |            |   |           |   |            |
-| Sumerian     | 0 | Yamato     | 0 |            |   |           |   |            |
-| Yamato       | 2 |            |   |            |   |           |   |            |
+| **Ro16**     |   | **Ro8**    |   | **Ro4**    |   | **Final** |   |
+|--------------|---|------------|---|------------|---|-----------|---|
+| Assyrian     | 0 |            |   |            |   |           |   |
+| Babylonian   | 2 | Babylonian | 2 |            |   |           |   |
+|              |   |            |   |            |   |           |   |
+| Carthaginian | 1 | Choson     | 0 | Babylonian | 0 |           |   |
+| Choson       | 2 |            |   |            |   |           |   |
+|              |   |            |   |            |   |           |   |
+| Egyptian     | 2 |            |   |            |   |           |   |
+| Greek        | 1 | Egyptian   | 2 | Egyptian   | 2 | Egyptian  | 1 |
+|              |   |            |   |            |   |           |   |
+| Hittite      | 1 | Macedonian | 1 |            |   |           |   |
+| Macedonian   | 2 |            |   |            |   |           |   |
+|              |   |            |   |            |   |           |   |
+| Minoan       | 1 |            |   |            |   |           |   |
+| Palmyran     | 2 | Palmyran   | 1 |            |   |           |   |
+|              |   |            |   |            |   |           |   |
+| Persian      | 0 | Phoenician | 2 | Phoenician | 0 | **Shang** | 2 |
+| Phoenician   | 2 |            |   |            |   |           |   |
+|              |   |            |   |            |   |           |   |
+| Roman        | 0 |            |   |            |   |           |   |
+| Shang        | 2 | Shang      | 2 | Shang      | 2 |           |   |
+|              |   |            |   |            |   |           |   |
+| Sumerian     | 0 | Yamato     | 0 |            |   |           |   |
+| Yamato       | 2 |            |   |            |   |           |   |
 
 ## Round of 16
 
