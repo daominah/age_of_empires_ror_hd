@@ -281,7 +281,7 @@ The Catapult line now has increased pierce armor but negative melee armor.
 
 ##### 6. Siege Workshop
 
-- [ ] Stone Thrower/Catapult/[Heavy Catapult](https://ageofempires.fandom.com/wiki/Heavy_Catapult)
+- [x] Stone Thrower/Catapult/[Heavy Catapult](https://ageofempires.fandom.com/wiki/Heavy_Catapult)
   have 3/4/5 pierce armor (previously 0).
 - [ ] Stone Thrower/Catapult/Heavy Catapult have -2 melee armor (previously 0).
 - [ ] Catapult and Heavy Catapult have slightly smaller damage area radius.
