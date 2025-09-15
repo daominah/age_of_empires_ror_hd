@@ -14,31 +14,31 @@ import random; a = ["Assyrian", "Babylonian", "Carthaginian", "Choson", "Egyptia
 
 ## Standing
 
-| **Ro16**     |   | **Ro8**      |   | **Ro4** |   | **Final** |   |
-|--------------|---|--------------|---|---------|---|-----------|---|
-| Roman        | 2 |              |   |         |   |           |   |
-| Hittite      | 1 | Roman        | 0 |         |   |           |   |
-|              |   |              |   |         |   |           |   |
-| Carthaginian | 2 | Carthaginian | 0 | TBD     | 0 |           |   |
-| Babylonian   | 0 |              |   |         |   |           |   |
-|              |   |              |   |         |   |           |   |
-| Persian      | 1 |              |   |         |   |           |   |
-| Sumerian     | 2 | Sumerian     | 0 | TBD     | 0 | TBD       | 0 |
-|              |   |              |   |         |   |           |   |
-| Macedonian   | 0 | TBD          | 0 |         |   |           |   |
-| Phoenician   | 0 |              |   |         |   |           |   |
-|              |   |              |   |         |   |           |   |
-| Minoan       | 0 |              |   |         |   |           |   |
-| Yamato       | 0 | TBD          | 0 |         |   |           |   |
-|              |   |              |   |         |   |           |   |
-| Choson       | 0 | TBD          | 0 | TBD     | 0 | TBD       | 0 |
-| Palmyran 0   |   |              |   |         |   |           |   |
-|              |   |              |   |         |   |           |   |
-| Greek        | 0 |              |   |         |   |           |   |
-| Assyrian     | 0 | TBD          | 0 | TBD     | 0 |           |   |
-|              |   |              |   |         |   |           |   |
-| Egyptian     | 0 | TBD          | 0 |         |   |           |   |
-| Shang        | 0 |              |   |         |   |           |   |
+| **Ro16**     |   | **Ro8**    |   | **Ro4** |   | **Final** |   |
+|--------------|---|------------|---|---------|---|-----------|---|
+| Roman        | 2 |            |   |         |   |           |   |
+| Hittite      | 1 | Roman      | 0 |         |   |           |   |
+|              |   |            |   |         |   |           |   |
+| Carthaginian | 0 | Babylonian | 0 | TBD     | 0 |           |   |
+| Babylonian   | 2 |            |   |         |   |           |   |
+|              |   |            |   |         |   |           |   |
+| Persian      | 1 |            |   |         |   |           |   |
+| Sumerian     | 2 | Sumerian   | 0 | TBD     | 0 | TBD       | 0 |
+|              |   |            |   |         |   |           |   |
+| Macedonian   | 2 | Macedonian | 0 |         |   |           |   |
+| Phoenician   | 1 |            |   |         |   |           |   |
+|              |   |            |   |         |   |           |   |
+| Minoan       | 0 |            |   |         |   |           |   |
+| Yamato       | 0 | TBD        | 0 |         |   |           |   |
+|              |   |            |   |         |   |           |   |
+| Choson       | 0 | TBD        | 0 | TBD     | 0 | TBD       | 0 |
+| Palmyran 0   |   |            |   |         |   |           |   |
+|              |   |            |   |         |   |           |   |
+| Greek        | 0 |            |   |         |   |           |   |
+| Assyrian     | 0 | TBD        | 0 | TBD     | 0 |           |   |
+|              |   |            |   |         |   |           |   |
+| Egyptian     | 0 | TBD        | 0 |         |   |           |   |
+| Shang        | 0 |            |   |         |   |           |   |
 
 ## Round of 16
 
@@ -93,7 +93,7 @@ Result:
 
 Carthaginian strategies: Carthage_Camel x3
 
-Babylonian strategies: Babylon_Tower_Priest x3, Babylon_Chariot x1
+Babylonian strategies: Babylon_Tower_Priest x2, Babylon_Chariot x1
 
 Result:
 
@@ -164,25 +164,35 @@ Result:
 
 #### Game 1
 
-Macedonian strategies: placeholder x3
+Macedonian strategies: Macedon_Centurion x3
 
-Phoenician strategies: placeholder x3
+Phoenician strategies: Phoenicia_Elephant_Archer x3
 
 Result:
 
-- placeholder
-- placeholder
+- Macedonian Centurion is good,
+  but a lot of Archer and Priest still can slowly take them down,
+  especially under Tower.
+- Phoenician win.
 
 #### Game 2
 
-Macedonian strategies: placeholder x3
+Result:
 
-Phoenician strategies: placeholder x3
+- Early Macedonian Cavalry get quite a few Villager kills.
+- Smaller map allows quick Phalanx attack.
+- At 20 minutes, Phoenician have almost no unit left.
+- Macedonian win.
+
+#### Game 3
 
 Result:
 
-- placeholder
-- placeholder
+- Macedonian attack right after getting some Hoplite,
+  when the number of Archer, Priest still small.
+- Centurion defeat 2 Phoenician in 25 minutes.
+  This how it should be, Mace Centurion should not be stopped by Archer and Priest.
+- Macedonian win.
 
 ### Ro16. Pair5. Minoan vs Yamato
 
