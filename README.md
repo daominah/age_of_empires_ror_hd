@@ -1,5 +1,10 @@
 # Age of Empires: The Rise of Rome
 
+Age of Empires: The Rise of Rome,
+features improved AI build orders and
+balance updates that mimic Microsoft’s latest
+(currently Return of Rome, a game mode inside AoE2 client).
+
 ## Download
 
 From [github.com/daominah/age_of_empires_ror_hd](https://github.com/daominah/age_of_empires_ror_hd) (this page)
@@ -15,6 +20,9 @@ click on green button `Code` then `Download ZIP` (size about 100 MB).
 * For multiplayer, run file `EMPIRESX.EXE`.
   If someone uses a cheat code in the game,
   their units will be deleted, and they will be kicked from the game.
+
+How to witch units, civilizations balance updates to latest version [here](#definitive-edition-and-return-of-rome-balance).
+In the future, the latest balances will be considered the default.
 
 Guides on how to edit computer player behavior are in the directory
 [data2_daominah/doc](data2_daominah/doc/edit_computer_player.md).
