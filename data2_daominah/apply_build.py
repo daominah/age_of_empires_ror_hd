@@ -94,9 +94,14 @@ def main():
             "Palmyra Horse Archer.ai",
         },
         "Persia_War_Elephant.ai": {
-            "Persia Elephant Archers.ai",
+            # "Persia Elephant Archers.ai",
             "Persia Priests.ai",
             "Persia War Elephant.ai",
+        },
+        "Persia_Cavalry_Archer.ai": {
+            "Persia Elephant Archers.ai",
+            # "Persia Priests.ai",
+            # "Persia War Elephant.ai",
         },
         "Phoenicia_Elephant_Archer.ai": {
             "Phoenicia Elephants.ai",

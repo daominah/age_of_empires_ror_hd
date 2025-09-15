@@ -22,8 +22,8 @@ import random; a = ["Assyrian", "Babylonian", "Carthaginian", "Choson", "Egyptia
 | Carthaginian | 2 | Carthaginian | 0 | TBD     | 0 |           |   |
 | Babylonian   | 0 |              |   |         |   |           |   |
 |              |   |              |   |         |   |           |   |
-| Persian      | 0 |              |   |         |   |           |   |
-| Sumerian     | 0 | TBD          | 0 | TBD     | 0 | TBD       | 0 |
+| Persian      | 1 |              |   |         |   |           |   |
+| Sumerian     | 2 | Sumerian     | 0 | TBD     | 0 | TBD       | 0 |
 |              |   |              |   |         |   |           |   |
 | Macedonian   | 0 | TBD          | 0 |         |   |           |   |
 | Phoenician   | 0 |              |   |         |   |           |   |
@@ -119,25 +119,46 @@ Result:
 
 #### Game 1
 
-Persian strategies: placeholder x3
+Persian strategies: Persia_War_Elephant x3
 
-Sumerian strategies: placeholder x3
+Sumerian strategies: Sumeria_Catapult x3
 
 Result:
 
-- placeholder
-- placeholder
+- Opening straight Iron Age to train Elephant is too weak,
+  Chariot Archer from Sumerian are enough to deal a lot of damage
+  before Elephant come out.
+- Persian Elephant are strong, but not from a losing position,
+  superior number of Catapult and Horse Archer will take them down easily.
+- Sumerian win.
 
 #### Game 2
 
-Persian strategies: placeholder x3
+Persian strategies: Persia_War_Elephant x3
 
-Sumerian strategies: placeholder x3
+Sumerian strategies: Sumeria_Catapult x3
 
 Result:
 
-- placeholder
-- placeholder
+- Smaller map somehow allow Persian 1 Stable Camel to pressure.
+- Luck favored the Persian side,  
+  a weakened Persian stayed in Bronze Age and gave resources to others,  
+  without this, a single Persian could not produce as many Elephants by itself.
+- Persian win in 15 minutes. Obliterate all the buildings too.
+
+#### Game 3
+
+Persian strategies: Persia_Cavalry_Archer x2, Persia_War_Elephant x1
+
+Sumerian strategies: Sumeria_Catapult x3
+
+Result:
+
+- 2 of the Persian open mass Camel, so they can pressure early Bronze.
+- It becomes balanced when Sumerian Archer group up.
+- A Persian mass Camel is severely damaged, transfer resources, but to the Horses player.
+- Sumerian gradually take Elephant down with a lot of Catapult.
+- Sumerian win.
 
 ### Ro16. Pair4. Macedonian vs Phoenician
 
