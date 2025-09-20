@@ -527,10 +527,16 @@ affects Phoenician the most, because of their bonus -25% Elephants cost.
 
 ##### 17. [Lac Viet](https://ageofempires.fandom.com/wiki/Lac_Viet#Civilization_bonuses)
 
-TODO: Lac Viet is a new civilization,
-need to modify the `empires.exe` to show the new civilization in the game,
-not just edit the `data/empires.dat` file. Can consider to replace Carthaginian,
-the civilization still bad after got buffs.
+TODO adding civilizations:
+
+- To be able to add a new civilization like Lac Viet,
+  we need to modify the `empires.exe` to show the new civilization in the game,
+  not just edit the `data/empires.dat` file.
+- The full process is quite complicated,
+  even if built on top of a popular mod like [UPatch HD](https://aoe.heavengames.com/dl-php/getfile.php?id=2477&s=3e6e64f202e2bdf936c546d2b2266d7b&r=https%3A//aoe.heavengames.com/dl-php/showfile.php%3Ffileid%3D2477),
+  guide [Creating Mods: Add a civilization](https://upatch-hd.weebly.com/creating-mods.html#:~:text=Custom%20number%20of%20Civilizations).
+
+Lac Viet civilization bonuses:
 
 - [x] Foragers work 20% faster.
   (Forager work rate +0.1, so 0.55 food/s instead of 0.45 food/s).
