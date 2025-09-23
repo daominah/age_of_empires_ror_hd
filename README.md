@@ -258,6 +258,8 @@ The Catapult line now has increased pierce armor but negative melee armor.
   cost reduced to 90 food (previously 100).
 - [x] Scout pierce armor increased to 1 (previously 0).
 - [ ] Scout have bonus attack vs archers +3 (previously 0).
+- [ ] Scout auto attack if they have been tasked to attack, or when attacked.
+  - [x] Hard to implement as is, so Scout trained in the Iron Age always auto attack.
 - [ ] Chariot bonus attack vs Priest removed (previously +7),
   also conversion resistance reduced to x2 (previously x8).
 - [ ] Scythe Chariot melee armor reduced to 1 (previously 2).
