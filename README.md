@@ -685,42 +685,60 @@ Priest is the only unit that has 33% accuracy in AoE-RoR;
 all other units have 100% accuracy.
 However, it is unclear exactly how this 33% accuracy functions in practice.
 
-In the following tests, 20 priests start to convert enemy unit at range 10,
+In all the following tests, 20 priests start to convert enemy unit at range 10,
 the result number is the number of failed conversions.
 
-#### Priest vs Cavalry
+#### Cavalry vs Priest
+
+##### Cavalry ATK 8+2 vs base Priest 25 HP
+
+[13, 11, 12, 14, 15, 13, 12, 16, 11, 14, 12, 11, 9, 10, 9, 10, 12, 13, 14, 12]
 
 [14, 13, 14, 13, 11, 13, 15, 11, 16, 15, 10, 11, 14, 14, 7, 13, 13, 11, 13, 16]
 
-#### Priest vs Cavalry
+36% converted.  
+So in early Bronze Age, Priest on open field is not reliable defense vs Cavalry.
 
-36% converted.
-
-#### Mysticism Astrology Priest vs Cavalry
+##### Cavalry ATK 8+2 vs Mysticism Astrology Priest 50 HP & 1.3 work rate
 
 [7, 5, 6, 8, 8, 7, 5, 10, 5, 9, 6, 5, 4, 5, 4, 5, 6, 7, 8, 6]
 
 68% converted.
+Upgraded Priest are much better, now can go out to attack.
 
-#### Priest vs Centurion
+#### Centurion vs Priest
+
+##### Centurion ATK 30+7 vs base Priest 25 HP
+
+[8, 7, 6, 5, 5, 7, 5, 4, 6, 4, 5, 8, 10, 4, 6, 4, 7, 5, 8, 5]
 
 [7, 6, 5, 4, 4, 8, 4, 3, 6, 3, 6, 9, 11, 3, 6, 3, 7, 4, 8, 4]
 
-72% converted.
+72% converted.  
+Even though Centurion can 1-shot Priest, they are converted while walking in.
 
-#### Mysticism Astrology Priest vs Centurion
+##### Centurion vs Mysticism Astrology Priest
 
 [3, 2, 7, 5, 3, 4, 6, 2, 2, 4, 8, 2, 3, 5, 3, 3, 5, 5, 5, 6]
 
-79% converted.
+79% converted.  
+Not improved much, so base Priest do well vs slow units.
 
-#### Priest vs Macedonian Centurion
+#### Macedonian
+
+##### Scout ATK 3+2 vs Priest 25 HP
+
+Macedonian: [8, 5, 9, 9, 10, 10, 8, 8, 9, 6]. Average 18% converted.
+
+Normal civ: [3, 3, 5, 4, 5, 4, 3, 8, 5, 5]. Average 55% converted.
+
+##### Macedonian Centurion vs base Priest
 
 [16, 14, 15, 19, 18, 16, 16, 19, 15, 14, 11, 15, 13, 15, 17, 11, 18, 15, 17, 13]
 
 23% converted.
 
-#### Mysticism Astrology Priest vs Macedonian Centurion
+##### Macedonian Centurion vs Mysticism Astrology Priest
 
 [15, 16, 17, 16, 15, 11, 9, 14, 12, 19, 17, 16, 13, 17, 16, 11, 17, 18, 16, 11]
 
