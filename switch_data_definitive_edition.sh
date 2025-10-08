@@ -14,7 +14,7 @@ BRANCH_MACE_OVERPOWERED="data/empires_mace_overpowered.dat" # Overpowered Mace
 
 
 # SET HERE BEFORE RUNNING THE SCRIPT one of the three options:
-data_branch="$BRANCH_MACE_OVERPOWERED"
+data_branch="$BRANCH_RISE_OF_ROME"
 
 if [ "$data_branch" = "$BRANCH_RISE_OF_ROME" ]; then
     if [ -f "$BRANCH_RISE_OF_ROME" ]; then
