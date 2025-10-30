@@ -8,10 +8,11 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"github.com/daominah/age_of_empires_ror_hd/data2_daominah/aoego"
 )
 
 // main prints out AoE2 civilizations from AoE2Insights website data in the last 180 days,
@@ -20,10 +21,14 @@ func main() {
 	const isForceReDownload = false
 	const isSortByPopularity = false // default sort by win rate
 
+	//const ratingRange RatingRange = Rating1000To1200
+	const ratingRange RatingRange = Rating1200To1900
+	//const ratingRange RatingRange = Rating1900Up
+
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
 	// check whether data is downloaded
-	projectRootDir, err := GetProjectRootGit()
+	projectRootDir, err := aoego.GetProjectRootGit()
 	if err != nil {
 		log.Fatalf("error GetProjectRootGit: %v\n", err)
 	}
@@ -34,7 +39,7 @@ func main() {
 		log.Printf("re-use existing aoe2insights data")
 	} else {
 		log.Printf("downloading aoe2insights data...")
-		data, err = downloadAoe2insightsData()
+		data, err = downloadAoe2insightsData(ratingRange)
 		if err != nil {
 			log.Fatalf("error downloadAoe2insightsData: %v\n", err)
 			return
@@ -101,7 +106,7 @@ func main() {
 	}
 }
 
-func downloadAoe2insightsData() ([]byte, error) {
+func downloadAoe2insightsData(ratingRange RatingRange) ([]byte, error) {
 	baseURL := "https://www.aoe2insights.com/stats/api/match-ups/"
 	params := url.Values{}
 	params.Add("filter", `{"field":"ladder","operator":"equals","value":"3"}`)
@@ -112,10 +117,27 @@ func downloadAoe2insightsData() ([]byte, error) {
 	params.Add("order", "-agg_win_rate")
 	params.Add("start", "0")
 	params.Add("limit", "100")
-	// Elo group from 1200 to 2000, mid-tier players,
-	// percentiles: 1200 (~75%), 1300 (~81%), 1400 (~87%), 1500 (~91%), 1600 (~94%), 2000 (~99%)
-	params.Add("filter", `{"field":"elo_group","operator":"equals","value":"1200"}`)
-	params.Add("filter", `{"field":"elo_group_opponent","operator":"equals","value":"1200"}`)
+	switch ratingRange {
+	case Rating1000To1200:
+		// Elo group from 1000 to 1200, developing players,
+		// percentiles: 1000 (~50%), 1100 (~64%)
+		params.Add("filter", `{"field":"elo_group","operator":"equals","value":"1000"}`)
+		params.Add("filter", `{"field":"elo_group_opponent","operator":"equals","value":"1000"}`)
+	case Rating1900Up:
+		// Elo group from 1900 and up, top-tier players,
+		// percentiles:
+		// 1900 (~98%), 2000 (~99%)
+		// 2400 (top 100 players, ~99.9%)
+		params.Add("filter", `{"field":"elo_group","operator":"equals","value":"1900"}`)
+		params.Add("filter", `{"field":"elo_group_opponent","operator":"equals","value":"1900"}`)
+	default:
+		// Elo group from 1200 to 2000, mid-tier players,
+		// percentiles:
+		// 1200 (~75%), 1300 (~81%), 1400 (~87%), 1500 (~91%),
+		// 1600 (~94%), 1900 (~98%), 2000 (~99%)
+		params.Add("filter", `{"field":"elo_group","operator":"equals","value":"1200"}`)
+		params.Add("filter", `{"field":"elo_group_opponent","operator":"equals","value":"1200"}`)
+	}
 
 	fullURL := baseURL + "?" + params.Encode()
 	log.Printf("data URL: %v", fullURL)
@@ -141,6 +163,15 @@ type Aoe2insightsResponse struct {
 		Civilization []string  `json:"civilization"`
 	} `json:"rows"`
 }
+
+// RatingRange are pre-defined by aoe2insights website (cannot customize)
+type RatingRange string
+
+const (
+	Rating1000To1200 RatingRange = "1000"
+	Rating1200To1900 RatingRange = "1200"
+	Rating1900Up     RatingRange = "1900"
+)
 
 type CivStat struct {
 	Civilization string
@@ -181,13 +212,4 @@ func ToCivStats(resp Aoe2insightsResponse) []CivStat {
 		})
 	}
 	return stats
-}
-
-func GetProjectRootGit() (string, error) {
-	cmd := exec.Command("git", "rev-parse", "--show-toplevel")
-	stdout, err := cmd.CombinedOutput()
-	if err != nil {
-		return "", err
-	}
-	return strings.TrimSpace(string(stdout)), nil
 }
