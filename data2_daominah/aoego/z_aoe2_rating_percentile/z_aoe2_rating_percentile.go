@@ -1,6 +1,7 @@
 package main
 
 import (
+	"archive/zip"
 	"bytes"
 	"encoding/base64"
 	"encoding/csv"
@@ -20,70 +21,96 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-echarts/go-echarts/v2/components"
-
 	"github.com/daominah/age_of_empires_ror_hd/data2_daominah/aoego"
 	"github.com/go-echarts/go-echarts/v2/charts"
+	"github.com/go-echarts/go-echarts/v2/components"
 	"github.com/go-echarts/go-echarts/v2/opts"
 	"github.com/go-echarts/go-echarts/v2/types"
 )
 
 func main() {
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
+
 	const isForceReDownload = false
 
-	log.SetFlags(log.Lshortfile | log.LstdFlags)
+	today := time.Now().Format("2006-01-02")
+	//today := "2025-11-01" // for testing with existing data only, should be commented out on normal run
 
 	// check whether data is downloaded
 	projectRootDir, err := aoego.GetProjectRootGit()
 	if err != nil {
-		log.Fatalf("error GetProjectRootGit: %v\n", err)
+		log.Fatalf("error GetProjectRootGit: %v", err)
 	}
-	today := time.Now().Format("2006-01-02")
 	todayOutputDir := filepath.Join(projectRootDir, "data2_daominah", "aoego",
 		"z_aoe2_rating_percentile", "data", today)
 	err = os.MkdirAll(todayOutputDir, 0755)
 	if err != nil {
-		log.Fatalf("error os.MkdirAll: %v\n", err)
+		log.Fatalf("error os.MkdirAll: %v", err)
 	}
 
 	// read the directory, download leaderboard if needed
 	files, err := os.ReadDir(todayOutputDir)
 	if err != nil {
-		log.Fatalf("error os.ReadDir: %v\n", err)
+		log.Fatalf("error os.ReadDir: %v", err)
 	}
 	if len(files) > 0 && !isForceReDownload {
-		log.Printf("re-use existing ageofempires.com data, already have %d files\n", len(files))
+		log.Printf("re-use existing ageofempires.com data, already have %d files", len(files))
 	} else {
 		log.Printf("downloading ageofempires.com data...")
 		nDownloadedPages, err := DownloadAgeofempirescomData(todayOutputDir)
 		if err != nil {
-			log.Fatalf("error downloadAoe2insightsData: %v\n", err)
+			log.Fatalf("error downloadAoe2insightsData: %v", err)
 			return
 		}
-		log.Printf("downloaded %d pages of ageofempires.com data\n", nDownloadedPages)
+		log.Printf("downloaded %d pages of ageofempires.com data", nDownloadedPages)
 	}
 
 	// read all files in the directory and aggregate players
 	players := make(map[int]AoEPlayer) // map key is "rlUserId"
 	files, err = os.ReadDir(todayOutputDir)
 	if err != nil {
-		log.Fatalf("error os.ReadDir before aggregate players: %v\n", err)
+		log.Fatalf("error os.ReadDir before aggregate players: %v", err)
 	}
 	for _, file := range files {
 		filePath := filepath.Join(todayOutputDir, file.Name())
 		data, err := os.ReadFile(filePath)
 		if err != nil {
-			log.Fatalf("error os.ReadFile %v: %v\n", filePath, err)
+			log.Fatalf("error os.ReadFile %v: %v", filePath, err)
 		}
 		var pageData AgeofempirescomDataResponse
 		err = json.Unmarshal(data, &pageData)
 		if err != nil {
-			log.Fatalf("error json.Unmarshal %v: %v\n", filePath, err)
+			log.Fatalf("error json.Unmarshal %v: %v", filePath, err)
 		}
 		for _, player := range pageData.Items {
 			players[player.RlUserId] = player
 		}
 	}
+
+	// concise data for reduced size and re-use,
+	// raw API responses size is about 16 MB, not good for GitHub Pages hosting,
+	// concise JSON is 4MB, zipped is about xMB.
+	var sortedPlayers []AoEPlayerLite
+	for _, player := range players {
+		sortedPlayers = append(sortedPlayers, player.ToLite())
+	}
+	sort.Slice(sortedPlayers, func(i, j int) bool {
+		// highest rating player comes first
+		return sortedPlayers[i].Elo > sortedPlayers[j].Elo
+	})
+	// save players concise data as zipped JSON
+	liteDataBytes, err := json.MarshalIndent(sortedPlayers, "", "\t")
+	if err != nil {
+		log.Fatalf("error json.MarshalIndent liteData: %v", err)
+	}
+	fNameCompressedNoExt := fmt.Sprintf("all_players_%v", today)
+	fPathCompressed := filepath.Join(projectRootDir, "data2_daominah", "aoego",
+		"z_aoe2_rating_percentile", "data_lite", fNameCompressedNoExt+".zip")
+	zippedSize, err := saveToZip(fPathCompressed, fNameCompressedNoExt, liteDataBytes)
+	if err != nil {
+		log.Fatalf("error saveToZip fPathCompressed %v: %v", fPathCompressed, err)
+	}
+	log.Printf("wrote compressed players data to %v, size %v KiB", fNameCompressedNoExt, zippedSize/1024)
 
 	// group players to Elo buckets, e.g. 1000-1099, 1100-1199, ...
 	const bucketSize float64 = 100
@@ -92,8 +119,8 @@ func main() {
 		roundUp := roundDown + int(bucketSize)
 		return fmt.Sprintf("%04d→%04d", roundDown, roundUp)
 	}
-	ratingRanges := make(map[string][]AoEPlayer)
-	for _, player := range players {
+	ratingRanges := make(map[string][]AoEPlayerLite)
+	for _, player := range sortedPlayers {
 		bucket := bucketFunc(player.Elo)
 		ratingRanges[bucket] = append(ratingRanges[bucket], player)
 	}
@@ -104,9 +131,9 @@ func main() {
 	}
 	sort.Strings(sortedBucketKeys)
 	// summarize then output as a CSV
-	totalPlayers := len(players)
+	totalPlayers := len(sortedPlayers)
 	if totalPlayers == 0 {
-		log.Fatalf("no players found in the data\n")
+		log.Fatalf("no players found in the data")
 	}
 	cumulativeToCurrentBucket := 0
 	var dataAsCSV [][]string
@@ -137,94 +164,31 @@ func main() {
 		chartBars = append(chartBars, ratingBucket)
 	}
 	// write output CSV to a file
-	outputCSVFileName := fmt.Sprintf("aoe2_rating_percentile_date_%v.csv", time.Now().Format("2006_01_02"))
+	outputCSVFileName := fmt.Sprintf("aoe2_rating_percentile_date_%v.csv", today)
 	outputCSVFilePath := filepath.Join(projectRootDir, "data2_daominah", "aoego",
-		"z_aoe2_rating_percentile", "data_processed", outputCSVFileName)
+		"z_aoe2_rating_percentile", "data_summarized", outputCSVFileName)
 	outputCSVFile, err := os.Create(outputCSVFilePath)
 	if err != nil {
-		log.Fatalf("error os.Create outputCSVFilePath %v: %v\n", outputCSVFilePath, err)
+		log.Fatalf("error os.Create outputCSVFilePath %v: %v", outputCSVFilePath, err)
 	}
 	csvWriter := csv.NewWriter(outputCSVFile)
 	err = csvWriter.WriteAll(dataAsCSV)
 	if err != nil {
-		log.Fatalf("error csvWriter.WriteAll to %v: %v\n", outputCSVFilePath, err)
+		log.Fatalf("error csvWriter.WriteAll to %v: %v", outputCSVFilePath, err)
 	}
 	csvWriter.Flush()
 	err = outputCSVFile.Close()
 	if err != nil {
-		log.Fatalf("error outputCSVFile.Close %v: %v\n", outputCSVFilePath, err)
+		log.Fatalf("error outputCSVFile.Close %v: %v", outputCSVFilePath, err)
 	}
-	log.Printf("wrote rating percentile to %v\n", outputCSVFileName)
+	log.Printf("wrote rating percentile to %v", outputCSVFileName)
 	//log.Printf("AoE2 rating percentile:")
 	//for _, row := range dataAsCSV {
 	//	log.Printf("%12v %12v %12v %16v", row[0], row[1], row[2], row[3])
 	//}
 
-	fmt.Printf("______________________________________________________\n")
-	group0To800 := 0
-	group0To1000 := 0
-	group0To1200 := 0
-	group0To1500 := 0
-	group0To2000 := 0
-	group0To2500 := 0
-	for _, player := range players {
-		if player.Elo < 800 {
-			group0To800++
-		}
-		if player.Elo < 1000 {
-			group0To1000++
-		}
-		if player.Elo < 1200 {
-			group0To1200++
-		}
-		if player.Elo < 1500 {
-			group0To1500++
-		}
-		if player.Elo < 2000 {
-			group0To2000++
-		}
-		if player.Elo < 2500 {
-			group0To2500++
-		}
-	}
-	fmt.Printf("* rating    0 →  800: percentile %.1f%% (rank #%5d → #%5d)\n",
-		float64(group0To800)/float64(totalPlayers)*100.0,
-		totalPlayers, totalPlayers-group0To800+1)
-	fmt.Printf("* rating  800 → 1000: percentile %.1f%% (rank #%5d → #%5d)\n",
-		float64(group0To1000)/float64(totalPlayers)*100.0,
-		totalPlayers-group0To800, totalPlayers-group0To1000+1)
-	fmt.Printf("* rating 1000 → 1200: percentile %.1f%% (rank #%5d → #%5d)\n",
-		float64(group0To1200)/float64(totalPlayers)*100.0,
-		totalPlayers-group0To1000, totalPlayers-group0To1200+1)
-	fmt.Printf("* rating 1200 → 1500: percentile %.1f%% (rank #%5d → #%5d)\n",
-		float64(group0To1500)/float64(totalPlayers)*100.0,
-		totalPlayers-group0To1200, totalPlayers-group0To1500+1)
-	fmt.Printf("* rating 1500 → 2000: percentile %.1f%% (rank #%5d → #%5d)\n",
-		float64(group0To2000)/float64(totalPlayers)*100.0,
-		totalPlayers-group0To1500, totalPlayers-group0To2000+1)
-	fmt.Printf("* rating 2000 → 2500: percentile %.1f%% (rank #%5d → #%5d)\n",
-		float64(group0To2500)/float64(totalPlayers)*100.0,
-		totalPlayers-group0To2000, totalPlayers-group0To2500+1)
-	fmt.Printf("* rating 2500 and up: percentile 100%%  (rank #%5d → #    1)\n", totalPlayers-group0To2500)
-	// Output:
-	//	* rating    0 →  800: percentile 26.1% (rank #43139 → #31878)
-	//	* rating  800 → 1000: percentile 49.2% (rank #31877 → #21906)
-	//	* rating 1000 → 1200: percentile 73.6% (rank #21905 → #11376)
-	//	* rating 1200 → 1500: percentile 90.7% (rank #11375 → # 4017)
-	//	* rating 1500 → 2000: percentile 98.8% (rank # 4016 → #  499)
-	//	* rating 2000 → 2500: percentile 99.9% (rank #  498 → #   59)
-	//	* rating 2500 and up: percentile 100%  (rank #   58 → #    1)
-	fmt.Printf("______________________________________________________\n")
+	printPercentileByHumanLevels(sortedPlayers)
 
-	// now sort players to find exact rating for markers 25%, 50%, 75%, 90%, 99%, 99.9%
-	sortedPlayers := make([]AoEPlayer, 0, len(players))
-	for _, player := range players {
-		sortedPlayers = append(sortedPlayers, player)
-	}
-	sort.Slice(sortedPlayers, func(i, j int) bool {
-		// highest rating player comes first
-		return sortedPlayers[i].Elo > sortedPlayers[j].Elo
-	})
 	getRatingAtPercentile := func(percentile float64) (float64, int) {
 		rankIndexFloat := math.Floor(float64(totalPlayers) * (1 - percentile))
 		rankIndex := int(rankIndexFloat)
@@ -264,9 +228,9 @@ func main() {
 	err = drawPercentilesChart(chartBars, percentileMarkers,
 		today, chartWidth, chartHeight, outputChartFileFullPath)
 	if err != nil {
-		log.Fatalf("error drawPercentilesChart: %v\n", err)
+		log.Fatalf("error drawPercentilesChart: %v", err)
 	}
-	log.Printf("drew rating percentile chart to %v\n", outputChartFile)
+	log.Printf("drew rating percentile chart to %v", outputChartFile)
 	// Output: an HTML file with scripts, onload will render two charts as <svg>.
 	// I want to overlay the two charts in the same place,
 	// but go-echarts overlapping func does not work,
@@ -304,7 +268,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("error writing modified chart HTML: %v", err)
 	}
-	log.Printf("injected overlay script into chart HTML %v\n", outputChartFile)
+	log.Printf("injected overlay script into chart HTML %v", outputChartFile)
 }
 
 func DownloadAgeofempirescomData(todayOutputDir string) (int, error) {
@@ -430,6 +394,50 @@ type AoEPlayer struct {
 	TotalGames int
 }
 
+type AoEPlayerLite struct {
+	RlUserId int
+	UserName string
+	Elo      float64
+	Rank     int
+}
+
+func (p AoEPlayer) ToLite() AoEPlayerLite {
+	return AoEPlayerLite{
+		RlUserId: p.RlUserId,
+		UserName: p.UserName,
+		Elo:      p.Elo,
+		Rank:     p.Rank,
+	}
+}
+
+func saveToZip(fileFullPath string, fileNameNoExt string, data []byte) (int, error) {
+	zipFile, err := os.Create(fileFullPath)
+	if err != nil {
+		return 0, fmt.Errorf("os.Create: %w", err)
+	}
+	defer zipFile.Close()
+
+	zipWriter := zip.NewWriter(zipFile)
+	w, err := zipWriter.Create(fileNameNoExt + ".json")
+	if err != nil {
+		return 0, fmt.Errorf("zipWriter.Create: %w", err)
+	}
+	_, err = w.Write(data)
+	if err != nil {
+		return 0, fmt.Errorf("w.Write: %w", err)
+	}
+	err = zipWriter.Close()
+	if err != nil {
+		return 0, fmt.Errorf("zipWriter.Close: %w", err)
+	}
+	info, err := os.Stat(fileFullPath)
+	if err != nil {
+		return 0, fmt.Errorf("os.Stat: %w", err)
+	}
+	zippedBytes := int(info.Size())
+	return zippedBytes, nil
+}
+
 type RatingBucket struct {
 	RatingRange     string // e.g. "0000→0099", "0100→0199", ...
 	RatingBoundLow  int
@@ -471,6 +479,69 @@ func (rr *RatingBucket) setRatingBound() error {
 	return nil
 }
 
+func printPercentileByHumanLevels(players []AoEPlayerLite) {
+	fmt.Printf("______________________________________________________\n")
+	group0To800 := 0  // beginner
+	group0To1000 := 0 // novice
+	group0To1200 := 0 // developing
+	group0To1500 := 0 // competent
+	group0To2000 := 0 // expert
+	group0To2500 := 0 // elite
+	group2500Up := 0  // professional
+	totalPlayers := len(players)
+	for _, player := range players {
+		if player.Elo < 800 {
+			group0To800++
+		}
+		if player.Elo < 1000 {
+			group0To1000++
+		}
+		if player.Elo < 1200 {
+			group0To1200++
+		}
+		if player.Elo < 1500 {
+			group0To1500++
+		}
+		if player.Elo < 2000 {
+			group0To2000++
+		}
+		if player.Elo < 2500 {
+			group0To2500++
+		}
+	}
+	group2500Up = totalPlayers - group0To2500
+
+	fmt.Printf("* rating    0 →  800: percentile %.1f%% (rank #%5d → #%5d)\n",
+		float64(group0To800)/float64(totalPlayers)*100.0,
+		totalPlayers, totalPlayers-group0To800+1)
+	fmt.Printf("* rating  800 → 1000: percentile %.1f%% (rank #%5d → #%5d)\n",
+		float64(group0To1000)/float64(totalPlayers)*100.0,
+		totalPlayers-group0To800, totalPlayers-group0To1000+1)
+	fmt.Printf("* rating 1000 → 1200: percentile %.1f%% (rank #%5d → #%5d)\n",
+		float64(group0To1200)/float64(totalPlayers)*100.0,
+		totalPlayers-group0To1000, totalPlayers-group0To1200+1)
+	fmt.Printf("* rating 1200 → 1500: percentile %.1f%% (rank #%5d → #%5d)\n",
+		float64(group0To1500)/float64(totalPlayers)*100.0,
+		totalPlayers-group0To1200, totalPlayers-group0To1500+1)
+	fmt.Printf("* rating 1500 → 2000: percentile %.1f%% (rank #%5d → #%5d)\n",
+		float64(group0To2000)/float64(totalPlayers)*100.0,
+		totalPlayers-group0To1500, totalPlayers-group0To2000+1)
+	fmt.Printf("* rating 2000 → 2500: percentile %.1f%% (rank #%5d → #%5d)\n",
+		float64(group0To2500)/float64(totalPlayers)*100.0,
+		totalPlayers-group0To2000, totalPlayers-group0To2500+1)
+	fmt.Printf("* rating 2500 and up: percentile 100%%  (rank #%5d → #    1)\n", group2500Up)
+	// Output:
+	//	* rating    0 →  800: percentile 26.1% (rank #43139 → #31878)
+	//	* rating  800 → 1000: percentile 49.2% (rank #31877 → #21906)
+	//	* rating 1000 → 1200: percentile 73.6% (rank #21905 → #11376)
+	//	* rating 1200 → 1500: percentile 90.7% (rank #11375 → # 4017)
+	//	* rating 1500 → 2000: percentile 98.8% (rank # 4016 → #  499)
+	//	* rating 2000 → 2500: percentile 99.9% (rank #  498 → #   59)
+	//	* rating 2500 and up: percentile 100%  (rank #   58 → #    1)
+	fmt.Printf("______________________________________________________\n")
+
+}
+
 // drawPercentilesChart draws a chart and save as HTML to outputFilePath,
 // the chart x-axis is rating buckets, y-axis is number of players in that bucket.
 func drawPercentilesChart(
@@ -485,7 +556,7 @@ func drawPercentilesChart(
 		if b.RatingBoundHigh > maxAxisX {
 			maxAxisX = b.RatingBoundHigh
 		}
-		roundUpNPlayers := int(math.Ceil(float64(b.CountPlayers)/1000)) * 1000
+		roundUpNPlayers := int(math.Ceil(float64(b.CountPlayers+500)/1000)) * 1000
 		if roundUpNPlayers > maxAxisY {
 			maxAxisY = roundUpNPlayers
 		}
