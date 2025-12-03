@@ -35,6 +35,7 @@ func main() {
 
 	today := time.Now().Format("2006-01-02")
 	//today := "2025-11-01" // for testing with existing data only, should be commented out on normal run
+	log.Printf("today is %v", today)
 
 	// check whether data is downloaded
 	projectRootDir, err := aoego.GetProjectRootGit()
