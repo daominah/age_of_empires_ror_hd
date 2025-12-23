@@ -126,6 +126,13 @@ Some of the most important:
   And if you are low on Gold, you can sell some things to get Gold in the Market,
   but buying enough Stone for a whole Castle is hella expensive.
 
+## 1500 → 1700 (in progress): struggle vs Archer + Siege push
+
+- Try harder to keep Scouts alive until Castle Age,
+  so we know what the opponent is doing when they reach Castle Age.
+- If you have Skirmishers and they produce many Archers,
+  go out early to prevent them from easily making a forward Siege Workshop.
+
 ## Obvious weaknesses to improve
 
 - I can still run only one opening smoothly, the Scout into Castle Age boom.
