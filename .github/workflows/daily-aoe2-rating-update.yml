@@ -70,4 +70,4 @@ jobs:
       run: |
         echo "## Deployment Complete" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "View the updated site at \n https://aoe2rating.github.io/\nand updated data at \n https://github.com/aoe2rating/aoe2rating.github.io" >> $GITHUB_STEP_SUMMARY
+        echo "View the updated site at https://aoe2rating.github.io and updated data at https://github.com/aoe2rating/aoe2rating.github.io" >> $GITHUB_STEP_SUMMARY
