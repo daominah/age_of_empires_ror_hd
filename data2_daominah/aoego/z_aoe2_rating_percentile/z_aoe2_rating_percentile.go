@@ -3,6 +3,7 @@ package main
 import (
 	"archive/zip"
 	"bytes"
+	_ "embed"
 	"encoding/base64"
 	"encoding/csv"
 	"encoding/json"
@@ -28,6 +29,9 @@ import (
 	"github.com/go-echarts/go-echarts/v2/types"
 )
 
+//go:embed index_template.html
+var indexTemplateHTML string
+
 func main() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
@@ -35,15 +39,15 @@ func main() {
 
 	today := time.Now().Format("2006-01-02")
 	//today := "2025-11-01" // for testing with existing data only, should be commented out on normal run
-	log.Printf("today is %v", today)
+	log.Printf("checking if data needs to be downloaded for today %v", today)
 
 	// check whether data is downloaded
 	projectRootDir, err := aoego.GetProjectRootGit()
 	if err != nil {
 		log.Fatalf("error GetProjectRootGit: %v", err)
 	}
-	todayOutputDir := filepath.Join(projectRootDir, "data2_daominah", "aoego",
-		"z_aoe2_rating_percentile", "data", today)
+	goCodeDir := filepath.Join(projectRootDir, "data2_daominah", "aoego")
+	todayOutputDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data", today)
 	err = os.MkdirAll(todayOutputDir, 0755)
 	if err != nil {
 		log.Fatalf("error os.MkdirAll: %v", err)
@@ -105,15 +109,74 @@ func main() {
 		log.Fatalf("error json.MarshalIndent liteData: %v", err)
 	}
 	fNameCompressedNoExt := fmt.Sprintf("all_players_%v", today)
-	fPathCompressed := filepath.Join(projectRootDir, "data2_daominah", "aoego",
-		"z_aoe2_rating_percentile", "data_lite", fNameCompressedNoExt+".zip")
+	fPathCompressed := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_lite", fNameCompressedNoExt+".zip")
 	zippedSize, err := saveToZip(fPathCompressed, fNameCompressedNoExt, liteDataBytes)
 	if err != nil {
 		log.Fatalf("error saveToZip fPathCompressed %v: %v", fPathCompressed, err)
 	}
 	log.Printf("wrote compressed players data to %v, size %v KiB", fNameCompressedNoExt, zippedSize/1024)
 
-	// group players to Elo buckets, e.g. 1000-1099, 1100-1199, ...
+	log.Printf("-------------------------------------------------------")
+	log.Printf("processing all zip files in data_lite and generate charts for each date")
+	err = loopProcessAllZipFiles(goCodeDir)
+	if err != nil {
+		log.Fatalf("error loopProcessAllZipFiles: %v", err)
+	}
+
+	// final output "index.html" that can pick date to view a corresponding chart
+	// from directory "output_charts"
+	log.Printf("-------------------------------------------------------")
+	log.Printf("combining all charts into index.html")
+	err = generateIndexHTML(goCodeDir)
+	if err != nil {
+		log.Fatalf("error generateIndexHTML: %v", err)
+	}
+}
+
+// readPlayersFromZip reads players data from a zip file
+func readPlayersFromZip(zipPath string) ([]AoEPlayerLite, error) {
+	zipReader, err := zip.OpenReader(zipPath)
+	if err != nil {
+		return nil, fmt.Errorf("error opening zip file %v: %w", zipPath, err)
+	}
+	defer zipReader.Close()
+
+	// Find the JSON file inside the zip
+	var jsonFile *zip.File
+	for _, f := range zipReader.File {
+		if strings.HasSuffix(f.Name, ".json") {
+			jsonFile = f
+			break
+		}
+	}
+	if jsonFile == nil {
+		return nil, fmt.Errorf("no JSON file found in zip %v", zipPath)
+	}
+
+	// Read the JSON file
+	rc, err := jsonFile.Open()
+	if err != nil {
+		return nil, fmt.Errorf("error opening JSON file in zip: %w", err)
+	}
+	defer rc.Close()
+
+	jsonData, err := io.ReadAll(rc)
+	if err != nil {
+		return nil, fmt.Errorf("error reading JSON data: %w", err)
+	}
+
+	var players []AoEPlayerLite
+	err = json.Unmarshal(jsonData, &players)
+	if err != nil {
+		return nil, fmt.Errorf("error unmarshaling JSON: %w", err)
+	}
+
+	return players, nil
+}
+
+// processPlayersData processes sorted players and generates chart data and CSV
+func processPlayersData(sortedPlayers []AoEPlayerLite, dataDate string, goCodeDir string) ([]RatingBucket, []PercentileMarker, error) {
+	// group players to Elo buckets, e.g. 1000-1099, 1100-1199, ..., 3100-3199
 	const bucketSize float64 = 100
 	bucketFunc := func(elo float64) string {
 		roundDown := int(elo) / int(bucketSize) * int(bucketSize)
@@ -134,7 +197,7 @@ func main() {
 	// summarize then output as a CSV
 	totalPlayers := len(sortedPlayers)
 	if totalPlayers == 0 {
-		log.Fatalf("no players found in the data")
+		return nil, nil, fmt.Errorf("no players found in the data")
 	}
 	cumulativeToCurrentBucket := 0
 	var dataAsCSV [][]string
@@ -164,31 +227,57 @@ func main() {
 		})
 		chartBars = append(chartBars, ratingBucket)
 	}
+
+	// Ensure all buckets from 0→99 to 3100→3199 are present for consistent x-axis
+	bucketsMap := make(map[string]RatingBucket)
+	for _, bucket := range chartBars {
+		bucketsMap[bucket.RatingRange] = bucket
+	}
+	const maxRating = 3200
+	for rating := 0; rating < maxRating; rating += 100 {
+		bucketKey := fmt.Sprintf("%04d→%04d", rating, rating+100)
+		if _, exists := bucketsMap[bucketKey]; !exists {
+			// Add empty bucket
+			emptyBucket := RatingBucket{
+				RatingRange:     bucketKey,
+				RatingBoundLow:  rating,
+				RatingBoundHigh: rating + 100,
+				CountPlayers:    0,
+				Percentile:      0,
+				RankBoundLow:    0,
+				RankBoundHigh:   0,
+			}
+			chartBars = append(chartBars, emptyBucket)
+		}
+	}
+	// Sort chartBars by rating range
+	sort.Slice(chartBars, func(i, j int) bool {
+		return chartBars[i].RatingBoundLow < chartBars[j].RatingBoundLow
+	})
+
 	// write output CSV to a file
-	outputCSVFileName := fmt.Sprintf("aoe2_rating_percentile_date_%v.csv", today)
-	outputCSVFilePath := filepath.Join(projectRootDir, "data2_daominah", "aoego",
-		"z_aoe2_rating_percentile", "data_summarized", outputCSVFileName)
+	outputCSVFileName := fmt.Sprintf("aoe2_rating_percentile_date_%v.csv", dataDate)
+	outputCSVFilePath := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_summarized", outputCSVFileName)
+	err := os.MkdirAll(filepath.Dir(outputCSVFilePath), 0755)
+	if err != nil {
+		return nil, nil, fmt.Errorf("error creating CSV output directory: %w", err)
+	}
 	outputCSVFile, err := os.Create(outputCSVFilePath)
 	if err != nil {
-		log.Fatalf("error os.Create outputCSVFilePath %v: %v", outputCSVFilePath, err)
+		return nil, nil, fmt.Errorf("error os.Create outputCSVFilePath %v: %w", outputCSVFilePath, err)
 	}
 	csvWriter := csv.NewWriter(outputCSVFile)
 	err = csvWriter.WriteAll(dataAsCSV)
 	if err != nil {
-		log.Fatalf("error csvWriter.WriteAll to %v: %v", outputCSVFilePath, err)
+		_ = outputCSVFile.Close()
+		return nil, nil, fmt.Errorf("error csvWriter.WriteAll to %v: %w", outputCSVFilePath, err)
 	}
 	csvWriter.Flush()
 	err = outputCSVFile.Close()
 	if err != nil {
-		log.Fatalf("error outputCSVFile.Close %v: %v", outputCSVFilePath, err)
+		return nil, nil, fmt.Errorf("error outputCSVFile.Close %v: %w", outputCSVFilePath, err)
 	}
-	log.Printf("wrote rating percentile to %v", outputCSVFileName)
-	//log.Printf("AoE2 rating percentile:")
-	//for _, row := range dataAsCSV {
-	//	log.Printf("%12v %12v %12v %16v", row[0], row[1], row[2], row[3])
-	//}
-
-	printPercentileByHumanLevels(sortedPlayers)
+	//log.Printf("wrote rating percentile to %v", outputCSVFileName)
 
 	getRatingAtPercentile := func(percentile float64) (float64, int) {
 		rankIndexFloat := math.Floor(float64(totalPlayers) * (1 - percentile))
@@ -210,39 +299,68 @@ func main() {
 			RankPosition: rankPosition,
 		}
 		percentileMarkers = append(percentileMarkers, percentileMarker)
-		fmt.Printf("rating %4.0f is better than %.1f%% players.\n",
-			ratingAtPercentile, percentile*100)
 	}
-	// Output:
-	//	rating  787 is better than 25.0% players.
-	//	rating 1005 is better than 50.0% players.
-	//	rating 1214 is better than 75.0% players.
-	//	rating 1480 is better than 90.0% players.
-	//	rating 2027 is better than 99.0% players.
-	//	rating 2546 is better than 99.9% players.
-	fmt.Printf("______________________________________________________\n")
 
-	outputChartFile := "index.html"
-	outputChartFileFullPath := filepath.Join(projectRootDir, "data2_daominah", "aoego",
-		"z_aoe2_rating_percentile", outputChartFile)
+	return chartBars, percentileMarkers, nil
+}
+
+// generateChartForDate generates a chart HTML file for a specific date
+func generateChartForDate(
+	goCodeDir string,
+	dataISOStr string,
+	chartBars []RatingBucket,
+	percentileMarkers []PercentileMarker) error {
+	outputChartFileName := fmt.Sprintf("chart_%v.html", dataISOStr)
+	outputChartsDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "output_charts")
+	err := os.MkdirAll(outputChartsDir, 0755)
+	if err != nil {
+		return fmt.Errorf("error creating output_charts directory: %w", err)
+	}
+	outputChartFileFullPath := filepath.Join(outputChartsDir, outputChartFileName)
+
+	//skip if output file already exists
+	if _, err := os.Stat(outputChartFileFullPath); err == nil {
+		log.Printf("skipping, chart file already exists %v", outputChartFileName)
+		return nil
+	}
+
 	chartWidth, chartHeight := 1800, 800
 	err = drawPercentilesChart(chartBars, percentileMarkers,
-		today, chartWidth, chartHeight, outputChartFileFullPath)
+		dataISOStr, chartWidth, chartHeight, outputChartFileFullPath)
 	if err != nil {
-		log.Fatalf("error drawPercentilesChart: %v", err)
+		return fmt.Errorf("error drawPercentilesChart: %w", err)
 	}
-	log.Printf("drew rating percentile chart to %v", outputChartFile)
-	// Output: an HTML file with scripts, onload will render two charts as <svg>.
-	// I want to overlay the two charts in the same place,
-	// but go-echarts overlapping func does not work,
-	// so I will edit the output HTML here:
-	// code here
+	log.Printf("drew rating percentile chart to %v", outputChartFileName)
+
 	// After page.Render(f) and closing the file, read-modify-write the HTML:
 	htmlBytes, err := os.ReadFile(outputChartFileFullPath)
 	if err != nil {
-		log.Fatalf("error reading chart HTML: %v", err)
+		return fmt.Errorf("error reading chart HTML: %w", err)
 	}
 	htmlStr := string(htmlBytes)
+
+	// Inject CSS to remove vertical scrolling and disable animations
+	cssStyle := `
+	<style>
+		html, body {
+			overflow-y: hidden !important;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		* {
+			animation: none !important;
+			transition: none !important;
+		}
+	</style>
+	`
+	// Inject CSS in the head section
+	if strings.Contains(htmlStr, "</head>") {
+		htmlStr = strings.Replace(htmlStr, "</head>", cssStyle+"</head>", 1)
+	} else {
+		// Fallback: inject before </body> if </head> not found
+		htmlStr = strings.Replace(htmlStr, "<body>", "<body>"+cssStyle, 1)
+	}
 
 	// Inject a script before </body> to overlay the SVGs
 	overlayScript := `
@@ -267,9 +385,145 @@ func main() {
 	htmlStr = strings.Replace(htmlStr, "</body>", overlayScript+"</body>", 1)
 	err = os.WriteFile(outputChartFileFullPath, []byte(htmlStr), 0644)
 	if err != nil {
-		log.Fatalf("error writing modified chart HTML: %v", err)
+		return fmt.Errorf("error writing modified chart HTML: %w", err)
 	}
-	log.Printf("injected overlay script into chart HTML %v", outputChartFile)
+	//log.Printf("injected overlay script into chart HTML %v", outputChartFileName)
+	return nil
+}
+
+// generateIndexHTML creates an index.html file that lists all available charts and allows date selection
+func generateIndexHTML(goCodeDir string) error {
+	outputChartsDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "output_charts")
+
+	// Read all files in output_charts directory
+	files, err := os.ReadDir(outputChartsDir)
+	if err != nil {
+		return fmt.Errorf("error reading output_charts directory: %w", err)
+	}
+
+	// Extract dates from chart filenames
+	var dates []string
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		}
+		filename := file.Name()
+		if !strings.HasPrefix(filename, "chart_") || !strings.HasSuffix(filename, ".html") {
+			continue
+		}
+		// Extract date from "chart_yyyy-mm-dd.html"
+		dateStr := strings.TrimPrefix(filename, "chart_")
+		dateStr = strings.TrimSuffix(dateStr, ".html")
+
+		// Validate date format
+		_, err := time.Parse("2006-01-02", dateStr)
+		if err != nil {
+			log.Printf("skipping file with invalid date format: %v", filename)
+			continue
+		}
+		dates = append(dates, dateStr)
+	}
+	if len(dates) == 0 {
+		return fmt.Errorf("no chart files found in output_charts directory")
+	}
+	// Sort dates ISO string in descending order (newest first)
+	sort.Slice(dates, func(i, j int) bool {
+		return dates[i] > dates[j]
+	})
+
+	// Generate date options HTML
+	var dateOptions strings.Builder
+	for i, date := range dates {
+		selected := ""
+		if i == 0 { // select the newest date by default
+			selected = " selected"
+		}
+		dateOptions.WriteString(fmt.Sprintf(`				<option value="%s"%s>%s</option>
+			`, date, selected, date))
+	}
+
+	// Replace placeholder in template with actual date options
+	htmlContent := strings.Replace(indexTemplateHTML, "{{DATE_OPTIONS}}", dateOptions.String(), 1)
+	// remove default <option value="">-- Select a date --</option>
+	htmlContent = strings.Replace(htmlContent, `                <option value="">-- Select a date --</option>`, "", 1)
+
+	// Write index.html to the z_aoe2_rating_percentile directory
+	indexHTMLPath := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "index.html")
+	err = os.WriteFile(indexHTMLPath, []byte(htmlContent), 0644)
+	if err != nil {
+		return fmt.Errorf("error writing index.html: %w", err)
+	}
+
+	log.Printf("generated index.html with %d available charts", len(dates))
+	return nil
+}
+
+// loopProcessAllZipFiles draws charts for all zip files, each zip produces one HTML chart
+func loopProcessAllZipFiles(goCodeDir string) error {
+	dataLiteDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_lite")
+
+	// Read all files in data_lite directory
+	files, err := os.ReadDir(dataLiteDir)
+	if err != nil {
+		return fmt.Errorf("error reading data_lite directory: %w", err)
+	}
+
+	// Process each zip file
+	for _, file := range files {
+		if !strings.HasSuffix(file.Name(), ".zip") {
+			continue
+		}
+
+		// Extract date from filename: all_players_yyyy-mm-dd.zip
+		zipName := file.Name()
+		if !strings.HasPrefix(zipName, "all_players_") {
+			log.Printf("skipping file with unexpected name format: %v", zipName)
+			continue
+		}
+		dateStr := strings.TrimPrefix(zipName, "all_players_")
+		dateStr = strings.TrimSuffix(dateStr, ".zip")
+
+		// Validate date format
+		_, err := time.Parse("2006-01-02", dateStr)
+		if err != nil {
+			log.Printf("skipping file with invalid date format: %v", zipName)
+			continue
+		}
+
+		log.Printf("processing file: %v", zipName)
+
+		zipPath := filepath.Join(dataLiteDir, zipName)
+
+		// Read players from zip
+		sortedPlayers, err := readPlayersFromZip(zipPath)
+		if err != nil {
+			log.Printf("error reading zip file %v: %v", zipName, err)
+			continue
+		}
+
+		// Sort players by rating (highest first)
+		sort.Slice(sortedPlayers, func(i, j int) bool {
+			return sortedPlayers[i].Elo > sortedPlayers[j].Elo
+		})
+
+		// Process data to generate chart bars and percentile markers
+		chartBars, percentileMarkers, err := processPlayersData(sortedPlayers, dateStr, goCodeDir)
+		if err != nil {
+			log.Printf("error processing players data for %v: %v", dateStr, err)
+			continue
+		}
+
+		// Generate chart
+		err = generateChartForDate(goCodeDir, dateStr, chartBars, percentileMarkers)
+		if err != nil {
+			log.Printf("error generating chart for %v: %v", dateStr, err)
+			continue
+		}
+
+		//log.Printf("successfully processed %v", dateStr)
+	}
+
+	return nil
 }
 
 func DownloadAgeofempirescomData(todayOutputDir string) (int, error) {
@@ -551,12 +805,10 @@ func drawPercentilesChart(
 	dataDate string,
 	chartWidth, chartHeight int,
 	outputFilePath string) error {
-	maxAxisX, maxAxisY := 0, 0
+	maxAxisX := 3200 // Always use 3200 for consistent x-axis across all charts
+	maxAxisY := 0
 	totalPlayers := 0
 	for _, b := range bars {
-		if b.RatingBoundHigh > maxAxisX {
-			maxAxisX = b.RatingBoundHigh
-		}
 		roundUpNPlayers := int(math.Ceil(float64(b.CountPlayers+500)/1000)) * 1000
 		if roundUpNPlayers > maxAxisY {
 			maxAxisY = roundUpNPlayers
@@ -626,6 +878,7 @@ func drawPercentilesChart(
 		charts.WithGridOpts(newGridOpts()),
 		charts.WithTooltipOpts(opts.Tooltip{Show: opts.Bool(true)}),
 		charts.WithLegendOpts(opts.Legend{Show: opts.Bool(false)}), // hide the only 1 legend button
+		charts.WithAnimation(false),                                // Disable animation
 	)
 
 	xLabels := make([]string, 0, len(bars))
@@ -666,6 +919,7 @@ func drawPercentilesChart(
 		charts.WithYAxisOpts(newYAxisOpts(false)),
 		charts.WithGridOpts(newGridOpts()),
 		charts.WithLegendOpts(opts.Legend{Show: opts.Bool(false)}),
+		charts.WithAnimation(false), // Disable animation
 	)
 
 	// Add one vertical line series per percentile marker

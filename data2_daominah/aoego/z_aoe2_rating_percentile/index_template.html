@@ -65,22 +65,8 @@
     <div class="container">
         <div class="date-selector">
             <select id="dateSelect" onchange="loadChart()">
-
-                				<option value="2026-01-02" selected>2026-01-02</option>
-							<option value="2025-12-31">2025-12-31</option>
-							<option value="2025-12-25">2025-12-25</option>
-							<option value="2025-12-20">2025-12-20</option>
-							<option value="2025-12-10">2025-12-10</option>
-							<option value="2025-12-09">2025-12-09</option>
-							<option value="2025-12-08">2025-12-08</option>
-							<option value="2025-12-03">2025-12-03</option>
-							<option value="2025-11-28">2025-11-28</option>
-							<option value="2025-11-20">2025-11-20</option>
-							<option value="2025-11-19">2025-11-19</option>
-							<option value="2025-11-12">2025-11-12</option>
-							<option value="2025-11-10">2025-11-10</option>
-							<option value="2025-11-01">2025-11-01</option>
-			
+                <option value="">-- Select a date --</option>
+                {{DATE_OPTIONS}}
             </select>
         </div>
         <div class="chart-container" id="chartContainer" style="display: none;">
