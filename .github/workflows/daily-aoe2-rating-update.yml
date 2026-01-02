@@ -1,0 +1,73 @@
+name: Daily AoE2 Rating Update
+
+on:
+  schedule:
+    # Run daily at 05:00 UTC (12:00 Indo China Time)
+    - cron: '0 5 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+        cache-dependency-path: data2_daominah/aoego/go.sum
+
+    - name: Install dependencies
+      working-directory: data2_daominah/aoego
+      run: go mod download
+
+    - name: Run rating percentile generator
+      working-directory: data2_daominah/aoego/z_aoe2_rating_percentile
+      run: go run z_aoe2_rating_percentile.go
+
+    - name: Checkout GitHub Pages repository
+      uses: actions/checkout@v4
+      with:
+        repository: aoe2rating/aoe2rating.github.io
+        token: ${{ secrets.GH_PAGES_AOE2RATING_TOKEN }}
+        path: gh-pages
+
+    - name: Copy generated files to GitHub Pages
+      run: |
+        # Copy index.html
+        cp data2_daominah/aoego/z_aoe2_rating_percentile/index.html gh-pages/
+
+        # Copy output_charts directory
+        rm -rf gh-pages/output_charts
+        cp -r data2_daominah/aoego/z_aoe2_rating_percentile/output_charts gh-pages/
+
+        # Copy data_lite directory
+        rm -rf gh-pages/data_lite
+        cp -r data2_daominah/aoego/z_aoe2_rating_percentile/data_lite gh-pages/
+
+        # Copy data_summarized directory
+        rm -rf gh-pages/data_summarized
+        cp -r data2_daominah/aoego/z_aoe2_rating_percentile/data_summarized gh-pages/
+
+    - name: Commit and push to GitHub Pages
+      run: |
+        cd gh-pages
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add index.html output_charts/ data_lite/ data_summarized/
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          COMMIT_TIME=$(TZ='Asia/Ho_Chi_Minh' date +'%Y-%m-%d %H:%M:%S.%3N %:z')
+          git commit -m "Auto update from daominah/age_of_empires_ror_hd at $COMMIT_TIME"
+          git push
+        fi
+
+    - name: Print deployment link
+      run: |
+        echo "## Deployment Complete" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "View the updated site at \n https://aoe2rating.github.io/\nand updated data at \n https://github.com/aoe2rating/aoe2rating.github.io" >> $GITHUB_STEP_SUMMARY
