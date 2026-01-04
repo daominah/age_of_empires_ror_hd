@@ -24,10 +24,6 @@ jobs:
       working-directory: data2_daominah/aoego
       run: go mod download
 
-    - name: Run rating percentile generator
-      working-directory: data2_daominah/aoego/z_aoe2_rating_percentile
-      run: go run z_aoe2_rating_percentile.go
-
     - name: Checkout GitHub Pages repository
       uses: actions/checkout@v4
       with:
@@ -35,22 +31,61 @@ jobs:
         token: ${{ secrets.GH_PAGES_AOE2RATING_TOKEN }}
         path: gh-pages
 
+    - name: Copy existing data from GitHub Pages to preserve old dates
+      run: |
+        # Copy existing data directories from GitHub Pages to preserve historical data
+        # Only copy if directories exist in GitHub Pages
+        if [ -d "gh-pages/data_lite" ]; then
+          mkdir -p data2_daominah/aoego/z_aoe2_rating_percentile/data_lite
+          cp -r gh-pages/data_lite/* data2_daominah/aoego/z_aoe2_rating_percentile/data_lite/ 2>/dev/null || true
+        fi
+        if [ -d "gh-pages/data_summarized" ]; then
+          mkdir -p data2_daominah/aoego/z_aoe2_rating_percentile/data_summarized
+          cp -r gh-pages/data_summarized/* data2_daominah/aoego/z_aoe2_rating_percentile/data_summarized/ 2>/dev/null || true
+        fi
+        if [ -d "gh-pages/output_charts" ]; then
+          mkdir -p data2_daominah/aoego/z_aoe2_rating_percentile/output_charts
+          cp -r gh-pages/output_charts/* data2_daominah/aoego/z_aoe2_rating_percentile/output_charts/ 2>/dev/null || true
+        fi
+
+    - name: Run rating percentile generator
+      working-directory: data2_daominah/aoego/z_aoe2_rating_percentile
+      run: go run z_aoe2_rating_percentile.go
+
     - name: Copy generated files to GitHub Pages
       run: |
-        # Copy index.html
+        # Copy index.html (always update the main page)
         cp data2_daominah/aoego/z_aoe2_rating_percentile/index.html gh-pages/
 
-        # Copy output_charts directory
-        rm -rf gh-pages/output_charts
-        cp -r data2_daominah/aoego/z_aoe2_rating_percentile/output_charts gh-pages/
+        # Copy only non-existing files from output_charts directory
+        mkdir -p gh-pages/output_charts
+        find data2_daominah/aoego/z_aoe2_rating_percentile/output_charts -type f | while read src_file; do
+          dest_file="gh-pages/output_charts/$(basename "$src_file")"
+          if [ ! -f "$dest_file" ]; then
+            cp "$src_file" "$dest_file"
+            echo "Copied new file: $(basename "$src_file")"
+          fi
+        done
 
-        # Copy data_lite directory
-        rm -rf gh-pages/data_lite
-        cp -r data2_daominah/aoego/z_aoe2_rating_percentile/data_lite gh-pages/
+        # Copy only non-existing files from data_lite directory
+        mkdir -p gh-pages/data_lite
+        find data2_daominah/aoego/z_aoe2_rating_percentile/data_lite -type f | while read src_file; do
+          dest_file="gh-pages/data_lite/$(basename "$src_file")"
+          if [ ! -f "$dest_file" ]; then
+            cp "$src_file" "$dest_file"
+            echo "Copied new file: $(basename "$src_file")"
+          fi
+        done
 
-        # Copy data_summarized directory
-        rm -rf gh-pages/data_summarized
-        cp -r data2_daominah/aoego/z_aoe2_rating_percentile/data_summarized gh-pages/
+        # Copy only non-existing files from data_summarized directory
+        mkdir -p gh-pages/data_summarized
+        find data2_daominah/aoego/z_aoe2_rating_percentile/data_summarized -type f | while read src_file; do
+          dest_file="gh-pages/data_summarized/$(basename "$src_file")"
+          if [ ! -f "$dest_file" ]; then
+            cp "$src_file" "$dest_file"
+            echo "Copied new file: $(basename "$src_file")"
+          fi
+        done
 
     - name: Commit and push to GitHub Pages
       run: |
