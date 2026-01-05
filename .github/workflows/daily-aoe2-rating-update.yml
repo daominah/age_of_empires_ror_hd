@@ -88,6 +88,11 @@ jobs:
           fi
         done
 
+    - name: Clean up old files using retention strategy
+      working-directory: gh-pages
+      run: |
+        python ../data2_daominah/aoego/z_aoe2_rating_percentile/retain_data_lite.py --execute
+
     - name: Commit and push to GitHub Pages
       run: |
         cd gh-pages
