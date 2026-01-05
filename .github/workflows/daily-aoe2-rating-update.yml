@@ -2,8 +2,9 @@ name: Daily AoE2 Rating Update
 
 on:
   schedule:
-    # Run daily at 05:00 UTC (12:00 Indo China Time)
-    - cron: '0 5 * * *'
+    # Run daily at 04:00 UTC (11:00 Indo China Time)
+    # Note: GitHub Actions can delay scheduled workflows by up to 30 minutes
+    - cron: '0 4 * * *'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
