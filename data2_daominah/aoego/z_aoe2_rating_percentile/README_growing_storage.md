@@ -21,14 +21,39 @@ Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub 
 
 ### Benefits
 
-- **Bounded repository size:** After initial 100 days, repository grows by ~1 file/month instead of ~30 files/month
+- **Bounded current commit size:** After initial 100 days, each new commit grows by ~1 file/month instead of ~30 files/month
 - **Preserves historical trends:** Monthly snapshots allow long-term trend analysis
 - **Maintains recent detail:** Full daily history for last 100 days (3+ months)
 - **Automatic fallback:** Handles cases where workflow didn't run on 1st of month
 - **No external dependencies:** All data stays in the same repository
 - **Simple implementation:** Can be done entirely in the workflow
 
+### Important Limitation: Git History
+
+⚠️ **Note:** This retention strategy only affects the **current commit**. Git history still contains all previous versions of deleted files, so the **total repository size (including history) will continue to grow**.
+
+**However, Git uses smart compression:**
+- ✅ **Delta compression** - Git stores file changes as deltas, not full copies
+- ✅ **Object packing** - Git packs similar objects efficiently
+- ⚠️ **Binary files** - Zip files compress poorly with deltas (they're already compressed)
+- ✅ **Text files** - Compress very well with Git's delta compression
+
+**What this means:**
+- ✅ **Current working directory size** - bounded and manageable
+- ✅ **Size of new commits** - grows slowly (~1 file/month)
+- ⚠️ **Total repository size** - grows over time, but less than linear due to compression
+  - After 1 year: ~365 MiB raw, but Git compression reduces this significantly
+  - Binary files (zip) compress less effectively than text files
+
+**To truly reduce repository size, you need:**
+1. **Git LFS** (recommended) - stores large files outside git history
+2. **History rewriting** - use `git filter-branch` or BFG Repo-Cleaner (destructive, requires force push)
+3. **Separate archive repository** - move old files to a different repo
+4. **Accept the growth** - GitHub allows up to 100GB, so growth is manageable for many years even with compression
+
 ### Storage Projection
+
+**Current Commit Size (what this strategy controls):**
 
 | Time Period    | Files Kept         | Approximate Size            |
 |----------------|--------------------|-----------------------------|
@@ -38,7 +63,15 @@ Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub 
 | After 5 years  | ~160 files         | ~160 MiB                    |
 | After 10 years | ~220 files         | ~220 MiB                    |
 
-**Result:** Repository size grows very slowly after the initial 100 days.
+**Result:** Current commit size grows very slowly after the initial 100 days.
+
+**Total Repository Size (including Git history):**
+- Will continue to grow as all previous versions are preserved in Git history
+- Git's delta compression reduces actual size significantly
+- After 1 year: ~365 MiB raw files, but Git compression may reduce to ~200-300 MiB
+- After 5 years: ~1.8 GiB raw, but Git compression may reduce to ~1-1.5 GiB
+- Binary files (zip) compress less effectively than text files
+- Still manageable for many years, but consider Git LFS for long-term solution
 
 ### Implementation Details
 
