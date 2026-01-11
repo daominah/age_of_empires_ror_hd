@@ -557,22 +557,26 @@ func DownloadAgeofempirescomData(todayOutputDir string) (int, error) {
 			page, time.Duration(nPages-page)*endT.Sub(beginT))
 		pageData, err := downloadAgeofempirescomData(page)
 		if err != nil {
-			return 0, fmt.Errorf("download page %d error: %w", page, err)
+			log.Printf("error downloading page %d: %v, continuing to next page", page, err)
+			continue
 		}
 		var pageDataObj AgeofempirescomDataResponse
 		err = json.Unmarshal(pageData, &pageDataObj)
 		if err != nil {
-			return 0, fmt.Errorf("json.Unmarshal page %d error: %w", page, err)
+			log.Printf("error json.Unmarshal page %d: %v, continuing to next page", page, err)
+			continue
 		}
 		beautyJSON, err := json.MarshalIndent(pageDataObj, "", "\t")
 		if err != nil {
-			return 0, fmt.Errorf("json.MarshalIndent page %d error: %w", page, err)
+			log.Printf("error json.MarshalIndent page %d: %v, continuing to next page", page, err)
+			continue
 		}
 		outputFile := filepath.Join(todayOutputDir,
 			fmt.Sprintf("ageofempirescom_leaderboard_page_%03d.json", page))
 		err = os.WriteFile(outputFile, beautyJSON, 0644)
 		if err != nil {
-			return 0, fmt.Errorf("os.WriteFile page %d error: %w", page, err)
+			log.Printf("error os.WriteFile page %d: %v, continuing to next page", page, err)
+			continue
 		}
 		nDownloadedPages++
 	}
@@ -806,7 +810,7 @@ func drawPercentilesChart(
 	chartWidth, chartHeight int,
 	outputFilePath string) error {
 	maxAxisX := 3200 // Always use 3200 for consistent x-axis across all charts
-	maxAxisY := 0
+	maxAxisY := 8000
 	totalPlayers := 0
 	for _, b := range bars {
 		roundUpNPlayers := int(math.Ceil(float64(b.CountPlayers+500)/1000)) * 1000
