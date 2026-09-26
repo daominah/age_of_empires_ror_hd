@@ -1,1 +1,4 @@
-{"Author":"gitignore","CacheStatus":0,"Description":"Every civilization has the full technology tree: no unit or technology is disabled. All civilization bonuses, team bonuses, unique units and unique technologies stay unchanged.","Title":"Full Tech Tree Keep Bonus"}
+{"Author":".gitignore","CacheStatus":0,"Description":"All civilization BONUSes, team bonuses, unique units and unique technologies stay unchanged.
+Every civilization has the full technology tree: no unit or technology is disabled, except some special cases:
+Civilizations have Mounted Crossbowman or Elephant Archers lose access to Cavalry Archer (because they use the same Archery Range slot).
+Khitans still have Pasture instead of Farm.","Title":"Full Tech Tree Keep Bonus"}
