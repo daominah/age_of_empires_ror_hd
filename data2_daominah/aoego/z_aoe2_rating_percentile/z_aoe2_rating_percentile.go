@@ -53,48 +53,94 @@ func main() {
 		log.Fatalf("error os.MkdirAll: %v", err)
 	}
 
-	// read the directory, download leaderboard if needed
+	// step 1: download raw leaderboard pages for today
+	err = stepDownload(todayOutputDir, isForceReDownload)
+	if err != nil {
+		log.Fatalf("error stepDownload: %v", err)
+	}
+
+	// step 2: merge pages into unique players
+	players, err := stepMergePages(todayOutputDir)
+	if err != nil {
+		log.Fatalf("error stepMergePages: %v", err)
+	}
+
+	// step 3: save today's players as concise zipped JSON in "data_lite"
+	err = stepSaveLite(players, goCodeDir, today)
+	if err != nil {
+		log.Fatalf("error stepSaveLite: %v", err)
+	}
+
+	// steps 4 to 6 for every date in "data_lite":
+	// read zip, detect and fill rank gaps, summarize to CSV, draw chart
+	log.Printf("-------------------------------------------------------")
+	log.Printf("processing all zip files in data_lite and generate charts for each date")
+	err = loopProcessAllZipFiles(goCodeDir)
+	if err != nil {
+		log.Fatalf("error loopProcessAllZipFiles: %v", err)
+	}
+
+	// step 7: final output "index.html" that can pick date to view a corresponding chart
+	// from directory "output_charts"
+	log.Printf("-------------------------------------------------------")
+	log.Printf("combining all charts into index.html")
+	err = generateIndexHTML(goCodeDir)
+	if err != nil {
+		log.Fatalf("error generateIndexHTML: %v", err)
+	}
+
+}
+
+// stepDownload downloads leaderboard pages to todayOutputDir,
+// re-uses existing pages unless isForceReDownload.
+func stepDownload(todayOutputDir string, isForceReDownload bool) error {
 	files, err := os.ReadDir(todayOutputDir)
 	if err != nil {
-		log.Fatalf("error os.ReadDir: %v", err)
+		return fmt.Errorf("error os.ReadDir: %w", err)
 	}
 	if len(files) > 0 && !isForceReDownload {
 		log.Printf("re-use existing ageofempires.com data, already have %d files", len(files))
-	} else {
-		log.Printf("downloading ageofempires.com data...")
-		nDownloadedPages, err := DownloadAgeofempirescomData(todayOutputDir)
-		if err != nil {
-			log.Fatalf("error downloadAoe2insightsData: %v", err)
-			return
-		}
-		log.Printf("downloaded %d pages of ageofempires.com data", nDownloadedPages)
+		return nil
 	}
-
-	// read all files in the directory and aggregate players
-	players := make(map[int]AoEPlayer) // map key is "rlUserId"
-	files, err = os.ReadDir(todayOutputDir)
+	log.Printf("downloading ageofempires.com data...")
+	nDownloadedPages, err := DownloadAgeofempirescomData(todayOutputDir)
 	if err != nil {
-		log.Fatalf("error os.ReadDir before aggregate players: %v", err)
+		return fmt.Errorf("error DownloadAgeofempirescomData: %w", err)
+	}
+	log.Printf("downloaded %d pages of ageofempires.com data", nDownloadedPages)
+	return nil
+}
+
+// stepMergePages reads all downloaded pages and returns unique players by RlUserId.
+func stepMergePages(todayOutputDir string) (map[int]AoEPlayer, error) {
+	players := make(map[int]AoEPlayer) // map key is "rlUserId"
+	files, err := os.ReadDir(todayOutputDir)
+	if err != nil {
+		return nil, fmt.Errorf("error os.ReadDir: %w", err)
 	}
 	for _, file := range files {
 		filePath := filepath.Join(todayOutputDir, file.Name())
 		data, err := os.ReadFile(filePath)
 		if err != nil {
-			log.Fatalf("error os.ReadFile %v: %v", filePath, err)
+			return nil, fmt.Errorf("error os.ReadFile %v: %w", filePath, err)
 		}
 		var pageData AgeofempirescomDataResponse
 		err = json.Unmarshal(data, &pageData)
 		if err != nil {
-			log.Fatalf("error json.Unmarshal %v: %v", filePath, err)
+			return nil, fmt.Errorf("error json.Unmarshal %v: %w", filePath, err)
 		}
 		for _, player := range pageData.Items {
 			players[player.RlUserId] = player
 		}
 	}
+	return players, nil
+}
 
-	// concise data for reduced size and re-use,
-	// raw API responses size is about 16 MB, not good for GitHub Pages hosting,
-	// concise JSON is 4MB, zipped is about xMB.
+// stepSaveLite saves players as concise zipped JSON sorted by Elo,
+// raw API responses size is about 16 MB, not good for GitHub Pages hosting,
+// concise JSON is 4MB, zipped is smaller.
+// Correct in memory only: the zip stays as the API returned it (no estimated players).
+func stepSaveLite(players map[int]AoEPlayer, goCodeDir string, today string) error {
 	var sortedPlayers []AoEPlayerLite
 	for _, player := range players {
 		sortedPlayers = append(sortedPlayers, player.ToLite())
@@ -103,34 +149,18 @@ func main() {
 		// highest rating player comes first
 		return sortedPlayers[i].Elo > sortedPlayers[j].Elo
 	})
-	// save players concise data as zipped JSON
 	liteDataBytes, err := json.MarshalIndent(sortedPlayers, "", "\t")
 	if err != nil {
-		log.Fatalf("error json.MarshalIndent liteData: %v", err)
+		return fmt.Errorf("error json.MarshalIndent liteData: %w", err)
 	}
 	fNameCompressedNoExt := fmt.Sprintf("all_players_%v", today)
 	fPathCompressed := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_lite", fNameCompressedNoExt+".zip")
 	zippedSize, err := saveToZip(fPathCompressed, fNameCompressedNoExt, liteDataBytes)
 	if err != nil {
-		log.Fatalf("error saveToZip fPathCompressed %v: %v", fPathCompressed, err)
+		return fmt.Errorf("error saveToZip %v: %w", fPathCompressed, err)
 	}
 	log.Printf("wrote compressed players data to %v, size %v KiB", fNameCompressedNoExt, zippedSize/1024)
-
-	log.Printf("-------------------------------------------------------")
-	log.Printf("processing all zip files in data_lite and generate charts for each date")
-	err = loopProcessAllZipFiles(goCodeDir)
-	if err != nil {
-		log.Fatalf("error loopProcessAllZipFiles: %v", err)
-	}
-
-	// final output "index.html" that can pick date to view a corresponding chart
-	// from directory "output_charts"
-	log.Printf("-------------------------------------------------------")
-	log.Printf("combining all charts into index.html")
-	err = generateIndexHTML(goCodeDir)
-	if err != nil {
-		log.Fatalf("error generateIndexHTML: %v", err)
-	}
+	return nil
 }
 
 // readPlayersFromZip reads players data from a zip file
@@ -201,19 +231,26 @@ func processPlayersData(sortedPlayers []AoEPlayerLite, dataDate string, goCodeDi
 	}
 	cumulativeToCurrentBucket := 0
 	var dataAsCSV [][]string
-	dataAsCSV = append(dataAsCSV, []string{"RatingRange", "RatingLow", "RatingHigh", "CountPlayers", "Percentile", "RankLow", "RankHigh"})
+	dataAsCSV = append(dataAsCSV, []string{"RatingRange", "RatingLow", "RatingHigh", "CountPlayers", "Percentile", "RankLow", "RankHigh", "EstimatedPlayers"})
 	var chartBars []RatingBucket
 	for _, bucketKey := range sortedBucketKeys {
 		playersInBucket := ratingRanges[bucketKey]
 		cumulativeToCurrentBucket += len(playersInBucket)
+		nEstimatedInBucket := 0
+		for _, p := range playersInBucket {
+			if p.IsEstimated {
+				nEstimatedInBucket++
+			}
+		}
 		ratingBucket := RatingBucket{
-			RatingRange:     bucketKey,
-			RatingBoundLow:  0, // will be set later based on RatingRange
-			RatingBoundHigh: 0, // will be set later based on RatingRange
-			CountPlayers:    len(playersInBucket),
-			Percentile:      float64(cumulativeToCurrentBucket) / float64(totalPlayers) * 100.0,
-			RankBoundLow:    totalPlayers - (cumulativeToCurrentBucket - len(playersInBucket)),
-			RankBoundHigh:   totalPlayers - cumulativeToCurrentBucket + 1,
+			RatingRange:      bucketKey,
+			RatingBoundLow:   0, // will be set later based on RatingRange
+			RatingBoundHigh:  0, // will be set later based on RatingRange
+			CountPlayers:     len(playersInBucket),
+			Percentile:       float64(cumulativeToCurrentBucket) / float64(totalPlayers) * 100.0,
+			RankBoundLow:     totalPlayers - (cumulativeToCurrentBucket - len(playersInBucket)),
+			RankBoundHigh:    totalPlayers - cumulativeToCurrentBucket + 1,
+			EstimatedPlayers: nEstimatedInBucket,
 		}
 		_ = ratingBucket.setRatingBound()
 		dataAsCSV = append(dataAsCSV, []string{
@@ -224,6 +261,7 @@ func processPlayersData(sortedPlayers []AoEPlayerLite, dataDate string, goCodeDi
 			fmt.Sprintf("%.3f", ratingBucket.Percentile),
 			fmt.Sprintf("#%v", ratingBucket.RankBoundLow),
 			fmt.Sprintf("#%v", ratingBucket.RankBoundHigh),
+			fmt.Sprintf("%v", ratingBucket.EstimatedPlayers),
 		})
 		chartBars = append(chartBars, ratingBucket)
 	}
@@ -309,7 +347,8 @@ func generateChartForDate(
 	goCodeDir string,
 	dataISOStr string,
 	chartBars []RatingBucket,
-	percentileMarkers []PercentileMarker) error {
+	percentileMarkers []PercentileMarker,
+	nEstimated int) error {
 	outputChartFileName := fmt.Sprintf("chart_%v.html", dataISOStr)
 	outputChartsDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "output_charts")
 	err := os.MkdirAll(outputChartsDir, 0755)
@@ -325,7 +364,7 @@ func generateChartForDate(
 	}
 
 	chartWidth, chartHeight := 1800, 800
-	err = drawPercentilesChart(chartBars, percentileMarkers,
+	err = drawPercentilesChart(chartBars, percentileMarkers, nEstimated,
 		dataISOStr, chartWidth, chartHeight, outputChartFileFullPath)
 	if err != nil {
 		return fmt.Errorf("error drawPercentilesChart: %w", err)
@@ -458,72 +497,268 @@ func generateIndexHTML(goCodeDir string) error {
 	return nil
 }
 
-// loopProcessAllZipFiles draws charts for all zip files, each zip produces one HTML chart
+// loopProcessAllZipFiles fills rank gaps, then writes the CSV summary and HTML chart of every zip.
+// What goes wrong and the decisions: "fill-leaderboard-rank-gaps.md".
 func loopProcessAllZipFiles(goCodeDir string) error {
 	dataLiteDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_lite")
-
-	// Read all files in data_lite directory
-	files, err := os.ReadDir(dataLiteDir)
+	zips, err := listDataLiteZips(dataLiteDir)
 	if err != nil {
-		return fmt.Errorf("error reading data_lite directory: %w", err)
+		return fmt.Errorf("error listDataLiteZips: %w", err)
 	}
 
-	// Process each zip file
-	for _, file := range files {
-		if !strings.HasSuffix(file.Name(), ".zip") {
-			continue
-		}
-
-		// Extract date from filename: all_players_yyyy-mm-dd.zip
-		zipName := file.Name()
-		if !strings.HasPrefix(zipName, "all_players_") {
-			log.Printf("skipping file with unexpected name format: %v", zipName)
-			continue
-		}
-		dateStr := strings.TrimPrefix(zipName, "all_players_")
-		dateStr = strings.TrimSuffix(dateStr, ".zip")
-
-		// Validate date format
-		_, err := time.Parse("2006-01-02", dateStr)
+	// first pass: Elo by rank of every day,
+	// so a gap can be filled from a reference day, the latest earlier day that has those ranks
+	eloByRankOfDays := make(map[string]EloByRank)
+	for _, z := range zips {
+		players, err := readPlayersFromZip(z.Path)
 		if err != nil {
-			log.Printf("skipping file with invalid date format: %v", zipName)
+			log.Printf("error reading zip file %v: %v", z.Path, err)
 			continue
 		}
+		eloByRankOfDays[z.Date] = newEloByRank(players)
+	}
 
-		log.Printf("processing file: %v", zipName)
+	for _, z := range zips {
+		log.Printf("processing file: %v", filepath.Base(z.Path))
 
-		zipPath := filepath.Join(dataLiteDir, zipName)
-
-		// Read players from zip
-		sortedPlayers, err := readPlayersFromZip(zipPath)
+		// step 4: read players from zip
+		sortedPlayers, err := readPlayersFromZip(z.Path)
 		if err != nil {
-			log.Printf("error reading zip file %v: %v", zipName, err)
+			log.Printf("error reading zip file %v: %v", z.Path, err)
 			continue
 		}
+
+		// step 4.5a: detect rank gaps, blocks of ranks the API left out that day
+		gaps := detectRankGaps(sortedPlayers)
+		nEstimated := countMissing(gaps)
+
+		// step 4.5b: fill gaps from a reference day, correct in memory only
+		references := make([]EloByRank, len(gaps))
+		nFromReference := 0
+		for i, gap := range gaps {
+			references[i] = findReferenceDay(gap, z.Date, eloByRankOfDays)
+			if references[i] != nil {
+				nFromReference += gap.RankLast - gap.RankFirst + 1
+			}
+		}
+		if nEstimated > 0 {
+			log.Printf("date %v: %v rank gaps, %v players missing from the API, %v estimated from a reference day",
+				z.Date, len(gaps), nEstimated, nFromReference)
+		}
+		sortedPlayers = fillRankGaps(sortedPlayers, gaps, references)
 
 		// Sort players by rating (highest first)
 		sort.Slice(sortedPlayers, func(i, j int) bool {
 			return sortedPlayers[i].Elo > sortedPlayers[j].Elo
 		})
 
-		// Process data to generate chart bars and percentile markers
-		chartBars, percentileMarkers, err := processPlayersData(sortedPlayers, dateStr, goCodeDir)
+		// step 5: process data to generate chart bars and percentile markers
+		chartBars, percentileMarkers, err := processPlayersData(sortedPlayers, z.Date, goCodeDir)
 		if err != nil {
-			log.Printf("error processing players data for %v: %v", dateStr, err)
+			log.Printf("error processing players data for %v: %v", z.Date, err)
 			continue
 		}
 
-		// Generate chart
-		err = generateChartForDate(goCodeDir, dateStr, chartBars, percentileMarkers)
+		// step 6: generate chart
+		err = generateChartForDate(goCodeDir, z.Date, chartBars, percentileMarkers, nEstimated)
 		if err != nil {
-			log.Printf("error generating chart for %v: %v", dateStr, err)
+			log.Printf("error generating chart for %v: %v", z.Date, err)
 			continue
 		}
-
-		//log.Printf("successfully processed %v", dateStr)
 	}
-
 	return nil
+}
+
+// listDataLiteZips returns the "all_players_yyyy-mm-dd.zip" files in dataLiteDir, sorted by date.
+func listDataLiteZips(dataLiteDir string) ([]DataLiteZip, error) {
+	files, err := os.ReadDir(dataLiteDir)
+	if err != nil {
+		return nil, fmt.Errorf("error os.ReadDir: %w", err)
+	}
+	var zips []DataLiteZip
+	for _, file := range files {
+		zipName := file.Name()
+		if !strings.HasSuffix(zipName, ".zip") {
+			continue
+		}
+		if !strings.HasPrefix(zipName, "all_players_") {
+			log.Printf("skipping file with unexpected name format: %v", zipName)
+			continue
+		}
+		dateStr := strings.TrimSuffix(strings.TrimPrefix(zipName, "all_players_"), ".zip")
+		if _, err := time.Parse("2006-01-02", dateStr); err != nil {
+			log.Printf("skipping file with invalid date format: %v", zipName)
+			continue
+		}
+		zips = append(zips, DataLiteZip{Date: dateStr, Path: filepath.Join(dataLiteDir, zipName)})
+	}
+	return zips, nil
+}
+
+// detectRankGaps returns blocks of ranks missing between known players.
+// The ageofempires.com API sometimes serves a leaderboard without whole pages,
+// or ranks shift while pages download minutes apart,
+// and its Count shrinks to match, so gaps in Rank are the only signal.
+// Players missing after the last rank cannot be detected.
+func detectRankGaps(players []AoEPlayerLite) []RankGap {
+	byRank := make([]AoEPlayerLite, len(players))
+	copy(byRank, players)
+	sort.Slice(byRank, func(i, j int) bool {
+		return byRank[i].Rank < byRank[j].Rank
+	})
+	var gaps []RankGap
+	for i := 1; i < len(byRank); i++ {
+		above, below := byRank[i-1], byRank[i]
+		if below.Rank-above.Rank <= 1 {
+			continue
+		}
+		gaps = append(gaps, RankGap{
+			RankFirst: above.Rank + 1,
+			RankLast:  below.Rank - 1,
+			EloAbove:  above.Elo,
+			EloBelow:  below.Elo,
+		})
+	}
+	return gaps
+}
+
+// fillRankGaps returns players plus one estimated player per missing rank,
+// estimated players have IsEstimated and an Elo inside the gap bounds.
+// The count and range of each gap are exact,
+// only the spread of Elo inside the gap is estimated.
+// Fill from a reference day, not a bell curve:
+//   - references[i] not nil: copy the rating shape of that reference day at the same ranks,
+//     rescaled so the gap's neighbors on that day land on today's neighbors.
+//     The real rating distribution has a long high tail that no simple curve fits,
+//     so a nearby day is the closest thing to the missing players.
+//   - otherwise, the fallback: a bell curve (normal distribution) fitted to the known players,
+//     the gap's Elo range is split into equal areas under the curve.
+func fillRankGaps(players []AoEPlayerLite, gaps []RankGap, references []EloByRank) []AoEPlayerLite {
+	if len(gaps) == 0 {
+		return players
+	}
+	mean, stdDev := fitNormal(players)
+	filled := make([]AoEPlayerLite, len(players), len(players)+countMissing(gaps))
+	copy(filled, players)
+	for i, gap := range gaps {
+		var reference EloByRank
+		if i < len(references) {
+			reference = references[i]
+		}
+		nMissing := gap.RankLast - gap.RankFirst + 1
+		cdfAbove := normalCDF(gap.EloAbove, mean, stdDev)
+		cdfBelow := normalCDF(gap.EloBelow, mean, stdDev)
+		// far in the tails the curve is flat in float64,
+		// fall back to evenly spaced Elo
+		isCurveUsable := stdDev > 0 && cdfAbove-cdfBelow > 1e-12
+		for j := range nMissing {
+			rank := gap.RankFirst + j
+			// fraction of the way from EloAbove down to EloBelow,
+			// the known neighbors sit at positions 0 and nMissing+1
+			fraction := float64(j+1) / float64(nMissing+1)
+			if reference != nil {
+				refAbove, refBelow := reference[gap.RankFirst-1], reference[gap.RankLast+1]
+				fraction = (refAbove - reference[rank]) / (refAbove - refBelow)
+			}
+			var elo float64
+			if reference == nil && isCurveUsable {
+				elo = normalQuantile(cdfAbove-fraction*(cdfAbove-cdfBelow), mean, stdDev)
+			} else {
+				elo = gap.EloAbove - fraction*(gap.EloAbove-gap.EloBelow)
+			}
+			elo = math.Max(gap.EloBelow, math.Min(gap.EloAbove, math.Round(elo)))
+			filled = append(filled, AoEPlayerLite{Elo: elo, Rank: rank, IsEstimated: true})
+		}
+	}
+	return filled
+}
+
+// findReferenceDay returns Elo by rank of the latest day before date
+// that has every rank of the gap and both its neighbors,
+// or nil if no earlier day qualifies.
+// Fill from earlier days data only:
+// a chart built on its own date gets the same estimates as a later rebuild.
+func findReferenceDay(gap RankGap, date string, eloByRankOfDays map[string]EloByRank) EloByRank {
+	var best EloByRank
+	bestDate := ""
+	// "yyyy-mm-dd" dates compare in time order as strings
+	for otherDate, eloByRank := range eloByRankOfDays {
+		if otherDate >= date || otherDate <= bestDate {
+			continue
+		}
+		if !eloByRank.hasRanks(gap.RankFirst-1, gap.RankLast+1) {
+			continue
+		}
+		if eloByRank[gap.RankFirst-1] <= eloByRank[gap.RankLast+1] {
+			continue // no spread to copy
+		}
+		best, bestDate = eloByRank, otherDate
+	}
+	return best
+}
+
+// newEloByRank indexes players' Elo by rank, NaN for ranks with no player.
+func newEloByRank(players []AoEPlayerLite) EloByRank {
+	maxRank := 0
+	for _, p := range players {
+		maxRank = max(maxRank, p.Rank)
+	}
+	eloByRank := make(EloByRank, maxRank+1)
+	for i := range eloByRank {
+		eloByRank[i] = math.NaN()
+	}
+	for _, p := range players {
+		if p.Rank > 0 {
+			eloByRank[p.Rank] = p.Elo
+		}
+	}
+	return eloByRank
+}
+
+// hasRanks reports whether every rank from first to last has a player.
+func (e EloByRank) hasRanks(first int, last int) bool {
+	if first < 1 || last >= len(e) {
+		return false
+	}
+	for rank := first; rank <= last; rank++ {
+		if math.IsNaN(e[rank]) {
+			return false
+		}
+	}
+	return true
+}
+
+func countMissing(gaps []RankGap) int {
+	n := 0
+	for _, gap := range gaps {
+		n += gap.RankLast - gap.RankFirst + 1
+	}
+	return n
+}
+
+// fitNormal returns the mean and standard deviation of players' Elo.
+func fitNormal(players []AoEPlayerLite) (float64, float64) {
+	if len(players) == 0 {
+		return 0, 0
+	}
+	sum := 0.0
+	for _, p := range players {
+		sum += p.Elo
+	}
+	mean := sum / float64(len(players))
+	sumSquares := 0.0
+	for _, p := range players {
+		sumSquares += (p.Elo - mean) * (p.Elo - mean)
+	}
+	return mean, math.Sqrt(sumSquares / float64(len(players)))
+}
+
+func normalCDF(x float64, mean float64, stdDev float64) float64 {
+	return 0.5 * (1 + math.Erf((x-mean)/(stdDev*math.Sqrt2)))
+}
+
+func normalQuantile(p float64, mean float64, stdDev float64) float64 {
+	return mean + stdDev*math.Sqrt2*math.Erfinv(2*p-1)
 }
 
 func DownloadAgeofempirescomData(todayOutputDir string) (int, error) {
@@ -658,6 +893,9 @@ type AoEPlayerLite struct {
 	UserName string
 	Elo      float64
 	Rank     int
+	// IsEstimated marks a player added in memory for a rank the API left out,
+	// never saved to the zip
+	IsEstimated bool `json:"-"`
 }
 
 func (p AoEPlayer) ToLite() AoEPlayerLite {
@@ -705,6 +943,27 @@ type RatingBucket struct {
 	Percentile      float64 // from 0 to 100, rounded .999
 	RankBoundLow    int     // e.g. #43139
 	RankBoundHigh   int     // e.g. #43054
+	// EstimatedPlayers is how many of CountPlayers have ratings estimated, for ranks the API left out,
+	// the last CSV column to disclose estimates
+	EstimatedPlayers int
+}
+
+// DataLiteZip is one day of saved players in "data_lite".
+type DataLiteZip struct {
+	Date string // "yyyy-mm-dd"
+	Path string
+}
+
+// EloByRank is one day's Elo indexed by rank, NaN where the rank has no player.
+type EloByRank []float64
+
+// RankGap is a block of consecutive ranks missing from the API response,
+// bounded by the known players right above and right below it.
+type RankGap struct {
+	RankFirst int
+	RankLast  int
+	EloAbove  float64 // Elo of the player at RankFirst-1
+	EloBelow  float64 // Elo of the player at RankLast+1
 }
 
 type PercentileMarker struct {
@@ -806,6 +1065,7 @@ func printPercentileByHumanLevels(players []AoEPlayerLite) {
 func drawPercentilesChart(
 	bars []RatingBucket,
 	percentileMarkers []PercentileMarker,
+	nEstimated int,
 	dataDate string,
 	chartWidth, chartHeight int,
 	outputFilePath string) error {
@@ -863,12 +1123,16 @@ func drawPercentilesChart(
 			SplitLine: &opts.SplitLine{Show: opts.Bool(showSplitLine)},
 		}
 	}
+	subtitle := fmt.Sprintf("Data from ageofempires.com leaderboards on %v with a total of %v players",
+		dataDate, totalPlayers)
+	if nEstimated > 0 {
+		subtitle += fmt.Sprintf(" (ratings of %v players estimated from earlier days, the API left them out that day)", nEstimated)
+	}
 	newTitleOpts := func() opts.Title {
 		return opts.Title{
-			Title: "AoE2DE rating distribution",
-			Subtitle: fmt.Sprintf("Data from ageofempires.com leaderboards on %v with a total of %v players",
-				dataDate, totalPlayers),
-			Left: "center", Top: "0px",
+			Title:    "AoE2DE rating distribution",
+			Subtitle: subtitle,
+			Left:     "center", Top: "0px",
 		}
 	}
 	newGridOpts := func() opts.Grid {
