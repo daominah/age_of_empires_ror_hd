@@ -40,8 +40,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        /* top left, away from the chart subtitle under the centered title */
         .total-players-link {
-            margin-right: 8px;
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            z-index: 1000;
             padding: 8px 12px;
             font-size: 16px;
             color: #333;
@@ -75,8 +79,8 @@
 
 <body>
     <div class="container">
+        <a class="total-players-link" href="total_players.html">Total players chart</a>
         <div class="date-selector">
-            <a class="total-players-link" href="total_players.html">Total players per day</a>
             <select id="dateSelect" onchange="loadChart()">
                 <option value="">-- Select a date --</option>
                 {{DATE_OPTIONS}}

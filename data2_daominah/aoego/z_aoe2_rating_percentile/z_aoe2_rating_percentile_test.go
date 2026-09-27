@@ -552,12 +552,13 @@ func TestGenerateTotalPlayersHTML(t *testing.T) {
 
 	// THEN the page shows the totals by date,
 	// and the players returned by the API (120 on 2026-09-25) as a line hidden until clicked,
-	// on a count axis starting from 0, as the lowest day has fewer than 1000 players
+	// on a count axis starting from 0, as the lowest day has fewer than 1000 players,
+	// with a button back to the rating percentile chart
 	page, err := os.ReadFile(filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "total_players.html"))
 	if err != nil {
 		t.Fatalf("error os.ReadFile: %v", err)
 	}
-	for _, text := range []string{"2025-10-30", "2026-09-25", "100", "150", "120", `"selected":{"Returned by the API":false}`, `"min":0`} {
+	for _, text := range []string{"2025-10-30", "2026-09-25", "100", "150", "120", `"selected":{"Returned by the API":false}`, `"min":0`, `href="index.html"`} {
 		if !strings.Contains(string(page), text) {
 			t.Errorf("total_players.html: missing %q", text)
 		}

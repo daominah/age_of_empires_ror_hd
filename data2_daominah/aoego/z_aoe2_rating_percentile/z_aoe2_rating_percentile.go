@@ -565,15 +565,59 @@ func generateTotalPlayersHTML(goCodeDir string) error {
 		AddSeries(returnedByAPI, nFromAPI).
 		AddSeries(allPlayers, nPlayers)
 
-	outputFilePath := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "total_players.html")
-	f, err := os.Create(outputFilePath)
-	if err != nil {
-		return fmt.Errorf("error os.Create: %w", err)
-	}
-	defer f.Close()
-	err = lineChart.Render(f)
+	var page bytes.Buffer
+	err = lineChart.Render(&page)
 	if err != nil {
 		return fmt.Errorf("error lineChart.Render: %w", err)
+	}
+	// same page padding and white card as "index_template.html",
+	// injected before </body> to override the go-echarts ".container" style above it
+	pageStyle := `
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+		.container {
+			margin-top: 0;
+			background-color: white;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			max-width: 1900px;
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+		}
+		.back-link {
+			position: absolute;
+			top: 20px;
+			left: 40px;
+			z-index: 1000;
+			padding: 8px 12px;
+			font-size: 16px;
+			color: #333;
+			text-decoration: none;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			background-color: white;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+	</style>
+	`
+	// a button back to the rating percentile chart,
+	// same place and look as the "Total players chart" button in "index_template.html"
+	backButton := `
+	<a class="back-link" href="index.html">Rating percentile chart</a>`
+	htmlStr := strings.Replace(page.String(), `<div class="container">`, `<div class="container">`+backButton, 1)
+	htmlStr = strings.Replace(htmlStr, "</body>", pageStyle+"</body>", 1)
+
+	outputFilePath := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "total_players.html")
+	err = os.WriteFile(outputFilePath, []byte(htmlStr), 0644)
+	if err != nil {
+		return fmt.Errorf("error os.WriteFile: %w", err)
 	}
 	log.Printf("generated total_players.html with %d days", len(totals))
 	return nil
