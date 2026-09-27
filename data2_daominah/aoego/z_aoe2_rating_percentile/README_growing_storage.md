@@ -1,5 +1,36 @@
 # Growing Storage Management Strategy
 
+## Status: Retention Stopped, Keep All Zips
+
+Since 2026-09-27 the workflow no longer runs `retain_data_lite.py`,
+every daily `data_lite` zip stays in the GitHub Pages repository.
+The retention strategy below ("Former Solution") is kept for reference.
+
+Why:
+
+- Retention does not shrink the repository:
+  git history keeps every deleted zip, as noted in "Important Limitation: Git History" below.
+  Zips restored from history are the same objects, so keeping them adds nothing to the repository.
+- Retention kept 1 zip per month without checking its data,
+  and deleted the complete days needed to regenerate a repaired chart
+  (see `fill-leaderboard-rank-gaps.md`).
+  For 2026-05 it kept 2026-05-01, a day with too little data.
+- The cost is small: the current files grow about 300 MiB a year
+  (194 MiB for 243 zips on 2026-09-27).
+  GitHub Pages limits a published site to 1 GB,
+  reached around 2029.
+- The generator reads every zip in `data_lite` on each run,
+  so run time and memory grow with the number of days kept.
+  Fine for years, later it can read only the recent days.
+
+If the repository gets close to a size limit (1 GB for a GitHub Pages site):
+no zip is deleted anymore, so the history holds the same zips as the current files.
+Move old zips out of the published files (see "Alternative Solutions" below)
+or run `retain_data_lite.py` again,
+then restart the history with a single commit of the current files and force push it,
+so the removed zips leave the repository too.
+Nothing of value is lost, the old history is only the bot's daily commits.
+
 ## Problem
 
 Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub Pages repository. Over time, this causes the repository to grow:
@@ -8,7 +39,9 @@ Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub 
 - After 5 years: ~1.8 GiB
 - GitHub repositories have size limits and performance degrades with large repos
 
-## Recommended Solution: Retention Strategy ⭐
+## Former Solution: Retention Strategy (Stopped)
+
+> **Stopped since 2026-09-27, not running.** Kept for reference, see "Status" at the top.
 
 ### Strategy Overview
 
@@ -33,12 +66,14 @@ Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub 
 ⚠️ **Note:** This retention strategy only affects the **current commit**. Git history still contains all previous versions of deleted files, so the **total repository size (including history) will continue to grow**.
 
 **However, Git uses smart compression:**
+
 - ✅ **Delta compression** - Git stores file changes as deltas, not full copies
 - ✅ **Object packing** - Git packs similar objects efficiently
 - ⚠️ **Binary files** - Zip files compress poorly with deltas (they're already compressed)
 - ✅ **Text files** - Compress very well with Git's delta compression
 
 **What this means:**
+
 - ✅ **Current working directory size** - bounded and manageable
 - ✅ **Size of new commits** - grows slowly (~1 file/month)
 - ⚠️ **Total repository size** - grows over time, but less than linear due to compression
@@ -46,6 +81,7 @@ Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub 
   - Binary files (zip) compress less effectively than text files
 
 **To truly reduce repository size, you need:**
+
 1. **Git LFS** (recommended) - stores large files outside git history
 2. **History rewriting** - use `git filter-branch` or BFG Repo-Cleaner (destructive, requires force push)
 3. **Separate archive repository** - move old files to a different repo
@@ -66,6 +102,7 @@ Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub 
 **Result:** Current commit size grows very slowly after the initial 100 days.
 
 **Total Repository Size (including Git history):**
+
 - Will continue to grow as all previous versions are preserved in Git history
 - Git's delta compression reduces actual size significantly
 - After 1 year: ~365 MiB raw files, but Git compression may reduce to ~200-300 MiB
@@ -98,6 +135,7 @@ python retain_data_lite.py --execute
 ```
 
 **Note:**
+
 - The script uses a constant `RETENTION_DAYS = 100` (modify in script to change)
 - By default, the script runs in dry-run mode (safe, no files deleted)
 - Only processes `data_lite` directory (large zip files ~1 MiB each)
@@ -291,7 +329,9 @@ Consider your use case:
 
 ---
 
-## Recommendation
+## Former Recommendation (Stopped)
+
+> **Stopped since 2026-09-27, not running.** Kept for reference, see "Status" at the top.
 
 **Use the Retention Strategy** because:
 
