@@ -502,3 +502,109 @@ func TestLoopProcessAllZipFiles_RealDataHighTail(t *testing.T) {
 		}
 	}
 }
+
+func TestDetectRankTail(t *testing.T) {
+	// GIVEN the previous day had ranks 1 to 100, rated 1000 down to 10
+	previous := make(EloByRank, 101)
+	previous[0] = math.NaN()
+	for rank := 1; rank <= 100; rank++ {
+		previous[rank] = float64(1010 - 10*rank)
+	}
+
+	// WHEN today stops at rank 80, short by more than 10%
+	tail, isSkipped := detectRankTail(previous[:81], previous)
+
+	// THEN ranks 81 to 99 are a gap between today's worst player and an estimated worst player at rank 100,
+	// rated like the previous day's worst
+	if isSkipped || tail == nil {
+		t.Fatalf("tail: got %+v, isSkipped %v, want a tail", tail, isSkipped)
+	}
+	wantGap := RankGap{RankFirst: 81, RankLast: 99, EloAbove: 210, EloBelow: 10}
+	if tail.Gap != wantGap || tail.Bottom.Rank != 100 || tail.Bottom.Elo != 10 || !tail.Bottom.IsEstimated {
+		t.Errorf("tail: got %+v, want gap %+v and an estimated rank 100 rated 10", tail, wantGap)
+	}
+
+	// WHEN today stops at rank 95, short by less than 10%
+	tail, isSkipped = detectRankTail(previous[:96], previous)
+
+	// THEN today counts as a normal day
+	if tail != nil || isSkipped {
+		t.Errorf("tail: got %+v, isSkipped %v, want none", tail, isSkipped)
+	}
+
+	// WHEN today stops at rank 40, less than half of the previous day
+	tail, isSkipped = detectRankTail(previous[:41], previous)
+
+	// THEN today is not the usual leaderboard and is skipped
+	if tail != nil || !isSkipped {
+		t.Errorf("tail: got %+v, isSkipped %v, want skipped", tail, isSkipped)
+	}
+
+	// WHEN there is no previous day
+	tail, isSkipped = detectRankTail(previous[:41], nil)
+
+	// THEN nothing can be detected
+	if tail != nil || isSkipped {
+		t.Errorf("tail: got %+v, isSkipped %v, want none", tail, isSkipped)
+	}
+}
+
+func TestLoopProcessAllZipFiles_RealDataApiStoppedEarly(t *testing.T) {
+	// GIVEN the real leaderboard of 2026-04-09, where the API stopped at rank 40700
+	// and returned no player under 500 Elo,
+	// and the day before, with last rank 45541
+	goCodeDir := newGoCodeDirWithFixtures(t, "2026-04-08", "2026-04-09")
+
+	// WHEN both daily summaries are generated
+	if err := loopProcessAllZipFiles(goCodeDir); err != nil {
+		t.Fatalf("error loopProcessAllZipFiles: %v", err)
+	}
+	day1 := readSummary(t, goCodeDir, "2026-04-08")
+	day2 := readSummary(t, goCodeDir, "2026-04-09")
+
+	// THEN 2026-04-09 is as long as the day before
+	total1, total2 := 0, 0
+	for _, count := range day1 {
+		total1 += count
+	}
+	for _, count := range day2 {
+		total2 += count
+	}
+	if total2 != 45541 {
+		t.Errorf("2026-04-09 total: got %v, want 45541 like the last rank of 2026-04-08 (which has %v)",
+			total2, total1)
+	}
+	// THEN the low-rating buckets are back, within 10% of the day before
+	for _, low := range []int{0, 100, 200, 300, 400} {
+		diffPercent := math.Abs(float64(day2[low]-day1[low])) / float64(day1[low]) * 100
+		if diffPercent > 10 {
+			t.Errorf("bucket %v: 2026-04-08 has %v, 2026-04-09 has %v, differ %.1f%%",
+				low, day1[low], day2[low], diffPercent)
+		}
+	}
+}
+
+func TestLoopProcessAllZipFiles_RealDataWrongLeaderboard(t *testing.T) {
+	// GIVEN the real leaderboard of 2026-05-01, where the API served only 4673 players
+	// with a different top player, and the day before with 47262 players
+	goCodeDir := newGoCodeDirWithFixtures(t, "2026-04-30", "2026-05-01")
+
+	// WHEN the daily summaries are generated
+	if err := loopProcessAllZipFiles(goCodeDir); err != nil {
+		t.Fatalf("error loopProcessAllZipFiles: %v", err)
+	}
+
+	// THEN 2026-05-01 gets no summary and no chart, 2026-04-30 still does
+	outputDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile")
+	for _, path := range []string{
+		filepath.Join(outputDir, "data_summarized", "aoe2_rating_percentile_date_2026-05-01.csv"),
+		filepath.Join(outputDir, "output_charts", "chart_2026-05-01.html"),
+	} {
+		if _, err := os.Stat(path); !os.IsNotExist(err) {
+			t.Errorf("%v: want no file, got err %v", filepath.Base(path), err)
+		}
+	}
+	if day := readSummary(t, goCodeDir, "2026-04-30"); len(day) == 0 {
+		t.Errorf("2026-04-30: want a summary")
+	}
+}

@@ -32,6 +32,17 @@ import (
 //go:embed index_template.html
 var indexTemplateHTML string
 
+// Thresholds on a day's player count (read from the last rank) against the previous day's (edit to tune).
+// Normal days change less than 3%.
+const (
+	// Short day (API stopped early): the player count drops more than 10%,
+	// fill the missing bottom ranks like a gap
+	shortDayRatio = 0.9
+	// Too little data (wrong leaderboard, or our download stopped early): the player count drops more than 50%,
+	// drop the day, no chart and no CSV, never a reference
+	skipDayRatio = 0.5
+)
+
 func main() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
@@ -517,9 +528,28 @@ func loopProcessAllZipFiles(goCodeDir string) error {
 		}
 		eloByRankOfDays[z.Date] = newEloByRank(players)
 	}
+	// too little data: drop the day,
+	// never use it as a reference or as the previous day of another day
+	isSkippedDays := make(map[string]bool)
+	for _, z := range zips { // zips are sorted by date
+		today, found := eloByRankOfDays[z.Date]
+		if !found {
+			continue
+		}
+		_, isSkipped := detectRankTail(today, findPreviousDay(z.Date, eloByRankOfDays))
+		if isSkipped {
+			isSkippedDays[z.Date] = true
+			delete(eloByRankOfDays, z.Date)
+		}
+	}
 
 	for _, z := range zips {
 		log.Printf("processing file: %v", filepath.Base(z.Path))
+
+		if isSkippedDays[z.Date] {
+			log.Printf("date %v: skipped, too little data, player count (read from the last rank) is below %v of the previous day's", z.Date, skipDayRatio)
+			continue
+		}
 
 		// step 4: read players from zip
 		sortedPlayers, err := readPlayersFromZip(z.Path)
@@ -530,6 +560,16 @@ func loopProcessAllZipFiles(goCodeDir string) error {
 
 		// step 4.5a: detect rank gaps, blocks of ranks the API left out that day
 		gaps := detectRankGaps(sortedPlayers)
+
+		// step 4.5c: detect a short day, the API stopped early: ranks missing after the last rank
+		tail, _ := detectRankTail(eloByRankOfDays[z.Date], findPreviousDay(z.Date, eloByRankOfDays))
+		if tail != nil {
+			log.Printf("date %v: API stopped early, ranks %v to %v estimated",
+				z.Date, tail.Gap.RankFirst, tail.Bottom.Rank)
+			if tail.Gap.RankFirst <= tail.Gap.RankLast {
+				gaps = append(gaps, tail.Gap)
+			}
+		}
 		nEstimated := countMissing(gaps)
 
 		// step 4.5b: fill gaps from a reference day, correct in memory only
@@ -546,6 +586,10 @@ func loopProcessAllZipFiles(goCodeDir string) error {
 				z.Date, len(gaps), nEstimated, nFromReference)
 		}
 		sortedPlayers = fillRankGaps(sortedPlayers, gaps, references)
+		if tail != nil {
+			sortedPlayers = append(sortedPlayers, tail.Bottom)
+			nEstimated++
+		}
 
 		// Sort players by rating (highest first)
 		sort.Slice(sortedPlayers, func(i, j int) bool {
@@ -599,7 +643,7 @@ func listDataLiteZips(dataLiteDir string) ([]DataLiteZip, error) {
 // The ageofempires.com API sometimes serves a leaderboard without whole pages,
 // or ranks shift while pages download minutes apart,
 // and its Count shrinks to match, so gaps in Rank are the only signal.
-// Players missing after the last rank cannot be detected.
+// A short day (API stopped early) has no hole in Rank, see detectRankTail.
 func detectRankGaps(players []AoEPlayerLite) []RankGap {
 	byRank := make([]AoEPlayerLite, len(players))
 	copy(byRank, players)
@@ -695,6 +739,49 @@ func findReferenceDay(gap RankGap, date string, eloByRankOfDays map[string]EloBy
 		best, bestDate = eloByRank, otherDate
 	}
 	return best
+}
+
+// detectRankTail detects a short day (API stopped early):
+// ranks missing after today's last rank, found by comparing it with the previous day's.
+// The ranks run from 1 to the last without a hole, so detectRankGaps cannot see them.
+// It returns nil when today is not short.
+// isSkipped means too little data (wrong leaderboard, or our download stopped early):
+// drop the day, no chart and no CSV, never a reference.
+func detectRankTail(today EloByRank, previous EloByRank) (tail *RankTail, isSkipped bool) {
+	lastRank, previousLastRank := len(today)-1, len(previous)-1
+	if lastRank < 1 || previousLastRank < 1 {
+		return nil, false
+	}
+	ratio := float64(lastRank) / float64(previousLastRank)
+	if ratio < skipDayRatio {
+		return nil, true
+	}
+	if ratio >= shortDayRatio {
+		return nil, false
+	}
+	// assume today's leaderboard is as long as the previous day's,
+	// and its worst player is rated like the previous day's worst
+	bottom := AoEPlayerLite{Elo: previous[previousLastRank], Rank: previousLastRank, IsEstimated: true}
+	gap := RankGap{
+		RankFirst: lastRank + 1,
+		RankLast:  previousLastRank - 1,
+		EloAbove:  today[lastRank],
+		EloBelow:  bottom.Elo,
+	}
+	return &RankTail{Gap: gap, Bottom: bottom}, false
+}
+
+// findPreviousDay returns Elo by rank of the latest day before date, or nil if none.
+func findPreviousDay(date string, eloByRankOfDays map[string]EloByRank) EloByRank {
+	var previous EloByRank
+	previousDate := ""
+	// "yyyy-mm-dd" dates compare in time order as strings
+	for otherDate, eloByRank := range eloByRankOfDays {
+		if otherDate < date && otherDate > previousDate {
+			previous, previousDate = eloByRank, otherDate
+		}
+	}
+	return previous
 }
 
 // newEloByRank indexes players' Elo by rank, NaN for ranks with no player.
@@ -946,6 +1033,13 @@ type RatingBucket struct {
 	// EstimatedPlayers is how many of CountPlayers have ratings estimated, for ranks the API left out,
 	// the last CSV column to disclose estimates
 	EstimatedPlayers int
+}
+
+// RankTail is the ranks missing after a short day's last rank (API stopped early).
+// Gap is filled like any rank gap, it ends right above Bottom, the estimated worst player.
+type RankTail struct {
+	Gap    RankGap
+	Bottom AoEPlayerLite
 }
 
 // DataLiteZip is one day of saved players in "data_lite".
