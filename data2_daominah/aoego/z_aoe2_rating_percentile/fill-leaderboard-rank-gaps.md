@@ -39,6 +39,8 @@ Grouped by the kind of bad day they address.
     so fill best-effort from data we already have.
   - Disclose estimates: the chart subtitle says how many players have ratings estimated from earlier days,
     a new last CSV column `EstimatedPlayers` counts them per bucket.
+  - Total players page: a cross-check that totals stay close from one day to the next.
+    A second line, hidden until clicked in the legend, shows only the players the API returned.
 - Rank gaps:
   - Fill from a reference day, not a bell curve:
     the count and Elo range of each gap are exact, only the spread inside is estimated,

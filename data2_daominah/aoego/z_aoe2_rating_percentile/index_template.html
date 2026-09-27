@@ -40,6 +40,18 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
+        .total-players-link {
+            margin-right: 8px;
+            padding: 8px 12px;
+            font-size: 16px;
+            color: #333;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
         .chart-container {
             width: 100%;
             overflow-x: auto;
@@ -64,6 +76,7 @@
 <body>
     <div class="container">
         <div class="date-selector">
+            <a class="total-players-link" href="total_players.html">Total players per day</a>
             <select id="dateSelect" onchange="loadChart()">
                 <option value="">-- Select a date --</option>
                 {{DATE_OPTIONS}}

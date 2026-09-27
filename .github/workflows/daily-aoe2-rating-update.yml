@@ -57,6 +57,8 @@ jobs:
       run: |
         # Copy index.html (always update the main page)
         cp data2_daominah/aoego/z_aoe2_rating_percentile/index.html gh-pages/
+        # Copy total_players.html (always update, it covers every day)
+        cp data2_daominah/aoego/z_aoe2_rating_percentile/total_players.html gh-pages/
 
         # Copy only non-existing files from output_charts directory
         mkdir -p gh-pages/output_charts
@@ -98,7 +100,7 @@ jobs:
         cd gh-pages
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add index.html output_charts/ data_lite/ data_summarized/
+        git add index.html total_players.html output_charts/ data_lite/ data_summarized/
         if git diff --quiet && git diff --staged --quiet; then
           echo "No changes to commit"
         else

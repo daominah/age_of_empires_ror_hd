@@ -503,6 +503,85 @@ func TestLoopProcessAllZipFiles_RealDataHighTail(t *testing.T) {
 	}
 }
 
+func TestGenerateTotalPlayersHTML(t *testing.T) {
+	// GIVEN two daily summaries: an older one named "yyyy_mm_dd" without the EstimatedPlayers column,
+	// and a newer one with 150 players, 30 of them estimated,
+	// plus a stale "yyyy_mm_dd" copy of the older day under the newer day's date
+	goCodeDir := t.TempDir()
+	summarizedDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_summarized")
+	if err := os.MkdirAll(summarizedDir, 0755); err != nil {
+		t.Fatalf("error os.MkdirAll: %v", err)
+	}
+	oldCSV := "RatingRange,RatingLow,RatingHigh,CountPlayers,Percentile,RankLow,RankHigh\n" +
+		"0000→0100,0,100,40,0.4,#100,#61\n" +
+		"0100→0200,100,200,60,1,#60,#1\n"
+	newCSV := "RatingRange,RatingLow,RatingHigh,CountPlayers,Percentile,RankLow,RankHigh,EstimatedPlayers\n" +
+		"0000→0100,0,100,50,0.333,#150,#101,10\n" +
+		"0100→0200,100,200,100,1,#100,#1,20\n"
+	files := map[string]string{
+		"aoe2_rating_percentile_date_2025_10_30.csv": oldCSV,
+		"aoe2_rating_percentile_date_2026-09-25.csv": newCSV,
+		"aoe2_rating_percentile_date_2026_09_25.csv": oldCSV,
+	}
+	for name, content := range files {
+		if err := os.WriteFile(filepath.Join(summarizedDir, name), []byte(content), 0644); err != nil {
+			t.Fatalf("error os.WriteFile: %v", err)
+		}
+	}
+
+	// WHEN the daily totals are read
+	totals, err := readDailyTotals(summarizedDir)
+	if err != nil {
+		t.Fatalf("error readDailyTotals: %v", err)
+	}
+
+	// THEN each day has its total including players the API left out, and how many were left out,
+	// oldest first, and the stale copy is ignored
+	want := []DailyTotal{
+		{Date: "2025-10-30", NPlayers: 100, NEstimated: 0},
+		{Date: "2026-09-25", NPlayers: 150, NEstimated: 30},
+	}
+	if len(totals) != len(want) || totals[0] != want[0] || totals[1] != want[1] {
+		t.Errorf("totals: got %+v, want %+v", totals, want)
+	}
+
+	// WHEN the total players page is generated
+	if err := generateTotalPlayersHTML(goCodeDir); err != nil {
+		t.Fatalf("error generateTotalPlayersHTML: %v", err)
+	}
+
+	// THEN the page shows the totals by date,
+	// and the players returned by the API (120 on 2026-09-25) as a line hidden until clicked,
+	// on a count axis starting from 0, as the lowest day has fewer than 1000 players
+	page, err := os.ReadFile(filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "total_players.html"))
+	if err != nil {
+		t.Fatalf("error os.ReadFile: %v", err)
+	}
+	for _, text := range []string{"2025-10-30", "2026-09-25", "100", "150", "120", `"selected":{"Returned by the API":false}`, `"min":0`} {
+		if !strings.Contains(string(page), text) {
+			t.Errorf("total_players.html: missing %q", text)
+		}
+	}
+}
+
+func TestTotalPlayersAxisMin(t *testing.T) {
+	// GIVEN the lowest daily count on the page
+	// WHEN the count axis minimum is chosen
+	// THEN it is 20000, or lower rounded down to a thousand when a day has fewer players
+	cases := []struct{ lowest, want int }{
+		{lowest: 44363, want: 20000},
+		{lowest: 20000, want: 20000},
+		{lowest: 19999, want: 19000},
+		{lowest: 4673, want: 4000},
+		{lowest: 100, want: 0},
+	}
+	for _, c := range cases {
+		if got := totalPlayersAxisMin(c.lowest); got != c.want {
+			t.Errorf("totalPlayersAxisMin(%v): got %v, want %v", c.lowest, got, c.want)
+		}
+	}
+}
+
 func TestDetectRankTail(t *testing.T) {
 	// GIVEN the previous day had ranks 1 to 100, rated 1000 down to 10
 	previous := make(EloByRank, 101)

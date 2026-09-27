@@ -100,6 +100,11 @@ func main() {
 		log.Fatalf("error generateIndexHTML: %v", err)
 	}
 
+	// step 8: "total_players.html", players per day including estimates, linked from index.html
+	err = generateTotalPlayersHTML(goCodeDir)
+	if err != nil {
+		log.Fatalf("error generateTotalPlayersHTML: %v", err)
+	}
 }
 
 // stepDownload downloads leaderboard pages to todayOutputDir,
@@ -506,6 +511,169 @@ func generateIndexHTML(goCodeDir string) error {
 
 	log.Printf("generated index.html with %d available charts", len(dates))
 	return nil
+}
+
+// generateTotalPlayersHTML draws "total_players.html": players per day, from every CSV in "data_summarized",
+// including players the API left out, so such a day does not show as a drop.
+// It is a cross-check that totals stay close from one day to the next.
+// A second line, hidden until clicked in the legend, shows only the players the API returned.
+func generateTotalPlayersHTML(goCodeDir string) error {
+	summarizedDir := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "data_summarized")
+	totals, err := readDailyTotals(summarizedDir)
+	if err != nil {
+		return fmt.Errorf("error readDailyTotals: %w", err)
+	}
+	if len(totals) == 0 {
+		return fmt.Errorf("no CSV files found in data_summarized directory")
+	}
+
+	var dates []string
+	var nPlayers, nFromAPI []opts.LineData
+	for _, total := range totals {
+		dates = append(dates, total.Date)
+		nPlayers = append(nPlayers, opts.LineData{Value: total.NPlayers})
+		nFromAPI = append(nFromAPI, opts.LineData{Value: total.NPlayers - total.NEstimated})
+	}
+	const allPlayers, returnedByAPI = "All players", "Returned by the API"
+	lowest := totals[0].NPlayers
+	for _, total := range totals {
+		lowest = min(lowest, total.NPlayers-total.NEstimated)
+	}
+	lineChart := charts.NewLine()
+	lineChart.SetGlobalOptions(
+		charts.WithInitializationOpts(opts.Initialization{
+			Width: "1800px", Height: "800px",
+			PageTitle: "AoE2DE total players per day",
+		}),
+		charts.WithTitleOpts(opts.Title{
+			Title:    "AoE2DE total players per day",
+			Subtitle: "Data from ageofempires.com leaderboards, including players the API left out",
+			Left:     "center",
+		}),
+		charts.WithLegendOpts(opts.Legend{
+			Show: opts.Bool(true), Top: "50px",
+			Selected: map[string]bool{returnedByAPI: false},
+		}),
+		// all players is added last so it draws on top, keep it the default first color
+		charts.WithColorsOpts(opts.Colors{"#91cc75", "#5470c6"}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: opts.Bool(true), Trigger: "axis"}),
+		charts.WithGridOpts(opts.Grid{Top: "100px"}),
+		charts.WithYAxisOpts(opts.YAxis{Name: "players count", Type: "value", Min: totalPlayersAxisMin(lowest)}),
+		charts.WithDataZoomOpts(opts.DataZoom{Type: "slider", Start: 0, End: 100}),
+	)
+	lineChart.SetXAxis(dates).
+		AddSeries(returnedByAPI, nFromAPI).
+		AddSeries(allPlayers, nPlayers)
+
+	outputFilePath := filepath.Join(goCodeDir, "z_aoe2_rating_percentile", "total_players.html")
+	f, err := os.Create(outputFilePath)
+	if err != nil {
+		return fmt.Errorf("error os.Create: %w", err)
+	}
+	defer f.Close()
+	err = lineChart.Render(f)
+	if err != nil {
+		return fmt.Errorf("error lineChart.Render: %w", err)
+	}
+	log.Printf("generated total_players.html with %d days", len(totals))
+	return nil
+}
+
+// totalPlayersAxisMin starts the count axis at 20000, below every day so far,
+// so daily changes stay visible, or lower (rounded down to a thousand) if a day ever has fewer players.
+func totalPlayersAxisMin(lowest int) int {
+	const axisMin = 20000
+	if lowest >= axisMin {
+		return axisMin
+	}
+	return max(0, lowest/1000*1000)
+}
+
+// readDailyTotals sums players of each daily CSV in summarizedDir, sorted by date.
+// Older CSVs are named with "yyyy_mm_dd" and have no EstimatedPlayers column (counted as 0).
+// If a date has both names, the "yyyy-mm-dd" one wins:
+// some old "yyyy_mm_dd" files are stale copies of another day.
+func readDailyTotals(summarizedDir string) ([]DailyTotal, error) {
+	files, err := os.ReadDir(summarizedDir)
+	if err != nil {
+		return nil, fmt.Errorf("error os.ReadDir: %w", err)
+	}
+	totalByDate := make(map[string]DailyTotal)
+	for _, file := range files {
+		name := file.Name()
+		if !strings.HasPrefix(name, "aoe2_rating_percentile_date_") || !strings.HasSuffix(name, ".csv") {
+			continue
+		}
+		date := strings.TrimSuffix(strings.TrimPrefix(name, "aoe2_rating_percentile_date_"), ".csv")
+		isOldName := strings.Contains(date, "_")
+		date = strings.ReplaceAll(date, "_", "-")
+		if _, found := totalByDate[date]; found && isOldName {
+			continue
+		}
+		if _, err := time.Parse("2006-01-02", date); err != nil {
+			log.Printf("skipping file with invalid date format: %v", name)
+			continue
+		}
+		total, err := readDailyTotal(filepath.Join(summarizedDir, name))
+		if err != nil {
+			return nil, fmt.Errorf("error readDailyTotal %v: %w", name, err)
+		}
+		total.Date = date
+		if _, found := totalByDate[date]; !found || !isOldName {
+			totalByDate[date] = total
+		}
+	}
+	var totals []DailyTotal
+	for _, total := range totalByDate {
+		totals = append(totals, total)
+	}
+	sort.Slice(totals, func(i, j int) bool {
+		return totals[i].Date < totals[j].Date
+	})
+	return totals, nil
+}
+
+func readDailyTotal(csvPath string) (DailyTotal, error) {
+	f, err := os.Open(csvPath)
+	if err != nil {
+		return DailyTotal{}, fmt.Errorf("error os.Open: %w", err)
+	}
+	defer f.Close()
+	rows, err := csv.NewReader(f).ReadAll()
+	if err != nil {
+		return DailyTotal{}, fmt.Errorf("error csv ReadAll: %w", err)
+	}
+	if len(rows) == 0 {
+		return DailyTotal{}, fmt.Errorf("empty CSV")
+	}
+	countColumn, estimatedColumn := -1, -1
+	for i, header := range rows[0] {
+		switch header {
+		case "CountPlayers":
+			countColumn = i
+		case "EstimatedPlayers":
+			estimatedColumn = i
+		}
+	}
+	if countColumn < 0 {
+		return DailyTotal{}, fmt.Errorf("no CountPlayers column")
+	}
+	var total DailyTotal
+	for _, row := range rows[1:] {
+		count, err := strconv.Atoi(row[countColumn])
+		if err != nil {
+			return DailyTotal{}, fmt.Errorf("error strconv.Atoi CountPlayers: %w", err)
+		}
+		total.NPlayers += count
+		if estimatedColumn >= 0 {
+			estimated, err := strconv.Atoi(row[estimatedColumn])
+			if err != nil {
+				return DailyTotal{}, fmt.Errorf("error strconv.Atoi EstimatedPlayers: %w", err)
+			}
+			total.NEstimated += estimated
+		}
+	}
+	return total, nil
 }
 
 // loopProcessAllZipFiles fills rank gaps, then writes the CSV summary and HTML chart of every zip.
@@ -1033,6 +1201,13 @@ type RatingBucket struct {
 	// EstimatedPlayers is how many of CountPlayers have ratings estimated, for ranks the API left out,
 	// the last CSV column to disclose estimates
 	EstimatedPlayers int
+}
+
+// DailyTotal is one day's players count from its CSV in "data_summarized".
+type DailyTotal struct {
+	Date       string // "yyyy-mm-dd"
+	NPlayers   int    // including players the API left out
+	NEstimated int    // players the API left out, with ratings estimated
 }
 
 // RankTail is the ranks missing after a short day's last rank (API stopped early).
