@@ -1,5 +1,42 @@
 # Growing Storage Management Strategy
 
+## Status: Retention Stopped, Keep All Zips
+
+Since 2026-09-27 the workflow no longer runs `retain_data_lite.py`,
+every daily `data_lite` zip stays in the GitHub Pages repository.
+The retention strategy below is kept for reference.
+
+Why:
+
+- Retention does not shrink the repository:
+  git history keeps every deleted zip, as noted in "Important Limitation: Git History" below.
+  Zips restored from history are the same objects, so keeping them adds nothing to the repository.
+- Retention kept 1 zip per month without checking its data,
+  and deleted the complete days needed to regenerate a repaired chart
+  (see `fill-leaderboard-rank-gaps.md`).
+  For 2026-05 it kept 2026-05-01, a day with too little data.
+- The cost is small: the current files grow about 300 MiB a year
+  (194 MiB for 243 zips on 2026-09-27).
+  GitHub Pages limits a published site to 1 GB,
+  reached around 2029.
+- The generator reads every zip in `data_lite` on each run,
+  so run time and memory grow with the number of days kept.
+  Fine for years, later it can read only the recent days.
+
+If the repository gets close to a size limit:
+
+- History is too big: replace the history with a single commit of the current files
+  (an orphan branch, or `git filter-repo` to remove only old zips),
+  then force push.
+  The history is only daily bot commits, nothing of value is lost.
+  GitHub shrinks the repository only after its garbage collection,
+  ask GitHub Support to run it if needed.
+  Other clones must clone again, the workflow is not affected (it checks out fresh on every run).
+- The current files are too big (close to the 1 GB site limit):
+  rewriting history does not help,
+  move old zips out of the published files (see "Alternative Solutions" below)
+  or run `retain_data_lite.py` again.
+
 ## Problem
 
 Each day, the workflow stores a new `data_lite` zip file (~1 MiB) in the GitHub Pages repository. Over time, this causes the repository to grow:
