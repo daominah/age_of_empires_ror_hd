@@ -1405,7 +1405,9 @@ func drawPercentilesChart(
 		}
 	}
 	newGridOpts := func() opts.Grid {
-		return opts.Grid{Top: "120px"} // lower the chart to get space for the title
+		// lower the chart to get space for the title,
+		// shift it left (default margins are 10% each side) so it fits a 1536px wide screen
+		return opts.Grid{Top: "120px", Left: "60px", Right: "360px"}
 	}
 	barChart.SetGlobalOptions(
 		charts.WithInitializationOpts(newInitializationOpts()),
