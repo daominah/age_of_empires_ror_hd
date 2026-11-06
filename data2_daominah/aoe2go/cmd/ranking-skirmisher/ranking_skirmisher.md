@@ -79,7 +79,7 @@
 - [19] Shu Elite Skirmisher: Fletching 75f 38g instead of 100f 50g, Bodkin Arrow 150f 75g instead of 200f 100g, Bracer 225f 150g instead of 300f 200g, Padded Archer Armor 75f instead of 100f, Leather Archer Armor 113f 113g instead of 150f 150g, Ring Archer Armor 188f 188g instead of 250f 250g, Thumb Ring 225f 188w instead of 300f 250w
 - [20] Spanish Elite Skirmisher: Fletching 100f instead of 100f 50g, Bodkin Arrow 200f instead of 200f 100g, Bracer 300f instead of 300f 200g, Leather Archer Armor 150f instead of 150f 150g, Ring Archer Armor 250f instead of 250f 250g
 - [21] Gurjaras Elite Skirmisher: base cost 25f 35w, 19f 35w after Kshatriyas (500f 450g)
-- [22] Muisca Elite Skirmisher: Skirmisher melee armor 3 in Feudal Age, Elite Skirmisher melee armor 4 in Castle Age, 5 in Imperial Age
+- [22] Muisca Elite Skirmisher: Skirmisher melee armor 2 in Feudal Age, Elite Skirmisher melee armor 4 in Castle Age, 5 in Imperial Age
 - [23] Sicilians Elite Skirmisher: bonus damage taken -40%
 - [24] Georgians Elite Skirmisher: receives less damage from lower elevation, -40% instead of the normal -25%
 - [25] Bulgarians Elite Skirmisher: Fletching 50f 50g instead of 100f 50g, Bodkin Arrow 100f 100g instead of 200f 100g, Bracer 150f 200g instead of 300f 200g, Padded Archer Armor 50f instead of 100f, Leather Archer Armor 75f 150g instead of 150f 150g

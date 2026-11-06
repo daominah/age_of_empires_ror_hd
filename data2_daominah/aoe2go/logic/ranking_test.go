@@ -173,6 +173,13 @@ func TestLoadRowsUpgraded(t *testing.T) {
 		t.Errorf("Mongols: got note %q, want %q", got, want)
 	}
 
+	// THEN a note counts only the technologies of the age:
+	// the Teutons Scout Cavalry has no Plate Barding Armor in the Castle Age,
+	// Scale and Chain Barding Armor +2 and the Teutons bonus +1 = 3
+	if got, want := FormatAgeNote(byCivilization[Teutons]), "melee armor 3 in Castle Age, 5 in Imperial Age"; got != want {
+		t.Errorf("Teutons: got note %q, want %q", got, want)
+	}
+
 	// THEN civilizations without the scout line have no row
 	for _, civilization := range []CivilizationID{Aztecs, Inca, Maya, Mapuche, Muisca, Tupi} {
 		if _, isFound := byCivilization[civilization]; isFound {

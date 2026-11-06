@@ -80,4 +80,4 @@
 - [24] Cumans Heavy Cavalry Archer: Cavalry Archer speed 1.47 in Feudal Age, 1.54 in Castle Age, Heavy Cavalry Archer speed 1.62 in Imperial Age
 - [25] Franks Heavy Mounted Crossbowman: bonus attack 2 vs Infantry
 - [26] Burgundians Mounted Crossbowman: Husbandry 75f instead of 150f
-- [27] Teutons Heavy Mounted Crossbowman: Mounted Crossbowman melee armor 6 in Castle Age, Heavy Mounted Crossbowman melee armor 7 in Imperial Age
+- [27] Teutons Heavy Mounted Crossbowman: Mounted Crossbowman melee armor 5 in Castle Age, Heavy Mounted Crossbowman melee armor 7 in Imperial Age

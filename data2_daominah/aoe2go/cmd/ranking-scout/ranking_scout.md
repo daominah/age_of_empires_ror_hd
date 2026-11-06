@@ -67,8 +67,8 @@
 - [13] Mongols Hussar: Light Cavalry HP 92 in Castle Age, Hussar HP 118 in Imperial Age
 - [14] Bengalis Light Cavalry: bonus attack 2 vs Skirmishers
 - [15] Sicilians Light Cavalry: bonus damage taken -40%
-- [16] Khitans Hussar: regeneration in combat 118.42 per minute after Ordo Cavalry
+- [16] Khitans Hussar: Scout Cavalry attack 7 in Feudal Age, Light Cavalry attack 11 in Castle Age; regeneration in combat 118.42 per minute after Ordo Cavalry
 - [17] Burgundians Hussar: Husbandry 75f instead of 150f, Light Cavalry upgrade 75f 25g instead of 150f 50g, Hussar upgrade 250f 300g instead of 500f 600g
 - [18] Poles Winged Hussar: Bloodlines 75f 100g instead of 150f 100g, Light Cavalry upgrade 75f 50g instead of 150f 50g, Winged Hussar upgrade 300f 800g instead of 600f 800g; bonus attack 1 vs Archers, 4 vs Gunpowder Units; 33% trample damage in 0.5 tile radius after Lechitic Legacy
 - [19] Wei Hussar: bonus attack 2 vs Siege Weapons
-- [20] Teutons Scout Cavalry: melee armor 4 in Castle Age, 5 in Imperial Age
+- [20] Teutons Scout Cavalry: melee armor 3 in Castle Age, 5 in Imperial Age

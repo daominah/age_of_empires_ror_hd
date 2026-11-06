@@ -185,7 +185,7 @@ func FormatAgeNote(row Row) string {
 		// the ages where a civilization bonus changes the stat
 		var ages []TechID
 		for _, step := range row.Steps {
-			age := step.Technology.FindAge()
+			age := step.Age
 			if step.Source == CivilizationBonuses && age != 0 && !slices.Contains(ages, age) &&
 				stat.value(step.UnitBefore) != stat.value(step.UnitAfter) {
 				ages = append(ages, age)
@@ -244,15 +244,17 @@ func FormatAgeNote(row Row) string {
 }
 
 // FindUnitAtAge is the unit after the technologies and the civilization bonuses
-// that are triggered in the age or before, e.g. the Mongols Light Cavalry in the Castle Age.
+// that are available in the age or before, e.g. the Mongols Light Cavalry in the Castle Age.
+// It applies the effects again in the order of the steps, skipping the later ages,
+// as a technology of a later age is applied before the civilization bonuses,
+// e.g. the Teutons Scout Cavalry has no Plate Barding Armor in the Castle Age.
 func (row Row) FindUnitAtAge(age TechID) Unit {
-	unit := row.BaseUnit
+	unit := row.BaseUnit.clone()
 	for _, step := range row.Steps {
-		stepAge := step.Technology.FindAge()
-		if step.Source == CivilizationBonuses && stepAge != 0 && stepAge > age {
-			break
+		if step.Age > age {
+			continue
 		}
-		unit = step.UnitAfter
+		step.Effect.Apply(&unit)
 	}
 	return unit
 }
@@ -314,6 +316,9 @@ type Step struct {
 	Name       string     // the technology name, or the effect name of a civilization bonus
 	Technology Technology // the researched technology, empty for a civilization bonus
 	Source     UpgradeSource
+	// Age is the age needed to get the step, 0 if none or unknown, e.g. ImperialAge for Plate Barding Armor.
+	Age        TechID
+	Effect     Effect
 	UnitBefore Unit
 	UnitAfter  Unit
 }
@@ -412,7 +417,11 @@ func (tree *TechTree) loadRowUpgraded(civilization Civilization, unitID UnitID, 
 		if source == CivilizationBonuses || name == "" {
 			name = effect.Name
 		}
-		row.Steps = append(row.Steps, Step{Name: name, Technology: technology, Source: source, UnitBefore: before, UnitAfter: unit.clone()})
+		row.Steps = append(row.Steps, Step{
+			Name: name, Technology: technology, Source: source,
+			Age: tree.findTechnologyAge(technology.ID, map[TechID]bool{}), Effect: effect,
+			UnitBefore: before, UnitAfter: unit.clone(),
+		})
 	}
 	for _, id := range technologyIDs {
 		effect := TechnologyEffects[id]
