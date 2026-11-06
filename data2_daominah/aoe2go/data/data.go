@@ -6,15 +6,24 @@ package data
 
 import _ "embed"
 
-// AoE2TechTreeData is data/data_from_aoe2techtree/data.json:
-// base stats and costs of units, buildings and technologies,
-// and what is available to each civilization.
+// Civilizations is dat_original_to_json/civilizations.json:
+// the .dat civilizations, with the units, buildings and technologies each one can use.
 //
-//go:embed data_from_aoe2techtree/data.json
-var AoE2TechTreeData []byte
+//go:embed dat_original_to_json/civilizations.json
+var Civilizations []byte
 
-// AoE2TechTreeStrings is data/data_from_aoe2techtree/strings.json:
-// English names and descriptions, by string ID.
+// Units is dat_original_to_json/units.json: base stats of units and buildings.
 //
-//go:embed data_from_aoe2techtree/strings.json
-var AoE2TechTreeStrings []byte
+//go:embed dat_original_to_json/units.json
+var Units []byte
+
+// Technologies is dat_original_to_json/technologies.json: names, effects and costs.
+//
+//go:embed dat_original_to_json/technologies.json
+var Technologies []byte
+
+// GameStringsEnglish is the game English strings, lines like `5661 "Hussar"`,
+// the names of units, technologies and civilizations by their name_string_id.
+//
+//go:embed dat_original_from_game/resources/en/strings/key-value/key-value-strings-utf8.txt
+var GameStringsEnglish []byte
