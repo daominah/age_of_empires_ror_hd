@@ -2,7 +2,6 @@ package logic
 
 import (
 	"fmt"
-	"maps"
 	"math"
 	"slices"
 	"sort"
@@ -20,12 +19,10 @@ type Line struct {
 	Class   UnitClass // unit class in the .dat, e.g. ClassCavalry
 }
 
-// Attacker is what hits the line units, with its fully upgraded attack.
-type Attacker struct {
-	Name    string
-	Attacks map[ArmorClass]float64 // amount by armor class, e.g. ArmorClassPierce
-	// ExtraProjectiles is the number of projectiles besides the first, see Unit.ExtraProjectiles.
-	ExtraProjectiles int
+// NewRowFromUnit is a row of the unit alone, without a civilization,
+// e.g. the baseline of a NewCriterionWeightedSum from LoadUnitUpgraded.
+func NewRowFromUnit(unit Unit) Row {
+	return Row{Unit: unit, BaseUnit: unit, UnitWithoutUniqueTechnologies: unit}
 }
 
 // Row is a civilization's fully upgraded unit of the line.
@@ -38,9 +35,11 @@ type Row struct {
 	// EarlierRows are the rows of the units of the line before this one that the civilization also has,
 	// e.g. the Light Cavalry for the Hussar, to note the stats of each age.
 	EarlierRows []Row
-	Unit        Unit
-	BaseUnit    Unit   // the unit before any technology or civilization bonus
-	Steps       []Step // the applied effects, in order
+	// UpgradeTechnologies is the technology that upgrades to the row unit, empty for the first unit of the line.
+	UpgradeTechnologies []Technology
+	Unit                Unit
+	BaseUnit            Unit   // the unit before any technology or civilization bonus
+	Steps               []Step // the applied effects, in order
 	// UnitWithoutUniqueTechnologies is the unit without its unique technologies,
 	// to rank a strength that costs a unique technology below the same strength for free,
 	// e.g. Tatars Silk Armor against Turks, Gurjaras Kshatriyas against Magyars.
@@ -58,12 +57,12 @@ type Column struct {
 // Columns of the unit stats.
 var (
 	ColumnHP          = Column{Name: "HP", Value: func(row Row) string { return formatNumber(GetShownHP(row.Unit)) }}
-	ColumnMeleeArmor  = Column{Name: "Melee armor", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getMeleeArmor) }}
-	ColumnPierceArmor = Column{Name: "Pierce armor", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getPierceArmor) }}
-	ColumnAttack      = Column{Name: "Attack", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getAttack) }}
+	ColumnMeleeArmor  = Column{Name: "MArmor", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getMeleeArmor) }}
+	ColumnPierceArmor = Column{Name: "PArmor", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getPierceArmor) }}
+	ColumnAttack      = Column{Name: "Attack", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getAttack) + formatExtraArrows(row.Unit) }}
 	ColumnRange       = Column{Name: "Range", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getRange) }}
 	ColumnMinRange    = Column{Name: "Min range", Value: func(row Row) string { return formatNumber(row.Unit.MinRange) }}
-	ColumnReloadTime  = Column{Name: "Reload time", Value: func(row Row) string { return formatNumber(row.Unit.ReloadTime) }}
+	ColumnReloadTime  = Column{Name: "Reload", Value: func(row Row) string { return formatNumber(row.Unit.ReloadTime) }}
 	ColumnSpeed       = Column{Name: "Speed", Value: func(row Row) string { return formatNumber(row.Unit.Speed) }}
 	ColumnCost        = Column{Name: "Cost", Value: func(row Row) string { return formatCost(row.Unit.Cost) }}
 	ColumnNote        = Column{Name: "Note", Value: FormatNote, IsFootnote: true}
@@ -85,6 +84,33 @@ func NewColumnBonusAttack(name string, classes ...ArmorClass) Column {
 	}
 }
 
+// ArmorClassLabel is an armor class with a short label for a narrow column, e.g. "CavArcher" for the Cavalry Archers.
+type ArmorClassLabel struct {
+	Class ArmorClass
+	Label string
+}
+
+// NewColumnBonusAttackShort shows the bonus attacks against the important classes
+// that differ from the baseline unit, empty if none, so the bonuses common to the line are not repeated,
+// e.g. the Elite Bolas Rider "+3 vs Cav" on top of its attack in the cavalry archer ranking,
+// the Vietnamese Imperial Skirmisher "+5 vs Archers" instead of the usual +4 in the skirmisher ranking.
+// It is a short version for the table, the note keeps the special bonus attacks in detail.
+func NewColumnBonusAttackShort(baseline Row, classes ...ArmorClassLabel) Column {
+	return Column{
+		Name: "BonusATK",
+		Value: func(row Row) string {
+			var values []string
+			for _, class := range classes {
+				amount := row.Unit.Attacks[class.Class]
+				if amount != baseline.Unit.Attacks[class.Class] {
+					values = append(values, formatSigned(amount)+" vs "+class.Label)
+				}
+			}
+			return strings.Join(values, ", ")
+		},
+	}
+}
+
 // NewColumnNoteWithBonusAttack is the note column that also notes the special bonus attacks,
 // for a line without a column of bonus attacks.
 // The classes every unit of the line has a bonus against are not noted, e.g. Monks for the scout line.
@@ -93,14 +119,14 @@ func NewColumnNoteWithBonusAttack(commonClasses ...ArmorClass) Column {
 		Name:       "Note",
 		IsFootnote: true,
 		Value: func(row Row) string {
-			return joinNotes(FormatCostNote(row), FormatAgeNote(row), FormatBonusAttackNote(row, commonClasses...), FormatTraitNote(row))
+			return joinNotes(FormatCostNote(row), FormatTechnologyCostNote(row), FormatAgeNote(row), FormatBonusAttackNote(row, commonClasses...), FormatTraitNote(row))
 		},
 	}
 }
 
-// FormatNote is FormatCostNote, FormatAgeNote then FormatTraitNote.
+// FormatNote is FormatCostNote, FormatTechnologyCostNote, FormatAgeNote then FormatTraitNote.
 func FormatNote(row Row) string {
-	return joinNotes(FormatCostNote(row), FormatAgeNote(row), FormatTraitNote(row))
+	return joinNotes(FormatCostNote(row), FormatTechnologyCostNote(row), FormatAgeNote(row), FormatTraitNote(row))
 }
 
 // joinNotes joins the notes that are not empty.
@@ -252,14 +278,35 @@ func getMeleeArmor(u Unit) float64  { return u.Armors[ArmorClassMelee] }
 func getPierceArmor(u Unit) float64 { return u.Armors[ArmorClassPierce] }
 func getRange(u Unit) float64       { return u.Range }
 
-// attack is the main attack of the unit: melee, or pierce for a unit without a melee attack, e.g. a skirmisher.
-// getAttack is the melee or pierce attack shown in game, plus the attack of the extra projectiles,
-// e.g. the Maya Elite Skirmisher 3+4+1.
+// getAttack is the melee or pierce attack shown in game, the main arrow only,
+// e.g. the Elite Kipchak 5+3, its extra arrows are shown apart by formatExtraArrows.
+// It takes the larger of the two, as some ranged units also list a melee attack of 0,
+// e.g. the Chu Ko Nu, so that melee 0 still counts against a ram negative melee armor.
 func getAttack(u Unit) float64 {
-	if melee, isFound := u.Attacks[ArmorClassMelee]; isFound {
+	melee := u.Attacks[ArmorClassMelee]
+	pierce, isRanged := u.Attacks[ArmorClassPierce]
+	if !isRanged || melee > pierce {
 		return melee
 	}
-	return u.Attacks[ArmorClassPierce] + float64(u.ExtraProjectiles)*ExtraProjectileAttack
+	return pierce
+}
+
+// formatExtraArrows is the arrows besides the main one, empty if none,
+// as their count x their attack, e.g. the Elite Kipchak " (+3x3 arrows)", the Maya Elite Skirmisher " (+1x1 arrow)".
+// A charged attack is left out.
+func formatExtraArrows(u Unit) string {
+	if u.ExtraProjectiles <= 0 {
+		return ""
+	}
+	attacks := u.ExtraAttacks
+	if attacks == nil {
+		attacks = u.Attacks
+	}
+	noun := "arrows"
+	if u.ExtraProjectiles == 1 {
+		noun = "arrow"
+	}
+	return fmt.Sprintf(" (+%vx%v %v)", u.ExtraProjectiles, formatNumber(attacks[ArmorClassPierce]), noun)
 }
 
 // Step is an effect applied to a row unit, with the unit before and after it.
@@ -344,6 +391,9 @@ func (tree *TechTree) loadRowUpgraded(civilization Civilization, unitID UnitID, 
 	unit.Class = class
 	withoutUniqueTechnologies := unit.clone()
 	row := Row{CivilizationID: civilization.ID, Civilization: civilization.Name, BaseUnit: unit.clone(), AvailableAge: tree.FindUnitAge(civilization, unitID)}
+	if id, isFound := civilization.UpgradeTechnologyIDs[unitID]; isFound {
+		row.UpgradeTechnologies = append(row.UpgradeTechnologies, tree.Technologies[id])
+	}
 
 	var technologyIDs []TechID
 	for id := range TechnologyEffects {
@@ -384,54 +434,6 @@ func (tree *TechTree) loadRowUpgraded(civilization Civilization, unitID UnitID, 
 	return row
 }
 
-// ExtraProjectileAttack is the pierce attack of each projectile besides the first,
-// e.g. a Maya Elite Skirmisher with Hul'che Javelineers throws one javelin of attack 7 and one of attack 1.
-const ExtraProjectileAttack = 1
-
-// CalculateDamagePerHit is the damage of one hit of the attacker on the target:
-// the damage of the first projectile plus the damage of each extra projectile.
-// Each projectile deals the sum over the armor classes of both of attack minus armor (not below 0), at least 1,
-// so against a high armor like a Battering Ram a Maya skirmisher deals 2 instead of 1.
-func CalculateDamagePerHit(attacker Attacker, target Unit) float64 {
-	damage := calculateProjectileDamage(attacker.Attacks, target)
-	extraAttacks := map[ArmorClass]float64{ArmorClassPierce: ExtraProjectileAttack}
-	for i := 0; i < attacker.ExtraProjectiles; i++ {
-		damage += calculateProjectileDamage(extraAttacks, target)
-	}
-	return damage
-}
-
-// calculateProjectileDamage is the damage of one projectile on the target.
-func calculateProjectileDamage(attacks map[ArmorClass]float64, target Unit) float64 {
-	damage := 0.0
-	for class, attack := range attacks {
-		armor, isFound := target.Armors[class]
-		if !isFound {
-			continue
-		}
-		damage += math.Max(0, attack-armor)
-	}
-	return math.Max(1, damage)
-}
-
-// CalculateHitsToKill is how many hits of the attacker kill the target.
-// It uses the HP with decimals, e.g. Mongols Hussar 117.5 HP, shown as 118 in game.
-func CalculateHitsToKill(attacker Attacker, target Unit) int {
-	return int(math.Ceil(cleanHP(target) / CalculateDamagePerHit(attacker, target)))
-}
-
-// GetShownHP is the HP shown in game, rounded to nearest (half up),
-// e.g. Mongols Hussar 117.5 HP is shown as 118.
-func GetShownHP(u Unit) float64 {
-	return math.Floor(cleanHP(u) + 0.5)
-}
-
-// cleanHP rounds away the noise of multiplied effect values,
-// e.g. the Mongols 1.08333 (for 1.08333...) makes 117.5 HP into 117.4997.
-func cleanHP(u Unit) float64 {
-	return math.Round(u.HP*1000) / 1000
-}
-
 // SortRows sorts by the criteria in order, the next one breaking ties of the previous,
 // then by civilization name.
 func SortRows(rows []Row, criteria []Criterion) {
@@ -456,7 +458,7 @@ func SortRows(rows []Row, criteria []Criterion) {
 func RenderMarkdownTable(rows []Row, columns []Column) string {
 	headers := []string{"#", "Civilization", "Unit"}
 	for _, column := range columns {
-		headers = append(headers, column.Name)
+		headers = append(headers, formatHeader(column.Name))
 	}
 	table := [][]string{headers}
 	var footnotes []string
@@ -477,6 +479,16 @@ func RenderMarkdownTable(rows []Row, columns []Column) string {
 		result += "\n" + strings.Join(footnotes, "\n") + "\n"
 	}
 	return result
+}
+
+// formatHeader is the column name in CamelCase, to save width of the table,
+// e.g. "Tank vs Arbalester 10" is "TankVsArbalester10".
+func formatHeader(name string) string {
+	var b strings.Builder
+	for _, word := range strings.Fields(name) {
+		b.WriteString(strings.ToUpper(word[:1]) + word[1:])
+	}
+	return b.String()
 }
 
 // alignTable pads each column to its widest cell,
@@ -524,12 +536,4 @@ func formatCost(c Cost) string {
 		}
 	}
 	return strings.Join(parts, " ")
-}
-
-// clone copies the unit, so applying effects does not change the base unit maps.
-func (u Unit) clone() Unit {
-	c := u
-	c.Attacks = maps.Clone(u.Attacks)
-	c.Armors = maps.Clone(u.Armors)
-	return c
 }

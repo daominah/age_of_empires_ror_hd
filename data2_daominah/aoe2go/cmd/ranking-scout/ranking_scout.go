@@ -28,48 +28,59 @@ var (
 		{UnitIDs: []logic.UnitID{logic.MagyarHuszar, logic.EliteMagyarHuszar}, Class: logic.ClassCavalry},
 	}
 
-	// castle11Plus4 is a fully upgraded Castle arrow:
-	// 11 + Fletching, Bodkin Arrow, Bracer, Chemistry.
-	castle11Plus4 = logic.Attacker{Name: "Castle 11+4", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 15}}
-	// castle11Plus3 is a Castle arrow without Bracer.
-	castle11Plus3 = logic.Attacker{Name: "Castle 11+3", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 14}}
-	// townCenter5Plus4 is a fully upgraded Town Center arrow:
-	// 5 + Fletching, Bodkin Arrow, Bracer, Chemistry.
-	townCenter5Plus4 = logic.Attacker{Name: "Town Center 5+4", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 9}}
-	// arbalester6Plus4 is a fully upgraded Arbalester: 6 + Fletching, Bodkin Arrow, Bracer, Chemistry.
-	arbalester6Plus4 = tree.LoadAttackerUpgraded(logic.Arbalester)
+	// castle15 is a fully upgraded Castle arrow: 11 + Fletching, Bodkin Arrow, Bracer, Chemistry.
+	castle15 = logic.Unit{Name: "Castle 15", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 15}}
+	// townCenter9 is a fully upgraded Town Center arrow: 5 + Fletching, Bodkin Arrow, Bracer, Chemistry.
+	townCenter9 = logic.Unit{Name: "Town Center 9", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 9}}
+	// arbalester is a fully upgraded Arbalester: attack 6+4.
+	arbalester = tree.LoadUnitUpgraded(logic.Arbalester)
+	// heavyCavalryArcher is a fully upgraded Heavy Cavalry Archer: attack 7+4.
+	heavyCavalryArcher = tree.LoadUnitUpgraded(logic.HeavyCavalryArcher)
+	// hussar is a fully upgraded Hussar, for the tank in the Hussar mirror: attack 7+4.
+	hussar = tree.LoadUnitUpgraded(logic.Hussar)
+	// baseline is a standard fully upgraded Hussar, the 100% of each score weight.
+	baseline = logic.NewRowFromUnit(hussar)
+	// scoreWeights weight the arrows that hit a scout most: an Arbalester, a Castle, a Heavy Cavalry Archer
+	// and a Town Center, all fully upgraded, in whole hits to kill.
+	scoreWeights = []logic.WeightedCriterion{
+		{Criterion: logic.NewCriterionTankVs(arbalester), Weight: 4},
+		{Criterion: logic.NewCriterionTankVs(castle15), Weight: 3},
+		{Criterion: logic.NewCriterionTankVs(heavyCavalryArcher), Weight: 2},
+		{Criterion: logic.NewCriterionTankVs(townCenter9), Weight: 1},
+	}
 
 	// criteria sort the rows in order, the next one breaking ties of the previous.
 	// Reorder or comment out lines to rank differently,
-	// e.g. put logic.NewCriterionTankVs(arbalester6Plus4) first.
+	// e.g. put logic.CriterionCost first.
 	criteria = []logic.Criterion{
-		logic.NewCriterionTankVs(castle11Plus4),
-		logic.NewCriterionTankVs(arbalester6Plus4),
+		logic.NewCriterionWeightedSum("Tank vs arrows", baseline, scoreWeights),
 		// cost saving from a unique technology only breaks ties of the same cost for free,
 		// e.g. Magyars and Berbers above Gurjaras (Kshatriyas)
 		logic.CriterionCostBeforeUniqueTechnologies,
 		logic.CriterionCost,
 		logic.CriterionAttack,
-		logic.NewCriterionTankVs(castle11Plus3),
-		logic.NewCriterionTankVs(townCenter5Plus4),
+		// the strengths the arrow tank leaves out, roughly ordered:
+		// melee armor in the Hussar mirror (Teutons), the speed (Cumans), the bonus attacks,
+		// then the hand written traits (regeneration, bonus damage taken, trample)
+		logic.NewCriterionTankVs(hussar),
+		logic.CriterionSpeed,
+		logic.CriterionBonusAttackSum,
+		logic.CriterionTraitWeightSum,
 		// last, a strength from a unique technology only breaks the remaining ties,
 		// e.g. Turks above Tatars (Silk Armor)
-		logic.NewCriterionTankVsBeforeUniqueTechnologies(castle11Plus4),
+		logic.NewCriterionTankVsBeforeUniqueTechnologies(arbalester),
 	}
 
 	// columns of the output table, after the rank, civilization and unit,
 	// apart from the criteria: a criterion sorts without a column of its own.
 	columns = []logic.Column{
-		// the basic stats first, then the stats that matter for this line
+		// the basic stats, add the stats that matter for this line later
 		logic.ColumnHP,
 		logic.ColumnMeleeArmor,
 		logic.ColumnPierceArmor,
 		logic.ColumnAttack,
 		logic.ColumnReloadTime,
 		logic.ColumnCost,
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(castle11Plus4)),
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(townCenter5Plus4)),
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(arbalester6Plus4)),
 		logic.ColumnSpeed,
 		// the bonus attack vs Monks is common to the line, so it is not noted
 		logic.NewColumnNoteWithBonusAttack(logic.ArmorClassMonks),
@@ -100,7 +111,7 @@ func findSourceDir() string {
 }
 
 // tree is the embedded game data, parsed before the config that uses it,
-// e.g. tree.LoadAttackerUpgraded(logic.Arbalester).
+// e.g. tree.LoadUnitUpgraded(logic.Arbalester).
 var tree = parseTechTreeOrExit()
 
 // parseTechTreeOrExit parses the embedded game data, it exits on error.

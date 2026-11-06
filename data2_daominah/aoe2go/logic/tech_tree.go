@@ -3,6 +3,7 @@ package logic
 import (
 	"encoding/json"
 	"fmt"
+	"maps"
 	"regexp"
 	"sort"
 	"strconv"
@@ -94,29 +95,6 @@ type Civilization struct {
 	UpgradeTechnologyIDs map[UnitID]TechID
 }
 
-// Unit is the stats of a unit, base or after applying effects.
-type Unit struct {
-	ID    UnitID
-	Name  string    // English name, e.g. "Hussar"
-	Class UnitClass // unit class in the .dat, e.g. ClassCavalry
-	HP    float64
-	// Attacks and Armors are amounts by armor class, e.g. ArmorClassPierce.
-	// Damage only counts the classes in both the attacker Attacks and the target Armors.
-	Attacks  map[ArmorClass]float64
-	Armors   map[ArmorClass]float64
-	Range    float64 // max range in tiles, e.g. 0 for a Knight, 1 for a Steppe Lancer, 5 for a Throwing Axeman
-	MinRange float64 // min range in tiles, 0 for most units, e.g. 1 for a Skirmisher, 3 for a Mangonel
-	// ExtraProjectiles is the number of projectiles besides the first, e.g. 1 for the Maya skirmisher.
-	// Each one hits with the attack ExtraProjectileAttack, apart from the first projectile.
-	ExtraProjectiles int
-	ReloadTime       float64 // seconds between attacks
-	Speed            float64
-	TrainTime        float64 // seconds
-	Cost             Cost
-	// IsIgnoringArmor is set by Wootz Steel: the unit attack ignores the target armor.
-	IsIgnoringArmor bool
-}
-
 // Cost is the resources to train a unit.
 type Cost struct {
 	Food  float64
@@ -168,7 +146,7 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 			ID:         UnitID(u.ID),
 			Name:       names[u.NameStringID],
 			HP:         u.HP,
-			Attacks:    map[ArmorClass]float64{},
+			Attacks:    parseAttacks(u.Attacks),
 			Armors:     map[ArmorClass]float64{},
 			Class:      UnitClass(u.Class),
 			Range:      u.Range,
@@ -181,9 +159,7 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 		if unit.Name == "" {
 			unit.Name = u.InternalName
 		}
-		for class, amount := range u.Attacks {
-			unit.Attacks[ArmorClass(class)] = amount
-		}
+		parseProjectiles(u, &unit)
 		for class, amount := range u.Armors {
 			unit.Armors[ArmorClass(class)] = amount
 		}
@@ -285,4 +261,55 @@ type unitJSON struct {
 	Attacks      map[int]float64    `json:"attacks"`
 	Armors       map[int]float64    `json:"armors"`
 	Cost         map[string]float64 `json:"cost"`
+	// TotalProjectiles and MaxTotalProjectiles are 0 when missing, which means 1 arrow.
+	TotalProjectiles    float64         `json:"total_projectiles"`
+	MaxTotalProjectiles float64         `json:"max_total_projectiles"`
+	SecondaryProjectile *projectileJSON `json:"secondary_projectile"`
+	ChargeProjectile    *projectileJSON `json:"charge_projectile"`
+	ChargeTime          float64         `json:"charge_time"`
+}
+
+// projectileJSON is a projectile of a unit attack in units.json, e.g. the Kipchak extra arrow.
+type projectileJSON struct {
+	ID      int             `json:"id"`
+	Attacks map[int]float64 `json:"attacks"`
+}
+
+// parseProjectiles reads the arrows of the unit attack into the unit:
+// the extra arrows of each attack, and the charged attack if any.
+func parseProjectiles(u unitJSON, unit *Unit) {
+	countExtra := func(total float64) int {
+		if total < 1 {
+			return 0 // missing in units.json, 1 arrow
+		}
+		return int(total) - 1
+	}
+	unit.ExtraProjectiles = countExtra(u.TotalProjectiles)
+	if u.SecondaryProjectile != nil {
+		unit.ExtraProjectileID = UnitID(u.SecondaryProjectile.ID)
+		unit.ExtraAttacks = parseAttacks(u.SecondaryProjectile.Attacks)
+	}
+	if u.ChargeProjectile == nil {
+		return
+	}
+	unit.ChargeAttack = &ChargeAttack{
+		Shot: Shot{
+			ProjectileID:     UnitID(u.ChargeProjectile.ID),
+			Attacks:          parseAttacks(u.ChargeProjectile.Attacks),
+			ExtraProjectiles: countExtra(u.MaxTotalProjectiles),
+			// the charged volley extra arrows are copies of the normal extra arrow, changed by effects apart
+			ExtraProjectileID: unit.ExtraProjectileID,
+			ExtraAttacks:      maps.Clone(unit.ExtraAttacks),
+		},
+		ChargeTime: u.ChargeTime,
+	}
+}
+
+// parseAttacks reads attacks of units.json, keeping the classes of 0, see Unit.Attacks.
+func parseAttacks(attacks map[int]float64) map[ArmorClass]float64 {
+	result := map[ArmorClass]float64{}
+	for class, amount := range attacks {
+		result[ArmorClass(class)] = amount
+	}
+	return result
 }

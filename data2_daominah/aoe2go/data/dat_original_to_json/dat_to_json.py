@@ -103,6 +103,8 @@ def units(dat):
             item['reload_time'] = unit.type_50.reload_time
             item['attacks'] = {str(a.class_): a.amount for a in unit.type_50.attacks}
             item['armors'] = {str(a.class_): a.amount for a in unit.type_50.armours}
+        if unit.creatable and unit.type_50:
+            item.update(projectiles(dat, unit.creatable))
         if unit.creatable:
             item['cost'] = cost(unit.creatable.resource_costs)
             locations = [t for t in unit.creatable.train_locations if t.unit_id >= 0]
@@ -112,6 +114,37 @@ def units(dat):
             item['train_time'] = slots[0].train_time if slots else 0
         result.append(item)
     return result
+
+
+def projectiles(dat, creatable):
+    """The arrows of a unit attack, only what differs from a single arrow:
+    - total_projectiles: arrows fired by each attack, e.g. 4 for the Elite Kipchak.
+    - max_total_projectiles: arrows of a charged volley, e.g. 6 for the Xianbei Raider.
+    - secondary_projectile: the arrow besides the main one, with its own attacks,
+      e.g. 3 pierce for the Kipchak, while the main arrow uses the unit attacks.
+    - charge_projectile and charge_time: the strong arrow fired once charged, and the seconds to charge,
+      e.g. the Bolas Rider bolas every 30 seconds."""
+    result = {}
+    if creatable.total_projectiles != 1:
+        result['total_projectiles'] = creatable.total_projectiles
+    if creatable.max_total_projectiles != 1:
+        result['max_total_projectiles'] = creatable.max_total_projectiles
+    secondary = projectile(dat, creatable.secondary_projectile_unit)
+    if secondary:
+        result['secondary_projectile'] = secondary
+    charge = projectile(dat, creatable.charge_projectile_unit)
+    if charge and creatable.recharge_rate > 0:
+        result['charge_projectile'] = charge
+        result['charge_time'] = round(creatable.max_charge / creatable.recharge_rate, 2)
+    return result
+
+
+def projectile(dat, unit_id):
+    """A projectile unit ID with its attacks, None if there is none."""
+    units = dat.civs[0].units
+    if not 0 <= unit_id < len(units) or not units[unit_id] or not units[unit_id].type_50:
+        return None
+    return {'id': unit_id, 'attacks': {str(a.class_): a.amount for a in units[unit_id].type_50.attacks}}
 
 
 def technologies(dat):

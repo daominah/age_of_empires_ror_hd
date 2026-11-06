@@ -133,7 +133,7 @@ func TestLoadRowsUpgraded(t *testing.T) {
 	ram := Unit{Armors: map[ArmorClass]float64{ArmorClassPierce: 150}, HP: 175}
 	for civilization, want := range map[CivilizationID]float64{Maya: 2, Britons: 1} {
 		u := skirmisherRows[civilization].Unit
-		got := CalculateDamagePerHit(Attacker{Attacks: u.Attacks, ExtraProjectiles: u.ExtraProjectiles}, ram)
+		got := CalculateDamagePerHit(u, ram)
 		if got != want {
 			t.Errorf("%v: got %v damage to a ram, want %v", civilization, got, want)
 		}
@@ -225,7 +225,7 @@ func TestLoadRowsUpgradedCavalryArcher(t *testing.T) {
 }
 
 func TestCalculateHitsToKill(t *testing.T) {
-	castle := Attacker{Name: "Castle", Attacks: map[ArmorClass]float64{ArmorClassPierce: 15, ArmorClassSpearmen: 2}}
+	castle := Unit{Name: "Castle", Attacks: map[ArmorClass]float64{ArmorClassPierce: 15, ArmorClassSpearmen: 2}}
 	for _, c := range []struct {
 		name   string
 		target Unit
@@ -250,7 +250,7 @@ func TestCalculateHitsToKill(t *testing.T) {
 	}
 }
 
-func TestLoadAttackerUpgraded(t *testing.T) {
+func TestLoadUnitUpgraded_Arbalester(t *testing.T) {
 	// GIVEN the embedded game data
 	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
 	if err != nil {
@@ -259,16 +259,12 @@ func TestLoadAttackerUpgraded(t *testing.T) {
 
 	// WHEN the Arbalester gets the technologies any civilization can research
 	unit := tree.LoadUnitUpgraded(Arbalester)
-	attacker := tree.LoadAttackerUpgraded(Arbalester)
 
 	// THEN it has Fletching, Bodkin Arrow, Bracer, Chemistry, Thumb Ring and the archer armors,
 	// without civilization bonuses, e.g. no Britons range
 	if unit.HP != 40 || unit.Attacks[ArmorClassPierce] != 10 || unit.Range != 8 ||
 		unit.Armors[ArmorClassPierce] != 4 || unit.Armors[ArmorClassMelee] != 3 || math.Abs(unit.ReloadTime-1.7) > 1e-6 {
 		t.Errorf("got %+v, want 40 HP, attack 10, range 8, armor 3/4, reload time 1.7", unit)
-	}
-	if attacker.Name != "Arbalester 6+4" || attacker.Attacks[ArmorClassPierce] != 10 {
-		t.Errorf("got attacker %+v, want Arbalester 6+4 with 10 pierce attack", attacker)
 	}
 }
 
@@ -370,5 +366,175 @@ func TestFormatBonusAttackNote(t *testing.T) {
 	// THEN only the special bonus is noted, not the pierce attack, a zero or a negative one
 	if want := "bonus attack 5 vs Siege Weapons"; got != want {
 		t.Errorf("got %q, want %q", got, want)
+	}
+}
+
+func TestFormatTechnologyCostNote(t *testing.T) {
+	// GIVEN the scout line rows
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+	line := Line{UnitIDs: []UnitID{ScoutCavalry, LightCavalry, Hussar, WingedHussar}, Class: ClassCavalry}
+	notes := map[CivilizationID]string{}
+	for _, row := range LoadRowsUpgraded(tree, line) {
+		notes[row.CivilizationID] = FormatTechnologyCostNote(row)
+	}
+
+	// THEN the cheaper technologies are noted with the cost before and after
+	for _, c := range []struct {
+		civilization CivilizationID
+		want         string
+	}{
+		{Turks, "Light Cavalry upgrade free instead of 150f 50g, Hussar upgrade free instead of 500f 600g"},
+		{Burgundians, "Husbandry 75f instead of 150f, Light Cavalry upgrade 75f 25g instead of 150f 50g, Hussar upgrade 250f 300g instead of 500f 600g"},
+		{Persians, ""},
+	} {
+		if got := notes[c.civilization]; got != c.want {
+			t.Errorf("civilization %v: got %q, want %q", c.civilization, got, c.want)
+		}
+	}
+}
+
+func TestCalculateDamagePerTwoSeconds(t *testing.T) {
+	// GIVEN an attacker of pierce attack 7 and a target of pierce armor 4
+	attacker := Unit{Attacks: map[ArmorClass]float64{ArmorClassPierce: 7}, ReloadTime: 3}
+	target := Unit{Armors: map[ArmorClass]float64{ArmorClassPierce: 4}}
+
+	// WHEN the reload time is 3 seconds
+	// THEN it hits for 3 every 3 seconds, so 2 in 2 seconds
+	if got := CalculateDamagePerTwoSeconds(attacker, target); got != 2 {
+		t.Errorf("got %v, want 2", got)
+	}
+
+	// WHEN the target armor is higher than the attack
+	attacker.ReloadTime = 2
+	target = Unit{Armors: map[ArmorClass]float64{ArmorClassPierce: 100}}
+	// THEN each hit still deals the minimum 1 damage, so 1 per second with a reload time of 2 seconds
+	if got := CalculateDamagePerTwoSeconds(attacker, target); got != 1 {
+		t.Errorf("got %v, want 1", got)
+	}
+
+	// WHEN the attacker also fires 2 extra arrows of pierce attack 5 with each attack
+	attacker.ExtraProjectiles = 2
+	attacker.ExtraAttacks = map[ArmorClass]float64{ArmorClassPierce: 5}
+	target = Unit{Armors: map[ArmorClass]float64{ArmorClassPierce: 4}}
+	// THEN each attack deals 3 + 1 + 1, so 5 in 2 seconds
+	if got := CalculateDamagePerTwoSeconds(attacker, target); got != 5 {
+		t.Errorf("got %v, want 5", got)
+	}
+
+	// WHEN the attacker also has a charged attack of pierce 34 every 29 seconds, without extra arrows
+	attacker.ChargeAttack = &ChargeAttack{Shot: Shot{Attacks: map[ArmorClass]float64{ArmorClassPierce: 34}}, ChargeTime: 29}
+	// THEN every 30 seconds, the charge time and half a reload, a charged shot of 30 replaces a normal shot of 5,
+	// adding 25 per 30 seconds, so 5 + 25*2/30 in 2 seconds
+	if got, want := CalculateDamagePerTwoSeconds(attacker, target), 5+25*2.0/30; math.Abs(got-want) > 1e-9 {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
+
+func TestLoadUnitUpgraded_ExtraArrowsAndChargedAttack(t *testing.T) {
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+	hussar := tree.LoadUnitUpgraded(Hussar)
+
+	// WHEN loading the Elite Kipchak, with every technology of its civilization
+	kipchak := tree.LoadUnitUpgraded(EliteKipchak)
+	// THEN each attack fires 3 extra arrows of 3 pierce, not improved by the Blacksmith
+	if kipchak.ExtraProjectiles != 3 || kipchak.ExtraAttacks[ArmorClassPierce] != 3 || kipchak.ChargeAttack != nil {
+		t.Errorf("Elite Kipchak: got %v extra arrows of %v, charged attack %v, want 3 of 3 pierce and none",
+			kipchak.ExtraProjectiles, kipchak.ExtraAttacks, kipchak.ChargeAttack)
+	}
+
+	// WHEN loading the Xianbei Raider
+	xianbei := tree.LoadUnitUpgraded(XianbeiRaider)
+	// THEN a normal attack fires 1 arrow,
+	// and the charged volley fires 1 arrow of 5 pierce and 5 of 1 pierce,
+	// each improved by the Blacksmith +4 pierce, and by Parthian Tactics +2 vs Spearmen
+	charge := xianbei.ChargeAttack
+	if xianbei.ExtraProjectiles != 0 || charge == nil || charge.ChargeTime != 30 || charge.ExtraProjectiles != 5 ||
+		charge.Attacks[ArmorClassPierce] != 9 || charge.ExtraAttacks[ArmorClassPierce] != 5 ||
+		charge.Attacks[ArmorClassSpearmen] != 5 || charge.ExtraAttacks[ArmorClassSpearmen] != 6 {
+		t.Errorf("Xianbei Raider: got %v extra arrows, charged attack %+v", xianbei.ExtraProjectiles, charge)
+	}
+
+	// WHEN loading the Elite Bolas Rider of the Mapuche, who have no Bracer
+	bolas := tree.LoadUnitUpgraded(EliteBolasRider)
+	// THEN its charged bolas of 9 pierce gets Fletching, Bodkin Arrow and Chemistry +3 pierce, without extra arrows
+	if bolas.ChargeAttack == nil || bolas.ChargeAttack.Attacks[ArmorClassPierce] != 12 || bolas.ChargeAttack.ExtraProjectiles != 0 {
+		t.Errorf("Elite Bolas Rider: got charged attack %+v, want 12 pierce", bolas.ChargeAttack)
+	}
+
+	// THEN against a fully upgraded Hussar, the charged bolas deals 12 - 6 = 6 plus 3 vs cavalry,
+	// and the Xianbei Raider charged volley 9 - 6 = 3 plus 5 arrows of 5 - 6, at least 1 each
+	if got := CalculateShotDamage(bolas.ChargeAttack.Shot, hussar); got != 9 {
+		t.Errorf("Elite Bolas Rider charged bolas: got %v damage to a Hussar, want 9", got)
+	}
+	if got := CalculateShotDamage(charge.Shot, hussar); got != 8 {
+		t.Errorf("Xianbei Raider charged volley: got %v damage to a Hussar, want 8", got)
+	}
+}
+
+func TestNewCriterionWeightedSum(t *testing.T) {
+	// GIVEN a baseline unit of range 7, reload time 2 and melee armor 0
+	baseline := NewRowFromUnit(Unit{Range: 7, ReloadTime: 2, Armors: map[ArmorClass]float64{ArmorClassMelee: 0}})
+	meleeArmor := Criterion{Name: "Melee armor", Value: func(r Row) float64 { return r.Unit.Armors[ArmorClassMelee] }, IsHigherBetter: true}
+
+	// WHEN the score weighs the range by 7, then the reload time and the melee armor by the default weights
+	score := NewCriterionWeightedSum("Score", baseline, []WeightedCriterion{
+		{Criterion: CriterionRange, Weight: 7},
+		{Criterion: CriterionReloadTime},
+		{Criterion: meleeArmor},
+	})
+
+	// THEN the baseline scores 0
+	if got := score.Value(baseline); got != 0 {
+		t.Errorf("baseline: got %v, want 0", got)
+	}
+	// THEN a range of 8 is 1/7 better than 7, worth 1
+	if got := score.Value(NewRowFromUnit(Unit{Range: 8, ReloadTime: 2})); math.Abs(got-1) > 1e-9 {
+		t.Errorf("range 8: got %v, want 1", got)
+	}
+	// THEN a reload time of 1.5 is 25% better as lower is better, worth 0.25 * 4 by default above the last criterion
+	if got := score.Value(NewRowFromUnit(Unit{Range: 7, ReloadTime: 1.5})); math.Abs(got-1) > 1e-9 {
+		t.Errorf("reload time 1.5: got %v, want 1", got)
+	}
+	// THEN a melee armor of 2 vs 0 counts the difference, as no ratio exists, worth 2 * 1 as the last criterion
+	if got := score.Value(NewRowFromUnit(Unit{Range: 7, ReloadTime: 2, Armors: map[ArmorClass]float64{ArmorClassMelee: 2}})); math.Abs(got-2) > 1e-9 {
+		t.Errorf("melee armor 2: got %v, want 2", got)
+	}
+}
+
+func TestNewCriterionWeightedSum_Limit(t *testing.T) {
+	// GIVEN a baseline unit of range 7, and a score of the range capped at +-50%
+	baseline := NewRowFromUnit(Unit{Range: 7})
+	score := NewCriterionWeightedSum("Score", baseline, []WeightedCriterion{{Criterion: CriterionRange, Weight: 2, Limit: 0.5}})
+
+	// WHEN a unit has range 21, 200% better than the baseline
+	got := score.Value(NewRowFromUnit(Unit{Range: 21}))
+
+	// THEN it counts as 50% better, worth 0.5 * 2
+	if math.Abs(got-1) > 1e-9 {
+		t.Errorf("range 21: got %v, want 1", got)
+	}
+}
+
+func TestNewCriterionWeightedSum_WeightIfWorse(t *testing.T) {
+	// GIVEN a baseline unit of range 7, and a score where a range below it counts twice as much
+	baseline := NewRowFromUnit(Unit{Range: 7})
+	score := NewCriterionWeightedSum("Score", baseline, []WeightedCriterion{{Criterion: CriterionRange, Weight: 7, WeightIfWorse: 14}})
+
+	// WHEN units have a tile more and a tile less than the baseline
+	better := score.Value(NewRowFromUnit(Unit{Range: 8}))
+	worse := score.Value(NewRowFromUnit(Unit{Range: 6}))
+
+	// THEN the tile more adds 1, the tile less costs 2
+	if math.Abs(better-1) > 1e-9 {
+		t.Errorf("range 8: got %v, want 1", better)
+	}
+	if math.Abs(worse+2) > 1e-9 {
+		t.Errorf("range 6: got %v, want -2", worse)
 	}
 }

@@ -62,7 +62,8 @@ const (
 	AttributeReloadTime            Attribute = 10
 	AttributeRange                 Attribute = 12 // max range
 	AttributeMinRange              Attribute = 20
-	AttributeProjectileCount       Attribute = 107 // max projectiles, the min one (102) changes with it
+	AttributeTotalProjectiles      Attribute = 102 // arrows of each attack
+	AttributeMaxTotalProjectiles   Attribute = 107 // arrows of a charged volley, e.g. the Xianbei Raider
 	AttributeBlastWidth            Attribute = 22  // e.g. Lechitic Legacy trample damage
 	AttributeSearchRadius          Attribute = 23
 	AttributeBonusDamageResistance Attribute = 24
@@ -94,6 +95,15 @@ const (
 // AnyUnit in an effect command targets all units of the command Class.
 const AnyUnit UnitID = -1
 
+// Projectile units with their own attacks, improved by the technologies apart from the unit that fires them.
+// The Kipchak extra arrow has no upgrade: Chemistry swaps it for a fire arrow of the same attack.
+const (
+	ProjectileXianbeiRaider          UnitID = 1982 // the main arrow of the charged volley
+	ProjectileXianbeiRaiderExtra     UnitID = 1983 // the other arrows of the charged volley
+	ProjectileBolasRiderCharged      UnitID = 2574
+	ProjectileEliteBolasRiderCharged UnitID = 2575
+)
+
 // Apply applies the effect commands that target the unit.
 func (e Effect) Apply(unit *Unit) {
 	for _, c := range e.Commands {
@@ -101,23 +111,25 @@ func (e Effect) Apply(unit *Unit) {
 	}
 }
 
-// Apply applies the command if it targets the unit.
+// Apply applies the command if it targets the unit, or the projectile of one of its arrows.
 func (c EffectCommand) Apply(unit *Unit) {
+	operation := c.getOperation()
+	if operation == nil {
+		return
+	}
+	// an arrow with its own attacks is improved by commands on its projectile unit,
+	// e.g. Fletching on the Xianbei Raider arrows
+	if c.UnitID != AnyUnit && c.Attribute == AttributeAttack {
+		for _, projectile := range unit.listProjectileAttacks() {
+			if projectile.ProjectileID == c.UnitID {
+				c.applyClassAmount(projectile.Attacks, operation)
+			}
+		}
+	}
 	if c.UnitID != AnyUnit && c.UnitID != unit.ID {
 		return
 	}
 	if c.Class != AnyClass && c.Class != unit.Class {
-		return
-	}
-	var operation func(old float64, value float64) float64
-	switch c.Type {
-	case SetAttribute, TeamSetAttribute:
-		operation = func(_ float64, value float64) float64 { return value }
-	case AddAttribute, TeamAddAttribute:
-		operation = func(old float64, value float64) float64 { return old + value }
-	case MultiplyAttribute, TeamMultiplyAttribute:
-		operation = func(old float64, value float64) float64 { return old * value }
-	default:
 		return
 	}
 
@@ -130,8 +142,14 @@ func (c EffectCommand) Apply(unit *Unit) {
 		unit.ReloadTime = operation(unit.ReloadTime, c.Value)
 	case AttributeRange:
 		unit.Range = operation(unit.Range, c.Value)
-	case AttributeProjectileCount:
-		unit.ExtraProjectiles = int(operation(float64(unit.ExtraProjectiles), c.Value))
+	case AttributeTotalProjectiles:
+		// the extra arrows are the total minus the main one
+		unit.ExtraProjectiles = int(operation(float64(unit.ExtraProjectiles+1), c.Value)) - 1
+	case AttributeMaxTotalProjectiles:
+		if unit.ChargeAttack != nil {
+			charge := unit.ChargeAttack
+			charge.ExtraProjectiles = int(operation(float64(charge.ExtraProjectiles+1), c.Value)) - 1
+		}
 	case AttributeMinRange:
 		unit.MinRange = operation(unit.MinRange, c.Value)
 	case AttributeTrainTime:
@@ -151,19 +169,35 @@ func (c EffectCommand) Apply(unit *Unit) {
 		unit.Cost.Wood = operation(unit.Cost.Wood, c.Value)
 		unit.Cost.Gold = operation(unit.Cost.Gold, c.Value)
 		unit.Cost.Stone = operation(unit.Cost.Stone, c.Value)
-	case AttributeArmor, AttributeAttack:
-		amounts := unit.Armors
-		if c.Attribute == AttributeAttack {
-			amounts = unit.Attacks
-		}
-		class, value := decodeClassAmount(c.Value)
-		if c.Type == MultiplyAttribute || c.Type == TeamMultiplyAttribute {
-			value = value / 100 // a percentage for multiply
-		}
-		// like the game, a class the unit does not have is not added
-		if old, isFound := amounts[class]; isFound {
-			amounts[class] = operation(old, value)
-		}
+	case AttributeArmor:
+		c.applyClassAmount(unit.Armors, operation)
+	case AttributeAttack:
+		c.applyClassAmount(unit.Attacks, operation)
+	}
+}
+
+// getOperation is how the command changes an attribute, nil for a command type not handled.
+func (c EffectCommand) getOperation() func(old float64, value float64) float64 {
+	switch c.Type {
+	case SetAttribute, TeamSetAttribute:
+		return func(_ float64, value float64) float64 { return value }
+	case AddAttribute, TeamAddAttribute:
+		return func(old float64, value float64) float64 { return old + value }
+	case MultiplyAttribute, TeamMultiplyAttribute:
+		return func(old float64, value float64) float64 { return old * value }
+	}
+	return nil
+}
+
+// applyClassAmount applies an armor or attack command to the amounts by class.
+func (c EffectCommand) applyClassAmount(amounts map[ArmorClass]float64, operation func(old float64, value float64) float64) {
+	class, value := decodeClassAmount(c.Value)
+	if c.Type == MultiplyAttribute || c.Type == TeamMultiplyAttribute {
+		value = value / 100 // a percentage for multiply
+	}
+	// like the game, a class the unit does not have is not added
+	if old, isFound := amounts[class]; isFound {
+		amounts[class] = operation(old, value)
 	}
 }
 
@@ -201,22 +235,38 @@ var TechnologyEffects = map[TechID]Effect{
 		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+		{AddAttribute, ProjectileXianbeiRaider, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileXianbeiRaiderExtra, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileEliteBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 	}},
 	BodkinArrow: {EffectID: 193, Name: "Bodkin Arrow", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+		{AddAttribute, ProjectileXianbeiRaider, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileXianbeiRaiderExtra, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileEliteBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 	}},
 	Bracer: {EffectID: 194, Name: "Bracer", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+		{AddAttribute, ProjectileXianbeiRaider, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileXianbeiRaiderExtra, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileEliteBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 	}},
 	Chemistry: {EffectID: 47, Name: "Chemistry", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileXianbeiRaider, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileXianbeiRaiderExtra, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ProjectileEliteBolasRiderCharged, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 	}},
 	PaddedArcherArmor: {EffectID: 202, Name: "Padded Archer Armor", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
@@ -236,17 +286,43 @@ var TechnologyEffects = map[TechID]Effect{
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
 	}},
-	// Thumb Ring makes archers attack faster, but not skirmishers: * 0.85 then * 1.1764706.
-	// The .dat has 1.17647 for the Skirmisher, written here as 1.1764706 like the other two,
-	// so the reload time stays 3 and does not break ties between civilizations.
+	// Thumb Ring reload time, the final change by unit:
+	//   - 10% faster: the Cavalry Archer line, the War Wagon and the Mounted Crossbowman.
+	//   - 15% faster: the special cavalry archers, e.g. the Mangudai, the Camel Archer,
+	//     the Kipchak, the Elephant Archer, the Ratha, the Xianbei Raider, the Bolas Rider.
+	//   - 15% faster: the foot archers, e.g. the Arbalester, the Longbowman.
+	//   - 20% faster: the Chu Ko Nu.
+	//   - no change: the skirmishers, the Genitour, the Slinger and the Guecha Warrior.
+	// The .dat gives every archer 15% first, then multiplies some units back to their final change.
+	// It rounds that number a bit shorter for some units, e.g. the Skirmisher,
+	// which makes their reload time differ by a tiny fraction: the code uses one value per change,
+	// so units with the same final change keep the same reload time and do not break ties.
 	ThumbRing: {EffectID: 451, Name: "Thumb Ring", Commands: []EffectCommand{
 		{MultiplyAttribute, AnyUnit, ClassArcher, AttributeReloadTime, 0.85},
 		{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeReloadTime, 0.85},
-		// the Heavy Cavalry Archer attacks 10% faster, not 15%: * 0.85 then * 1.0588236
-		{MultiplyAttribute, HeavyCavalryArcher, AnyClass, AttributeReloadTime, 1.0588236},
 		{MultiplyAttribute, Skirmisher, AnyClass, AttributeReloadTime, 1.1764706},
 		{MultiplyAttribute, EliteSkirmisher, AnyClass, AttributeReloadTime, 1.1764706},
 		{MultiplyAttribute, ImperialSkirmisher, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, Genitour, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, EliteGenitour, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, Slinger, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, GuechaWarrior, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, EliteGuechaWarrior, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, CavalryArcher, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, HeavyCavalryArcher, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, WarWagon, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, EliteWarWagon, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, MountedCrossbowman, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, HeavyMountedCrossbowman, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, ChuKoNu, AnyClass, AttributeReloadTime, 0.9411765},
+		{MultiplyAttribute, EliteChuKoNu, AnyClass, AttributeReloadTime, 0.9411765},
+	}},
+	// Cranequins also adds +1 line of sight and search radius, ignored like the other line of sight commands.
+	Cranequins: {EffectID: 1452, Name: "Cranequins", Commands: []EffectCommand{
+		{AddAttribute, MountedCrossbowman, AnyClass, AttributeRange, 1},
+		{AddAttribute, MountedCrossbowman, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassInfantry, 2)},
+		{AddAttribute, HeavyMountedCrossbowman, AnyClass, AttributeRange, 1},
+		{AddAttribute, HeavyMountedCrossbowman, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassInfantry, 2)},
 	}},
 	// Italians Pavise, Muisca Herbalism and the Britons archer range bonuses are left out:
 	// their skirmisher commands cancel the archer ones, so they change only units not ranked yet.
@@ -288,6 +364,8 @@ var TechnologyEffects = map[TechID]Effect{
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 2)},
+		{AddAttribute, ProjectileXianbeiRaider, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 2)},
+		{AddAttribute, ProjectileXianbeiRaiderExtra, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 2)},
 	}},
 	Husbandry: {EffectID: 39, Name: "Husbandry", Commands: []EffectCommand{
 		{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeSpeed, 1.1},
@@ -386,11 +464,14 @@ var TechnologyEffects = map[TechID]Effect{
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
 		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
 	}, IsUniqueTechnology: true},
-	// Hul'che Spearthrowers adds a projectile (attributes 102 and 107), the min one 102 is not modeled.
+	// Hul'che Spearthrowers makes the skirmishers throw 2 javelins instead of 1.
 	HulCheJavelineers: {EffectID: 515, Name: "Hul'che Spearthrowers", Commands: []EffectCommand{
-		{AddAttribute, EliteSkirmisher, AnyClass, AttributeProjectileCount, 1},
-		{AddAttribute, Skirmisher, AnyClass, AttributeProjectileCount, 1},
-		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeProjectileCount, 1},
+		{AddAttribute, Skirmisher, AnyClass, AttributeTotalProjectiles, 1},
+		{AddAttribute, Skirmisher, AnyClass, AttributeMaxTotalProjectiles, 1},
+		{AddAttribute, EliteSkirmisher, AnyClass, AttributeTotalProjectiles, 1},
+		{AddAttribute, EliteSkirmisher, AnyClass, AttributeMaxTotalProjectiles, 1},
+		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeTotalProjectiles, 1},
+		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeMaxTotalProjectiles, 1},
 	}, IsUniqueTechnology: true},
 	AndeanSling: {EffectID: 572, Name: "Andean Sling", Commands: []EffectCommand{
 		{SetAttribute, EliteSkirmisher, AnyClass, AttributeMinRange, 0},
@@ -591,7 +672,8 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{AddAttribute, WingedHussar, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
 		}},
 	},
-	// Inca: each age bonus first undoes the previous one, e.g. * 1.174 (for 1 / 0.85) then * 0.8.
+	// Inca: the archer food discount grows each age, -15%, -20%, -25%, -30%,
+	// each step first takes back the previous discount, then applies the new one.
 	Inca: {
 		{EffectID: 156, Name: "C-Bonus, Military cost -15%", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 0.85},
@@ -666,14 +748,12 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 		{EffectID: 1383, TechnologyID: 1385, Name: "C-Bonus, Skirm Spear +5 HP Imperial", Commands: mapucheSkirmisherHP},
 	},
 	Mongols: {
-		// The +20% (Castle Age) and +30% (Imperial Age) HP each come in 2 technologies
-		// that disable each other (command type 102), the first to fire wins:
-		// 286 and 287 ("+ BL") need Bloodlines and multiply the HP without its +20,
-		// 288 and 388 multiply the HP before Bloodlines.
-		// The .dat age names are shifted: "Middle Age" is the Feudal Age, "Feudal Age" is the Castle Age.
-		// Bloodlines is a Feudal Age technology, usually researched before the Castle Age,
-		// so 286 then 287 fire: (95 - 20) * 1.2 * 1.0833 + 20 = 117.5 HP, shown as 118 in Imperial Age.
-		// (Bloodlines after the Castle Age gives 288 then 388: 75 * 1.2 * 1.084 + 20 = 117.56, also 118.)
+		// The scout line gets +20% HP in the Castle Age and +30% in the Imperial Age,
+		// the percent does not count the Bloodlines +20 HP:
+		// the fully upgraded Hussar has 117.5 HP, shown as 118.
+		// The .dat has the bonus twice, for Bloodlines researched before or after the age,
+		// only the first to apply counts, the code copies the usual case: Bloodlines first.
+		// The odd steps (* 100, -2000, then +2000, * 0.01) take the +20 out before the percent and put it back after.
 		{EffectID: 286, Name: "C-Bonus, Light Cavalry +20% HP + BL", Commands: []EffectCommand{
 			{MultiplyAttribute, ScoutCavalry, AnyClass, AttributeHP, 100},
 			{MultiplyAttribute, LightCavalry, AnyClass, AttributeHP, 100},
@@ -796,10 +876,9 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 		}},
 	},
 	Wei: {
-		// Like the Mongols HP bonus: 1056 and 1057 ("+ BL") multiply the HP without the Bloodlines +20,
-		// the same bonus is also split in 1058 and 1059 for before Bloodlines, which are left out.
+		// Like the Mongols HP bonus, without the Bloodlines +20 HP:
+		// the Xianbei Raider has 56 HP in the Castle Age, 59.5 in the Imperial Age (shown as 60).
 		// Only the Xianbei Raider is copied, the Heavy Hei Guang Cavalry is not ranked.
-		// 30 base HP: 30 * 1.2 + 20 = 56 in Castle Age, 30 * 1.2 * 1.098 + 20 = 59.5 in Imperial Age.
 		{EffectID: 1056, Name: "C-Bonus, Heavy Cav +20% HP + BL", Commands: []EffectCommand{
 			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 100},
 			{AddAttribute, XianbeiRaider, AnyClass, AttributeHP, -2000},

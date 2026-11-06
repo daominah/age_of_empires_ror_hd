@@ -119,7 +119,10 @@ func TestLoadUnitBase(t *testing.T) {
 			ReloadTime: 2,
 			Speed:      0.96,
 			TrainTime:  35,
-			Cost:       Cost{Wood: 25, Gold: 45},
+			// the extra arrow of the archer line, not fired: it shoots 1 arrow
+			ExtraProjectileID: 1930,
+			ExtraAttacks:      map[ArmorClass]float64{ArmorClassPierce: 3, ArmorClassMelee: 0},
+			Cost:              Cost{Wood: 25, Gold: 45},
 		}},
 		// foot archer, bonus against archers, the Cavalry Archers bonus starts at 0 before the Elite Skirmisher
 		{Skirmisher, Unit{
@@ -143,7 +146,10 @@ func TestLoadUnitBase(t *testing.T) {
 			ReloadTime: 3,
 			Speed:      0.96,
 			TrainTime:  26,
-			Cost:       Cost{Food: 25, Wood: 35},
+			// the extra javelin, thrown after Hul'che Spearthrowers
+			ExtraProjectileID: 365,
+			ExtraAttacks:      map[ArmorClass]float64{ArmorClassPierce: 1},
+			Cost:              Cost{Food: 25, Wood: 35},
 		}},
 		// unique foot archer, high pierce armor
 		{RattanArcher, Unit{
@@ -333,12 +339,14 @@ func TestLoadUnitUpgraded(t *testing.T) {
 				ArmorClassMelee:   3,
 				ArmorClassArchers: 0, ArmorClassUnusedArmor31: 0, ArmorClassSkirmishers: 0,
 			},
-			Range:      8,
-			MinRange:   1,
-			ReloadTime: 3,
-			Speed:      0.96,
-			TrainTime:  22,
-			Cost:       Cost{Food: 25, Wood: 35},
+			Range:             8,
+			MinRange:          1,
+			ReloadTime:        3,
+			Speed:             0.96,
+			TrainTime:         22,
+			ExtraProjectileID: 366,
+			ExtraAttacks:      map[ArmorClass]float64{ArmorClassPierce: 1},
+			Cost:              Cost{Food: 25, Wood: 35},
 		}},
 		// Forging, Iron Casting, Blast Furnace +4 attack, the mail armors +3/+4, Squires +10% speed, Arson +2 against buildings
 		{Halberdier, Unit{
