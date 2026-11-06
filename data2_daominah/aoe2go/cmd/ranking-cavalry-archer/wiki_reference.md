@@ -19,12 +19,10 @@ Source pages:
 - https://ageofempires.fandom.com/wiki/Bolas_Rider
 - https://ageofempires.fandom.com/wiki/War_Wagon_(Age_of_Empires_II)
 
-Not captured:
-
-- The Mounted Crossbowman and Heavy Mounted Crossbowman pages have a different layout,
-  only the start of the unit information was read, so no technology list is stored.
-- The elite variants (Elite Mangudai, Elite Camel Archer, Elite Kipchak, Elite War Wagon,
-  Elite Bolas Rider) have no page of their own, and "Ratha" covers the ranged mode.
+The Mounted Crossbowman and Heavy Mounted Crossbowman pages were saved from a browser on 2026-11-06,
+as the site blocks automated fetching.
+Their layout differs: the sections are "Further statistics" (technologies, civilization bonuses, team bonuses),
+then the lists "Civilization bonuses" and "Team bonuses".
 
 ## Cavalry Archer and Heavy Cavalry Archer
 
@@ -49,12 +47,12 @@ Not captured:
 
 Civilization bonuses, per unit:
 
-| Bonus                  | Cavalry Archer                | Heavy Cavalry Archer |
-|------------------------|-------------------------------|----------------------|
-| Georgians regeneration | 8/14 per minute Castle/Imp.   | 14 per minute        |
-| Cumans movement speed  | +10%/+15% Castle/Imperial     | +15%                 |
-| Huns cost              | -10%/-20% Castle/Imperial     | -20%                 |
-| Georgians pop cost     | -20%                          | -15%                 |
+| Bonus                  | Cavalry Archer                                                     | Heavy Cavalry Archer                 |
+|------------------------|--------------------------------------------------------------------|--------------------------------------|
+| Georgians regeneration | 8/14 per minute Castle/Imp.                                        | 14 per minute                        |
+| Cumans movement speed  | +10%/+15% Castle/Imperial                                          | +15%                                 |
+| Huns cost              | -10%/-20% Castle/Imperial                                          | -20%                                 |
+| Georgians pop cost     | -20%                                                               | -15%                                 |
 | Upgrade                | Chinese -15% cost, Khitans -50% cost and Castle Age, Shu -25% cost | Khitans: available in the Castle Age |
 
 Same for both:
@@ -89,6 +87,54 @@ Team bonuses:
 - Lithuanians: Devotion, Faith and Heresy researched 20% faster.
 - Malians: Ballistics and Chemistry researched 80% faster.
 - Portuguese: technologies that benefit the unit researched 25% faster.
+
+## Mounted Crossbowman and Heavy Mounted Crossbowman
+
+Trained at the Archery Range, 15 civilizations have the Mounted Crossbowman, e.g. Britons, Franks, Teutons, Vikings.
+Compared to the generic unit, a higher attack and a lower rate of fire (reload 2.5, 2.25 after Thumb Ring).
+The two pages list the same things, differences are noted.
+
+- Hit points: Bloodlines +20 (+30 for the Varangians).
+- Attack:
+  - Fletching +1, Bodkin Arrow +1, Bracer +1, Chemistry +1.
+  - Cranequins +2 vs infantry.
+  - The unit has +1 vs Spearmen on both pages, the Heavy Mounted Crossbowman page adds +2 vs infantry.
+- Range: Fletching +1, Bodkin Arrow +1, Bracer +1, Cranequins +1.
+- Accuracy: Thumb Ring, Ballistics.
+- Armor: Padded +1/+1, Leather +1/+1, Ring Archer Armor +1/+2 (no Parthian Tactics, no Silk Armor).
+- Conversion resistance: Devotion, Faith, Heresy, First Crusade (Sicilians only).
+- Attack speed: Thumb Ring +11%.
+- Movement speed: Husbandry +10%.
+- Resource cost: Ordonnance Companies -40% gold, Franks only.
+- Creation speed: Conscription +33%.
+- Upgrading: Conscription +33% faster (Mounted Crossbowman page only).
+
+Civilization bonuses:
+
+- Hit points: Franks +20%.
+- Armor: Teutons +1/+2 melee in the Castle/Imperial Age (the Heavy Mounted Crossbowman page: +2 melee).
+- Damage resistance: Sicilians -40% bonus damage.
+- Resource cost: Portuguese -20% gold (Mounted Crossbowman page only).
+- Resource generation: Danes 25% of target cost when destroying buildings.
+- Bohemians: Chemistry is available in the Castle Age (Mounted Crossbowman page only).
+- Burgundians: Husbandry is 50% cheaper (Mounted Crossbowman page only).
+- Celts: can convert herdable animals even if enemy units are next to them.
+- Italians: Ballistics and Chemistry are 25% cheaper (Mounted Crossbowman page only).
+- Poles: Bloodlines costs -50% food.
+- Spanish: Blacksmith technologies that benefit the unit cost no gold, and each provides 20 gold when researched.
+
+Team bonuses:
+
+- Conversion resistance: Teutons +3 min, +1 max.
+- Line of sight: Tatars +2.
+- Creation speed: Britons +10%, Magyars +25%.
+- Upgrading: Britons +10% faster, Portuguese +25% faster (Mounted Crossbowman page only).
+- Britons: Thumb Ring and Cranequins are researched 10% faster.
+- Bulgarians: Blacksmith technologies that benefit the unit are researched 80% faster.
+- Huns: Bloodlines and Husbandry are researched 20% faster.
+- Lithuanians: Devotion, Faith and Heresy are researched 20% faster.
+- Malians: Ballistics and Chemistry are researched 80% faster.
+- Portuguese: technologies that benefit the unit are researched 25% faster.
 
 ## Mangudai
 

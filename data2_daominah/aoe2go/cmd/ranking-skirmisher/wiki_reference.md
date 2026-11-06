@@ -46,12 +46,12 @@ Strong vs archers and Spearmen, weak vs melee units and siege units.
 
 ## Civilization bonuses, per unit
 
-| Bonus                        | Skirmisher                    | Elite Skirmisher        | Imperial Skirmisher |
-|------------------------------|-------------------------------|-------------------------|---------------------|
-| Mapuche hit points           | +5/+10/+15 Feudal/Castle/Imp. | +10/+15 Castle/Imperial | +15                 |
-| Muisca melee armor           | +1/+2/+3 Feudal/Castle/Imp.   | +2/+3 Castle/Imperial   | +3                  |
-| Inca food cost               | -20%/-25%/-30% F/C/I          | -25%/-30% Castle/Imp.   | -30%                |
-| Mapuche training time        | x2.15/x1.61/x1 F/C/I          | x1.61/x1 Castle/Imp.    | not listed          |
+| Bonus                 | Skirmisher                    | Elite Skirmisher        | Imperial Skirmisher |
+|-----------------------|-------------------------------|-------------------------|---------------------|
+| Mapuche hit points    | +5/+10/+15 Feudal/Castle/Imp. | +10/+15 Castle/Imperial | +15                 |
+| Muisca melee armor    | +1/+2/+3 Feudal/Castle/Imp.   | +2/+3 Castle/Imperial   | +3                  |
+| Inca food cost        | -20%/-25%/-30% F/C/I          | -25%/-30% Castle/Imp.   | -30%                |
+| Mapuche training time | x2.15/x1.61/x1 F/C/I          | x1.61/x1 Castle/Imp.    | not listed          |
 
 Bonuses that are the same for all three units:
 

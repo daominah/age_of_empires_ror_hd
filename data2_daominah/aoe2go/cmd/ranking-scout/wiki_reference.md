@@ -74,17 +74,17 @@ Differences between Scout Cavalry, Light Cavalry and Hussar are listed in the ne
 
 Values differ by unit, because a bonus can be staggered by age.
 
-| Bonus                          | Scout Cavalry                 | Light Cavalry                 | Hussar               |
-|--------------------------------|-------------------------------|-------------------------------|----------------------|
-| Ordo Cavalry regeneration      | 67.5 per minute               | 90 per minute                 | 118.42 per minute    |
-| Franks hit points              | +20% from Feudal Age          | +20%                          | not listed           |
-| Mongols hit points             | +20%/+30% Castle/Imperial     | +20%/+30% Castle/Imperial     | +30%                 |
-| Georgians regeneration         | 2/8/14 Feudal/Castle/Imperial | 8/14 Castle/Imperial          | 14 per minute        |
-| Gurjaras bonus damage          | +20%/+30%/+40% F/C/I          | +30%/+40% Castle/Imperial     | +40%                 |
-| Cumans movement speed          | +5%/+10%/+15% F/C/I           | +10%/+15% Castle/Imperial     | +15%                 |
-| Berbers cost                   | -15%/-20% Castle/Imperial     | -15%/-20% Castle/Imperial     | -20%                 |
-| Jurchens attack speed          | +25% from Feudal Age          | +25%                          | +25%                 |
-| Upgrade cost                   | see below                     | see below                     | Khitans +15% faster  |
+| Bonus                     | Scout Cavalry                 | Light Cavalry             | Hussar              |
+|---------------------------|-------------------------------|---------------------------|---------------------|
+| Ordo Cavalry regeneration | 67.5 per minute               | 90 per minute             | 118.42 per minute   |
+| Franks hit points         | +20% from Feudal Age          | +20%                      | not listed          |
+| Mongols hit points        | +20%/+30% Castle/Imperial     | +20%/+30% Castle/Imperial | +30%                |
+| Georgians regeneration    | 2/8/14 Feudal/Castle/Imperial | 8/14 Castle/Imperial      | 14 per minute       |
+| Gurjaras bonus damage     | +20%/+30%/+40% F/C/I          | +30%/+40% Castle/Imperial | +40%                |
+| Cumans movement speed     | +5%/+10%/+15% F/C/I           | +10%/+15% Castle/Imperial | +15%                |
+| Berbers cost              | -15%/-20% Castle/Imperial     | -15%/-20% Castle/Imperial | -20%                |
+| Jurchens attack speed     | +25% from Feudal Age          | +25%                      | +25%                |
+| Upgrade cost              | see below                     | see below                 | Khitans +15% faster |
 
 Bonuses that are the same for all three units:
 
