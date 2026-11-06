@@ -97,6 +97,7 @@ def units(dat):
             'line_of_sight': unit.line_of_sight,
         }
         if unit.type_50:
+            item['range'] = unit.type_50.max_range
             item['reload_time'] = unit.type_50.reload_time
             item['attacks'] = {str(a.class_): a.amount for a in unit.type_50.attacks}
             item['armors'] = {str(a.class_): a.amount for a in unit.type_50.armours}

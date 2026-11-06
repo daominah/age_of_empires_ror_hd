@@ -1,14 +1,18 @@
 package logic
 
 import (
+	"math"
 	"testing"
 
 	"github.com/daominah/age_of_empires_ror_hd/data2_daominah/aoe2go/data"
 )
 
-var scoutLine = Line{UnitIDs: []UnitID{ScoutCavalry, LightCavalry, Hussar, WingedHussar}, Class: ClassCavalry}
+var (
+	scoutLine      = Line{UnitIDs: []UnitID{ScoutCavalry, LightCavalry, Hussar, WingedHussar}, Class: ClassCavalry}
+	skirmisherLine = Line{UnitIDs: []UnitID{Skirmisher, EliteSkirmisher, ImperialSkirmisher}, Class: ClassArcher}
+)
 
-func TestFullyUpgradedRows(t *testing.T) {
+func TestLoadRowsUpgraded(t *testing.T) {
 	// GIVEN the embedded game data
 	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
 	if err != nil {
@@ -16,7 +20,7 @@ func TestFullyUpgradedRows(t *testing.T) {
 	}
 
 	// WHEN each civilization gets its fully upgraded scout line unit
-	rows := FullyUpgradedRows(tree, scoutLine)
+	rows := LoadRowsUpgraded(tree, scoutLine)
 
 	// THEN the stats include the technologies and civilization bonuses
 	byCivilization := map[CivilizationID]Row{}
@@ -56,7 +60,7 @@ func TestFullyUpgradedRows(t *testing.T) {
 			continue
 		}
 		u := row.Unit
-		hp := ShownHP(u)
+		hp := GetShownHP(u)
 		if u.Name != c.unit || hp != c.hp || u.Armors[ArmorClassPierce] != c.pierceArmor ||
 			u.Attacks[ArmorClassMelee] != c.meleeAttack || int(u.Cost.Food+0.5) != int(c.food) {
 			t.Errorf("%v: got %v HP %v pierce armor %v attack %v food %v, want %+v",
@@ -84,10 +88,64 @@ func TestFullyUpgradedRows(t *testing.T) {
 
 	// THEN a unit outside the scout line gets its own row:
 	// Magyars Elite Magyar Huszar costs 80 food and no gold with Corvinian Army, Bloodlines +20 HP
-	huszarRows := FullyUpgradedRows(tree, Line{UnitIDs: []UnitID{MagyarHuszar, EliteMagyarHuszar}, Class: ClassCavalry})
+	huszarRows := LoadRowsUpgraded(tree, Line{UnitIDs: []UnitID{MagyarHuszar, EliteMagyarHuszar}, Class: ClassCavalry})
 	if len(huszarRows) != 1 || huszarRows[0].CivilizationID != Magyars ||
-		huszarRows[0].Unit.Cost != (Cost{Food: 80}) || ShownHP(huszarRows[0].Unit) != 110 {
+		huszarRows[0].Unit.Cost != (Cost{Food: 80}) || GetShownHP(huszarRows[0].Unit) != 110 {
 		t.Errorf("got Magyar Huszar rows %+v, want only Magyars with 80 food and 110 HP", huszarRows)
+	}
+
+	// THEN the skirmisher line gets the archer technologies and its civilization bonuses
+	skirmisherRows := map[CivilizationID]Row{}
+	for _, row := range LoadRowsUpgraded(tree, skirmisherLine) {
+		skirmisherRows[row.CivilizationID] = row
+	}
+	for _, c := range []struct {
+		civilization CivilizationID
+		unit         string
+		hp           float64
+		pierceArmor  float64
+		pierceAttack float64
+		reloadTime   float64
+	}{
+		// Fletching, Bodkin Arrow, Bracer, Chemistry +4 attack, archer armors +4 pierce armor
+		{Britons, "Elite Skirmisher", 35, 8, 7, 3},
+		// the Imperial Skirmisher, archers +20% HP
+		{Vietnamese, "Imperial Skirmisher", 42, 9, 8, 3},
+		// Tower Shields +2 pierce armor
+		{Lithuanians, "Elite Skirmisher", 35, 10, 7, 3},
+		// +5 HP in each of Feudal, Castle and Imperial Age, no Bracer
+		{Mapuche, "Elite Skirmisher", 50, 8, 6, 3},
+		// skirmishers attack 25% faster
+		{Dravidians, "Elite Skirmisher", 35, 8, 7, 2.4},
+		// Atlatl +1 attack, no Ring Archer Armor
+		{Aztecs, "Elite Skirmisher", 35, 6, 8, 3},
+	} {
+		u := skirmisherRows[c.civilization].Unit
+		if u.Name != c.unit || GetShownHP(u) != c.hp || u.Armors[ArmorClassPierce] != c.pierceArmor ||
+			u.Attacks[ArmorClassPierce] != c.pierceAttack || math.Abs(u.ReloadTime-c.reloadTime) > 1e-6 {
+			t.Errorf("%v: got %v HP %v pierce armor %v attack %v reload time %v, want %+v",
+				c.civilization, u.Name, GetShownHP(u), u.Armors[ArmorClassPierce], u.Attacks[ArmorClassPierce], u.ReloadTime, c)
+		}
+	}
+
+	// THEN the range includes Fletching, Bodkin Arrow, Bracer and the unique technologies
+	for _, c := range []struct {
+		civilization CivilizationID
+		unitRange    float64
+	}{
+		{Persians, 7},   // no Bracer: 5 + 2
+		{Vietnamese, 8}, // 5 + 3
+		{Britons, 9},    // Yeomen +1, the Britons archer range bonus excludes skirmishers
+		{Aztecs, 9},     // Atlatl +1
+	} {
+		if got := skirmisherRows[c.civilization].Unit.Range; got != c.unitRange {
+			t.Errorf("%v: got range %v, want %v", c.civilization, got, c.unitRange)
+		}
+	}
+
+	// THEN a bonus triggered in several ages notes each age, e.g. the Mapuche skirmisher HP
+	if got, want := FormatAgeNote(skirmisherRows[Mapuche]), "HP 40 in Feudal Age, 45 in Castle Age, 50 in Imperial Age"; got != want {
+		t.Errorf("Mapuche: got note %q, want %q", got, want)
 	}
 
 	// THEN civilizations without the scout line have no row
@@ -98,7 +156,7 @@ func TestFullyUpgradedRows(t *testing.T) {
 	}
 }
 
-func TestHitsToKill(t *testing.T) {
+func TestCalculateHitsToKill(t *testing.T) {
 	castle := Attacker{Name: "Castle", Attacks: map[ArmorClass]float64{ArmorClassPierce: 15, ArmorClassSpearmen: 2}}
 	for _, c := range []struct {
 		name   string
@@ -115,12 +173,49 @@ func TestHitsToKill(t *testing.T) {
 		{"at least 1 damage", Unit{HP: 10, Armors: map[ArmorClass]float64{ArmorClassPierce: 20}}, 10},
 	} {
 		// WHEN the Castle shoots the target
-		got := HitsToKill(castle, c.target)
+		got := CalculateHitsToKill(castle, c.target)
 
 		// THEN it needs this many arrows, the attack class the target does not have is ignored
 		if got != c.want {
 			t.Errorf("%v: got %v, want %v", c.name, got, c.want)
 		}
+	}
+}
+
+func TestLoadAttackerUpgraded(t *testing.T) {
+	// GIVEN the embedded game data
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+
+	// WHEN the Arbalester gets the technologies any civilization can research
+	unit := tree.LoadUnitUpgraded(Arbalester)
+	attacker := tree.LoadAttackerUpgraded(Arbalester)
+
+	// THEN it has Fletching, Bodkin Arrow, Bracer, Chemistry, Thumb Ring and the archer armors,
+	// without civilization bonuses, e.g. no Britons range
+	if unit.HP != 40 || unit.Attacks[ArmorClassPierce] != 10 || unit.Range != 8 ||
+		unit.Armors[ArmorClassPierce] != 4 || unit.Armors[ArmorClassMelee] != 3 || math.Abs(unit.ReloadTime-1.7) > 1e-6 {
+		t.Errorf("got %+v, want 40 HP, attack 10, range 8, armor 3/4, reload time 1.7", unit)
+	}
+	if attacker.Name != "Arbalester 6+4" || attacker.Attacks[ArmorClassPierce] != 10 {
+		t.Errorf("got attacker %+v, want Arbalester 6+4 with 10 pierce attack", attacker)
+	}
+}
+
+func TestNewCriterionHitsToKillTarget(t *testing.T) {
+	// GIVEN an Arbalester with 40 HP and 4 pierce armor,
+	// and an Elite Skirmisher with 7 pierce attack and 4 bonus attack against archers
+	arbalester := Unit{Name: "Arbalester", HP: 40, Armors: map[ArmorClass]float64{ArmorClassPierce: 4, ArmorClassArchers: 0}}
+	row := Row{Unit: Unit{Attacks: map[ArmorClass]float64{ArmorClassPierce: 7, ArmorClassArchers: 4}}}
+
+	// WHEN the skirmisher shoots the Arbalester
+	criterion := NewCriterionHitsToKillTarget(arbalester)
+
+	// THEN 7 damage per hit kills it in 6 hits, and fewer hits rank higher
+	if got := criterion.Value(row); got != 6 || criterion.IsHigherBetter || criterion.Name != "Hits to kill Arbalester" {
+		t.Errorf("got %v hits, criterion %+v, want 6 hits, fewer is better", got, criterion)
 	}
 }
 
@@ -134,7 +229,7 @@ func TestSortRows(t *testing.T) {
 	}
 	criteria := []Criterion{
 		{Name: "HP", Value: func(r Row) float64 { return r.Unit.HP }, IsHigherBetter: true},
-		{Name: "Cost", Value: func(r Row) float64 { return r.Unit.Cost.Total() }},
+		{Name: "Cost", Value: func(r Row) float64 { return r.Unit.Cost.Sum() }},
 	}
 
 	// WHEN the rows are sorted
@@ -150,7 +245,7 @@ func TestSortRows(t *testing.T) {
 	}
 }
 
-func TestClassAmount(t *testing.T) {
+func TestEncodeClassAmount(t *testing.T) {
 	for _, c := range []struct {
 		value  float64
 		class  ArmorClass
@@ -161,7 +256,7 @@ func TestClassAmount(t *testing.T) {
 		{-1025, ArmorClassMelee, -1},
 	} {
 		// WHEN an armor or attack command value is encoded and decoded
-		encoded := classAmount(c.class, c.amount)
+		encoded := encodeClassAmount(c.class, c.amount)
 		class, amount := decodeClassAmount(c.value)
 
 		// THEN it is the .dat value, and back the armor class and the amount

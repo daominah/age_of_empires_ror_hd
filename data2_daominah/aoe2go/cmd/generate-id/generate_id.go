@@ -114,12 +114,12 @@ func main() {
 	addAll(buildingIDs, additionalBuildingIDs)
 	addAll(techIDs, additionalTechIDs)
 
-	units := namedIDs(unitList, unitIDs, names)
-	buildings := namedIDs(unitList, buildingIDs, names)
-	techs := namedIDs(techList, techIDs, names)
+	units := collectNamedIDs(unitList, unitIDs, names)
+	buildings := collectNamedIDs(unitList, buildingIDs, names)
+	techs := collectNamedIDs(techList, techIDs, names)
 
-	unitConstants := constantNames(units)
-	buildingConstants := constantNames(buildings)
+	unitConstants := assignConstantNames(units)
+	buildingConstants := assignConstantNames(buildings)
 	taken := map[string]bool{}
 	for _, c := range unitConstants {
 		taken[c.Constant] = true
@@ -130,7 +130,7 @@ func main() {
 		}
 		taken[c.Constant] = true
 	}
-	techConstants := constantNames(techs)
+	techConstants := assignConstantNames(techs)
 	for i, c := range techConstants {
 		if taken[c.Constant] {
 			techConstants[i].Constant = techPrefix + c.Constant
@@ -144,7 +144,7 @@ func main() {
 	}
 	var civilizationConstants []namedID
 	for _, c := range baseCivilizations {
-		constant := toConstant(names[c.NameStringID])
+		constant := makeConstantName(names[c.NameStringID])
 		if taken[constant] {
 			log.Fatalf("civilization %v has the name of a unit or technology", constant)
 		}
@@ -152,13 +152,13 @@ func main() {
 			namedID{ID: c.ID, Name: names[c.NameStringID], InternalName: c.DatName, Constant: constant})
 	}
 
-	logicDir := filepath.Join(sourceDir(), "..", "..", "logic")
-	writeGoFile(filepath.Join(logicDir, "unit_id.go"), unitIDFile(unitConstants, buildingConstants))
-	writeGoFile(filepath.Join(logicDir, "building_id.go"), constantsFile(
+	logicDir := filepath.Join(findSourceDir(), "..", "..", "logic")
+	writeGoFile(filepath.Join(logicDir, "unit_id.go"), renderUnitIDFile(unitConstants, buildingConstants))
+	writeGoFile(filepath.Join(logicDir, "building_id.go"), renderConstantsFile(
 		"Buildings, as UnitID: a building is a unit in the .dat.", "UnitID", buildingConstants))
-	writeGoFile(filepath.Join(logicDir, "tech_id.go"), techIDFile(techConstants))
-	writeGoFile(filepath.Join(logicDir, "civilization_id.go"), civilizationFile(civilizationConstants))
-	writeGoFile(filepath.Join(logicDir, "armor_class.go"), armorClassFile(names))
+	writeGoFile(filepath.Join(logicDir, "tech_id.go"), renderTechIDFile(techConstants))
+	writeGoFile(filepath.Join(logicDir, "civilization_id.go"), renderCivilizationFile(civilizationConstants))
+	writeGoFile(filepath.Join(logicDir, "armor_class.go"), renderArmorClassFile(names))
 }
 
 func addAll(set map[int]bool, ids []int) {
@@ -167,8 +167,8 @@ func addAll(set map[int]bool, ids []int) {
 	}
 }
 
-// namedIDs reads the ID and English name of the items with the wanted IDs.
-func namedIDs(items []itemJSON, wanted map[int]bool, names map[int]string) map[int]namedID {
+// collectNamedIDs reads the ID and English name of the items with the wanted IDs.
+func collectNamedIDs(items []itemJSON, wanted map[int]bool, names map[int]string) map[int]namedID {
 	result := map[int]namedID{}
 	for _, item := range items {
 		if !wanted[item.ID] {
@@ -188,10 +188,10 @@ func namedIDs(items []itemJSON, wanted map[int]bool, names map[int]string) map[i
 	return result
 }
 
-// constantNames turns the names into Go constants, sorted by ID.
+// assignConstantNames turns the names into Go constants, sorted by ID.
 // A duplicate name listed in variants gets its suffix,
 // an unlisted duplicate gets its ID with a warning, except the lowest ID.
-func constantNames(items map[int]namedID) []namedID {
+func assignConstantNames(items map[int]namedID) []namedID {
 	suffixes := map[int]string{}
 	isNormal := map[int]bool{}
 	for normalID, vs := range variants {
@@ -205,7 +205,7 @@ func constantNames(items map[int]namedID) []namedID {
 	}
 	byName := map[string][]int{}
 	for id, item := range items {
-		c := toConstant(item.Name)
+		c := makeConstantName(item.Name)
 		byName[c] = append(byName[c], id)
 	}
 	var result []namedID
@@ -231,9 +231,9 @@ func constantNames(items map[int]namedID) []namedID {
 	return result
 }
 
-// toConstant is the name in PascalCase without punctuation,
+// makeConstantName is the name in PascalCase without punctuation,
 // e.g. "Two-Handed Swordsman" is TwoHandedSwordsman, "Villager (Male)" is VillagerMale.
-func toConstant(name string) string {
+func makeConstantName(name string) string {
 	var b strings.Builder
 	isWordStart := true
 	for _, r := range name {
@@ -254,7 +254,7 @@ func toConstant(name string) string {
 	return c
 }
 
-func unitIDFile(units []namedID, buildings []namedID) string {
+func renderUnitIDFile(units []namedID, buildings []namedID) string {
 	constants := map[int]string{}
 	for _, c := range append(units, buildings...) {
 		constants[c.ID] = c.Constant
@@ -280,19 +280,19 @@ var UnitVariants = map[UnitID][]UnitID{
 		fmt.Fprintf(&b, "\t%v: {%v},\n", constants[id], strings.Join(names, ", "))
 	}
 	b.WriteString("}\n\n")
-	return b.String() + constantsFile("Units.", "UnitID", units)
+	return b.String() + renderConstantsFile("Units.", "UnitID", units)
 }
 
-func techIDFile(techs []namedID) string {
+func renderTechIDFile(techs []namedID) string {
 	header := `// TechID is a technology ID in the game .dat.
 // A technology named like a unit or building has the prefix Tech, e.g. TechHussar.
 type TechID int
 
 `
-	return header + constantsFile("Technologies, including the unit upgrades.", "TechID", techs)
+	return header + renderConstantsFile("Technologies, including the unit upgrades.", "TechID", techs)
 }
 
-func constantsFile(title string, typeName string, items []namedID) string {
+func renderConstantsFile(title string, typeName string, items []namedID) string {
 	var b strings.Builder
 	fmt.Fprintf(&b, "// %v\n// The comment is the internal name in the .dat.\nconst (\n", title)
 	for _, item := range items {
@@ -302,7 +302,7 @@ func constantsFile(title string, typeName string, items []namedID) string {
 	return b.String()
 }
 
-func civilizationFile(civilizations []namedID) string {
+func renderCivilizationFile(civilizations []namedID) string {
 	var b strings.Builder
 	b.WriteString(`// CivilizationID is a civilization ID in the .dat.
 type CivilizationID int
@@ -318,25 +318,46 @@ const (
 	return b.String()
 }
 
-// armorClassFile names the armor classes from the game strings,
+// renderArmorClassFile names the armor classes from the game strings,
 // the name of armor class N is string armorClassStringID + N, e.g. 12403 "Pierce".
-func armorClassFile(names map[int]string) string {
+func renderArmorClassFile(names map[int]string) string {
 	var b strings.Builder
-	b.WriteString(`// ArmorClass is an armor class in the .dat: attacks and armors are amounts by class,
+	b.WriteString(`import "fmt"
+
+// ArmorClass is an armor class in the .dat: attacks and armors are amounts by class,
 // a hit only counts the classes in both the attacker attacks and the target armors.
 type ArmorClass int
 
 // Armor classes, named by the game strings.
 const (
 `)
+	var classNames []string
 	for class := 0; ; class++ {
 		name, isFound := names[armorClassStringID+class]
 		if !isFound {
 			break
 		}
-		fmt.Fprintf(&b, "\t%v%v ArmorClass = %v // %v\n", armorClassPrefix, toConstant(name), class, name)
+		fmt.Fprintf(&b, "\t%v%v ArmorClass = %v // %v\n", armorClassPrefix, makeConstantName(name), class, name)
+		classNames = append(classNames, name)
 	}
 	b.WriteString(")\n")
+	b.WriteString(`
+// String is the game name of the armor class, e.g. "Pierce",
+// so a printed unit reads map[Pierce:4 Melee:3] instead of map[3:4 4:3].
+func (c ArmorClass) String() string {
+	if name, isFound := armorClassNames[c]; isFound {
+		return name
+	}
+	return fmt.Sprintf("ArmorClass(%d)", int(c))
+}
+
+// armorClassNames are the game names of the armor classes.
+var armorClassNames = map[ArmorClass]string{
+`)
+	for class, name := range classNames {
+		fmt.Fprintf(&b, "\t%v: %q,\n", class, name)
+	}
+	b.WriteString("}\n")
 	return b.String()
 }
 
@@ -353,9 +374,9 @@ func writeGoFile(path string, body string) {
 	log.Printf("wrote %v", path)
 }
 
-// sourceDir is the directory of this source file,
+// findSourceDir is the directory of this source file,
 // so the output lands in logic whatever the working directory of "go run".
-func sourceDir() string {
+func findSourceDir() string {
 	_, file, _, _ := runtime.Caller(0)
 	return filepath.Dir(file)
 }

@@ -1,5 +1,5 @@
 // Package logic is the shared logic for ranking AoE2 DE civilizations
-// by a unit line, e.g. the scout line ranked by arrows to kill vs a Castle.
+// by a unit line, e.g. the scout line ranked by tank vs a Castle (the arrows to kill it).
 //
 // The input is data/dat_original_to_json, extracted from the game files in data/dat_original_from_game:
 // base unit stats and costs, and the units and technologies available to each civilization.

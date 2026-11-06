@@ -27,9 +27,9 @@ type Technology struct {
 	RequiredTechnologyIDs []TechID
 }
 
-// Age is the age technology the technology requires, 0 if none,
+// FindAge is the age technology the technology requires, 0 if none,
 // e.g. CastleAge for the Berbers "Stable units -15%" bonus.
-func (t Technology) Age() TechID {
+func (t Technology) FindAge() TechID {
 	age := TechID(0)
 	for _, id := range t.RequiredTechnologyIDs {
 		if _, isAge := AgeNames[id]; isAge {
@@ -43,11 +43,15 @@ func (t Technology) Age() TechID {
 // The .dat internal names are shifted, e.g. "Feudal Age" is CastleAge.
 var AgeNames = map[TechID]string{FeudalAge: "Feudal Age", CastleAge: "Castle Age", ImperialAge: "Imperial Age"}
 
-// civilizationBonusTechnology is the technology of a civilization that triggers the effect,
+// AnyCivilization is the CivilizationID of a technology that any civilization can research,
+// if its Technology Tree allows it.
+const AnyCivilization CivilizationID = -1
+
+// findCivilizationBonusTechnology is the technology of a civilization that triggers the effect,
 // e.g. the Berbers Imperial Age technology for "Stable units -20%".
 // Some effects are also triggered by a technology for any civilization,
 // e.g. Khitans "Double Forging" triggers the Forging effect again.
-func (tree *TechTree) civilizationBonusTechnology(civilizationID CivilizationID, effectID int) Technology {
+func (tree *TechTree) findCivilizationBonusTechnology(civilizationID CivilizationID, effectID int) Technology {
 	result := Technology{}
 	for _, t := range tree.Technologies {
 		if t.EffectID == effectID && t.CivilizationID == civilizationID && (result.Name == "" || t.ID < result.ID) {
@@ -69,12 +73,13 @@ type Civilization struct {
 type Unit struct {
 	ID    UnitID
 	Name  string    // English name, e.g. "Hussar"
-	Class UnitClass // unit class in the .dat, e.g. ClassCavalry, set by the ranking line
+	Class UnitClass // unit class in the .dat, e.g. ClassCavalry
 	HP    float64
 	// Attacks and Armors are amounts by armor class, e.g. ArmorClassPierce.
 	// Damage only counts the classes in both the attacker Attacks and the target Armors.
 	Attacks    map[ArmorClass]float64
 	Armors     map[ArmorClass]float64
+	Range      float64 // max range in tiles, e.g. 0 for a Knight, 1 for a Steppe Lancer, 5 for a Throwing Axeman
 	ReloadTime float64 // seconds between attacks
 	Speed      float64
 	TrainTime  float64 // seconds
@@ -91,8 +96,8 @@ type Cost struct {
 	Stone float64
 }
 
-// Total is the sum of all resources.
-func (c Cost) Total() float64 {
+// Sum is the total of all resources.
+func (c Cost) Sum() float64 {
 	return c.Food + c.Wood + c.Gold + c.Stone
 }
 
@@ -136,6 +141,8 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 			HP:         u.HP,
 			Attacks:    map[ArmorClass]float64{},
 			Armors:     map[ArmorClass]float64{},
+			Class:      UnitClass(u.Class),
+			Range:      u.Range,
 			ReloadTime: u.ReloadTime,
 			Speed:      u.Speed,
 			TrainTime:  u.TrainTime,
@@ -229,8 +236,10 @@ type unitJSON struct {
 	ID           int                `json:"id"`
 	InternalName string             `json:"internal_name"`
 	NameStringID int                `json:"name_string_id"`
+	Class        int                `json:"class"`
 	HP           float64            `json:"hp"`
 	Speed        float64            `json:"speed"`
+	Range        float64            `json:"range"`
 	ReloadTime   float64            `json:"reload_time"`
 	TrainTime    float64            `json:"train_time"`
 	Attacks      map[int]float64    `json:"attacks"`

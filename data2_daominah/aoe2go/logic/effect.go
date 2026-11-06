@@ -4,12 +4,18 @@ import "math"
 
 // Effect is an effect in the game .dat, applied by a technology or a civilization bonus.
 // The values are copied by hand from data/dat_original_to_json/effects.json,
-// keeping only the commands for the unit lines ranked so far (the scout line),
+// keeping only the commands for the units ranked or loaded so far:
+// cavalry, foot archers, cavalry archers and infantry,
 // so a game patch shows in the effects.json git diff and is edited here.
 type Effect struct {
 	EffectID int    // effect ID in effects.json
 	Name     string // technology name in the .dat, to search effects.json
 	Commands []EffectCommand
+	// TechnologyID is the technology that triggers a civilization bonus,
+	// set when several of its technologies trigger the same effect, one per age,
+	// e.g. Mapuche "Skirm Spear +5 HP" in Feudal, Castle and Imperial Age.
+	// 0 is the first technology that triggers the effect.
+	TechnologyID TechID
 	// IsUniqueTechnology is a civilization unique technology, researched in a Castle.
 	// It is expensive, so a ranking may count its cost saving less than a free civilization bonus.
 	IsUniqueTechnology bool
@@ -17,14 +23,14 @@ type Effect struct {
 
 // EffectCommand is one command of an effect,
 // in the same order as effects.json: [Type, A, B, C, D].
-// For the attribute commands, e.g. {AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 1)}
+// For the attribute commands, e.g. {AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)}
 // is "cavalry +1 melee armor".
 type EffectCommand struct {
 	Type      EffectType
 	UnitID    UnitID    // A, AnyUnit for all units of the Class
 	Class     UnitClass // B, AnyClass for any
 	Attribute Attribute // C
-	// Value is D, for AttributeArmor and AttributeAttack it is a classAmount.
+	// Value is D, for AttributeArmor and AttributeAttack it is a encodeClassAmount.
 	Value float64
 }
 
@@ -51,9 +57,10 @@ const (
 	AttributeHP                    Attribute = 0
 	AttributeLineOfSight           Attribute = 1
 	AttributeSpeed                 Attribute = 5
-	AttributeArmor                 Attribute = 8 // Value is a classAmount
-	AttributeAttack                Attribute = 9 // Value is a classAmount
+	AttributeArmor                 Attribute = 8 // Value is a encodeClassAmount
+	AttributeAttack                Attribute = 9 // Value is a encodeClassAmount
 	AttributeReloadTime            Attribute = 10
+	AttributeRange                 Attribute = 12 // max range
 	AttributeBlastWidth            Attribute = 22 // e.g. Lechitic Legacy trample damage
 	AttributeSearchRadius          Attribute = 23
 	AttributeBonusDamageResistance Attribute = 24
@@ -74,8 +81,12 @@ type UnitClass int
 
 // UnitClass values used so far.
 const (
-	AnyClass     UnitClass = -1
-	ClassCavalry UnitClass = 12 // the scout line
+	AnyClass           UnitClass = -1
+	ClassArcher        UnitClass = 0  // foot archers, e.g. the skirmisher line
+	ClassInfantry      UnitClass = 6  // e.g. Man-at-Arms, Throwing Axeman
+	ClassCavalry       UnitClass = 12 // e.g. Knight, the scout line after the Scout Cavalry
+	ClassCavalryArcher UnitClass = 36
+	ClassScoutCavalry  UnitClass = 47 // the Scout Cavalry only, the effects repeat their cavalry commands for it
 )
 
 // AnyUnit in an effect command targets all units of the command Class.
@@ -115,6 +126,8 @@ func (c EffectCommand) Apply(unit *Unit) {
 		unit.Speed = operation(unit.Speed, c.Value)
 	case AttributeReloadTime:
 		unit.ReloadTime = operation(unit.ReloadTime, c.Value)
+	case AttributeRange:
+		unit.Range = operation(unit.Range, c.Value)
 	case AttributeTrainTime:
 		unit.TrainTime = operation(unit.TrainTime, c.Value)
 	case AttributeIgnoreArmor:
@@ -148,10 +161,10 @@ func (c EffectCommand) Apply(unit *Unit) {
 	}
 }
 
-// classAmount is the Value of an armor or attack command: class * 256 + amount,
-// e.g. classAmount(ArmorClassPierce, 1) is 769, classAmount(ArmorClassMelee, -1) is -1025.
+// encodeClassAmount is the Value of an armor or attack command: class * 256 + amount,
+// e.g. encodeClassAmount(ArmorClassPierce, 1) is 769, encodeClassAmount(ArmorClassMelee, -1) is -1025.
 // For MultiplyAttribute the amount is a percentage, e.g. 120 is * 1.2.
-func classAmount(class ArmorClass, amount float64) float64 {
+func encodeClassAmount(class ArmorClass, amount float64) float64 {
 	sign := 1.0
 	if amount < 0 {
 		sign, amount = -1, -amount
@@ -159,7 +172,7 @@ func classAmount(class ArmorClass, amount float64) float64 {
 	return sign * (float64(class)*256 + amount)
 }
 
-// decodeClassAmount is the reverse of classAmount.
+// decodeClassAmount is the reverse of encodeClassAmount.
 func decodeClassAmount(value float64) (class ArmorClass, amount float64) {
 	v := int(math.Round(value))
 	sign := 1
@@ -177,55 +190,153 @@ var AutomaticTechnologies = map[TechID]bool{AutoUpgradeScoutFeudalAge: true}
 // TechnologyEffects are the effects of the technologies, by technology ID.
 // A ranking applies each one available to the civilization.
 var TechnologyEffects = map[TechID]Effect{
+	Fletching: {EffectID: 192, Name: "Fletching", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+	}},
+	BodkinArrow: {EffectID: 193, Name: "Bodkin Arrow", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+	}},
+	Bracer: {EffectID: 194, Name: "Bracer", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+	}},
+	Chemistry: {EffectID: 47, Name: "Chemistry", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+	}},
+	PaddedArcherArmor: {EffectID: 202, Name: "Padded Archer Armor", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+	}},
+	LeatherArcherArmor: {EffectID: 203, Name: "Leather Archer Armor", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+	}},
+	RingArcherArmor: {EffectID: 208, Name: "Ring Archer Armor", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+	}},
+	// Thumb Ring makes archers attack faster, but not skirmishers: * 0.85 then * 1.1764706.
+	// The .dat has 1.17647 for the Skirmisher, written here as 1.1764706 like the other two,
+	// so the reload time stays 3 and does not break ties between civilizations.
+	ThumbRing: {EffectID: 451, Name: "Thumb Ring", Commands: []EffectCommand{
+		{MultiplyAttribute, AnyUnit, ClassArcher, AttributeReloadTime, 0.85},
+		{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeReloadTime, 0.85},
+		// the Heavy Cavalry Archer attacks 10% faster, not 15%: * 0.85 then * 1.0588236
+		{MultiplyAttribute, HeavyCavalryArcher, AnyClass, AttributeReloadTime, 1.0588236},
+		{MultiplyAttribute, Skirmisher, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, EliteSkirmisher, AnyClass, AttributeReloadTime, 1.1764706},
+		{MultiplyAttribute, ImperialSkirmisher, AnyClass, AttributeReloadTime, 1.1764706},
+	}},
+	// Italians Pavise, Muisca Herbalism and the Britons archer range bonuses are left out:
+	// their skirmisher commands cancel the archer ones, so they change only units not ranked yet.
+	Yeomen: {EffectID: 455, Name: "Yeomen", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassArcher, AttributeRange, 1},
+	}, IsUniqueTechnology: true},
+	Atlatl: {EffectID: 514, Name: "Atlatl", Commands: []EffectCommand{
+		{AddAttribute, Skirmisher, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, EliteSkirmisher, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, Skirmisher, AnyClass, AttributeRange, 1},
+		{AddAttribute, EliteSkirmisher, AnyClass, AttributeRange, 1},
+		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeRange, 1},
+	}, IsUniqueTechnology: true},
+	TowerShields: {EffectID: 729, Name: "Tower Shields", Commands: []EffectCommand{
+		{AddAttribute, Skirmisher, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+		{AddAttribute, EliteSkirmisher, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+	}, IsUniqueTechnology: true},
+	ScaleMailArmor: {EffectID: 74, Name: "Scale Mail Armor", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+	}},
+	ChainMailArmor: {EffectID: 76, Name: "Chain Mail Armor", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+	}},
+	PlateMailArmor: {EffectID: 77, Name: "Plate Mail Armor", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+	}},
+	Squires: {EffectID: 204, Name: "Squires", Commands: []EffectCommand{
+		{MultiplyAttribute, AnyUnit, ClassInfantry, AttributeSpeed, 1.1},
+	}},
+	Arson: {EffectID: 628, Name: "Arson", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
+	}},
+	ParthianTactics: {EffectID: 452, Name: "Parthian Tactics", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 2)},
+	}},
 	Husbandry: {EffectID: 39, Name: "Husbandry", Commands: []EffectCommand{
 		{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeSpeed, 1.1},
+		{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeSpeed, 1.1},
 	}},
 	Forging: {EffectID: 67, Name: "Forging", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 1)},
 	}},
 	IronCasting: {EffectID: 68, Name: "Iron casting", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 1)},
 	}},
 	BlastFurnace: {EffectID: 75, Name: "Blast Furnace", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMelee, 2)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 2)},
+		{AddAttribute, AnyUnit, ClassInfantry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 2)},
 	}},
 	PlateBardingArmor: {EffectID: 80, Name: "Plate Barding Armor", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassPierce, 2)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 2)},
 	}},
 	ScaleBardingArmor: {EffectID: 81, Name: "Scale Barding Armor", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 	}},
 	ChainBardingArmor: {EffectID: 82, Name: "Chain Barding Armor", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 	}},
 	AutoUpgradeScoutFeudalAge: {EffectID: 16, Name: "Auto upgrade Scout Feudal Age", Commands: []EffectCommand{
 		{AddAttribute, ScoutCavalry, AnyClass, AttributeSpeed, 0.35},
-		{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, classAmount(ArmorClassMelee, 2)},
+		{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassMelee, 2)},
 	}},
 	Bloodlines: {EffectID: 450, Name: "Bloodlines", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassCavalry, AttributeHP, 20},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeHP, 20},
 	}},
 	Farimba: {EffectID: 606, Name: "Malian UT", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMelee, 5)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 5)},
 	}, IsUniqueTechnology: true},
 	ManipurCavalry: {EffectID: 667, Name: "Burmese UT", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassArchers, 4)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassArchers, 4)},
 	}, IsUniqueTechnology: true},
 	Stirrups: {EffectID: 722, Name: "Khmer UT", Commands: []EffectCommand{
 		{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeReloadTime, 0.75},
 	}, IsUniqueTechnology: true},
 	SilkArmor: {EffectID: 724, Name: "Malay UT", Commands: []EffectCommand{
-		{AddAttribute, ScoutCavalry, AnyClass, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, LightCavalry, AnyClass, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, Hussar, AnyClass, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, WingedHussar, AnyClass, AttributeArmor, classAmount(ArmorClassMelee, 1)},
-		{AddAttribute, ScoutCavalry, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
-		{AddAttribute, LightCavalry, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
-		{AddAttribute, Hussar, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
-		{AddAttribute, WingedHussar, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
+		{AddAttribute, ScoutCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, LightCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, Hussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, WingedHussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, ScoutCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, LightCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, Hussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, WingedHussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 	}, IsUniqueTechnology: true},
 	SteppeHusbandry: {EffectID: 726, Name: "Burmese UT", Commands: []EffectCommand{
 		{MultiplyAttribute, ScoutCavalry, AnyClass, AttributeTrainTime, 0.5},
@@ -250,12 +361,13 @@ var TechnologyEffects = map[TechID]Effect{
 	}, IsUniqueTechnology: true},
 	Kshatriyas: {EffectID: 854, Name: "Kshatriyas", Commands: []EffectCommand{
 		{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeFoodCost, 0.75},
+		{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 0.75},
 	}, IsUniqueTechnology: true},
 	AznauriCavalry: {EffectID: 936, Name: "Aznauri Cavalry", Commands: []EffectCommand{
 		{SetAttribute, AnyUnit, ClassCavalry, AttributePopulation, -0.8},
 	}, IsUniqueTechnology: true},
 	MingGuangArmor: {EffectID: 1062, Name: "Ming-Kuang Armor", Commands: []EffectCommand{
-		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 4)},
+		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 4)},
 	}, IsUniqueTechnology: true},
 }
 
@@ -264,9 +376,16 @@ var TechnologyEffects = map[TechID]Effect{
 // by civilization.
 // A ranking applies them after the technologies, in this order.
 var CivilizationBonusEffects = map[CivilizationID][]Effect{
+	Byzantines: {
+		{EffectID: 283, Name: "C-Bonus, Skirms Pikes cost -25%", Commands: []EffectCommand{
+			{MultiplyAttribute, Skirmisher, AnyClass, AttributeAllCosts, 0.75},
+			{MultiplyAttribute, EliteSkirmisher, AnyClass, AttributeAllCosts, 0.75},
+			{MultiplyAttribute, ImperialSkirmisher, AnyClass, AttributeAllCosts, 0.75},
+		}},
+	},
 	Bengalis: {
 		{EffectID: 888, Name: "C-Bonus, Cavalry vs Skirm", Commands: []EffectCommand{
-			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSkirmishers, 2)},
+			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSkirmishers, 2)},
 		}},
 	},
 	Berbers: {
@@ -288,6 +407,13 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeSpeed, 1.05},
 		}},
 	},
+	Dravidians: {
+		{EffectID: 864, Name: "C-Bonus, Skirm and EA faster attack", Commands: []EffectCommand{
+			{MultiplyAttribute, Skirmisher, AnyClass, AttributeReloadTime, 0.8},
+			{MultiplyAttribute, EliteSkirmisher, AnyClass, AttributeReloadTime, 0.8},
+			{MultiplyAttribute, ImperialSkirmisher, AnyClass, AttributeReloadTime, 0.8},
+		}},
+	},
 	Franks: {
 		{EffectID: 285, Name: "C-Bonus, Cavalry +20% HP", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeHP, 1.2},
@@ -306,117 +432,135 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 	},
 	Gurjaras: {
 		{EffectID: 869, Name: "C-Bonus, +20% Cav bonus damage", Commands: []EffectCommand{
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassInfantry, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCapitalShips, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassElephantUnits, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor6, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor7, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCavalry, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor9, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor10, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassAllBuildings, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor12, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassStoneDefense, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassPredatorAnimals, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassArchers, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassShips, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassRams, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassTrees, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUniqueUnits, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSiegeWeapons, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassStandardBuildings, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassWallsAndGates, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassGunpowderUnits, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassBoars, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMonks, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCastles, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSpearmen, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCavalryArchers, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassShockInfantry, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCamelUnits, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor33, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMamelukes, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassHeroesKings, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassHeavySiege, 120)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSkirmishers, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassInfantry, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCapitalShips, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassElephantUnits, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor6, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor7, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCavalry, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor9, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor10, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassAllBuildings, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor12, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassStoneDefense, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassPredatorAnimals, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassArchers, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassShips, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassRams, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassTrees, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUniqueUnits, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSiegeWeapons, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassWallsAndGates, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassGunpowderUnits, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassBoars, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMonks, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCastles, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCavalryArchers, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassShockInfantry, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCamelUnits, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor33, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMamelukes, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassHeroesKings, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassHeavySiege, 120)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSkirmishers, 120)},
 		}},
 		{EffectID: 873, Name: "C-Bonus, +30% Cav bonus damage", Commands: []EffectCommand{
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassInfantry, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCapitalShips, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassElephantUnits, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor6, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor7, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCavalry, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor9, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor10, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassAllBuildings, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor12, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassStoneDefense, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassPredatorAnimals, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassArchers, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassShips, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassRams, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassTrees, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUniqueUnits, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSiegeWeapons, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassStandardBuildings, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassWallsAndGates, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassGunpowderUnits, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassBoars, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMonks, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCastles, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSpearmen, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCavalryArchers, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassShockInfantry, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCamelUnits, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor33, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMamelukes, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassHeroesKings, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassHeavySiege, 111)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSkirmishers, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassInfantry, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCapitalShips, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassElephantUnits, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor6, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor7, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCavalry, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor9, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor10, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassAllBuildings, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor12, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassStoneDefense, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassPredatorAnimals, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassArchers, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassShips, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassRams, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassTrees, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUniqueUnits, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSiegeWeapons, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassWallsAndGates, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassGunpowderUnits, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassBoars, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMonks, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCastles, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCavalryArchers, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassShockInfantry, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCamelUnits, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor33, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMamelukes, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassHeroesKings, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassHeavySiege, 111)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSkirmishers, 111)},
 		}},
 		{EffectID: 884, Name: "C-Bonus, +40% Cav bonus damage", Commands: []EffectCommand{
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassInfantry, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCapitalShips, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassElephantUnits, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor6, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor7, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCavalry, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor9, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor10, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassAllBuildings, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor12, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassStoneDefense, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassPredatorAnimals, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassArchers, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassShips, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassRams, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassTrees, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUniqueUnits, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSiegeWeapons, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassStandardBuildings, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassWallsAndGates, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassGunpowderUnits, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassBoars, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMonks, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCastles, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSpearmen, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCavalryArchers, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassShockInfantry, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassCamelUnits, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassUnusedArmor33, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMamelukes, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassHeroesKings, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassHeavySiege, 105)},
-			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSkirmishers, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassInfantry, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCapitalShips, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassElephantUnits, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor6, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor7, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCavalry, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor9, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor10, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassAllBuildings, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor12, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassStoneDefense, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassPredatorAnimals, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassArchers, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassShips, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassRams, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassTrees, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUniqueUnits, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSiegeWeapons, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassWallsAndGates, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassGunpowderUnits, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassBoars, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMonks, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCastles, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSpearmen, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCavalryArchers, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassShockInfantry, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassCamelUnits, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassUnusedArmor33, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMamelukes, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassHeroesKings, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassHeavySiege, 105)},
+			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSkirmishers, 105)},
 		}},
 	},
 	Hindustanis: {
 		{EffectID: 2, Name: "Hindustanis Team Bonus", Commands: []EffectCommand{
-			{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, classAmount(ArmorClassStandardBuildings, 2)},
-			{AddAttribute, LightCavalry, AnyClass, AttributeAttack, classAmount(ArmorClassStandardBuildings, 2)},
-			{AddAttribute, Hussar, AnyClass, AttributeAttack, classAmount(ArmorClassStandardBuildings, 2)},
-			{AddAttribute, WingedHussar, AnyClass, AttributeAttack, classAmount(ArmorClassStandardBuildings, 2)},
+			{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
+			{AddAttribute, LightCavalry, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
+			{AddAttribute, Hussar, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
+			{AddAttribute, WingedHussar, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
+		}},
+	},
+	// Inca: each age bonus first undoes the previous one, e.g. * 1.174 (for 1 / 0.85) then * 0.8.
+	Inca: {
+		{EffectID: 156, Name: "C-Bonus, Military cost -15%", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 0.85},
+		}},
+		{EffectID: 158, Name: "C-Bonus, Military cost -20%", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 1.174},
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 0.8},
+		}},
+		{EffectID: 159, Name: "C-Bonus, Military cost -25%", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 1.25},
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 0.75},
+		}},
+		{EffectID: 160, Name: "C-Bonus, Military cost -30%", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 1.328},
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFoodCost, 0.7},
 		}},
 	},
 	Jurchens: {
@@ -425,19 +569,32 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 		}},
 		{EffectID: 1009, Name: "C-Bonus, No friendly damage", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeFriendlyFireDamage, 0.5},
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFriendlyFireDamage, 0.5},
 		}},
 	},
 	Khitans: {
 		{EffectID: 67, Name: "C-Bonus, Double Forging", Commands: []EffectCommand{
-			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMelee, 1)},
+			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 1)},
 		}},
 		{EffectID: 68, Name: "C-Bonus, Double Iron Casting", Commands: []EffectCommand{
-			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassMelee, 1)},
+			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassMelee, 1)},
 		}},
 		{EffectID: 1011, Name: "C-Bonus, Skirms Spear Scout train 25% faster", Commands: []EffectCommand{
 			{MultiplyAttribute, ScoutCavalry, AnyClass, AttributeTrainTime, 0.869565},
 			{MultiplyAttribute, LightCavalry, AnyClass, AttributeTrainTime, 0.869565},
 			{MultiplyAttribute, Hussar, AnyClass, AttributeTrainTime, 0.869565},
+		}},
+	},
+	Koreans: {
+		{EffectID: 561, Name: "C-Bonus, Units cost less wood", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeWoodCost, 0.5},
+		}},
+	},
+	Lithuanians: {
+		{EffectID: 745, Name: "C-Bonus, Skirms Pikes 10% faster", Commands: []EffectCommand{
+			{MultiplyAttribute, Skirmisher, AnyClass, AttributeSpeed, 1.1},
+			{MultiplyAttribute, EliteSkirmisher, AnyClass, AttributeSpeed, 1.1},
+			{MultiplyAttribute, ImperialSkirmisher, AnyClass, AttributeSpeed, 1.1},
 		}},
 	},
 	Magyars: {
@@ -447,6 +604,11 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{MultiplyAttribute, Hussar, AnyClass, AttributeFoodCost, 0.85},
 			{MultiplyAttribute, WingedHussar, AnyClass, AttributeFoodCost, 0.85},
 		}},
+	},
+	Mapuche: {
+		{EffectID: 1383, TechnologyID: 1383, Name: "C-Bonus, Skirm Spear +5 HP Feudal", Commands: mapucheSkirmisherHP},
+		{EffectID: 1383, TechnologyID: 1384, Name: "C-Bonus, Skirm Spear +5 HP Castle", Commands: mapucheSkirmisherHP},
+		{EffectID: 1383, TechnologyID: 1385, Name: "C-Bonus, Skirm Spear +5 HP Imperial", Commands: mapucheSkirmisherHP},
 	},
 	Mongols: {
 		// The +20% (Castle Age) and +30% (Imperial Age) HP each come in 2 technologies
@@ -512,38 +674,50 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{AddAttribute, WingedHussar, AnyClass, AttributeSearchRadius, 2},
 		}},
 	},
+	Muisca: {
+		{EffectID: 1369, TechnologyID: 1369, Name: "C-Bonus, Arch + Champi +1 armor Age2", Commands: muiscaArcherMeleeArmor},
+		{EffectID: 1369, TechnologyID: 1370, Name: "C-Bonus, Arch + Champi +1 armor Age3", Commands: muiscaArcherMeleeArmor},
+		{EffectID: 1369, TechnologyID: 1371, Name: "C-Bonus, Arch + Champi +1 armor Age4", Commands: muiscaArcherMeleeArmor},
+	},
 	Poles: {
 		{EffectID: 802, Name: "Poles Team Bonus", Commands: []EffectCommand{
-			{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, classAmount(ArmorClassArchers, 1)},
-			{AddAttribute, LightCavalry, AnyClass, AttributeAttack, classAmount(ArmorClassArchers, 1)},
-			{AddAttribute, Hussar, AnyClass, AttributeAttack, classAmount(ArmorClassArchers, 1)},
-			{AddAttribute, WingedHussar, AnyClass, AttributeAttack, classAmount(ArmorClassArchers, 1)},
+			{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassArchers, 1)},
+			{AddAttribute, LightCavalry, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassArchers, 1)},
+			{AddAttribute, Hussar, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassArchers, 1)},
+			{AddAttribute, WingedHussar, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassArchers, 1)},
 		}},
 	},
 	Portuguese: {
 		{EffectID: 33, Name: "C-Bonus, All units -20% gold", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeGoldCost, 0.8},
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeGoldCost, 0.8},
+		}},
+	},
+	Saracens: {
+		{EffectID: 409, Name: "Saracens Team Bonus", Commands: []EffectCommand{
+			{AddAttribute, AnyUnit, ClassArcher, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 3)},
 		}},
 	},
 	Sicilians: {
 		{EffectID: 796, Name: "C-Bonus, Bonus damage resistance", Commands: []EffectCommand{
 			{SetAttribute, AnyUnit, ClassCavalry, AttributeBonusDamageResistance, 0.4},
+			{SetAttribute, AnyUnit, ClassArcher, AttributeBonusDamageResistance, 0.4},
 		}},
 	},
 	Teutons: {
 		{EffectID: 333, Name: "C-Bonus, Inf Cav +1 armor Age3", Commands: []EffectCommand{
-			{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 1)},
+			{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		}},
 		{EffectID: 334, Name: "C-Bonus, Inf Cav +1 armor Age4", Commands: []EffectCommand{
-			{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, classAmount(ArmorClassMelee, 1)},
+			{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		}},
 	},
 	Turks: {
 		{EffectID: 509, Name: "C-Bonus, Light cavalry +1P armor", Commands: []EffectCommand{
-			{AddAttribute, ScoutCavalry, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
-			{AddAttribute, LightCavalry, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
-			{AddAttribute, Hussar, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
-			{AddAttribute, WingedHussar, AnyClass, AttributeArmor, classAmount(ArmorClassPierce, 1)},
+			{AddAttribute, ScoutCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+			{AddAttribute, LightCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+			{AddAttribute, Hussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+			{AddAttribute, WingedHussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 		}},
 	},
 	Varangians: {
@@ -553,9 +727,26 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{AddAttribute, AnyUnit, ClassCavalry, AttributeHP, 10},
 		}},
 	},
-	Wei: {
-		{EffectID: 1027, Name: "Wei Team Bonus", Commands: []EffectCommand{
-			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, classAmount(ArmorClassSiegeWeapons, 2)},
+	Vietnamese: {
+		{EffectID: 672, Name: "C-Bonus, Archers +20% HP", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeHP, 1.2},
 		}},
 	},
+	Wei: {
+		{EffectID: 1027, Name: "Wei Team Bonus", Commands: []EffectCommand{
+			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSiegeWeapons, 2)},
+		}},
+	},
+}
+
+// mapucheSkirmisherHP is the effect of the Mapuche "Skirm Spear +5 HP" bonus, triggered in each age.
+var mapucheSkirmisherHP = []EffectCommand{
+	{AddAttribute, EliteSkirmisher, AnyClass, AttributeHP, 5},
+	{AddAttribute, Skirmisher, AnyClass, AttributeHP, 5},
+	{AddAttribute, ImperialSkirmisher, AnyClass, AttributeHP, 5},
+}
+
+// muiscaArcherMeleeArmor is the effect of the Muisca "Arch + Champi +1 armor" bonus, triggered in each age.
+var muiscaArcherMeleeArmor = []EffectCommand{
+	{AddAttribute, AnyUnit, ClassArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 }

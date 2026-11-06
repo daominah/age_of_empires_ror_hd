@@ -2,6 +2,8 @@
 
 package logic
 
+import "fmt"
+
 // ArmorClass is an armor class in the .dat: attacks and armors are amounts by class,
 // a hit only counts the classes in both the attacker attacks and the target armors.
 type ArmorClass int
@@ -59,3 +61,66 @@ const (
 	ArmorClassUnusedArmor48     ArmorClass = 48 // Unused Armor 48
 	ArmorClassUnusedArmor49     ArmorClass = 49 // Unused Armor 49
 )
+
+// String is the game name of the armor class, e.g. "Pierce",
+// so a printed unit reads map[Pierce:4 Melee:3] instead of map[3:4 4:3].
+func (c ArmorClass) String() string {
+	if name, isFound := armorClassNames[c]; isFound {
+		return name
+	}
+	return fmt.Sprintf("ArmorClass(%d)", int(c))
+}
+
+// armorClassNames are the game names of the armor classes.
+var armorClassNames = map[ArmorClass]string{
+	0:  "Unused Armor 0",
+	1:  "Infantry",
+	2:  "Capital Ships",
+	3:  "Pierce",
+	4:  "Melee",
+	5:  "Elephant Units",
+	6:  "Unused Armor 6",
+	7:  "Unused Armor 7",
+	8:  "Cavalry",
+	9:  "Unused Armor 9",
+	10: "Unused Armor 10",
+	11: "All Buildings",
+	12: "Unused Armor 12",
+	13: "Stone Defense",
+	14: "Predator Animals",
+	15: "Archers",
+	16: "Ships",
+	17: "Rams",
+	18: "Trees",
+	19: "Unique Units",
+	20: "Siege Weapons",
+	21: "Standard Buildings",
+	22: "Walls and Gates",
+	23: "Gunpowder Units",
+	24: "Boars",
+	25: "Monks",
+	26: "Castles",
+	27: "Spearmen",
+	28: "Cavalry Archers",
+	29: "Shock Infantry",
+	30: "Camel Units",
+	31: "Unused Armor 31",
+	32: "Condottieri",
+	33: "Unused Armor 33",
+	34: "Fishing Ships",
+	35: "Mamelukes",
+	36: "Heroes & Kings",
+	37: "Heavy Siege",
+	38: "Skirmishers",
+	39: "Royal Heirs",
+	40: "Unused Armor 40",
+	41: "Fire Ships",
+	42: "Unused Armor 42",
+	43: "Unused Armor 43",
+	44: "Unused Armor 44",
+	45: "Unused Armor 45",
+	46: "Unused Armor 46",
+	47: "Unused Armor 47",
+	48: "Unused Armor 48",
+	49: "Unused Armor 49",
+}

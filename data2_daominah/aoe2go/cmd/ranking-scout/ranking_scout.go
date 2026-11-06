@@ -36,33 +36,33 @@ var (
 	// townCenter5Plus4 is a fully upgraded Town Center arrow:
 	// 5 + Fletching, Bodkin Arrow, Bracer, Chemistry.
 	townCenter5Plus4 = logic.Attacker{Name: "Town Center 5+4", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 9}}
-	// arbalester6Plus4 is a fully upgraded Arbalester: 6 + Fletching, Bodkin Arrow, Bracer.
-	arbalester6Plus4 = logic.Attacker{Name: "Arbalester 6+4", Attacks: map[logic.ArmorClass]float64{logic.ArmorClassPierce: 10}}
+	// arbalester6Plus4 is a fully upgraded Arbalester: 6 + Fletching, Bodkin Arrow, Bracer, Chemistry.
+	arbalester6Plus4 = tree.LoadAttackerUpgraded(logic.Arbalester)
 
 	// criteria sort the rows in order, the next one breaking ties of the previous.
 	// Reorder or comment out lines to rank differently,
-	// e.g. put arrowsToKill(arbalester6Plus4) first.
+	// e.g. put logic.NewCriterionTankVs(arbalester6Plus4) first.
 	criteria = []logic.Criterion{
-		arrowsToKill(castle11Plus4),
-		arrowsToKill(arbalester6Plus4),
+		logic.NewCriterionTankVs(castle11Plus4),
+		logic.NewCriterionTankVs(arbalester6Plus4),
 		// cost saving from a unique technology only breaks ties of the same cost for free,
 		// e.g. Magyars and Berbers above Gurjaras (Kshatriyas)
-		{Name: "Cost before unique tech", Value: func(r logic.Row) float64 { return r.UnitWithoutUniqueTechnologies.Cost.Total() }, IsHigherBetter: false},
-		{Name: "Cost", Value: func(r logic.Row) float64 { return r.Unit.Cost.Total() }, IsHigherBetter: false},
-		{Name: "Attack", Value: func(r logic.Row) float64 { return r.Unit.Attacks[logic.ArmorClassMelee] }, IsHigherBetter: true},
-		arrowsToKill(castle11Plus3),
-		arrowsToKill(townCenter5Plus4),
+		logic.CriterionCostBeforeUniqueTechnologies,
+		logic.CriterionCost,
+		logic.CriterionAttack,
+		logic.NewCriterionTankVs(castle11Plus3),
+		logic.NewCriterionTankVs(townCenter5Plus4),
 		// last, a strength from a unique technology only breaks the remaining ties,
 		// e.g. Turks above Tatars (Silk Armor)
-		arrowsToKillBeforeUniqueTechnologies(castle11Plus4),
+		logic.NewCriterionTankVsBeforeUniqueTechnologies(castle11Plus4),
 	}
 
 	// columns of the output table, after the rank, civilization and unit,
 	// apart from the criteria: a criterion sorts without a column of its own.
 	columns = []logic.Column{
-		logic.CriterionColumn(arrowsToKill(castle11Plus4)),
-		logic.CriterionColumn(arrowsToKill(townCenter5Plus4)),
-		logic.CriterionColumn(arrowsToKill(arbalester6Plus4)),
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(castle11Plus4)),
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(townCenter5Plus4)),
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(arbalester6Plus4)),
 		logic.ColumnCost,
 		logic.ColumnAttack,
 		logic.ColumnHP,
@@ -75,46 +75,37 @@ var (
 )
 
 func main() {
-	tree, err := logic.ParseTechTree(data.Civilizations, data.Units, data.Technologies, logic.ParseGameStrings(data.GameStringsEnglish))
-	if err != nil {
-		log.Fatalf("error logic.ParseTechTree: %v", err)
-	}
-	rows := logic.FullyUpgradedRows(tree, scoutLine)
+	rows := logic.LoadRowsUpgraded(tree, scoutLine)
 	for _, line := range extraLines {
-		rows = append(rows, logic.FullyUpgradedRows(tree, line)...)
+		rows = append(rows, logic.LoadRowsUpgraded(tree, line)...)
 	}
 	logic.SortRows(rows, criteria)
-	table := logic.MarkdownTable(rows, columns)
+	table := logic.RenderMarkdownTable(rows, columns)
 	fmt.Print(table)
 
-	outputPath := filepath.Join(sourceDir(), outputFileName)
+	outputPath := filepath.Join(findSourceDir(), outputFileName)
 	if err := os.WriteFile(outputPath, []byte(table), 0o644); err != nil {
 		log.Fatalf("error os.WriteFile: %v", err)
 	}
 	log.Printf("wrote %v", outputPath)
 }
 
-// sourceDir is the directory of this source file,
+// findSourceDir is the directory of this source file,
 // so the output lands next to it whatever the working directory of "go run".
-func sourceDir() string {
+func findSourceDir() string {
 	_, file, _, _ := runtime.Caller(0)
 	return filepath.Dir(file)
 }
 
-// arrowsToKillBeforeUniqueTechnologies is arrowsToKill on the unit without its unique technologies.
-func arrowsToKillBeforeUniqueTechnologies(attacker logic.Attacker) logic.Criterion {
-	return logic.Criterion{
-		Name:           "Arrows " + attacker.Name + " before unique tech",
-		Value:          func(r logic.Row) float64 { return float64(logic.HitsToKill(attacker, r.UnitWithoutUniqueTechnologies)) },
-		IsHigherBetter: true,
-	}
-}
+// tree is the embedded game data, parsed before the config that uses it,
+// e.g. tree.LoadAttackerUpgraded(logic.Arbalester).
+var tree = parseTechTreeOrExit()
 
-// arrowsToKill is a criterion: hits of the attacker to kill the unit, more is better.
-func arrowsToKill(attacker logic.Attacker) logic.Criterion {
-	return logic.Criterion{
-		Name:           "Arrows " + attacker.Name,
-		Value:          func(r logic.Row) float64 { return float64(logic.HitsToKill(attacker, r.Unit)) },
-		IsHigherBetter: true,
+// parseTechTreeOrExit parses the embedded game data, it exits on error.
+func parseTechTreeOrExit() *logic.TechTree {
+	tree, err := logic.ParseTechTree(data.Civilizations, data.Units, data.Technologies, logic.ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		log.Fatalf("error logic.ParseTechTree: %v", err)
 	}
+	return tree
 }

@@ -38,13 +38,6 @@ type Row struct {
 	UnitWithoutUniqueTechnologies Unit
 }
 
-// Criterion sorts the rows, in the configured order.
-type Criterion struct {
-	Name           string
-	Value          func(row Row) float64
-	IsHigherBetter bool
-}
-
 // Column is a column of the ranking table, apart from the sorting criteria.
 type Column struct {
 	Name  string
@@ -53,27 +46,39 @@ type Column struct {
 	IsFootnote bool
 }
 
-// CriterionColumn shows the value of a criterion, e.g. the arrows to kill.
-func CriterionColumn(criterion Criterion) Column {
-	return Column{Name: criterion.Name, Value: func(row Row) string { return formatNumber(criterion.Value(row)) }}
-}
-
 // Columns of the unit stats.
 var (
-	ColumnHP          = Column{Name: "HP", Value: func(row Row) string { return formatNumber(ShownHP(row.Unit)) }}
-	ColumnMeleeArmor  = Column{Name: "Melee armor", Value: func(row Row) string { return BasePlusUpgrade(row, meleeArmor) }}
-	ColumnPierceArmor = Column{Name: "Pierce armor", Value: func(row Row) string { return BasePlusUpgrade(row, pierceArmor) }}
-	ColumnAttack      = Column{Name: "Attack", Value: func(row Row) string { return BasePlusUpgrade(row, meleeAttack) }}
+	ColumnHP          = Column{Name: "HP", Value: func(row Row) string { return formatNumber(GetShownHP(row.Unit)) }}
+	ColumnMeleeArmor  = Column{Name: "Melee armor", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getMeleeArmor) }}
+	ColumnPierceArmor = Column{Name: "Pierce armor", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getPierceArmor) }}
+	ColumnAttack      = Column{Name: "Attack", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getAttack) }}
+	ColumnRange       = Column{Name: "Range", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getRange) }}
 	ColumnReloadTime  = Column{Name: "Reload time", Value: func(row Row) string { return formatNumber(row.Unit.ReloadTime) }}
 	ColumnSpeed       = Column{Name: "Speed", Value: func(row Row) string { return formatNumber(row.Unit.Speed) }}
 	ColumnCost        = Column{Name: "Cost", Value: func(row Row) string { return formatCost(row.Unit.Cost) }}
-	ColumnNote        = Column{Name: "Note", Value: Note, IsFootnote: true}
+	ColumnNote        = Column{Name: "Note", Value: FormatNote, IsFootnote: true}
 )
 
-// Note is CostNote then AgeNote.
-func Note(row Row) string {
+// NewColumnBonusAttack shows the bonus attacks against armor classes, joined by ", ",
+// e.g. the Elite Skirmisher "Bonus vs Archer, CA" is "4, 2".
+// Each value is the total after upgrades, not base+upgrade.
+func NewColumnBonusAttack(name string, classes ...ArmorClass) Column {
+	return Column{
+		Name: name,
+		Value: func(row Row) string {
+			var values []string
+			for _, class := range classes {
+				values = append(values, formatNumber(row.Unit.Attacks[class]))
+			}
+			return strings.Join(values, ", ")
+		},
+	}
+}
+
+// Note is FormatCostNote then FormatAgeNote.
+func FormatNote(row Row) string {
 	var notes []string
-	for _, note := range []string{CostNote(row), AgeNote(row)} {
+	for _, note := range []string{FormatCostNote(row), FormatAgeNote(row)} {
 		if note != "" {
 			notes = append(notes, note)
 		}
@@ -81,34 +86,35 @@ func Note(row Row) string {
 	return strings.Join(notes, "; ")
 }
 
-// AgeNote shows a stat that civilization bonuses improve in several ages,
+// FormatAgeNote shows a stat that civilization bonuses improve in several ages,
 // with the value after the bonuses of each age, e.g. Berbers "cost 68f in Castle Age, 64f in Imperial Age".
 // The table shows the last one.
-func AgeNote(row Row) string {
+func FormatAgeNote(row Row) string {
 	var notes []string
 	for _, stat := range []struct {
 		name  string
 		value func(u Unit) string
 	}{
 		{"cost", func(u Unit) string { return formatCost(u.Cost) }},
-		{"HP", func(u Unit) string { return formatNumber(ShownHP(u)) }},
-		{"attack", func(u Unit) string { return formatNumber(meleeAttack(u)) }},
-		{"melee armor", func(u Unit) string { return formatNumber(meleeArmor(u)) }},
-		{"pierce armor", func(u Unit) string { return formatNumber(pierceArmor(u)) }},
+		{"HP", func(u Unit) string { return formatNumber(GetShownHP(u)) }},
+		{"attack", func(u Unit) string { return formatNumber(getAttack(u)) }},
+		{"melee armor", func(u Unit) string { return formatNumber(getMeleeArmor(u)) }},
+		{"pierce armor", func(u Unit) string { return formatNumber(getPierceArmor(u)) }},
+		{"range", func(u Unit) string { return formatNumber(u.Range) }},
 		{"reload time", func(u Unit) string { return formatNumber(u.ReloadTime) }},
 		{"speed", func(u Unit) string { return formatNumber(u.Speed) }},
 	} {
 		var ages []TechID
 		valueByAge := map[TechID]string{}
 		for _, step := range row.Steps {
-			age := step.Technology.Age()
-			if step.Source != CivilizationBonuses || age == 0 || stat.value(step.Before) == stat.value(step.After) {
+			age := step.Technology.FindAge()
+			if step.Source != CivilizationBonuses || age == 0 || stat.value(step.UnitBefore) == stat.value(step.UnitAfter) {
 				continue
 			}
 			if _, isFound := valueByAge[age]; !isFound {
 				ages = append(ages, age)
 			}
-			valueByAge[age] = stat.value(step.After)
+			valueByAge[age] = stat.value(step.UnitAfter)
 		}
 		if len(ages) < 2 {
 			continue
@@ -122,16 +128,16 @@ func AgeNote(row Row) string {
 	return strings.Join(notes, "; ")
 }
 
-// CostNote explains a cost changed by a technology to research, empty if none,
+// FormatCostNote explains a cost changed by a technology to research, empty if none,
 // e.g. "base cost 35f 45g, 80f after Corvinian Army (200f 300g)".
 // Civilization bonuses always apply, so they need no note, e.g. Magyars Hussar 68f.
-func CostNote(row Row) string {
+func FormatCostNote(row Row) string {
 	var changes []string
 	for _, step := range row.Steps {
-		if step.Source == CivilizationBonuses || step.Before.Cost == step.After.Cost {
+		if step.Source == CivilizationBonuses || step.UnitBefore.Cost == step.UnitAfter.Cost {
 			continue
 		}
-		changes = append(changes, fmt.Sprintf("%v after %v (%v)", formatCost(step.After.Cost), step.Name, formatCost(step.Technology.Cost)))
+		changes = append(changes, fmt.Sprintf("%v after %v (%v)", formatCost(step.UnitAfter.Cost), step.Name, formatCost(step.Technology.Cost)))
 	}
 	if len(changes) == 0 {
 		return ""
@@ -139,17 +145,25 @@ func CostNote(row Row) string {
 	return "base cost " + formatCost(row.BaseUnit.Cost) + ", " + strings.Join(changes, ", ")
 }
 
-func meleeArmor(u Unit) float64  { return u.Armors[ArmorClassMelee] }
-func pierceArmor(u Unit) float64 { return u.Armors[ArmorClassPierce] }
-func meleeAttack(u Unit) float64 { return u.Attacks[ArmorClassMelee] }
+func getMeleeArmor(u Unit) float64  { return u.Armors[ArmorClassMelee] }
+func getPierceArmor(u Unit) float64 { return u.Armors[ArmorClassPierce] }
+func getRange(u Unit) float64       { return u.Range }
+
+// attack is the main attack of the unit: melee, or pierce for a unit without a melee attack, e.g. a skirmisher.
+func getAttack(u Unit) float64 {
+	if melee, isFound := u.Attacks[ArmorClassMelee]; isFound {
+		return melee
+	}
+	return u.Attacks[ArmorClassPierce]
+}
 
 // Step is an effect applied to a row unit, with the unit before and after it.
 type Step struct {
 	Name       string     // the technology name, or the effect name of a civilization bonus
 	Technology Technology // the researched technology, empty for a civilization bonus
 	Source     UpgradeSource
-	Before     Unit
-	After      Unit
+	UnitBefore Unit
+	UnitAfter  Unit
 }
 
 // UpgradeSource groups the effects shown as one term of a base+upgrade stat.
@@ -162,34 +176,34 @@ const (
 	CivilizationBonuses
 )
 
-// BasePlusUpgrade shows a stat as the base, plus the technologies,
+// FormatBasePlusUpgrade shows a stat as the base, plus the technologies,
 // then plus the unique technologies and the civilization bonuses when they change it,
 // e.g. Malians attack "7+2+5" with Farimba, Khitans "7+2+2" with their double Forging and Iron Casting.
-func BasePlusUpgrade(row Row, stat func(u Unit) float64) string {
+func FormatBasePlusUpgrade(row Row, stat func(u Unit) float64) string {
 	upgrades := map[UpgradeSource]float64{}
 	for _, step := range row.Steps {
-		upgrades[step.Source] += stat(step.After) - stat(step.Before)
+		upgrades[step.Source] += stat(step.UnitAfter) - stat(step.UnitBefore)
 	}
-	result := formatNumber(stat(row.BaseUnit)) + signed(upgrades[Technologies])
+	result := formatNumber(stat(row.BaseUnit)) + formatSigned(upgrades[Technologies])
 	for _, source := range []UpgradeSource{UniqueTechnologies, CivilizationBonuses} {
 		if math.Abs(upgrades[source]) > 1e-6 {
-			result += signed(upgrades[source])
+			result += formatSigned(upgrades[source])
 		}
 	}
 	return result
 }
 
-// signed is the number with its sign, e.g. "+2", "-1", "+0".
-func signed(v float64) string {
+// formatSigned is the number with its sign, e.g. "+2", "-1", "+0".
+func formatSigned(v float64) string {
 	if v < 0 {
 		return formatNumber(v)
 	}
 	return "+" + formatNumber(v)
 }
 
-// FullyUpgradedRows returns one row per civilization that has the line,
+// LoadRowsUpgraded returns one row per civilization that has the line,
 // with every available technology and the civilization bonuses applied.
-func FullyUpgradedRows(tree *TechTree, line Line) []Row {
+func LoadRowsUpgraded(tree *TechTree, line Line) []Row {
 	var rows []Row
 	for _, civilization := range tree.Civilizations {
 		unitID := UnitID(-1)
@@ -198,59 +212,67 @@ func FullyUpgradedRows(tree *TechTree, line Line) []Row {
 				unitID = id
 			}
 		}
-		base, isFound := tree.Units[unitID]
-		if !isFound {
+		if _, isFound := tree.Units[unitID]; !isFound {
 			continue
 		}
-		unit := base.clone()
-		unit.Class = line.Class
-		// the automatic technologies are part of the base, e.g. Scout Cavalry attack 5 from the Feudal Age
-		for id := range AutomaticTechnologies {
-			TechnologyEffects[id].Apply(&unit)
-		}
-		withoutUniqueTechnologies := unit.clone()
-		row := Row{CivilizationID: civilization.ID, Civilization: civilization.Name, BaseUnit: unit.clone()}
-
-		var technologyIDs []TechID
-		for id := range TechnologyEffects {
-			if civilization.TechnologyIDs[id] && !AutomaticTechnologies[id] {
-				technologyIDs = append(technologyIDs, id)
-			}
-		}
-		sort.Slice(technologyIDs, func(i, j int) bool { return technologyIDs[i] < technologyIDs[j] }) // a fixed order, e.g. Bloodlines before the Mongols HP bonus
-		apply := func(effect Effect, source UpgradeSource, technology Technology) {
-			before := unit.clone()
-			effect.Apply(&unit)
-			if source != UniqueTechnologies {
-				effect.Apply(&withoutUniqueTechnologies)
-			}
-			name := technology.Name
-			if source == CivilizationBonuses || name == "" {
-				name = effect.Name
-			}
-			row.Steps = append(row.Steps, Step{Name: name, Technology: technology, Source: source, Before: before, After: unit.clone()})
-		}
-		for _, id := range technologyIDs {
-			effect := TechnologyEffects[id]
-			source := Technologies
-			if effect.IsUniqueTechnology {
-				source = UniqueTechnologies
-			}
-			apply(effect, source, tree.Technologies[id])
-		}
-		for _, effect := range CivilizationBonusEffects[civilization.ID] {
-			apply(effect, CivilizationBonuses, tree.civilizationBonusTechnology(civilization.ID, effect.EffectID))
-		}
-		row.Unit = unit
-		row.UnitWithoutUniqueTechnologies = withoutUniqueTechnologies
-		rows = append(rows, row)
+		// the Scout Cavalry is class 47 in the data, the effects copied in effect.go use class 12 for the whole line
+		rows = append(rows, tree.loadRowUpgraded(civilization, unitID, line.Class))
 	}
 	return rows
 }
 
-// DamagePerHit is the damage of one hit of the attacker on the target:
+// loadRowUpgraded is the unit of the civilization
+// with every technology it has in its Technology Tree and its civilization bonuses,
+// step by step. The class replaces the unit class in the data.
+func (tree *TechTree) loadRowUpgraded(civilization Civilization, unitID UnitID, class UnitClass) Row {
+	// the automatic technologies are part of the base, e.g. Scout Cavalry attack 5 from the Feudal Age
+	unit := tree.LoadUnitBase(unitID)
+	unit.Class = class
+	withoutUniqueTechnologies := unit.clone()
+	row := Row{CivilizationID: civilization.ID, Civilization: civilization.Name, BaseUnit: unit.clone()}
+
+	var technologyIDs []TechID
+	for id := range TechnologyEffects {
+		if civilization.TechnologyIDs[id] && !AutomaticTechnologies[id] {
+			technologyIDs = append(technologyIDs, id)
+		}
+	}
+	sort.Slice(technologyIDs, func(i, j int) bool { return technologyIDs[i] < technologyIDs[j] }) // a fixed order, e.g. Bloodlines before the Mongols HP bonus
+	apply := func(effect Effect, source UpgradeSource, technology Technology) {
+		before := unit.clone()
+		effect.Apply(&unit)
+		if source != UniqueTechnologies {
+			effect.Apply(&withoutUniqueTechnologies)
+		}
+		name := technology.Name
+		if source == CivilizationBonuses || name == "" {
+			name = effect.Name
+		}
+		row.Steps = append(row.Steps, Step{Name: name, Technology: technology, Source: source, UnitBefore: before, UnitAfter: unit.clone()})
+	}
+	for _, id := range technologyIDs {
+		effect := TechnologyEffects[id]
+		source := Technologies
+		if effect.IsUniqueTechnology {
+			source = UniqueTechnologies
+		}
+		apply(effect, source, tree.Technologies[id])
+	}
+	for _, effect := range CivilizationBonusEffects[civilization.ID] {
+		technology := tree.findCivilizationBonusTechnology(civilization.ID, effect.EffectID)
+		if effect.TechnologyID != 0 {
+			technology = tree.Technologies[effect.TechnologyID]
+		}
+		apply(effect, CivilizationBonuses, technology)
+	}
+	row.Unit = unit
+	row.UnitWithoutUniqueTechnologies = withoutUniqueTechnologies
+	return row
+}
+
+// CalculateDamagePerHit is the damage of one hit of the attacker on the target:
 // the sum over the armor classes of both of attack minus armor (not below 0), at least 1.
-func DamagePerHit(attacker Attacker, target Unit) float64 {
+func CalculateDamagePerHit(attacker Attacker, target Unit) float64 {
 	damage := 0.0
 	for class, attack := range attacker.Attacks {
 		armor, isFound := target.Armors[class]
@@ -262,15 +284,15 @@ func DamagePerHit(attacker Attacker, target Unit) float64 {
 	return math.Max(1, damage)
 }
 
-// HitsToKill is how many hits of the attacker kill the target.
+// CalculateHitsToKill is how many hits of the attacker kill the target.
 // It uses the HP with decimals, e.g. Mongols Hussar 117.5 HP, shown as 118 in game.
-func HitsToKill(attacker Attacker, target Unit) int {
-	return int(math.Ceil(cleanHP(target) / DamagePerHit(attacker, target)))
+func CalculateHitsToKill(attacker Attacker, target Unit) int {
+	return int(math.Ceil(cleanHP(target) / CalculateDamagePerHit(attacker, target)))
 }
 
-// ShownHP is the HP shown in game, rounded to nearest (half up),
+// GetShownHP is the HP shown in game, rounded to nearest (half up),
 // e.g. Mongols Hussar 117.5 HP is shown as 118.
-func ShownHP(u Unit) float64 {
+func GetShownHP(u Unit) float64 {
 	return math.Floor(cleanHP(u) + 0.5)
 }
 
@@ -298,10 +320,10 @@ func SortRows(rows []Row, criteria []Criterion) {
 	})
 }
 
-// MarkdownTable prints the rows as a Markdown table:
+// RenderMarkdownTable prints the rows as a Markdown table:
 // the rank, civilization and unit, then the columns in order,
 // then the footnotes of the IsFootnote columns.
-func MarkdownTable(rows []Row, columns []Column) string {
+func RenderMarkdownTable(rows []Row, columns []Column) string {
 	headers := []string{"#", "Civilization", "Unit"}
 	for _, column := range columns {
 		headers = append(headers, column.Name)
@@ -320,17 +342,17 @@ func MarkdownTable(rows []Row, columns []Column) string {
 		}
 		table = append(table, cells)
 	}
-	result := alignedTable(table)
+	result := alignTable(table)
 	if len(footnotes) > 0 {
 		result += "\n" + strings.Join(footnotes, "\n") + "\n"
 	}
 	return result
 }
 
-// alignedTable pads each column to its widest cell,
+// alignTable pads each column to its widest cell,
 // so the raw Markdown reads as a table too.
 // The first line is the header.
-func alignedTable(table [][]string) string {
+func alignTable(table [][]string) string {
 	widths := make([]int, len(table[0]))
 	for _, line := range table {
 		for i, cell := range line {
