@@ -52,7 +52,7 @@ func NewCriterionHitsToKillTarget(target Unit) Criterion {
 	return Criterion{
 		Name: "Hits to kill " + target.Name,
 		Value: func(r Row) float64 {
-			return float64(CalculateHitsToKill(Attacker{Name: r.Unit.Name, Attacks: r.Unit.Attacks}, target))
+			return float64(CalculateHitsToKill(Attacker{Name: r.Unit.Name, Attacks: r.Unit.Attacks, ExtraProjectiles: r.Unit.ExtraProjectiles}, target))
 		},
 	}
 }

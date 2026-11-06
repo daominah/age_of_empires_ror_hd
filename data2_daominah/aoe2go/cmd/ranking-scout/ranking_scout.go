@@ -60,17 +60,19 @@ var (
 	// columns of the output table, after the rank, civilization and unit,
 	// apart from the criteria: a criterion sorts without a column of its own.
 	columns = []logic.Column{
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(castle11Plus4)),
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(townCenter5Plus4)),
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(arbalester6Plus4)),
-		logic.ColumnCost,
-		logic.ColumnAttack,
+		// the basic stats first, then the stats that matter for this line
 		logic.ColumnHP,
 		logic.ColumnMeleeArmor,
 		logic.ColumnPierceArmor,
+		logic.ColumnAttack,
 		logic.ColumnReloadTime,
+		logic.ColumnCost,
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(castle11Plus4)),
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(townCenter5Plus4)),
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(arbalester6Plus4)),
 		logic.ColumnSpeed,
-		logic.ColumnNote,
+		// the bonus attack vs Monks is common to the line, so it is not noted
+		logic.NewColumnNoteWithBonusAttack(logic.ArmorClassMonks),
 	}
 )
 

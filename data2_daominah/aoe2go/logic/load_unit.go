@@ -43,8 +43,9 @@ func (tree *TechTree) LoadAttackerUpgraded(id UnitID) Attacker {
 	unit := tree.LoadUnitUpgraded(id)
 	base := getAttack(tree.LoadUnitBase(id))
 	return Attacker{
-		Name:    unit.Name + " " + formatNumber(base) + formatSigned(getAttack(unit)-base),
-		Attacks: unit.Attacks,
+		Name:             unit.Name + " " + formatNumber(base) + formatSigned(getAttack(unit)-base),
+		Attacks:          unit.Attacks,
+		ExtraProjectiles: unit.ExtraProjectiles,
 	}
 }
 

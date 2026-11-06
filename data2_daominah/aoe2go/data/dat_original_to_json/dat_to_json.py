@@ -98,6 +98,8 @@ def units(dat):
         }
         if unit.type_50:
             item['range'] = unit.type_50.max_range
+            if unit.type_50.min_range:  # most units have none
+                item['min_range'] = unit.type_50.min_range
             item['reload_time'] = unit.type_50.reload_time
             item['attacks'] = {str(a.class_): a.amount for a in unit.type_50.attacks}
             item['armors'] = {str(a.class_): a.amount for a in unit.type_50.armours}

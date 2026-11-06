@@ -61,7 +61,9 @@ const (
 	AttributeAttack                Attribute = 9 // Value is a encodeClassAmount
 	AttributeReloadTime            Attribute = 10
 	AttributeRange                 Attribute = 12 // max range
-	AttributeBlastWidth            Attribute = 22 // e.g. Lechitic Legacy trample damage
+	AttributeMinRange              Attribute = 20
+	AttributeProjectileCount       Attribute = 107 // max projectiles, the min one (102) changes with it
+	AttributeBlastWidth            Attribute = 22  // e.g. Lechitic Legacy trample damage
 	AttributeSearchRadius          Attribute = 23
 	AttributeBonusDamageResistance Attribute = 24
 	AttributeIgnoreArmor           Attribute = 63
@@ -128,6 +130,10 @@ func (c EffectCommand) Apply(unit *Unit) {
 		unit.ReloadTime = operation(unit.ReloadTime, c.Value)
 	case AttributeRange:
 		unit.Range = operation(unit.Range, c.Value)
+	case AttributeProjectileCount:
+		unit.ExtraProjectiles = int(operation(float64(unit.ExtraProjectiles), c.Value))
+	case AttributeMinRange:
+		unit.MinRange = operation(unit.MinRange, c.Value)
 	case AttributeTrainTime:
 		unit.TrainTime = operation(unit.TrainTime, c.Value)
 	case AttributeIgnoreArmor:
@@ -337,6 +343,8 @@ var TechnologyEffects = map[TechID]Effect{
 		{AddAttribute, LightCavalry, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, Hussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 		{AddAttribute, WingedHussar, AnyClass, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
 	}, IsUniqueTechnology: true},
 	SteppeHusbandry: {EffectID: 726, Name: "Burmese UT", Commands: []EffectCommand{
 		{MultiplyAttribute, ScoutCavalry, AnyClass, AttributeTrainTime, 0.5},
@@ -368,6 +376,32 @@ var TechnologyEffects = map[TechID]Effect{
 	}, IsUniqueTechnology: true},
 	MingGuangArmor: {EffectID: 1062, Name: "Ming-Kuang Armor", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 4)},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 4)},
+	}, IsUniqueTechnology: true},
+	Sipahi: {EffectID: 546, Name: "Sipahi", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeHP, 20},
+	}, IsUniqueTechnology: true},
+	// Recurve Bow also adds +1 line of sight, ignored like the other line of sight commands.
+	RecurveBow: {EffectID: 570, Name: "Indians UT", Commands: []EffectCommand{
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeRange, 1},
+		{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassPierce, 1)},
+	}, IsUniqueTechnology: true},
+	// Hul'che Spearthrowers adds a projectile (attributes 102 and 107), the min one 102 is not modeled.
+	HulCheJavelineers: {EffectID: 515, Name: "Hul'che Spearthrowers", Commands: []EffectCommand{
+		{AddAttribute, EliteSkirmisher, AnyClass, AttributeProjectileCount, 1},
+		{AddAttribute, Skirmisher, AnyClass, AttributeProjectileCount, 1},
+		{AddAttribute, ImperialSkirmisher, AnyClass, AttributeProjectileCount, 1},
+	}, IsUniqueTechnology: true},
+	AndeanSling: {EffectID: 572, Name: "Andean Sling", Commands: []EffectCommand{
+		{SetAttribute, EliteSkirmisher, AnyClass, AttributeMinRange, 0},
+		{SetAttribute, Skirmisher, AnyClass, AttributeMinRange, 0},
+		{SetAttribute, Slinger, AnyClass, AttributeMinRange, 0},
+		{SetAttribute, Genitour, AnyClass, AttributeMinRange, 0},
+	}, IsUniqueTechnology: true},
+	// Paiks also speeds up the melee Ratha, not ranked.
+	Paiks: {EffectID: 852, Name: "Paiks", Commands: []EffectCommand{
+		{MultiplyAttribute, RathaRanged, AnyClass, AttributeReloadTime, 0.833333},
+		{MultiplyAttribute, EliteRathaRanged, AnyClass, AttributeReloadTime, 0.833333},
 	}, IsUniqueTechnology: true},
 }
 
@@ -399,12 +433,15 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 	Cumans: {
 		{EffectID: 748, Name: "C-Bonus, Cavalry +5% speed Age2", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeSpeed, 1.05},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeSpeed, 1.05},
 		}},
 		{EffectID: 762, Name: "C-Bonus, Cavalry +5% speed Age3", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeSpeed, 1.05},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeSpeed, 1.05},
 		}},
 		{EffectID: 763, Name: "C-Bonus, Cavalry +5% speed Age4", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeSpeed, 1.05},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeSpeed, 1.05},
 		}},
 	},
 	Dravidians: {
@@ -417,6 +454,7 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 	Franks: {
 		{EffectID: 285, Name: "C-Bonus, Cavalry +20% HP", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeHP, 1.2},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeHP, 1.2},
 		}},
 	},
 	Georgians: {
@@ -537,6 +575,14 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSkirmishers, 105)},
 		}},
 	},
+	Huns: {
+		{EffectID: 497, Name: "C-Bonus, 35% CA", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeAllCosts, 0.9},
+		}},
+		{EffectID: 498, Name: "C-Bonus, 40% CA", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeAllCosts, 0.888889},
+		}},
+	},
 	Hindustanis: {
 		{EffectID: 2, Name: "Hindustanis Team Bonus", Commands: []EffectCommand{
 			{AddAttribute, ScoutCavalry, AnyClass, AttributeAttack, encodeClassAmount(ArmorClassStandardBuildings, 2)},
@@ -566,10 +612,18 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 	Jurchens: {
 		{EffectID: 994, Name: "C-Bonus, cav & Fire Lancer +25% attack", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeReloadTime, 0.8},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeReloadTime, 0.8},
 		}},
 		{EffectID: 1009, Name: "C-Bonus, No friendly damage", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeFriendlyFireDamage, 0.5},
 			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeFriendlyFireDamage, 0.5},
+		}},
+	},
+	Japanese: {
+		// +2 vs Archers, but not vs Skirmishers (a Skirmisher is also an Archer).
+		{EffectID: 185, Name: "C-Bonus, CA vs Archers", Commands: []EffectCommand{
+			{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassArchers, 2)},
+			{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeAttack, encodeClassAmount(ArmorClassSkirmishers, -2)},
 		}},
 	},
 	Khitans: {
@@ -588,6 +642,7 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 	Koreans: {
 		{EffectID: 561, Name: "C-Bonus, Units cost less wood", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeWoodCost, 0.5},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeWoodCost, 0.5},
 		}},
 	},
 	Lithuanians: {
@@ -663,6 +718,10 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 			{MultiplyAttribute, Hussar, AnyClass, AttributeHP, 0.01},
 			{MultiplyAttribute, WingedHussar, AnyClass, AttributeHP, 0.01},
 		}},
+		// The .dat names the Mongols cavalry archer attack speed bonus "Non-Tech".
+		{EffectID: 393, Name: "Non-Tech", Commands: []EffectCommand{
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeReloadTime, 0.8},
+		}},
 		{EffectID: 407, Name: "Mongols Team Bonus", Commands: []EffectCommand{
 			{AddAttribute, ScoutCavalry, AnyClass, AttributeLineOfSight, 2},
 			{AddAttribute, LightCavalry, AnyClass, AttributeLineOfSight, 2},
@@ -691,6 +750,7 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 		{EffectID: 33, Name: "C-Bonus, All units -20% gold", Commands: []EffectCommand{
 			{MultiplyAttribute, AnyUnit, ClassCavalry, AttributeGoldCost, 0.8},
 			{MultiplyAttribute, AnyUnit, ClassArcher, AttributeGoldCost, 0.8},
+			{MultiplyAttribute, AnyUnit, ClassCavalryArcher, AttributeGoldCost, 0.8},
 		}},
 	},
 	Saracens: {
@@ -707,9 +767,11 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 	Teutons: {
 		{EffectID: 333, Name: "C-Bonus, Inf Cav +1 armor Age3", Commands: []EffectCommand{
 			{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+			{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		}},
 		{EffectID: 334, Name: "C-Bonus, Inf Cav +1 armor Age4", Commands: []EffectCommand{
 			{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+			{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		}},
 	},
 	Turks: {
@@ -725,6 +787,7 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 		// the .dat name "+65%" is outdated
 		{EffectID: 1489, Name: "C-Bonus, Bloodlines +65% more effective", Commands: []EffectCommand{
 			{AddAttribute, AnyUnit, ClassCavalry, AttributeHP, 10},
+			{AddAttribute, AnyUnit, ClassCavalryArcher, AttributeHP, 10},
 		}},
 	},
 	Vietnamese: {
@@ -733,6 +796,24 @@ var CivilizationBonusEffects = map[CivilizationID][]Effect{
 		}},
 	},
 	Wei: {
+		// Like the Mongols HP bonus: 1056 and 1057 ("+ BL") multiply the HP without the Bloodlines +20,
+		// the same bonus is also split in 1058 and 1059 for before Bloodlines, which are left out.
+		// Only the Xianbei Raider is copied, the Heavy Hei Guang Cavalry is not ranked.
+		// 30 base HP: 30 * 1.2 + 20 = 56 in Castle Age, 30 * 1.2 * 1.098 + 20 = 59.5 in Imperial Age.
+		{EffectID: 1056, Name: "C-Bonus, Heavy Cav +20% HP + BL", Commands: []EffectCommand{
+			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 100},
+			{AddAttribute, XianbeiRaider, AnyClass, AttributeHP, -2000},
+			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 1.2},
+			{AddAttribute, XianbeiRaider, AnyClass, AttributeHP, 2000},
+			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 0.01},
+		}},
+		{EffectID: 1057, Name: "C-Bonus, Heavy Cav +30% + BL", Commands: []EffectCommand{
+			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 100},
+			{AddAttribute, XianbeiRaider, AnyClass, AttributeHP, -2000},
+			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 1.098},
+			{AddAttribute, XianbeiRaider, AnyClass, AttributeHP, 2000},
+			{MultiplyAttribute, XianbeiRaider, AnyClass, AttributeHP, 0.01},
+		}},
 		{EffectID: 1027, Name: "Wei Team Bonus", Commands: []EffectCommand{
 			{AddAttribute, AnyUnit, ClassCavalry, AttributeAttack, encodeClassAmount(ArmorClassSiegeWeapons, 2)},
 		}},

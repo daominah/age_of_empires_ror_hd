@@ -46,16 +46,18 @@ var (
 	// columns of the output table, after the rank, civilization and unit,
 	// apart from the criteria: a criterion sorts without a column of its own.
 	columns = []logic.Column{
-		logic.ColumnRange,
-		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(arbalester6Plus4)),
-		logic.NewColumnFromCriterion(logic.NewCriterionHitsToKillTarget(arbalesterTarget)),
-		logic.ColumnCost,
-		logic.ColumnAttack,
-		logic.NewColumnBonusAttack("Bonus vs Archer, CA", logic.ArmorClassArchers, logic.ArmorClassCavalryArchers),
+		// the basic stats first, then the stats that matter for this line
 		logic.ColumnHP,
 		logic.ColumnMeleeArmor,
 		logic.ColumnPierceArmor,
+		logic.ColumnAttack,
 		logic.ColumnReloadTime,
+		logic.ColumnCost,
+		logic.ColumnRange,
+		logic.ColumnMinRange,
+		logic.NewColumnFromCriterion(logic.NewCriterionTankVs(arbalester6Plus4)),
+		logic.NewColumnFromCriterion(logic.NewCriterionHitsToKillTarget(arbalesterTarget)),
+		logic.NewColumnBonusAttack("Bonus vs Archer, CA", logic.ArmorClassArchers, logic.ArmorClassCavalryArchers),
 		logic.ColumnSpeed,
 		logic.ColumnNote,
 	}

@@ -47,6 +47,28 @@ var AgeNames = map[TechID]string{FeudalAge: "Feudal Age", CastleAge: "Castle Age
 // if its Technology Tree allows it.
 const AnyCivilization CivilizationID = -1
 
+// FindUnitAge is the age that the unit becomes available to the civilization, 0 if unknown:
+// the latest age among the technology that upgrades to the unit and the technologies it requires,
+// e.g. ImperialAge for the Hussar, CastleAge for the Elite Skirmisher.
+// A unit without an upgrade technology (e.g. the Scout Cavalry, a unique unit) has no age here.
+func (tree *TechTree) FindUnitAge(civilization Civilization, unitID UnitID) TechID {
+	return tree.findTechnologyAge(civilization.UpgradeTechnologyIDs[unitID], map[TechID]bool{})
+}
+
+// findTechnologyAge is the latest age among the technology and the technologies it requires.
+func (tree *TechTree) findTechnologyAge(id TechID, visited map[TechID]bool) TechID {
+	technology, isFound := tree.Technologies[id]
+	if !isFound || visited[id] {
+		return 0
+	}
+	visited[id] = true
+	age := technology.FindAge()
+	for _, required := range technology.RequiredTechnologyIDs {
+		age = max(age, tree.findTechnologyAge(required, visited))
+	}
+	return age
+}
+
 // findCivilizationBonusTechnology is the technology of a civilization that triggers the effect,
 // e.g. the Berbers Imperial Age technology for "Stable units -20%".
 // Some effects are also triggered by a technology for any civilization,
@@ -67,6 +89,9 @@ type Civilization struct {
 	Name          string // English name, e.g. "Hindustanis"
 	UnitIDs       map[UnitID]bool
 	TechnologyIDs map[TechID]bool
+	// UpgradeTechnologyIDs is the technology that upgrades to the unit, e.g. the Hussar technology for the Hussar,
+	// a unit without it (e.g. the Scout Cavalry, a unique unit) is not here.
+	UpgradeTechnologyIDs map[UnitID]TechID
 }
 
 // Unit is the stats of a unit, base or after applying effects.
@@ -77,13 +102,17 @@ type Unit struct {
 	HP    float64
 	// Attacks and Armors are amounts by armor class, e.g. ArmorClassPierce.
 	// Damage only counts the classes in both the attacker Attacks and the target Armors.
-	Attacks    map[ArmorClass]float64
-	Armors     map[ArmorClass]float64
-	Range      float64 // max range in tiles, e.g. 0 for a Knight, 1 for a Steppe Lancer, 5 for a Throwing Axeman
-	ReloadTime float64 // seconds between attacks
-	Speed      float64
-	TrainTime  float64 // seconds
-	Cost       Cost
+	Attacks  map[ArmorClass]float64
+	Armors   map[ArmorClass]float64
+	Range    float64 // max range in tiles, e.g. 0 for a Knight, 1 for a Steppe Lancer, 5 for a Throwing Axeman
+	MinRange float64 // min range in tiles, 0 for most units, e.g. 1 for a Skirmisher, 3 for a Mangonel
+	// ExtraProjectiles is the number of projectiles besides the first, e.g. 1 for the Maya skirmisher.
+	// Each one hits with the attack ExtraProjectileAttack, apart from the first projectile.
+	ExtraProjectiles int
+	ReloadTime       float64 // seconds between attacks
+	Speed            float64
+	TrainTime        float64 // seconds
+	Cost             Cost
 	// IsIgnoringArmor is set by Wootz Steel: the unit attack ignores the target armor.
 	IsIgnoringArmor bool
 }
@@ -143,6 +172,7 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 			Armors:     map[ArmorClass]float64{},
 			Class:      UnitClass(u.Class),
 			Range:      u.Range,
+			MinRange:   u.MinRange,
 			ReloadTime: u.ReloadTime,
 			Speed:      u.Speed,
 			TrainTime:  u.TrainTime,
@@ -164,10 +194,18 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 			continue
 		}
 		civilization := Civilization{
-			ID:            CivilizationID(c.ID),
-			Name:          names[c.NameStringID],
-			UnitIDs:       map[UnitID]bool{},
-			TechnologyIDs: map[TechID]bool{},
+			ID:                   CivilizationID(c.ID),
+			Name:                 names[c.NameStringID],
+			UnitIDs:              map[UnitID]bool{},
+			TechnologyIDs:        map[TechID]bool{},
+			UpgradeTechnologyIDs: map[UnitID]TechID{},
+		}
+		for unitID, techID := range c.UpgradeTechnologyIDs {
+			id, err := strconv.Atoi(unitID)
+			if err != nil {
+				return nil, fmt.Errorf("error strconv.Atoi upgrade_technology_ids key %q: %w", unitID, err)
+			}
+			civilization.UpgradeTechnologyIDs[UnitID(id)] = TechID(techID)
 		}
 		for _, id := range c.UnitIDs {
 			civilization.UnitIDs[UnitID(id)] = true
@@ -213,11 +251,12 @@ var gameStringLine = regexp.MustCompile(`(?m)^(\d+)\s+"(.*)"\r?$`)
 
 // civilizationJSON is the part of civilizations.json used here.
 type civilizationJSON struct {
-	ID            int    `json:"id"`
-	NameStringID  int    `json:"name_string_id"`
-	Era           string `json:"era"`
-	UnitIDs       []int  `json:"unit_ids"`
-	TechnologyIDs []int  `json:"technology_ids"`
+	ID                   int            `json:"id"`
+	NameStringID         int            `json:"name_string_id"`
+	Era                  string         `json:"era"`
+	UnitIDs              []int          `json:"unit_ids"`
+	TechnologyIDs        []int          `json:"technology_ids"`
+	UpgradeTechnologyIDs map[string]int `json:"upgrade_technology_ids"`
 }
 
 // technologyJSON is the part of technologies.json used here.
@@ -240,6 +279,7 @@ type unitJSON struct {
 	HP           float64            `json:"hp"`
 	Speed        float64            `json:"speed"`
 	Range        float64            `json:"range"`
+	MinRange     float64            `json:"min_range"`
 	ReloadTime   float64            `json:"reload_time"`
 	TrainTime    float64            `json:"train_time"`
 	Attacks      map[int]float64    `json:"attacks"`

@@ -128,6 +128,24 @@ func TestLoadRowsUpgraded(t *testing.T) {
 		}
 	}
 
+	// THEN the Maya skirmisher throws an extra projectile of attack 1 with Hul'che Javelineers,
+	// so against a very high pierce armor it deals 2 damage and the others 1
+	ram := Unit{Armors: map[ArmorClass]float64{ArmorClassPierce: 150}, HP: 175}
+	for civilization, want := range map[CivilizationID]float64{Maya: 2, Britons: 1} {
+		u := skirmisherRows[civilization].Unit
+		got := CalculateDamagePerHit(Attacker{Attacks: u.Attacks, ExtraProjectiles: u.ExtraProjectiles}, ram)
+		if got != want {
+			t.Errorf("%v: got %v damage to a ram, want %v", civilization, got, want)
+		}
+	}
+
+	// THEN the Inca skirmisher has no minimum range after Andean Sling, the others have 1
+	for civilization, want := range map[CivilizationID]float64{Inca: 0, Britons: 1} {
+		if got := skirmisherRows[civilization].Unit.MinRange; got != want {
+			t.Errorf("%v: got min range %v, want %v", civilization, got, want)
+		}
+	}
+
 	// THEN the range includes Fletching, Bodkin Arrow, Bracer and the unique technologies
 	for _, c := range []struct {
 		civilization CivilizationID
@@ -144,14 +162,64 @@ func TestLoadRowsUpgraded(t *testing.T) {
 	}
 
 	// THEN a bonus triggered in several ages notes each age, e.g. the Mapuche skirmisher HP
-	if got, want := FormatAgeNote(skirmisherRows[Mapuche]), "HP 40 in Feudal Age, 45 in Castle Age, 50 in Imperial Age"; got != want {
+	if got, want := FormatAgeNote(skirmisherRows[Mapuche]), "Skirmisher HP 35 in Feudal Age, Elite Skirmisher HP 45 in Castle Age, 50 in Imperial Age"; got != want {
 		t.Errorf("Mapuche: got note %q, want %q", got, want)
+	}
+
+	// THEN a note names the unit available in each age, e.g. no Hussar in the Castle Age:
+	// the Light Cavalry has (60 base HP) * 1.2 + 20 Bloodlines = 92
+	mongolsHussar := byCivilization[Mongols]
+	if got, want := FormatAgeNote(mongolsHussar), "Light Cavalry HP 92 in Castle Age, Hussar HP 118 in Imperial Age"; got != want {
+		t.Errorf("Mongols: got note %q, want %q", got, want)
 	}
 
 	// THEN civilizations without the scout line have no row
 	for _, civilization := range []CivilizationID{Aztecs, Inca, Maya, Mapuche, Muisca, Tupi} {
 		if _, isFound := byCivilization[civilization]; isFound {
 			t.Errorf("%v: has a row, but no scout line", civilization)
+		}
+	}
+}
+
+func TestLoadRowsUpgradedCavalryArcher(t *testing.T) {
+	// GIVEN the embedded game data
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+
+	// WHEN each civilization gets its fully upgraded cavalry archer line unit
+	line := Line{UnitIDs: []UnitID{CavalryArcher, HeavyCavalryArcher}, Class: ClassCavalryArcher}
+	byCivilization := map[CivilizationID]Row{}
+	for _, row := range LoadRowsUpgraded(tree, line) {
+		byCivilization[row.CivilizationID] = row
+	}
+
+	// THEN the civilization bonuses and unique technologies written for the cavalry class
+	// also apply to the cavalry archer class
+	for _, c := range []struct {
+		civilization CivilizationID
+		hp           float64 // shown in game
+		wood         float64
+		gold         float64
+		reloadTime   float64
+	}{
+		// Bloodlines +20 HP, Thumb Ring 10% faster attack
+		{Persians, 80, 40, 60, 1.8},
+		// Sipahi +20 HP
+		{Turks, 100, 40, 60, 1.8},
+		// wood cost -50%
+		{Koreans, 60, 20, 60, 1.8},
+		// attack 25% faster: 1.8 * 0.8
+		{Mongols, 80, 40, 60, 1.44},
+		// attack 20% faster: 1.8 * 0.8 with Thumb Ring included
+		{Jurchens, 80, 40, 60, 1.6},
+	} {
+		u := byCivilization[c.civilization].Unit
+		if GetShownHP(u) != c.hp || math.Abs(u.Cost.Wood-c.wood) > 0.5 || math.Abs(u.Cost.Gold-c.gold) > 0.5 ||
+			math.Abs(u.ReloadTime-c.reloadTime) > 0.01 {
+			t.Errorf("%v: got HP %v wood %v gold %v reload time %v, want %+v",
+				c.civilization, GetShownHP(u), u.Cost.Wood, u.Cost.Gold, u.ReloadTime, c)
 		}
 	}
 }
@@ -263,5 +331,44 @@ func TestEncodeClassAmount(t *testing.T) {
 		if encoded != c.value || class != c.class || amount != c.amount {
 			t.Errorf("%+v: got encoded %v, decoded class %v amount %v", c, encoded, class, amount)
 		}
+	}
+}
+
+func TestFormatTraitNote(t *testing.T) {
+	// GIVEN rows of civilizations with traits the rankings do not calculate
+	for _, c := range []struct {
+		row  Row
+		want string
+	}{
+		// the cost and the stats are not changed, only the note tells
+		{Row{CivilizationID: Poles, Unit: Unit{ID: WingedHussar}}, "33% trample damage in 0.5 tile radius after Lechitic Legacy"},
+		{Row{CivilizationID: Sicilians, Unit: Unit{ID: Hussar}}, "bonus damage taken -40%"},
+		// a trait of another unit of the civilization is not noted
+		{Row{CivilizationID: Khitans, Unit: Unit{ID: LightCavalry}}, "regeneration in combat 90 per minute after Ordo Cavalry"},
+		{Row{CivilizationID: Persians, Unit: Unit{ID: Hussar}}, ""},
+		{Row{CivilizationID: Berbers, Unit: Unit{ID: Hussar}}, ""},
+	} {
+		// WHEN the note is formatted
+		got := FormatTraitNote(c.row)
+
+		// THEN it lists the traits of the row unit
+		if got != c.want {
+			t.Errorf("%v %v: got %q, want %q", c.row.CivilizationID, c.row.Unit.ID, got, c.want)
+		}
+	}
+}
+
+func TestFormatBonusAttackNote(t *testing.T) {
+	// GIVEN a Mangudai with the bonus attacks of the line and one special bonus
+	row := Row{Unit: Unit{Attacks: map[ArmorClass]float64{
+		ArmorClassPierce: 12, ArmorClassSpearmen: 3, ArmorClassSiegeWeapons: 5, ArmorClassRoyalHeirs: -3, ArmorClassRams: 0,
+	}}}
+
+	// WHEN the note skips the bonus of the whole line (Parthian Tactics vs Spearmen)
+	got := FormatBonusAttackNote(row, ArmorClassSpearmen)
+
+	// THEN only the special bonus is noted, not the pierce attack, a zero or a negative one
+	if want := "bonus attack 5 vs Siege Weapons"; got != want {
+		t.Errorf("got %q, want %q", got, want)
 	}
 }
