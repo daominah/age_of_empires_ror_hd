@@ -3,6 +3,7 @@ package logic
 import (
 	"fmt"
 	"reflect"
+	"slices"
 	"strings"
 )
 
@@ -111,10 +112,5 @@ func FormatTechnologyCostNote(row Row) string {
 }
 
 func containsTechID(ids []TechID, id TechID) bool {
-	for _, v := range ids {
-		if v == id {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(ids, id)
 }

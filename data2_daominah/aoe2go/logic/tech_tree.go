@@ -293,15 +293,13 @@ func parseProjectiles(u unitJSON, unit *Unit) {
 		return
 	}
 	unit.ChargeAttack = &ChargeAttack{
-		Shot: Shot{
-			ProjectileID:     UnitID(u.ChargeProjectile.ID),
-			Attacks:          parseAttacks(u.ChargeProjectile.Attacks),
-			ExtraProjectiles: countExtra(u.MaxTotalProjectiles),
-			// the charged volley extra arrows are copies of the normal extra arrow, changed by effects apart
-			ExtraProjectileID: unit.ExtraProjectileID,
-			ExtraAttacks:      maps.Clone(unit.ExtraAttacks),
-		},
-		ChargeTime: u.ChargeTime,
+		ProjectileID:     UnitID(u.ChargeProjectile.ID),
+		Attacks:          parseAttacks(u.ChargeProjectile.Attacks),
+		ExtraProjectiles: countExtra(u.MaxTotalProjectiles),
+		// the charged volley extra arrows are copies of the normal extra arrow, changed by effects apart
+		ExtraProjectileID: unit.ExtraProjectileID,
+		ExtraAttacks:      maps.Clone(unit.ExtraAttacks),
+		ChargeTime:        u.ChargeTime,
 	}
 }
 

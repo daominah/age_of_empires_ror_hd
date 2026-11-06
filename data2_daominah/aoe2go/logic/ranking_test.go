@@ -432,7 +432,7 @@ func TestCalculateDamagePerTwoSeconds(t *testing.T) {
 	}
 
 	// WHEN the attacker also has a charged attack of pierce 34 every 29 seconds, without extra arrows
-	attacker.ChargeAttack = &ChargeAttack{Shot: Shot{Attacks: map[ArmorClass]float64{ArmorClassPierce: 34}}, ChargeTime: 29}
+	attacker.ChargeAttack = &ChargeAttack{Attacks: map[ArmorClass]float64{ArmorClassPierce: 34}, ChargeTime: 29}
 	// THEN every 30 seconds, the charge time and half a reload, a charged shot of 30 replaces a normal shot of 5,
 	// adding 25 per 30 seconds, so 5 + 25*2/30 in 2 seconds
 	if got, want := CalculateDamagePerTwoSeconds(attacker, target), 5+25*2.0/30; math.Abs(got-want) > 1e-9 {

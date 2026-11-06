@@ -1,5 +1,7 @@
 package logic
 
+import "slices"
+
 import "strings"
 
 // Trait is something that matters in a fight but the rankings do not calculate:
@@ -84,10 +86,5 @@ func (trait Trait) CheckHasUnit(unitID UnitID) bool {
 	if len(trait.UnitIDs) == 0 {
 		return true
 	}
-	for _, id := range trait.UnitIDs {
-		if id == unitID {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(trait.UnitIDs, unitID)
 }

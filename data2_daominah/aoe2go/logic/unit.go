@@ -2,7 +2,7 @@ package logic
 
 import (
 	"maps"
-	"sort"
+	"slices"
 )
 
 // Unit is the stats of a unit, base or after applying effects.
@@ -169,6 +169,6 @@ func listSortedTechnologyIDs(checkIsKept func(techID TechID) bool) []TechID {
 			ids = append(ids, techID)
 		}
 	}
-	sort.Slice(ids, func(i, j int) bool { return ids[i] < ids[j] })
+	slices.Sort(ids)
 	return ids
 }

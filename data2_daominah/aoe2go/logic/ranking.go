@@ -341,13 +341,14 @@ func FormatBasePlusUpgrade(row Row, stat func(u Unit) float64) string {
 	for _, step := range row.Steps {
 		upgrades[step.Source] += stat(step.UnitAfter) - stat(step.UnitBefore)
 	}
-	result := formatNumber(stat(row.BaseUnit)) + formatSigned(upgrades[Technologies])
+	var result strings.Builder
+	result.WriteString(formatNumber(stat(row.BaseUnit)) + formatSigned(upgrades[Technologies]))
 	for _, source := range []UpgradeSource{UniqueTechnologies, CivilizationBonuses} {
 		if math.Abs(upgrades[source]) > 1e-6 {
-			result += formatSigned(upgrades[source])
+			result.WriteString(formatSigned(upgrades[source]))
 		}
 	}
-	return result
+	return result.String()
 }
 
 // formatSigned is the number with its sign, e.g. "+2", "-1", "+0".
@@ -406,7 +407,7 @@ func (tree *TechTree) loadRowUpgraded(civilization Civilization, unitID UnitID, 
 			technologyIDs = append(technologyIDs, id)
 		}
 	}
-	sort.Slice(technologyIDs, func(i, j int) bool { return technologyIDs[i] < technologyIDs[j] }) // a fixed order, e.g. Bloodlines before the Mongols HP bonus
+	slices.Sort(technologyIDs) // a fixed order, e.g. Bloodlines before the Mongols HP bonus
 	apply := func(effect Effect, source UpgradeSource, technology Technology) {
 		before := unit.clone()
 		effect.Apply(&unit)
@@ -494,7 +495,7 @@ func RenderMarkdownTable(rows []Row, columns []Column) string {
 // e.g. "Tank vs Arbalester 10" is "TankVsArbalester10".
 func formatHeader(name string) string {
 	var b strings.Builder
-	for _, word := range strings.Fields(name) {
+	for word := range strings.FieldsSeq(name) {
 		b.WriteString(strings.ToUpper(word[:1]) + word[1:])
 	}
 	return b.String()
