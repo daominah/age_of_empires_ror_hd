@@ -23,6 +23,7 @@ func CalculateShotDamage(shot Shot, target Unit) float64 {
 }
 
 // calculateProjectileDamage is the damage of one projectile on the target.
+// The target resistance cuts the bonus damage only, e.g. a Halberdier deals 7 + 32 * 0.6 to a Sicilians Light Cavalry.
 func calculateProjectileDamage(attacks map[ArmorClass]float64, target Unit) float64 {
 	damage := 0.0
 	for class, attack := range attacks {
@@ -30,7 +31,11 @@ func calculateProjectileDamage(attacks map[ArmorClass]float64, target Unit) floa
 		if !isFound {
 			continue
 		}
-		damage += math.Max(0, attack-armor)
+		classDamage := math.Max(0, attack-armor)
+		if class != ArmorClassMelee && class != ArmorClassPierce {
+			classDamage *= 1 - target.BonusDamageResistance
+		}
+		damage += classDamage
 	}
 	return math.Max(1, damage)
 }

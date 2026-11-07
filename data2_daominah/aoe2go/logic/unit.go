@@ -39,6 +39,9 @@ type Unit struct {
 	Cost         Cost
 	// IsIgnoringArmor is set by Wootz Steel: the unit attack ignores the target armor.
 	IsIgnoringArmor bool
+	// BonusDamageResistance is the share of the bonus damage the unit does not take,
+	// the damage of the classes other than melee and pierce, e.g. 0.4 for the Sicilians cavalry and archers.
+	BonusDamageResistance float64
 }
 
 // Shot is what one attack fires at the target: a main arrow, then the extra ones.

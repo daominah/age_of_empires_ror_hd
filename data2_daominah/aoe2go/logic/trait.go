@@ -1,8 +1,9 @@
 package logic
 
-import "slices"
-
-import "strings"
+import (
+	"slices"
+	"strings"
+)
 
 // Trait is something that matters in a fight but the rankings do not calculate:
 // regeneration, population cost, bonus damage resistance, trample and pass through damage.
@@ -25,7 +26,7 @@ var (
 	skirmisherLineUnitIDs    = []UnitID{Skirmisher, EliteSkirmisher, ImperialSkirmisher}
 )
 
-// Traits are the hand written traits of the civilizations.
+// Traits are the handwritten traits of the civilizations.
 var Traits = []Trait{
 	// Georgians: the unique technology Aznauri Cavalry gives regeneration and a lower population cost
 	{Georgians, append(append([]UnitID{}, scoutLineUnitIDs...), HeavyCavalryArcher, CavalryArcher, Kipchak, EliteKipchak),
@@ -41,13 +42,34 @@ var Traits = []Trait{
 	{Khitans, []UnitID{LightCavalry}, "regeneration in combat 90 per minute after Ordo Cavalry", 1},
 	{Khitans, []UnitID{Hussar}, "regeneration in combat 118.42 per minute after Ordo Cavalry", 1},
 	{Berbers, []UnitID{CamelArcher, EliteCamelArcher}, "regeneration 15 per minute after Maghrebi Camels", 1},
-	// a free civilization bonus that counters the bonus attack of the units built to kill it
-	{Sicilians, nil, "bonus damage taken -40%", 3},
+	// a free civilization bonus that counters the bonus attack of the units built to kill it,
+	// already in the damage (Unit.BonusDamageResistance), so it is a note only, of weight 0
+	{Sicilians, nil, "bonus damage taken -40%", 0},
 	// Maya only has the skirmisher line in the rankings
 	{Maya, nil, "+1 arrow after Hul'che Javelineers, it has attack 1 so it deals at least 1 damage", 1},
 	{Mapuche, []UnitID{Skirmisher, EliteSkirmisher, ImperialSkirmisher, BolasRider, EliteBolasRider},
 		"pass through damage after Malon", 1},
 	{Poles, scoutLineUnitIDs, "33% trample damage in 0.5 tile radius after Lechitic Legacy", 1},
+	// the line of sight is not a unit stat in the rankings, and the Mongols +2 is the only civilization bonus to it on the scout line
+	{Mongols, scoutLineUnitIDs, "+2 line of sight", 1},
+	// the scout line upsides of the extra scores of the scout ranking, so the note explains them
+	{Poles, scoutLineUnitIDs, "Folwark collects instantly 10% of the farm food", 1},
+	{Sicilians, scoutLineUnitIDs, "farm upgrades +100% food", 1},
+	{Khitans, scoutLineUnitIDs, "trained 15% faster", 1},
+	{Khitans, scoutLineUnitIDs, "Pasture food needs no drop-off", 1},
+	{Franks, scoutLineUnitIDs, "farm upgrades free, trained 40% faster after Chivalry", 1},
+	{Franks, scoutLineUnitIDs, "Scout Cavalry 54 HP in Feudal Age, above the others until they research Bloodlines", 1},
+	{Gurjaras, scoutLineUnitIDs, "livestock garrisoned in the Mills generates food", 1},
+	{Huns, scoutLineUnitIDs, "trained 20% faster at the Stable, no houses", 1},
+	{Cumans, scoutLineUnitIDs, "trained 100% faster after Steppe Husbandry", 1},
+	{Slavs, scoutLineUnitIDs, "farmers work faster", 1},
+	{Khmer, scoutLineUnitIDs, "farmers need no drop-off", 1},
+	{Vikings, scoutLineUnitIDs, "Wheelbarrow and Hand Cart free", 1},
+	{Hindustanis, scoutLineUnitIDs, "villagers cheaper", 1},
+	{Tatars, scoutLineUnitIDs, "+50% damage from higher elevation instead of the normal +25%", 1},
+	{Danes, scoutLineUnitIDs, "gets 25% of the cost of the buildings it destroys", 1},
+	{Vietnamese, scoutLineUnitIDs, "Conscription free", 1},
+	{Wei, scoutLineUnitIDs, "generates 1.8 food per minute after Tuntian", 1},
 	// the small skirmisher upsides from the wiki, so they break the ties of the standard Elite Skirmishers,
 	// on the skirmisher line only, as the scout and cavalry archer rankings were not checked for them.
 	// A cost or training time saving weighs most, a unique technology or a situational upside least.
@@ -56,7 +78,7 @@ var Traits = []Trait{
 	{Saxons, skirmisherLineUnitIDs, "cost -5% per Town Center or Castle, up to -20%", 3},
 	{Khitans, skirmisherLineUnitIDs, "trained 15% faster, upgrades researched 15% faster", 3},
 	{Aztecs, skirmisherLineUnitIDs, "trained 15% faster", 3},
-	{Britons, skirmisherLineUnitIDs, "trained 10% faster at the Archery Range (team bonus)", 2},
+	{Britons, skirmisherLineUnitIDs, "trained 10% faster at the Archery Range", 2},
 	{Danes, skirmisherLineUnitIDs, "gets 25% of the cost of the buildings it destroys", 2},
 	{Vietnamese, skirmisherLineUnitIDs, "Conscription free", 1},
 	{Khitans, skirmisherLineUnitIDs, "reflects 25% of the melee damage after Lamellar Armor", 1},

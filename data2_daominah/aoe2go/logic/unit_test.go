@@ -398,6 +398,30 @@ func TestLoadUnitUpgraded(t *testing.T) {
 			TrainTime:  30,
 			Cost:       Cost{Food: 80},
 		}},
+		// the same upgrades as the Hussar, only the Magyars train it, so it gets Corvinian Army: 80 food instead of 35f 45g.
+		// The .dat lists the bonus vs Siege Weapons twice, 8 then 0, the game counts both, so +8.
+		{EliteMagyarHuszar, Unit{
+			ID:    EliteMagyarHuszar,
+			Name:  "Elite Magyar Huszar",
+			Class: ClassCavalry,
+			HP:    110,
+			Attacks: map[ArmorClass]float64{
+				ArmorClassMelee:        15,
+				ArmorClassSiegeWeapons: 8,
+				ArmorClassRams:         2,
+				ArmorClassAllBuildings: 0, ArmorClassStandardBuildings: 0, ArmorClassUnusedArmor31: 0, ArmorClassSkirmishers: 0, ArmorClassRoyalHeirs: -3,
+			},
+			Armors: map[ArmorClass]float64{
+				ArmorClassPierce:  6,
+				ArmorClassMelee:   3,
+				ArmorClassCavalry: 0, ArmorClassUniqueUnits: 0, ArmorClassUnusedArmor31: 0,
+			},
+			Range:      0,
+			ReloadTime: 1.8,
+			Speed:      1.65,
+			TrainTime:  12,
+			Cost:       Cost{Food: 80},
+		}},
 		// the same cavalry upgrades
 		{Paladin, Unit{
 			ID:    Paladin,
