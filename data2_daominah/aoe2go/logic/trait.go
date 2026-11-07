@@ -5,10 +5,15 @@ import (
 	"strings"
 )
 
-// Trait is something that matters in a fight but the rankings do not calculate:
-// regeneration, population cost, bonus damage resistance, trample and pass through damage.
+// Trait is an upside of a civilization that the unit stats leave out,
+// shown as a note of the row:
+// in a fight (regeneration, population cost, trample and pass through damage),
+// or in the economy behind the unit (farmers, training speed).
+// A ranking may also score a trait by hand, e.g. the extra scores of the scout ranking,
+// or calculate it, e.g. the Sicilians bonus damage taken (Unit.BonusDamageResistance),
+// then the trait stays as the note that explains the score.
 // The text is written by hand from the wiki (see wiki_reference.md in each ranking command),
-// as a note of the row, at the values of the Imperial Age.
+// at the values of the Imperial Age.
 type Trait struct {
 	CivilizationID CivilizationID
 	// UnitIDs are the units that have the trait, empty for every unit of the civilization.
@@ -16,6 +21,8 @@ type Trait struct {
 	Text    string
 	// Weight is a rough worth of the trait as a tie-breaker, 1 for a small upside,
 	// 3 for a cost or training time saving, e.g. the Tupi refund of 15% of the cost.
+	// The scout line traits weigh 1 each, even a training time saving,
+	// as the extra scores of the scout ranking already weigh them.
 	Weight float64
 }
 

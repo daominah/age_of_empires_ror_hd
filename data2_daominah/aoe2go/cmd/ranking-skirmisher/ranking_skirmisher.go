@@ -81,6 +81,18 @@ var (
 	//     worth a share of the damage vs the Arbalester, as archers fight in a group.
 	extraScores = map[logic.CivilizationID]float64{logic.Koreans: 0.75, logic.Inca: -0.4, logic.Saxons: 0.3, logic.Mapuche: 0.6}
 
+	// Known gaps of the skirmisher score, to refine in a later change:
+	//   - Mapuche rank 48 (-1.45), though they should be stronger:
+	//     the +15 HP (50 instead of 35) adds only 0.81, +0.39 vs the Arbalester and +0.42 vs the Heavy Cavalry Archer,
+	//     as each tank weighs 1, while the missing Bracer costs 2.86 (range -2, damage vs the Arbalester -0.86).
+	//     The Malon pass-through 0.6 is a guess too, about a third of a 30% pass-through on the damage vs the Arbalester.
+	//   - Sicilians: the bonus damage taken -40% counts nowhere here,
+	//     as neither the Arbalester, the Heavy Cavalry Archer nor the Hussar has a bonus vs Archers,
+	//     and its trait weighs 0, as the scout ranking calculates it in the damage.
+	//     It wins the mirror vs a standard Elite Skirmisher, 9 hits to kill vs 11, though it lacks Ring Archer Armor:
+	//     the +4 vs Archers is most of the damage, and the Sicilians take 4 * 0.6.
+	//     No tank vs the Elite Skirmisher in the score, so the mirror counts for no civilization.
+
 	// criteria sort the rows in order, the next one breaking ties of the previous.
 	// The score decides, the others only break exact ties with what the score leaves out.
 	criteria = []logic.Criterion{

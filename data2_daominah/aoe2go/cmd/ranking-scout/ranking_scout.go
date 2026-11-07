@@ -105,12 +105,12 @@ var (
 		logic.Franks:      0.5, // Feudal Scout stronger without upgrades, farm upgrades free, trained 40% faster (Chivalry)
 		logic.Georgians:   0.5, // regeneration and population -20% (Aznauri Cavalry), less damage from lower elevation
 		logic.Vikings:     0.5, // Wheelbarrow and Hand Cart free
-		logic.Gurjaras:    0.2, // livestock garrisoned in a Mill generates food
+		logic.Gurjaras:    0.2, // livestock garrisoned in the Mills generates food
 		logic.Huns:        0.2, // trained 20% faster, no houses
 		logic.Mongols:     0.2, // +2 line of sight
 		logic.Tatars:      0.2, // +50% damage from higher elevation instead of +25%
 		logic.Cumans:      0.1, // trained 100% faster (Steppe Husbandry)
-		logic.Hindustanis: 0.1, // villagers cheaper each age
+		logic.Hindustanis: 0.1, // villagers cheaper
 		logic.Danes:       0.1, // gets 25% of the cost of the buildings it destroys
 		logic.Vietnamese:  0.1, // Conscription free
 		logic.Wei:         0.1, // 1.8 food per minute per unit (Tuntian)
@@ -125,7 +125,9 @@ var (
 		logic.NewCriterionWithExtraScores(
 			logic.NewCriterionDiscountUniqueTechnologies(logic.NewCriterionWeightedSum("Score", baseline, scoreWeights), 0.75),
 			extraScores),
-		// the strengths the score leaves out: the handwritten traits (regeneration, bonus damage taken, trample)
+		// the handwritten traits only break the exact ties of the score,
+		// as the score already counts most of them through the extra scores (regeneration, trample, economy)
+		// and the bonus damage taken through the damage
 		logic.CriterionTraitWeightSum,
 	}
 
