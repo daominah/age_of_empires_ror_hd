@@ -154,6 +154,8 @@ func (c EffectCommand) Apply(unit *Unit) {
 		unit.MinRange = operation(unit.MinRange, c.Value)
 	case AttributeTrainTime:
 		unit.TrainTime = operation(unit.TrainTime, c.Value)
+	case AttributeBonusDamageResistance:
+		unit.BonusDamageResistance = operation(unit.BonusDamageResistance, c.Value)
 	case AttributeIgnoreArmor:
 		unit.IsIgnoringArmor = operation(0, c.Value) > 0
 	case AttributeFoodCost:

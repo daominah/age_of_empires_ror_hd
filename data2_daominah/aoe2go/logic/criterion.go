@@ -1,6 +1,9 @@
 package logic
 
-import "math"
+import (
+	"math"
+	"slices"
+)
 
 // Criterion sorts the rows, in the configured order.
 type Criterion struct {
@@ -32,7 +35,9 @@ var (
 		Value: func(r Row) float64 { return r.UnitWithoutUniqueTechnologies.Cost.Sum() },
 	}
 	// CriterionFoodCost is the food alone, for a line where the food is the scarce resource, e.g. the skirmisher.
-	CriterionFoodCost   = Criterion{Name: "Food cost", Value: func(r Row) float64 { return r.Unit.Cost.Food }}
+	CriterionFoodCost = Criterion{Name: "Food cost", Value: func(r Row) float64 { return r.Unit.Cost.Food }}
+	// CriterionWoodCost is the wood alone, for a line whose gold is already in the score, e.g. the cavalry archer.
+	CriterionWoodCost   = Criterion{Name: "Wood cost", Value: func(r Row) float64 { return r.Unit.Cost.Wood }}
 	CriterionAttack     = Criterion{Name: "Attack", Value: func(r Row) float64 { return getAttack(r.Unit) }, IsHigherBetter: true}
 	CriterionReloadTime = Criterion{Name: "Reload time", Value: func(r Row) float64 { return r.Unit.ReloadTime }}
 	CriterionRange      = Criterion{Name: "Range", Value: func(r Row) float64 { return r.Unit.Range }, IsHigherBetter: true}
@@ -84,21 +89,28 @@ func NewCriterionBonusAttackVs(class ArmorClass) Criterion {
 
 // CriterionBonusAttackSum is the sum of the bonus attacks of the row unit, all classes but melee and pierce,
 // more is better, a rough tie-breaker, e.g. the Mongols Elite Mangudai +5 vs Siege Weapons.
-var CriterionBonusAttackSum = Criterion{
-	Name: "Bonus attack sum",
-	Value: func(r Row) float64 {
-		sum := 0.0
-		for class, amount := range r.Unit.Attacks {
-			if class != ArmorClassMelee && class != ArmorClassPierce {
-				sum += amount
+var CriterionBonusAttackSum = NewCriterionBonusAttackSumExcept()
+
+// NewCriterionBonusAttackSumExcept is CriterionBonusAttackSum without the bonus attacks against commonClasses,
+// the classes the whole line has a bonus against, so a standard unit sums 0
+// and only the bonus attacks of a civilization count, e.g. the Lithuanians Winged Hussar +4 vs Gunpowder Units.
+func NewCriterionBonusAttackSumExcept(commonClasses ...ArmorClass) Criterion {
+	return Criterion{
+		Name: "Bonus attack sum",
+		Value: func(r Row) float64 {
+			sum := 0.0
+			for class, amount := range r.Unit.Attacks {
+				if class != ArmorClassMelee && class != ArmorClassPierce && !slices.Contains(commonClasses, class) {
+					sum += amount
+				}
 			}
-		}
-		return sum
-	},
-	IsHigherBetter: true,
+			return sum
+		},
+		IsHigherBetter: true,
+	}
 }
 
-// CriterionTraitWeightSum is the sum of the weights of the hand written traits of the row unit, more is better,
+// CriterionTraitWeightSum is the sum of the weights of the handwritten traits of the row unit, more is better,
 // a rough tie-breaker as every trait is a strength, e.g. the Sicilians bonus damage taken -40%.
 var CriterionTraitWeightSum = Criterion{
 	Name: "Trait weight sum",
@@ -124,6 +136,16 @@ var CriterionHasCheaperTechnologies = Criterion{
 		}
 		return 1
 	},
+	IsHigherBetter: true,
+}
+
+// CriterionTechnologySaving is the resources the civilization saves on the upgrades of the row unit, more is better,
+// e.g. the Tatars cavalry archer above the Turks one, Parthian Tactics and Thumb Ring free vs Chemistry free.
+// It counts in 1000 resources, e.g. 1.3 for the Turks Hussar:
+// in a score, its baseline is 0, so its weight is the score of 1000 resources saved.
+var CriterionTechnologySaving = Criterion{
+	Name:           "Technology saving",
+	Value:          func(r Row) float64 { return CalculateTechnologySaving(r) / 1000 },
 	IsHigherBetter: true,
 }
 
@@ -180,7 +202,7 @@ func NewCriterionDiscountUniqueTechnologies(criterion Criterion, uniqueTechnolog
 	}
 }
 
-// NewCriterionWithExtraScores adds a hand written score to the criterion for some civilizations,
+// NewCriterionWithExtraScores adds a handwritten score to the criterion for some civilizations,
 // for a strength the stats leave out, e.g. the Koreans free archer armors.
 func NewCriterionWithExtraScores(criterion Criterion, extraScores map[CivilizationID]float64) Criterion {
 	return Criterion{

@@ -531,7 +531,12 @@ func alignTable(table [][]string) string {
 
 // formatNumber rounds to 2 decimals, without trailing zeros.
 func formatNumber(v float64) string {
-	return strconv.FormatFloat(math.Round(v*100)/100, 'f', -1, 64)
+	rounded := math.Round(v*100) / 100
+	if rounded == 0 {
+		// a small negative value rounds to -0, e.g. a score of -0.003 would read "-0"
+		rounded = 0
+	}
+	return strconv.FormatFloat(rounded, 'f', -1, 64)
 }
 
 // formatCost shows the cost with the short resource names, e.g. "80f", "35f 45g".

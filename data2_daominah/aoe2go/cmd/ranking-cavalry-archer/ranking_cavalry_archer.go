@@ -1,9 +1,8 @@
-// Command ranking-cavalry-archer prints the AoE2 DE civilizations ranked by their fully upgraded cavalry archer line unit,
-// as a Markdown table, one row per civilization, plus extra rows for unique cavalry archers.
+// Command ranking-cavalry-archer writes the AoE2 DE civilizations ranked by their fully upgraded cavalry archer line unit,
+// as a Markdown table next to its source file, one row per civilization, plus extra rows for unique cavalry archers.
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -61,6 +60,13 @@ var (
 	//     e.g. the Tatars +1 pierce armor and the Turks +20 HP rank above the baseline,
 	//     the Khitans without Bloodlines (60 HP) below it.
 	//     The cap keeps the Elite War Wagon (+317%) from deciding alone, as nobody fights it with cavalry archers.
+	//   - Wood cost 0.1, capped at +-50%: the gold is already in the damage per gold,
+	//     and cheap wood helps a little only, e.g. the Koreans Heavy Cavalry Archer (20w) ranks above the standard ones.
+	//     The cap keeps a small base of wood from swinging the score, e.g. the Elite War Wagon (100w).
+	//   - Technology saving 0.1 per 1000 resources, small: the free or cheaper upgrades break the ties of the combat,
+	//     e.g. the Tatars (Parthian Tactics and Thumb Ring free) above the Turks (Chemistry free),
+	//     as the two tie head to head: 20 hits each, Sipahi HP vs Silk Armor.
+	//     A larger weight lets the Koreans free archer armors lift the Elite War Wagon to the top.
 	scoreWeights = []logic.WeightedCriterion{
 		{Criterion: logic.NewCriterionDamagePerTwoSecondsVs(hussar), Weight: 3.97},
 		{Criterion: logic.NewCriterionDamagePerTwoSecondsVs(baseline.Unit), Weight: 0.5},
@@ -68,29 +74,28 @@ var (
 		{Criterion: logic.CriterionRange, Weight: 7, WeightIfWorse: 15},
 		{Criterion: logic.CriterionSpeed, Weight: 6.16},
 		{Criterion: logic.NewCriterionTankVs(baseline.Unit), Weight: 2, Limit: 0.5},
+		{Criterion: logic.CriterionWoodCost, Weight: 0.1, Limit: 0.5},
+		{Criterion: logic.CriterionTechnologySaving, Weight: 0.1},
 	}
 
 	// criteria sort the rows in order, the next one breaking ties of the previous.
-	// The score decides, the others only break exact ties
-	// with what the score leaves out: the total cost and the unique technologies.
+	// The score decides, the others only break exact ties with what the score leaves out.
+	// The cost is in the score through the damage per gold.
 	criteria = []logic.Criterion{
 		logic.NewCriterionWeightedSum("Score", baseline, scoreWeights),
 		// the strengths the score leaves out, roughly ordered:
 		// melee armor vs a Hussar (Teutons), the bonus attacks (vs Siege Weapons, Rams, Infantry),
-		// then the hand written traits (regeneration, bonus damage taken)
+		// then the handwritten traits (regeneration, bonus damage taken)
 		logic.NewCriterionTankVs(hussar),
 		logic.CriterionBonusAttackSum,
 		logic.CriterionTraitWeightSum,
-		// cost saving from a unique technology only breaks ties of the same cost for free
-		logic.CriterionCostBeforeUniqueTechnologies,
-		logic.CriterionCost,
-		// last, a strength from a unique technology only breaks the remaining ties
-		logic.NewCriterionTankVsBeforeUniqueTechnologies(baseline.Unit),
 	}
 
 	// columns of the output table, after the rank, civilization and unit,
 	// apart from the criteria: a criterion sorts without a column of its own.
 	columns = []logic.Column{
+		// the score, 0 for the baseline, a standard fully upgraded unit
+		logic.NewColumnFromCriterion(criteria[0]),
 		// the basic stats, add the stats that matter for this line later
 		// a range unit shows its offense first
 		logic.ColumnRange,
@@ -124,7 +129,6 @@ func main() {
 	}
 	logic.SortRows(rows, criteria)
 	table := logic.RenderMarkdownTable(rows, columns)
-	fmt.Print(table)
 
 	outputPath := filepath.Join(findSourceDir(), outputFileName)
 	if err := os.WriteFile(outputPath, []byte(table), 0o644); err != nil {

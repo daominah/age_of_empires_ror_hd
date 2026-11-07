@@ -290,6 +290,22 @@ func TestNewCriterionHitsToKillTarget(t *testing.T) {
 	}
 }
 
+func TestNewCriterionBonusAttackSumExcept(t *testing.T) {
+	// GIVEN a Winged Hussar with the line bonus attack 9 vs Monks
+	// and the Lithuanians bonus attacks 1 vs Archers and 4 vs Gunpowder Units
+	row := Row{Unit: Unit{Attacks: map[ArmorClass]float64{
+		ArmorClassMelee: 13, ArmorClassMonks: 9, ArmorClassArchers: 1, ArmorClassGunpowderUnits: 4,
+	}}}
+
+	// WHEN summing its bonus attacks out of the line
+	criterion := NewCriterionBonusAttackSumExcept(ArmorClassMonks)
+
+	// THEN only the civilization bonus attacks count, 1 + 4, and more ranks higher
+	if got := criterion.Value(row); got != 5 || !criterion.IsHigherBetter {
+		t.Errorf("got %v, criterion %+v, want 5, more is better", got, criterion)
+	}
+}
+
 func TestSortRows(t *testing.T) {
 	// GIVEN civilizations tied on the first criterion
 	rows := []Row{
@@ -344,10 +360,10 @@ func TestFormatTraitNote(t *testing.T) {
 		want string
 	}{
 		// the cost and the stats are not changed, only the note tells
-		{Row{CivilizationID: Poles, Unit: Unit{ID: WingedHussar}}, "33% trample damage in 0.5 tile radius after Lechitic Legacy"},
-		{Row{CivilizationID: Sicilians, Unit: Unit{ID: Hussar}}, "bonus damage taken -40%"},
+		{Row{CivilizationID: Poles, Unit: Unit{ID: WingedHussar}}, "33% trample damage in 0.5 tile radius after Lechitic Legacy; Folwark collects instantly 10% of the farm food"},
+		{Row{CivilizationID: Sicilians, Unit: Unit{ID: Hussar}}, "bonus damage taken -40%; farm upgrades +100% food"},
 		// a trait of another unit of the civilization is not noted
-		{Row{CivilizationID: Khitans, Unit: Unit{ID: LightCavalry}}, "regeneration in combat 90 per minute after Ordo Cavalry"},
+		{Row{CivilizationID: Khitans, Unit: Unit{ID: LightCavalry}}, "regeneration in combat 90 per minute after Ordo Cavalry; trained 15% faster; Pasture food needs no drop-off"},
 		{Row{CivilizationID: Persians, Unit: Unit{ID: Hussar}}, ""},
 		{Row{CivilizationID: Berbers, Unit: Unit{ID: Hussar}}, ""},
 	} {
@@ -543,5 +559,44 @@ func TestNewCriterionWeightedSum_WeightIfWorse(t *testing.T) {
 	}
 	if math.Abs(worse+2) > 1e-9 {
 		t.Errorf("range 6: got %v, want -2", worse)
+	}
+}
+
+func TestCalculateHitsToKill_BonusDamageResistance(t *testing.T) {
+	// GIVEN a fully upgraded Halberdier, attack 10 melee + 32 vs Cavalry,
+	// and the fully upgraded scout line units of the Sicilians and the Persians, Light Cavalry 80 HP and Hussar 95 HP, both 3 melee armor
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+	halberdier := tree.LoadUnitUpgraded(Halberdier)
+	byCivilization := map[CivilizationID]Row{}
+	for _, row := range LoadRowsUpgraded(tree, scoutLine) {
+		byCivilization[row.CivilizationID] = row
+	}
+
+	for _, c := range []struct {
+		civilization   CivilizationID
+		wantResistance float64
+		wantDamage     float64
+		wantHits       int
+	}{
+		// the Sicilians take 40% less of the bonus only: 7 + 32 * 0.6
+		{Sicilians, 0.4, 26.2, 4},
+		// no resistance: 7 + 32
+		{Persians, 0, 39, 3},
+	} {
+		// WHEN the Halberdier hits the unit
+		unit := byCivilization[c.civilization].Unit
+		damage := CalculateDamagePerHit(halberdier, unit)
+		hits := CalculateHitsToKill(halberdier, unit)
+
+		// THEN the resistance cuts the bonus damage, not the melee damage
+		if unit.BonusDamageResistance != c.wantResistance {
+			t.Errorf("%v resistance: got %v, want %v", c.civilization, unit.BonusDamageResistance, c.wantResistance)
+		}
+		if math.Abs(damage-c.wantDamage) > 1e-9 || hits != c.wantHits {
+			t.Errorf("%v: got damage %v hits %v, want damage %v hits %v", c.civilization, damage, hits, c.wantDamage, c.wantHits)
+		}
 	}
 }

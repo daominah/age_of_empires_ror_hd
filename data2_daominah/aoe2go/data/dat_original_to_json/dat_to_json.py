@@ -101,8 +101,8 @@ def units(dat):
             if unit.type_50.min_range:  # most units have none
                 item['min_range'] = unit.type_50.min_range
             item['reload_time'] = unit.type_50.reload_time
-            item['attacks'] = {str(a.class_): a.amount for a in unit.type_50.attacks}
-            item['armors'] = {str(a.class_): a.amount for a in unit.type_50.armours}
+            item['attacks'] = sum_by_class(unit.type_50.attacks)
+            item['armors'] = sum_by_class(unit.type_50.armours)
         if unit.creatable and unit.type_50:
             item.update(projectiles(dat, unit.creatable))
         if unit.creatable:
@@ -144,7 +144,19 @@ def projectile(dat, unit_id):
     units = dat.civs[0].units
     if not 0 <= unit_id < len(units) or not units[unit_id] or not units[unit_id].type_50:
         return None
-    return {'id': unit_id, 'attacks': {str(a.class_): a.amount for a in units[unit_id].type_50.attacks}}
+    return {'id': unit_id, 'attacks': sum_by_class(units[unit_id].type_50.attacks)}
+
+
+def sum_by_class(entries):
+    """The attack or armor amounts by armor class.
+    A class may be listed twice, the game counts every entry,
+    e.g. the Elite Magyar Huszar lists 8 then 0 vs Siege Weapons, so it has +8,
+    while keeping only the last entry would drop the bonus."""
+    result = {}
+    for entry in entries:
+        key = str(entry.class_)
+        result[key] = result.get(key, 0) + entry.amount
+    return result
 
 
 def technologies(dat):
