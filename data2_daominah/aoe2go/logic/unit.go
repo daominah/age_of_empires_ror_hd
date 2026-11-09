@@ -121,6 +121,17 @@ func (tree *TechTree) LoadUnitBase(id UnitID) Unit {
 	return unit
 }
 
+// LoadUnitWithTechnologies is the LoadUnitBase with only the given technologies researched, in order,
+// e.g. a Castle with Masonry but not Architecture, to compare the steps of an upgrade line.
+// A technology missing from TechnologyEffects changes nothing.
+func (tree *TechTree) LoadUnitWithTechnologies(id UnitID, techIDs ...TechID) Unit {
+	unit := tree.LoadUnitBase(id)
+	for _, techID := range techIDs {
+		TechnologyEffects[techID].Apply(&unit)
+	}
+	return unit
+}
+
 // LoadUnitUpgraded is the LoadUnitBase with the technologies any civilization can research,
 // without civilization bonuses or unique technologies,
 // e.g. the Arbalester: attack 6+4, 40 HP, pierce armor 0+4.
