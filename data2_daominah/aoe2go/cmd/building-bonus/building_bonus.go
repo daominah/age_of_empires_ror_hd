@@ -38,11 +38,11 @@ var (
 	// armorBuildings are shown with their HP and armors, to see which classes each kind of building has.
 	// The walls are the control: Masonry and Architecture do not change them.
 	armorBuildings = []logic.UnitID{
-		logic.Barracks, logic.TownCenter, logic.Castle, logic.Keep, logic.StoneWall, logic.FortifiedWall,
+		logic.Barracks, logic.TownCenter, logic.Castle, logic.Monastery, logic.Keep, logic.StoneWall, logic.FortifiedWall,
 	}
-	// targetBuildings are attacked in the damage tables: the Town Center and the Castle,
+	// targetBuildings are attacked in the damage tables: the Town Center, the Castle and the Monastery,
 	// the buildings that a raid or a siege goes for.
-	targetBuildings = []logic.UnitID{logic.TownCenter, logic.Castle}
+	targetBuildings = []logic.UnitID{logic.TownCenter, logic.Castle, logic.Monastery}
 
 	// steps are the states of the target building compared in the damage tables.
 	// Architecture requires Masonry, so its step has both.
