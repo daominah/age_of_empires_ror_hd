@@ -89,6 +89,7 @@ const (
 	ClassBuilding      UnitClass = 3  // e.g. Barracks, Town Center, Castle, not the walls or the towers
 	ClassInfantry      UnitClass = 6  // e.g. Man-at-Arms, Throwing Axeman
 	ClassCavalry       UnitClass = 12 // e.g. Knight, the scout line after the Scout Cavalry
+	ClassWall          UnitClass = 27 // the Palisade, Stone and Fortified Walls
 	ClassCavalryArcher UnitClass = 36
 	ClassTower         UnitClass = 52 // e.g. Watch Tower, Keep, the effects repeat their building commands for it
 	ClassScoutCavalry  UnitClass = 47 // the Scout Cavalry only, the effects repeat their cavalry commands for it

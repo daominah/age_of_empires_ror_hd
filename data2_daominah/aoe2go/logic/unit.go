@@ -37,7 +37,9 @@ type Unit struct {
 	Speed        float64
 	TrainTime    float64 // seconds
 	Cost         Cost
-	// IsIgnoringArmor is set by Wootz Steel: the unit attack ignores the target armor.
+	// IsIgnoringArmor means the unit attack ignores the target armor: each attack class counts in full,
+	// when the target lists the class, but not against a building or a wall, which keep their armor.
+	// The Rocket Carts have it from the start, the Hindustani cavalry get it from Wootz Steel.
 	IsIgnoringArmor bool
 	// BonusDamageResistance is the share of the bonus damage the unit does not take,
 	// the damage of the classes other than melee and pierce, e.g. 0.4 for the Sicilians cavalry and archers.
@@ -53,6 +55,7 @@ type Shot struct {
 	ExtraProjectiles  int                    // e.g. 5 for the Xianbei Raider charged shot
 	ExtraProjectileID UnitID                 // see Unit.ExtraProjectileID
 	ExtraAttacks      map[ArmorClass]float64 // each extra arrow, e.g. 1 pierce for the Xianbei Raider charged shot
+	IsIgnoringArmor   bool                   // see Unit.IsIgnoringArmor
 }
 
 // ChargeAttack is an attack that fires once charged, instead of a normal attack,
@@ -69,8 +72,13 @@ func (u Unit) GetShot() Shot {
 		ExtraProjectiles:  u.ExtraProjectiles,
 		ExtraProjectileID: u.ExtraProjectileID,
 		ExtraAttacks:      u.ExtraAttacks,
+		IsIgnoringArmor:   u.IsIgnoringArmor,
 	}
 }
+
+// ignoringArmorUnitIDs are the units with an attack that ignores the armor from the start,
+// units.json does not tell it.
+var ignoringArmorUnitIDs = map[UnitID]bool{RocketCart: true, HeavyRocketCart: true}
 
 // listProjectileAttacks are the arrows that have their own attacks, with the projectile unit of each,
 // so an effect on a projectile unit changes them, e.g. Parthian Tactics on the Xianbei Raider arrows.

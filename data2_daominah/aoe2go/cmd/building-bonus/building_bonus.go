@@ -36,13 +36,16 @@ var (
 	warshipClass logic.UnitClass = 22
 
 	// armorBuildings are shown with their HP and armors, to see which classes each kind of building has.
+	// A building that the age technologies replace is its Imperial Age unit, as the attackers are fully upgraded:
+	// the Dark Age unit (e.g. TownCenter, 3 melee and 5 pierce armor) has less armor than the Imperial Age one (6 and 8).
 	// The walls are the control: Masonry and Architecture do not change them.
 	armorBuildings = []logic.UnitID{
-		logic.Barracks, logic.TownCenter, logic.Castle, logic.Monastery, logic.Keep, logic.StoneWall, logic.FortifiedWall,
+		logic.BarracksImperialAge, logic.TownCenterImperialAge, logic.Castle, logic.MonasteryImperialAge,
+		logic.Keep, logic.StoneWall, logic.FortifiedWall,
 	}
 	// targetBuildings are attacked in the damage tables: the Town Center, the Castle and the Monastery,
 	// the buildings that a raid or a siege goes for.
-	targetBuildings = []logic.UnitID{logic.TownCenter, logic.Castle, logic.Monastery}
+	targetBuildings = []logic.UnitID{logic.TownCenterImperialAge, logic.Castle, logic.MonasteryImperialAge}
 
 	// steps are the states of the target building compared in the damage tables.
 	// Architecture requires Masonry, so its step has both.
@@ -181,7 +184,7 @@ func buildAttackerTable(attackers []logic.Unit) [][]string {
 }
 
 // buildDamageTable is the damage per hit and the hits to kill of each attacker against the building,
-// at each step, sorted by the damage without upgrades.
+// at each step, sorted by how much the hits grow from the first to the last step.
 func buildDamageTable(attackers []logic.Unit, targetID logic.UnitID) [][]string {
 	targets := loadStages(targetID)
 	header := []string{"Unit"}
@@ -191,20 +194,37 @@ func buildDamageTable(attackers []logic.Unit, targetID logic.UnitID) [][]string 
 	for _, t := range targets {
 		header = append(header, "Hits "+t.StepName)
 	}
-	table := [][]string{header}
-	sorted := slices.Clone(attackers)
-	slices.SortStableFunc(sorted, func(a, b logic.Unit) int {
-		return -compareFloat(logic.CalculateDamagePerHit(a, targets[0].Unit), logic.CalculateDamagePerHit(b, targets[0].Unit))
-	})
-	for _, attacker := range sorted {
+	header = append(header, "Hits ratio")
+	type damageRow struct {
+		cells []string
+		ratio float64
+		// firstDamage breaks the ties of the ratio
+		firstDamage float64
+	}
+	var rows []damageRow
+	for _, attacker := range attackers {
 		row := []string{attacker.Name}
 		for _, t := range targets {
 			row = append(row, formatNumber(logic.CalculateDamagePerHit(attacker, t.Unit)))
 		}
+		var hits []int
 		for _, t := range targets {
-			row = append(row, strconv.Itoa(logic.CalculateHitsToKill(attacker, t.Unit)))
+			hits = append(hits, logic.CalculateHitsToKill(attacker, t.Unit))
+			row = append(row, strconv.Itoa(hits[len(hits)-1]))
 		}
-		table = append(table, row)
+		ratio := float64(hits[len(hits)-1]) / float64(hits[0])
+		row = append(row, "x"+formatNumber(ratio))
+		rows = append(rows, damageRow{row, ratio, logic.CalculateDamagePerHit(attacker, targets[0].Unit)})
+	}
+	slices.SortStableFunc(rows, func(a, b damageRow) int {
+		if c := compareFloat(b.ratio, a.ratio); c != 0 {
+			return c
+		}
+		return compareFloat(b.firstDamage, a.firstDamage)
+	})
+	table := [][]string{header}
+	for _, r := range rows {
+		table = append(table, r.cells)
 	}
 	return table
 }
@@ -290,6 +310,25 @@ func parseTechTreeOrExit() *logic.TechTree {
 
 const reportIntro = `# Building bonus attacks, Masonry and Architecture
 
+## Summary
+
+- **Every unit that attacks a building loses damage**, even a unit with a bonus attack:
+  each technology gives the building +1 melee armor, +1 pierce armor and +10% HP.
+- **The Standard Buildings bonus is not reduced**, so most infantry (regional and unique included)
+  keep that part of their hit, as every building has 0 armor in that class.
+  The bonus is small (mostly 2 to 6) next to the melee part of the hit,
+  so infantry still need more hits: the melee part loses 1 per technology and the HP grows 10%.
+- **The Stone Defense, Walls and Gates, and Castles bonuses are not reduced either**,
+  for the same reason (elephants, Bombard Cannon, Petard, Tarkan).
+- **The All Buildings bonus is reduced by 3 per technology**, 6 in total, which is small for a siege weapon
+  (+150 to +200) but wipes out a small one, e.g. the Elite Battle Elephant +7 is 1 vs the Town Center.
+  The game text says "+3 building armor" without a class: it means All Buildings,
+  not Standard Buildings (the infantry bonus class), which the technologies do not change.
+- **The Rocket Carts lose the most**: each rocket loses 3 per technology,
+  and a cart fires 8 or 10 rockets, so one hit loses 24 to 30 per technology.
+  Their armor ignoring attack does not work on buildings.
+- **The walls are not changed by the technologies.**
+
 A hit deals the sum over the armor classes that both the attack and the target list,
 each one attack minus armor, never below 0, and at least 1 in total.
 So a bonus attack against a building only counts if the building lists that armor class.
@@ -298,6 +337,11 @@ Masonry and Architecture are University technologies.
 Each one gives the buildings and the towers (not the walls) +10% HP,
 +1 melee armor, +1 pierce armor and +3 armor of the class All Buildings.
 Architecture requires Masonry, so the Architecture step has both researched.
+The game text is "Buildings +10% HP, +1 melee/+1 pierce armor and +3 building armor",
+and the data tells the class of the last one: the armor class All Buildings (11).
+
+The buildings are the Imperial Age ones: the age technologies replace a building with a unit of more armor,
+e.g. the Town Center has melee and pierce armor 3 and 5 in the Dark Age and 6 and 8 in the Imperial Age.
 
 Generated by cmd/building-bonus from data/dat_original_to_json, the units have all the technologies
 in logic.TechnologyEffects (Forging line, etc.), without civilization bonuses.
@@ -327,5 +371,6 @@ The units are sorted by the strongest building attack.
 `
 
 const damageIntro = `Damage is one hit with all the attack classes added, and hits is how many hits destroy the building.
-The units are sorted by the damage without Masonry.
+The units are sorted by the hits ratio, the hits with Architecture divided by the hits without any technology,
+so the units that the technologies hurt the most are first.
 `

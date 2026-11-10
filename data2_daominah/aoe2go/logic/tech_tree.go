@@ -156,6 +156,7 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 			TrainTime:  u.TrainTime,
 			Cost:       parseCost(u.Cost),
 		}
+		unit.IsIgnoringArmor = ignoringArmorUnitIDs[unit.ID]
 		if unit.Name == "" {
 			unit.Name = u.InternalName
 		}

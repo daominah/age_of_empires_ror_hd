@@ -11,25 +11,32 @@ func CalculateDamagePerHit(attacker Unit, target Unit) float64 {
 // CalculateShotDamage is the damage of one shot on the target:
 // the damage of the main arrow plus the damage of each extra arrow, all assumed to hit.
 // Each arrow deals the sum over the armor classes of both of attack minus armor (not below 0), at least 1,
+// or the attack in full when the shot ignores armor and the target is not a building, e.g. the Rocket Cart,
 // so against a high armor like a Battering Ram a Maya skirmisher deals 2 instead of 1,
 // e.g. a Maya Elite Skirmisher with Hul'che Javelineers throws one javelin of attack 7 and one of attack 1.
 func CalculateShotDamage(shot Shot, target Unit) float64 {
-	damage := calculateProjectileDamage(shot.Attacks, target)
+	// a building keeps its armor against an attack that ignores armor, so the Masonry and Architecture armor still counts
+	isIgnoringArmor := shot.IsIgnoringArmor && target.Class != ClassBuilding && target.Class != ClassTower && target.Class != ClassWall
+	damage := calculateProjectileDamage(shot.Attacks, target, isIgnoringArmor)
 	extraAttacks := shot.ExtraAttacks
 	if extraAttacks == nil {
 		extraAttacks = shot.Attacks
 	}
-	return damage + float64(shot.ExtraProjectiles)*calculateProjectileDamage(extraAttacks, target)
+	return damage + float64(shot.ExtraProjectiles)*calculateProjectileDamage(extraAttacks, target, isIgnoringArmor)
 }
 
 // calculateProjectileDamage is the damage of one projectile on the target.
 // The target resistance cuts the bonus damage only, e.g. a Halberdier deals 7 + 32 * 0.6 to a Sicilians Light Cavalry.
-func calculateProjectileDamage(attacks map[ArmorClass]float64, target Unit) float64 {
+// A projectile that ignores armor only skips the subtraction: the target must still list the class.
+func calculateProjectileDamage(attacks map[ArmorClass]float64, target Unit, isIgnoringArmor bool) float64 {
 	damage := 0.0
 	for class, attack := range attacks {
 		armor, isFound := target.Armors[class]
 		if !isFound {
 			continue
+		}
+		if isIgnoringArmor {
+			armor = 0
 		}
 		classDamage := math.Max(0, attack-armor)
 		if class != ArmorClassMelee && class != ArmorClassPierce {
@@ -72,7 +79,9 @@ func CalculateDamagePerTwoSeconds(unit Unit, target Unit) float64 {
 	damage := shotDamage * 2 / unit.ReloadTime
 	if unit.ChargeAttack != nil {
 		cycle := unit.ChargeAttack.ChargeTime + unit.ReloadTime/2
-		damage += (CalculateShotDamage(unit.ChargeAttack.Shot, target) - shotDamage) * 2 / cycle
+		charge := unit.ChargeAttack.Shot
+		charge.IsIgnoringArmor = unit.IsIgnoringArmor
+		damage += (CalculateShotDamage(charge, target) - shotDamage) * 2 / cycle
 	}
 	return damage
 }

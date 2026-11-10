@@ -94,3 +94,27 @@ func TestCalculateDamagePerHitBuilding(t *testing.T) {
 		})
 	}
 }
+
+func TestCalculateDamagePerHitIgnoringArmor(t *testing.T) {
+	// GIVEN a Town Center that has Masonry and Architecture, and a unit with melee armor 10
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+	townCenter := tree.LoadUnitWithTechnologies(TownCenterImperialAge, Masonry, Architecture)
+	armoredUnit := Unit{Class: ClassInfantry, HP: 100, Armors: map[ArmorClass]float64{ArmorClassMelee: 10}}
+	rocketCart := tree.LoadUnitBase(HeavyRocketCart)
+
+	// WHEN a Heavy Rocket Cart hits each of them
+	gotBuilding := CalculateDamagePerHit(rocketCart, townCenter)
+	gotUnit := CalculateDamagePerHit(rocketCart, armoredUnit)
+
+	// THEN the unit armor is ignored: 10 rockets of 5 melee
+	if want := 10 * 5.0; gotUnit != want {
+		t.Errorf("unit: got %v, want %v", gotUnit, want)
+	}
+	// AND the building keeps its armor: 10 rockets of 12 vs All Buildings minus 6, the melee 5 is cut to 0
+	if want := 10 * (12.0 - 6); gotBuilding != want {
+		t.Errorf("building: got %v, want %v", gotBuilding, want)
+	}
+}
