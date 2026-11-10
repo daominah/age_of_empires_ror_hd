@@ -40,8 +40,8 @@ var (
 	// the Dark Age unit (e.g. TownCenter, 3 melee and 5 pierce armor) has less armor than the Imperial Age one (6 and 8).
 	// The walls are the control: Masonry and Architecture do not change them.
 	armorBuildings = []logic.UnitID{
-		logic.BarracksImperialAge, logic.TownCenterImperialAge, logic.Castle, logic.MonasteryImperialAge,
-		logic.Keep, logic.StoneWall, logic.FortifiedWall,
+		logic.TownCenterImperialAge, logic.Castle, logic.MonasteryImperialAge,
+		logic.BarracksImperialAge, logic.Keep, logic.StoneWall, logic.FortifiedWall,
 	}
 	// targetBuildings are attacked in the damage tables: the Town Center, the Castle and the Monastery,
 	// the buildings that a raid or a siege goes for.
@@ -82,7 +82,8 @@ func main() {
 	log.Printf("wrote %v", outputPath)
 }
 
-// listAttackers is the fully upgraded land units that any civilization trains,
+// listAttackers is the fully upgraded land units that several civilizations train,
+// so the unique units of one civilization are left out, they only add noise,
 // with an attack above 0 against a building class, once per name and attacks,
 // sorted by the strongest building attack.
 // A unit repeats when several civilizations have their own copy, e.g. the Huskarl.
@@ -105,6 +106,9 @@ func listAttackers() []logic.Unit {
 		if tree.Units[id].Class == warshipClass {
 			continue
 		}
+		if _, isUnique := tree.CheckIsUniqueUnit(id); isUnique {
+			continue
+		}
 		unit := tree.LoadUnitUpgraded(id)
 		if getStrongestBuildingAttack(unit) <= 0 {
 			continue
@@ -116,10 +120,34 @@ func listAttackers() []logic.Unit {
 		seen[key] = true
 		result = append(result, unit)
 	}
+	return sortByTrainBuilding(result, getStrongestBuildingAttack)
+}
+
+// sortByTrainBuilding keeps the units of the same training building together,
+// the building with the strongest unit first, then the units by the score, strongest first.
+func sortByTrainBuilding(units []logic.Unit, getScore func(logic.Unit) float64) []logic.Unit {
+	best := map[logic.UnitID]float64{}
+	for _, u := range units {
+		building := tree.TrainBuildingIDs[u.ID]
+		best[building] = max(best[building], getScore(u))
+	}
+	result := slices.Clone(units)
 	slices.SortStableFunc(result, func(a, b logic.Unit) int {
-		return -compareFloat(getStrongestBuildingAttack(a), getStrongestBuildingAttack(b))
+		buildingA, buildingB := tree.TrainBuildingIDs[a.ID], tree.TrainBuildingIDs[b.ID]
+		if buildingA != buildingB {
+			if c := compareFloat(best[buildingB], best[buildingA]); c != 0 {
+				return c
+			}
+			return int(buildingA) - int(buildingB)
+		}
+		return compareFloat(getScore(b), getScore(a))
 	})
 	return result
+}
+
+// getTrainBuildingName is the name of the building that trains the unit, empty if none.
+func getTrainBuildingName(unit logic.Unit) string {
+	return tree.Units[tree.TrainBuildingIDs[unit.ID]].Name
 }
 
 // getStrongestBuildingAttack is the largest attack of the unit against the building classes.
@@ -163,13 +191,13 @@ func buildArmorTable() [][]string {
 
 // buildAttackerTable is the attack of each unit against each building class, empty when 0.
 func buildAttackerTable(attackers []logic.Unit) [][]string {
-	header := []string{"Unit"}
+	header := []string{"Unit", "Trained at"}
 	for _, class := range buildingClasses {
 		header = append(header, class.Label)
 	}
 	table := [][]string{header}
 	for _, unit := range attackers {
-		row := []string{unit.Name}
+		row := []string{unit.Name, getTrainBuildingName(unit)}
 		for _, class := range buildingClasses {
 			amount := unit.Attacks[class.Class]
 			if amount <= 0 {
@@ -183,11 +211,16 @@ func buildAttackerTable(attackers []logic.Unit) [][]string {
 	return table
 }
 
-// buildDamageTable is the damage per hit and the hits to kill of each attacker against the building,
-// at each step, sorted by how much the hits grow from the first to the last step.
+// buildDamageTable is the damage per hit, the hits to kill and the damage per second of each attacker
+// against the building, at each step.
+// The units that train at the same building stay together, sorted by the damage per second to the building without
+// any technology.
 func buildDamageTable(attackers []logic.Unit, targetID logic.UnitID) [][]string {
 	targets := loadStages(targetID)
-	header := []string{"Unit"}
+	getDamagePerSecond := func(u logic.Unit) float64 {
+		return logic.CalculateDamagePerTwoSeconds(u, targets[0].Unit) / 2
+	}
+	header := []string{"Unit", "Trained at", "DPS " + targets[0].StepName}
 	for _, t := range targets {
 		header = append(header, "Damage "+t.StepName)
 	}
@@ -195,15 +228,13 @@ func buildDamageTable(attackers []logic.Unit, targetID logic.UnitID) [][]string 
 		header = append(header, "Hits "+t.StepName)
 	}
 	header = append(header, "Hits ratio")
-	type damageRow struct {
-		cells []string
-		ratio float64
-		// firstDamage breaks the ties of the ratio
-		firstDamage float64
-	}
-	var rows []damageRow
-	for _, attacker := range attackers {
-		row := []string{attacker.Name}
+	table := [][]string{header}
+	for _, attacker := range sortByTrainBuilding(attackers, getDamagePerSecond) {
+		dps := ""
+		if attacker.ReloadTime > 0 { // a Petard explodes once, it has no reload
+			dps = formatNumber(getDamagePerSecond(attacker))
+		}
+		row := []string{attacker.Name, getTrainBuildingName(attacker), dps}
 		for _, t := range targets {
 			row = append(row, formatNumber(logic.CalculateDamagePerHit(attacker, t.Unit)))
 		}
@@ -212,19 +243,8 @@ func buildDamageTable(attackers []logic.Unit, targetID logic.UnitID) [][]string 
 			hits = append(hits, logic.CalculateHitsToKill(attacker, t.Unit))
 			row = append(row, strconv.Itoa(hits[len(hits)-1]))
 		}
-		ratio := float64(hits[len(hits)-1]) / float64(hits[0])
-		row = append(row, "x"+formatNumber(ratio))
-		rows = append(rows, damageRow{row, ratio, logic.CalculateDamagePerHit(attacker, targets[0].Unit)})
-	}
-	slices.SortStableFunc(rows, func(a, b damageRow) int {
-		if c := compareFloat(b.ratio, a.ratio); c != 0 {
-			return c
-		}
-		return compareFloat(b.firstDamage, a.firstDamage)
-	})
-	table := [][]string{header}
-	for _, r := range rows {
-		table = append(table, r.cells)
+		row = append(row, "x"+formatNumber(float64(hits[len(hits)-1])/float64(hits[0])))
+		table = append(table, row)
 	}
 	return table
 }
@@ -314,12 +334,12 @@ const reportIntro = `# Building bonus attacks, Masonry and Architecture
 
 - **Every unit that attacks a building loses damage**, even a unit with a bonus attack:
   each technology gives the building +1 melee armor, +1 pierce armor and +10% HP.
-- **The Standard Buildings bonus is not reduced**, so most infantry (regional and unique included)
+- **The Standard Buildings bonus is not reduced**, so most infantry
   keep that part of their hit, as every building has 0 armor in that class.
   The bonus is small (mostly 2 to 6) next to the melee part of the hit,
   so infantry still need more hits: the melee part loses 1 per technology and the HP grows 10%.
 - **The Stone Defense, Walls and Gates, and Castles bonuses are not reduced either**,
-  for the same reason (elephants, Bombard Cannon, Petard, Tarkan).
+  for the same reason (elephants, Bombard Cannon, Petard, Rocket Carts).
 - **The All Buildings bonus is reduced by 3 per technology**, 6 in total, which is small for a siege weapon
   (+150 to +200) but wipes out a small one, e.g. the Elite Battle Elephant +7 is 1 vs the Town Center.
   The game text says "+3 building armor" without a class: it means All Buildings,
@@ -361,16 +381,18 @@ A value shows None, then Masonry, then Architecture when the technologies change
   so this bonus is never reduced.
 - **Stone Defense** is the bonus class of the elephants and the Bombard Cannon.
   Only the towers, the walls, the Gate, the Harbor and the Fortified Church have it, always 0.
-- **Walls and Gates** is the bonus class of the Petard, only the walls and the gates have it, always 0.
-- **Castles** is the bonus class of the Petard and the Tarkan, only the Castle and the Krepost have it, always 0.
+- **Walls and Gates** is the bonus class of the Petard and the Rocket Carts, only the walls and the gates have it, always 0.
+- **Castles** is the bonus class of the Petard and the Rocket Carts, only the Castle and the Krepost have it, always 0.
 `
 
 const attackersIntro = `The attack against each building class, after the Blacksmith attack technologies.
 A blank is 0 or no attack in that class.
-The units are sorted by the strongest building attack.
+The unique units of one civilization are left out, a unit that several civilizations train is kept.
+The units that train at the same building stay together, sorted by the strongest building attack.
 `
 
 const damageIntro = `Damage is one hit with all the attack classes added, and hits is how many hits destroy the building.
-The units are sorted by the hits ratio, the hits with Architecture divided by the hits without any technology,
-so the units that the technologies hurt the most are first.
+The units that train at the same building stay together, the building with the strongest unit first,
+and the units are sorted by DPS (damage per second without any technology, one hit divided by the reload time).
+The hits ratio is the hits with Architecture divided by the hits without any technology.
 `

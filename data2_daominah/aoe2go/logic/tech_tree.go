@@ -15,6 +15,9 @@ type TechTree struct {
 	Units         map[UnitID]Unit
 	Technologies  map[TechID]Technology
 	Civilizations []Civilization // the AoE2 ones (not Chronicles), sorted by name
+	// TrainBuildingIDs is the first building that trains each unit, e.g. the Siege Workshop for the Mangonel,
+	// a unit no building trains is missing.
+	TrainBuildingIDs map[UnitID]UnitID
 }
 
 // Technology is what a ranking shows of a technology.
@@ -124,7 +127,7 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 		return nil, fmt.Errorf("error json.Unmarshal technologies.json: %w", err)
 	}
 
-	tree := &TechTree{Units: map[UnitID]Unit{}, Technologies: map[TechID]Technology{}}
+	tree := &TechTree{Units: map[UnitID]Unit{}, Technologies: map[TechID]Technology{}, TrainBuildingIDs: map[UnitID]UnitID{}}
 	for _, t := range technologies {
 		technology := Technology{
 			ID:             TechID(t.ID),
@@ -157,6 +160,9 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 			Cost:       parseCost(u.Cost),
 		}
 		unit.IsIgnoringArmor = ignoringArmorUnitIDs[unit.ID]
+		if len(u.TrainLocationIDs) > 0 {
+			tree.TrainBuildingIDs[unit.ID] = UnitID(u.TrainLocationIDs[0])
+		}
 		if unit.Name == "" {
 			unit.Name = u.InternalName
 		}
@@ -249,19 +255,20 @@ type technologyJSON struct {
 
 // unitJSON is the part of units.json used here.
 type unitJSON struct {
-	ID           int                `json:"id"`
-	InternalName string             `json:"internal_name"`
-	NameStringID int                `json:"name_string_id"`
-	Class        int                `json:"class"`
-	HP           float64            `json:"hp"`
-	Speed        float64            `json:"speed"`
-	Range        float64            `json:"range"`
-	MinRange     float64            `json:"min_range"`
-	ReloadTime   float64            `json:"reload_time"`
-	TrainTime    float64            `json:"train_time"`
-	Attacks      map[int]float64    `json:"attacks"`
-	Armors       map[int]float64    `json:"armors"`
-	Cost         map[string]float64 `json:"cost"`
+	ID               int                `json:"id"`
+	InternalName     string             `json:"internal_name"`
+	NameStringID     int                `json:"name_string_id"`
+	Class            int                `json:"class"`
+	HP               float64            `json:"hp"`
+	Speed            float64            `json:"speed"`
+	Range            float64            `json:"range"`
+	MinRange         float64            `json:"min_range"`
+	ReloadTime       float64            `json:"reload_time"`
+	TrainTime        float64            `json:"train_time"`
+	Attacks          map[int]float64    `json:"attacks"`
+	Armors           map[int]float64    `json:"armors"`
+	Cost             map[string]float64 `json:"cost"`
+	TrainLocationIDs []int              `json:"train_location_ids"`
 	// TotalProjectiles and MaxTotalProjectiles are 0 when missing, which means 1 arrow.
 	TotalProjectiles    float64         `json:"total_projectiles"`
 	MaxTotalProjectiles float64         `json:"max_total_projectiles"`

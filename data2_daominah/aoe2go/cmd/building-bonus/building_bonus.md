@@ -4,12 +4,12 @@
 
 - **Every unit that attacks a building loses damage**, even a unit with a bonus attack:
   each technology gives the building +1 melee armor, +1 pierce armor and +10% HP.
-- **The Standard Buildings bonus is not reduced**, so most infantry (regional and unique included)
+- **The Standard Buildings bonus is not reduced**, so most infantry
   keep that part of their hit, as every building has 0 armor in that class.
   The bonus is small (mostly 2 to 6) next to the melee part of the hit,
   so infantry still need more hits: the melee part loses 1 per technology and the HP grows 10%.
 - **The Stone Defense, Walls and Gates, and Castles bonuses are not reduced either**,
-  for the same reason (elephants, Bombard Cannon, Petard, Tarkan).
+  for the same reason (elephants, Bombard Cannon, Petard, Rocket Carts).
 - **The All Buildings bonus is reduced by 3 per technology**, 6 in total, which is small for a siege weapon
   (+150 to +200) but wipes out a small one, e.g. the Elite Battle Elephant +7 is 1 vs the Town Center.
   The game text says "+3 building armor" without a class: it means All Buildings,
@@ -52,15 +52,15 @@ A value shows None, then Masonry, then Architecture when the technologies change
   so this bonus is never reduced.
 - **Stone Defense** is the bonus class of the elephants and the Bombard Cannon.
   Only the towers, the walls, the Gate, the Harbor and the Fortified Church have it, always 0.
-- **Walls and Gates** is the bonus class of the Petard, only the walls and the gates have it, always 0.
-- **Castles** is the bonus class of the Petard and the Tarkan, only the Castle and the Krepost have it, always 0.
+- **Walls and Gates** is the bonus class of the Petard and the Rocket Carts, only the walls and the gates have it, always 0.
+- **Castles** is the bonus class of the Petard and the Rocket Carts, only the Castle and the Krepost have it, always 0.
 
 | Building       | HP                   | Melee      | Pierce       | All Buildings | Standard Buildings | Stone Defense | Walls and Gates | Castles |
 |----------------|----------------------|------------|--------------|---------------|--------------------|---------------|-----------------|---------|
-| Barracks       | 2100 → 2310 → 2541   | 3 → 4 → 5  | 10 → 11 → 12 | 0 → 3 → 6     | 0                  |               |                 |         |
 | Town Center    | 2400 → 2640 → 2904   | 6 → 7 → 8  | 8 → 9 → 10   | 0 → 3 → 6     | 0                  |               |                 |         |
 | Castle         | 4800 → 5280 → 5808   | 8 → 9 → 10 | 11 → 12 → 13 | 8 → 11 → 14   | 0                  |               |                 | 0       |
 | Monastery      | 2100 → 2310 → 2541   | 3 → 4 → 5  | 10 → 11 → 12 | 0 → 3 → 6     | 0                  |               |                 |         |
+| Barracks       | 2100 → 2310 → 2541   | 3 → 4 → 5  | 10 → 11 → 12 | 0 → 3 → 6     | 0                  |               |                 |         |
 | Keep           | 2250 → 2475 → 2722.5 | 3 → 4 → 5  | 9 → 10 → 11  | 0 → 3 → 6     | 0                  | 0             |                 |         |
 | Stone Wall     | 1080                 | 8          | 10           | 16            | 0                  | 0             | 0               |         |
 | Fortified Wall | 3000                 | 12         | 12           | 24            | 0                  | 0             | 0               |         |
@@ -69,454 +69,190 @@ A value shows None, then Masonry, then Architecture when the technologies change
 
 The attack against each building class, after the Blacksmith attack technologies.
 A blank is 0 or no attack in that class.
-The units are sorted by the strongest building attack.
+The unique units of one civilization are left out, a unit that several civilizations train is kept.
+The units that train at the same building stay together, sorted by the strongest building attack.
 
-| Unit                      | All Buildings | Standard Buildings | Stone Defense | Walls and Gates | Castles |
-|---------------------------|---------------|--------------------|---------------|-----------------|---------|
-| Petard                    | 500           |                    |               | 900             | 100     |
-| Trebuchet (Packed)        | 250           |                    |               |                 |         |
-| Houfnice                  | 250           |                    | 50            |                 |         |
-| Traction Trebuchet        | 230           |                    |               |                 |         |
-| Bombard Cannon            | 200           |                    | 40            |                 |         |
-| Siege Ram                 | 200           |                    |               |                 |         |
-| Flaming Camel             | 200           |                    |               |                 |         |
-| Capped Ram                | 160           |                    |               |                 |         |
-| Battering Ram             | 150           |                    |               |                 |         |
-| Siege Elephant            | 105           |                    |               |                 |         |
-| Armored Elephant          | 90            |                    |               |                 |         |
-| Siege Onager              | 60            |                    |               |                 |         |
-| Onager                    | 45            |                    |               |                 |         |
-| Mangonel                  | 35            |                    |               |                 |         |
-| War Elephant              | 30            |                    | 30            |                 |         |
-| Elite War Elephant        | 30            |                    | 30            |                 |         |
-| Tarkan                    | 8             |                    | 12            | 8               | 10      |
-| Elite Tarkan              | 10            |                    | 12            | 10              | 10      |
-| Heavy Rocket Cart         | 12            |                    |               | 7               | 7       |
-| Elite Jomsviking          |               | 11                 |               |                 |         |
-| Mounted Trebuchet         | 10            |                    |               |                 |         |
-| Elite Obuch               |               | 8                  |               |                 |         |
-| Jomsviking                |               | 8                  |               |                 |         |
-| Elite Battle Elephant     | 7             |                    | 7             |                 |         |
-| Rocket Cart               | 7             |                    |               | 6               | 7       |
-| Teutonic Knight           |               | 6                  |               |                 |         |
-| Villager (Male)           | 3             |                    | 6             |                 |         |
-| Two-Handed Swordsman      |               | 6                  |               |                 |         |
-| Heavy Scorpion            | 6             |                    |               |                 |         |
-| Elite Teutonic Knight     |               | 6                  |               |                 |         |
-| Champion                  |               | 6                  |               |                 |         |
-| Obuch                     |               | 6                  |               |                 |         |
-| Long Swordsman            |               | 5                  |               |                 |         |
-| Elite Woad Raider         |               | 5                  |               |                 |         |
-| Elite Samurai             |               | 5                  |               |                 |         |
-| Elite Berserk             |               | 5                  |               |                 |         |
-| Elite Serjeant            |               | 5                  |               |                 |         |
-| Elite Liao Dao            |               | 5                  |               |                 |         |
-| Elite Champi Warrior      |               | 5                  |               |                 |         |
-| Man-at-Arms               |               | 4                  |               |                 |         |
-| Woad Raider               |               | 4                  |               |                 |         |
-| Samurai                   |               | 4                  |               |                 |         |
-| Elite Throwing Axeman     |               | 4                  |               |                 |         |
-| Berserk                   |               | 4                  |               |                 |         |
-| Jaguar Warrior            |               | 4                  |               |                 |         |
-| Elite Jaguar Warrior      |               | 4                  |               |                 |         |
-| Condottiero               |               | 4                  |               |                 |         |
-| Elite Ballista Elephant   | 4             | 4                  | 4             |                 |         |
-| Battle Elephant           | 4             |                    | 4             |                 |         |
-| Serjeant                  |               | 4                  |               |                 |         |
-| Elite Urumi Swordsman     |               | 4                  |               |                 |         |
-| Elite Chakram Thrower     |               | 4                  |               |                 |         |
-| Ghulam                    |               | 4                  |               |                 |         |
-| Elite Ghulam              |               | 4                  |               |                 |         |
-| Legionary                 |               | 4                  |               |                 |         |
-| Grenadier                 |               | 4                  |               |                 |         |
-| Liao Dao                  |               | 4                  |               |                 |         |
-| White Feather Guard       |               | 4                  |               |                 |         |
-| Elite White Feather Guard |               | 4                  |               |                 |         |
-| Fire Archer               |               | 4                  |               |                 |         |
-| Elite Fire Archer         |               | 4                  |               |                 |         |
-| Jian Swordsman            |               | 4                  |               |                 |         |
-| Champi Warrior            |               | 4                  |               |                 |         |
-| Elite Ibirapema Warrior   |               | 4                  |               |                 |         |
-| Elite Hearth Troop        |               | 4                  |               |                 |         |
-| Spearman                  |               | 3                  |               |                 |         |
-| Scorpion                  | 3             |                    |               |                 |         |
-| Throwing Axeman           |               | 3                  |               |                 |         |
-| Pikeman                   |               | 3                  |               |                 |         |
-| Halberdier                |               | 3                  |               |                 |         |
-| Elite Huskarl             |               | 3                  |               |                 |         |
-| Elite Shotel Warrior      |               | 3                  |               |                 |         |
-| Ballista Elephant         | 2             | 3                  | 3             |                 |         |
-| Elite Karambit Warrior    |               | 3                  |               |                 |         |
-| Urumi Swordsman           |               | 3                  |               |                 |         |
-| Chakram Thrower           |               | 3                  |               |                 |         |
-| Fire Lancer               |               | 3                  |               |                 |         |
-| Elite Fire Lancer         |               | 3                  |               |                 |         |
-| Ibirapema Warrior         |               | 3                  |               |                 |         |
-| Hearth Troop              |               | 3                  |               |                 |         |
-| Huskarl                   |               | 2                  |               |                 |         |
-| Militia                   |               | 2                  |               |                 |         |
-| Eagle Scout               |               | 2                  |               |                 |         |
-| Elite Eagle Warrior       |               | 2                  |               |                 |         |
-| Eagle Warrior             |               | 2                  |               |                 |         |
-| Elite Conquistador        | 2             |                    |               |                 |         |
-| War Wagon                 |               | 2                  |               |                 |         |
-| Elite War Wagon           |               | 2                  |               |                 |         |
-| Kamayuk                   |               | 2                  |               |                 |         |
-| Elite Kamayuk             |               | 2                  |               |                 |         |
-| Gbeto                     |               | 2                  |               |                 |         |
-| Elite Gbeto               |               | 2                  |               |                 |         |
-| Shotel Warrior            |               | 2                  |               |                 |         |
-| Karambit Warrior          |               | 2                  |               |                 |         |
-| Flemish Militia           |               | 2                  |               |                 |         |
-| Elite Hussite Wagon       | 2             |                    |               |                 |         |
-| Warrior Priest            |               | 2                  |               |                 |         |
-| War Chariot (Focus Fire)  | 2             |                    |               |                 |         |
-| Champi Scout              |               | 2                  |               |                 |         |
-| Elite Temple Guard        |               | 2                  |               |                 |         |
-| Champi Runner             |               | 2                  |               |                 |         |
-| Varangian Guard           |               | 2                  |               |                 |         |
-| Elite Varangian Guard     |               | 2                  |               |                 |         |
-| Elite Organ Gun           | 1             |                    |               |                 |         |
-| Hussite Wagon             | 1             |                    |               |                 |         |
+| Unit                  | Trained at     | All Buildings | Standard Buildings | Stone Defense | Walls and Gates | Castles |
+|-----------------------|----------------|---------------|--------------------|---------------|-----------------|---------|
+| Petard                | Castle         | 500           |                    |               | 900             | 100     |
+| Trebuchet (Packed)    | Castle         | 250           |                    |               |                 |         |
+| Traction Trebuchet    | Siege Workshop | 230           |                    |               |                 |         |
+| Bombard Cannon        | Siege Workshop | 200           |                    | 40            |                 |         |
+| Siege Ram             | Siege Workshop | 200           |                    |               |                 |         |
+| Capped Ram            | Siege Workshop | 160           |                    |               |                 |         |
+| Battering Ram         | Siege Workshop | 150           |                    |               |                 |         |
+| Siege Elephant        | Siege Workshop | 105           |                    |               |                 |         |
+| Armored Elephant      | Siege Workshop | 90            |                    |               |                 |         |
+| Siege Onager          | Siege Workshop | 60            |                    |               |                 |         |
+| Onager                | Siege Workshop | 45            |                    |               |                 |         |
+| Mangonel              | Siege Workshop | 35            |                    |               |                 |         |
+| Heavy Rocket Cart     | Siege Workshop | 12            |                    |               | 7               | 7       |
+| Rocket Cart           | Siege Workshop | 7             |                    |               | 6               | 7       |
+| Heavy Scorpion        | Siege Workshop | 6             |                    |               |                 |         |
+| Scorpion              | Siege Workshop | 3             |                    |               |                 |         |
+| Elite Battle Elephant | Stable         | 7             |                    | 7             |                 |         |
+| Battle Elephant       | Stable         | 4             |                    | 4             |                 |         |
+| Two-Handed Swordsman  | Barracks       |               | 6                  |               |                 |         |
+| Champion              | Barracks       |               | 6                  |               |                 |         |
+| Long Swordsman        | Barracks       |               | 5                  |               |                 |         |
+| Elite Champi Warrior  | Barracks       |               | 5                  |               |                 |         |
+| Man-at-Arms           | Barracks       |               | 4                  |               |                 |         |
+| Champi Warrior        | Barracks       |               | 4                  |               |                 |         |
+| Spearman              | Barracks       |               | 3                  |               |                 |         |
+| Pikeman               | Barracks       |               | 3                  |               |                 |         |
+| Halberdier            | Barracks       |               | 3                  |               |                 |         |
+| Fire Lancer           | Barracks       |               | 3                  |               |                 |         |
+| Elite Fire Lancer     | Barracks       |               | 3                  |               |                 |         |
+| Militia               | Barracks       |               | 2                  |               |                 |         |
+| Eagle Scout           | Barracks       |               | 2                  |               |                 |         |
+| Elite Eagle Warrior   | Barracks       |               | 2                  |               |                 |         |
+| Eagle Warrior         | Barracks       |               | 2                  |               |                 |         |
+| Champi Scout          | Barracks       |               | 2                  |               |                 |         |
+| Champi Runner         | Barracks       |               | 2                  |               |                 |         |
+| Varangian Guard       | Barracks       |               | 2                  |               |                 |         |
+| Elite Varangian Guard | Barracks       |               | 2                  |               |                 |         |
+| Villager (Male)       | Town Center    | 3             |                    | 6             |                 |         |
 
 ## Damage to a Town Center
 
 Damage is one hit with all the attack classes added, and hits is how many hits destroy the building.
-The units are sorted by the hits ratio, the hits with Architecture divided by the hits without any technology,
-so the units that the technologies hurt the most are first.
+The units that train at the same building stay together, the building with the strongest unit first,
+and the units are sorted by DPS (damage per second without any technology, one hit divided by the reload time).
+The hits ratio is the hits with Architecture divided by the hits without any technology.
 
-| Unit                      | Damage None | Damage Masonry | Damage Architecture | Hits None | Hits Masonry | Hits Architecture | Hits ratio |
-|---------------------------|-------------|----------------|---------------------|-----------|--------------|-------------------|------------|
-| Rocket Cart               | 56          | 32             | 8                   | 43        | 83           | 363               | x8.44      |
-| Scorpion                  | 6           | 2              | 1                   | 400       | 1320         | 2904              | x7.26      |
-| Heavy Scorpion            | 12          | 8              | 4                   | 200       | 330          | 726               | x3.63      |
-| Villager (Male)           | 3           | 1              | 1                   | 800       | 2640         | 2904              | x3.63      |
-| Hussite Wagon             | 18          | 6              | 6                   | 134       | 440          | 484               | x3.61      |
-| Elite Hussite Wagon       | 22          | 9              | 8                   | 110       | 294          | 363               | x3.3       |
-| Elite Ballista Elephant   | 10          | 6              | 4                   | 240       | 440          | 726               | x3.03      |
-| Tarkan                    | 14          | 10             | 6                   | 172       | 264          | 484               | x2.81      |
-| Heavy Rocket Cart         | 120         | 90             | 60                  | 20        | 30           | 49                | x2.45      |
-| War Chariot (Focus Fire)  | 10          | 5              | 5                   | 240       | 528          | 581               | x2.42      |
-| Ballista Elephant         | 6           | 3              | 3                   | 400       | 880          | 968               | x2.42      |
-| Militia                   | 4           | 3              | 2                   | 600       | 880          | 1452              | x2.42      |
-| Eagle Scout               | 4           | 3              | 2                   | 600       | 880          | 1452              | x2.42      |
-| Battle Elephant           | 14          | 10             | 8                   | 172       | 264          | 363               | x2.11      |
-| Elite Tarkan              | 19          | 15             | 11                  | 127       | 176          | 264               | x2.08      |
-| Elite Battle Elephant     | 19          | 15             | 11                  | 127       | 176          | 264               | x2.08      |
-| Pikeman                   | 5           | 4              | 3                   | 480       | 660          | 968               | x2.02      |
-| Flemish Militia           | 5           | 4              | 3                   | 480       | 660          | 968               | x2.02      |
-| Champi Runner             | 5           | 4              | 3                   | 480       | 660          | 968               | x2.02      |
-| White Feather Guard       | 6           | 5              | 4                   | 400       | 528          | 726               | x1.82      |
-| Elite Fire Archer         | 6           | 5              | 4                   | 400       | 528          | 726               | x1.82      |
-| Champi Scout              | 3           | 2              | 2                   | 800       | 1320         | 1452              | x1.82      |
-| Elite Conquistador        | 13          | 10             | 9                   | 185       | 264          | 323               | x1.75      |
-| Serjeant                  | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Elite White Feather Guard | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Halberdier                | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Ibirapema Warrior         | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Eagle Warrior             | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| War Wagon                 | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Elite War Wagon           | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Kamayuk                   | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Karambit Warrior          | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
-| Man-at-Arms               | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
-| Grenadier                 | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
-| Throwing Axeman           | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
-| Hearth Troop              | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
-| Elite Kamayuk             | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
-| Gbeto                     | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
-| Spearman                  | 4           | 3              | 3                   | 600       | 880          | 968               | x1.61      |
-| Liao Dao                  | 9           | 8              | 7                   | 267       | 330          | 415               | x1.55      |
-| Elite Karambit Warrior    | 9           | 8              | 7                   | 267       | 330          | 415               | x1.55      |
-| Elite Eagle Warrior       | 9           | 8              | 7                   | 267       | 330          | 415               | x1.55      |
-| Mounted Trebuchet         | 38          | 34             | 30                  | 64        | 78           | 97                | x1.52      |
-| Elite Throwing Axeman     | 10          | 9              | 8                   | 240       | 294          | 363               | x1.51      |
-| Jian Swordsman            | 10          | 9              | 8                   | 240       | 294          | 363               | x1.51      |
-| Urumi Swordsman           | 10          | 9              | 8                   | 240       | 294          | 363               | x1.51      |
-| Fire Lancer               | 10          | 9              | 8                   | 240       | 294          | 363               | x1.51      |
-| Huskarl                   | 10          | 9              | 8                   | 240       | 294          | 363               | x1.51      |
-| Fire Archer               | 5           | 4              | 4                   | 480       | 660          | 726               | x1.51      |
-| War Elephant              | 43          | 39             | 35                  | 56        | 68           | 83                | x1.48      |
-| Ghulam                    | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
-| Champi Warrior            | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
-| Elite Ibirapema Warrior   | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
-| Elite Fire Lancer         | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
-| Elite Gbeto               | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
-| Warrior Priest            | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
-| Elite War Elephant        | 48          | 44             | 40                  | 50        | 60           | 73                | x1.46      |
-| Obuch                     | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
-| Long Swordsman            | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
-| Samurai                   | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
-| Condottiero               | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
-| Elite Hearth Troop        | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
-| Elite Temple Guard        | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
-| Woad Raider               | 13          | 12             | 11                  | 185       | 220          | 264               | x1.43      |
-| Elite Urumi Swordsman     | 13          | 12             | 11                  | 185       | 220          | 264               | x1.43      |
-| Elite Ghulam              | 13          | 12             | 11                  | 185       | 220          | 264               | x1.43      |
-| Elite Huskarl             | 13          | 12             | 11                  | 185       | 220          | 264               | x1.43      |
-| Varangian Guard           | 13          | 12             | 11                  | 185       | 220          | 264               | x1.43      |
-| Jomsviking                | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
-| Elite Serjeant            | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
-| Elite Liao Dao            | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
-| Elite Champi Warrior      | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
-| Berserk                   | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
-| Legionary                 | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
-| Elite Samurai             | 15          | 14             | 13                  | 160       | 189          | 224               | x1.4       |
-| Elite Obuch               | 16          | 15             | 14                  | 150       | 176          | 208               | x1.39      |
-| Two-Handed Swordsman      | 16          | 15             | 14                  | 150       | 176          | 208               | x1.39      |
-| Shotel Warrior            | 16          | 15             | 14                  | 150       | 176          | 208               | x1.39      |
-| Elite Berserk             | 17          | 16             | 15                  | 142       | 165          | 194               | x1.37      |
-| Jaguar Warrior            | 17          | 16             | 15                  | 142       | 165          | 194               | x1.37      |
-| Elite Varangian Guard     | 17          | 16             | 15                  | 142       | 165          | 194               | x1.37      |
-| Elite Jomsviking          | 18          | 17             | 16                  | 134       | 156          | 182               | x1.36      |
-| Teutonic Knight           | 18          | 17             | 16                  | 134       | 156          | 182               | x1.36      |
-| Champion                  | 18          | 17             | 16                  | 134       | 156          | 182               | x1.36      |
-| Elite Woad Raider         | 18          | 17             | 16                  | 134       | 156          | 182               | x1.36      |
-| Elite Shotel Warrior      | 19          | 18             | 17                  | 127       | 147          | 171               | x1.35      |
-| Onager                    | 101         | 97             | 93                  | 24        | 28           | 32                | x1.33      |
-| Mangonel                  | 74          | 70             | 66                  | 33        | 38           | 44                | x1.33      |
-| Elite Teutonic Knight     | 21          | 20             | 19                  | 115       | 132          | 153               | x1.33      |
-| Elite Jaguar Warrior      | 21          | 20             | 19                  | 115       | 132          | 153               | x1.33      |
-| Battering Ram             | 150         | 147            | 144                 | 16        | 18           | 21                | x1.31      |
-| Siege Elephant            | 107         | 103            | 99                  | 23        | 26           | 30                | x1.3       |
-| Armored Elephant          | 92          | 88             | 84                  | 27        | 30           | 35                | x1.3       |
-| Siege Onager              | 138         | 134            | 130                 | 18        | 20           | 23                | x1.28      |
-| Capped Ram                | 160         | 157            | 154                 | 15        | 17           | 19                | x1.27      |
-| Flaming Camel             | 214         | 210            | 206                 | 12        | 13           | 15                | x1.25      |
-| Siege Ram                 | 200         | 197            | 194                 | 12        | 14           | 15                | x1.25      |
-| Houfnice                  | 294         | 290            | 286                 | 9         | 10           | 11                | x1.22      |
-| Traction Trebuchet        | 274         | 270            | 266                 | 9         | 10           | 11                | x1.22      |
-| Elite Organ Gun           | 6           | 6              | 6                   | 400       | 440          | 484               | x1.21      |
-| Elite Chakram Thrower     | 4           | 4              | 4                   | 600       | 660          | 726               | x1.21      |
-| Chakram Thrower           | 3           | 3              | 3                   | 800       | 880          | 968               | x1.21      |
-| Petard                    | 519         | 515            | 511                 | 5         | 6            | 6                 | x1.2       |
-| Bombard Cannon            | 234         | 230            | 226                 | 11        | 12           | 13                | x1.18      |
-| Trebuchet (Packed)        | 442         | 438            | 434                 | 6         | 7            | 7                 | x1.17      |
+| Unit                  | Trained at     | DPS None | Damage None | Damage Masonry | Damage Architecture | Hits None | Hits Masonry | Hits Architecture | Hits ratio |
+|-----------------------|----------------|----------|-------------|----------------|---------------------|-----------|--------------|-------------------|------------|
+| Trebuchet (Packed)    | Castle         | 44.2     | 442         | 438            | 434                 | 6         | 7            | 7                 | x1.17      |
+| Petard                | Castle         |          | 519         | 515            | 511                 | 5         | 6            | 6                 | x1.2       |
+| Siege Ram             | Siege Workshop | 40       | 200         | 197            | 194                 | 12        | 14           | 15                | x1.25      |
+| Bombard Cannon        | Siege Workshop | 36       | 234         | 230            | 226                 | 11        | 12           | 13                | x1.18      |
+| Siege Elephant        | Siege Workshop | 35.67    | 107         | 103            | 99                  | 23        | 26           | 30                | x1.3       |
+| Capped Ram            | Siege Workshop | 32       | 160         | 157            | 154                 | 15        | 17           | 19                | x1.27      |
+| Armored Elephant      | Siege Workshop | 30.67    | 92          | 88             | 84                  | 27        | 30           | 35                | x1.3       |
+| Battering Ram         | Siege Workshop | 30       | 150         | 147            | 144                 | 16        | 18           | 21                | x1.31      |
+| Traction Trebuchet    | Siege Workshop | 24.91    | 274         | 270            | 266                 | 9         | 10           | 11                | x1.22      |
+| Siege Onager          | Siege Workshop | 23       | 138         | 134            | 130                 | 18        | 20           | 23                | x1.28      |
+| Heavy Rocket Cart     | Siege Workshop | 22.43    | 120         | 90             | 60                  | 20        | 30           | 49                | x2.45      |
+| Onager                | Siege Workshop | 16.83    | 101         | 97             | 93                  | 24        | 28           | 32                | x1.33      |
+| Mangonel              | Siege Workshop | 12.33    | 74          | 70             | 66                  | 33        | 38           | 44                | x1.33      |
+| Rocket Cart           | Siege Workshop | 10.18    | 56          | 32             | 8                   | 43        | 83           | 363               | x8.44      |
+| Heavy Scorpion        | Siege Workshop | 3.33     | 12          | 8              | 4                   | 200       | 330          | 726               | x3.63      |
+| Scorpion              | Siege Workshop | 1.67     | 6           | 2              | 1                   | 400       | 1320         | 2904              | x7.26      |
+| Elite Battle Elephant | Stable         | 9.5      | 19          | 15             | 11                  | 127       | 176          | 264               | x2.08      |
+| Battle Elephant       | Stable         | 7        | 14          | 10             | 8                   | 172       | 264          | 363               | x2.11      |
+| Champion              | Barracks       | 9        | 18          | 17             | 16                  | 134       | 156          | 182               | x1.36      |
+| Elite Varangian Guard | Barracks       | 8.5      | 17          | 16             | 15                  | 142       | 165          | 194               | x1.37      |
+| Two-Handed Swordsman  | Barracks       | 8        | 16          | 15             | 14                  | 150       | 176          | 208               | x1.39      |
+| Elite Champi Warrior  | Barracks       | 7        | 14          | 13             | 12                  | 172       | 204          | 242               | x1.41      |
+| Varangian Guard       | Barracks       | 6.5      | 13          | 12             | 11                  | 185       | 220          | 264               | x1.43      |
+| Long Swordsman        | Barracks       | 6        | 12          | 11             | 10                  | 200       | 240          | 291               | x1.46      |
+| Champi Warrior        | Barracks       | 5.5      | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
+| Elite Fire Lancer     | Barracks       | 5.24     | 11          | 10             | 9                   | 219       | 264          | 323               | x1.47      |
+| Fire Lancer           | Barracks       | 4.77     | 10          | 9              | 8                   | 240       | 294          | 363               | x1.51      |
+| Elite Eagle Warrior   | Barracks       | 4.5      | 9           | 8              | 7                   | 267       | 330          | 415               | x1.55      |
+| Man-at-Arms           | Barracks       | 4        | 8           | 7              | 6                   | 300       | 378          | 484               | x1.61      |
+| Eagle Warrior         | Barracks       | 3.5      | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
+| Champi Runner         | Barracks       | 2.5      | 5           | 4              | 3                   | 480       | 660          | 968               | x2.02      |
+| Halberdier            | Barracks       | 2.33     | 7           | 6              | 5                   | 343       | 440          | 581               | x1.69      |
+| Militia               | Barracks       | 2        | 4           | 3              | 2                   | 600       | 880          | 1452              | x2.42      |
+| Eagle Scout           | Barracks       | 2        | 4           | 3              | 2                   | 600       | 880          | 1452              | x2.42      |
+| Pikeman               | Barracks       | 1.67     | 5           | 4              | 3                   | 480       | 660          | 968               | x2.02      |
+| Champi Scout          | Barracks       | 1.5      | 3           | 2              | 2                   | 800       | 1320         | 1452              | x1.82      |
+| Spearman              | Barracks       | 1.33     | 4           | 3              | 3                   | 600       | 880          | 968               | x1.61      |
+| Villager (Male)       | Town Center    | 1.5      | 3           | 1              | 1                   | 800       | 2640         | 2904              | x3.63      |
 
 ## Damage to a Castle
 
 Damage is one hit with all the attack classes added, and hits is how many hits destroy the building.
-The units are sorted by the hits ratio, the hits with Architecture divided by the hits without any technology,
-so the units that the technologies hurt the most are first.
+The units that train at the same building stay together, the building with the strongest unit first,
+and the units are sorted by DPS (damage per second without any technology, one hit divided by the reload time).
+The hits ratio is the hits with Architecture divided by the hits without any technology.
 
-| Unit                      | Damage None | Damage Masonry | Damage Architecture | Hits None | Hits Masonry | Hits Architecture | Hits ratio |
-|---------------------------|-------------|----------------|---------------------|-----------|--------------|-------------------|------------|
-| Heavy Scorpion            | 3           | 2              | 1                   | 1600      | 2640         | 5808              | x3.63      |
-| War Wagon                 | 4           | 3              | 2                   | 1200      | 1760         | 2904              | x2.42      |
-| Elite War Wagon           | 4           | 3              | 2                   | 1200      | 1760         | 2904              | x2.42      |
-| Halberdier                | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
-| Ibirapema Warrior         | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
-| Eagle Warrior             | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
-| Kamayuk                   | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
-| Karambit Warrior          | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
-| Heavy Rocket Cart         | 110         | 80             | 70                  | 44        | 66           | 83                | x1.89      |
-| Man-at-Arms               | 6           | 5              | 4                   | 800       | 1056         | 1452              | x1.82      |
-| Throwing Axeman           | 6           | 5              | 4                   | 800       | 1056         | 1452              | x1.82      |
-| Hearth Troop              | 6           | 5              | 4                   | 800       | 1056         | 1452              | x1.82      |
-| Elite Kamayuk             | 6           | 5              | 4                   | 800       | 1056         | 1452              | x1.82      |
-| Gbeto                     | 6           | 5              | 4                   | 800       | 1056         | 1452              | x1.82      |
-| Flemish Militia           | 3           | 2              | 2                   | 1600      | 2640         | 2904              | x1.82      |
-| Champi Runner             | 3           | 2              | 2                   | 1600      | 2640         | 2904              | x1.82      |
-| Liao Dao                  | 7           | 6              | 5                   | 686       | 880          | 1162              | x1.69      |
-| Elite Karambit Warrior    | 7           | 6              | 5                   | 686       | 880          | 1162              | x1.69      |
-| Elite Eagle Warrior       | 7           | 6              | 5                   | 686       | 880          | 1162              | x1.69      |
-| Elite Throwing Axeman     | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| Battle Elephant           | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| Jian Swordsman            | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| Urumi Swordsman           | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| Fire Lancer               | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| Huskarl                   | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| Elite Conquistador        | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
-| War Elephant              | 33          | 29             | 25                  | 146       | 183          | 233               | x1.6       |
-| Ghulam                    | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
-| Champi Warrior            | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
-| Elite Ibirapema Warrior   | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
-| Elite Fire Lancer         | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
-| Elite Gbeto               | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
-| Warrior Priest            | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
-| Elite Tarkan              | 19          | 16             | 15                  | 253       | 330          | 388               | x1.53      |
-| Elite War Elephant        | 38          | 34             | 30                  | 127       | 156          | 194               | x1.53      |
-| Elite Battle Elephant     | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Obuch                     | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Long Swordsman            | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Samurai                   | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Condottiero               | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Elite Hearth Troop        | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Elite Temple Guard        | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
-| Serjeant                  | 5           | 4              | 4                   | 960       | 1320         | 1452              | x1.51      |
-| Grenadier                 | 5           | 4              | 4                   | 960       | 1320         | 1452              | x1.51      |
-| Elite White Feather Guard | 5           | 4              | 4                   | 960       | 1320         | 1452              | x1.51      |
-| Woad Raider               | 11          | 10             | 9                   | 437       | 528          | 646               | x1.48      |
-| Elite Urumi Swordsman     | 11          | 10             | 9                   | 437       | 528          | 646               | x1.48      |
-| Elite Ghulam              | 11          | 10             | 9                   | 437       | 528          | 646               | x1.48      |
-| Elite Huskarl             | 11          | 10             | 9                   | 437       | 528          | 646               | x1.48      |
-| Varangian Guard           | 11          | 10             | 9                   | 437       | 528          | 646               | x1.48      |
-| Jomsviking                | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
-| Elite Serjeant            | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
-| Elite Liao Dao            | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
-| Elite Champi Warrior      | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
-| Berserk                   | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
-| Legionary                 | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
-| Elite Samurai             | 13          | 12             | 11                  | 370       | 440          | 528               | x1.43      |
-| Tarkan                    | 14          | 13             | 12                  | 343       | 407          | 484               | x1.41      |
-| Elite Obuch               | 14          | 13             | 12                  | 343       | 407          | 484               | x1.41      |
-| Two-Handed Swordsman      | 14          | 13             | 12                  | 343       | 407          | 484               | x1.41      |
-| Shotel Warrior            | 14          | 13             | 12                  | 343       | 407          | 484               | x1.41      |
-| Elite Hussite Wagon       | 7           | 6              | 6                   | 686       | 880          | 968               | x1.41      |
-| Mounted Trebuchet         | 28          | 25             | 24                  | 172       | 212          | 242               | x1.41      |
-| Elite Berserk             | 15          | 14             | 13                  | 320       | 378          | 447               | x1.4       |
-| Jaguar Warrior            | 15          | 14             | 13                  | 320       | 378          | 447               | x1.4       |
-| Elite Varangian Guard     | 15          | 14             | 13                  | 320       | 378          | 447               | x1.4       |
-| Mangonel                  | 64          | 60             | 56                  | 75        | 88           | 104               | x1.39      |
-| Elite Jomsviking          | 16          | 15             | 14                  | 300       | 352          | 415               | x1.38      |
-| Teutonic Knight           | 16          | 15             | 14                  | 300       | 352          | 415               | x1.38      |
-| Champion                  | 16          | 15             | 14                  | 300       | 352          | 415               | x1.38      |
-| Elite Woad Raider         | 16          | 15             | 14                  | 300       | 352          | 415               | x1.38      |
-| Elite Shotel Warrior      | 17          | 16             | 15                  | 283       | 330          | 388               | x1.37      |
-| Elite Teutonic Knight     | 19          | 18             | 17                  | 253       | 294          | 342               | x1.35      |
-| Elite Jaguar Warrior      | 19          | 18             | 17                  | 253       | 294          | 342               | x1.35      |
-| Onager                    | 91          | 87             | 83                  | 53        | 61           | 70                | x1.32      |
-| Armored Elephant          | 82          | 79             | 76                  | 59        | 67           | 77                | x1.31      |
-| Houfnice                  | 284         | 280            | 276                 | 17        | 19           | 22                | x1.29      |
-| Siege Onager              | 128         | 124            | 120                 | 38        | 43           | 49                | x1.29      |
-| Siege Ram                 | 192         | 189            | 186                 | 25        | 28           | 32                | x1.28      |
-| Siege Elephant            | 97          | 94             | 91                  | 50        | 57           | 64                | x1.28      |
-| Battering Ram             | 142         | 139            | 136                 | 34        | 38           | 43                | x1.26      |
-| Petard                    | 609         | 605            | 601                 | 8         | 9            | 10                | x1.25      |
-| Flaming Camel             | 204         | 200            | 196                 | 24        | 27           | 30                | x1.25      |
-| Capped Ram                | 152         | 149            | 146                 | 32        | 36           | 40                | x1.25      |
-| Bombard Cannon            | 224         | 220            | 216                 | 22        | 24           | 27                | x1.23      |
-| Traction Trebuchet        | 264         | 260            | 256                 | 19        | 21           | 23                | x1.21      |
-| War Chariot (Focus Fire)  | 5           | 5              | 5                   | 960       | 1056         | 1162              | x1.21      |
-| Elite Organ Gun           | 6           | 6              | 6                   | 800       | 880          | 968               | x1.21      |
-| Hussite Wagon             | 6           | 6              | 6                   | 800       | 880          | 968               | x1.21      |
-| Elite Ballista Elephant   | 4           | 4              | 4                   | 1200      | 1320         | 1452              | x1.21      |
-| Elite Chakram Thrower     | 4           | 4              | 4                   | 1200      | 1320         | 1452              | x1.21      |
-| White Feather Guard       | 4           | 4              | 4                   | 1200      | 1320         | 1452              | x1.21      |
-| Fire Archer               | 4           | 4              | 4                   | 1200      | 1320         | 1452              | x1.21      |
-| Elite Fire Archer         | 4           | 4              | 4                   | 1200      | 1320         | 1452              | x1.21      |
-| Spearman                  | 3           | 3              | 3                   | 1600      | 1760         | 1936              | x1.21      |
-| Pikeman                   | 3           | 3              | 3                   | 1600      | 1760         | 1936              | x1.21      |
-| Ballista Elephant         | 3           | 3              | 3                   | 1600      | 1760         | 1936              | x1.21      |
-| Chakram Thrower           | 3           | 3              | 3                   | 1600      | 1760         | 1936              | x1.21      |
-| Militia                   | 2           | 2              | 2                   | 2400      | 2640         | 2904              | x1.21      |
-| Eagle Scout               | 2           | 2              | 2                   | 2400      | 2640         | 2904              | x1.21      |
-| Champi Scout              | 2           | 2              | 2                   | 2400      | 2640         | 2904              | x1.21      |
-| Villager (Male)           | 1           | 1              | 1                   | 4800      | 5280         | 5808              | x1.21      |
-| Scorpion                  | 1           | 1              | 1                   | 4800      | 5280         | 5808              | x1.21      |
-| Rocket Cart               | 56          | 56             | 56                  | 86        | 95           | 104               | x1.21      |
-| Trebuchet (Packed)        | 431         | 427            | 423                 | 12        | 13           | 14                | x1.17      |
+| Unit                  | Trained at     | DPS None | Damage None | Damage Masonry | Damage Architecture | Hits None | Hits Masonry | Hits Architecture | Hits ratio |
+|-----------------------|----------------|----------|-------------|----------------|---------------------|-----------|--------------|-------------------|------------|
+| Trebuchet (Packed)    | Castle         | 43.1     | 431         | 427            | 423                 | 12        | 13           | 14                | x1.17      |
+| Petard                | Castle         |          | 609         | 605            | 601                 | 8         | 9            | 10                | x1.25      |
+| Siege Ram             | Siege Workshop | 38.4     | 192         | 189            | 186                 | 25        | 28           | 32                | x1.28      |
+| Bombard Cannon        | Siege Workshop | 34.46    | 224         | 220            | 216                 | 22        | 24           | 27                | x1.23      |
+| Siege Elephant        | Siege Workshop | 32.33    | 97          | 94             | 91                  | 50        | 57           | 64                | x1.28      |
+| Capped Ram            | Siege Workshop | 30.4     | 152         | 149            | 146                 | 32        | 36           | 40                | x1.25      |
+| Battering Ram         | Siege Workshop | 28.4     | 142         | 139            | 136                 | 34        | 38           | 43                | x1.26      |
+| Armored Elephant      | Siege Workshop | 27.33    | 82          | 79             | 76                  | 59        | 67           | 77                | x1.31      |
+| Traction Trebuchet    | Siege Workshop | 24       | 264         | 260            | 256                 | 19        | 21           | 23                | x1.21      |
+| Siege Onager          | Siege Workshop | 21.33    | 128         | 124            | 120                 | 38        | 43           | 49                | x1.29      |
+| Heavy Rocket Cart     | Siege Workshop | 20.56    | 110         | 80             | 70                  | 44        | 66           | 83                | x1.89      |
+| Onager                | Siege Workshop | 15.17    | 91          | 87             | 83                  | 53        | 61           | 70                | x1.32      |
+| Mangonel              | Siege Workshop | 10.67    | 64          | 60             | 56                  | 75        | 88           | 104               | x1.39      |
+| Rocket Cart           | Siege Workshop | 10.18    | 56          | 56             | 56                  | 86        | 95           | 104               | x1.21      |
+| Heavy Scorpion        | Siege Workshop | 0.83     | 3           | 2              | 1                   | 1600      | 2640         | 5808              | x3.63      |
+| Scorpion              | Siege Workshop | 0.28     | 1           | 1              | 1                   | 4800      | 5280         | 5808              | x1.21      |
+| Champion              | Barracks       | 8        | 16          | 15             | 14                  | 300       | 352          | 415               | x1.38      |
+| Elite Varangian Guard | Barracks       | 7.5      | 15          | 14             | 13                  | 320       | 378          | 447               | x1.4       |
+| Two-Handed Swordsman  | Barracks       | 7        | 14          | 13             | 12                  | 343       | 407          | 484               | x1.41      |
+| Elite Champi Warrior  | Barracks       | 6        | 12          | 11             | 10                  | 400       | 480          | 581               | x1.45      |
+| Varangian Guard       | Barracks       | 5.5      | 11          | 10             | 9                   | 437       | 528          | 646               | x1.48      |
+| Long Swordsman        | Barracks       | 5        | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
+| Champi Warrior        | Barracks       | 4.5      | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
+| Elite Fire Lancer     | Barracks       | 4.31     | 9           | 8              | 7                   | 534       | 660          | 830               | x1.55      |
+| Fire Lancer           | Barracks       | 3.84     | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
+| Elite Eagle Warrior   | Barracks       | 3.5      | 7           | 6              | 5                   | 686       | 880          | 1162              | x1.69      |
+| Man-at-Arms           | Barracks       | 3        | 6           | 5              | 4                   | 800       | 1056         | 1452              | x1.82      |
+| Eagle Warrior         | Barracks       | 2.5      | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
+| Halberdier            | Barracks       | 1.67     | 5           | 4              | 3                   | 960       | 1320         | 1936              | x2.02      |
+| Champi Runner         | Barracks       | 1.5      | 3           | 2              | 2                   | 1600      | 2640         | 2904              | x1.82      |
+| Spearman              | Barracks       | 1        | 3           | 3              | 3                   | 1600      | 1760         | 1936              | x1.21      |
+| Pikeman               | Barracks       | 1        | 3           | 3              | 3                   | 1600      | 1760         | 1936              | x1.21      |
+| Militia               | Barracks       | 1        | 2           | 2              | 2                   | 2400      | 2640         | 2904              | x1.21      |
+| Eagle Scout           | Barracks       | 1        | 2           | 2              | 2                   | 2400      | 2640         | 2904              | x1.21      |
+| Champi Scout          | Barracks       | 1        | 2           | 2              | 2                   | 2400      | 2640         | 2904              | x1.21      |
+| Elite Battle Elephant | Stable         | 5        | 10          | 9              | 8                   | 480       | 587          | 726               | x1.51      |
+| Battle Elephant       | Stable         | 4        | 8           | 7              | 6                   | 600       | 755          | 968               | x1.61      |
+| Villager (Male)       | Town Center    | 0.5      | 1           | 1              | 1                   | 4800      | 5280         | 5808              | x1.21      |
 
 ## Damage to a Monastery
 
 Damage is one hit with all the attack classes added, and hits is how many hits destroy the building.
-The units are sorted by the hits ratio, the hits with Architecture divided by the hits without any technology,
-so the units that the technologies hurt the most are first.
+The units that train at the same building stay together, the building with the strongest unit first,
+and the units are sorted by DPS (damage per second without any technology, one hit divided by the reload time).
+The hits ratio is the hits with Architecture divided by the hits without any technology.
 
-| Unit                      | Damage None | Damage Masonry | Damage Architecture | Hits None | Hits Masonry | Hits Architecture | Hits ratio |
-|---------------------------|-------------|----------------|---------------------|-----------|--------------|-------------------|------------|
-| Rocket Cart               | 72          | 40             | 8                   | 30        | 58           | 318               | x10.6      |
-| Heavy Scorpion            | 10          | 6              | 2                   | 210       | 385          | 1271              | x6.05      |
-| Scorpion                  | 4           | 1              | 1                   | 525       | 2310         | 2541              | x4.84      |
-| Elite Hussite Wagon       | 20          | 7              | 6                   | 105       | 330          | 424               | x4.04      |
-| Villager (Male)           | 3           | 1              | 1                   | 700       | 2310         | 2541              | x3.63      |
-| Hussite Wagon             | 16          | 6              | 6                   | 132       | 385          | 424               | x3.21      |
-| Heavy Rocket Cart         | 140         | 100            | 60                  | 15        | 24           | 43                | x2.87      |
-| War Chariot (Focus Fire)  | 10          | 5              | 5                   | 210       | 462          | 509               | x2.42      |
-| Elite Ballista Elephant   | 8           | 5              | 4                   | 263       | 462          | 636               | x2.42      |
-| Tarkan                    | 17          | 13             | 9                   | 124       | 178          | 283               | x2.28      |
-| Ballista Elephant         | 5           | 3              | 3                   | 420       | 770          | 847               | x2.02      |
-| Chakram Thrower           | 5           | 4              | 3                   | 420       | 578          | 847               | x2.02      |
-| War Wagon                 | 5           | 4              | 3                   | 420       | 578          | 847               | x2.02      |
-| Elite War Wagon           | 5           | 4              | 3                   | 420       | 578          | 847               | x2.02      |
-| Elite Conquistador        | 11          | 8              | 7                   | 191       | 289          | 363               | x1.9       |
-| Elite Tarkan              | 22          | 18             | 14                  | 96        | 129          | 182               | x1.9       |
-| Elite Battle Elephant     | 22          | 18             | 14                  | 96        | 129          | 182               | x1.9       |
-| Battle Elephant           | 17          | 13             | 11                  | 124       | 178          | 231               | x1.86      |
-| Grenadier                 | 6           | 5              | 4                   | 350       | 462          | 636               | x1.82      |
-| Champi Scout              | 6           | 5              | 4                   | 350       | 462          | 636               | x1.82      |
-| Elite Chakram Thrower     | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
-| Spearman                  | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
-| Militia                   | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
-| Eagle Scout               | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
-| Pikeman                   | 8           | 7              | 6                   | 263       | 330          | 424               | x1.61      |
-| Flemish Militia           | 8           | 7              | 6                   | 263       | 330          | 424               | x1.61      |
-| Champi Runner             | 8           | 7              | 6                   | 263       | 330          | 424               | x1.61      |
-| White Feather Guard       | 9           | 8              | 7                   | 234       | 289          | 363               | x1.55      |
-| Serjeant                  | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Elite White Feather Guard | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Halberdier                | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Ibirapema Warrior         | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Eagle Warrior             | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Kamayuk                   | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Karambit Warrior          | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
-| Man-at-Arms               | 11          | 10             | 9                   | 191       | 231          | 283               | x1.48      |
-| Throwing Axeman           | 11          | 10             | 9                   | 191       | 231          | 283               | x1.48      |
-| Hearth Troop              | 11          | 10             | 9                   | 191       | 231          | 283               | x1.48      |
-| Elite Kamayuk             | 11          | 10             | 9                   | 191       | 231          | 283               | x1.48      |
-| Gbeto                     | 11          | 10             | 9                   | 191       | 231          | 283               | x1.48      |
-| Mounted Trebuchet         | 41          | 37             | 33                  | 52        | 63           | 77                | x1.48      |
-| Liao Dao                  | 12          | 11             | 10                  | 175       | 210          | 255               | x1.46      |
-| Elite Karambit Warrior    | 12          | 11             | 10                  | 175       | 210          | 255               | x1.46      |
-| Elite Eagle Warrior       | 12          | 11             | 10                  | 175       | 210          | 255               | x1.46      |
-| War Elephant              | 46          | 42             | 38                  | 46        | 55           | 67                | x1.46      |
-| Elite War Elephant        | 51          | 47             | 43                  | 42        | 50           | 60                | x1.43      |
-| Elite Throwing Axeman     | 13          | 12             | 11                  | 162       | 193          | 231               | x1.43      |
-| Jian Swordsman            | 13          | 12             | 11                  | 162       | 193          | 231               | x1.43      |
-| Urumi Swordsman           | 13          | 12             | 11                  | 162       | 193          | 231               | x1.43      |
-| Fire Lancer               | 13          | 12             | 11                  | 162       | 193          | 231               | x1.43      |
-| Huskarl                   | 13          | 12             | 11                  | 162       | 193          | 231               | x1.43      |
-| Ghulam                    | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
-| Champi Warrior            | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
-| Elite Ibirapema Warrior   | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
-| Elite Fire Lancer         | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
-| Elite Gbeto               | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
-| Warrior Priest            | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
-| Obuch                     | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
-| Long Swordsman            | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
-| Samurai                   | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
-| Condottiero               | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
-| Elite Hearth Troop        | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
-| Elite Temple Guard        | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
-| Woad Raider               | 16          | 15             | 14                  | 132       | 154          | 182               | x1.38      |
-| Elite Urumi Swordsman     | 16          | 15             | 14                  | 132       | 154          | 182               | x1.38      |
-| Elite Ghulam              | 16          | 15             | 14                  | 132       | 154          | 182               | x1.38      |
-| Elite Huskarl             | 16          | 15             | 14                  | 132       | 154          | 182               | x1.38      |
-| Varangian Guard           | 16          | 15             | 14                  | 132       | 154          | 182               | x1.38      |
-| Jomsviking                | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
-| Elite Serjeant            | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
-| Elite Liao Dao            | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
-| Elite Champi Warrior      | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
-| Berserk                   | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
-| Legionary                 | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
-| Elite Samurai             | 18          | 17             | 16                  | 117       | 136          | 159               | x1.36      |
-| Elite Berserk             | 20          | 19             | 18                  | 105       | 122          | 142               | x1.35      |
-| Jaguar Warrior            | 20          | 19             | 18                  | 105       | 122          | 142               | x1.35      |
-| Elite Varangian Guard     | 20          | 19             | 18                  | 105       | 122          | 142               | x1.35      |
-| Elite Obuch               | 19          | 18             | 17                  | 111       | 129          | 150               | x1.35      |
-| Two-Handed Swordsman      | 19          | 18             | 17                  | 111       | 129          | 150               | x1.35      |
-| Shotel Warrior            | 19          | 18             | 17                  | 111       | 129          | 150               | x1.35      |
-| Elite Jomsviking          | 21          | 20             | 19                  | 100       | 116          | 134               | x1.34      |
-| Teutonic Knight           | 21          | 20             | 19                  | 100       | 116          | 134               | x1.34      |
-| Champion                  | 21          | 20             | 19                  | 100       | 116          | 134               | x1.34      |
-| Elite Woad Raider         | 21          | 20             | 19                  | 100       | 116          | 134               | x1.34      |
-| Bombard Cannon            | 237         | 233            | 229                 | 9         | 10           | 12                | x1.33      |
-| Siege Onager              | 141         | 137            | 133                 | 15        | 17           | 20                | x1.33      |
-| Elite Shotel Warrior      | 22          | 21             | 20                  | 96        | 110          | 128               | x1.33      |
-| Mangonel                  | 77          | 73             | 69                  | 28        | 32           | 37                | x1.32      |
-| Elite Teutonic Knight     | 24          | 23             | 22                  | 88        | 101          | 116               | x1.32      |
-| Elite Jaguar Warrior      | 24          | 23             | 22                  | 88        | 101          | 116               | x1.32      |
-| Armored Elephant          | 95          | 91             | 87                  | 23        | 26           | 30                | x1.3       |
-| Flaming Camel             | 217         | 213            | 209                 | 10        | 11           | 13                | x1.3       |
-| Battering Ram             | 150         | 147            | 144                 | 14        | 16           | 18                | x1.29      |
-| Onager                    | 104         | 100            | 96                  | 21        | 24           | 27                | x1.29      |
-| Siege Ram                 | 201         | 197            | 194                 | 11        | 12           | 14                | x1.27      |
-| Traction Trebuchet        | 277         | 273            | 269                 | 8         | 9            | 10                | x1.25      |
-| Siege Elephant            | 110         | 106            | 102                 | 20        | 22           | 25                | x1.25      |
-| Capped Ram                | 160         | 157            | 154                 | 14        | 15           | 17                | x1.21      |
-| Elite Organ Gun           | 6           | 6              | 6                   | 350       | 385          | 424               | x1.21      |
-| Fire Archer               | 4           | 4              | 4                   | 525       | 578          | 636               | x1.21      |
-| Elite Fire Archer         | 4           | 4              | 4                   | 525       | 578          | 636               | x1.21      |
-| Trebuchet (Packed)        | 440         | 436            | 432                 | 5         | 6            | 6                 | x1.2       |
-| Houfnice                  | 297         | 293            | 289                 | 8         | 8            | 9                 | x1.13      |
-| Petard                    | 522         | 518            | 514                 | 5         | 5            | 5                 | x1         |
+| Unit                  | Trained at     | DPS None | Damage None | Damage Masonry | Damage Architecture | Hits None | Hits Masonry | Hits Architecture | Hits ratio |
+|-----------------------|----------------|----------|-------------|----------------|---------------------|-----------|--------------|-------------------|------------|
+| Trebuchet (Packed)    | Castle         | 44       | 440         | 436            | 432                 | 5         | 6            | 6                 | x1.2       |
+| Petard                | Castle         |          | 522         | 518            | 514                 | 5         | 5            | 5                 | x1         |
+| Siege Ram             | Siege Workshop | 40.2     | 201         | 197            | 194                 | 11        | 12           | 14                | x1.27      |
+| Siege Elephant        | Siege Workshop | 36.67    | 110         | 106            | 102                 | 20        | 22           | 25                | x1.25      |
+| Bombard Cannon        | Siege Workshop | 36.46    | 237         | 233            | 229                 | 9         | 10           | 12                | x1.33      |
+| Capped Ram            | Siege Workshop | 32       | 160         | 157            | 154                 | 14        | 15           | 17                | x1.21      |
+| Armored Elephant      | Siege Workshop | 31.67    | 95          | 91             | 87                  | 23        | 26           | 30                | x1.3       |
+| Battering Ram         | Siege Workshop | 30       | 150         | 147            | 144                 | 14        | 16           | 18                | x1.29      |
+| Heavy Rocket Cart     | Siege Workshop | 26.17    | 140         | 100            | 60                  | 15        | 24           | 43                | x2.87      |
+| Traction Trebuchet    | Siege Workshop | 25.18    | 277         | 273            | 269                 | 8         | 9            | 10                | x1.25      |
+| Siege Onager          | Siege Workshop | 23.5     | 141         | 137            | 133                 | 15        | 17           | 20                | x1.33      |
+| Onager                | Siege Workshop | 17.33    | 104         | 100            | 96                  | 21        | 24           | 27                | x1.29      |
+| Rocket Cart           | Siege Workshop | 13.09    | 72          | 40             | 8                   | 30        | 58           | 318               | x10.6      |
+| Mangonel              | Siege Workshop | 12.83    | 77          | 73             | 69                  | 28        | 32           | 37                | x1.32      |
+| Heavy Scorpion        | Siege Workshop | 2.78     | 10          | 6              | 2                   | 210       | 385          | 1271              | x6.05      |
+| Scorpion              | Siege Workshop | 1.11     | 4           | 1              | 1                   | 525       | 2310         | 2541              | x4.84      |
+| Elite Battle Elephant | Stable         | 11       | 22          | 18             | 14                  | 96        | 129          | 182               | x1.9       |
+| Battle Elephant       | Stable         | 8.5      | 17          | 13             | 11                  | 124       | 178          | 231               | x1.86      |
+| Champion              | Barracks       | 10.5     | 21          | 20             | 19                  | 100       | 116          | 134               | x1.34      |
+| Elite Varangian Guard | Barracks       | 10       | 20          | 19             | 18                  | 105       | 122          | 142               | x1.35      |
+| Two-Handed Swordsman  | Barracks       | 9.5      | 19          | 18             | 17                  | 111       | 129          | 150               | x1.35      |
+| Elite Champi Warrior  | Barracks       | 8.5      | 17          | 16             | 15                  | 124       | 145          | 170               | x1.37      |
+| Varangian Guard       | Barracks       | 8        | 16          | 15             | 14                  | 132       | 154          | 182               | x1.38      |
+| Long Swordsman        | Barracks       | 7.5      | 15          | 14             | 13                  | 140       | 165          | 196               | x1.4       |
+| Champi Warrior        | Barracks       | 7        | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
+| Elite Fire Lancer     | Barracks       | 6.65     | 14          | 13             | 12                  | 150       | 178          | 212               | x1.41      |
+| Fire Lancer           | Barracks       | 6.18     | 13          | 12             | 11                  | 162       | 193          | 231               | x1.43      |
+| Elite Eagle Warrior   | Barracks       | 6        | 12          | 11             | 10                  | 175       | 210          | 255               | x1.46      |
+| Man-at-Arms           | Barracks       | 5.5      | 11          | 10             | 9                   | 191       | 231          | 283               | x1.48      |
+| Eagle Warrior         | Barracks       | 5        | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
+| Champi Runner         | Barracks       | 4        | 8           | 7              | 6                   | 263       | 330          | 424               | x1.61      |
+| Militia               | Barracks       | 3.5      | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
+| Eagle Scout           | Barracks       | 3.5      | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
+| Halberdier            | Barracks       | 3.33     | 10          | 9              | 8                   | 210       | 257          | 318               | x1.51      |
+| Champi Scout          | Barracks       | 3        | 6           | 5              | 4                   | 350       | 462          | 636               | x1.82      |
+| Pikeman               | Barracks       | 2.67     | 8           | 7              | 6                   | 263       | 330          | 424               | x1.61      |
+| Spearman              | Barracks       | 2.33     | 7           | 6              | 5                   | 300       | 385          | 509               | x1.7       |
+| Villager (Male)       | Town Center    | 1.5      | 3           | 1              | 1                   | 700       | 2310         | 2541              | x3.63      |

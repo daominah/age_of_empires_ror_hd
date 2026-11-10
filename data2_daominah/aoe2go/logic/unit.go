@@ -149,7 +149,7 @@ func (tree *TechTree) LoadUnitWithTechnologies(id UnitID, techIDs ...TechID) Uni
 // It stands for the enemy of a ranked line, as a target or an attacker.
 // It only gets the technologies in TechnologyEffects, the ones the rankings need so far.
 func (tree *TechTree) LoadUnitUpgraded(id UnitID) Unit {
-	if civilization, isOnlyOne := tree.checkIsUniqueUnit(id); isOnlyOne {
+	if civilization, isOnlyOne := tree.CheckIsUniqueUnit(id); isOnlyOne {
 		return tree.loadRowUpgraded(civilization, id, tree.Units[id].Class).Unit
 	}
 	unit := tree.LoadUnitBase(id)
@@ -163,13 +163,13 @@ func (tree *TechTree) LoadUnitUpgraded(id UnitID) Unit {
 	return unit
 }
 
-// checkIsUniqueUnit checks whether one civilization alone trains the unit, and returns it,
+// CheckIsUniqueUnit checks whether one civilization alone trains the unit, and returns it,
 // e.g. the Vietnamese for the Rattan Archer.
 // It is about the same as a "UniqueUnit" node in the game Technology Tree,
 // which also includes units like the Vietnamese Imperial Skirmisher,
 // the Hindustanis Imperial Camel Rider or the Spanish Missionary.
 // A regional unit does not count, as several civilizations train it.
-func (tree *TechTree) checkIsUniqueUnit(id UnitID) (Civilization, bool) {
+func (tree *TechTree) CheckIsUniqueUnit(id UnitID) (Civilization, bool) {
 	var result []Civilization
 	for _, civilization := range tree.Civilizations {
 		if civilization.UnitIDs[id] {
