@@ -37,7 +37,9 @@ type Unit struct {
 	Speed        float64
 	TrainTime    float64 // seconds
 	Cost         Cost
-	// IsIgnoringArmor is set by Wootz Steel: the unit attack ignores the target armor.
+	// IsIgnoringArmor means the unit attack ignores the target armor: each attack class counts in full,
+	// when the target lists the class, but not against a building or a wall, which keep their armor.
+	// The Rocket Carts have it from the start, the Hindustani cavalry get it from Wootz Steel.
 	IsIgnoringArmor bool
 	// BonusDamageResistance is the share of the bonus damage the unit does not take,
 	// the damage of the classes other than melee and pierce, e.g. 0.4 for the Sicilians cavalry and archers.
@@ -53,6 +55,7 @@ type Shot struct {
 	ExtraProjectiles  int                    // e.g. 5 for the Xianbei Raider charged shot
 	ExtraProjectileID UnitID                 // see Unit.ExtraProjectileID
 	ExtraAttacks      map[ArmorClass]float64 // each extra arrow, e.g. 1 pierce for the Xianbei Raider charged shot
+	IsIgnoringArmor   bool                   // see Unit.IsIgnoringArmor
 }
 
 // ChargeAttack is an attack that fires once charged, instead of a normal attack,
@@ -69,8 +72,13 @@ func (u Unit) GetShot() Shot {
 		ExtraProjectiles:  u.ExtraProjectiles,
 		ExtraProjectileID: u.ExtraProjectileID,
 		ExtraAttacks:      u.ExtraAttacks,
+		IsIgnoringArmor:   u.IsIgnoringArmor,
 	}
 }
+
+// ignoringArmorUnitIDs are the units with an attack that ignores the armor from the start,
+// units.json does not tell it.
+var ignoringArmorUnitIDs = map[UnitID]bool{RocketCart: true, HeavyRocketCart: true}
 
 // listProjectileAttacks are the arrows that have their own attacks, with the projectile unit of each,
 // so an effect on a projectile unit changes them, e.g. Parthian Tactics on the Xianbei Raider arrows.
@@ -121,6 +129,17 @@ func (tree *TechTree) LoadUnitBase(id UnitID) Unit {
 	return unit
 }
 
+// LoadUnitWithTechnologies is the LoadUnitBase with only the given technologies researched, in order,
+// e.g. a Castle with Masonry but not Architecture, to compare the steps of an upgrade line.
+// A technology missing from TechnologyEffects changes nothing.
+func (tree *TechTree) LoadUnitWithTechnologies(id UnitID, techIDs ...TechID) Unit {
+	unit := tree.LoadUnitBase(id)
+	for _, techID := range techIDs {
+		TechnologyEffects[techID].Apply(&unit)
+	}
+	return unit
+}
+
 // LoadUnitUpgraded is the LoadUnitBase with the technologies any civilization can research,
 // without civilization bonuses or unique technologies,
 // e.g. the Arbalester: attack 6+4, 40 HP, pierce armor 0+4.
@@ -130,7 +149,7 @@ func (tree *TechTree) LoadUnitBase(id UnitID) Unit {
 // It stands for the enemy of a ranked line, as a target or an attacker.
 // It only gets the technologies in TechnologyEffects, the ones the rankings need so far.
 func (tree *TechTree) LoadUnitUpgraded(id UnitID) Unit {
-	if civilization, isOnlyOne := tree.checkIsUniqueUnit(id); isOnlyOne {
+	if civilization, isOnlyOne := tree.CheckIsUniqueUnit(id); isOnlyOne {
 		return tree.loadRowUpgraded(civilization, id, tree.Units[id].Class).Unit
 	}
 	unit := tree.LoadUnitBase(id)
@@ -144,13 +163,13 @@ func (tree *TechTree) LoadUnitUpgraded(id UnitID) Unit {
 	return unit
 }
 
-// checkIsUniqueUnit checks whether one civilization alone trains the unit, and returns it,
+// CheckIsUniqueUnit checks whether one civilization alone trains the unit, and returns it,
 // e.g. the Vietnamese for the Rattan Archer.
 // It is about the same as a "UniqueUnit" node in the game Technology Tree,
 // which also includes units like the Vietnamese Imperial Skirmisher,
 // the Hindustanis Imperial Camel Rider or the Spanish Missionary.
 // A regional unit does not count, as several civilizations train it.
-func (tree *TechTree) checkIsUniqueUnit(id UnitID) (Civilization, bool) {
+func (tree *TechTree) CheckIsUniqueUnit(id UnitID) (Civilization, bool) {
 	var result []Civilization
 	for _, civilization := range tree.Civilizations {
 		if civilization.UnitIDs[id] {

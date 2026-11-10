@@ -43,8 +43,11 @@ var (
 		1659: {{1661, "Donjon"}},      // Elite Serjeant
 		1233: {{1260, "Mercenaries"}}, // Elite Kipchak, Cumans team bonus Cuman Mercenaries
 		// Town Center: a villager places 621, it becomes 109 when finished,
-		// 71 is the Feudal Age one (the age technologies upgrade 109 to 71, 141, 142)
-		109: {{621, "Unfinished"}, {71, "FeudalAge"}},
+		// the age technologies replace 109 with 71, 141 and 142, each with +1 melee and pierce armor
+		109: {{621, "Unfinished"}, {71, "FeudalAge"}, {141, "CastleAge"}, {142, "ImperialAge"}},
+		// the age technologies also replace these buildings, each age with more armor and HP
+		12:  {{498, "FeudalAge"}, {132, "CastleAge"}, {20, "ImperialAge"}}, // Barracks
+		104: {{30, "FeudalAge"}, {31, "CastleAge"}, {32, "ImperialAge"}},   // Monastery
 	}
 )
 
@@ -70,8 +73,8 @@ const (
 var (
 	// e.g. Packed Trebuchet, dismounted Konnik, Ratha, War Chariot modes
 	additionalUnitIDs     = []int{42, 1252, 1253, 1570, 1738, 1740, 1962, 1980}
-	additionalBuildingIDs = []int{71}         // Feudal Age Town Center, the age technology upgrades to it
-	additionalTechIDs     = []int{19, 20, 90} // Cartography, Auto upgrade Scout Feudal Age, Tracking
+	additionalBuildingIDs = []int{71, 141, 142, 498, 132, 20, 30, 31, 32} // the age stages of the Town Center, Barracks and Monastery, the age technologies replace the building with them
+	additionalTechIDs     = []int{19, 20, 90}                             // Cartography, Auto upgrade Scout Feudal Age, Tracking
 )
 
 func main() {

@@ -5,7 +5,7 @@ import "math"
 // Effect is an effect in the game .dat, applied by a technology or a civilization bonus.
 // The values are copied by hand from data/dat_original_to_json/effects.json,
 // keeping only the commands for the units ranked or loaded so far:
-// cavalry, foot archers, cavalry archers and infantry,
+// cavalry, foot archers, cavalry archers, infantry and the buildings they attack,
 // so a game patch shows in the effects.json git diff and is edited here.
 type Effect struct {
 	EffectID int    // effect ID in effects.json
@@ -86,9 +86,12 @@ type UnitClass int
 const (
 	AnyClass           UnitClass = -1
 	ClassArcher        UnitClass = 0  // foot archers, e.g. the skirmisher line
+	ClassBuilding      UnitClass = 3  // e.g. Barracks, Town Center, Castle, not the walls or the towers
 	ClassInfantry      UnitClass = 6  // e.g. Man-at-Arms, Throwing Axeman
 	ClassCavalry       UnitClass = 12 // e.g. Knight, the scout line after the Scout Cavalry
+	ClassWall          UnitClass = 27 // the Palisade, Stone and Fortified Walls
 	ClassCavalryArcher UnitClass = 36
+	ClassTower         UnitClass = 52 // e.g. Watch Tower, Keep, the effects repeat their building commands for it
 	ClassScoutCavalry  UnitClass = 47 // the Scout Cavalry only, the effects repeat their cavalry commands for it
 )
 
@@ -396,6 +399,29 @@ var TechnologyEffects = map[TechID]Effect{
 	ChainBardingArmor: {EffectID: 82, Name: "Chain Barding Armor", Commands: []EffectCommand{
 		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
 		{AddAttribute, AnyUnit, ClassCavalry, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+	}},
+	// Masonry and Architecture raise the HP and the armor of the buildings and the towers, not the walls.
+	// The effects.json commands of type 201 and 202 on building IDs are ignored here:
+	// they repeat the class commands for a few buildings, e.g. the Castle, and the effect of a repeat is unknown.
+	Masonry: {EffectID: 50, Name: "Masonry", Commands: []EffectCommand{
+		{MultiplyAttribute, AnyUnit, ClassBuilding, AttributeHP, 1.1},
+		{AddAttribute, AnyUnit, ClassBuilding, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassBuilding, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassBuilding, AttributeArmor, encodeClassAmount(ArmorClassAllBuildings, 3)},
+		{MultiplyAttribute, AnyUnit, ClassTower, AttributeHP, 1.1},
+		{AddAttribute, AnyUnit, ClassTower, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassTower, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassTower, AttributeArmor, encodeClassAmount(ArmorClassAllBuildings, 3)},
+	}},
+	Architecture: {EffectID: 51, Name: "Architecture", Commands: []EffectCommand{
+		{MultiplyAttribute, AnyUnit, ClassBuilding, AttributeHP, 1.1},
+		{AddAttribute, AnyUnit, ClassBuilding, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassBuilding, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassBuilding, AttributeArmor, encodeClassAmount(ArmorClassAllBuildings, 3)},
+		{MultiplyAttribute, AnyUnit, ClassTower, AttributeHP, 1.1},
+		{AddAttribute, AnyUnit, ClassTower, AttributeArmor, encodeClassAmount(ArmorClassMelee, 1)},
+		{AddAttribute, AnyUnit, ClassTower, AttributeArmor, encodeClassAmount(ArmorClassPierce, 1)},
+		{AddAttribute, AnyUnit, ClassTower, AttributeArmor, encodeClassAmount(ArmorClassAllBuildings, 3)},
 	}},
 	AutoUpgradeScoutFeudalAge: {EffectID: 16, Name: "Auto upgrade Scout Feudal Age", Commands: []EffectCommand{
 		{AddAttribute, ScoutCavalry, AnyClass, AttributeSpeed, 0.35},
