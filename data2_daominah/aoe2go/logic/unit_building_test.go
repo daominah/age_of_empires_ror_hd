@@ -118,3 +118,42 @@ func TestCalculateDamagePerHitIgnoringArmor(t *testing.T) {
 		t.Errorf("building: got %v, want %v", gotBuilding, want)
 	}
 }
+
+func TestCalculateDamagePerHitIgnoringArmorGate(t *testing.T) {
+	// GIVEN a Gate, and a Heavy Rocket Cart with and without its armor ignoring attack
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+	gate := tree.LoadUnitBase(Gate)
+	rocketCart := tree.LoadUnitBase(HeavyRocketCart)
+	plainRocketCart := rocketCart
+	plainRocketCart.IsIgnoringArmor = false
+
+	// WHEN each of them hits the Gate
+	got := CalculateDamagePerHit(rocketCart, gate)
+	want := CalculateDamagePerHit(plainRocketCart, gate)
+
+	// THEN the Gate keeps its armor, like the other buildings
+	if got != want {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
+
+func TestCalculateDamagePerHitWootzSteel(t *testing.T) {
+	// GIVEN a Light Cavalry with Wootz Steel, the Dravidians unique technology, and a unit with melee armor 3
+	tree, err := ParseTechTree(data.Civilizations, data.Units, data.Technologies, ParseGameStrings(data.GameStringsEnglish))
+	if err != nil {
+		t.Fatalf("error ParseTechTree: %v", err)
+	}
+	lightCavalry := tree.LoadUnitWithTechnologies(LightCavalry, WootzSteel)
+	armoredUnit := Unit{Class: ClassInfantry, HP: 100, Armors: map[ArmorClass]float64{ArmorClassMelee: 3}}
+
+	// WHEN the Light Cavalry hits the unit
+	got := CalculateDamagePerHit(lightCavalry, armoredUnit)
+
+	// THEN the melee armor is ignored: the full melee attack counts
+	if want := lightCavalry.Attacks[ArmorClassMelee]; got != want {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}

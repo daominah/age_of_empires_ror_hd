@@ -38,8 +38,8 @@ type Unit struct {
 	TrainTime    float64 // seconds
 	Cost         Cost
 	// IsIgnoringArmor means the unit attack ignores the target armor: each attack class counts in full,
-	// when the target lists the class, but not against a building or a wall, which keep their armor.
-	// The Rocket Carts have it from the start, the Hindustani cavalry get it from Wootz Steel.
+	// when the target lists the class, but not against a building, a tower, a wall or a gate, which keep their armor.
+	// The Rocket Carts have it from the start, the Dravidians cavalry get it from Wootz Steel.
 	IsIgnoringArmor bool
 	// BonusDamageResistance is the share of the bonus damage the unit does not take,
 	// the damage of the classes other than melee and pierce, e.g. 0.4 for the Sicilians cavalry and archers.

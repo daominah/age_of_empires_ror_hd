@@ -11,18 +11,29 @@ func CalculateDamagePerHit(attacker Unit, target Unit) float64 {
 // CalculateShotDamage is the damage of one shot on the target:
 // the damage of the main arrow plus the damage of each extra arrow, all assumed to hit.
 // Each arrow deals the sum over the armor classes of both of attack minus armor (not below 0), at least 1,
-// or the attack in full when the shot ignores armor and the target is not a building, e.g. the Rocket Cart,
 // so against a high armor like a Battering Ram a Maya skirmisher deals 2 instead of 1,
 // e.g. a Maya Elite Skirmisher with Hul'che Javelineers throws one javelin of attack 7 and one of attack 1.
+// A shot that ignores armor deals each attack in full, e.g. the Rocket Cart,
+// except against a building, a tower, a wall or a gate, which keep their armor.
 func CalculateShotDamage(shot Shot, target Unit) float64 {
 	// a building keeps its armor against an attack that ignores armor, so the Masonry and Architecture armor still counts
-	isIgnoringArmor := shot.IsIgnoringArmor && target.Class != ClassBuilding && target.Class != ClassTower && target.Class != ClassWall
+	isIgnoringArmor := shot.IsIgnoringArmor && !checkIsStructure(target)
 	damage := calculateProjectileDamage(shot.Attacks, target, isIgnoringArmor)
 	extraAttacks := shot.ExtraAttacks
 	if extraAttacks == nil {
 		extraAttacks = shot.Attacks
 	}
 	return damage + float64(shot.ExtraProjectiles)*calculateProjectileDamage(extraAttacks, target, isIgnoringArmor)
+}
+
+// checkIsStructure checks whether the target is a building, a tower, a wall or a gate,
+// the targets that keep their armor against an attack that ignores armor.
+func checkIsStructure(target Unit) bool {
+	switch target.Class {
+	case ClassBuilding, ClassTower, ClassWall, ClassGate:
+		return true
+	}
+	return false
 }
 
 // calculateProjectileDamage is the damage of one projectile on the target.

@@ -91,8 +91,9 @@ const (
 	ClassCavalry       UnitClass = 12 // e.g. Knight, the scout line after the Scout Cavalry
 	ClassWall          UnitClass = 27 // the Palisade, Stone and Fortified Walls
 	ClassCavalryArcher UnitClass = 36
-	ClassTower         UnitClass = 52 // e.g. Watch Tower, Keep, the effects repeat their building commands for it
+	ClassGate          UnitClass = 39 // the Gate and the Palisade Gate
 	ClassScoutCavalry  UnitClass = 47 // the Scout Cavalry only, the effects repeat their cavalry commands for it
+	ClassTower         UnitClass = 52 // e.g. Watch Tower, Keep, the effects repeat their building commands for it
 )
 
 // AnyUnit in an effect command targets all units of the command Class.
