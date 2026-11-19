@@ -501,6 +501,12 @@ func formatHeader(name string) string {
 	return b.String()
 }
 
+// RenderTable prints the cells as a Markdown table, the first line is the header,
+// for a report that is not a ranking of civilizations.
+func RenderTable(cells [][]string) string {
+	return alignTable(cells)
+}
+
 // alignTable pads each column to its widest cell,
 // so the raw Markdown reads as a table too.
 // The first line is the header.

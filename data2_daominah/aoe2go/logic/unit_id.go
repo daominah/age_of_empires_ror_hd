@@ -8,9 +8,11 @@ type UnitID int
 // UnitVariants maps a normal unit or building to its variants sharing the in-game name,
 // e.g. Huskarl to HuskarlBarracks: Goths train it at the Barracks after a unique technology.
 var UnitVariants = map[UnitID][]UnitID{
+	Barracks:      {BarracksFeudalAge, BarracksCastleAge, BarracksImperialAge},
 	Huskarl:       {HuskarlBarracks},
 	Spearman:      {SpearmanDonjon},
-	TownCenter:    {TownCenterUnfinished, TownCenterFeudalAge},
+	Monastery:     {MonasteryFeudalAge, MonasteryCastleAge, MonasteryImperialAge},
+	TownCenter:    {TownCenterUnfinished, TownCenterFeudalAge, TownCenterCastleAge, TownCenterImperialAge},
 	Pikeman:       {PikemanDonjon},
 	Halberdier:    {HalberdierDonjon},
 	EliteHuskarl:  {EliteHuskarlBarracks},
