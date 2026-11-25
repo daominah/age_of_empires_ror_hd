@@ -10,101 +10,118 @@ The rows list bindings that differ from the preset "Definitive" (the game defaul
 
 ## Changed
 
-| Action                                               | Mine       | Classic      |
-|------------------------------------------------------|------------|--------------|
-| **Unit Command**                                     |            |              |
-| Economic Buildings                                   | **B**      | B            |
-| Stop                                                 | **S**      | S            |
-| Drop Relic                                           | **D**      | Q            |
-| Garrison                                             | **G**      | G            |
-| Set Gather Point                                     | **Q**      | I            |
-| Ungarrison                                           | **T**      | L            |
-| **Game Command**                                     |            |              |
-| Display Statistics                                   | **F4**     | F4           |
-| Select all Idle Villagers                            | **Ctrl+1** | Shift+.      |
-| Select all Castles                                   | **7**      | Ctrl+Shift+V |
-| Select all Town Centers                              | **8**      | Ctrl+Shift+H |
-| Select all Siege Workshops                           | **9**      | Ctrl+Shift+K |
-| **Cycle Command**                                    |            |              |
-| Go to Next Idle Villager                             | **1**      | .            |
-| Go to Lumber Camp                                    | **Ctrl+S** | Ctrl+Z       |
-| Go to Mill                                           | **Ctrl+G** | Ctrl+I       |
-| Go to Mining Camp                                    | **Ctrl+D** | Ctrl+G       |
-| Go to Blacksmith                                     | **Ctrl+R** | Ctrl+S       |
-| Go to Market                                         | **Ctrl+T** | Ctrl+M       |
-| Go to Monastery                                      | **Ctrl+P** | Ctrl+Y       |
-| Go to Castle                                         | **Ctrl+C** | Ctrl+V       |
-| **Military Units**                                   |            |              |
-| Patrol                                               | **R**      | Z            |
-| Guard                                                | **Y**      | X            |
-| Follow                                               | **U**      | C            |
-| Defensive                                            | **E**      | D            |
-| Attack Move                                          | **A**      | Tab          |
-| Auto Scout                                           | **T**      | P            |
-| **Villager Build**                                   |            |              |
-| House                                                | **E**      | E            |
-| Lumber Camp                                          | **S**      | Z            |
-| Mill                                                 | **G**      | I            |
-| Barracks                                             | **B**      | B            |
-| Palisade Wall                                        | **W**      | P            |
-| Palisade Gate                                        | **Q**      | C            |
-| Farm, Pasture                                        | **F**      | F            |
-| Stable                                               | **L**      | L            |
-| Archery Range                                        | **A**      | A            |
-| Mining Camp                                          | **D**      | G            |
-| Blacksmith                                           | **R**      | S            |
-| Market                                               | **M**      | M            |
-| Town Center                                          | **N**      | N            |
-| Monastery                                            | **P**      | Y            |
-| Siege Workshop                                       | **K**      | K            |
-| University                                           | **U**      | U            |
-| Outpost                                              | **Y**      | Q            |
-| Stone Wall                                           | **X**      | W            |
-| (Stone) Gate                                         | **Z**      | /            |
-| Tower                                                | **T**      | T            |
-| Bombard Tower                                        | **/**      | J            |
-| Dock                                                 | **J**      | D            |
-| **Town Center**                                      |            |              |
-| Villager                                             | **C**      | C            |
-| Tech: Loom                                           | **L**      | (none)       |
-| Tech: Wheelbarrow, Hand Cart                         | **W**      | (none)       |
-| Tech: Age Up                                         | **Z**      | (none)       |
-| **Barracks**                                         |            |              |
-| Spearman-line                                        | **R**      | E            |
-| Fire Lancer, Eagle Warrior, Varangian Guard          | **C**      | G            |
-| Tech: Fire Lancer, Eagle Warrior, Varangian, Hoplite | **Z**      | (none)       |
-| **Archery Range**                                    |            |              |
-| Archer-line                                          | **A**      | A            |
-| Skirmisher                                           | **R**      | R            |
-| Cavalry Archer, Mounted Crossbowman                  | **C**      | C            |
-| Hand Cannoneer                                       | **D**      | E            |
-| Genitour                                             | **E**      | V            |
-| Elephant Archer                                      | **C**      | C            |
-| **Stable**                                           |            |              |
-| Scout Cavalry, Hussar                                | **T**      | T            |
-| Camel Rider                                          | **A**      | C            |
-| Knight-line, Hei Guang Cavalry                       | **C**      | N            |
-| Battle Elephant                                      | **E**      | F            |
-| **Siege Workshop**                                   |            |              |
-| Battering Ram                                        | **R**      | R            |
-| Scorpion, War Chariot                                | **A**      | N            |
-| Mangonel, Onager, Rocket Cart                        | **C**      | A            |
-| Bombard Cannon, Traction Trebuchet                   | **B**      | C            |
-| Siege Tower                                          | **W**      | V            |
-| Armored Elephant                                     | **R**      | R            |
-| **Monastery**                                        |            |              |
-| Monk                                                 | **T**      | T            |
-| **Castle**                                           |            |              |
-| Trebuchet, Heroes                                    | **R**      | R            |
-| Unique Unit                                          | **C**      | T            |
-| Tech: Conscription                                   | **T**      | (none)       |
-| **Mining Camp**                                      |            |              |
-| Tech: Gold Upgrades                                  | **Z**      | (none)       |
-| **University**                                       |            |              |
-| Tech: Ballistics                                     | **Z**      | (none)       |
-| **Dock**                                             |            |              |
-| Fishing Ship                                         | **C**      | F            |
-| Transport Ship                                       | **P**      | P            |
+| Action                                               | Mine             | Classic      |
+|------------------------------------------------------|------------------|--------------|
+| **Unit Command**                                     |                  |              |
+| Economic Buildings                                   | **B**            | B            |
+| Stop                                                 | **S**            | S            |
+| Drop Relic                                           | **D**            | Q            |
+| Garrison                                             | **G**            | G            |
+| Set Gather Point                                     | **Q**            | I            |
+| Ungarrison                                           | **T**            | L            |
+| **Game Command**                                     |                  |              |
+| Display Statistics                                   | **F4**           | F4           |
+| Select all Idle Villagers                            | **Ctrl+1**       | Shift+.      |
+| Select all Barracks                                  | **Ctrl+Shift+B** | Ctrl+Shift+B |
+| Select all Archery Ranges                            | **Ctrl+Shift+A** | Ctrl+Shift+A |
+| Select all Stables                                   | **6**            | Ctrl+Shift+L |
+| Select all Castles                                   | **7**            | Ctrl+Shift+V |
+| Select all Town Centers                              | **8**            | Ctrl+Shift+H |
+| Select all Siege Workshops                           | **9**            | Ctrl+Shift+K |
+| **Cycle Command**                                    |                  |              |
+| Go to Next Idle Villager                             | **1**            | .            |
+| Go to Lumber Camp                                    | **Ctrl+S**       | Ctrl+Z       |
+| Go to Mill                                           | **Ctrl+G**       | Ctrl+I       |
+| Go to Mining Camp                                    | **Ctrl+D**       | Ctrl+G       |
+| Go to Blacksmith                                     | **Ctrl+R**       | Ctrl+S       |
+| Go to Market                                         | **Ctrl+T**       | Ctrl+M       |
+| Go to Monastery                                      | **Ctrl+P**       | Ctrl+Y       |
+| Go to Castle                                         | **Ctrl+C**       | Ctrl+V       |
+| **Military Units**                                   |                  |              |
+| Patrol                                               | **R**            | Z            |
+| Guard                                                | **Y**            | X            |
+| Follow                                               | **U**            | C            |
+| Defensive                                            | **E**            | D            |
+| Attack Move                                          | **A**            | Tab          |
+| Auto Scout                                           | **T**            | P            |
+| **Villager Build**                                   |                  |              |
+| House                                                | **E**            | E            |
+| Lumber Camp                                          | **S**            | Z            |
+| Mill                                                 | **G**            | I            |
+| Barracks                                             | **B**            | B            |
+| Palisade Wall                                        | **W**            | P            |
+| Palisade Gate                                        | **Q**            | C            |
+| Farm, Pasture                                        | **F**            | F            |
+| Stable                                               | **L**            | L            |
+| Archery Range                                        | **A**            | A            |
+| Mining Camp                                          | **D**            | G            |
+| Blacksmith                                           | **R**            | S            |
+| Market                                               | **M**            | M            |
+| Town Center                                          | **N**            | N            |
+| Monastery                                            | **P**            | Y            |
+| Siege Workshop                                       | **K**            | K            |
+| University                                           | **U**            | U            |
+| Outpost                                              | **Y**            | Q            |
+| Stone Wall                                           | **X**            | W            |
+| (Stone) Gate                                         | **Z**            | /            |
+| Tower                                                | **T**            | T            |
+| Bombard Tower                                        | **/**            | J            |
+| Dock                                                 | **J**            | D            |
+| **Town Center**                                      |                  |              |
+| Villager                                             | **C**            | C            |
+| Tech: Loom                                           | **L**            | (none)       |
+| Tech: Wheelbarrow, Hand Cart                         | **W**            | (none)       |
+| Tech: Age Up                                         | **Z**            | (none)       |
+| **Barracks**                                         |                  |              |
+| Spearman-line                                        | **R**            | E            |
+| Fire Lancer, Eagle Warrior, Varangian Guard          | **C**            | G            |
+| Tech: Fire Lancer, Eagle Warrior, Varangian, Hoplite | **Z**            | (none)       |
+| **Archery Range**                                    |                  |              |
+| Archer-line                                          | **A**            | A            |
+| Skirmisher                                           | **R**            | R            |
+| Cavalry Archer, Mounted Crossbowman                  | **C**            | C            |
+| Hand Cannoneer                                       | **D**            | E            |
+| Genitour                                             | **E**            | V            |
+| Elephant Archer                                      | **C**            | C            |
+| **Stable**                                           |                  |              |
+| Scout Cavalry, Hussar                                | **T**            | T            |
+| Camel Rider                                          | **A**            | C            |
+| Knight-line, Hei Guang Cavalry                       | **C**            | N            |
+| Battle Elephant                                      | **E**            | F            |
+| **Siege Workshop**                                   |                  |              |
+| Battering Ram                                        | **R**            | R            |
+| Scorpion, War Chariot                                | **A**            | N            |
+| Mangonel, Onager, Rocket Cart                        | **C**            | A            |
+| Bombard Cannon, Traction Trebuchet                   | **B**            | C            |
+| Siege Tower                                          | **W**            | V            |
+| Armored Elephant                                     | **R**            | R            |
+| **Monastery**                                        |                  |              |
+| Monk                                                 | **T**            | T            |
+| **Castle**                                           |                  |              |
+| Trebuchet, Heroes                                    | **R**            | R            |
+| Unique Unit                                          | **C**            | T            |
+| Tech: Conscription                                   | **T**            | (none)       |
+| **Mining Camp**                                      |                  |              |
+| Tech: Gold Upgrades                                  | **Z**            | (none)       |
+| **University**                                       |                  |              |
+| Tech: Ballistics                                     | **Z**            | (none)       |
+| **Dock**                                             |                  |              |
+| Fishing Ship                                         | **C**            | F            |
+| Transport Ship                                       | **P**            | P            |
+
+I only play 1v1 on land maps, so the tables skip most naval and trade bindings:
+
+- **Kept**: the Dock rows already listed (Fishing Ship, Transport Ship, building a Dock).
+- **Skipped**: other Dock units, Trade Cog, and Go to Dock.
+  Their profile keys may differ from both presets; that is intentional, do not add them.
+- **Minor**: rarely used or redundant, not listed in the table:
+  - Unload (Transport Ship) and Unload (Siege Tower): L as in Classic.
+  - Military Buildings: V as in Classic,
+    redundant since the Economic Buildings key B already reaches the same buildings.
+  - Lock/Unlock Gate: L as in Classic.
+  - Go to Settlement: Ctrl+S.
+  - Mule Cart: S.
+  - Tarkan: V.
 
 ## Unbound
 
@@ -178,6 +195,7 @@ to avoid triggering them by an accidental key press.
 | Goto Shipyard                                              | Ctrl+R             |
 | **Group Command**                                          |                    |
 | Create Group #1                                            | Ctrl+1             |
+| Create Group #6                                            | Ctrl+6             |
 | Create Group #7                                            | Ctrl+7             |
 | Create Group #8                                            | Ctrl+8             |
 | Create Group #9                                            | Ctrl+9             |
@@ -192,6 +210,7 @@ to avoid triggering them by an accidental key press.
 | Create Group #19                                           | Ctrl+Alt+9         |
 | Create Group #20                                           | Ctrl+Alt+0         |
 | Select Group #1                                            | 1                  |
+| Select Group #6                                            | 6                  |
 | Select Group #7                                            | 7                  |
 | Select Group #8                                            | 8                  |
 | Select Group #9                                            | 9                  |
@@ -226,7 +245,9 @@ to avoid triggering them by an accidental key press.
 | Select & Center Group #19                                  | Ctrl+Alt+Shift+9   |
 | Select & Center Group #20                                  | Ctrl+Alt+Shift+F10 |
 | Append Group #1                                            | Shift+1            |
+| Append Group #6                                            | Shift+6            |
 | Append Group #7                                            | Shift+7            |
+| Append Group #8                                            | Shift+8            |
 | Append Group #9                                            | Shift+9            |
 | Append Group #11                                           | Alt+Shift+1        |
 | Append Group #12                                           | Alt+Shift+2        |
