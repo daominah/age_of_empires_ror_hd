@@ -14,6 +14,9 @@ one item per line, so a game patch shows as a small, readable git diff:
 - `units.json`: base stats of units and buildings,
   from the Gaia copy in the `.dat`, before any civilization bonus.
   Attacks and armors are amounts by armor class.
+  `attack_delay` is the seconds from the start of the attack animation to the shot:
+  the `.dat` frame delay times the frame duration of the attack graphic,
+  e.g. 0.91 for the Cavalry Archer.
 - `technologies.json`: name, effect, requirements, cost.
   `civilization_id` -1 is any civilization, if its Technology Tree allows it.
 - `effects.json`: the commands of each effect, as `[type, A, B, C, D]`,

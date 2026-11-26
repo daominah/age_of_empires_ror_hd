@@ -56,6 +56,8 @@ var Traits = []Trait{
 	{Maya, nil, "+1 arrow after Hul'che Javelineers, it has attack 1 so it deals at least 1 damage", 1},
 	{Mapuche, []UnitID{Skirmisher, EliteSkirmisher, ImperialSkirmisher, BolasRider, EliteBolasRider},
 		"pass through damage after Malon", 1},
+	// the ranked Ratha is the ranged mode, its melee mode is a separate unit in the .dat
+	{Bengalis, []UnitID{RathaRanged, EliteRathaRanged}, "switches to a melee mode, melee attack 12 before the Blacksmith", 1},
 	{Poles, scoutLineUnitIDs, "33% trample damage in 0.5 tile radius after Lechitic Legacy", 1},
 	// the line of sight is not a unit stat in the rankings, and the Mongols +2 is the only civilization bonus to it on the scout line
 	{Mongols, scoutLineUnitIDs, "+2 line of sight", 1},

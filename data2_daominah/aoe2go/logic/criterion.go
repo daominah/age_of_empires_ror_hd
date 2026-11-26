@@ -44,6 +44,39 @@ var (
 	CriterionSpeed      = Criterion{Name: "Speed", Value: func(r Row) float64 { return r.Unit.Speed }, IsHigherBetter: true}
 )
 
+// NewCriterionKiteTimeVs is the seconds the row unit takes for each shot while it kites the chaser, less is better:
+// it stands still for its attack delay while the chaser closes in,
+// then it runs to win back that gap, so attack delay × speed / (speed - chaser speed),
+// e.g. a Heavy Cavalry Archer (delay 0.9, speed 1.54) vs a Halberdier (speed 1.1) 3.14 seconds,
+// the Elite Mangudai (delay 0.5) 1.74 seconds.
+// It combines the attack delay and the speed: a short attack delay makes up for a bit less speed,
+// and a speed near the chaser speed hurts a lot, as the gap takes ever longer to win back.
+// A unit not faster than the chaser never wins back the gap: infinite seconds, so use it with a Limit.
+func NewCriterionKiteTimeVs(chaser Unit) Criterion {
+	return Criterion{
+		Name: "Kite time vs " + chaser.Name,
+		Value: func(r Row) float64 {
+			margin := r.Unit.Speed - chaser.Speed
+			if margin <= 0 {
+				return math.Inf(1)
+			}
+			return r.Unit.AttackDelay * r.Unit.Speed / margin
+		},
+	}
+}
+
+// NewCriterionSpeedDeficitVs is how much slower the row unit is than the chaser, less is better,
+// 0 for a unit at least as fast, which can always run away,
+// e.g. vs a Knight (1.485 with Husbandry): the Elite Ratha (1.43) 0.055, the Elite War Wagon (1.32) 0.165.
+// A slower unit cannot run away, and the more it lacks, the sooner the chaser forces it to fight,
+// so its baseline is 0 for a cavalry archer, and a score counts the deficit itself, not a ratio.
+func NewCriterionSpeedDeficitVs(chaser Unit) Criterion {
+	return Criterion{
+		Name:  "Speed deficit vs " + chaser.Name,
+		Value: func(r Row) float64 { return math.Max(0, chaser.Speed-r.Unit.Speed) },
+	}
+}
+
 // NewCriterionTankVs is the whole hits of the attacker to kill the row unit, more is better,
 // as in the game: a few HP or armor that do not save a hit do not count.
 // It combines the HP and the armor, e.g. Bloodlines +20 HP and Parthian Tactics +2 pierce armor.
@@ -141,7 +174,7 @@ var CriterionHasCheaperTechnologies = Criterion{
 
 // CriterionTechnologySaving is the resources the civilization saves on the upgrades of the row unit, more is better,
 // e.g. the Tatars cavalry archer above the Turks one, Parthian Tactics and Thumb Ring free vs Chemistry free.
-// It counts in 1000 resources, e.g. 1.3 for the Turks Hussar:
+// It counts in 1000 resources:
 // in a score, its baseline is 0, so its weight is the score of 1000 resources saved.
 var CriterionTechnologySaving = Criterion{
 	Name:           "Technology saving",
@@ -174,7 +207,7 @@ func NewCriterionDamagePerTwoSecondsVs(target Unit) Criterion {
 
 // NewCriterionDamagePerTwoSecondsPer100GoldVs is NewCriterionDamagePerTwoSecondsVs per 100 gold of the row unit cost,
 // more is better, e.g. the Xianbei Raider 35 gold.
-// Per 100 gold keeps it on the scale of the damage, e.g. a Heavy Cavalry Archer vs a Hussar: 5.56 and 9.26.
+// Per 100 gold keeps it on the scale of the damage.
 func NewCriterionDamagePerTwoSecondsPer100GoldVs(target Unit) Criterion {
 	return Criterion{
 		Name: "DP2Svs " + target.Name + " per 100 gold",
@@ -216,7 +249,7 @@ func NewCriterionWithExtraScores(criterion Criterion, extraScores map[Civilizati
 type WeightedCriterion struct {
 	Criterion Criterion
 	// Weight is the score of the criterion value 100% better than the baseline,
-	// e.g. 7 for the range: a range of 8 vs 7 is 14% better, so it adds 1.
+	// e.g. with a weight of 1, a value 10% better adds 0.1.
 	// 0 is the default: 1 for the last criterion, 4 times the next one for each criterion above it,
 	// so a criterion added without tuning ranks by its place in the list.
 	Weight float64
@@ -224,8 +257,8 @@ type WeightedCriterion struct {
 	// e.g. a range of 6 hurts a cavalry archer more than a range of 8 helps it.
 	WeightIfWorse float64
 	// Limit caps how much better or worse than the baseline the criterion counts, 0 for no cap,
-	// e.g. 0.5 counts the Elite War Wagon tank +317% vs a Heavy Cavalry Archer as +50%,
-	// so one stat far from the baseline does not decide the rank alone.
+	// e.g. 0.5 counts anything more than 50% better as 50% better,
+	// so one stat far from the baseline does not decide the rank alone, e.g. the Elite War Wagon tank.
 	Limit float64
 }
 

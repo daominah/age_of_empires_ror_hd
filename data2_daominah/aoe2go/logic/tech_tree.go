@@ -146,18 +146,19 @@ func ParseTechTree(civilizationsJSON, unitsJSON, technologiesJSON []byte, names 
 	}
 	for _, u := range units {
 		unit := Unit{
-			ID:         UnitID(u.ID),
-			Name:       names[u.NameStringID],
-			HP:         u.HP,
-			Attacks:    parseAttacks(u.Attacks),
-			Armors:     map[ArmorClass]float64{},
-			Class:      UnitClass(u.Class),
-			Range:      u.Range,
-			MinRange:   u.MinRange,
-			ReloadTime: u.ReloadTime,
-			Speed:      u.Speed,
-			TrainTime:  u.TrainTime,
-			Cost:       parseCost(u.Cost),
+			ID:          UnitID(u.ID),
+			Name:        names[u.NameStringID],
+			HP:          u.HP,
+			Attacks:     parseAttacks(u.Attacks),
+			Armors:      map[ArmorClass]float64{},
+			Class:       UnitClass(u.Class),
+			Range:       u.Range,
+			MinRange:    u.MinRange,
+			ReloadTime:  u.ReloadTime,
+			AttackDelay: u.AttackDelay,
+			Speed:       u.Speed,
+			TrainTime:   u.TrainTime,
+			Cost:        parseCost(u.Cost),
 		}
 		unit.IsIgnoringArmor = ignoringArmorUnitIDs[unit.ID]
 		if len(u.TrainLocationIDs) > 0 {
@@ -264,6 +265,7 @@ type unitJSON struct {
 	Range            float64            `json:"range"`
 	MinRange         float64            `json:"min_range"`
 	ReloadTime       float64            `json:"reload_time"`
+	AttackDelay      float64            `json:"attack_delay"`
 	TrainTime        float64            `json:"train_time"`
 	Attacks          map[int]float64    `json:"attacks"`
 	Armors           map[int]float64    `json:"armors"`

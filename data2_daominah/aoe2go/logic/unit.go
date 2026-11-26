@@ -34,9 +34,13 @@ type Unit struct {
 	// e.g. the Xianbei Raider volley, nil for most units.
 	ChargeAttack *ChargeAttack
 	ReloadTime   float64 // seconds between attacks
-	Speed        float64
-	TrainTime    float64 // seconds
-	Cost         Cost
+	// AttackDelay is the seconds from the start of the attack animation to the shot, lower is better:
+	// the unit fires sooner after it stops, and can move again sooner, e.g. 0.9 for a Heavy Cavalry Archer,
+	// 0.5 for an Elite Mangudai. 0 for many units, e.g. the Keshik.
+	AttackDelay float64
+	Speed       float64
+	TrainTime   float64 // seconds
+	Cost        Cost
 	// IsIgnoringArmor means the unit attack ignores the target armor: each attack class counts in full,
 	// when the target lists the class, but not against a building, a tower, a wall or a gate, which keep their armor.
 	// The Rocket Carts have it from the start, the Dravidians cavalry get it from Wootz Steel.

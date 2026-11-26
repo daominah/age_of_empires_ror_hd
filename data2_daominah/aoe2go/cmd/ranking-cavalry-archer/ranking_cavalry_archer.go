@@ -39,54 +39,92 @@ var (
 	// 95 HP, pierce armor 6, attack 7+4.
 	hussar = tree.LoadUnitUpgraded(logic.Hussar)
 
+	// halberdier is a fully upgraded Halberdier, speed 1.1 with Squires,
+	// the counter that chases the cavalry archer, for its kite time.
+	halberdier = tree.LoadUnitUpgraded(logic.Halberdier)
+	// knight is a fully upgraded Knight, speed 1.485 with Husbandry, the most common chaser of cavalry archers,
+	// a bit slower than a standard Heavy Cavalry Archer, so a slower unit cannot run away from it.
+	knight = tree.LoadUnitUpgraded(logic.Knight)
+
+	// trebuchet and siegeRam are the siege that cavalry archers raid,
+	// pierce armor 150 and 195, so every arrow does the minimum 1 damage plus the bonus attack.
+	// The Siege Ram has armor 2 vs Rams, which cancels the Elite Bolas Rider +2 vs Rams.
+	trebuchet = tree.LoadUnitUpgraded(logic.Trebuchet)
+	siegeRam  = tree.LoadUnitUpgraded(logic.SiegeRam)
+
 	// baseline is a standard fully upgraded Heavy Cavalry Archer, the 100% of each score weight:
-	// attack 7+4, reload 1.8, range 7, speed 1.54, 60 gold.
+	// attack 7+4, reload 1.8, range 7, speed 1.54, attack delay 0.9, 60 gold.
 	baseline = logic.NewRowFromUnit(tree.LoadUnitUpgraded(logic.HeavyCavalryArcher))
 
 	// scoreWeights are the stats of the score, each weight is the score of that stat 100% better than the baseline.
 	// A weight of 0 is 1 for the last stat and 4 times the next one for each stat above it.
-	//   - Damage 3.97 and per gold 2.65: the Xianbei Raider (35 gold) ranks a bit below the baseline,
-	//     above a Heavy Cavalry Archer missing an attack upgrade.
-	//   - Range 7, so 1 per tile: the Magyars Heavy Cavalry Archer (range 8) ranks 2nd.
-	//     A tile less costs 15/7, about 2: a cavalry archer of range 6 has to move to fight the others,
-	//     e.g. the Elite Kipchak drops below the Heavy Cavalry Archers without Parthian Tactics,
-	//     despite its cheap gold and its speed, as the range counts more than the tank.
-	//   - Speed 6.16, so 0.4 per 0.1 speed: the Danes and Saxons Heavy Mounted Crossbowman
-	//     (range 8, speed 1.38) rank just after the baseline.
-	//   - Damage vs the baseline 0.5, small on purpose: the cavalry archer mirror only breaks ties,
-	//     e.g. the Japanese +2 vs Archers makes them the best of the Heavy Cavalry Archers of attack 7+4 and reload 1.8,
-	//     while the Elite Camel Archer +6 vs Cavalry Archers keeps it 3rd, below the Magyars Heavy Cavalry Archer.
-	//   - Tank vs the baseline 2, capped at +-50%: HP and pierce armor together,
-	//     e.g. the Tatars +1 pierce armor and the Turks +20 HP rank above the baseline,
-	//     the Khitans without Bloodlines (60 HP) below it.
-	//     The cap keeps the Elite War Wagon (+317%) from deciding alone, as nobody fights it with cavalry archers.
-	//   - Wood cost 0.1, capped at +-50%: the gold is already in the damage per gold,
-	//     and cheap wood helps a little only, e.g. the Koreans Heavy Cavalry Archer (20w) ranks above the standard ones.
+	//   - Damage vs the Hussar, and per gold: the main job, killing the raiders that hunt cavalry archers,
+	//     so a cheap unit with a weaker shot can still pay off, e.g. the Xianbei Raider (35 gold).
+	//   - Range: a tile less costs more than a tile more gains, as a shorter range has to walk into the others to fight,
+	//     e.g. the Magyars range 8 gains, the Elite Kipchak range 6 loses more, despite its cheap gold and its speed.
+	//   - Kite time vs the Halberdier: the seconds per shot to stop for the attack delay, fire,
+	//     and win back the gap on its counter, attack delay × speed / (speed - 1.1), 3.14 seconds for the baseline.
+	//     It combines the attack delay and the speed, e.g. the Elite Mangudai (delay 0.5) 1.74 seconds,
+	//     the Elite Ratha (delay 0.62, speed 1.43) 2.69 seconds, its short delay makes up for its speed.
+	//     A speed near the Halberdier hurts a lot, e.g. the Elite War Wagon (delay 1, speed 1.32) 5.98 seconds.
+	//     The cap keeps the slowest units from losing without end at the bottom,
+	//     e.g. the Castle Age Mounted Crossbowman (speed 1.25) 7.58 seconds.
+	//   - Speed deficit vs the Knight: how much slower than a Knight, which then forces the fight,
+	//     a straight line so a bit slower loses a little, much slower a lot,
+	//     e.g. the Elite Ratha (1.43) 0.055 slower, a melee tank that rarely needs to run,
+	//     the Elite War Wagon (1.32) 0.165 slower, three times the Ratha.
+	//     A unit faster than the Knight loses nothing, e.g. the Elite Bolas Rider (1.5).
+	//   - Damage vs the baseline, small on purpose: the cavalry archer mirror only breaks ties,
+	//     e.g. the Japanese +2 vs Archers, the Elite Camel Archer +6 vs Cavalry Archers.
+	//   - Tank vs the baseline: HP and pierce armor together, vs other archers,
+	//     e.g. the Tatars +1 pierce armor, the Turks +20 HP, the Khitans without Bloodlines (60 HP).
+	//     It is weighted so a tanky Heavy Cavalry Archer beats a cheap fragile unit,
+	//     e.g. the Turks (20 hits to kill) above the Elite Bolas Rider (13 hits).
+	//     The cap keeps a huge tank from deciding alone, as nobody fights it with cavalry archers,
+	//     e.g. the Elite War Wagon (200 HP).
+	//   - Tank vs the Hussar, small: HP and melee armor vs the raiders that hunt cavalry archers,
+	//     the baseline needs 14 hits to die, e.g. the Xianbei Raider (melee armor 8) 20 hits, the Elite War Wagon 25 hits.
+	//   - Wood cost, small and capped: the gold is already in the damage per gold,
+	//     and cheap wood helps a little only, e.g. the Koreans Heavy Cavalry Archer (20w).
 	//     The cap keeps a small base of wood from swinging the score, e.g. the Elite War Wagon (100w).
-	//   - Technology saving 0.1 per 1000 resources, small: the free or cheaper upgrades break the ties of the combat,
-	//     e.g. the Tatars (Parthian Tactics and Thumb Ring free) above the Turks (Chemistry free),
+	//   - Technology saving, small: free or cheaper upgrades break the ties of the combat,
+	//     e.g. the Tatars (Parthian Tactics and Thumb Ring free) vs the Turks (Chemistry free),
 	//     as the two tie head to head: 20 hits each, Sipahi HP vs Silk Armor.
-	//     A larger weight lets the Koreans free archer armors lift the Elite War Wagon to the top.
+	//   - Damage vs the Trebuchet and vs the Siege Ram, the Trebuchet more as the more common raid target:
+	//     the minimum 1 damage per arrow counts the arrows per second and the bonus attack,
+	//     e.g. the Elite Mangudai +5 vs Siege Weapons, the Elite Kipchak several arrows each shot,
+	//     the Xianbei Raider charged volley of 6 arrows every 30 seconds, the Heavy Mounted Crossbowman reload 2.25.
+	//     The cap is high so a big bonus vs Siege Weapons stands out from several arrows.
 	scoreWeights = []logic.WeightedCriterion{
 		{Criterion: logic.NewCriterionDamagePerTwoSecondsVs(hussar), Weight: 3.97},
 		{Criterion: logic.NewCriterionDamagePerTwoSecondsVs(baseline.Unit), Weight: 0.5},
 		{Criterion: logic.NewCriterionDamagePerTwoSecondsPer100GoldVs(hussar), Weight: 2.65},
 		{Criterion: logic.CriterionRange, Weight: 7, WeightIfWorse: 15},
-		{Criterion: logic.CriterionSpeed, Weight: 6.16},
-		{Criterion: logic.NewCriterionTankVs(baseline.Unit), Weight: 2, Limit: 0.5},
+		{Criterion: logic.NewCriterionKiteTimeVs(halberdier), Weight: 1.76, Limit: 1},
+		{Criterion: logic.NewCriterionSpeedDeficitVs(knight), Weight: 6},
+		{Criterion: logic.NewCriterionTankVs(baseline.Unit), Weight: 2.5, Limit: 0.5},
+		{Criterion: logic.NewCriterionTankVs(hussar), Weight: 0.3, Limit: 0.5},
 		{Criterion: logic.CriterionWoodCost, Weight: 0.1, Limit: 0.5},
 		{Criterion: logic.CriterionTechnologySaving, Weight: 0.1},
+		{Criterion: logic.NewCriterionDamagePerTwoSecondsVs(trebuchet), Weight: 0.07, Limit: 6},
+		{Criterion: logic.NewCriterionDamagePerTwoSecondsVs(siegeRam), Weight: 0.035, Limit: 6},
 	}
+
+	// extraScores are the strengths the score leaves out:
+	//   - Bengalis: the Ratha switches to a melee mode, to fight skirmishers, siege and buildings up close,
+	//     which no other cavalry archer can. It also makes up a bit for the tank cap,
+	//     as the Ratha needs 34 hits of the baseline to die, more than twice the baseline.
+	//     The Bengalis rank only the Ratha here, so the score of the civilization is the score of the Ratha.
+	extraScores = map[logic.CivilizationID]float64{logic.Bengalis: 0.3}
 
 	// criteria sort the rows in order, the next one breaking ties of the previous.
 	// The score decides, the others only break exact ties with what the score leaves out.
 	// The cost is in the score through the damage per gold.
 	criteria = []logic.Criterion{
-		logic.NewCriterionWeightedSum("Score", baseline, scoreWeights),
+		logic.NewCriterionWithExtraScores(logic.NewCriterionWeightedSum("Score", baseline, scoreWeights), extraScores),
 		// the strengths the score leaves out, roughly ordered:
-		// melee armor vs a Hussar (Teutons), the bonus attacks (vs Siege Weapons, Rams, Infantry),
+		// the bonus attacks (vs Siege Weapons, Rams, Infantry),
 		// then the handwritten traits (regeneration, bonus damage taken)
-		logic.NewCriterionTankVs(hussar),
 		logic.CriterionBonusAttackSum,
 		logic.CriterionTraitWeightSum,
 	}
@@ -111,6 +149,8 @@ var (
 			logic.ArmorClassLabel{Class: logic.ArmorClassRams, Label: "Ram"},
 		),
 		logic.ColumnReloadTime,
+		// seconds from the start of the attack to the shot, lower is better
+		logic.ColumnAttackDelay,
 		logic.NewColumnFromCriterionNamed("DP2Svs Scout", logic.NewCriterionDamagePerTwoSecondsVs(hussar)),
 		logic.ColumnHP,
 		logic.ColumnMeleeArmor,

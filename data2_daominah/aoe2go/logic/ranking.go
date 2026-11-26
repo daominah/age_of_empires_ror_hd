@@ -63,6 +63,7 @@ var (
 	ColumnRange       = Column{Name: "Range", Value: func(row Row) string { return FormatBasePlusUpgrade(row, getRange) }}
 	ColumnMinRange    = Column{Name: "Min range", Value: func(row Row) string { return formatNumber(row.Unit.MinRange) }}
 	ColumnReloadTime  = Column{Name: "Reload", Value: func(row Row) string { return formatNumber(row.Unit.ReloadTime) }}
+	ColumnAttackDelay = Column{Name: "ATKDelay", Value: func(row Row) string { return formatNumber(row.Unit.AttackDelay) }}
 	ColumnSpeed       = Column{Name: "Speed", Value: func(row Row) string { return formatNumber(row.Unit.Speed) }}
 	ColumnCost        = Column{Name: "Cost", Value: func(row Row) string { return formatCost(row.Unit.Cost) }}
 	ColumnNote        = Column{Name: "Note", Value: FormatNote, IsFootnote: true}

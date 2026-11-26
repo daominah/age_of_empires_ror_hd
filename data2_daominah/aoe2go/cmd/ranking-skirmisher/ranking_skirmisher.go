@@ -47,19 +47,18 @@ var (
 	// scoreWeights are the stats of the score, each weight is the score of that stat 100% better than the baseline.
 	// A weight of 0 is 1 for the last stat and 4 times the next one for each stat above it.
 	// A skirmisher has to tank and kill archers. An attack or a discount counts more than
-	// a speed or a range above 8, e.g. +1 attack (+14% damage) adds 0.86, a 25% discount 0.75 (1.5 with the food),
-	// +0.1 speed (+10%) 0.62 and +1 range (+12.5%) 0.5.
+	// a speed or a range above 8, e.g. +1 attack (+14% damage) vs +0.1 speed (+10%) or +1 range (+12.5%).
 	scoreWeights = []logic.WeightedCriterion{
 		{Criterion: logic.NewCriterionDamagePerThreeSecondsVs(arbalester), Weight: 6},
-		// the tank vs the 2 archers a skirmisher counters, e.g. the missing Ring Archer Armor costs 0.5 vs the Arbalester
-		// (2 damage instead of 1) and 0.42 vs the Heavy Cavalry Archer (5 damage instead of 3)
+		// the tank vs the 2 archers a skirmisher counters, e.g. the missing Ring Archer Armor:
+		// 2 damage instead of 1 from the Arbalester, 5 instead of 3 from the Heavy Cavalry Archer
 		{Criterion: logic.NewCriterionTankVs(arbalester), Weight: 1},
 		{Criterion: logic.NewCriterionTankVs(heavyCavalryArcher), Weight: 1},
 		// vs a raiding Hussar (pierce armor 6) a standard skirmisher deals the minimum 1 damage,
 		// so +1 attack doubles it, a small weight as killing a Hussar is not its job
 		{Criterion: logic.NewCriterionDamagePerThreeSecondsVs(hussar), Weight: 0.5},
-		// a range above 8 helps a little, a tile less costs 2: Bracer (+1 range, +1 attack) counts more than an armor upgrade,
-		// e.g. the Bulgarians without Ring Archer Armor rank above the Celts without Bracer
+		// a range above 8 helps a little, a tile less costs much more: Bracer (+1 range, +1 attack) counts more than an armor upgrade,
+		// e.g. missing Bracer (Celts) costs more than missing Ring Archer Armor (Bulgarians)
 		{Criterion: logic.CriterionRange, Weight: 4, WeightIfWorse: 16},
 		// the bonus attacks out of the line count a little per point, as they help vs a few targets only,
 		// e.g. the Saracens vs Standard Buildings
@@ -71,21 +70,19 @@ var (
 	}
 
 	// extraScores are the strengths and weaknesses the score leaves out:
-	//   - Koreans: the free archer armors (Padded, Leather and Ring Archer Armor, 1150 resources)
-	//     rank them above the Byzantines.
+	//   - Koreans: the free archer armors (Padded, Leather and Ring Archer Armor, 1150 resources).
 	//   - Inca: the food discount grows by age, 20f in the Feudal Age, 17f only in the Imperial Age,
 	//     while the food is worth more early.
-	//   - Saxons: -5% cost per Town Center or Castle, up to -20%, about -10% in a real game,
-	//     so they rank just below the Britons.
+	//   - Saxons: -5% cost per Town Center or Castle, up to -20%, about -10% in a real game.
 	//   - Mapuche: the pass through damage after Malon hits the archers behind the target,
 	//     worth a share of the damage vs the Arbalester, as archers fight in a group.
 	extraScores = map[logic.CivilizationID]float64{logic.Koreans: 0.75, logic.Inca: -0.4, logic.Saxons: 0.3, logic.Mapuche: 0.6}
 
 	// Known gaps of the skirmisher score, to refine in a later change:
-	//   - Mapuche rank 48 (-1.45), though they should be stronger:
-	//     the +15 HP (50 instead of 35) adds only 0.81, +0.39 vs the Arbalester and +0.42 vs the Heavy Cavalry Archer,
-	//     as each tank weighs 1, while the missing Bracer costs 2.86 (range -2, damage vs the Arbalester -0.86).
-	//     The Malon pass-through 0.6 is a guess too, about a third of a 30% pass-through on the damage vs the Arbalester.
+	//   - Mapuche rank low, though they should be stronger:
+	//     the +15 HP (50 instead of 35) adds little, as each tank weighs little,
+	//     while the missing Bracer costs a lot (range and damage vs the Arbalester).
+	//     The Malon pass-through extra score is a guess too, about a third of a 30% pass-through on the damage vs the Arbalester.
 	//   - Sicilians: the bonus damage taken -40% counts nowhere here,
 	//     as neither the Arbalester, the Heavy Cavalry Archer nor the Hussar has a bonus vs Archers,
 	//     and its trait weighs 0, as the scout ranking calculates it in the damage.

@@ -101,6 +101,9 @@ def units(dat):
             if unit.type_50.min_range:  # most units have none
                 item['min_range'] = unit.type_50.min_range
             item['reload_time'] = unit.type_50.reload_time
+            delay = attack_delay(dat, unit.type_50)
+            if delay:  # 0 for many units, e.g. the Keshik
+                item['attack_delay'] = delay
             item['attacks'] = sum_by_class(unit.type_50.attacks)
             item['armors'] = sum_by_class(unit.type_50.armours)
         if unit.creatable and unit.type_50:
@@ -114,6 +117,18 @@ def units(dat):
             item['train_time'] = slots[0].train_time if slots else 0
         result.append(item)
     return result
+
+
+def attack_delay(dat, type_50):
+    """Seconds from the start of the attack animation to the shot, 0 if none.
+    The .dat stores it as a frame of the attack graphic, so it is that frame times the frame duration,
+    e.g. the Cavalry Archer fires at frame 35 of 0.026 seconds: 0.91 seconds."""
+    if type_50.frame_delay <= 0 or not 0 <= type_50.attack_graphic < len(dat.graphics):
+        return 0
+    graphic = dat.graphics[type_50.attack_graphic]
+    if not graphic:
+        return 0
+    return round(type_50.frame_delay * graphic.frame_duration, 3)
 
 
 def projectiles(dat, creatable):

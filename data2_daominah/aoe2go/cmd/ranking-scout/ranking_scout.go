@@ -64,13 +64,13 @@ var (
 	// vs the units a scout fights: the Hussar in the mirror and the Halberdier weigh most,
 	// then the Villager in a raid and the Arbalester (the bonus vs Archers, e.g. Burmese).
 	// The tank weighs much more than the damage,
-	// so +1 pierce armor (Tatars) ranks above a faster reload (Bulgarians).
+	// so +1 pierce armor (Tatars) counts more than a faster reload (Bulgarians).
 	// The bonus attacks out of the line count a little per point, as they help vs a few targets only,
 	// e.g. the Lithuanians Winged Hussar vs Gunpowder Units and the Elite Magyar Huszar vs Rams.
-	// The free or cheaper upgrades count 0.8 per 1000 resources saved, as they feel strong in practice,
-	// e.g. the Turks (Light Cavalry and Hussar upgrades free) rank above the Tatars (Silk Armor),
+	// The free or cheaper upgrades count a fair amount, as they feel strong in practice,
+	// e.g. the Turks (Light Cavalry and Hussar upgrades free) vs the Tatars (Silk Armor),
 	// though the Tatars Hussar wins head to head.
-	// The cost counts a lot, as cheap scouts are very good, e.g. the Berbers (-20%) rank above a standard Hussar.
+	// The cost counts a lot, as cheap scouts are very good, e.g. the Berbers (-20%).
 	// The speed counts a little, as the standard Hussar is already among the fastest units, e.g. the Cumans (+5%).
 	scoreWeights = []logic.WeightedCriterion{
 		{Criterion: logic.NewCriterionTankVs(castle15), Weight: 8},
@@ -93,7 +93,7 @@ var (
 
 	// extraScores are the civilization bonuses the stats leave out, guessed by hand,
 	// to mass the scouts (creation speed, long-term food) or in combat (trample, regeneration).
-	// On the scale of the score: the Berbers -20% cost scores about 2,
+	// On the scale of the score: compare with what the Berbers -20% cost scores,
 	// a short-term bonus scores 0, e.g. the Mongols hunters or the Lithuanians starting food.
 	// The Hussar is a late game unit, so a permanent bonus scores much more than a one-time saving,
 	// e.g. the Slavs farmers working faster above the Vikings Wheelbarrow and Hand Cart free.
