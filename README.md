@@ -26,6 +26,9 @@ In the future, the latest balances will be considered the default.
 
 Guides on how to edit computer player behavior are in the directory
 [data2_daominah/doc](data2_daominah/doc/edit_computer_player.md).
+How the Age of Empires II: Definitive Edition AI scripts work
+(the built-in Extreme AI, Immortal and Rehoboam) is in
+[data2_daominah/aoe2de_ai](data2_daominah/aoe2de_ai/how_ai_scripts_work.md).
 
 ## AoE version detail
 
